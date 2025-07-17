@@ -5,6 +5,7 @@ class DataManager {
         this.clinics = [];
         this.stores = [];
         this.rankings = [];
+        this.storeViews = [];
         this.dataPath = './data/';
     }
 
@@ -15,7 +16,8 @@ class DataManager {
                 this.loadRegions(),
                 this.loadClinics(),
                 this.loadStores(),
-                this.loadRankings()
+                this.loadRankings(),
+                this.loadStoreViews()
             ]);
 
             // 店舗と地域の関連付け
@@ -120,6 +122,29 @@ class DataManager {
         this.rankings = Object.values(rankingMap);
     }
 
+    // 店舗ビューデータの読み込み
+    async loadStoreViews() {
+        const data = await this.loadCsvFile('出しわけSS - store_view.csv');
+        
+        this.storeViews = data.map(row => {
+            const view = {
+                regionId: row.parameter_no,
+                clinicStores: {}
+            };
+            
+            // clinic_1からclinic_5までの店舗IDを取得
+            for (let i = 1; i <= 5; i++) {
+                const clinicKey = `clinic_${i}`;
+                if (row[clinicKey] && row[clinicKey] !== '-') {
+                    // 複数店舗は/で区切られている
+                    view.clinicStores[clinicKey] = row[clinicKey].split('/');
+                }
+            }
+            
+            return view;
+        });
+    }
+
     // 店舗と地域の関連付け
     associateStoresWithRegions() {
         this.stores.forEach(store => {
@@ -153,9 +178,33 @@ class DataManager {
         return this.rankings.find(r => r.regionId === regionId);
     }
 
-    // 地域IDで店舗を取得
+    // 地域IDで店舗を取得（store_viewベース）
     getStoresByRegionId(regionId) {
-        return this.stores.filter(s => s.regionId === regionId);
+        // store_viewから該当地域のデータを取得
+        const storeView = this.storeViews.find(sv => sv.regionId === regionId);
+        if (!storeView) return [];
+        
+        // ランキングデータを取得して、表示されているクリニックを特定
+        const ranking = this.getRankingByRegionId(regionId);
+        if (!ranking) return [];
+        
+        // 表示する店舗IDのリストを作成
+        const storeIdsToShow = [];
+        
+        // ランキングのno1〜no5に対応するclinic_1〜clinic_5の店舗IDを取得
+        Object.entries(ranking.ranks).forEach(([position, clinicId]) => {
+            const positionNum = parseInt(position.replace('no', ''));
+            const clinicKey = `clinic_${positionNum}`;
+            
+            if (storeView.clinicStores[clinicKey]) {
+                storeIdsToShow.push(...storeView.clinicStores[clinicKey]);
+            }
+        });
+        
+        // 店舗IDに基づいて実際の店舗情報を取得
+        return this.stores.filter(store => 
+            storeIdsToShow.includes(store.id)
+        );
     }
 
     // クリニック名で店舗を取得
