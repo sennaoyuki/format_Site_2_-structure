@@ -433,19 +433,19 @@ class RankingApp {
             
             // ダミーデータ（実際のデータに置き換え）
             const ratings = { 1: 4.9, 2: 4.8, 3: 4.7, 4: 4.7, 5: 4.7 };
-            const prices = { 
-                1: '49,500円<br><span class="price-note">(月々1,000円〜)</span>',
-                2: '69,300円<br><span class="price-note">(月々1,200円〜)</span>',
-                3: '52,800円<br><span class="price-note">(月々1,000円〜)</span>',
-                4: '99,800円<br><span class="price-note">(月々1,400円〜)</span>',
-                5: '53,800円<br><span class="price-note">(月々1,100円〜)</span>'
+            const achievements = { 
+                1: '全国100院以上',
+                2: '累計施術50万件',
+                3: '開院15年の実績',
+                4: '全国80院展開',
+                5: '医療脱毛専門10年'
             };
-            const features = {
-                1: 'コスパ重視！独自の脱毛器で効果よくツルスベに',
-                2: '痛みが苦手な人・肌がデリケートな人向け',
-                3: '追加費用ゼロ！賢い脱毛を受けたい人にピッタリ',
-                4: '自分に合う機械で、じっくり通いたい人におすすめ',
-                5: '圧倒的な実績と店舗数を誇る、安心感を求める人向け'
+            const benefits = {
+                1: '初回限定50%OFF',
+                2: '学割・ペア割あり',
+                3: '全身脱毛20%割引',
+                4: 'モニター割引30%',
+                5: '平日限定プランあり'
             };
 
             row.innerHTML = `
@@ -465,13 +465,8 @@ class RankingApp {
                         ${(ratings[clinic.rank] || 4.5) % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
                     </div>
                 </td>
-                <td>
-                    <div class="price-cell">
-                        <i class="fas fa-circle feature-icon circle"></i><br>
-                        ${prices[clinic.rank] || '要問合せ'}
-                    </div>
-                </td>
-                <td class="feature-text">${features[clinic.rank] || '優良クリニック'}</td>
+                <td class="achievement-text">${achievements[clinic.rank] || '豊富な実績'}</td>
+                <td class="benefit-text">${benefits[clinic.rank] || '特典あり'}</td>
                 <td>
                     <div class="cta-cell">
                         <a href="#" class="cta-button">公式サイト</a>
