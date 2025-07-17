@@ -834,26 +834,16 @@ class RankingApp {
             const data = detailData[rank] || detailData[1];
 
             detailItem.innerHTML = `
-                <div class="detail-header-section">
-                    <div class="detail-rank">
-                        <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
-                        <div class="detail-title">
-                            <h3>${data.title}</h3>
-                            <p>${data.subtitle}</p>
-                        </div>
-                        <a href="#" class="detail-cta-link">
-                            ${data.link}
-                            <i class="fas fa-chevron-right"></i>
-                        </a>
+                <div class="detail-rank">
+                    <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
+                    <div class="detail-title">
+                        <h3>${data.title}</h3>
+                        <p>${data.subtitle}</p>
                     </div>
-                    <div class="rank-swap-buttons">
-                        <button class="swap-up" ${rank === 1 ? 'disabled' : ''} data-rank="${rank}">
-                            <i class="fas fa-chevron-up"></i>
-                        </button>
-                        <button class="swap-down" ${rank === 3 ? 'disabled' : ''} data-rank="${rank}">
-                            <i class="fas fa-chevron-down"></i>
-                        </button>
-                    </div>
+                    <a href="#" class="detail-cta-link">
+                        ${data.link}
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
                 </div>
                 ${data.banner ? `
                 <div class="detail-banner">
@@ -969,55 +959,6 @@ class RankingApp {
 
             detailsList.appendChild(detailItem);
         });
-
-        // 順位入れ替えボタンのイベントリスナーを設定
-        this.setupRankSwapping();
-    }
-
-    // 順位入れ替え機能のセットアップ
-    setupRankSwapping() {
-        const swapUpButtons = document.querySelectorAll('.swap-up');
-        const swapDownButtons = document.querySelectorAll('.swap-down');
-
-        swapUpButtons.forEach(button => {
-            button.addEventListener('click', () => this.swapRanks(parseInt(button.dataset.rank), 'up'));
-        });
-
-        swapDownButtons.forEach(button => {
-            button.addEventListener('click', () => this.swapRanks(parseInt(button.dataset.rank), 'down'));
-        });
-    }
-
-    // ランクを入れ替える
-    swapRanks(currentRank, direction) {
-        const currentRegionId = this.currentRegionId;
-        const ranking = this.dataManager.getRankingByRegionId(currentRegionId);
-        
-        if (!ranking) return;
-
-        const newRank = direction === 'up' ? currentRank - 1 : currentRank + 1;
-        
-        // 範囲チェック
-        if (newRank < 1 || newRank > 3) return;
-
-        // 現在のランキングデータを取得
-        const currentClinicId = ranking.ranks[`no${currentRank}`];
-        const swapClinicId = ranking.ranks[`no${newRank}`];
-
-        // ランキングを入れ替え
-        ranking.ranks[`no${currentRank}`] = swapClinicId;
-        ranking.ranks[`no${newRank}`] = currentClinicId;
-
-        // 表示を更新
-        const allClinics = this.dataManager.getAllClinics();
-        this.displayManager.updateRankingDisplay(allClinics, ranking);
-        this.updateComparisonTable(allClinics, ranking);
-        this.updateClinicDetails(allClinics, ranking);
-
-        // スクロール位置を保持
-        const detailsSection = document.querySelector('.clinic-details-section');
-        const scrollPosition = detailsSection.getBoundingClientRect().top + window.pageYOffset - 100;
-        window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
     }
 }
 
