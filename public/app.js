@@ -112,13 +112,13 @@ class DisplayManager {
                 starsHtml += '<i class="far fa-star"></i>';
             }
 
-            // キャンペーンバナーの生成（仮のデータ）
-            const banners = {
-                1: 'フレイア脱毛 5周年記念キャンペーン',
-                2: 'レジーナクリニック 医療脱毛',
-                3: '全身+VIO+顔'
+            // バナー画像の設定（プレースホルダー画像）
+            const bannerImages = {
+                1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3Crect fill="%23fce0ec" width="300" height="150"/%3E%3Ctext x="20" y="30" fill="%23ec4899" font-size="12" font-weight="bold"%3EFREY-A CLINIC%3C/text%3E%3Ctext x="20" y="55" fill="%23333" font-size="10"%3E医療脱毛%3C/text%3E%3Ctext x="20" y="75" fill="%23ec4899" font-size="18" font-weight="bold"%3E5周年記念%3C/text%3E%3Ctext x="20" y="95" fill="%23333" font-size="11"%3E全身%2BVIO%2B顔%3C/text%3E%3Ctext x="20" y="115" fill="%23ec4899" font-size="14" font-weight="bold"%3E¥101,000~%3C/text%3E%3Ctext x="20" y="135" fill="%23666" font-size="9"%3E月額￥1,500~%3C/text%3E%3C/svg%3E',
+                2: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3Crect fill="%23fff7e6" width="300" height="150"/%3E%3Ctext x="20" y="30" fill="%23f59e0b" font-size="12" font-weight="bold"%3EREGINA CLINIC%3C/text%3E%3Ctext x="20" y="55" fill="%23333" font-size="10"%3E医療脱毛%3C/text%3E%3Ctext x="20" y="80" fill="%23f59e0b" font-size="20" font-weight="bold"%3E¥48,000円%3C/text%3E%3Ctext x="20" y="100" fill="%23666" font-size="9"%3E(5回総額)%3C/text%3E%3Ctext x="20" y="120" fill="%23333" font-size="10"%3E月々¥1,000~%3C/text%3E%3C/svg%3E',
+                3: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3Crect fill="%23e6f3ff" width="300" height="150"/%3E%3Ctext x="20" y="30" fill="%233b82f6" font-size="12" font-weight="bold"%3ERIZE%3C/text%3E%3Ctext x="20" y="55" fill="%23333" font-size="10"%3E全身%2BVIO%2B顔%3C/text%3E%3Ctext x="20" y="80" fill="%233b82f6" font-size="16" font-weight="bold"%3E月々¥4,800~%3C/text%3E%3Ctext x="20" y="100" fill="%23ec4899" font-size="14" font-weight="bold"%3E+¥500%3C/text%3E%3Ctext x="20" y="120" fill="%23666" font-size="9"%3Eニードル脱毛%3C/text%3E%3C/svg%3E'
             };
-            const bannerText = banners[rankNum] || 'キャンペーン実施中';
+            const bannerImage = bannerImages[rankNum] || bannerImages[1];
 
             // 価格情報の生成（仮のデータ）
             const prices = {
@@ -146,7 +146,7 @@ class DisplayManager {
                         <div class="clinic-logo">${clinic.name}</div>
                     </div>
                     <div class="clinic-banner">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect fill='%23${rankNum === 1 ? 'fce7f3' : rankNum === 2 ? 'fbbf24' : 'e0e7ff'}' width='400' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23${rankNum === 1 ? 'ec4899' : rankNum === 2 ? 'fff' : '4c1d95'}' font-size='20' font-weight='bold'%3E${bannerText}%3C/text%3E%3C/svg%3E" alt="キャンペーンバナー">
+                        <img src="${bannerImage}" alt="${clinic.name}キャンペーンバナー">
                     </div>
                     <div class="price-info">
                         <div class="price-main">${price.main}</div>

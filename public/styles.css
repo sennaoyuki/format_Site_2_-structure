@@ -1315,38 +1315,138 @@ section {
     }
     
     .ranking-header-banner {
-        padding: 15px;
+        padding: 12px 8px;
+        margin-bottom: 20px;
+        border-radius: 0;
     }
     
     .ranking-banner-text {
-        font-size: 1.3rem;
+        font-size: 1.1rem;
     }
     
     .ranking-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 6px;
+        padding: 0 8px;
+        max-width: 375px;
+        margin: 0 auto;
+    }
+    
+    .ranking-item {
+        position: relative;
     }
     
     .rank-medal {
-        width: 70px;
-        height: 70px;
-        font-size: 1rem;
+        width: 50px;
+        height: 50px;
+        font-size: 0.75rem;
+        top: -10px;
+        box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    }
+    
+    .clinic-card {
+        padding: 40px 8px 15px;
+        border-radius: 15px;
+        border-width: 2px;
+    }
+    
+    .satisfaction-badge {
+        padding: 4px 12px;
+        font-size: 0.7rem;
+        margin-bottom: 8px;
+        border-radius: 15px;
     }
     
     .stars {
-        font-size: 1.2rem;
+        font-size: 0.8rem;
+        gap: 2px;
+        margin-bottom: 5px;
     }
     
     .rating-score {
-        font-size: 2rem;
+        font-size: 1.3rem;
+    }
+    
+    .score-max {
+        font-size: 0.7rem;
+    }
+    
+    .clinic-logo-section {
+        margin-bottom: 10px;
+        min-height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
     
     .clinic-logo {
-        font-size: 1.5rem;
+        font-size: 0.85rem;
+        line-height: 1.2;
+        font-weight: 900;
+    }
+    
+    .clinic-logo.regina {
+        font-size: 0.7rem;
+    }
+    
+    .clinic-logo.rize {
+        font-size: 0.65rem;
+        padding: 5px 10px;
+        border-radius: 6px;
+    }
+    
+    .logo-sub {
+        font-size: 0.6em;
+        margin-top: 2px;
+    }
+    
+    .clinic-banner {
+        margin-bottom: 10px;
+        min-height: 80px;
+    }
+    
+    .clinic-banner img {
+        max-width: 100%;
+        height: 80px;
+        border-radius: 8px;
+    }
+    
+    .price-info {
+        padding: 10px 0;
+        margin-bottom: 10px;
+        border-top: 1px solid #f0f0f0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .price-main {
+        font-size: 0.75rem;
+        margin-bottom: 4px;
     }
     
     .price-details {
-        font-size: 1.3rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 3px;
+        line-height: 1.2;
+    }
+    
+    .price-discount {
+        font-size: 0.8rem;
+        margin-bottom: 3px;
+        font-weight: 700;
+    }
+    
+    .price-note {
+        font-size: 0.7rem;
+        line-height: 1.2;
+    }
+    
+    .clinic-cta-button {
+        padding: 10px 20px;
+        font-size: 0.85rem;
+        border-radius: 20px;
+        width: 100%;
+        max-width: none;
     }
 
     .hero-title {
