@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>地域別クリニックランキング | 優良医療機関検索</title>
     <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -15,17 +16,12 @@
                 <div class="logo-section">
                     <a href="/" class="logo-link">
                         <div class="logo-main">
-                            <span class="logo-icon">💜</span>
+                            <span class="logo-icon"><i class="fas fa-stethoscope"></i></span>
                             <h1 class="site-logo">クリニックランキング</h1>
                         </div>
                     </a>
                 </div>
                 <nav class="header-nav">
-                    <div class="region-selector-header">
-                        <select id="region-select" class="region-select">
-                            <!-- 地域オプションはJavaScriptで動的に生成 -->
-                        </select>
-                    </div>
                     <a href="#" class="pr-badge">PR</a>
                 </nav>
             </div>
@@ -33,22 +29,27 @@
 
         <!-- メインビジュアル -->
         <section class="hero-section">
-            <div class="hero-content">
-                <h2 class="hero-title">あなたの地域の<br>優良クリニックを探そう</h2>
-                <p class="hero-subtitle">地域密着型の信頼できる医療機関をランキング形式でご紹介</p>
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <span class="stat-number">1,200+</span>
-                        <span class="stat-label">登録クリニック</span>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <div class="hero-badge">東京版</div>
+                    <div class="hero-message">
+                        <div class="hero-tagline">料金 × 通いやすさ で選ぶ</div>
+                        <h2 class="hero-title">
+                            <span class="title-main">医療脱毛</span>
+                            <span class="title-sub">ランキング</span>
+                        </h2>
+                        <div class="hero-arrows">
+                            <i class="fas fa-chevron-down"></i>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">47</span>
-                        <span class="stat-label">都道府県対応</span>
+                    <div class="hero-highlight">
+                        <div class="highlight-label">この夏</div>
+                        <div class="highlight-text">賢い<span class="highlight-emphasis">女子の</span><br>脱毛選び</div>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">15,000+</span>
-                        <span class="stat-label">利用者実績</span>
-                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="image-placeholder"></div>
                 </div>
             </div>
         </section>
@@ -58,16 +59,21 @@
             <section class="selected-region">
                 <div class="region-display">
                     <h2 class="region-title">
-                        <span class="region-icon">📍</span>
+                        <span class="region-icon"><i class="fas fa-map-marker-alt"></i></span>
                         選択地域: <span id="selected-region-name" aria-live="polite" class="region-name">地域を選択してください</span>
                     </h2>
+                    <div class="region-selector-container">
+                        <select id="region-select" class="region-select">
+                            <!-- 地域オプションはJavaScriptで動的に生成 -->
+                        </select>
+                    </div>
                 </div>
             </section>
 
             <!-- 検索フィルターセクション -->
             <section class="search-filter">
                 <div class="filter-header">
-                    <h2 class="filter-title">🔍 条件で絞り込み</h2>
+                    <h2 class="filter-title"><i class="fas fa-search"></i> 条件で絞り込み</h2>
                     <p class="filter-subtitle">お探しの条件を選択してください</p>
                 </div>
                 <div class="filter-container">
@@ -105,18 +111,18 @@
             <!-- ランキング表示セクション -->
             <section class="clinic-rankings">
                 <div class="ranking-header">
-                    <h2 class="ranking-title">🏆 地域別クリニックランキング</h2>
+                    <h2 class="ranking-title"><i class="fas fa-trophy"></i> 地域別クリニックランキング</h2>
                     <p class="ranking-subtitle">患者評価・アクセス・サービス品質を総合評価</p>
                 </div>
                 <div class="ranking-tabs">
                     <button class="tab-btn active" data-type="overall">
-                        <span class="tab-icon">🏆</span>総合ランキング
+                        <span class="tab-icon"><i class="fas fa-trophy"></i></span>総合ランキング
                     </button>
                     <button class="tab-btn" data-type="rating">
-                        <span class="tab-icon">⭐</span>評価順
+                        <span class="tab-icon"><i class="fas fa-star"></i></span>評価順
                     </button>
                     <button class="tab-btn" data-type="accessibility">
-                        <span class="tab-icon">🚇</span>アクセス順
+                        <span class="tab-icon"><i class="fas fa-subway"></i></span>アクセス順
                     </button>
                 </div>
                 <div id="ranking-list" class="ranking-container">
@@ -127,7 +133,7 @@
             <!-- TOP3比較表セクション -->
             <section class="top3-comparison">
                 <div class="comparison-header">
-                    <h2 class="comparison-title">📊 TOP3クリニック比較</h2>
+                    <h2 class="comparison-title"><i class="fas fa-chart-bar"></i> TOP3クリニック比較</h2>
                     <p class="comparison-subtitle">上位3院の特徴を一目で比較</p>
                 </div>
                 <div id="top3-table" class="comparison-table">
@@ -138,18 +144,18 @@
             <!-- クリニック詳細セクション -->
             <section id="stores-list" class="clinic-list">
                 <div class="clinic-list-header">
-                    <h2 class="clinic-list-title">🏥 地域のクリニック一覧</h2>
+                    <h2 class="clinic-list-title"><i class="fas fa-hospital"></i> 地域のクリニック一覧</h2>
                     <p class="clinic-list-subtitle">詳細情報とアクセス方法をご確認いただけます</p>
                 </div>
                 <div class="view-options">
                     <button class="view-btn active" data-view="card">
-                        <span class="view-icon">🔲</span>カード表示
+                        <span class="view-icon"><i class="fas fa-th"></i></span>カード表示
                     </button>
                     <button class="view-btn" data-view="list">
-                        <span class="view-icon">📄</span>リスト表示
+                        <span class="view-icon"><i class="fas fa-list"></i></span>リスト表示
                     </button>
                     <button class="view-btn" data-view="map">
-                        <span class="view-icon">🗺️</span>マップ表示
+                        <span class="view-icon"><i class="fas fa-map-marked-alt"></i></span>マップ表示
                     </button>
                 </div>
                 <div class="stores-container">
@@ -160,8 +166,8 @@
             <!-- 選択クリニック詳細（モーダル的表示） -->
             <section class="clinic-details" id="clinic-details" style="display: none;">
                 <div class="details-header">
-                    <h2 class="details-title">📋 クリニック詳細情報</h2>
-                    <button class="close-details" id="close-details">✕</button>
+                    <h2 class="details-title"><i class="fas fa-clipboard-list"></i> クリニック詳細情報</h2>
+                    <button class="close-details" id="close-details"><i class="fas fa-times"></i></button>
                 </div>
                 <div id="clinic-detail-content" class="detail-container">
                     <!-- 選択されたクリニックの詳細情報 -->
@@ -171,12 +177,12 @@
             <!-- お役立ち情報セクション -->
             <section class="helpful-info">
                 <div class="info-header">
-                    <h2 class="info-title">💡 クリニック選びのお役立ち情報</h2>
+                    <h2 class="info-title"><i class="fas fa-lightbulb"></i> クリニック選びのお役立ち情報</h2>
                     <p class="info-subtitle">安心して医療機関を選ぶためのポイント</p>
                 </div>
                 <div class="info-grid">
                     <div class="info-card">
-                        <div class="card-icon">🔍</div>
+                        <div class="card-icon"><i class="fas fa-search"></i></div>
                         <h3 class="card-title">クリニックの選び方</h3>
                         <ul class="card-list">
                             <li>診療科目が適切か</li>
@@ -187,8 +193,8 @@
                         </ul>
                     </div>
                     <div class="info-card">
+                        <div class="card-icon"><i class="fas fa-question-circle"></i></div>
                         <h3 class="card-title">よくある質問</h3>
-                        <div class="card-icon">❓</div>
                         <ul class="card-list">
                             <li>初診に必要な持ち物は？</li>
                             <li>予約は必要ですか？</li>
@@ -198,7 +204,7 @@
                         </ul>
                     </div>
                     <div class="info-card">
-                        <div class="card-icon">🏥</div>
+                        <div class="card-icon"><i class="fas fa-hospital"></i></div>
                         <h3 class="card-title">診療科目ガイド</h3>
                         <ul class="card-list">
                             <li>内科：風邪、生活習慣病</li>
