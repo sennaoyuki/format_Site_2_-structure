@@ -77,19 +77,87 @@ class DisplayManager {
             if (!clinic) return;
 
             const rankNum = parseInt(position.replace('no', ''));
+            
+            // ランキングアイテムのコンテナ
             const rankingItem = document.createElement('div');
-            rankingItem.className = 'ranking-item';
+            rankingItem.className = `ranking-item rank-${rankNum}`;
 
-            let rankClass = '';
-            if (rankNum === 1) rankClass = 'gold';
-            else if (rankNum === 2) rankClass = 'silver';
-            else if (rankNum === 3) rankClass = 'bronze';
+            // メダルクラスの設定
+            let medalClass = '';
+            let medalText = `No.${rankNum}`;
+            if (rankNum === 1) medalClass = 'gold-medal';
+            else if (rankNum === 2) medalClass = 'silver-medal';
+            else if (rankNum === 3) medalClass = 'bronze-medal';
+
+            // 評価スコアとスターの生成（仮のデータ）
+            const ratings = {
+                1: { score: 4.3, stars: 4.5 },
+                2: { score: 4.0, stars: 4 },
+                3: { score: 3.2, stars: 3 }
+            };
+            const rating = ratings[rankNum] || { score: 3.0, stars: 3 };
+
+            // スターのHTML生成
+            let starsHtml = '';
+            const fullStars = Math.floor(rating.stars);
+            const hasHalfStar = rating.stars % 1 !== 0;
+            
+            for (let i = 0; i < fullStars; i++) {
+                starsHtml += '<i class="fas fa-star"></i>';
+            }
+            if (hasHalfStar) {
+                starsHtml += '<i class="fas fa-star-half-alt"></i>';
+            }
+            for (let i = Math.ceil(rating.stars); i < 5; i++) {
+                starsHtml += '<i class="far fa-star"></i>';
+            }
+
+            // キャンペーンバナーの生成（仮のデータ）
+            const banners = {
+                1: 'フレイア脱毛 5周年記念キャンペーン',
+                2: 'レジーナクリニック 医療脱毛',
+                3: '全身+VIO+顔'
+            };
+            const bannerText = banners[rankNum] || 'キャンペーン実施中';
+
+            // 価格情報の生成（仮のデータ）
+            const prices = {
+                1: { main: '全身+VIO+顔', detail: '月額1,500円〜', discount: '最大13万円OFF！', note: '記念プラン開始！' },
+                2: { main: '全身+VIO', detail: '月額1,000円〜' },
+                3: { main: '全身+VIO+顔', detail: '月々4,800円' }
+            };
+            const price = prices[rankNum] || { main: '要問合せ', detail: '詳細はクリニックへ' };
 
             rankingItem.innerHTML = `
-                <div class="ranking-number ${rankClass}">${rankNum}</div>
-                <div class="clinic-info">
-                    <div class="clinic-name">${clinic.name}</div>
-                    <div class="clinic-code">コード: ${clinic.code}</div>
+                <div class="rank-medal ${medalClass}">
+                    <span class="medal-text">${medalText}</span>
+                </div>
+                <div class="clinic-card">
+                    <div class="satisfaction-badge">
+                        <span class="satisfaction-label">満足度</span>
+                    </div>
+                    <div class="rating-section">
+                        <div class="stars">
+                            ${starsHtml}
+                        </div>
+                        <div class="rating-score">${rating.score}<span class="score-max">/5.0</span></div>
+                    </div>
+                    <div class="clinic-logo-section">
+                        <div class="clinic-logo">${clinic.name}</div>
+                    </div>
+                    <div class="clinic-banner">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 200'%3E%3Crect fill='%23${rankNum === 1 ? 'fce7f3' : rankNum === 2 ? 'fbbf24' : 'e0e7ff'}' width='400' height='200'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' fill='%23${rankNum === 1 ? 'ec4899' : rankNum === 2 ? 'fff' : '4c1d95'}' font-size='20' font-weight='bold'%3E${bannerText}%3C/text%3E%3C/svg%3E" alt="キャンペーンバナー">
+                    </div>
+                    <div class="price-info">
+                        <div class="price-main">${price.main}</div>
+                        <div class="price-details">${price.detail}</div>
+                        ${price.discount ? `<div class="price-discount">${price.discount}</div>` : ''}
+                        ${price.note ? `<div class="price-note">${price.note}</div>` : ''}
+                    </div>
+                    <a href="#" class="clinic-cta-button">
+                        <span class="cta-text">予約する</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
                 </div>
             `;
 
