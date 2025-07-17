@@ -422,6 +422,19 @@ class RankingApp {
         this.setupTabSwitching();
     }
 
+    // クリニック名の表示形式を取得
+    getClinicDisplayName(name, rank) {
+        // 画像に合わせて特定のクリニック名を変換
+        const displayNames = {
+            1: 'DIO',
+            2: 'ウララクリニック',
+            3: 'リエートクリニック',
+            4: 'エミナルクリニック',
+            5: '湘南美容クリニック'
+        };
+        return displayNames[rank] || name;
+    }
+
     // 総合タブの生成
     generateGeneralTab(clinics) {
         const tbody = document.getElementById('general-tbody');
@@ -453,7 +466,7 @@ class RankingApp {
                     <div class="clinic-name-cell">
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
-                            <div class="clinic-main-name">${clinic.name}</div>
+                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic.name, clinic.rank)}</div>
                             <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
@@ -493,7 +506,7 @@ class RankingApp {
                     <div class="clinic-name-cell">
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
-                            <div class="clinic-main-name">${clinic.name}</div>
+                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic.name, clinic.rank)}</div>
                             <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
@@ -527,7 +540,7 @@ class RankingApp {
                     <div class="clinic-name-cell">
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
-                            <div class="clinic-main-name">${clinic.name}</div>
+                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic.name, clinic.rank)}</div>
                             <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>

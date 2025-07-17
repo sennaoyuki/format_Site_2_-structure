@@ -548,6 +548,11 @@ section {
     border: 3px solid #fff;
 }
 
+.rank-medal:not(.gold-medal):not(.silver-medal):not(.bronze-medal) {
+    background: linear-gradient(135deg, #9ca3af 0%, #d1d5db 100%);
+    border: 3px solid #fff;
+}
+
 .medal-text {
     font-style: italic;
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
@@ -575,6 +580,14 @@ section {
 
 .rank-3 .clinic-card {
     border-color: #f59e0b;
+}
+
+.rank-4 .clinic-card {
+    border-color: #666;
+}
+
+.rank-5 .clinic-card {
+    border-color: #666;
 }
 
 .clinic-card:hover {
@@ -775,8 +788,10 @@ section {
 .comparison-tabs {
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 0;
     border-bottom: 2px solid #f0f0f0;
+    gap: 0;
 }
 
 .tab-button {
@@ -840,7 +855,7 @@ section {
 }
 
 .comparison-table th:first-child {
-    width: 20%;
+    width: 25%;
     background: #5fbfdb;
 }
 
