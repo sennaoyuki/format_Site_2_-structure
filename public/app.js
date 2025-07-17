@@ -78,6 +78,9 @@ class DisplayManager {
 
             const rankNum = parseInt(position.replace('no', ''));
             
+            // 3位までに制限
+            if (rankNum > 3) return;
+            
             // ランキングアイテムのコンテナ
             const rankingItem = document.createElement('div');
             rankingItem.className = `ranking-item rank-${rankNum}`;
