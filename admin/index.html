@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV管理画面 - クリニックランキングシステム</title>
+    <link rel="stylesheet" href="admin-style.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>📊 CSV管理画面</h1>
+            <p class="admin-subtitle">クリニックランキングシステム データ管理</p>
+            <nav class="admin-nav">
+                <a href="../public/index.html" class="nav-link">🏠 メインサイトに戻る</a>
+            </nav>
+        </header>
+
+        <main class="admin-main">
+            <!-- アップロード統計 -->
+            <section class="upload-stats">
+                <h2>アップロード状況</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number" id="uploaded-count">0</span>
+                        <span class="stat-label">アップロード済み</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5</span>
+                        <span class="stat-label">必須ファイル</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="total-records">0</span>
+                        <span class="stat-label">総レコード数</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="last-update">-</span>
+                        <span class="stat-label">最終更新</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CSV アップロードエリア -->
+            <section class="upload-section">
+                <h2>CSVファイル アップロード</h2>
+                
+                <!-- 地域データ -->
+                <div class="upload-card" data-file-type="region">
+                    <div class="upload-header">
+                        <h3>🗺️ 地域データ</h3>
+                        <span class="file-name">region.csv</span>
+                        <div class="upload-status" id="region-status">待機中</div>
+                        <button class="delete-btn" id="region-delete" style="display: none;" title="ファイルを削除">🗑️</button>
+                    </div>
+                    <div class="upload-dropzone" id="region-dropzone">
+                        <div class="dropzone-content">
+                            <div class="upload-icon">📁</div>
+                            <p class="dropzone-text">ファイルをドラッグ&ドロップ</p>
+                            <p class="dropzone-subtext">または クリックして選択</p>
+                            <input type="file" class="file-input" id="region-input" accept=".csv">
+                        </div>
+                        <div class="upload-progress" id="region-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <div class="file-info" id="region-info"></div>
+                </div>
+
+                <!-- クリニックデータ -->
+                <div class="upload-card" data-file-type="items">
+                    <div class="upload-header">
+                        <h3>🏥 クリニックデータ</h3>
+                        <span class="file-name">items.csv</span>
+                        <div class="upload-status" id="items-status">待機中</div>
+                        <button class="delete-btn" id="items-delete" style="display: none;" title="ファイルを削除">🗑️</button>
+                    </div>
+                    <div class="upload-dropzone" id="items-dropzone">
+                        <div class="dropzone-content">
+                            <div class="upload-icon">📁</div>
+                            <p class="dropzone-text">ファイルをドラッグ&ドロップ</p>
+                            <p class="dropzone-subtext">または クリックして選択</p>
+                            <input type="file" class="file-input" id="items-input" accept=".csv">
+                        </div>
+                        <div class="upload-progress" id="items-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <div class="file-info" id="items-info"></div>
+                </div>
+
+                <!-- ランキングデータ -->
+                <div class="upload-card" data-file-type="ranking">
+                    <div class="upload-header">
+                        <h3>🏆 ランキングデータ</h3>
+                        <span class="file-name">ranking.csv</span>
+                        <div class="upload-status" id="ranking-status">待機中</div>
+                    </div>
+                    <div class="upload-dropzone" id="ranking-dropzone">
+                        <div class="dropzone-content">
+                            <div class="upload-icon">📁</div>
+                            <p class="dropzone-text">ファイルをドラッグ&ドロップ</p>
+                            <p class="dropzone-subtext">または クリックして選択</p>
+                            <input type="file" class="file-input" id="ranking-input" accept=".csv">
+                        </div>
+                        <div class="upload-progress" id="ranking-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <div class="file-info" id="ranking-info"></div>
+                </div>
+
+                <!-- 店舗データ -->
+                <div class="upload-card" data-file-type="stores">
+                    <div class="upload-header">
+                        <h3>🏪 店舗データ</h3>
+                        <span class="file-name">stores.csv</span>
+                        <div class="upload-status" id="stores-status">待機中</div>
+                    </div>
+                    <div class="upload-dropzone" id="stores-dropzone">
+                        <div class="dropzone-content">
+                            <div class="upload-icon">📁</div>
+                            <p class="dropzone-text">ファイルをドラッグ&ドロップ</p>
+                            <p class="dropzone-subtext">または クリックして選択</p>
+                            <input type="file" class="file-input" id="stores-input" accept=".csv">
+                        </div>
+                        <div class="upload-progress" id="stores-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <div class="file-info" id="stores-info"></div>
+                </div>
+
+                <!-- 店舗ビューデータ -->
+                <div class="upload-card" data-file-type="store_view">
+                    <div class="upload-header">
+                        <h3>👁️ 店舗ビューデータ</h3>
+                        <span class="file-name">store_view.csv</span>
+                        <div class="upload-status" id="store_view-status">待機中</div>
+                    </div>
+                    <div class="upload-dropzone" id="store_view-dropzone">
+                        <div class="dropzone-content">
+                            <div class="upload-icon">📁</div>
+                            <p class="dropzone-text">ファイルをドラッグ&ドロップ</p>
+                            <p class="dropzone-subtext">または クリックして選択</p>
+                            <input type="file" class="file-input" id="store_view-input" accept=".csv">
+                        </div>
+                        <div class="upload-progress" id="store_view-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill"></div>
+                            </div>
+                            <span class="progress-text">0%</span>
+                        </div>
+                    </div>
+                    <div class="file-info" id="store_view-info"></div>
+                </div>
+            </section>
+
+            <!-- プレビューエリア -->
+            <section class="preview-section" id="preview-section" style="display: none;">
+                <h2>データプレビュー</h2>
+                <div class="preview-controls">
+                    <select id="preview-select">
+                        <option value="">プレビューするファイルを選択</option>
+                    </select>
+                    <button id="clear-preview" class="btn btn-secondary">プレビュークリア</button>
+                </div>
+                <div class="preview-container">
+                    <div class="preview-info">
+                        <span id="preview-filename"></span>
+                        <span id="preview-records"></span>
+                    </div>
+                    <div class="table-container">
+                        <table id="preview-table">
+                            <thead id="preview-thead"></thead>
+                            <tbody id="preview-tbody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- バックアップ管理セクション -->
+            <section class="backup-section">
+                <h2>バックアップ管理</h2>
+                <div class="backup-controls">
+                    <button id="create-backup" class="btn btn-primary">📦 バックアップ作成</button>
+                    <button id="restore-backup" class="btn btn-secondary">🔄 復元</button>
+                    <select id="backup-select" style="display: none;">
+                        <option value="">バックアップを選択...</option>
+                    </select>
+                </div>
+                <div class="backup-list" id="backup-list">
+                    <!-- バックアップリストがここに表示される -->
+                </div>
+            </section>
+
+            <!-- 一括操作ボタン -->
+            <section class="bulk-actions">
+                <button id="clear-all" class="btn btn-danger">🗑️ 全てクリア</button>
+                <button id="validate-all" class="btn btn-primary">✅ データ検証</button>
+                <button id="save-all" class="btn btn-success">💾 保存</button>
+                <button id="save-settings" class="btn btn-info">⚙️ 設定保存</button>
+            </section>
+
+            <!-- エラーメッセージエリア -->
+            <div id="error-message" class="error-message" style="display: none;">
+                <div class="error-content">
+                    <span class="error-icon">⚠️</span>
+                    <p id="error-text"></p>
+                    <button id="close-error" class="error-close">×</button>
+                </div>
+            </div>
+
+            <!-- 成功メッセージエリア -->
+            <div id="success-message" class="success-message" style="display: none;">
+                <div class="success-content">
+                    <span class="success-icon">✅</span>
+                    <p id="success-text"></p>
+                    <button id="close-success" class="success-close">×</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Papa Parse CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    
+    <!-- Core Scripts -->
+    <script src="admin-script.js"></script>
+    <script src="csv-manager.js"></script>
+    <script src="file-uploader.js"></script>
+    <script src="backup-manager.js"></script>
+    
+    <!-- Security & Advanced Features -->
+    <script src="security-layer.js"></script>
+    <script src="csv-parser-advanced.js"></script>
+    
+    <!-- Integration -->
+    <script src="integration-adapter.js"></script>
+    
+    <!-- 統合初期化 -->
+    <script>
+        // Papa Parse読み込み確認
+        window.addEventListener('load', function() {
+            if (typeof Papa === 'undefined') {
+                console.error('Papa Parse CDNの読み込みに失敗しました');
+                alert('必要なライブラリの読み込みに失敗しました。ページを再読み込みしてください。');
+            } else {
+                console.log('Papa Parse v' + Papa.VERSION + ' 読み込み完了');
+            }
+        });
+    </script>
+</body>
+</html>

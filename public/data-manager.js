@@ -28,7 +28,7 @@ class DataManager {
         }
     }
 
-    // CSVファイルを読み込む汎用関数
+    // CSVファイルを読み込む汎用関数（エラーハンドリング付き）
     async loadCsvFile(filename) {
         try {
             const response = await fetch(this.dataPath + filename);
@@ -43,7 +43,7 @@ class DataManager {
         }
     }
 
-    // CSVパーサー
+    // CSVパーサー（カンマ区切りのデータをオブジェクト配列に変換）
     parseCsv(csvText) {
         const lines = csvText.split('\n').filter(line => line.trim() !== '');
         if (lines.length === 0) return [];
@@ -178,7 +178,7 @@ class DataManager {
         return this.rankings.find(r => r.regionId === regionId);
     }
 
-    // 地域IDで店舗を取得（store_viewベース）
+    // 地域IDで店舗を取得（store_viewデータを使用してランキングに対応した店舗を取得）
     getStoresByRegionId(regionId) {
         // store_viewから該当地域のデータを取得
         const storeView = this.storeViews.find(sv => sv.regionId === regionId);
@@ -191,7 +191,7 @@ class DataManager {
         // 表示する店舗IDのリストを作成
         const storeIdsToShow = [];
         
-        // ランキングのno1〜no5に対応するclinic_1〜clinic_5の店舗IDを取得
+        // ランキングのno1〜no5に対応するclinic_1〜clinic_5の店舗IDをマッピング
         Object.entries(ranking.ranks).forEach(([position, clinicId]) => {
             const positionNum = parseInt(position.replace('no', ''));
             const clinicKey = `clinic_${positionNum}`;

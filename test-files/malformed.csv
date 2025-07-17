@@ -1,0 +1,4 @@
+id,name,description
+1,"Unclosed quote,"data
+2,Missing column
+3,"Extra","column","here","too"

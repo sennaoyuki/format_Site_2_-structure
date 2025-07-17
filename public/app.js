@@ -40,6 +40,7 @@ class DisplayManager {
         this.errorText = document.getElementById('error-text');
     }
 
+    // 地域セレクターを更新し、選択された地域を設定
     updateRegionSelector(regions, selectedRegionId) {
         this.regionSelect.innerHTML = '';
         regions.forEach(region => {
@@ -51,8 +52,9 @@ class DisplayManager {
         });
     }
 
+    // 選択された地域名を表示（アクセシビリティ対応）
     updateSelectedRegionName(regionName) {
-        this.selectedRegionName.textContent = regionName || '-';
+        this.selectedRegionName.textContent = regionName || '該当店舗なし';
     }
 
     updateRankingDisplay(clinics, ranking) {
@@ -63,7 +65,7 @@ class DisplayManager {
             return;
         }
 
-        // ランキング順に表示
+        // ランキング順に表示（no1, no2, no3...の順番でソート）
         const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
             const numA = parseInt(a[0].replace('no', ''));
             const numB = parseInt(b[0].replace('no', ''));
@@ -117,24 +119,32 @@ class DisplayManager {
                 clinicGroup.appendChild(clinicHeader);
 
                 // そのクリニックの店舗を表示
-                clinicStores.forEach(store => {
-                    const storeItem = document.createElement('div');
-                    storeItem.className = 'store-item';
+                if (clinicStores.length > 0) {
+                    clinicStores.forEach(store => {
+                        const storeItem = document.createElement('div');
+                        storeItem.className = 'store-item';
 
-                    // 郵便番号の重複を修正
-                    const zipcode = store.zipcode.replace(/^〒/, '');
+                        // 郵便番号の重複を修正
+                        const zipcode = store.zipcode.replace(/^〒/, '');
 
-                    storeItem.innerHTML = `
-                        <div class="store-name">${store.name}</div>
-                        <div class="store-details">
-                            <p class="store-zipcode">〒${zipcode}</p>
-                            <p class="store-address">${store.address}</p>
-                            <p class="store-access">アクセス: ${store.access}</p>
-                        </div>
-                    `;
+                        storeItem.innerHTML = `
+                            <div class="store-name">${store.name}</div>
+                            <div class="store-details">
+                                <p class="store-zipcode">〒${zipcode}</p>
+                                <p class="store-address">${store.address}</p>
+                                <p class="store-access">アクセス: ${store.access}</p>
+                            </div>
+                        `;
 
-                    clinicGroup.appendChild(storeItem);
-                });
+                        clinicGroup.appendChild(storeItem);
+                    });
+                } else {
+                    // 店舗がない場合の表示
+                    const noStoreItem = document.createElement('div');
+                    noStoreItem.className = 'empty-state';
+                    noStoreItem.innerHTML = '<p>該当店舗なし</p>';
+                    clinicGroup.appendChild(noStoreItem);
+                }
 
                 this.storesList.appendChild(clinicGroup);
             });
@@ -163,7 +173,12 @@ class DisplayManager {
     showError(message) {
         this.errorText.textContent = message;
         this.errorMessage.style.display = 'block';
-        setTimeout(() => {
+        // 既存のタイマーをクリア
+        if (this.errorTimeout) {
+            clearTimeout(this.errorTimeout);
+        }
+        // 新しいタイマーを設定
+        this.errorTimeout = setTimeout(() => {
             this.errorMessage.style.display = 'none';
         }, 5000);
     }
@@ -266,7 +281,7 @@ class RankingApp {
         }
     }
 
-    // 店舗をクリニックごとにグループ化
+    // 店舗をクリニックごとにグループ化して表示順を管理
     groupStoresByClinics(stores, ranking, allClinics) {
         const clinicsWithStores = new Map();
         
@@ -284,14 +299,13 @@ class RankingApp {
         sortedRanks.forEach(([position, clinicId]) => {
             const clinic = allClinics.find(c => c.id === clinicId);
             if (clinic) {
-                // このクリニックに属する店舗を検索
+                // このクリニックに属する店舗をクリニック名でフィルタリング
                 const clinicStores = stores.filter(store => 
                     store.clinicName === clinic.name
                 );
                 
-                if (clinicStores.length > 0) {
-                    clinicsWithStores.set(clinic, clinicStores);
-                }
+                // 店舗がない場合も空配列でMapに追加（全クリニックを表示するため）
+                clinicsWithStores.set(clinic, clinicStores);
             }
         });
 
@@ -299,7 +313,7 @@ class RankingApp {
     }
 }
 
-// アプリケーションの起動
+// アプリケーションの起動（DOM読み込み完了後に実行）
 document.addEventListener('DOMContentLoaded', () => {
     const app = new RankingApp();
     app.init();
