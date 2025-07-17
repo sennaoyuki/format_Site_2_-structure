@@ -1012,6 +1012,226 @@ section {
     color: #ec4899;
 }
 
+/* ===== 案件詳細セクション ===== */
+.clinic-details-section {
+    max-width: 1200px;
+    margin: 60px auto;
+    padding: 0 20px;
+}
+
+.details-header-banner {
+    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
+    color: white;
+    padding: 30px 20px;
+    text-align: center;
+    border-radius: 30px 30px 0 0;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.banner-decoration {
+    font-size: 2rem;
+    opacity: 0.3;
+    transform: rotate(45deg);
+}
+
+.banner-decoration.left {
+    transform: rotate(-45deg);
+}
+
+.banner-content {
+    flex: 1;
+    max-width: 500px;
+}
+
+.banner-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.banner-icon {
+    font-size: 1.5rem;
+    color: #fbbf24;
+}
+
+.banner-subtitle {
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-left: 10px;
+}
+
+.big-number {
+    font-size: 3rem;
+    font-style: italic;
+}
+
+.clinic-details-container {
+    background: white;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    overflow: hidden;
+}
+
+.detail-item {
+    border-bottom: 1px solid #f0f0f0;
+    padding: 40px;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+}
+
+.detail-rank {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.detail-rank-badge {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: white;
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+}
+
+.detail-rank-badge.silver {
+    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
+    box-shadow: 0 4px 15px rgba(192, 192, 192, 0.4);
+}
+
+.detail-rank-badge.bronze {
+    background: linear-gradient(135deg, #cd7f32 0%, #e4a853 100%);
+    box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
+}
+
+.detail-title {
+    flex: 1;
+}
+
+.detail-title h3 {
+    font-size: 1.3rem;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.detail-title p {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+.detail-cta-link {
+    color: #3b82f6;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s;
+}
+
+.detail-cta-link:hover {
+    gap: 12px;
+    color: #2563eb;
+}
+
+.detail-banner {
+    margin: 20px 0;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+}
+
+.detail-banner img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.detail-features {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.feature-tag {
+    background: #fce7f3;
+    color: #be185d;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.detail-info-table {
+    background: #f9fafb;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+.info-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.info-table tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.info-table tr:last-child {
+    border-bottom: none;
+}
+
+.info-table td {
+    padding: 15px;
+    vertical-align: top;
+}
+
+.info-table td:first-child {
+    width: 30%;
+    background: #f3f4f6;
+    font-weight: 600;
+    color: #374151;
+}
+
+.info-table td:last-child {
+    color: #111827;
+}
+
+.price-highlight {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ec4899;
+}
+
+.price-sub {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-left: 5px;
+}
+
 /* ===== クリニック一覧セクション ===== */
 .view-options {
     display: flex;
@@ -1754,6 +1974,113 @@ section {
     
     /* スクロールヒント削除（スクロール不要のため） */
     
+    /* 案件詳細セクション */
+    .clinic-details-section {
+        margin: 40px 0;
+        padding: 0 10px;
+    }
+    
+    .details-header-banner {
+        padding: 20px 10px;
+        border-radius: 20px 20px 0 0;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .banner-decoration {
+        font-size: 1.5rem;
+    }
+    
+    .banner-title {
+        font-size: 1.2rem;
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .banner-icon {
+        font-size: 1.2rem;
+    }
+    
+    .banner-subtitle {
+        font-size: 1.5rem;
+        margin-left: 0;
+    }
+    
+    .big-number {
+        font-size: 2rem;
+    }
+    
+    .clinic-details-container {
+        border-radius: 0 0 15px 15px;
+    }
+    
+    .detail-item {
+        padding: 20px 15px;
+    }
+    
+    .detail-rank {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+    
+    .detail-rank-badge {
+        width: 45px;
+        height: 45px;
+        font-size: 1rem;
+    }
+    
+    .detail-title h3 {
+        font-size: 1.1rem;
+    }
+    
+    .detail-title p {
+        font-size: 0.9rem;
+    }
+    
+    .detail-cta-link {
+        font-size: 1rem;
+        width: 100%;
+        justify-content: center;
+        margin-top: 10px;
+    }
+    
+    .detail-banner {
+        margin: 15px 0;
+        border-radius: 10px;
+    }
+    
+    .detail-features {
+        gap: 10px;
+        margin: 15px 0;
+    }
+    
+    .feature-tag {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+    
+    .detail-info-table {
+        padding: 15px;
+        margin-top: 15px;
+    }
+    
+    .info-table td {
+        padding: 10px;
+        font-size: 0.85rem;
+    }
+    
+    .info-table td:first-child {
+        width: 35%;
+    }
+    
+    .price-highlight {
+        font-size: 1.3rem;
+    }
+    
+    .price-sub {
+        font-size: 0.8rem;
+    }
+
     /* クリニック一覧セクション */
     .clinic-list {
         padding: 30px 10px;

@@ -347,6 +347,9 @@ class RankingApp {
 
             // 比較表の更新
             this.updateComparisonTable(allClinics, ranking);
+            
+            // 詳細コンテンツの更新
+            this.updateClinicDetails(allClinics, ranking);
 
             // エラーメッセージを隠す
             this.displayManager.hideError();
@@ -580,6 +583,128 @@ class RankingApp {
                 button.classList.add('active');
                 document.getElementById(`${targetTab}-tab`).classList.add('active');
             });
+        });
+    }
+
+    // クリニック詳細の更新
+    updateClinicDetails(clinics, ranking) {
+        const detailsList = document.getElementById('clinic-details-list');
+        if (!detailsList) return;
+
+        detailsList.innerHTML = '';
+
+        if (!ranking || Object.keys(ranking.ranks).length === 0) {
+            return;
+        }
+
+        // ランキング順のクリニックデータを取得（3位まで）
+        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
+            const numA = parseInt(a[0].replace('no', ''));
+            const numB = parseInt(b[0].replace('no', ''));
+            return numA - numB;
+        }).slice(0, 3);
+
+        sortedRanks.forEach(([position, clinicId]) => {
+            const clinic = clinics.find(c => c.id === clinicId);
+            if (!clinic) return;
+
+            const rank = parseInt(position.replace('no', ''));
+            const detailItem = document.createElement('div');
+            detailItem.className = 'detail-item';
+
+            // ランクに応じたバッジクラス
+            let badgeClass = '';
+            if (rank === 2) badgeClass = 'silver';
+            else if (rank === 3) badgeClass = 'bronze';
+
+            // クリニック詳細データ（仮のデータ）
+            const detailData = {
+                1: {
+                    title: '肌に優しい脱毛機を採用！',
+                    subtitle: '日焼け肌も産毛もスベスベに',
+                    link: 'フレイアクリニック ＞',
+                    banner: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400"%3E%3Crect fill="%23fce0ec" width="800" height="400"/%3E%3Ctext x="40" y="60" fill="%23ec4899" font-size="24" font-weight="bold"%3EFREY-A CLINIC%3C/text%3E%3Ctext x="40" y="100" fill="%23333" font-size="18"%3E※自由診療%3C/text%3E%3Ctext x="40" y="140" fill="%23ec4899" font-size="32" font-weight="bold"%3Eフレイア開院5周年記念キャンペーン%3C/text%3E%3Ctext x="40" y="180" fill="%23333" font-size="20"%3E全身%2BVIO%2B顔 5回コース%3C/text%3E%3Ctext x="40" y="220" fill="%23ec4899" font-size="36" font-weight="bold"%3E月額 1,500円%3C/text%3E%3Ctext x="350" y="220" fill="%23666" font-size="16"%3E(税込)%3C/text%3E%3Ctext x="40" y="260" fill="%23666" font-size="16"%3E払い 101,000円%3C/text%3E%3Ctext x="40" y="290" fill="%23666" font-size="14"%3E111,100円(税込)/月々1,500円(税込)%3C/text%3E%3Ctext x="40" y="330" fill="%23ec4899" font-size="20" font-weight="bold"%3E学割 5周年記念キャンペーン%3C/text%3E%3Ctext x="40" y="360" fill="%23333" font-size="16"%3E全身%2BVIO%2B顔 5回 月額 1,300円%3C/text%3E%3C/svg%3E',
+                    features: ['熱破壊式が蓄熱式の照射方法を選択可◯', '痛みに敏感な方も◯'],
+                    priceMain: '全身+VIO+顔 5回コース',
+                    priceValue: '月々1,500円',
+                    priceDetail: {
+                        '料金': '総額111,100円<br>学生：月々1,300円<br>学生：総額94,600円',
+                        '脱毛機': 'メディオスターNext PRO<br>メディオスターモノリス',
+                        '完了目安期間': '最短1〜1年半程度',
+                        '営業時間': '平日12:00〜21:00'
+                    }
+                },
+                2: {
+                    title: '豊富なプランから選べる！',
+                    subtitle: '肌質・毛質に合わせた施術',
+                    link: 'エミナルクリニック ＞',
+                    features: ['最新機器導入', '短時間施術'],
+                    priceMain: '全身+VIO',
+                    priceValue: '月額1,000円〜',
+                    priceDetail: {
+                        '料金': '総額98,000円〜',
+                        '脱毛機': '最新医療レーザー',
+                        '完了目安期間': '最短5ヶ月',
+                        '営業時間': '11:00〜21:00'
+                    }
+                },
+                3: {
+                    title: 'リーズナブルな価格設定',
+                    subtitle: '学生に人気の医療脱毛',
+                    link: 'リゼクリニック ＞',
+                    features: ['24回払い無利息', 'キャンセル料無料'],
+                    priceMain: '全身+VIO+顔',
+                    priceValue: '月々4,800円',
+                    priceDetail: {
+                        '料金': '総額198,000円',
+                        '脱毛機': '3種類の機器を使い分け',
+                        '完了目安期間': '最短8ヶ月',
+                        '営業時間': '10:00〜20:00'
+                    }
+                }
+            };
+
+            const data = detailData[rank] || detailData[1];
+
+            detailItem.innerHTML = `
+                <div class="detail-rank">
+                    <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
+                    <div class="detail-title">
+                        <h3>${data.title}</h3>
+                        <p>${data.subtitle}</p>
+                    </div>
+                    <a href="#" class="detail-cta-link">
+                        ${data.link}
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
+                ${data.banner ? `
+                <div class="detail-banner">
+                    <img src="${data.banner}" alt="${this.getClinicDisplayName(clinic.name, rank)}キャンペーン">
+                </div>
+                ` : ''}
+                <div class="detail-features">
+                    ${data.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                </div>
+                <div class="detail-info-table">
+                    <table class="info-table">
+                        <tr>
+                            <td colspan="2" style="text-align: center; background: white; padding: 20px;">
+                                <div style="font-size: 1.1rem; color: #333; margin-bottom: 10px;">${data.priceMain}</div>
+                                <div class="price-highlight">${data.priceValue}</div>
+                            </td>
+                        </tr>
+                        ${Object.entries(data.priceDetail).map(([key, value]) => `
+                            <tr>
+                                <td>${key}</td>
+                                <td>${value}</td>
+                            </tr>
+                        `).join('')}
+                    </table>
+                </div>
+            `;
+
+            detailsList.appendChild(detailItem);
         });
     }
 }
