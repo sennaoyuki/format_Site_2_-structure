@@ -30,10 +30,17 @@
         <!-- メインビジュアル -->
         <section class="hero-section">
             <div class="hero-container">
-                <div class="hero-content">
-                    <div class="hero-badge">東京版</div>
-                    <div class="hero-message">
-                        <div class="hero-tagline">料金 × 通いやすさ で選ぶ</div>
+                <div class="hero-inner">
+                    <div class="hero-content">
+                        <div class="hero-badge-top">東京版</div>
+                        <div class="hero-speech-bubble">
+                            <div class="bubble-header">
+                                <span class="bubble-text-small">料金</span>
+                                <span class="bubble-icon">×</span>
+                                <span class="bubble-text-small">通いやすさ</span>
+                                <span class="bubble-text-select">で選ぶ</span>
+                            </div>
+                        </div>
                         <h2 class="hero-title">
                             <span class="title-main">医療脱毛</span>
                             <span class="title-sub">ランキング</span>
@@ -43,13 +50,14 @@
                             <i class="fas fa-chevron-down"></i>
                         </div>
                     </div>
-                    <div class="hero-highlight">
-                        <div class="highlight-label">この夏</div>
-                        <div class="highlight-text">賢い<span class="highlight-emphasis">女子の</span><br>脱毛選び</div>
+                    <div class="hero-circle">
+                        <span class="circle-text-top">この夏</span>
+                        <span class="circle-text-main">賢い<span class="text-pink">女子の</span></span>
+                        <span class="circle-text-sub">脱毛選び</span>
                     </div>
                 </div>
-                <div class="hero-image">
-                    <div class="image-placeholder"></div>
+                <div class="hero-model-area">
+                    <div class="model-placeholder"></div>
                 </div>
             </div>
         </section>
@@ -111,22 +119,136 @@
             <!-- ランキング表示セクション -->
             <section class="clinic-rankings">
                 <div class="ranking-header">
-                    <h2 class="ranking-title"><i class="fas fa-trophy"></i> 地域別クリニックランキング</h2>
-                    <p class="ranking-subtitle">患者評価・アクセス・サービス品質を総合評価</p>
+                    <h2 class="ranking-title"><i class="fas fa-trophy"></i> 医療脱毛クリニックランキング</h2>
+                    <p class="ranking-subtitle">料金・アクセス・サービスを総合評価</p>
                 </div>
-                <div class="ranking-tabs">
-                    <button class="tab-btn active" data-type="overall">
-                        <span class="tab-icon"><i class="fas fa-trophy"></i></span>総合ランキング
-                    </button>
-                    <button class="tab-btn" data-type="rating">
-                        <span class="tab-icon"><i class="fas fa-star"></i></span>評価順
-                    </button>
-                    <button class="tab-btn" data-type="accessibility">
-                        <span class="tab-icon"><i class="fas fa-subway"></i></span>アクセス順
-                    </button>
-                </div>
-                <div id="ranking-list" class="ranking-container">
-                    <!-- ランキングはJavaScriptで動的に生成 -->
+                <div class="ranking-container">
+                    <!-- ランキング1位 -->
+                    <div class="ranking-item rank-1">
+                        <div class="rank-badge">
+                            <span class="rank-number">1</span>
+                            <span class="rank-label">位</span>
+                        </div>
+                        <div class="clinic-card">
+                            <div class="clinic-header">
+                                <h3 class="clinic-name">エミナルクリニック</h3>
+                                <div class="clinic-tags">
+                                    <span class="tag tag-popular">人気No.1</span>
+                                    <span class="tag tag-price">最安値</span>
+                                </div>
+                            </div>
+                            <div class="clinic-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-yen-sign"></i>
+                                    <span>全身脱毛 5回 68,000円</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span>夜21時まで営業</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>東京・横浜10院</span>
+                                </div>
+                            </div>
+                            <div class="clinic-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <span class="rating-score">4.8</span>
+                                <span class="review-count">(2,345件)</span>
+                            </div>
+                            <a href="#" class="clinic-cta">詳細を見る</a>
+                        </div>
+                    </div>
+                    
+                    <!-- ランキング2位 -->
+                    <div class="ranking-item rank-2">
+                        <div class="rank-badge">
+                            <span class="rank-number">2</span>
+                            <span class="rank-label">位</span>
+                        </div>
+                        <div class="clinic-card">
+                            <div class="clinic-header">
+                                <h3 class="clinic-name">レジーナクリニック</h3>
+                                <div class="clinic-tags">
+                                    <span class="tag tag-tech">最新機器</span>
+                                </div>
+                            </div>
+                            <div class="clinic-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-yen-sign"></i>
+                                    <span>全身脱毛 5回 99,800円</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-certificate"></i>
+                                    <span>返金保証あり</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>関東全域25院</span>
+                                </div>
+                            </div>
+                            <div class="clinic-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-score">4.7</span>
+                                <span class="review-count">(1,876件)</span>
+                            </div>
+                            <a href="#" class="clinic-cta">詳細を見る</a>
+                        </div>
+                    </div>
+                    
+                    <!-- ランキング3位 -->
+                    <div class="ranking-item rank-3">
+                        <div class="rank-badge">
+                            <span class="rank-number">3</span>
+                            <span class="rank-label">位</span>
+                        </div>
+                        <div class="clinic-card">
+                            <div class="clinic-header">
+                                <h3 class="clinic-name">フレイアクリニック</h3>
+                                <div class="clinic-tags">
+                                    <span class="tag tag-campaign">キャンペーン中</span>
+                                </div>
+                            </div>
+                            <div class="clinic-features">
+                                <div class="feature-item">
+                                    <i class="fas fa-yen-sign"></i>
+                                    <span>全身脱毛 5回 149,000円</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-gift"></i>
+                                    <span>学生割引10%OFF</span>
+                                </div>
+                                <div class="feature-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span>都内主要15院</span>
+                                </div>
+                            </div>
+                            <div class="clinic-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                                <span class="rating-score">4.5</span>
+                                <span class="review-count">(1,234件)</span>
+                            </div>
+                            <a href="#" class="clinic-cta">詳細を見る</a>
+                        </div>
+                    </div>
                 </div>
             </section>
 
