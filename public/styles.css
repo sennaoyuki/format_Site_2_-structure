@@ -157,7 +157,37 @@ section h2 {
 /* 店舗リスト */
 .stores-container {
     display: grid;
-    gap: 15px;
+    gap: 25px;
+}
+
+/* クリニックグループ */
+.clinic-group {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.clinic-group-header {
+    color: #2c3e50;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #3498db;
+}
+
+.clinic-group .store-item {
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 8px;
+    border-left: 4px solid #5dade2;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.clinic-group .store-item:last-child {
+    margin-bottom: 0;
 }
 
 .store-item {

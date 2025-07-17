@@ -95,7 +95,7 @@ class DisplayManager {
         });
     }
 
-    updateStoresDisplay(stores) {
+    updateStoresDisplay(stores, clinicsWithStores) {
         this.storesList.innerHTML = '';
 
         if (!stores || stores.length === 0) {
@@ -103,21 +103,61 @@ class DisplayManager {
             return;
         }
 
-        stores.forEach(store => {
-            const storeItem = document.createElement('div');
-            storeItem.className = 'store-item';
+        // クリニックごとにグループ化された店舗を表示
+        if (clinicsWithStores && clinicsWithStores.size > 0) {
+            clinicsWithStores.forEach((clinicStores, clinic) => {
+                // クリニックグループのコンテナ
+                const clinicGroup = document.createElement('div');
+                clinicGroup.className = 'clinic-group';
 
-            storeItem.innerHTML = `
-                <div class="store-name">${store.name}</div>
-                <div class="store-details">
-                    <p class="store-zipcode">〒${store.zipcode}</p>
-                    <p class="store-address">${store.address}</p>
-                    <p class="store-access">アクセス: ${store.access}</p>
-                </div>
-            `;
+                // クリニック名のヘッダー
+                const clinicHeader = document.createElement('h3');
+                clinicHeader.className = 'clinic-group-header';
+                clinicHeader.textContent = clinic.name;
+                clinicGroup.appendChild(clinicHeader);
 
-            this.storesList.appendChild(storeItem);
-        });
+                // そのクリニックの店舗を表示
+                clinicStores.forEach(store => {
+                    const storeItem = document.createElement('div');
+                    storeItem.className = 'store-item';
+
+                    // 郵便番号の重複を修正
+                    const zipcode = store.zipcode.replace(/^〒/, '');
+
+                    storeItem.innerHTML = `
+                        <div class="store-name">${store.name}</div>
+                        <div class="store-details">
+                            <p class="store-zipcode">〒${zipcode}</p>
+                            <p class="store-address">${store.address}</p>
+                            <p class="store-access">アクセス: ${store.access}</p>
+                        </div>
+                    `;
+
+                    clinicGroup.appendChild(storeItem);
+                });
+
+                this.storesList.appendChild(clinicGroup);
+            });
+        } else {
+            // フォールバック：グループ化できない場合は従来の表示
+            stores.forEach(store => {
+                const storeItem = document.createElement('div');
+                storeItem.className = 'store-item';
+
+                const zipcode = store.zipcode.replace(/^〒/, '');
+
+                storeItem.innerHTML = `
+                    <div class="store-name">${store.name}</div>
+                    <div class="store-details">
+                        <p class="store-zipcode">〒${zipcode}</p>
+                        <p class="store-address">${store.address}</p>
+                        <p class="store-access">アクセス: ${store.access}</p>
+                    </div>
+                `;
+
+                this.storesList.appendChild(storeItem);
+            });
+        }
     }
 
     showError(message) {
@@ -208,9 +248,10 @@ class RankingApp {
             const allClinics = this.dataManager.getAllClinics();
             this.displayManager.updateRankingDisplay(allClinics, ranking);
 
-            // 店舗リストの取得と表示
+            // 店舗リストの取得と表示（クリニックごとにグループ化）
             const stores = this.dataManager.getStoresByRegionId(regionId);
-            this.displayManager.updateStoresDisplay(stores);
+            const clinicsWithStores = this.groupStoresByClinics(stores, ranking, allClinics);
+            this.displayManager.updateStoresDisplay(stores, clinicsWithStores);
 
             // エラーメッセージを隠す
             this.displayManager.hideError();
@@ -223,6 +264,38 @@ class RankingApp {
                 this.changeRegion('013');
             }
         }
+    }
+
+    // 店舗をクリニックごとにグループ化
+    groupStoresByClinics(stores, ranking, allClinics) {
+        const clinicsWithStores = new Map();
+        
+        if (!ranking || !stores || stores.length === 0) {
+            return clinicsWithStores;
+        }
+
+        // ランキング順にクリニックを処理
+        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
+            const numA = parseInt(a[0].replace('no', ''));
+            const numB = parseInt(b[0].replace('no', ''));
+            return numA - numB;
+        });
+
+        sortedRanks.forEach(([position, clinicId]) => {
+            const clinic = allClinics.find(c => c.id === clinicId);
+            if (clinic) {
+                // このクリニックに属する店舗を検索
+                const clinicStores = stores.filter(store => 
+                    store.clinicName === clinic.name
+                );
+                
+                if (clinicStores.length > 0) {
+                    clinicsWithStores.set(clinic, clinicStores);
+                }
+            }
+        });
+
+        return clinicsWithStores;
     }
 }
 
