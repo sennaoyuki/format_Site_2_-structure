@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリニックランキング</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>クリニックランキング</h1>
+            <div class="region-selector">
+                <label for="region-select">地域を選択:</label>
+                <select id="region-select">
+                    <!-- 地域オプションはJavaScriptで動的に生成 -->
+                </select>
+            </div>
+        </header>
+
+        <main>
+            <section class="selected-region">
+                <h2>選択地域: <span id="selected-region-name">-</span></h2>
+            </section>
+
+            <section class="clinic-rankings">
+                <h2>クリニックランキング</h2>
+                <div id="ranking-list" class="ranking-container">
+                    <!-- ランキングはJavaScriptで動的に生成 -->
+                </div>
+            </section>
+
+            <section class="store-list">
+                <h2>店舗一覧</h2>
+                <div id="stores-list" class="stores-container">
+                    <!-- 店舗リストはJavaScriptで動的に生成 -->
+                </div>
+            </section>
+        </main>
+
+        <div id="error-message" class="error-message" style="display: none;">
+            <p id="error-text"></p>
+        </div>
+    </div>
+
+    <script src="data-manager.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

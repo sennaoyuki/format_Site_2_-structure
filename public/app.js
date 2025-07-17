@@ -1,0 +1,233 @@
+// URLパラメータ処理クラス
+class UrlParamHandler {
+    getParam(name) {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get(name);
+    }
+
+    setParam(name, value) {
+        const urlParams = new URLSearchParams(window.location.search);
+        urlParams.set(name, value);
+        window.history.replaceState({}, '', `${window.location.pathname}?${urlParams}`);
+    }
+
+    getAllParams() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const params = {};
+        for (const [key, value] of urlParams) {
+            params[key] = value;
+        }
+        return params;
+    }
+
+    getRegionId() {
+        return this.getParam('region_id') || '013'; // デフォルトは東京
+    }
+
+    updateRegionId(regionId) {
+        this.setParam('region_id', regionId);
+    }
+}
+
+// 表示管理クラス
+class DisplayManager {
+    constructor() {
+        this.regionSelect = document.getElementById('region-select');
+        this.selectedRegionName = document.getElementById('selected-region-name');
+        this.rankingList = document.getElementById('ranking-list');
+        this.storesList = document.getElementById('stores-list');
+        this.errorMessage = document.getElementById('error-message');
+        this.errorText = document.getElementById('error-text');
+    }
+
+    updateRegionSelector(regions, selectedRegionId) {
+        this.regionSelect.innerHTML = '';
+        regions.forEach(region => {
+            const option = document.createElement('option');
+            option.value = region.id;
+            option.textContent = region.name;
+            option.selected = region.id === selectedRegionId;
+            this.regionSelect.appendChild(option);
+        });
+    }
+
+    updateSelectedRegionName(regionName) {
+        this.selectedRegionName.textContent = regionName || '-';
+    }
+
+    updateRankingDisplay(clinics, ranking) {
+        this.rankingList.innerHTML = '';
+
+        if (!ranking || Object.keys(ranking.ranks).length === 0) {
+            this.rankingList.innerHTML = '<div class="empty-state"><p>この地域のランキングデータはありません</p></div>';
+            return;
+        }
+
+        // ランキング順に表示
+        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
+            const numA = parseInt(a[0].replace('no', ''));
+            const numB = parseInt(b[0].replace('no', ''));
+            return numA - numB;
+        });
+
+        sortedRanks.forEach(([position, clinicId]) => {
+            const clinic = clinics.find(c => c.id === clinicId);
+            if (!clinic) return;
+
+            const rankNum = parseInt(position.replace('no', ''));
+            const rankingItem = document.createElement('div');
+            rankingItem.className = 'ranking-item';
+
+            let rankClass = '';
+            if (rankNum === 1) rankClass = 'gold';
+            else if (rankNum === 2) rankClass = 'silver';
+            else if (rankNum === 3) rankClass = 'bronze';
+
+            rankingItem.innerHTML = `
+                <div class="ranking-number ${rankClass}">${rankNum}</div>
+                <div class="clinic-info">
+                    <div class="clinic-name">${clinic.name}</div>
+                    <div class="clinic-code">コード: ${clinic.code}</div>
+                </div>
+            `;
+
+            this.rankingList.appendChild(rankingItem);
+        });
+    }
+
+    updateStoresDisplay(stores) {
+        this.storesList.innerHTML = '';
+
+        if (!stores || stores.length === 0) {
+            this.storesList.innerHTML = '<div class="empty-state"><p>この地域に店舗はありません</p></div>';
+            return;
+        }
+
+        stores.forEach(store => {
+            const storeItem = document.createElement('div');
+            storeItem.className = 'store-item';
+
+            storeItem.innerHTML = `
+                <div class="store-name">${store.name}</div>
+                <div class="store-details">
+                    <p class="store-zipcode">〒${store.zipcode}</p>
+                    <p class="store-address">${store.address}</p>
+                    <p class="store-access">アクセス: ${store.access}</p>
+                </div>
+            `;
+
+            this.storesList.appendChild(storeItem);
+        });
+    }
+
+    showError(message) {
+        this.errorText.textContent = message;
+        this.errorMessage.style.display = 'block';
+        setTimeout(() => {
+            this.errorMessage.style.display = 'none';
+        }, 5000);
+    }
+
+    hideError() {
+        this.errorMessage.style.display = 'none';
+    }
+}
+
+// アプリケーションクラス
+class RankingApp {
+    constructor() {
+        this.urlHandler = new UrlParamHandler();
+        this.displayManager = new DisplayManager();
+        this.dataManager = null;
+        this.currentRegionId = null;
+    }
+
+    async init() {
+        try {
+            // データマネージャーの初期化
+            this.dataManager = new DataManager();
+            await this.dataManager.init();
+
+            // 初期地域IDの取得
+            this.currentRegionId = this.urlHandler.getRegionId();
+
+            // 地域セレクターの初期化
+            const regions = this.dataManager.getAllRegions();
+            this.displayManager.updateRegionSelector(regions, this.currentRegionId);
+
+            // イベントリスナーの設定
+            this.setupEventListeners();
+
+            // 初期表示の更新
+            this.updatePageContent(this.currentRegionId);
+        } catch (error) {
+            console.error('アプリケーションの初期化に失敗しました:', error);
+            this.displayManager.showError('データの読み込みに失敗しました。ページを再読み込みしてください。');
+        }
+    }
+
+    setupEventListeners() {
+        // 地域選択の変更イベント
+        this.displayManager.regionSelect.addEventListener('change', (e) => {
+            const newRegionId = e.target.value;
+            this.changeRegion(newRegionId);
+        });
+
+        // ブラウザの戻る/進むボタン対応
+        window.addEventListener('popstate', () => {
+            const regionId = this.urlHandler.getRegionId();
+            if (regionId !== this.currentRegionId) {
+                this.updatePageContent(regionId);
+                this.displayManager.regionSelect.value = regionId;
+            }
+        });
+    }
+
+    changeRegion(regionId) {
+        // URLパラメータの更新
+        this.urlHandler.updateRegionId(regionId);
+        this.currentRegionId = regionId;
+
+        // ページコンテンツの更新
+        this.updatePageContent(regionId);
+    }
+
+    updatePageContent(regionId) {
+        try {
+            // 地域情報の取得
+            const region = this.dataManager.getRegionById(regionId);
+            if (!region) {
+                throw new Error('指定された地域が見つかりません');
+            }
+
+            // 地域名の更新
+            this.displayManager.updateSelectedRegionName(region.name);
+
+            // ランキングの取得と表示
+            const ranking = this.dataManager.getRankingByRegionId(regionId);
+            const allClinics = this.dataManager.getAllClinics();
+            this.displayManager.updateRankingDisplay(allClinics, ranking);
+
+            // 店舗リストの取得と表示
+            const stores = this.dataManager.getStoresByRegionId(regionId);
+            this.displayManager.updateStoresDisplay(stores);
+
+            // エラーメッセージを隠す
+            this.displayManager.hideError();
+        } catch (error) {
+            console.error('ページコンテンツの更新に失敗しました:', error);
+            this.displayManager.showError('データの表示に問題が発生しました。');
+            
+            // デフォルト地域にフォールバック
+            if (regionId !== '013') {
+                this.changeRegion('013');
+            }
+        }
+    }
+}
+
+// アプリケーションの起動
+document.addEventListener('DOMContentLoaded', () => {
+    const app = new RankingApp();
+    app.init();
+});
