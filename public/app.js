@@ -920,12 +920,6 @@ class RankingApp {
                 <!-- 拡張版価格表 -->
                 <div class="detail-info-table">
                     <table class="info-table">
-                        <tr>
-                            <td colspan="2" style="text-align: center; background: white; padding: 20px;">
-                                <div style="font-size: 1.1rem; color: #333; margin-bottom: 10px;">${data.priceMain}</div>
-                                <div class="price-highlight">${data.priceValue}</div>
-                            </td>
-                        </tr>
                         ${Object.entries(data.priceDetail).map(([key, value]) => `
                             <tr>
                                 <td>${key}</td>
