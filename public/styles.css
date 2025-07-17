@@ -1413,8 +1413,9 @@ section {
     
     /* ランキングセクション */
     .clinic-rankings {
-        padding: 20px 0;
+        padding: 20px 10px;
         background: white;
+        box-sizing: border-box;
     }
     
     .ranking-header-banner {
@@ -1434,12 +1435,16 @@ section {
         grid-template-columns: repeat(3, 1fr);
         gap: 3px;
         padding: 0;
-        max-width: 375px;
+        width: 100%;
+        max-width: 355px;
         margin: 0 auto;
+        box-sizing: border-box;
     }
     
     .ranking-item {
         position: relative;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .rank-medal {
@@ -1451,9 +1456,10 @@ section {
     }
     
     .clinic-card {
-        padding: 45px 5px 10px;
+        padding: 45px 3px 8px;
         border-radius: 12px;
         border-width: 2px;
+        box-sizing: border-box;
     }
     
     .satisfaction-badge {
@@ -1486,9 +1492,10 @@ section {
     }
     
     .clinic-logo {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         line-height: 1.1;
         font-weight: 900;
+        word-break: break-word;
     }
     
     .clinic-logo.regina {
@@ -1507,39 +1514,42 @@ section {
     }
     
     .clinic-banner {
-        margin-bottom: 8px;
-        min-height: 65px;
+        margin-bottom: 6px;
+        min-height: 60px;
     }
     
     .clinic-banner img {
-        max-width: 100%;
-        height: 65px;
+        width: 100%;
+        height: 60px;
         border-radius: 6px;
+        object-fit: contain;
     }
     
     .price-info {
-        padding: 8px 0;
-        margin-bottom: 8px;
+        padding: 6px 0;
+        margin-bottom: 6px;
         border-top: 1px solid #f0f0f0;
         border-bottom: 1px solid #f0f0f0;
     }
     
     .price-main {
-        font-size: 0.65rem;
-        margin-bottom: 3px;
+        font-size: 0.6rem;
+        margin-bottom: 2px;
+        line-height: 1.1;
     }
     
     .price-details {
-        font-size: 0.75rem;
+        font-size: 0.7rem;
         font-weight: 700;
         margin-bottom: 2px;
         line-height: 1.1;
     }
     
     .price-discount {
-        font-size: 0.7rem;
+        font-size: 0.65rem;
         margin-bottom: 2px;
         font-weight: 700;
+        line-height: 1.1;
     }
     
     .price-note {
@@ -1548,11 +1558,12 @@ section {
     }
     
     .clinic-cta-button {
-        padding: 8px 15px;
-        font-size: 0.75rem;
-        border-radius: 18px;
-        width: 100%;
-        max-width: none;
+        padding: 6px 10px;
+        font-size: 0.7rem;
+        border-radius: 15px;
+        width: calc(100% - 4px);
+        margin: 0 2px;
+        box-sizing: border-box;
     }
 
     .hero-title {
