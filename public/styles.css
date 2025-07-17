@@ -1296,7 +1296,7 @@ section {
     .info-header,
     .info-grid,
     .footer-content {
-        max-width: 355px;
+        max-width: 375px;
         margin: 0 auto;
         box-sizing: border-box;
     }
@@ -1832,7 +1832,7 @@ section {
     }
     
     .comparison-table {
-        min-width: 500px;
+        min-width: 375px;
     }
     
     .comparison-table th,
