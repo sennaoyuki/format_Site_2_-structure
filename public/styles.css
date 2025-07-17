@@ -24,57 +24,106 @@ body {
 
 /* ===== ヘッダー ===== */
 .site-header {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background: #ffffff;
     padding: 15px 0;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.08);
     position: sticky;
     top: 0;
     z-index: 1000;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .header-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
 }
 
-.site-logo {
-    font-size: 1.8rem;
-    font-weight: 600;
+.logo-section {
     display: flex;
     align-items: center;
-    gap: 8px;
+}
+
+.logo-link {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo-main {
+    display: flex;
+    align-items: center;
+    gap: 12px;
 }
 
 .logo-icon {
-    font-size: 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    border-radius: 12px;
+}
+
+.site-logo {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    letter-spacing: -0.5px;
+}
+
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 20px;
 }
 
 .region-selector-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    background-color: rgba(255,255,255,0.1);
-    padding: 8px 15px;
-    border-radius: 25px;
-}
-
-.region-label {
-    font-weight: 500;
-    font-size: 0.9rem;
 }
 
 .region-select {
-    padding: 6px 12px;
-    border: none;
-    border-radius: 15px;
+    padding: 8px 16px;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
     font-size: 14px;
     background-color: white;
     cursor: pointer;
-    min-width: 120px;
+    min-width: 140px;
+    color: #555;
+    transition: border-color 0.3s;
+}
+
+.region-select:hover {
+    border-color: #764ba2;
+}
+
+.pr-badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background-color: #fff;
+    border: 2px solid #764ba2;
+    color: #764ba2;
+    font-weight: 700;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s;
+}
+
+.pr-badge:hover {
+    background-color: #764ba2;
+    color: white;
 }
 
 /* ===== メインビジュアル ===== */
@@ -85,6 +134,7 @@ body {
     text-align: center;
     padding: 60px 0;
     margin-bottom: 40px;
+    margin-top: -1px;
 }
 
 .hero-title {
@@ -557,12 +607,28 @@ section {
     }
 
     .header-content {
-        flex-direction: column;
-        text-align: center;
+        padding: 0 15px;
     }
 
     .site-logo {
+        font-size: 1.1rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
         font-size: 1.5rem;
+    }
+    
+    .pr-badge {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9rem;
+    }
+    
+    .region-select {
+        min-width: 100px;
+        font-size: 13px;
     }
 
     .hero-title {
