@@ -929,26 +929,6 @@ class RankingApp {
                     </table>
                 </div>
                 
-                <!-- VIOプラン比較 -->
-                <div class="vio-plans-section">
-                    <h4 class="section-title">VIO脱毛プラン</h4>
-                    <div class="vio-plans-container">
-                        <div class="vio-plan-card">
-                            <h5>${data.vioPlans.vioOnly.title}</h5>
-                            <div class="plan-price">${data.vioPlans.vioOnly.price}</div>
-                            <div class="plan-sessions">${data.vioPlans.vioOnly.sessions}</div>
-                            <div class="plan-monthly">${data.vioPlans.vioOnly.monthly}</div>
-                        </div>
-                        <div class="vio-plan-card recommended">
-                            <div class="recommend-badge">おすすめ</div>
-                            <h5>${data.vioPlans.fullBody.title}</h5>
-                            <div class="plan-price">${data.vioPlans.fullBody.price}</div>
-                            <div class="plan-sessions">${data.vioPlans.fullBody.sessions}</div>
-                            <div class="plan-monthly">${data.vioPlans.fullBody.monthly}</div>
-                        </div>
-                    </div>
-                </div>
-                
                 <!-- クリニックのポイント -->
                 <div class="clinic-points-section">
                     <h4 class="section-title">${this.getClinicDisplayName(clinic)}の<span class="pink-text">3つ</span>のポイント</h4>
