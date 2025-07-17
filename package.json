@@ -1,0 +1,17 @@
+{
+  "name": "regional-clinic-ranking",
+  "version": "1.0.0",
+  "description": "Regional medical clinic ranking website",
+  "main": "index.js",
+  "scripts": {
+    "start": "python3 start-server.py",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "clinic",
+    "ranking",
+    "medical"
+  ],
+  "author": "",
+  "license": "ISC"
+}
