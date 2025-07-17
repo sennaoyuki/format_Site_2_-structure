@@ -1432,7 +1432,8 @@ section {
     }
     
     .ranking-container {
-        grid-template-columns: repeat(3, 1fr);
+        display: flex;
+        flex-wrap: wrap;
         gap: 3px;
         padding: 0;
         width: 100%;
@@ -1443,7 +1444,7 @@ section {
     
     .ranking-item {
         position: relative;
-        width: 100%;
+        width: calc((100% - 6px) / 3);
         box-sizing: border-box;
     }
     
