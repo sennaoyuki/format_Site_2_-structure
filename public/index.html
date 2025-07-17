@@ -22,7 +22,11 @@
                     </a>
                 </div>
                 <nav class="header-nav">
-                    <a href="#" class="pr-badge">PR</a>
+                    <button class="hamburger-menu" id="hamburger-menu" aria-label="メニュー">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
                 </nav>
             </div>
         </header>
@@ -32,7 +36,7 @@
             <div class="hero-container">
                 <div class="hero-inner">
                     <div class="hero-content">
-                        <div class="hero-badge-top">東京版</div>
+                        <div class="hero-badge-top" id="hero-region-badge">東京版</div>
                         <div class="hero-speech-bubble">
                             <div class="bubble-header">
                                 <span class="bubble-text-small">料金</span>
@@ -63,58 +67,6 @@
         </section>
 
         <main>
-            <!-- 地域表示セクション -->
-            <section class="selected-region">
-                <div class="region-display">
-                    <h2 class="region-title">
-                        <span class="region-icon"><i class="fas fa-map-marker-alt"></i></span>
-                        選択地域: <span id="selected-region-name" aria-live="polite" class="region-name">地域を選択してください</span>
-                    </h2>
-                    <div class="region-selector-container">
-                        <select id="region-select" class="region-select">
-                            <!-- 地域オプションはJavaScriptで動的に生成 -->
-                        </select>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 検索フィルターセクション -->
-            <section class="search-filter">
-                <div class="filter-header">
-                    <h2 class="filter-title"><i class="fas fa-search"></i> 条件で絞り込み</h2>
-                    <p class="filter-subtitle">お探しの条件を選択してください</p>
-                </div>
-                <div class="filter-container">
-                    <div class="filter-group">
-                        <label for="clinic-search" class="filter-label">クリニック名検索</label>
-                        <input type="text" id="clinic-search" class="search-input" placeholder="クリニック名を入力">
-                    </div>
-                    <div class="filter-group">
-                        <label for="specialty-filter" class="filter-label">診療科目</label>
-                        <select id="specialty-filter" class="specialty-select">
-                            <option value="">すべての診療科</option>
-                            <option value="internal">内科</option>
-                            <option value="surgery">外科</option>
-                            <option value="dermatology">皮膚科</option>
-                            <option value="orthopedic">整形外科</option>
-                            <option value="pediatrics">小児科</option>
-                            <option value="gynecology">婦人科</option>
-                            <option value="ophthalmology">眼科</option>
-                            <option value="dentistry">歯科</option>
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label for="hours-filter" class="filter-label">営業時間</label>
-                        <select id="hours-filter" class="hours-select">
-                            <option value="">営業時間指定なし</option>
-                            <option value="early">早朝診療あり</option>
-                            <option value="late">夜間診療あり</option>
-                            <option value="weekend">土日診療あり</option>
-                            <option value="holiday">祝日診療あり</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
 
             <!-- ランキング表示セクション -->
             <section class="clinic-rankings">
@@ -318,6 +270,51 @@
                 <p class="disclaimer">※本サイトの情報は参考程度に留め、必ず医療機関にご相談ください。</p>
             </div>
         </footer>
+
+        <!-- サイドバーメニュー -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+        <div class="sidebar-menu" id="sidebar-menu">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">絞り込み検索</h3>
+                <button class="close-sidebar" id="close-sidebar" aria-label="閉じる">×</button>
+            </div>
+            <div class="sidebar-content">
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-region-select" class="sidebar-filter-label">地域選択</label>
+                    <select id="sidebar-region-select" class="sidebar-select">
+                        <!-- 地域オプションはJavaScriptで動的に生成 -->
+                    </select>
+                </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-clinic-search" class="sidebar-filter-label">クリニック名検索</label>
+                    <input type="text" id="sidebar-clinic-search" class="sidebar-search-input" placeholder="クリニック名を入力">
+                </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-specialty-filter" class="sidebar-filter-label">診療科目</label>
+                    <select id="sidebar-specialty-filter" class="sidebar-select">
+                        <option value="">すべての診療科</option>
+                        <option value="internal">内科</option>
+                        <option value="surgery">外科</option>
+                        <option value="dermatology">皮膚科</option>
+                        <option value="orthopedic">整形外科</option>
+                        <option value="pediatrics">小児科</option>
+                        <option value="gynecology">婦人科</option>
+                        <option value="ophthalmology">眼科</option>
+                        <option value="dentistry">歯科</option>
+                    </select>
+                </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-hours-filter" class="sidebar-filter-label">営業時間</label>
+                    <select id="sidebar-hours-filter" class="sidebar-select">
+                        <option value="">営業時間指定なし</option>
+                        <option value="early">早朝診療あり</option>
+                        <option value="late">夜間診療あり</option>
+                        <option value="weekend">土日診療あり</option>
+                        <option value="holiday">祝日診療あり</option>
+                    </select>
+                </div>
+            </div>
+        </div>
 
         <div id="error-message" class="error-message" style="display: none;">
             <p id="error-text"></p>

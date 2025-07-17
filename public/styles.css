@@ -1,88 +1,201 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* VIOプランセクション */
-.vio-plans-section {
+/* ハンバーガーメニュー */
+.hamburger-menu {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    width: 40px;
+    height: 40px;
+}
+
+.hamburger-line {
+    width: 100%;
+    height: 3px;
+    background-color: #333;
+    transition: all 0.3s ease;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(7px, 7px);
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-menu.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -7px);
+}
+
+/* サイドバーメニュー */
+.sidebar-menu {
+    position: fixed;
+    top: 0;
+    right: -300px;
+    width: 300px;
+    height: 100vh;
+    background: white;
+    box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+    transition: right 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.sidebar-menu.active {
+    right: 0;
+}
+
+.sidebar-header {
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+}
+
+.close-sidebar {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+}
+
+.sidebar-content {
+    padding: 20px;
+}
+
+.sidebar-filter-group {
+    margin-bottom: 20px;
+}
+
+.sidebar-filter-label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+.sidebar-search-input,
+.sidebar-select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+    z-index: 999;
+}
+
+.sidebar-overlay.active {
+    display: block;
+}
+
+/* CTAボタン */
+.clinic-cta-button-wrapper {
+    text-align: center;
     margin: 30px 0;
     padding: 20px;
-    background: #f9f9f9;
-    border-radius: 8px;
 }
 
-.vio-plans-container {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-top: 15px;
-}
-
-.vio-plan-card {
-    background: white;
-    border-radius: 8px;
-    padding: 20px;
-    text-align: center;
-    border: 2px solid #e0e0e0;
-    position: relative;
-    transition: transform 0.2s ease;
-}
-
-.vio-plan-card:hover {
-    transform: translateY(-2px);
-}
-
-.vio-plan-card.recommended {
-    border-color: #ec4899;
-    background: linear-gradient(135deg, #fef7ff 0%, #fce7f3 100%);
-}
-
-.recommend-badge {
-    position: absolute;
-    top: -8px;
-    right: 10px;
-    background: #ec4899;
+.clinic-cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #ff69b4;
     color: white;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 0.8rem;
+    padding: 15px 40px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-size: 1.1rem;
     font-weight: bold;
+    box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+    transition: all 0.3s ease;
+    min-width: 240px;
 }
 
-.vio-plan-card h5 {
-    color: #333;
-    margin-bottom: 10px;
+.clinic-cta-button:hover {
+    background-color: #ff1493;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.4);
+}
+
+.cta-text {
     font-size: 1.1rem;
 }
 
-.plan-price {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: #ec4899;
-    margin-bottom: 5px;
+.cta-arrow {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
 }
 
-.plan-sessions {
-    color: #666;
-    margin-bottom: 5px;
-}
-
-.plan-monthly {
-    color: #333;
-    font-size: 0.9rem;
+.clinic-cta-button:hover .cta-arrow {
+    transform: translateX(5px);
 }
 
 /* クリニックポイントセクション */
 .clinic-points-section {
-    margin: 30px 0;
-    padding: 20px;
-    background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 40px 20px;
+    background: #fff;
+    border: 2px solid #e5e7eb;
+    border-radius: 20px;
+    margin: 30px auto;
+    max-width: 640px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
-.section-title {
-    font-size: 1.2rem;
-    margin-bottom: 20px;
-    color: #333;
+.clinic-points-section .section-title {
+    font-size: 2rem;
     font-weight: bold;
+    text-align: center;
+    margin-bottom: 40px;
+    color: #666;
+    letter-spacing: 8px;
+    position: relative;
+    padding: 20px 0;
+}
+
+.clinic-points-section .section-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #87CEEB;
+}
+
+.clinic-points-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #87CEEB;
 }
 
 .pink-text {
@@ -92,52 +205,140 @@
 .points-container {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 35px;
 }
 
 .point-item {
     display: flex;
     align-items: flex-start;
-    gap: 15px;
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #ec4899;
+    gap: 20px;
+    padding: 0;
+    background: transparent;
+    border: none;
 }
 
-.point-number {
-    background: #ec4899;
-    color: white;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
+.point-icon {
+    min-width: 60px;
+    height: 60px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: bold;
-    font-size: 0.9rem;
+    font-size: 2.5rem;
     flex-shrink: 0;
 }
 
+.point-icon.lightbulb {
+    color: #FFD700;
+}
+
+.point-icon.phone {
+    color: #87CEEB;
+}
+
+.point-icon.coin {
+    color: #FFA500;
+}
+
+.point-number {
+    display: none;
+}
+
 .point-content h5 {
-    margin-bottom: 5px;
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
     color: #333;
-    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.point-content h5 .highlight {
+    background: linear-gradient(transparent 60%, #FFE4B5 60%);
+    padding: 0 2px;
 }
 
 .point-content p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #555;
+    text-align: justify;
+}
+
+.clinic-link-section {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 30px;
+    border-top: 1px dashed #ddd;
+}
+
+.clinic-link-section a {
+    color: #3b82f6;
+    font-size: 1.1rem;
+    text-decoration: underline;
+    font-weight: 500;
 }
 
 /* 口コミセクション */
 .reviews-section {
-    margin: 30px 0;
-    padding: 20px;
+    margin: 30px auto;
+    padding: 30px 20px;
     background: white;
-    border-radius: 8px;
+    border-radius: 20px;
+    max-width: 800px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* レビュータブメニュー */
+.review-tabs {
+    display: flex;
+    gap: 8px;
+    margin: 20px 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.review-tab-button {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    background: #f3f4f6;
+    border: none;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #6b7280;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.review-tab-button:hover {
+    background: #e5e7eb;
+}
+
+.review-tab-button.active {
+    background: #ec4899;
+    color: white;
+}
+
+/* レビューコンテンツ */
+.review-tab-content {
+    margin-top: 20px;
+}
+
+.review-content {
+    display: none;
+}
+
+.review-content.active {
+    display: block;
+}
+
+.review-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 .reviews-container {
@@ -182,6 +383,204 @@
 }
 
 /* 店舗情報セクション */
+.clinic-info-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+}
+
+.stores-display-container {
+    margin-top: 20px;
+}
+
+.stores-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.store-item {
+    padding: 20px;
+    background: #f9fafb;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+}
+
+.store-header {
+    margin-bottom: 15px;
+}
+
+.store-name {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0;
+}
+
+.store-info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.store-detail {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.store-detail i {
+    color: #ec4899;
+    font-size: 0.9rem;
+    margin-top: 2px;
+    flex-shrink: 0;
+    width: 16px;
+}
+
+/* アコーディオン */
+.stores-accordion {
+    margin-top: 20px;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: 15px 20px;
+    background: #fff;
+    border: 2px solid #ec4899;
+    border-radius: 50px;
+    color: #ec4899;
+    font-weight: bold;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.accordion-button:hover {
+    background: #ec4899;
+    color: white;
+}
+
+.accordion-button i {
+    transition: transform 0.3s ease;
+}
+
+.accordion-button.active i {
+    transform: rotate(180deg);
+}
+
+.accordion-content {
+    display: none;
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #e5e7eb;
+}
+
+.accordion-content.show {
+    display: block;
+}
+
+.no-stores {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
+/* キャンペーンセクション */
+.campaign-section {
+    margin: 30px 0;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+}
+
+.campaign-list {
+    margin-top: 20px;
+}
+
+.campaign-item {
+    position: relative;
+    padding: 25px;
+    background: linear-gradient(135deg, #fff5f7 0%, #fee2e2 100%);
+    border-radius: 12px;
+    border: 2px solid #fecaca;
+    margin-bottom: 15px;
+}
+
+.campaign-badge {
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    background: #ef4444;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    box-shadow: 0 2px 4px rgba(239, 68, 68, 0.3);
+}
+
+.campaign-content {
+    text-align: center;
+}
+
+.campaign-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    margin: 0 0 5px 0;
+}
+
+.campaign-subtitle {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0 0 15px 0;
+}
+
+.campaign-prices {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.original-price {
+    font-size: 1rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.arrow {
+    color: #ef4444;
+    font-weight: bold;
+}
+
+.discount-price {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ef4444;
+}
+
+.monthly-price {
+    font-size: 0.9rem;
+    color: #666;
+    margin: 0;
+}
+
+.no-campaigns {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+}
+
 .clinic-info-section {
     margin: 30px 0;
     padding: 20px;
@@ -1756,6 +2155,31 @@ section {
     .comparison-table {
         min-width: 700px;
     }
+    
+    /* ポイントセクションのモバイル対応 */
+    .clinic-points-section {
+        padding: 30px 15px;
+        margin: 20px 10px;
+    }
+    
+    .clinic-points-section .section-title {
+        font-size: 1.6rem;
+        letter-spacing: 4px;
+    }
+    
+    .point-icon {
+        min-width: 50px;
+        height: 50px;
+        font-size: 2rem;
+    }
+    
+    .point-content h5 {
+        font-size: 1.1rem;
+    }
+    
+    .point-content p {
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1764,6 +2188,18 @@ section {
         overflow-x: hidden;
         width: 100%;
         min-width: 375px;
+    }
+    
+    /* CTAボタンのモバイル対応 */
+    .clinic-cta-button-wrapper {
+        margin: 20px 0;
+        padding: 15px;
+    }
+    
+    .clinic-cta-button {
+        padding: 12px 30px;
+        font-size: 1rem;
+        min-width: 200px;
     }
     
     /* 共通のセクション設定 */

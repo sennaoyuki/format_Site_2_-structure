@@ -32,12 +32,19 @@ class UrlParamHandler {
 // 表示管理クラス
 class DisplayManager {
     constructor() {
-        this.regionSelect = document.getElementById('region-select');
+        this.regionSelect = document.getElementById('sidebar-region-select');
         this.selectedRegionName = document.getElementById('selected-region-name');
         this.rankingList = document.getElementById('ranking-list');
         this.storesList = document.getElementById('stores-list');
         this.errorMessage = document.getElementById('error-message');
         this.errorText = document.getElementById('error-text');
+        this.heroRegionBadge = document.getElementById('hero-region-badge');
+        
+        // ハンバーガーメニュー要素
+        this.hamburgerMenu = document.getElementById('hamburger-menu');
+        this.sidebarMenu = document.getElementById('sidebar-menu');
+        this.sidebarOverlay = document.getElementById('sidebar-overlay');
+        this.closeSidebar = document.getElementById('close-sidebar');
     }
 
     // 地域セレクターを更新し、選択された地域を設定
@@ -54,7 +61,13 @@ class DisplayManager {
 
     // 選択された地域名を表示（アクセシビリティ対応）
     updateSelectedRegionName(regionName) {
-        this.selectedRegionName.textContent = regionName || '該当店舗なし';
+        if (this.selectedRegionName) {
+            this.selectedRegionName.textContent = regionName || '該当店舗なし';
+        }
+        // ヒーローバッジも更新
+        if (this.heroRegionBadge) {
+            this.heroRegionBadge.textContent = regionName ? `${regionName}版` : '東京版';
+        }
     }
 
     updateRankingDisplay(clinics, ranking) {
@@ -299,6 +312,33 @@ class RankingApp {
             this.changeRegion(newRegionId);
         });
 
+        // ハンバーガーメニューのイベント
+        if (this.displayManager.hamburgerMenu) {
+            this.displayManager.hamburgerMenu.addEventListener('click', () => {
+                this.displayManager.hamburgerMenu.classList.toggle('active');
+                this.displayManager.sidebarMenu.classList.toggle('active');
+                this.displayManager.sidebarOverlay.classList.toggle('active');
+            });
+        }
+
+        // サイドバーを閉じる
+        if (this.displayManager.closeSidebar) {
+            this.displayManager.closeSidebar.addEventListener('click', () => {
+                this.displayManager.hamburgerMenu.classList.remove('active');
+                this.displayManager.sidebarMenu.classList.remove('active');
+                this.displayManager.sidebarOverlay.classList.remove('active');
+            });
+        }
+
+        // オーバーレイクリックで閉じる
+        if (this.displayManager.sidebarOverlay) {
+            this.displayManager.sidebarOverlay.addEventListener('click', () => {
+                this.displayManager.hamburgerMenu.classList.remove('active');
+                this.displayManager.sidebarMenu.classList.remove('active');
+                this.displayManager.sidebarOverlay.classList.remove('active');
+            });
+        }
+
         // ブラウザの戻る/進むボタン対応
         window.addEventListener('popstate', () => {
             const regionId = this.urlHandler.getRegionId();
@@ -426,6 +466,9 @@ class RankingApp {
 
         // タブ切り替え機能の設定
         this.setupTabSwitching();
+        
+        // レビュータブ切り替え機能の設定
+        this.setupReviewTabs();
     }
 
     // クリニック名の表示形式を取得
@@ -578,6 +621,35 @@ class RankingApp {
             });
         });
     }
+    
+    // レビュータブ切り替え機能の設定
+    setupReviewTabs() {
+        // 各クリニック詳細セクションのレビュータブを設定
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('review-tab-button')) {
+                const button = e.target;
+                const targetTab = button.getAttribute('data-tab');
+                const reviewSection = button.closest('.reviews-section');
+                
+                if (reviewSection) {
+                    // タブボタンのアクティブ状態を更新
+                    reviewSection.querySelectorAll('.review-tab-button').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    button.classList.add('active');
+                    
+                    // コンテンツの表示を切り替え
+                    reviewSection.querySelectorAll('.review-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    const targetContent = reviewSection.querySelector(`#${targetTab}-reviews`);
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                }
+            }
+        });
+    }
 
     // クリニック詳細の更新
     updateClinicDetails(clinics, ranking) {
@@ -648,19 +720,19 @@ class RankingApp {
                     },
                     points: [
                         {
-                            number: '01',
-                            title: '痛みが少ない蓄熱式',
-                            description: '蓄熱式脱毛機を採用。じんわりと温かく、痛みを最小限に抑えます。'
+                            icon: 'lightbulb',
+                            title: '期間限定で全身+VIO5回が5万円台！',
+                            description: 'レジーナクリニックでは、VIO付きの全身脱毛5回分が5万円台で通える脱毛デビュー応援キャンペーンを開催中！リーズナブルに脱毛が始められるため、まずはお試しで脱毛してみたい初心者にも◎'
                         },
                         {
-                            number: '02',
-                            title: '平日21時まで営業',
-                            description: '仕事帰りでも通いやすい。土日も診療しているから予約が取りやすい。'
+                            icon: 'phone',
+                            title: '太い毛に◎ジェントルシリーズ完備！',
+                            description: 'VIOやワキなどの濃くて太い毛に効果の高い「ジェントルレーズ」シリーズや痛みが少なく細い毛に効果の高い「ソプラノチタニウム」を完備！毛質や肌質、部位に合わせて最適な脱毛機を使い分けてくれるので脱毛効果をしっかり実感できる◎'
                         },
                         {
-                            number: '03',
-                            title: '当日キャンセル無料',
-                            description: '急な予定変更でも安心。当日キャンセルでもペナルティなし。'
+                            icon: 'coin',
+                            title: 'オプション料金はすべて無料！',
+                            description: '予約キャンセル料や肌トラブル時の治療薬・シェービング代などのオプション料金はすべて無料のため追加費用がかからず最後まで安心して通える♪'
                         }
                     ],
                     reviews: [
@@ -675,14 +747,53 @@ class RankingApp {
                             text: '予約が取りやすく、効果も実感できています。'
                         }
                     ],
-                    clinicInfo: {
-                        name: 'DIO 銀座院',
-                        address: '東京都中央区銀座5-5-1 マツモトキヨシ銀座5thビル5F',
-                        access: '東京メトロ銀座駅B5出口より徒歩2分',
-                        tel: '0120-XXX-XXX',
-                        hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00',
-                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
-                    }
+                    stores: [
+                        {
+                            name: 'DIO 銀座院',
+                            address: '東京都中央区銀座5-5-1 マツモトキヨシ銀座5thビル5F',
+                            access: '東京メトロ銀座駅B5出口より徒歩2分',
+                            tel: '0120-XXX-XXX',
+                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
+                        },
+                        {
+                            name: 'DIO 新宿院',
+                            address: '東京都新宿区西新宿1-4-1 プリンスビル7F',
+                            access: 'JR新宿駅西口より徒歩3分',
+                            tel: '0120-XXX-XXX',
+                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
+                        },
+                        {
+                            name: 'DIO 渋谷院',
+                            address: '東京都渋谷区神南1-10-1 神南ビル6F',
+                            access: 'JR渋谷駅ハチ公口より徒歩5分',
+                            tel: '0120-XXX-XXX',
+                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
+                        },
+                        {
+                            name: 'DIO 池袋院',
+                            address: '東京都豊島区西池袋1-20-1 池袋ビル8F',
+                            access: 'JR池袋駅西口より徒歩4分',
+                            tel: '0120-XXX-XXX',
+                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
+                        },
+                        {
+                            name: 'DIO 表参道院',
+                            address: '東京都港区南青山3-18-20 青山ビル3F',
+                            access: '東京メトロ表参道駅A4出口より徒歩1分',
+                            tel: '0120-XXX-XXX',
+                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
+                        }
+                    ],
+                    campaigns: [
+                        {
+                            title: '全身＋VIO ＋顔',
+                            subtitle: '5回コース',
+                            originalPrice: '286,000円',
+                            discountPrice: '143,000円',
+                            monthlyPrice: '月額2,000円',
+                            discount: '50%OFF'
+                        }
+                    ]
                 },
                 '2': { // エミナルクリニック
                     title: '豊富なプランから選べる！',
@@ -744,14 +855,39 @@ class RankingApp {
                             text: '予約も取りやすく、スタッフさんも親切です。'
                         }
                     ],
-                    clinicInfo: {
-                        name: 'エミナルクリニック 新宿院',
-                        address: '東京都新宿区西新宿1-4-1 プリンスビル7F',
-                        access: 'JR新宿駅西口より徒歩3分',
-                        tel: '0120-YYY-YYY',
-                        hours: '11:00〜21:00（不定休）',
-                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
-                    }
+                    stores: [
+                        {
+                            name: 'エミナルクリニック 新宿院',
+                            address: '東京都新宿区西新宿1-4-1 プリンスビル7F',
+                            access: 'JR新宿駅西口より徒歩3分',
+                            tel: '0120-YYY-YYY',
+                            hours: '11:00〜21:00（不定休）'
+                        },
+                        {
+                            name: 'エミナルクリニック 銀座院',
+                            address: '東京都中央区銀座7-5-2 居酒屋ビル4F',
+                            access: '東京メトロ銀座駅A2出口より徒歩3分',
+                            tel: '0120-YYY-YYY',
+                            hours: '11:00〜21:00（不定休）'
+                        },
+                        {
+                            name: 'エミナルクリニック 池袋院',
+                            address: '東京都豊島区南池袋3-13-10 ISP第3ビル4F',
+                            access: 'JR池袋駅東口より徒歩4分',
+                            tel: '0120-YYY-YYY',
+                            hours: '11:00〜21:00（不定休）'
+                        }
+                    ],
+                    campaigns: [
+                        {
+                            title: '全身＋VIO 医療脱毛',
+                            subtitle: '5回完了コース',
+                            originalPrice: '174,900円',
+                            discountPrice: '98,000円',
+                            monthlyPrice: '月額1,600円〜',
+                            discount: '今だけ価格'
+                        }
+                    ]
                 },
                 '3': { // ウララクリニック
                     title: 'リーズナブルな価格設定',
@@ -929,61 +1065,161 @@ class RankingApp {
                     </table>
                 </div>
                 
+                <!-- CTAボタン -->
+                <div class="clinic-cta-button-wrapper">
+                    <a href="${clinic.accessUrl || '#'}" class="clinic-cta-button" target="_blank" rel="noopener noreferrer">
+                        <span class="cta-text">詳しく見る</span>
+                        <span class="cta-arrow">→</span>
+                    </a>
+                </div>
+                
                 <!-- クリニックのポイント -->
                 <div class="clinic-points-section">
-                    <h4 class="section-title">${this.getClinicDisplayName(clinic)}の<span class="pink-text">3つ</span>のポイント</h4>
+                    <h4 class="section-title">POINT</h4>
                     <div class="points-container">
                         ${data.points.map(point => `
                             <div class="point-item">
-                                <div class="point-number">${point.number}</div>
+                                <div class="point-icon ${point.icon}">
+                                    ${point.icon === 'lightbulb' ? '<i class="far fa-lightbulb"></i>' : 
+                                      point.icon === 'phone' ? '<i class="fas fa-mobile-alt"></i>' : 
+                                      '<i class="fas fa-coins"></i>'}
+                                </div>
                                 <div class="point-content">
-                                    <h5>${point.title}</h5>
+                                    <h5>${point.title.replace(/5万円台/g, '<span class="highlight">5万円台</span>')}</h5>
                                     <p>${point.description}</p>
                                 </div>
                             </div>
                         `).join('')}
+                    </div>
+                    <div class="clinic-link-section">
+                        <a href="#">【公式】 https://reginaclinic.jp/</a>
                     </div>
                 </div>
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
                     <h4 class="section-title">口コミ・評判</h4>
-                    <div class="reviews-container">
-                        ${data.reviews.map(review => `
-                            <div class="review-item">
-                                <div class="review-header">
-                                    <div class="review-rating">
-                                        ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
+                    
+                    <!-- タブメニュー -->
+                    <div class="review-tabs">
+                        <button class="review-tab-button active" data-tab="treatment">施術について</button>
+                        <button class="review-tab-button" data-tab="price">価格について</button>
+                        <button class="review-tab-button" data-tab="reservation">予約について</button>
+                        <button class="review-tab-button" data-tab="staff">スタッフについて</button>
+                    </div>
+                    
+                    <!-- レビューコンテンツ -->
+                    <div class="review-tab-content">
+                        <!-- 施術について -->
+                        <div id="treatment-reviews" class="review-content active">
+                            <div class="review-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
+                                        </div>
+                                        <div class="review-date">2024年1月</div>
                                     </div>
-                                    <div class="review-date">${review.date}</div>
+                                    <p class="review-text">痛みが少なく、効果も実感できています。スタッフの技術力が高いと感じました。</p>
                                 </div>
-                                <p class="review-text">${review.text}</p>
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(4)}
+                                        </div>
+                                        <div class="review-date">2023年12月</div>
+                                    </div>
+                                    <p class="review-text">施術時間も短く、ストレスなく通えています。効果も順調です。</p>
+                                </div>
                             </div>
-                        `).join('')}
+                        </div>
+                        
+                        <!-- 価格について -->
+                        <div id="price-reviews" class="review-content">
+                            <div class="review-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
+                                        </div>
+                                        <div class="review-date">2024年1月</div>
+                                    </div>
+                                    <p class="review-text">他のクリニックと比べてリーズナブル。追加料金もなく安心です。</p>
+                                </div>
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(4)}
+                                        </div>
+                                        <div class="review-date">2023年11月</div>
+                                    </div>
+                                    <p class="review-text">月々の支払いプランがあるので、無理なく通えています。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- 予約について -->
+                        <div id="reservation-reviews" class="review-content">
+                            <div class="review-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
+                                        </div>
+                                        <div class="review-date">2024年1月</div>
+                                    </div>
+                                    <p class="review-text">Web予約が便利で、希望の時間に取りやすいです。</p>
+                                </div>
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(4)}
+                                        </div>
+                                        <div class="review-date">2023年12月</div>
+                                    </div>
+                                    <p class="review-text">キャンセル料が無料なので、急な予定変更でも安心。</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- スタッフについて -->
+                        <div id="staff-reviews" class="review-content">
+                            <div class="review-list">
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
+                                        </div>
+                                        <div class="review-date">2024年1月</div>
+                                    </div>
+                                    <p class="review-text">カウンセリングが丁寧で、不安なく始められました。</p>
+                                </div>
+                                <div class="review-item">
+                                    <div class="review-header">
+                                        <div class="review-rating">
+                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
+                                        </div>
+                                        <div class="review-date">2023年12月</div>
+                                    </div>
+                                    <p class="review-text">スタッフの対応が親切で、毎回気持ちよく通えています。</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
                 <!-- 店舗情報 -->
                 <div class="clinic-info-section">
                     <h4 class="section-title">店舗情報</h4>
-                    <div class="clinic-info-container">
-                        <div class="clinic-image">
-                            <img src="${data.clinicInfo.image}" alt="${data.clinicInfo.name}">
-                        </div>
-                        <div class="clinic-details">
-                            <h5>${data.clinicInfo.name}</h5>
-                            <dl>
-                                <dt><i class="fas fa-map-marker-alt"></i> 住所</dt>
-                                <dd>${data.clinicInfo.address}</dd>
-                                <dt><i class="fas fa-train"></i> アクセス</dt>
-                                <dd>${data.clinicInfo.access}</dd>
-                                <dt><i class="fas fa-phone"></i> 電話番号</dt>
-                                <dd>${data.clinicInfo.tel}</dd>
-                                <dt><i class="fas fa-clock"></i> 営業時間</dt>
-                                <dd>${data.clinicInfo.hours}</dd>
-                            </dl>
-                        </div>
+                    <div class="stores-display-container">
+                        ${this.generateStoresDisplay(data.stores || [])}
                     </div>
+                </div>
+                
+                <!-- 特典情報 -->
+                <div class="campaign-section">
+                    <h4 class="section-title">限定キャンペーン</h4>
+                    ${this.generateCampaignDisplay(data.campaigns || [])}
                 </div>
                 
                 <div class="detail-cta-section">
@@ -996,6 +1232,125 @@ class RankingApp {
 
             detailsList.appendChild(detailItem);
         });
+    }
+    
+    // 店舗表示のHTML生成（MAX3店舗 + アコーディオン）
+    generateStoresDisplay(stores) {
+        if (!stores || stores.length === 0) {
+            return '<p class="no-stores">店舗情報がありません</p>';
+        }
+        
+        const visibleStores = stores.slice(0, 3);
+        const hiddenStores = stores.slice(3);
+        
+        let html = '<div class="stores-list">';
+        
+        // 最初の3店舗を表示
+        visibleStores.forEach((store, index) => {
+            html += `
+                <div class="store-item">
+                    <div class="store-header">
+                        <h5 class="store-name">${store.name || `店舗${index + 1}`}</h5>
+                    </div>
+                    <div class="store-info">
+                        <div class="store-detail">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>${store.address || '住所情報なし'}</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-train"></i>
+                            <span>${store.access || 'アクセス情報なし'}</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-phone"></i>
+                            <span>${store.tel || '電話番号なし'}</span>
+                        </div>
+                        <div class="store-detail">
+                            <i class="fas fa-clock"></i>
+                            <span>${store.hours || '営業時間情報なし'}</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        // 残りの店舗がある場合はアコーディオンで表示
+        if (hiddenStores.length > 0) {
+            html += `
+                <div class="stores-accordion">
+                    <button class="accordion-button" onclick="this.classList.toggle('active'); this.nextElementSibling.classList.toggle('show');">
+                        <span>他${hiddenStores.length}件のクリニックを見る</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                    <div class="accordion-content">
+            `;
+            
+            hiddenStores.forEach((store, index) => {
+                html += `
+                    <div class="store-item">
+                        <div class="store-header">
+                            <h5 class="store-name">${store.name || `店舗${visibleStores.length + index + 1}`}</h5>
+                        </div>
+                        <div class="store-info">
+                            <div class="store-detail">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <span>${store.address || '住所情報なし'}</span>
+                            </div>
+                            <div class="store-detail">
+                                <i class="fas fa-train"></i>
+                                <span>${store.access || 'アクセス情報なし'}</span>
+                            </div>
+                            <div class="store-detail">
+                                <i class="fas fa-phone"></i>
+                                <span>${store.tel || '電話番号なし'}</span>
+                            </div>
+                            <div class="store-detail">
+                                <i class="fas fa-clock"></i>
+                                <span>${store.hours || '営業時間情報なし'}</span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += '</div>';
+        return html;
+    }
+    
+    // キャンペーン表示のHTML生成
+    generateCampaignDisplay(campaigns) {
+        if (!campaigns || campaigns.length === 0) {
+            return '<p class="no-campaigns">現在キャンペーン情報はありません</p>';
+        }
+        
+        let html = '<div class="campaign-list">';
+        
+        campaigns.forEach(campaign => {
+            html += `
+                <div class="campaign-item">
+                    <div class="campaign-badge">${campaign.discount || 'お得'}</div>
+                    <div class="campaign-content">
+                        <h5 class="campaign-title">${campaign.title}</h5>
+                        <p class="campaign-subtitle">${campaign.subtitle}</p>
+                        <div class="campaign-prices">
+                            <span class="original-price">${campaign.originalPrice}</span>
+                            <span class="arrow">→</span>
+                            <span class="discount-price">${campaign.discountPrice}</span>
+                        </div>
+                        <p class="monthly-price">${campaign.monthlyPrice}</p>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        return html;
     }
 }
 
