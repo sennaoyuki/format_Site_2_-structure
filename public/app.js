@@ -611,13 +611,15 @@ class RankingApp {
             const rank = parseInt(position.replace('no', ''));
             const detailItem = document.createElement('div');
             detailItem.className = 'detail-item';
+            detailItem.setAttribute('data-rank', rank);
+            detailItem.setAttribute('data-clinic-id', clinicId);
 
             // ランクに応じたバッジクラス
             let badgeClass = '';
             if (rank === 2) badgeClass = 'silver';
             else if (rank === 3) badgeClass = 'bronze';
 
-            // クリニック詳細データ（仮のデータ）
+            // クリニック詳細データ（拡張版）
             const detailData = {
                 1: {
                     title: '肌に優しい脱毛機を採用！',
@@ -631,7 +633,62 @@ class RankingApp {
                         '料金': '総額111,100円<br>学生：月々1,300円<br>学生：総額94,600円',
                         '脱毛機': 'メディオスターNext PRO<br>メディオスターモノリス',
                         '完了目安期間': '最短1〜1年半程度',
-                        '営業時間': '平日12:00〜21:00'
+                        '営業時間': '平日12:00〜21:00',
+                        'シェービング代': '手の届かない部位無料',
+                        '麻酔代': '無料',
+                        '店舗': '全国13院',
+                        '公式サイト': '<a href="#" class="clinic-link">公式サイトへ ></a>'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: 'VIOのみ',
+                            price: '99,000円',
+                            sessions: '5回',
+                            monthly: '月々1,200円'
+                        },
+                        fullBody: {
+                            title: '全身＋VIO',
+                            price: '247,000円',
+                            sessions: '5回',
+                            monthly: '月々4,500円'
+                        }
+                    },
+                    points: [
+                        {
+                            number: '01',
+                            title: '痛みが少ない蓄熱式',
+                            description: '蓄熱式脱毛機を採用。じんわりと温かく、痛みを最小限に抑えます。'
+                        },
+                        {
+                            number: '02',
+                            title: '平日21時まで営業',
+                            description: '仕事帰りでも通いやすい。土日も診療しているから予約が取りやすい。'
+                        },
+                        {
+                            number: '03',
+                            title: '当日キャンセル無料',
+                            description: '急な予定変更でも安心。当日キャンセルでもペナルティなし。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: 'スタッフの対応が丁寧で、痛みも少なく安心して通えています。'
+                        },
+                        {
+                            rating: 4,
+                            date: '2023年12月',
+                            text: '予約が取りやすく、効果も実感できています。'
+                        }
+                    ],
+                    clinicInfo: {
+                        name: 'フレイアクリニック 銀座院',
+                        address: '東京都中央区銀座5-5-1 マツモトキヨシ銀座5thビル5F',
+                        access: '東京メトロ銀座駅B5出口より徒歩2分',
+                        tel: '0120-XXX-XXX',
+                        hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00',
+                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     }
                 },
                 2: {
@@ -645,7 +702,62 @@ class RankingApp {
                         '料金': '総額98,000円〜',
                         '脱毛機': '最新医療レーザー',
                         '完了目安期間': '最短5ヶ月',
-                        '営業時間': '11:00〜21:00'
+                        '営業時間': '11:00〜21:00',
+                        'シェービング代': '背面無料',
+                        '麻酔代': '3,000円',
+                        '店舗': '全国60院以上',
+                        '公式サイト': '<a href="#" class="clinic-link">公式サイトへ ></a>'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: 'VIOのみ',
+                            price: '40,800円',
+                            sessions: '5回',
+                            monthly: '月々1,000円'
+                        },
+                        fullBody: {
+                            title: '全身＋VIO',
+                            price: '98,000円',
+                            sessions: '5回',
+                            monthly: '月々1,600円'
+                        }
+                    },
+                    points: [
+                        {
+                            number: '01',
+                            title: '最短5ヶ月で完了',
+                            description: '1ヶ月に1回通えるから、スピーディーに脱毛完了。'
+                        },
+                        {
+                            number: '02',
+                            title: '全国60院以上',
+                            description: '引っ越しても安心。全国どこでも通いやすい。'
+                        },
+                        {
+                            number: '03',
+                            title: '21時まで営業',
+                            description: '仕事や学校帰りでも通いやすい営業時間。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: '料金が安くて効果もしっかり。コスパ最高です！'
+                        },
+                        {
+                            rating: 5,
+                            date: '2023年12月',
+                            text: '予約も取りやすく、スタッフさんも親切です。'
+                        }
+                    ],
+                    clinicInfo: {
+                        name: 'エミナルクリニック 新宿院',
+                        address: '東京都新宿区西新宿1-4-1 プリンスビル7F',
+                        access: 'JR新宿駅西口より徒歩3分',
+                        tel: '0120-YYY-YYY',
+                        hours: '11:00〜21:00（不定休）',
+                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     }
                 },
                 3: {
@@ -659,7 +771,62 @@ class RankingApp {
                         '料金': '総額198,000円',
                         '脱毛機': '3種類の機器を使い分け',
                         '完了目安期間': '最短8ヶ月',
-                        '営業時間': '10:00〜20:00'
+                        '営業時間': '10:00〜20:00',
+                        'シェービング代': '無料',
+                        '麻酔代': '3,300円',
+                        '店舗': '全国26院',
+                        '公式サイト': '<a href="#" class="clinic-link">公式サイトへ ></a>'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: 'VIOのみ',
+                            price: '81,600円',
+                            sessions: '5回',
+                            monthly: '月々3,600円'
+                        },
+                        fullBody: {
+                            title: '全身＋VIO',
+                            price: '252,000円',
+                            sessions: '5回',
+                            monthly: '月々4,900円'
+                        }
+                    },
+                    points: [
+                        {
+                            number: '01',
+                            title: '3種類の脱毛機',
+                            description: '肌質・毛質に合わせて最適な機器を選択。効果的な脱毛を実現。'
+                        },
+                        {
+                            number: '02',
+                            title: 'キャンセル料無料',
+                            description: '予約時間の3時間前まで無料でキャンセル可能。'
+                        },
+                        {
+                            number: '03',
+                            title: '追加料金なし',
+                            description: 'シェービング代、初診料、再診料すべて無料。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 4,
+                            date: '2024年1月',
+                            text: '追加料金がないから安心。効果も満足しています。'
+                        },
+                        {
+                            rating: 5,
+                            date: '2023年11月',
+                            text: 'カウンセリングが丁寧で、不安なく始められました。'
+                        }
+                    ],
+                    clinicInfo: {
+                        name: 'リゼクリニック 渋谷院',
+                        address: '東京都渋谷区神南1-10-1 神南ビル6F',
+                        access: 'JR渋谷駅ハチ公口より徒歩5分',
+                        tel: '0120-ZZZ-ZZZ',
+                        hours: '10:00〜14:00 / 15:00〜20:00',
+                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     }
                 }
             };
@@ -667,16 +834,26 @@ class RankingApp {
             const data = detailData[rank] || detailData[1];
 
             detailItem.innerHTML = `
-                <div class="detail-rank">
-                    <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
-                    <div class="detail-title">
-                        <h3>${data.title}</h3>
-                        <p>${data.subtitle}</p>
+                <div class="detail-header-section">
+                    <div class="detail-rank">
+                        <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
+                        <div class="detail-title">
+                            <h3>${data.title}</h3>
+                            <p>${data.subtitle}</p>
+                        </div>
+                        <a href="#" class="detail-cta-link">
+                            ${data.link}
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
                     </div>
-                    <a href="#" class="detail-cta-link">
-                        ${data.link}
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
+                    <div class="rank-swap-buttons">
+                        <button class="swap-up" ${rank === 1 ? 'disabled' : ''} data-rank="${rank}">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <button class="swap-down" ${rank === 3 ? 'disabled' : ''} data-rank="${rank}">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
                 </div>
                 ${data.banner ? `
                 <div class="detail-banner">
@@ -686,6 +863,8 @@ class RankingApp {
                 <div class="detail-features">
                     ${data.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
                 </div>
+                
+                <!-- 拡張版価格表 -->
                 <div class="detail-info-table">
                     <table class="info-table">
                         <tr>
@@ -702,10 +881,143 @@ class RankingApp {
                         `).join('')}
                     </table>
                 </div>
+                
+                <!-- VIOプラン比較 -->
+                <div class="vio-plans-section">
+                    <h4 class="section-title">VIO脱毛プラン</h4>
+                    <div class="vio-plans-container">
+                        <div class="vio-plan-card">
+                            <h5>${data.vioPlans.vioOnly.title}</h5>
+                            <div class="plan-price">${data.vioPlans.vioOnly.price}</div>
+                            <div class="plan-sessions">${data.vioPlans.vioOnly.sessions}</div>
+                            <div class="plan-monthly">${data.vioPlans.vioOnly.monthly}</div>
+                        </div>
+                        <div class="vio-plan-card recommended">
+                            <div class="recommend-badge">おすすめ</div>
+                            <h5>${data.vioPlans.fullBody.title}</h5>
+                            <div class="plan-price">${data.vioPlans.fullBody.price}</div>
+                            <div class="plan-sessions">${data.vioPlans.fullBody.sessions}</div>
+                            <div class="plan-monthly">${data.vioPlans.fullBody.monthly}</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- クリニックのポイント -->
+                <div class="clinic-points-section">
+                    <h4 class="section-title">${this.getClinicDisplayName(clinic.name, rank)}の<span class="pink-text">3つ</span>のポイント</h4>
+                    <div class="points-container">
+                        ${data.points.map(point => `
+                            <div class="point-item">
+                                <div class="point-number">${point.number}</div>
+                                <div class="point-content">
+                                    <h5>${point.title}</h5>
+                                    <p>${point.description}</p>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <!-- 口コミ -->
+                <div class="reviews-section">
+                    <h4 class="section-title">口コミ・評判</h4>
+                    <div class="reviews-container">
+                        ${data.reviews.map(review => `
+                            <div class="review-item">
+                                <div class="review-header">
+                                    <div class="review-rating">
+                                        ${'<i class="fas fa-star"></i>'.repeat(review.rating)}
+                                    </div>
+                                    <div class="review-date">${review.date}</div>
+                                </div>
+                                <p class="review-text">${review.text}</p>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                
+                <!-- 店舗情報 -->
+                <div class="clinic-info-section">
+                    <h4 class="section-title">店舗情報</h4>
+                    <div class="clinic-info-container">
+                        <div class="clinic-image">
+                            <img src="${data.clinicInfo.image}" alt="${data.clinicInfo.name}">
+                        </div>
+                        <div class="clinic-details">
+                            <h5>${data.clinicInfo.name}</h5>
+                            <dl>
+                                <dt><i class="fas fa-map-marker-alt"></i> 住所</dt>
+                                <dd>${data.clinicInfo.address}</dd>
+                                <dt><i class="fas fa-train"></i> アクセス</dt>
+                                <dd>${data.clinicInfo.access}</dd>
+                                <dt><i class="fas fa-phone"></i> 電話番号</dt>
+                                <dd>${data.clinicInfo.tel}</dd>
+                                <dt><i class="fas fa-clock"></i> 営業時間</dt>
+                                <dd>${data.clinicInfo.hours}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="detail-cta-section">
+                    <a href="#" class="detail-cta-button">
+                        無料カウンセリング予約
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+                </div>
             `;
 
             detailsList.appendChild(detailItem);
         });
+
+        // 順位入れ替えボタンのイベントリスナーを設定
+        this.setupRankSwapping();
+    }
+
+    // 順位入れ替え機能のセットアップ
+    setupRankSwapping() {
+        const swapUpButtons = document.querySelectorAll('.swap-up');
+        const swapDownButtons = document.querySelectorAll('.swap-down');
+
+        swapUpButtons.forEach(button => {
+            button.addEventListener('click', () => this.swapRanks(parseInt(button.dataset.rank), 'up'));
+        });
+
+        swapDownButtons.forEach(button => {
+            button.addEventListener('click', () => this.swapRanks(parseInt(button.dataset.rank), 'down'));
+        });
+    }
+
+    // ランクを入れ替える
+    swapRanks(currentRank, direction) {
+        const currentRegionId = this.currentRegionId;
+        const ranking = this.dataManager.getRankingByRegionId(currentRegionId);
+        
+        if (!ranking) return;
+
+        const newRank = direction === 'up' ? currentRank - 1 : currentRank + 1;
+        
+        // 範囲チェック
+        if (newRank < 1 || newRank > 3) return;
+
+        // 現在のランキングデータを取得
+        const currentClinicId = ranking.ranks[`no${currentRank}`];
+        const swapClinicId = ranking.ranks[`no${newRank}`];
+
+        // ランキングを入れ替え
+        ranking.ranks[`no${currentRank}`] = swapClinicId;
+        ranking.ranks[`no${newRank}`] = currentClinicId;
+
+        // 表示を更新
+        const allClinics = this.dataManager.getAllClinics();
+        this.displayManager.updateRankingDisplay(allClinics, ranking);
+        this.updateComparisonTable(allClinics, ranking);
+        this.updateClinicDetails(allClinics, ranking);
+
+        // スクロール位置を保持
+        const detailsSection = document.querySelector('.clinic-details-section');
+        const scrollPosition = detailsSection.getBoundingClientRect().top + window.pageYOffset - 100;
+        window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
     }
 }
 
