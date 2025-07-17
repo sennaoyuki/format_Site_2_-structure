@@ -429,16 +429,9 @@ class RankingApp {
     }
 
     // クリニック名の表示形式を取得
-    getClinicDisplayName(name, rank) {
-        // 画像に合わせて特定のクリニック名を変換
-        const displayNames = {
-            1: 'DIO',
-            2: 'ウララクリニック',
-            3: 'リエートクリニック',
-            4: 'エミナルクリニック',
-            5: '湘南美容クリニック'
-        };
-        return displayNames[rank] || name;
+    getClinicDisplayName(clinic) {
+        // CSVデータのクリニック名をそのまま使用
+        return clinic.name;
     }
 
     // 総合タブの生成
@@ -472,7 +465,7 @@ class RankingApp {
                     <div class="clinic-name-cell">
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
-                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic.name, clinic.rank)}</div>
+                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic)}</div>
                             <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
@@ -512,7 +505,7 @@ class RankingApp {
                     <div class="clinic-name-cell">
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
-                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic.name, clinic.rank)}</div>
+                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic)}</div>
                             <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
@@ -546,7 +539,7 @@ class RankingApp {
                     <div class="clinic-name-cell">
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
-                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic.name, clinic.rank)}</div>
+                            <div class="clinic-main-name">${this.getClinicDisplayName(clinic)}</div>
                             <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
@@ -620,11 +613,11 @@ class RankingApp {
             else if (rank === 3) badgeClass = 'bronze';
 
             // クリニック詳細データ（拡張版）
-            const detailData = {
-                1: {
+            const clinicDetailDataMap = {
+                '1': { // DIO
                     title: '肌に優しい脱毛機を採用！',
                     subtitle: '日焼け肌も産毛もスベスベに',
-                    link: 'フレイアクリニック ＞',
+                    link: 'DIO ＞',
                     banner: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400"%3E%3Crect fill="%23fce0ec" width="800" height="400"/%3E%3Ctext x="40" y="60" fill="%23ec4899" font-size="24" font-weight="bold"%3EFREY-A CLINIC%3C/text%3E%3Ctext x="40" y="100" fill="%23333" font-size="18"%3E※自由診療%3C/text%3E%3Ctext x="40" y="140" fill="%23ec4899" font-size="32" font-weight="bold"%3Eフレイア開院5周年記念キャンペーン%3C/text%3E%3Ctext x="40" y="180" fill="%23333" font-size="20"%3E全身%2BVIO%2B顔 5回コース%3C/text%3E%3Ctext x="40" y="220" fill="%23ec4899" font-size="36" font-weight="bold"%3E月額 1,500円%3C/text%3E%3Ctext x="350" y="220" fill="%23666" font-size="16"%3E(税込)%3C/text%3E%3Ctext x="40" y="260" fill="%23666" font-size="16"%3E払い 101,000円%3C/text%3E%3Ctext x="40" y="290" fill="%23666" font-size="14"%3E111,100円(税込)/月々1,500円(税込)%3C/text%3E%3Ctext x="40" y="330" fill="%23ec4899" font-size="20" font-weight="bold"%3E学割 5周年記念キャンペーン%3C/text%3E%3Ctext x="40" y="360" fill="%23333" font-size="16"%3E全身%2BVIO%2B顔 5回 月額 1,300円%3C/text%3E%3C/svg%3E',
                     features: ['熱破壊式が蓄熱式の照射方法を選択可◯', '痛みに敏感な方も◯'],
                     priceMain: '全身+VIO+顔 5回コース',
@@ -683,7 +676,7 @@ class RankingApp {
                         }
                     ],
                     clinicInfo: {
-                        name: 'フレイアクリニック 銀座院',
+                        name: 'DIO 銀座院',
                         address: '東京都中央区銀座5-5-1 マツモトキヨシ銀座5thビル5F',
                         access: '東京メトロ銀座駅B5出口より徒歩2分',
                         tel: '0120-XXX-XXX',
@@ -691,7 +684,7 @@ class RankingApp {
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     }
                 },
-                2: {
+                '2': { // エミナルクリニック
                     title: '豊富なプランから選べる！',
                     subtitle: '肌質・毛質に合わせた施術',
                     link: 'エミナルクリニック ＞',
@@ -760,10 +753,10 @@ class RankingApp {
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     }
                 },
-                3: {
+                '3': { // ウララクリニック
                     title: 'リーズナブルな価格設定',
                     subtitle: '学生に人気の医療脱毛',
-                    link: 'リゼクリニック ＞',
+                    link: 'ウララクリニック ＞',
                     features: ['24回払い無利息', 'キャンセル料無料'],
                     priceMain: '全身+VIO+顔',
                     priceValue: '月々4,800円',
@@ -821,17 +814,87 @@ class RankingApp {
                         }
                     ],
                     clinicInfo: {
-                        name: 'リゼクリニック 渋谷院',
+                        name: 'ウララクリニック 渋谷院',
                         address: '東京都渋谷区神南1-10-1 神南ビル6F',
                         access: 'JR渋谷駅ハチ公口より徒歩5分',
                         tel: '0120-ZZZ-ZZZ',
                         hours: '10:00〜14:00 / 15:00〜20:00',
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     }
+                },
+                '4': { // リエートクリニック
+                    title: '最新技術で安心脱毛',
+                    subtitle: '個人に合わせたオーダーメイド施術',
+                    link: 'リエートクリニック ＞',
+                    features: ['痛みの少ない最新機器', '完全個室でプライバシー配慮'],
+                    priceMain: '全身+VIO+顔',
+                    priceValue: '月々2,800円',
+                    priceDetail: {
+                        '料金': '総額148,000円',
+                        '脱毛機': '最新蓄熱式レーザー',
+                        '完了目安期間': '最短6ヶ月',
+                        '営業時間': '11:00〜20:00',
+                        'シェービング代': '無料',
+                        '麻酔代': '無料',
+                        '店舗': '全国20院',
+                        '公式サイト': '<a href="#" class="clinic-link">公式サイトへ ></a>'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: 'VIOのみ',
+                            price: '55,000円',
+                            sessions: '5回',
+                            monthly: '月々1,800円'
+                        },
+                        fullBody: {
+                            title: '全身＋VIO',
+                            price: '148,000円',
+                            sessions: '5回',
+                            monthly: '月々2,800円'
+                        }
+                    },
+                    points: [
+                        {
+                            number: '01',
+                            title: '完全個室でリラックス',
+                            description: 'プライバシーに配慮した完全個室。リラックスして施術を受けられます。'
+                        },
+                        {
+                            number: '02',
+                            title: '最新機器で痛み軽減',
+                            description: '蓄熱式の最新脱毛機を導入。痛みを最小限に抑えた施術が可能。'
+                        },
+                        {
+                            number: '03',
+                            title: 'アフターケア充実',
+                            description: '施術後のケアも万全。肌トラブル時も医師が丁寧に対応。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: '個室なので周りを気にせず施術を受けられて良かったです。'
+                        },
+                        {
+                            rating: 4,
+                            date: '2023年12月',
+                            text: '痛みが少なく、スタッフの対応も丁寧でした。'
+                        }
+                    ],
+                    clinicInfo: {
+                        name: 'リエートクリニック 池袋院',
+                        address: '東京都豊島区南池袋1-25-1 池袋MYTビル4F',
+                        access: 'JR池袋駅東口より徒歩3分',
+                        tel: '0120-AAA-AAA',
+                        hours: '11:00〜20:00（年中無休）',
+                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
+                    }
                 }
             };
 
-            const data = detailData[rank] || detailData[1];
+            // クリニックIDに基づいてデータを取得
+            const data = clinicDetailDataMap[clinicId] || clinicDetailDataMap['1'];
 
             detailItem.innerHTML = `
                 <div class="detail-rank">
@@ -847,7 +910,7 @@ class RankingApp {
                 </div>
                 ${data.banner ? `
                 <div class="detail-banner">
-                    <img src="${data.banner}" alt="${this.getClinicDisplayName(clinic.name, rank)}キャンペーン">
+                    <img src="${data.banner}" alt="${this.getClinicDisplayName(clinic)}キャンペーン">
                 </div>
                 ` : ''}
                 <div class="detail-features">
@@ -894,7 +957,7 @@ class RankingApp {
                 
                 <!-- クリニックのポイント -->
                 <div class="clinic-points-section">
-                    <h4 class="section-title">${this.getClinicDisplayName(clinic.name, rank)}の<span class="pink-text">3つ</span>のポイント</h4>
+                    <h4 class="section-title">${this.getClinicDisplayName(clinic)}の<span class="pink-text">3つ</span>のポイント</h4>
                     <div class="points-container">
                         ${data.points.map(point => `
                             <div class="point-item">
