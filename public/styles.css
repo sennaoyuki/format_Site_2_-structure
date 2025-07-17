@@ -1680,7 +1680,7 @@ section {
     
     .comparison-table th:first-child,
     .comparison-table td:first-child {
-        width: 25%;
+        width: 20%;
     }
     
     /* 背景色は通常のセルと同じに */
@@ -1746,7 +1746,7 @@ section {
     }
     
     .cta-link {
-        padding: 3px 6px;
+        padding: 6px 3px;
         font-size: 0.55rem;
         white-space: normal;
         border-radius: 10px;
@@ -1832,7 +1832,7 @@ section {
     }
     
     .comparison-table {
-        min-width: 375px;
+        min-width: 355px;
     }
     
     .comparison-table th,
@@ -1850,7 +1850,7 @@ section {
     }
     
     .cta-button {
-        padding: 6px 15px;
+        padding: 7px 4px;
         font-size: 0.75rem;
     }
 }
