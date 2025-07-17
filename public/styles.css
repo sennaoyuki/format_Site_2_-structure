@@ -1666,6 +1666,7 @@ section {
     .comparison-table {
         font-size: 0.65rem;
         width: 100%;
+        min-width: 375px;
         margin: 0 auto;
         table-layout: fixed;
     }
