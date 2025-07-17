@@ -336,6 +336,9 @@ class RankingApp {
             const clinicsWithStores = this.groupStoresByClinics(stores, ranking, allClinics);
             this.displayManager.updateStoresDisplay(stores, clinicsWithStores);
 
+            // 比較表の更新
+            this.updateComparisonTable(allClinics, ranking);
+
             // エラーメッセージを隠す
             this.displayManager.hideError();
         } catch (error) {
@@ -378,6 +381,189 @@ class RankingApp {
         });
 
         return clinicsWithStores;
+    }
+
+    // 比較表の更新
+    updateComparisonTable(clinics, ranking) {
+        if (!ranking || Object.keys(ranking.ranks).length === 0) {
+            return;
+        }
+
+        // ランキング順のクリニックデータを取得
+        const rankedClinics = [];
+        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
+            const numA = parseInt(a[0].replace('no', ''));
+            const numB = parseInt(b[0].replace('no', ''));
+            return numA - numB;
+        });
+
+        sortedRanks.forEach(([position, clinicId]) => {
+            const clinic = clinics.find(c => c.id === clinicId);
+            if (clinic) {
+                rankedClinics.push({
+                    ...clinic,
+                    rank: parseInt(position.replace('no', ''))
+                });
+            }
+        });
+
+        // 各タブの内容を生成
+        this.generateGeneralTab(rankedClinics);
+        this.generateTreatmentTab(rankedClinics);
+        this.generateServiceTab(rankedClinics);
+
+        // タブ切り替え機能の設定
+        this.setupTabSwitching();
+    }
+
+    // 総合タブの生成
+    generateGeneralTab(clinics) {
+        const tbody = document.getElementById('general-tbody');
+        tbody.innerHTML = '';
+
+        clinics.forEach((clinic, index) => {
+            const row = document.createElement('tr');
+            const rankClass = clinic.rank === 1 ? '' : clinic.rank === 2 ? 'silver' : 'bronze';
+            
+            // ダミーデータ（実際のデータに置き換え）
+            const ratings = { 1: 4.9, 2: 4.8, 3: 4.7, 4: 4.7, 5: 4.7 };
+            const prices = { 
+                1: '49,500円<br><span class="price-note">(月々1,000円〜)</span>',
+                2: '69,300円<br><span class="price-note">(月々1,200円〜)</span>',
+                3: '52,800円<br><span class="price-note">(月々1,000円〜)</span>',
+                4: '99,800円<br><span class="price-note">(月々1,400円〜)</span>',
+                5: '53,800円<br><span class="price-note">(月々1,100円〜)</span>'
+            };
+            const features = {
+                1: 'コスパ重視！独自の脱毛器で効果よくツルスベに',
+                2: '痛みが苦手な人・肌がデリケートな人向け',
+                3: '追加費用ゼロ！賢い脱毛を受けたい人にピッタリ',
+                4: '自分に合う機械で、じっくり通いたい人におすすめ',
+                5: '圧倒的な実績と店舗数を誇る、安心感を求める人向け'
+            };
+
+            row.innerHTML = `
+                <td>
+                    <div class="clinic-name-cell">
+                        <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
+                        <div class="clinic-info">
+                            <div class="clinic-main-name">${clinic.name}</div>
+                            <a href="#" class="clinic-sub-name">クリニック</a>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="rating-cell">${ratings[clinic.rank] || 4.5}</div>
+                    <div class="rating-stars">
+                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(ratings[clinic.rank] || 4.5))}
+                        ${(ratings[clinic.rank] || 4.5) % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                    </div>
+                </td>
+                <td>
+                    <div class="price-cell">
+                        <i class="fas fa-circle feature-icon circle"></i><br>
+                        ${prices[clinic.rank] || '要問合せ'}
+                    </div>
+                </td>
+                <td class="feature-text">${features[clinic.rank] || '優良クリニック'}</td>
+                <td>
+                    <div class="cta-cell">
+                        <a href="#" class="cta-button">公式サイト</a>
+                        <a href="#" class="cta-link">詳細を見る</a>
+                    </div>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+        });
+    }
+
+    // 施術内容タブの生成
+    generateTreatmentTab(clinics) {
+        const tbody = document.getElementById('treatment-tbody');
+        tbody.innerHTML = '';
+
+        clinics.forEach((clinic, index) => {
+            const row = document.createElement('tr');
+            const rankClass = clinic.rank === 1 ? '' : clinic.rank === 2 ? 'silver' : 'bronze';
+
+            row.innerHTML = `
+                <td>
+                    <div class="clinic-name-cell">
+                        <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
+                        <div class="clinic-info">
+                            <div class="clinic-main-name">${clinic.name}</div>
+                            <a href="#" class="clinic-sub-name">クリニック</a>
+                        </div>
+                    </div>
+                </td>
+                <td>全身＋VIO脱毛</td>
+                <td>最新医療レーザー</td>
+                <td><i class="fas fa-circle feature-icon"></i></td>
+                <td>
+                    <div class="cta-cell">
+                        <a href="#" class="cta-button">公式サイト</a>
+                        <a href="#" class="cta-link">詳細を見る</a>
+                    </div>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+        });
+    }
+
+    // サービスタブの生成
+    generateServiceTab(clinics) {
+        const tbody = document.getElementById('service-tbody');
+        tbody.innerHTML = '';
+
+        clinics.forEach((clinic, index) => {
+            const row = document.createElement('tr');
+            const rankClass = clinic.rank === 1 ? '' : clinic.rank === 2 ? 'silver' : 'bronze';
+
+            row.innerHTML = `
+                <td>
+                    <div class="clinic-name-cell">
+                        <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
+                        <div class="clinic-info">
+                            <div class="clinic-main-name">${clinic.name}</div>
+                            <a href="#" class="clinic-sub-name">クリニック</a>
+                        </div>
+                    </div>
+                </td>
+                <td><i class="fas fa-circle feature-icon"></i></td>
+                <td>${clinic.rank <= 3 ? '<i class="fas fa-circle feature-icon"></i>' : '<i class="fas fa-triangle feature-icon triangle"></i>'}</td>
+                <td>${clinic.rank <= 2 ? '<i class="fas fa-circle feature-icon"></i>' : '-'}</td>
+                <td>
+                    <div class="cta-cell">
+                        <a href="#" class="cta-button">公式サイト</a>
+                        <a href="#" class="cta-link">詳細を見る</a>
+                    </div>
+                </td>
+            `;
+
+            tbody.appendChild(row);
+        });
+    }
+
+    // タブ切り替え機能の設定
+    setupTabSwitching() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetTab = button.getAttribute('data-tab');
+
+                // すべてのタブボタンとコンテンツを非アクティブに
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+
+                // クリックされたタブをアクティブに
+                button.classList.add('active');
+                document.getElementById(`${targetTab}-tab`).classList.add('active');
+            });
+        });
     }
 }
 

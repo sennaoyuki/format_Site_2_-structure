@@ -739,24 +739,256 @@ section {
 }
 
 /* ===== 比較表セクション ===== */
-.comparison-header, .clinic-list-header, .info-header {
+.comparison-section {
+    max-width: 1200px;
+    margin: 40px auto;
+    padding: 40px 20px;
+    background: white;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+.comparison-header {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
-.comparison-title, .clinic-list-title, .info-title {
-    font-size: 1.4rem;
-    color: #1565c0;
-    margin-bottom: 8px;
+.comparison-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 5px;
+    font-weight: 700;
 }
 
-.comparison-subtitle, .clinic-list-subtitle, .info-subtitle {
+.pink-text {
+    color: #ec4899;
+}
+
+.comparison-subtitle {
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* タブナビゲーション */
+.comparison-tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-button {
+    background: white;
+    border: none;
+    padding: 15px 40px;
+    font-size: 1rem;
+    font-weight: 600;
     color: #666;
-    font-size: 0.9rem;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.3s;
 }
 
+.tab-button:hover {
+    color: #ec4899;
+}
+
+.tab-button.active {
+    color: #ec4899;
+}
+
+.tab-button.active::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: #ec4899;
+}
+
+/* タブコンテンツ */
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* 比較表スタイル */
 .comparison-table {
-    overflow-x: auto;
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0;
+    background: #fafafa;
+}
+
+.comparison-table thead {
+    background: #8dd4e8;
+    color: white;
+}
+
+.comparison-table th {
+    padding: 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border: 1px solid #7dc5d9;
+}
+
+.comparison-table th:first-child {
+    width: 20%;
+    background: #5fbfdb;
+}
+
+.comparison-table tbody tr {
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.comparison-table tbody tr:nth-child(odd) {
+    background: #fefef4;
+}
+
+.comparison-table td {
+    padding: 20px 15px;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid #f0f0f0;
+}
+
+/* クリニック名セル */
+.clinic-name-cell {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.rank-badge {
+    width: 30px;
+    height: 30px;
+    background: #ffd700;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    flex-shrink: 0;
+}
+
+.rank-badge.silver {
+    background: #c0c0c0;
+}
+
+.rank-badge.bronze {
+    background: #cd7f32;
+}
+
+.clinic-info {
+    text-align: left;
+}
+
+.clinic-main-name {
+    font-weight: 700;
+    color: #333;
+    font-size: 1rem;
+    margin-bottom: 3px;
+}
+
+.clinic-sub-name {
+    font-size: 0.8rem;
+    color: #666;
+    text-decoration: underline;
+}
+
+/* 評価セル */
+.rating-cell {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+}
+
+.rating-stars {
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    margin-top: 5px;
+    color: #ffa500;
+    font-size: 1rem;
+}
+
+/* 価格セル */
+.price-cell {
+    font-size: 1.2rem;
+    color: #333;
+    font-weight: 600;
+}
+
+.price-note {
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 3px;
+}
+
+/* アイコン */
+.feature-icon {
+    font-size: 1.5rem;
+    color: #ec4899;
+}
+
+.feature-icon.circle {
+    color: #ec4899;
+}
+
+.feature-icon.triangle {
+    color: #3b82f6;
+}
+
+/* CTAボタン */
+.cta-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.cta-button {
+    background: #ec4899;
+    color: white;
+    border: none;
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    background: #db2777;
+    transform: translateY(-2px);
+}
+
+.cta-link {
+    color: #666;
+    font-size: 0.85rem;
+    text-decoration: none;
+    border: 1px solid #ddd;
+    padding: 8px 20px;
+    border-radius: 20px;
+    transition: all 0.3s;
+}
+
+.cta-link:hover {
+    border-color: #ec4899;
+    color: #ec4899;
 }
 
 /* ===== クリニック一覧セクション ===== */
@@ -996,6 +1228,16 @@ section {
         grid-template-columns: 1fr;
         gap: 30px;
     }
+    
+    /* 比較表のレスポンシブ対応 */
+    .comparison-content {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .comparison-table {
+        min-width: 700px;
+    }
 }
 
 @media (max-width: 768px) {
@@ -1149,6 +1391,72 @@ section {
     .footer-content {
         grid-template-columns: 1fr;
         text-align: center;
+    }
+    
+    /* 比較表モバイル対応 */
+    .comparison-section {
+        padding: 30px 15px;
+    }
+    
+    .comparison-title {
+        font-size: 1.4rem;
+    }
+    
+    .comparison-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .tab-button {
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .comparison-table {
+        font-size: 0.85rem;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 10px 8px;
+    }
+    
+    .clinic-name-cell {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .rank-badge {
+        width: 25px;
+        height: 25px;
+        font-size: 0.7rem;
+    }
+    
+    .clinic-main-name {
+        font-size: 0.9rem;
+        text-align: center;
+    }
+    
+    .clinic-sub-name {
+        font-size: 0.75rem;
+        text-align: center;
+    }
+    
+    .rating-cell {
+        font-size: 1.4rem;
+    }
+    
+    .price-cell {
+        font-size: 1rem;
+    }
+    
+    .cta-button {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+    }
+    
+    .cta-link {
+        padding: 6px 15px;
+        font-size: 0.8rem;
     }
 }
 

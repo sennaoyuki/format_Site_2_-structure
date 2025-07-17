@@ -126,14 +126,75 @@
                 </div>
             </section>
 
-            <!-- TOP3比較表セクション -->
-            <section class="top3-comparison">
+            <!-- 比較表セクション -->
+            <section class="comparison-section">
                 <div class="comparison-header">
-                    <h2 class="comparison-title"><i class="fas fa-chart-bar"></i> TOP3クリニック比較</h2>
-                    <p class="comparison-subtitle">上位3院の特徴を一目で比較</p>
+                    <h2 class="comparison-title">関東で人気の<span class="pink-text">徹底比較</span></h2>
+                    <h3 class="comparison-subtitle">脱毛クリニック一覧</h3>
                 </div>
-                <div id="top3-table" class="comparison-table">
-                    <!-- TOP3比較表はJavaScriptで動的に生成 -->
+                
+                <!-- タブナビゲーション -->
+                <div class="comparison-tabs">
+                    <button class="tab-button active" data-tab="general">総合</button>
+                    <button class="tab-button" data-tab="treatment">プラン</button>
+                    <button class="tab-button" data-tab="service">サービス</button>
+                </div>
+                
+                <!-- 比較表コンテンツ -->
+                <div class="comparison-content">
+                    <!-- 総合タブ -->
+                    <div id="general-tab" class="tab-content active">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>クリニック</th>
+                                    <th>総合評価</th>
+                                    <th>全身＋VIO</th>
+                                    <th>特徴</th>
+                                    <th>詳細</th>
+                                </tr>
+                            </thead>
+                            <tbody id="general-tbody">
+                                <!-- JavaScriptで動的に生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- 施術内容タブ -->
+                    <div id="treatment-tab" class="tab-content">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>クリニック</th>
+                                    <th>人気プラン</th>
+                                    <th>医療機器</th>
+                                    <th>注射治療</th>
+                                    <th>詳細</th>
+                                </tr>
+                            </thead>
+                            <tbody id="treatment-tbody">
+                                <!-- JavaScriptで動的に生成 -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- サービスタブ -->
+                    <div id="service-tab" class="tab-content">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>クリニック</th>
+                                    <th>食事指導</th>
+                                    <th>モニター割引</th>
+                                    <th>全額返金保証</th>
+                                    <th>詳細</th>
+                                </tr>
+                            </thead>
+                            <tbody id="service-tbody">
+                                <!-- JavaScriptで動的に生成 -->
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </section>
 
