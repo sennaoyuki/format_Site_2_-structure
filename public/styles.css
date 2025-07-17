@@ -458,215 +458,276 @@ section {
 
 /* ===== ランキングセクション ===== */
 .clinic-rankings {
-    max-width: 1000px;
+    max-width: 1200px;
     margin: 0 auto;
-    padding: 60px 20px;
+    padding: 40px 20px;
 }
 
-.ranking-header {
+/* ランキングヘッダーバナー */
+.ranking-header-banner {
+    background: #ec4899;
+    color: white;
+    padding: 20px;
     text-align: center;
-    margin-bottom: 50px;
+    border-radius: 15px;
+    margin-bottom: 40px;
+    position: relative;
+    overflow: hidden;
 }
 
-.ranking-title {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 10px;
+.ranking-header-banner::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    animation: sparkle 3s linear infinite;
+}
+
+@keyframes sparkle {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.ranking-banner-text {
+    font-size: 1.8rem;
     font-weight: 700;
-}
-
-.ranking-title i {
-    color: #fbbf24;
-    margin-right: 10px;
-}
-
-.ranking-subtitle {
-    color: #666;
-    font-size: 1rem;
+    margin: 0;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
 }
 
 /* ランキングコンテナ */
 .ranking-container {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 30px;
 }
 
+/* ランキングアイテム */
 .ranking-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
     position: relative;
 }
 
-/* ランクバッジ */
-.rank-badge {
-    flex-shrink: 0;
+/* ランクメダル */
+.rank-medal {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
     width: 80px;
     height: 80px;
+    border-radius: 50%;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: white;
-    border-radius: 50%;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    font-weight: 700;
-    position: relative;
+    font-weight: 800;
+    font-size: 1.2rem;
+    color: white;
+    z-index: 2;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
-.rank-1 .rank-badge {
+.gold-medal {
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    box-shadow: 0 5px 30px rgba(255, 215, 0, 0.4);
+    border: 3px solid #fff;
 }
 
-.rank-2 .rank-badge {
+.silver-medal {
     background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
-    box-shadow: 0 5px 30px rgba(192, 192, 192, 0.4);
+    border: 3px solid #fff;
 }
 
-.rank-3 .rank-badge {
+.bronze-medal {
     background: linear-gradient(135deg, #cd7f32 0%, #e4a853 100%);
-    box-shadow: 0 5px 30px rgba(205, 127, 50, 0.4);
+    border: 3px solid #fff;
 }
 
-.rank-number {
-    font-size: 2rem;
-    color: #333;
-    line-height: 1;
-}
-
-.rank-label {
-    font-size: 0.8rem;
-    color: #666;
+.medal-text {
+    font-style: italic;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
 }
 
 /* クリニックカード */
 .clinic-card {
-    flex: 1;
     background: white;
+    border: 3px solid;
     border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 5px 30px rgba(0,0,0,0.08);
+    padding: 60px 20px 30px;
+    text-align: center;
     transition: all 0.3s;
+    position: relative;
+}
+
+.rank-1 .clinic-card {
+    border-color: #ec4899;
+}
+
+.rank-2 .clinic-card {
+    border-color: #8b5cf6;
+}
+
+.rank-3 .clinic-card {
+    border-color: #f59e0b;
 }
 
 .clinic-card:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
 }
 
-.clinic-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
-}
-
-.clinic-name {
-    font-size: 1.5rem;
-    font-weight: 700;
-    color: #333;
-    margin: 0;
-}
-
-.clinic-tags {
-    display: flex;
-    gap: 8px;
-}
-
-.tag {
-    padding: 5px 12px;
+/* 満足度バッジ */
+.satisfaction-badge {
+    background: #ec4899;
+    color: white;
+    padding: 8px 20px;
     border-radius: 20px;
-    font-size: 0.75rem;
+    display: inline-block;
+    margin-bottom: 15px;
     font-weight: 600;
-    white-space: nowrap;
+    font-size: 0.9rem;
 }
 
-.tag-popular {
-    background: #ffe4e6;
-    color: #e11d48;
-}
-
-.tag-price {
-    background: #dbeafe;
-    color: #1e40af;
-}
-
-.tag-tech {
-    background: #e9d5ff;
-    color: #7c3aed;
-}
-
-.tag-campaign {
-    background: #fef3c7;
-    color: #d97706;
-}
-
-/* クリニック特徴 */
-.clinic-features {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+/* 評価セクション */
+.rating-section {
     margin-bottom: 20px;
-}
-
-.feature-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    color: #555;
-    font-size: 0.95rem;
-}
-
-.feature-item i {
-    width: 20px;
-    color: #a78bfa;
-}
-
-/* 評価 */
-.clinic-rating {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 20px;
-    padding-top: 20px;
-    border-top: 1px solid #f0f0f0;
 }
 
 .stars {
     display: flex;
-    gap: 2px;
-    color: #fbbf24;
+    justify-content: center;
+    gap: 5px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+}
+
+.rank-1 .stars {
+    color: #ec4899;
+}
+
+.rank-2 .stars {
+    color: #ec4899;
+}
+
+.rank-3 .stars {
+    color: #ec4899;
 }
 
 .rating-score {
+    font-size: 2.5rem;
     font-weight: 700;
-    color: #333;
-    font-size: 1.1rem;
+    color: #ec4899;
+    font-style: italic;
 }
 
-.review-count {
+.score-max {
+    font-size: 1.2rem;
+    color: #666;
+    font-weight: 400;
+}
+
+/* クリニックロゴ */
+.clinic-logo-section {
+    margin-bottom: 20px;
+}
+
+.clinic-logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: #333;
+    line-height: 1.2;
+}
+
+.clinic-logo.regina {
+    color: #333;
+    font-size: 1.4rem;
+}
+
+.clinic-logo.rize {
+    background: #f59e0b;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    display: inline-block;
+    font-size: 1.2rem;
+}
+
+.logo-sub {
+    font-size: 0.7em;
+    font-weight: 400;
+    display: block;
+    margin-top: 5px;
+}
+
+/* クリニックバナー */
+.clinic-banner {
+    margin-bottom: 20px;
+}
+
+.clinic-banner img {
+    width: 100%;
+    max-width: 280px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+}
+
+/* 価格情報 */
+.price-info {
+    margin-bottom: 25px;
+    padding: 20px 0;
+    border-top: 1px solid #f0f0f0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.price-main {
+    font-size: 1.1rem;
+    color: #333;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.price-details {
+    font-size: 1.5rem;
+    color: #333;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.price-discount {
+    color: #ec4899;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.price-note {
     color: #666;
     font-size: 0.9rem;
 }
 
 /* CTAボタン */
-.clinic-cta {
-    display: inline-block;
-    background: linear-gradient(135deg, #e91e63 0%, #f06292 100%);
+.clinic-cta-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: #14b8a6;
     color: white;
-    padding: 12px 30px;
-    border-radius: 25px;
+    padding: 15px 40px;
+    border-radius: 30px;
     text-decoration: none;
-    font-weight: 600;
+    font-weight: 700;
+    font-size: 1.1rem;
     transition: all 0.3s;
-    box-shadow: 0 5px 20px rgba(233, 30, 99, 0.3);
+    box-shadow: 0 5px 20px rgba(20, 184, 166, 0.3);
 }
 
-.clinic-cta:hover {
+.clinic-cta-button:hover {
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(233, 30, 99, 0.4);
+    box-shadow: 0 8px 30px rgba(20, 184, 166, 0.4);
 }
 
 /* ===== 比較表セクション ===== */
@@ -996,26 +1057,38 @@ section {
         display: none;
     }
     
-    .ranking-item {
-        flex-direction: column;
-        text-align: center;
+    .ranking-header-banner {
+        padding: 15px;
     }
     
-    .rank-badge {
-        margin-bottom: 20px;
+    .ranking-banner-text {
+        font-size: 1.3rem;
     }
     
-    .clinic-header {
-        flex-direction: column;
-        gap: 10px;
+    .ranking-container {
+        grid-template-columns: 1fr;
     }
     
-    .clinic-features {
-        font-size: 0.9rem;
+    .rank-medal {
+        width: 70px;
+        height: 70px;
+        font-size: 1rem;
     }
     
-    .clinic-rating {
-        justify-content: center;
+    .stars {
+        font-size: 1.2rem;
+    }
+    
+    .rating-score {
+        font-size: 2rem;
+    }
+    
+    .clinic-logo {
+        font-size: 1.5rem;
+    }
+    
+    .price-details {
+        font-size: 1.3rem;
     }
 
     .hero-title {
