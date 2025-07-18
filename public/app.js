@@ -1285,14 +1285,83 @@ class RankingApp {
         const visibleStores = stores.slice(0, 3);
         const hiddenStores = stores.slice(3);
         
-        let html = '<div class="stores-list">';
+        let html = '<div class="shops">';
         
         // 最初の3店舗を表示
         visibleStores.forEach((store, index) => {
+            const zipcode = store.zipcode ? store.zipcode.replace(/^〒/, '') : '';
+            html += `
+                <div class='shop'>
+                    <div class='shop-image'>
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='16'%3E店舗${index + 1}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
+                    </div>
+                    <div class='shop-info'>
+                        <div class='shop-name'>
+                            <a href="#" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
+                        </div>
+                        <div class='shop-address line-clamp'>
+                            ${store.address || '住所情報なし'}
+                        </div>
+                    </div>
+                    <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
+                    地図
+                    </a>
+                </div>
+            `;
+        });
+        
+        // 4店舗以上ある場合はアコーディオンに格納
+        if (hiddenStores.length > 0) {
+            html += `
+                <div class="accordion-container">
+                    <button class="accordion-button" onclick="toggleAccordion(this)">
+                        他件のクリニックを見る
+                        <i class="fas fa-chevron-down accordion-icon"></i>
+                    </button>
+                    <div class="accordion-content">
+            `;
+            
+            hiddenStores.forEach((store, index) => {
+                const zipcode = store.zipcode ? store.zipcode.replace(/^〒/, '') : '';
+                html += `
+                    <div class='shop'>
+                        <div class='shop-image'>
+                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='16'%3E店舗${index + 4}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
+                        </div>
+                        <div class='shop-info'>
+                            <div class='shop-name'>
+                                <a href="#" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
+                            </div>
+                            <div class='shop-address line-clamp'>
+                                ${store.address || '住所情報なし'}
+                            </div>
+                        </div>
+                        <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
+                        </a>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+        }
+        
+        html += '</div>';
+        
+        return html;
+    }
+    
+    // 残りの店舗情報生成（アコーディオン内）
+    generateHiddenStores(stores) {
+        let html = '';
+        stores.forEach((store, index) => {
             html += `
                 <div class="store-item">
                     <div class="store-header">
-                        <h5 class="store-name">${store.name || `店舗${index + 1}`}</h5>
+                        <h5 class="store-name">${store.name || `店舗${index + 4}`}</h5>
                     </div>
                     <div class="store-info">
                         <div class="store-detail">
@@ -1393,6 +1462,23 @@ class RankingApp {
         
         html += '</div>';
         return html;
+    }
+}
+
+// アコーディオンのトグル関数
+function toggleAccordion(button) {
+    const accordionContent = button.nextElementSibling;
+    const accordionIcon = button.querySelector('.accordion-icon');
+    
+    button.classList.toggle('active');
+    accordionContent.classList.toggle('active');
+    
+    if (button.classList.contains('active')) {
+        accordionIcon.classList.remove('fa-chevron-down');
+        accordionIcon.classList.add('fa-chevron-up');
+    } else {
+        accordionIcon.classList.remove('fa-chevron-up');
+        accordionIcon.classList.add('fa-chevron-down');
     }
 }
 

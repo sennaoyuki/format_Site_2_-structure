@@ -3847,3 +3847,127 @@ section {
         height: 72px;
     }
 }
+
+/* 詳細コンテンツ内の店舗情報スタイル */
+.clinic-info-section {
+    margin-top: 30px;
+}
+
+.clinic-info-section .shops {
+    margin-top: 15px;
+}
+
+.clinic-info-section .shops>.shop {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+}
+
+.clinic-info-section .shop-image {
+    flex-shrink: 0;
+    width: 48px;
+    height: 48px;
+    margin-right: 10px;
+    background-color: #f2f2f2;
+    border-radius: 4px;
+}
+
+.clinic-info-section .shop-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.clinic-info-section .shop-info {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.clinic-info-section .shop-name {
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.clinic-info-section .shop-name a {
+    color: #4a90e2;
+    text-decoration: none;
+}
+
+.clinic-info-section .shop-address {
+    font-size: 12px;
+    color: #666;
+}
+
+.clinic-info-section .shop-btn {
+    padding: 8px 12px;
+    border-radius: 20px;
+    background-color: #f25496;
+    color: #fff;
+    font-weight: 700;
+    font-size: 12px;
+    white-space: nowrap;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.clinic-info-section .shop-btn .btn-icon {
+    margin-right: 4px;
+    font-size: 14px;
+}
+
+/* アコーディオンスタイル */
+.accordion-container {
+    margin-top: 15px;
+}
+
+.accordion-button {
+    width: 100%;
+    padding: 15px;
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #f25496;
+    text-align: center;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.accordion-button:hover {
+    background-color: #f9f9f9;
+}
+
+.accordion-icon {
+    margin-left: 8px;
+    transition: transform 0.3s ease;
+}
+
+.accordion-content {
+    display: none;
+    margin-top: 10px;
+}
+
+.accordion-content.active {
+    display: block;
+}
+
+.accordion-content .shop {
+    margin-bottom: 10px;
+}
+
+.no-stores {
+    text-align: center;
+    color: #999;
+    padding: 20px;
+    font-size: 14px;
+}
