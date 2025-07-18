@@ -825,6 +825,8 @@ body {
     margin-top: -1px;
     overflow: hidden;
     position: relative;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .hero-container {
@@ -2187,7 +2189,11 @@ section {
     body {
         overflow-x: hidden;
         width: 100%;
-        min-width: 375px;
+        min-width: 320px;
+    }
+    
+    html {
+        overflow-x: hidden;
     }
     
     /* CTAボタンのモバイル対応 */
@@ -2229,7 +2235,7 @@ section {
     .info-header,
     .info-grid,
     .footer-content {
-        max-width: 375px;
+        max-width: calc(100vw - 20px);
         margin: 0 auto;
         box-sizing: border-box;
     }
@@ -2349,6 +2355,7 @@ section {
         padding: 20px 10px;
         background: white;
         box-sizing: border-box;
+        overflow-x: hidden;
     }
     
     .ranking-header-banner {
@@ -2370,9 +2377,10 @@ section {
         gap: 3px;
         padding: 0;
         width: 100%;
-        max-width: 355px;
+        max-width: calc(100vw - 20px);
         margin: 0 auto;
         box-sizing: border-box;
+        justify-content: center;
     }
     
     .ranking-item {
@@ -2551,6 +2559,8 @@ section {
         overflow: hidden;
         margin: 40px 0;
         border-top: 1px solid #f0f0f0;
+        width: 100%;
+        box-sizing: border-box;
     }
     
     .comparison-header {
@@ -2828,12 +2838,211 @@ section {
         margin-top: 0;
         padding: 30px 10px 20px;
     }
+    
+    /* ハンバーガーメニューのモバイル対応 */
+    .hamburger-menu {
+        width: 35px;
+        height: 35px;
+        padding: 5px;
+    }
+    
+    .hamburger-line {
+        height: 2px;
+    }
+    
+    /* 口コミタブのモバイル対応 */
+    .review-tabs {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        white-space: nowrap;
+        padding: 0 10px;
+        margin: 0 -10px 20px -10px;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        display: flex;
+        gap: 8px;
+    }
+    
+    .review-tabs::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .review-tab {
+        padding: 8px 16px;
+        font-size: 0.85rem;
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+    
+    .review-content {
+        padding: 15px;
+    }
+    
+    .review-item {
+        padding: 12px;
+        margin-bottom: 10px;
+    }
+    
+    .review-header {
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+    }
+    
+    .review-rating {
+        font-size: 0.8rem;
+    }
+    
+    .review-text {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    
+    .review-footer {
+        font-size: 0.75rem;
+        margin-top: 8px;
+    }
+    
+    /* 店舗表示のモバイル対応 */
+    .stores-display-container {
+        padding: 0;
+    }
+    
+    .store-item {
+        padding: 12px;
+        margin-bottom: 8px;
+        border-radius: 8px;
+    }
+    
+    .store-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    .store-number {
+        width: 25px;
+        height: 25px;
+        font-size: 0.85rem;
+    }
+    
+    .store-name {
+        font-size: 0.95rem;
+    }
+    
+    .store-distance {
+        font-size: 0.8rem;
+    }
+    
+    .store-info-grid {
+        gap: 8px;
+    }
+    
+    .store-info-item {
+        font-size: 0.8rem;
+    }
+    
+    .store-features {
+        gap: 5px;
+        margin-top: 8px;
+    }
+    
+    .store-tag {
+        padding: 3px 8px;
+        font-size: 0.7rem;
+    }
+    
+    .accordion-button {
+        padding: 10px;
+        margin-top: 15px;
+        font-size: 0.85rem;
+    }
+    
+    /* キャンペーンセクションのモバイル対応 */
+    .campaign-section {
+        padding: 15px;
+        margin: 20px 0;
+    }
+    
+    .campaign-item {
+        padding: 20px 15px;
+        margin-bottom: 12px;
+    }
+    
+    .campaign-badge {
+        padding: 4px 12px;
+        font-size: 0.75rem;
+        top: -8px;
+        left: 10px;
+    }
+    
+    .campaign-title {
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+    }
+    
+    .campaign-subtitle {
+        font-size: 0.8rem;
+        margin-bottom: 12px;
+    }
+    
+    .campaign-prices {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .campaign-original-price {
+        font-size: 0.85rem;
+    }
+    
+    .campaign-arrow {
+        transform: rotate(90deg);
+        font-size: 1rem;
+    }
+    
+    .campaign-sale-price {
+        font-size: 1.2rem;
+    }
+    
+    /* CTAボタンのモバイル最適化 */
+    .clinic-cta-button-wrapper {
+        width: 100%;
+        max-width: none;
+        margin: 15px 0;
+        padding: 10px;
+    }
+    
+    .clinic-cta-button {
+        width: 100%;
+        max-width: 320px;
+        margin: 0 auto;
+        display: block;
+        padding: 12px 20px;
+        font-size: 0.95rem;
+    }
 }
 
 @media (max-width: 480px) {
     /* さらに小さい画面用の微調整 */
     .ranking-container {
         padding: 10px 3px;
+    }
+    
+    /* ボディのオーバーフロー制御 */
+    body {
+        overflow-x: hidden;
+        width: 100vw;
+    }
+    
+    /* コンテナの最適化 */
+    .container {
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+    
+    /* セクションの幅制御 */
+    main > section {
+        max-width: 100vw;
+        overflow-x: hidden;
     }
     
     .ranking-item {
