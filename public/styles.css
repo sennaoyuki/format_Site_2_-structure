@@ -1491,31 +1491,36 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 5px;
     background: #10b981;
     color: white;
-    padding: 15px 40px;
-    border-radius: 30px;
+    padding: 12px 20px;
+    border-radius: 25px;
     text-decoration: none;
     font-weight: 700;
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     transition: all 0.3s;
-    box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
+    box-shadow: 0 3px 10px rgba(16, 185, 129, 0.2);
     margin-top: auto;
+    width: calc(100% - 10px);
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+    box-sizing: border-box;
 }
 
 .clinic-cta-button .cta-text {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
 }
 
 .clinic-cta-button i {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
 }
 
 .clinic-cta-button:hover {
     background: #059669;
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
+    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
 }
 
 /* ===== 比較表セクション ===== */
