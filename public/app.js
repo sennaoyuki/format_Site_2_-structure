@@ -1262,13 +1262,6 @@ class RankingApp {
                 <div class="campaign-section">
                     ${this.generateCampaignDisplay(data.campaigns || [])}
                 </div>
-                
-                <div class="detail-cta-section">
-                    <a href="#" class="detail-cta-button">
-                        無料カウンセリング予約
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
             `;
 
             detailsList.appendChild(detailItem);
