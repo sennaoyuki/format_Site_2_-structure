@@ -1429,32 +1429,30 @@ class RankingApp {
     
     // キャンペーン表示のHTML生成
     generateCampaignDisplay(campaigns) {
-        if (!campaigns || campaigns.length === 0) {
-            return '<p class="no-campaigns">現在キャンペーン情報はありません</p>';
-        }
-        
-        let html = '<div class="campaign-list">';
-        
-        campaigns.forEach(campaign => {
-            html += `
-                <div class="campaign-item">
-                    <div class="campaign-badge">${campaign.discount || 'お得'}</div>
-                    <div class="campaign-content">
-                        <h5 class="campaign-title">${campaign.title}</h5>
-                        <p class="campaign-subtitle">${campaign.subtitle}</p>
-                        <div class="campaign-prices">
-                            <span class="original-price">${campaign.originalPrice}</span>
-                            <span class="arrow">→</span>
-                            <span class="discount-price">${campaign.discountPrice}</span>
-                        </div>
-                        <p class="monthly-price">${campaign.monthlyPrice}</p>
-                    </div>
+        // 固定のフレイアキャンペーンを表示
+        // 注意: /img/top_all_ranking_info.png と /img/salon_hikaku_freya.png の画像ファイルを配置してください
+        return `
+            <div class="campaign contain">
+                <img src="/img/top_all_ranking_info.png" alt="" width="100%">
+                <div class="campaign_title">フレイアの6周年記念</div>
+                
+                <div class="camp_header3">
+                    <img src="/img/salon_hikaku_freya.png" alt="">
+                    <div class="camp_txt">人気プランが最大10万円OFF<br>ペア・学割・のりかえ割併用もOK♪</div>
                 </div>
-            `;
-        });
-        
-        html += '</div>';
-        return html;
+                
+                <div class="cv_box_img">
+                    ＼月額・総額がリーズナブルなクリニック／
+                    <p class="btn btn_second_primary">
+                        <a href="https://xn--eckp2g630n3ukyzxne8a.com/freya_url?page=vio-iryou&amp;p=quick_bt&amp;location=tokyo&amp;no=ivio-kantou&amp;gclid=EAIaIQobChMIqNGJ5qWbjgMVIcJMAh2n5DtZEAAYAyAAEgJNsfD_BwE&amp;ca=11027584297&amp;gr=110882177929&amp;k=kwd-407066983568&amp;sid=1752560034179.128009585659" target="_blank" rel="noopener">
+                            <span class="bt_s">フレイア公式はコチラ</span>
+                            <i class="fas fa-caret-square-right"></i>
+                        </a>
+                    </p>
+                    コスパと効果のどっちも譲れない人におすすめ！
+                </div>
+            </div>
+        `;
     }
 }
 
