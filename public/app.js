@@ -1402,32 +1402,19 @@ class RankingApp {
     }
 }
 
-// 店舗の表示/非表示を切り替える関数
+// 店舗の表示/非表示を切り替える関数（一回限り）
 function toggleStores(button) {
     const targetId = button.getAttribute('data-target');
     const targetShops = document.querySelector(targetId);
     const hiddenShops = targetShops.querySelectorAll('.hidden-content');
-    const btnIcon = button.querySelector('.btn-icon');
     
-    if (button.classList.contains('active')) {
-        // 隠す
-        hiddenShops.forEach(shop => {
-            shop.classList.add('hidden');
-        });
-        button.classList.remove('active');
-        btnIcon.classList.remove('fa-chevron-up');
-        btnIcon.classList.add('fa-chevron-down');
-        button.innerHTML = `他${hiddenShops.length}件のクリニックを見る<i class="fas fa-chevron-down btn-icon"></i>`;
-    } else {
-        // 表示
-        hiddenShops.forEach(shop => {
-            shop.classList.remove('hidden');
-        });
-        button.classList.add('active');
-        btnIcon.classList.remove('fa-chevron-down');
-        btnIcon.classList.add('fa-chevron-up');
-        button.innerHTML = `閉じる<i class="fas fa-chevron-up btn-icon"></i>`;
-    }
+    // 隠されている店舗を表示
+    hiddenShops.forEach(shop => {
+        shop.classList.remove('hidden');
+    });
+    
+    // ボタンを非表示にする（一度クリックしたら消える）
+    button.style.display = 'none';
 }
 
 // アプリケーションの起動（DOM読み込み完了後に実行）
