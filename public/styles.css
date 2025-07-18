@@ -4058,34 +4058,34 @@ section {
     .comparison-content {
         max-width: 100%;
         padding: 0;
-        overflow-x: visible;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .comparison-table {
-        width: 100%;
-        font-size: 10px;
+        min-width: 500px;
+        font-size: 12px;
         box-sizing: border-box;
     }
     
     .comparison-table th,
     .comparison-table td {
-        padding: 4px 2px;
-        font-size: 9px;
-        word-wrap: break-word;
-        white-space: normal;
+        padding: 8px 4px;
+        font-size: 11px;
+        white-space: nowrap;
     }
     
     .clinic-name-cell {
-        width: 25%;
+        min-width: 120px;
     }
     
     .cta-button {
-        padding: 4px 2px;
-        font-size: 8px;
-        width: 100%;
-        box-sizing: border-box;
-        word-wrap: break-word;
-        white-space: normal;
+        padding: 6px 8px;
+        font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px;
     }
     
     /* 375px専用: 詳細セクション */
