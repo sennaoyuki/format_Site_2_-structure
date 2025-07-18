@@ -2786,96 +2786,82 @@ section {
 
 /* ===== フッター ===== */
 #footer {
-    background-color: #f8f9fa;
-    border-top: 1px solid #e0e0e0;
-    padding: 40px 0 20px;
+    clear: both;
+    padding: 30px 0 0 0;
+    background-color: #ff6f6b;
     margin-top: 60px;
 }
 
 .footer_contents {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 20px;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
+    padding: 0 40px 30px 40px;
+    overflow: hidden;
+}
+
+.footer_contents:after {
+    content: "";
+    display: table;
+    clear: both;
 }
 
 .footer_contents h4 {
-    width: 100%;
-    margin-bottom: 30px;
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.footer_contents h4 a {
-    color: #333;
-    text-decoration: none;
-    transition: color 0.3s ease;
-}
-
-.footer_contents h4 a:hover {
-    color: #3498db;
-}
-
-.footer_contents ul {
-    flex: 1;
-    min-width: 200px;
-    list-style: none;
+    margin: 0 auto 20px;
     padding: 0;
-    margin: 0;
+    overflow: hidden;
+    font-size: 1.3rem;
 }
 
-.footer_contents h5 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #333;
-    margin-bottom: 15px;
-    padding-bottom: 8px;
-    border-bottom: 2px solid #3498db;
-}
-
-.footer_contents li {
-    margin-bottom: 10px;
-}
-
-.footer_contents li a {
-    color: #666;
+.footer_contents a {
+    color: #fff;
     text-decoration: none;
-    font-size: 0.9rem;
-    transition: color 0.3s ease;
-    display: block;
-    padding: 5px 0;
 }
 
-.footer_contents li a:hover {
-    color: #3498db;
+.footer_contents a:hover {
     text-decoration: underline;
 }
 
+.footer_contents ul {
+    margin: 5px 20px 5px 10px;
+    padding: 0;
+    float: left;
+    min-width: 200px;
+}
+
+.footer_contents li {
+    margin: 0 5px 8px 15px;
+    text-align: left;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+
+.footer_contents ul h5 {
+    color: #fff;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 1rem;
+}
+
 #footer .footer-bottom {
-    border-top: 1px solid #e0e0e0;
-    margin-top: 40px;
-    padding-top: 20px;
+    background-color: rgba(0,0,0,0.1);
+    margin: 0;
+    padding: 15px 40px;
     text-align: center;
-    background: transparent;
+    border-top: 1px solid rgba(255,255,255,0.2);
 }
 
 #footer .copyright {
-    color: #666;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
+    color: #fff;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
 }
 
 #footer .disclaimer {
-    color: #e74c3c;
-    font-size: 0.8rem;
-    font-weight: 600;
-    background: transparent;
-    padding: 0;
-    border-radius: 0;
-    display: block;
-    border: none;
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: normal;
+    opacity: 0.9;
 }
 
 /* ===== エラーメッセージ ===== */
@@ -3717,54 +3703,50 @@ section {
     /* フッター */
     #footer {
         margin-top: 40px;
-        padding: 30px 0 20px;
+        padding: 20px 0 0 0;
     }
     
     .footer_contents {
-        padding: 0 15px;
-        flex-direction: column;
-        gap: 25px;
+        padding: 0 20px 20px 20px;
     }
     
     .footer_contents h4 {
-        font-size: 1.3rem;
-        margin-bottom: 25px;
+        font-size: 1.1rem;
+        margin-bottom: 15px;
         text-align: center;
+        display: block;
+        width: 100%;
     }
     
     .footer_contents ul {
         width: 100%;
-        margin-bottom: 20px;
+        float: none;
+        margin: 0 0 15px 0;
+        min-width: auto;
     }
     
     .footer_contents h5 {
         font-size: 0.95rem;
-        margin-bottom: 12px;
-        padding-bottom: 6px;
-    }
-    
-    .footer_contents li {
         margin-bottom: 8px;
     }
     
-    .footer_contents li a {
+    .footer_contents li {
+        margin: 0 0 5px 10px;
         font-size: 0.85rem;
-        padding: 8px 0;
     }
     
     #footer .footer-bottom {
-        margin-top: 30px;
-        padding: 20px 15px 15px;
+        padding: 15px 20px;
     }
     
     #footer .copyright {
-        font-size: 0.8rem;
-        margin-bottom: 10px;
+        font-size: 0.75rem;
+        margin-bottom: 5px;
     }
     
     #footer .disclaimer {
-        font-size: 0.75rem;
-        line-height: 1.5;
+        font-size: 0.7rem;
+        line-height: 1.4;
     }
     
     /* ハンバーガーメニューのモバイル対応 */
