@@ -1191,7 +1191,7 @@ class RankingApp {
                 <!-- 店舗情報 -->
                 <div class="brand-section">
                     <h4 class="section-heading">
-                        ${clinic.name}の店舗
+                        ${clinic.name}の「${this.getRegionName(data.regionId)}」の店舗
                     </h4>
                     ${this.generateStoresDisplay(data.stores || [])}
                 </div>
@@ -1399,6 +1399,15 @@ class RankingApp {
                 </div>
             </div>
         `;
+    }
+
+    // 地域IDから地域名を取得するヘルパーメソッド
+    getRegionName(regionId) {
+        if (!window.dataManager) {
+            return '';
+        }
+        const region = window.dataManager.getRegionById(regionId);
+        return region ? region.name : '';
     }
 }
 
