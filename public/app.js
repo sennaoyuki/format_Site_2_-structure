@@ -685,7 +685,7 @@ class RankingApp {
 
             const rank = parseInt(position.replace('no', ''));
             const detailItem = document.createElement('div');
-            detailItem.className = 'detail-item';
+            detailItem.className = `detail-item ranking_box_inner ranking_box_${rank}`;
             detailItem.setAttribute('data-rank', rank);
             detailItem.setAttribute('data-clinic-id', clinicId);
 
@@ -1043,17 +1043,18 @@ class RankingApp {
             const data = clinicDetailDataMap[clinicId] || clinicDetailDataMap['1'];
 
             detailItem.innerHTML = `
-                <div class="detail-rank">
-                    <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
-                    <div class="detail-title">
-                        <h3>${data.title}</h3>
-                        <p>${data.subtitle}</p>
+                <div class="ranking_box_in">
+                    <div class="detail-rank">
+                        <div class="detail-rank-badge ${badgeClass}">No.${rank}</div>
+                        <div class="detail-title">
+                            <h3>${data.title}</h3>
+                            <p>${data.subtitle}</p>
+                        </div>
+                        <a href="#" class="detail-cta-link">
+                            ${data.link}
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
                     </div>
-                    <a href="#" class="detail-cta-link">
-                        ${data.link}
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
-                </div>
                 ${data.banner ? `
                 <div class="detail-banner">
                     <img src="${data.banner}" alt="${this.getClinicDisplayName(clinic)}キャンペーン">
@@ -1261,6 +1262,7 @@ class RankingApp {
                 <!-- 特典情報 -->
                 <div class="campaign-section">
                     ${this.generateCampaignDisplay(data.campaigns || [])}
+                </div>
                 </div>
             `;
 

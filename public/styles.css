@@ -2256,12 +2256,37 @@ section {
 }
 
 .detail-item {
-    border-bottom: 1px solid #f0f0f0;
-    padding: 40px;
+    margin-bottom: 15px;
 }
 
-.detail-item:last-child {
-    border-bottom: none;
+/* ランキングボックススタイル */
+.ranking_box_inner {
+    clear: both;
+    margin: 0px 0 15px;
+    width: 100%;
+    height: auto;
+    padding: 0px 0 10px;
+}
+
+.ranking_box_in {
+    background: #ffffff;
+    border-radius: 7px;
+    padding: 30px 20px;
+    margin: 7px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* 各順位の背景色 */
+.ranking_box_1 {
+    background: #ffd27e; /* ゴールド */
+}
+
+.ranking_box_2 {
+    background: #AAC2E3; /* ライトブルー */
+}
+
+.ranking_box_3 {
+    background: #ffd586; /* イエロー */
 }
 
 .detail-rank {
@@ -3272,8 +3297,13 @@ section {
         border-radius: 0 0 15px 15px;
     }
     
-    .detail-item {
+    .ranking_box_inner {
+        margin: 0px 0 10px;
+    }
+    
+    .ranking_box_in {
         padding: 20px 15px;
+        margin: 5px;
     }
     
     .detail-rank {
