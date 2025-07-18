@@ -4046,47 +4046,6 @@ section {
         line-height: 1.2;
     }
     
-    /* 375px専用: 比較セクション */
-    .comparison-section {
-        padding: 20px 10px;
-        width: 100%;
-        max-width: 375px;
-        margin: 0 auto;
-        box-sizing: border-box;
-    }
-    
-    .comparison-content {
-        max-width: 100%;
-        padding: 0;
-        overflow-x: visible;
-    }
-    
-    .comparison-table {
-        width: 100%;
-        font-size: 10px;
-        box-sizing: border-box;
-    }
-    
-    .comparison-table th,
-    .comparison-table td {
-        padding: 4px 2px;
-        font-size: 9px;
-        word-wrap: break-word;
-        white-space: normal;
-    }
-    
-    .clinic-name-cell {
-        width: 25%;
-    }
-    
-    .cta-button {
-        padding: 4px 2px;
-        font-size: 8px;
-        width: 100%;
-        box-sizing: border-box;
-        word-wrap: break-word;
-        white-space: normal;
-    }
     
     /* 375px専用: 詳細セクション */
     .clinic-details-section {
