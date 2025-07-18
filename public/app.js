@@ -453,7 +453,6 @@ class RankingApp {
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
                             <div class="clinic-main-name">${this.getClinicDisplayName(clinic)}</div>
-                            <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
                 </td>
@@ -493,7 +492,6 @@ class RankingApp {
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
                             <div class="clinic-main-name">${this.getClinicDisplayName(clinic)}</div>
-                            <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
                 </td>
@@ -527,7 +525,6 @@ class RankingApp {
                         <div class="rank-badge ${rankClass}">${clinic.rank}位</div>
                         <div class="clinic-info">
                             <div class="clinic-main-name">${this.getClinicDisplayName(clinic)}</div>
-                            <a href="#" class="clinic-sub-name">クリニック</a>
                         </div>
                     </div>
                 </td>
