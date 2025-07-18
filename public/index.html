@@ -166,43 +166,278 @@
 
             <!-- お役立ち情報セクション -->
             <section class="helpful-info">
-                <div class="info-header">
-                    <h2 class="info-title"><i class="fas fa-lightbulb"></i> クリニック選びのお役立ち情報</h2>
-                    <p class="info-subtitle">安心して医療機関を選ぶためのポイント</p>
-                </div>
-                <div class="info-grid">
-                    <div class="info-card">
-                        <div class="card-icon"><i class="fas fa-search"></i></div>
-                        <h3 class="card-title">クリニックの選び方</h3>
-                        <ul class="card-list">
-                            <li>診療科目が適切か</li>
-                            <li>アクセスの良さ</li>
-                            <li>診療時間・曜日</li>
-                            <li>医師の専門性</li>
-                            <li>設備の充実度</li>
-                        </ul>
+                <div class="columns-container">
+                    <!-- メインアーティクルカード -->
+                    <div class="article-card">
+                        <div class="article-header">
+                            <div class="header-image">
+                                <div class="header-image-placeholder">
+                                    <i class="fas fa-spa" style="font-size: 3rem; color: #ec4899;"></i>
+                                </div>
+                            </div>
+                            <div class="article-title">
+                                医療脱毛を始める前に知っ<br>
+                                ておくべきこと
+                            </div>
+                        </div>
+
+                        <!-- 目次 -->
+                        <div class="toc-section">
+                            <div class="toc-title">目次</div>
+                            <ul class="toc-list">
+                                <li class="toc-item">
+                                    <a href="#comparison" class="toc-link">医療脱毛とサロン脱毛の違い</a>
+                                    <div class="toc-sub-item">
+                                        <a href="#mechanism" class="toc-link">医療脱毛とサロン脱毛の仕組み</a>
+                                    </div>
+                                    <div class="toc-sub-item">
+                                        <a href="#merits" class="toc-link">医療脱毛とサロン脱毛メリット・デメリット</a>
+                                    </div>
+                                </li>
+                                <li class="toc-item">
+                                    <a href="#risks" class="toc-link">医療脱毛に伴うリスクや副作用</a>
+                                    <div class="toc-sub-item">
+                                        <a href="#side-effects" class="toc-link">医療脱毛で起こりうる副作用</a>
+                                    </div>
+                                    <div class="toc-sub-item">
+                                        <a href="#pain" class="toc-link">医療脱毛の痛みについて</a>
+                                    </div>
+                                </li>
+                                <li class="toc-item">
+                                    <a href="#contract" class="toc-link">医療脱毛を契約する時の注意点</a>
+                                    <div class="toc-sub-item">
+                                        <a href="#insurance" class="toc-link">医療脱毛は保険適用外</a>
+                                    </div>
+                                    <div class="toc-sub-item">
+                                        <a href="#details" class="toc-link">施術内容について細かく確認する</a>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <div class="card-icon"><i class="fas fa-question-circle"></i></div>
-                        <h3 class="card-title">よくある質問</h3>
-                        <ul class="card-list">
-                            <li>初診に必要な持ち物は？</li>
-                            <li>予約は必要ですか？</li>
-                            <li>保険証は使えますか？</li>
-                            <li>駐車場はありますか？</li>
-                            <li>子供連れでも大丈夫？</li>
-                        </ul>
+
+                    <!-- 医療脱毛とサロン脱毛の比較 -->
+                    <div class="article-card">
+                        <div class="content-section" id="comparison">
+                            <div class="section-title">医療脱毛とサロン脱毛の違い</div>
+                            <div class="section-content">
+                                「脱毛」には、大きく分けて「医療脱毛」と「サロン脱毛（美容脱毛・エステサロン）」の<span style="background-color: #fff3cd; padding: 2px 4px;">2種類があります</span>。それぞれの仕組みやメリット・デメリットを理解して、どちらが自分に適しているか判断するようにしましょう。
+                            </div>
+
+                            <table class="comparison-table">
+                                <thead class="table-header">
+                                    <tr>
+                                        <th></th>
+                                        <th>医療脱毛</th>
+                                        <th>サロン脱毛</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-row">
+                                        <td class="row-header">施術方法</td>
+                                        <td>医療レーザー</td>
+                                        <td>光脱毛（フラッシュ）</td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="row-header">効果</td>
+                                        <td>永久脱毛</td>
+                                        <td>抑毛・減毛</td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="row-header">施術回数(※)</td>
+                                        <td>5～8回</td>
+                                        <td>12～18回</td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="row-header">期間(※)</td>
+                                        <td>1～1年半</td>
+                                        <td>2～3年</td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="row-header">痛み</td>
+                                        <td>やや強い</td>
+                                        <td>弱い</td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="row-header">運営元</td>
+                                        <td>医療機関<br>（クリニック）</td>
+                                        <td>民間企業</td>
+                                    </tr>
+                                    <tr class="table-row">
+                                        <td class="row-header">施術者</td>
+                                        <td>医師・看護師</td>
+                                        <td>エステティシャン</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="section-content">
+                                <small>（※）回数・期間は目安です。個人差や施術部位による違いがあります。</small>
+                            </div>
+                        </div>
                     </div>
-                    <div class="info-card">
-                        <div class="card-icon"><i class="fas fa-hospital"></i></div>
-                        <h3 class="card-title">診療科目ガイド</h3>
-                        <ul class="card-list">
-                            <li>内科：風邪、生活習慣病</li>
-                            <li>外科：けが、手術治療</li>
-                            <li>皮膚科：肌トラブル</li>
-                            <li>整形外科：骨・関節</li>
-                            <li>小児科：子供の病気</li>
-                        </ul>
+
+                    <!-- 仕組みの説明 -->
+                    <div class="article-card">
+                        <div class="highlight-box" id="mechanism">
+                            <div class="section-title">医療脱毛とサロン脱毛の仕組み</div>
+                            <div class="section-content">
+                                医療脱毛とサロン脱毛では、脱毛の仕組みが異なります。
+                            </div>
+                            <div class="section-content" style="margin-top: 12px;">
+                                医療脱毛は、出力の高いレーザーで<span style="background-color: #fff3cd; padding: 2px 4px;">毛を作る細胞（毛母細胞）を破壊します</span>。発毛の原因である細胞を破壊するため、長期間にわたって毛が生えてこなくなります。
+                            </div>
+                            <div class="section-content" style="margin-top: 12px;">
+                                一方のサロン脱毛で行う光（フラッシュ）脱毛では、毛母細胞を破壊することは出来ません。そのため、サロン脱毛でできるのは、毛の成長を抑制する<span style="background-color: #fff3cd; padding: 2px 4px;">「抑毛・減毛」のみになります</span>。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- メリット・デメリット -->
+                    <div class="article-card">
+                        <div class="highlight-box" id="merits">
+                            <div class="section-title">医療脱毛とサロン脱毛メリット・デメリット</div>
+                            <div class="section-content">
+                                以上の内容を踏まえて、医療脱毛とサロン脱毛のメリット・デメリットをまとめました。
+                            </div>
+
+                            <table class="merit-table">
+                                <thead>
+                                    <tr>
+                                        <th class="merit-header"></th>
+                                        <th class="merit-header">医療脱毛</th>
+                                        <th class="merit-header">サロン脱毛</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td class="merit-category">メリット</td>
+                                        <td class="merit-content">
+                                            <ul>
+                                                <li>短い期間で脱毛が完了する</li>
+                                                <li>永久脱毛効果が期待できる</li>
+                                                <li>医師による診察がある</li>
+                                            </ul>
+                                        </td>
+                                        <td class="merit-content">
+                                            <ul>
+                                                <li>痛みを抑えた施術が可能</li>
+                                                <li>1回あたりの価格が安い</li>
+                                                <li>美肌ケアも同時に可能</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="merit-category">デメリット</td>
+                                        <td class="merit-content">
+                                            <ul>
+                                                <li>痛みを伴う可能性が高い</li>
+                                                <li>1回あたりの費用が高い</li>
+                                            </ul>
+                                        </td>
+                                        <td class="merit-content">
+                                            <ul>
+                                                <li>脱毛完了までの期間が長い</li>
+                                                <li>永久脱毛効果は期待できない</li>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- リスクと副作用 -->
+                    <div class="article-card">
+                        <div class="content-section" id="risks">
+                            <div class="section-title">医療脱毛に伴うリスクや副作用</div>
+                            <div class="section-content">
+                                医療脱毛は効果が高い反面、肌への負担も大きくなる可能性があります。各クリニックでは安全に脱毛が行えるような取り組みを行っていますが、リスクがゼロではないことを理解しておきましょう。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 副作用の詳細 -->
+                    <div class="article-card">
+                        <div class="highlight-box" id="side-effects">
+                            <div class="section-title">医療脱毛で起こりうる副作用</div>
+                            <div class="section-content">
+                                医療脱毛の副作用として起こりうる症状は以下の通りです。
+                            </div>
+
+                            <div class="subsection-title">やけど</div>
+                            <div class="section-content">
+                                レーザーを照射するときに、周辺の肌に熱が伝わり、やけどを引き起こす可能性があります。
+                            </div>
+
+                            <div class="subsection-title">毛嚢炎</div>
+                            <div class="section-content">
+                                皮膚に入り込んだ細菌が原因で、毛根付近におこる炎症です。赤みを帯びて腫れを持った皮膚の盛り上がりができます。
+                            </div>
+
+                            <div class="subsection-title">硬毛化</div>
+                            <div class="section-content">
+                                まれに、レーザー照射により薄かった毛が太く濃くなってしまう現象です。原因は解明されていませんが、適切な処置により改善が可能です。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 痛みについて -->
+                    <div class="article-card">
+                        <div class="highlight-box" id="pain">
+                            <div class="section-title">医療脱毛の痛みについて</div>
+                            <div class="section-content">
+                                医療脱毛の痛みは、<span style="background-color: #fff3cd; padding: 2px 4px;">レーザー照射時に発生する「熱」が原因です</span>。痛みの感じ方は人それぞれで、施術部位によっても変化します。
+                            </div>
+
+                            <div class="pain-area-box">
+                                <div class="pain-area">特に痛みを感じやすい部位</div>
+                                <ul style="margin: 8px 0 0 16px; padding: 0;">
+                                    <li>VIO（デリケートゾーン）</li>
+                                    <li>ワキ</li>
+                                    <li>顔（特に鼻下）</li>
+                                    <li>手足の指</li>
+                                </ul>
+                            </div>
+
+                            <div class="section-content">
+                                ただし、痛み対策に注力しているクリニックも多く、冷却機能付きの脱毛機や麻酔を使うことで、痛みを最小限に抑えることが可能です。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 契約時の注意点 -->
+                    <div class="article-card">
+                        <div class="content-section" id="contract">
+                            <div class="section-title">医療脱毛を契約する時の注意点</div>
+                        </div>
+                    </div>
+
+                    <!-- 保険適用について -->
+                    <div class="article-card">
+                        <div class="highlight-box" id="insurance">
+                            <div class="section-title">医療脱毛は保険適用外</div>
+                            <div class="section-content">
+                                医療脱毛は美容目的の治療となるため、<span style="background-color: #fff3cd; padding: 2px 4px;">健康保険の適用外</span>となります。全額自己負担となることを理解した上で契約しましょう。
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 施術内容の確認 -->
+                    <div class="article-card">
+                        <div class="highlight-box" id="details">
+                            <div class="section-title">施術内容について細かく確認する</div>
+                            <div class="section-content">
+                                契約前に必ず確認すべきポイント：
+                            </div>
+                            <ul class="fee-list">
+                                <li class="fee-item">脱毛範囲（全身脱毛に含まれる部位）</li>
+                                <li class="fee-item">施術回数と有効期限</li>
+                                <li class="fee-item">追加料金（麻酔代、シェービング代など）</li>
+                                <li class="fee-item">キャンセル料金とルール</li>
+                                <li class="fee-item">解約時の返金制度</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
