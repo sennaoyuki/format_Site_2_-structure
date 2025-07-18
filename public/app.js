@@ -1371,6 +1371,18 @@ class RankingApp {
             return ''; // 該当するキャンペーンがない場合は空を返す
         }
         
+        // 該当地域の1位クリニック名を取得してCTAテキストを動的に生成
+        const ranking = window.dataManager.getRankingByRegionId(regionId);
+        const allClinics = window.dataManager.getAllClinics();
+        let ctaText = 'クリニック公式はコチラ'; // デフォルトテキスト
+        
+        if (ranking && ranking.ranks && ranking.ranks.no1) {
+            const topClinic = allClinics.find(c => c.id === ranking.ranks.no1);
+            if (topClinic) {
+                ctaText = `${topClinic.name}公式はコチラ`;
+            }
+        }
+        
         return `
             <div class="campaign-container">
                 <div class="campaign-header">${campaign.headerText}</div>
@@ -1390,7 +1402,7 @@ class RankingApp {
                         ＼月額・総額がリーズナブルなクリニック／
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
                             <a href="${campaign.ctaUrl}" target="_blank" rel="noopener">
-                                <span class="bt_s">DIO公式はコチラ</span>
+                                <span class="bt_s">${ctaText}</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
