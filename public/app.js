@@ -626,26 +626,30 @@ class RankingApp {
     setupReviewTabs() {
         // 各クリニック詳細セクションのレビュータブを設定
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('review-tab-button')) {
-                const button = e.target;
-                const targetTab = button.getAttribute('data-tab');
-                const reviewSection = button.closest('.reviews-section');
-                
+            // 新しいタブ構造用のイベント処理
+            const tabLi = e.target.closest('.review_tab2 li');
+            if (tabLi) {
+                const reviewSection = tabLi.closest('#review_tab_box');
                 if (reviewSection) {
-                    // タブボタンのアクティブ状態を更新
-                    reviewSection.querySelectorAll('.review-tab-button').forEach(btn => {
-                        btn.classList.remove('active');
+                    const tabIndex = Array.from(tabLi.parentElement.children).indexOf(tabLi);
+                    
+                    // タブのアクティブ状態を更新
+                    reviewSection.querySelectorAll('.review_tab2 li').forEach((li, index) => {
+                        li.classList.remove('select2');
+                        if (index === tabIndex) {
+                            li.classList.add('select2');
+                        }
                     });
-                    button.classList.add('active');
                     
                     // コンテンツの表示を切り替え
-                    reviewSection.querySelectorAll('.review-content').forEach(content => {
+                    reviewSection.querySelectorAll('.wrap_long2').forEach((content, index) => {
                         content.classList.remove('active');
+                        content.classList.add('disnon2');
+                        if (index === tabIndex) {
+                            content.classList.add('active');
+                            content.classList.remove('disnon2');
+                        }
                     });
-                    const targetContent = reviewSection.querySelector(`#${targetTab}-reviews`);
-                    if (targetContent) {
-                        targetContent.classList.add('active');
-                    }
                 }
             }
         });
@@ -1101,114 +1105,143 @@ class RankingApp {
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
-                    <h4 class="section-title">口コミ・評判</h4>
+                    <h4 class="section-title-review">REVIEW</h4>
                     
-                    <!-- タブメニュー -->
-                    <div class="review-tabs">
-                        <button class="review-tab-button active" data-tab="treatment">施術について</button>
-                        <button class="review-tab-button" data-tab="price">価格について</button>
-                        <button class="review-tab-button" data-tab="reservation">予約について</button>
-                        <button class="review-tab-button" data-tab="staff">スタッフについて</button>
-                    </div>
-                    
-                    <!-- レビューコンテンツ -->
-                    <div class="review-tab-content">
-                        <!-- 施術について -->
-                        <div id="treatment-reviews" class="review-content active">
-                            <div class="review-list">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
-                                        </div>
-                                        <div class="review-date">2024年1月</div>
-                                    </div>
-                                    <p class="review-text">痛みが少なく、効果も実感できています。スタッフの技術力が高いと感じました。</p>
+                    <section id="review_tab_box">
+                        <nav role="navigation" class="review_tab2">
+                            <ul>
+                                <li class="select2" data-tab="cost"><i class="fas fa-yen-sign"></i> コスパ</li>
+                                <li data-tab="pain"><i class="fas fa-bolt"></i> 痛み</li>
+                                <li data-tab="access"><i class="fas fa-heart"></i> 通いやすさ</li>
+                            </ul>
+                        </nav>
+
+                        <div class="wrap_long2 active">
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
                                 </div>
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(4)}
-                                        </div>
-                                        <div class="review-date">2023年12月</div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>サービスが充実しています！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        追加費用も一切かからないし、シェービングやキャンセル代が無料だったりサービスも充実していて良かった！        
                                     </div>
-                                    <p class="review-text">施術時間も短く、ストレスなく通えています。効果も順調です。</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- 価格について -->
-                        <div id="price-reviews" class="review-content">
-                            <div class="review-list">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
-                                        </div>
-                                        <div class="review-date">2024年1月</div>
-                                    </div>
-                                    <p class="review-text">他のクリニックと比べてリーズナブル。追加料金もなく安心です。</p>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
                                 </div>
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(4)}
-                                        </div>
-                                        <div class="review-date">2023年11月</div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>自己処理いらずでラク！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        5回通いました！産毛は正直まだ生えてますが、一番気になっていた足とワキの毛がほぼなくなった！脱毛して良かったです！    
                                     </div>
-                                    <p class="review-text">月々の支払いプランがあるので、無理なく通えています。</p>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- 予約について -->
-                        <div id="reservation-reviews" class="review-content">
-                            <div class="review-list">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
-                                        </div>
-                                        <div class="review-date">2024年1月</div>
-                                    </div>
-                                    <p class="review-text">Web予約が便利で、希望の時間に取りやすいです。</p>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
                                 </div>
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(4)}
-                                        </div>
-                                        <div class="review-date">2023年12月</div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>剛毛でもキレイになれた！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        肌質や毛質をしっかり見てくれたうえで、脱毛の機器を当ててくれるので効果も高くおすすめできます。    
                                     </div>
-                                    <p class="review-text">キャンセル料が無料なので、急な予定変更でも安心。</p>
                                 </div>
                             </div>
+                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
                         </div>
-                        
-                        <!-- スタッフについて -->
-                        <div id="staff-reviews" class="review-content">
-                            <div class="review-list">
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
-                                        </div>
-                                        <div class="review-date">2024年1月</div>
-                                    </div>
-                                    <p class="review-text">カウンセリングが丁寧で、不安なく始められました。</p>
+
+                        <div class="wrap_long2 disnon2">
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
                                 </div>
-                                <div class="review-item">
-                                    <div class="review-header">
-                                        <div class="review-rating">
-                                            ${'<i class="fas fa-star"></i>'.repeat(5)}
-                                        </div>
-                                        <div class="review-date">2023年12月</div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>しっかり冷却してくれる！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        しっかり冷却しながらレーザーを当ててくれるのでそこまで痛くないです。痛みに弱い方は麻酔をやってもらうと安心だと思います。
                                     </div>
-                                    <p class="review-text">スタッフの対応が親切で、毎回気持ちよく通えています。</p>
                                 </div>
                             </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23e2e3e5'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%236c757d'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>テスト照射あり♪</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        痛みが心配だったのでテスト照射をしてもらえました。痛いときはレベルの調整も行ってくれるので無理せず通えてます。    
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>少し痛かったけど効果あり</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        少し痛かったですが、ムダ毛がなくなるなら。。。と我慢しながら通ってました。我慢した甲斐もあって効果はでてます。        
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
                         </div>
-                    </div>
+
+                        <div class="wrap_long2 disnon2">
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>院内がとてもキレイ！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        カウンセリングで予算とか脱毛したい部位を相談しながら私に合ったコースを選んでくれました。院内も清潔感がありキレイです！        
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>ゆったり過ごせる◎</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        完全個室なので、人目を気にせずに脱毛できる。 スタッフも親切で、落ち着いた雰囲気で脱毛できます。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>平日に通うのがおすすめ</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        土日など休日は予約が取りにくいですが、平日であれば問題なく通えます。前日でも予約できるので空いた時間に合わせて通えます。        
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                        </div>
+                    </section>
                 </div>
                 
                 <!-- 店舗情報 -->

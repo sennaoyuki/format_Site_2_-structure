@@ -229,14 +229,134 @@
     box-shadow: none;
 }
 
-.reviews-section .section-title {
-    font-size: 1.25rem;
+.section-title-review {
+    font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 0;
-    padding: 15px 15px 0;
+    text-align: center;
+    margin-bottom: 20px;
+    padding: 0 15px;
     color: #333;
-    background: white;
-    border-bottom: none;
+    letter-spacing: 2px;
+    position: relative;
+}
+
+.section-title-review::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    border-radius: 2px;
+}
+
+/* レビュータブボックス */
+#review_tab_box {
+    margin: 0px 0px 0px;
+}
+
+#review_tab_box .wrap_long2 {
+    padding: 10px 10px 0px;
+    border: 2px solid #f0a0a5;
+    overflow: hidden;
+    background: #ffffff;
+    font-size: 14px;
+    margin: 0px 0px 20px;
+}
+
+#review_tab_box .review_tab2 {
+    border-bottom: 0px solid #f0a0a5;
+}
+
+#review_tab_box .review_tab2 ul {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    margin: 0;
+    list-style: none;
+}
+
+#review_tab_box .review_tab2 ul li {
+    display: flex;
+    align-items: center;
+    width: calc(230 / 710 * 100%);
+    line-height: 1;
+    font-weight: bold;
+    border-radius: 10px 10px 0 0;
+    background-color: #d0d0d0;
+    color: #ffffff;
+    font-size: 14px;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    padding: 7px 0 5px;
+    cursor: pointer;
+    position: relative;
+}
+
+#review_tab_box .review_tab2 ul li i {
+    margin-right: 5px;
+}
+
+#review_tab_box .review_tab2 ul li.select2 {
+    border-radius: 10px 10px 0 0;
+    border-top: 1px solid #f0a0a5;
+    border-left: 1px solid #f0a0a5;
+    border-right: 1px solid #f0a0a5;
+    color: #fff;
+    background-color: #f0a0a5;
+    padding: 5px 0 5px;
+}
+
+#review_tab_box .disnon2 {
+    display: none;
+}
+
+.review_tab_box_in {
+    margin-bottom: 10px;
+}
+
+.review_tab_box_in:after {
+    content: "";
+    clear: both;
+    height: 0;
+    display: block;
+    visibility: hidden;
+}
+
+.review_tab_box_img {
+    width: 19%;
+    float: left;
+    text-align: center;
+}
+
+.review_tab_box_img img {
+    width: 80%;
+    margin: 0px 5%;
+}
+
+.review_tab_box_img span {
+    display: block;
+    color: #ffcc43;
+}
+
+.review_tab_box_r {
+    width: 79%;
+    float: left;
+    margin: 0px 0px 0px 1%;
+}
+
+.review_tab_box_title {
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.review_tab_box_txt {
+    background: #fef4f4;
+    padding: 6px;
+    border-radius: 7px;
 }
 
 /* レビュータブメニュー */
@@ -3550,5 +3670,66 @@ section {
     
     .ribbon_point_link {
         font-size: 11px;
+    }
+    
+    /* 口コミタブのモバイル対応（375px） */
+    #review_tab_box .review_tab2 ul {
+        padding: 0 5px;
+    }
+    
+    #review_tab_box .review_tab2 ul li {
+        font-size: 11px;
+        padding: 5px 0 3px;
+    }
+    
+    #review_tab_box .review_tab2 ul li i {
+        font-size: 10px;
+        margin-right: 3px;
+    }
+    
+    #review_tab_box .wrap_long2 {
+        padding: 6px 6px 0px;
+        margin: 0px 0px 12px;
+        font-size: 11px;
+        border-width: 1px;
+    }
+    
+    .review_tab_box_img {
+        width: 25%;
+    }
+    
+    .review_tab_box_img img {
+        width: 70%;
+        margin: 0px 15%;
+    }
+    
+    .review_tab_box_img span {
+        font-size: 10px;
+    }
+    
+    .review_tab_box_r {
+        width: 73%;
+        margin: 0px 0px 0px 2%;
+    }
+    
+    .review_tab_box_title {
+        font-size: 13px;
+        margin-bottom: 4px;
+    }
+    
+    .review_tab_box_txt {
+        padding: 5px;
+        font-size: 11px;
+    }
+    
+    .section-title-review {
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+    }
+    
+    .section-title-review::after {
+        width: 50px;
+        height: 2px;
+        bottom: -6px;
     }
 }
