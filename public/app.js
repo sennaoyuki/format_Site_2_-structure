@@ -987,9 +987,10 @@ class RankingApp {
                             <h3>${data.title}</h3>
                             <p>${data.subtitle}</p>
                         </div>
-                        <div class="ranking__name">
-                            <a href="#" target="_blank" rel="noopener nofollow">${data.link}</a>
-                        </div>
+                        <a href="#" class="detail-cta-link">
+                            ${data.link}
+                            <i class="fas fa-chevron-right"></i>
+                        </a>
                     </div>
                 ${data.banner ? `
                 <div class="detail-banner">
