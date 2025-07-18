@@ -3985,8 +3985,120 @@ section {
     }
 }
 
-/* 375px幅での完璧な表示 */
+/* 375px幅での完璧な表示 - 修正版 */
 @media (max-width: 375px) {
+    /* 375px専用: ランキングセクション */
+    .clinic-rankings {
+        padding: 15px 10px;
+        width: 100%;
+        max-width: 375px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .ranking-container {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .ranking-item {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .clinic-card {
+        padding: 15px;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    
+    /* 375px専用: 比較セクション */
+    .comparison-section {
+        padding: 20px 10px;
+        width: 100%;
+        max-width: 375px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .comparison-content {
+        max-width: 100%;
+        padding: 0;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .comparison-table {
+        min-width: 500px;
+        font-size: 12px;
+        box-sizing: border-box;
+    }
+    
+    .comparison-table th,
+    .comparison-table td {
+        padding: 8px 4px;
+        font-size: 11px;
+        white-space: nowrap;
+    }
+    
+    .clinic-name-cell {
+        min-width: 120px;
+    }
+    
+    .cta-button {
+        padding: 6px 8px;
+        font-size: 10px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 100px;
+    }
+    
+    /* 375px専用: 詳細セクション */
+    .clinic-details-section {
+        padding: 20px 10px;
+        width: 100%;
+        max-width: 375px;
+        margin: 0 auto;
+        box-sizing: border-box;
+    }
+    
+    .detail-item {
+        margin-bottom: 30px;
+        padding: 15px;
+        box-sizing: border-box;
+    }
+    
+    .detail-info-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .info-table {
+        width: 100%;
+        font-size: 12px;
+        box-sizing: border-box;
+    }
+    
+    .info-table td {
+        padding: 8px 4px;
+        font-size: 11px;
+    }
+    
+    .clinic-cta-button {
+        width: 100%;
+        padding: 12px;
+        font-size: 14px;
+        box-sizing: border-box;
+    }
+    
     .point-section {
         padding: 12px 0 25px;
     }
