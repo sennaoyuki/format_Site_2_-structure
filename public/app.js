@@ -741,7 +741,17 @@ class RankingApp {
                             monthlyPrice: '月額2,000円',
                             discount: '50%OFF'
                         }
-                    ]
+                    ],
+                    campaignInfo: {
+                        header: 'INFORMATION!',
+                        title: 'DIOクリニック開院5周年記念キャンペーン',
+                        logoSrc: '/img/dio-logo.png',
+                        logoAlt: 'DIOクリニック',
+                        description: '【ランキング1位獲得記念】<br>全身脱毛5回コースが<br>特別価格で提供中！',
+                        ctaUrl: 'https://dio-clinic.jp/campaign/tokyo',
+                        ctaText: 'DIO公式はコチラ',
+                        footerText: '今なら無料カウンセリング実施中！'
+                    }
                 },
                 '2': { // エミナルクリニック
                     title: '豊富なプランから選べる！',
@@ -835,7 +845,17 @@ class RankingApp {
                             monthlyPrice: '月額1,600円〜',
                             discount: '今だけ価格'
                         }
-                    ]
+                    ],
+                    campaignInfo: {
+                        header: 'NEWS!',
+                        title: 'エミナルクリニック新春キャンペーン',
+                        logoSrc: '/img/eminal-logo.png',
+                        logoAlt: 'エミナルクリニック',
+                        description: '【期間限定】<br>全身+VIO脱毛が<br>月額1,000円から始められる！',
+                        ctaUrl: 'https://eminal-clinic.jp/lp1/',
+                        ctaText: 'エミナル公式はコチラ',
+                        footerText: '先着100名様限定！お急ぎください'
+                    }
                 },
                 '3': { // ウララクリニック
                     title: 'リーズナブルな価格設定',
@@ -904,6 +924,16 @@ class RankingApp {
                         tel: '0120-ZZZ-ZZZ',
                         hours: '10:00〜14:00 / 15:00〜20:00',
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
+                    },
+                    campaignInfo: {
+                        header: 'CAMPAIGN!',
+                        title: 'ウララクリニック学割キャンペーン',
+                        logoSrc: '/img/urara-logo.png',
+                        logoAlt: 'ウララクリニック',
+                        description: '【学生限定特典】<br>学生証提示で<br>全コース20%OFF！',
+                        ctaUrl: 'https://urara-clinic.jp/',
+                        ctaText: 'ウララ公式はコチラ',
+                        footerText: '24回まで分割手数料無料！'
                     }
                 },
                 '4': { // リエートクリニック
@@ -973,6 +1003,16 @@ class RankingApp {
                         tel: '0120-AAA-AAA',
                         hours: '11:00〜20:00（年中無休）',
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
+                    },
+                    campaignInfo: {
+                        header: 'SPECIAL!',
+                        title: 'リエートクリニック新規開院記念',
+                        logoSrc: '/img/reate-logo.png',
+                        logoAlt: 'リエートクリニック',
+                        description: '【完全個室でプライベート重視】<br>新規開院記念で<br>全身脱毛が特別価格！',
+                        ctaUrl: 'https://reate-clinic.jp/',
+                        ctaText: 'リエート公式はコチラ',
+                        footerText: 'アフターケア付きで安心'
                     }
                 }
             };
@@ -1005,16 +1045,14 @@ class RankingApp {
                 </div>
                 
                 <!-- 拡張版価格表 -->
-                <div class="detail-info-table">
-                    <table class="info-table">
-                        ${Object.entries(data.priceDetail).map(([key, value]) => `
-                            <tr>
-                                <td>${key}</td>
-                                <td>${value}</td>
-                            </tr>
-                        `).join('')}
-                    </table>
-                </div>
+                <table class="info-table">
+                    ${Object.entries(data.priceDetail).map(([key, value]) => `
+                        <tr>
+                            <td>${key}</td>
+                            <td>${value}</td>
+                        </tr>
+                    `).join('')}
+                </table>
                 
                 <!-- CTAボタン -->
                 <div class="clinic-cta-button-wrapper">
@@ -1203,7 +1241,7 @@ class RankingApp {
                 
                 <!-- 特典情報 -->
                 <div class="campaign-section">
-                    ${this.generateCampaignDisplay(data.regionId, clinic.id)}
+                    ${this.generateCampaignDisplay(clinic.id, data.campaignInfo)}
                 </div>
                 </div>
             `;
@@ -1363,55 +1401,36 @@ class RankingApp {
         return html;
     }
     
-    // キャンペーン表示のHTML生成（地域IDとクリニックIDで動的生成）
-    generateCampaignDisplay(regionId, clinicId) {
-        // データマネージャーから該当地域・クリニックのキャンペーンを取得
-        if (!window.dataManager) {
-            return ''; // データマネージャーが初期化されていない場合は空を返す
-        }
-        
-        const campaign = window.dataManager.getCampaignByRegionAndClinic(regionId, clinicId);
-        
-        if (!campaign) {
-            return ''; // 該当するキャンペーンがない場合は空を返す
-        }
-        
-        // 該当地域の1位クリニック名を取得してCTAテキストを動的に生成
-        const ranking = window.dataManager.getRankingByRegionId(regionId);
-        const allClinics = window.dataManager.getAllClinics();
-        let ctaText = 'クリニック公式はコチラ'; // デフォルトテキスト
-        
-        if (ranking && ranking.ranks && ranking.ranks.no1) {
-            const topClinic = allClinics.find(c => c.id === ranking.ranks.no1);
-            if (topClinic) {
-                ctaText = `${topClinic.name}公式はコチラ`;
-            }
+    // キャンペーン表示のHTML生成（各クリニックのcampaignInfoを使用）
+    generateCampaignDisplay(clinicId, campaignInfo) {
+        if (!campaignInfo) {
+            return ''; // キャンペーン情報がない場合は空を返す
         }
         
         return `
             <div class="campaign-container">
-                <div class="campaign-header">${campaign.headerText}</div>
+                <div class="campaign-header">${campaignInfo.header}</div>
                 <div class="campaign-content">
-                    <div class="campaign_title">${campaign.title}</div>
+                    <div class="campaign_title">${campaignInfo.title}</div>
                     
                     <div class="camp_header3">
                         <div class="freya-logo">
-                            <img src="${campaign.logoSrc}" alt="${campaign.logoAlt}">
+                            <img src="${campaignInfo.logoSrc}" alt="${campaignInfo.logoAlt}">
                         </div>
                         <div class="camp_txt">
-                            ${campaign.description}
+                            ${campaignInfo.description}
                         </div>
                     </div>
                     
                     <div class="cv_box_img">
                         ＼月額・総額がリーズナブルなクリニック／
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
-                            <a href="${campaign.ctaUrl}" target="_blank" rel="noopener">
-                                <span class="bt_s">${ctaText}</span>
+                            <a href="${campaignInfo.ctaUrl}" target="_blank" rel="noopener">
+                                <span class="bt_s">${campaignInfo.ctaText}</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
-                        ${campaign.footerText}
+                        ${campaignInfo.footerText}
                     </div>
                 </div>
             </div>
