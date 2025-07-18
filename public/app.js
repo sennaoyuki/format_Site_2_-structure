@@ -172,7 +172,7 @@ class DisplayManager {
                     </div>
                     <p class="btn btn_second_primary">
                         <a href="#" target="_blank" rel="noopener">
-                            <span class="bt_s">無料カウンセリングはコチラ</span>
+                            <span class="bt_s">公式サイト</span>
                             <span class="btn-arrow">▶</span>
                         </a>
                     </p>
