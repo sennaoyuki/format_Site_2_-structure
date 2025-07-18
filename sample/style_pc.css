@@ -1,0 +1,1172 @@
+@charset "UTF-8";
+@media screen and (min-width: 950px) {
+  .tiiki {
+    font-size: 30px;
+    right: 21px;
+    width: 92px;
+  }
+
+  .mv__year {
+    font-size: 30px;
+    right: 15px;
+    width: 106px;
+  }
+}
+
+@media screen and (min-width: 768px) {
+
+  /* ========================================================
+  基本設定
+  =========================================================*/
+  html {
+    font-size: 20px;
+  }
+
+  .forPC {
+    display: block;
+  }
+
+  .forSP {
+    display: none;
+  }
+
+  a {
+    transition: 0.2s;
+  }
+
+  a:hover {
+    opacity: 0.6;
+  }
+
+  a::before {
+    pointer-events: none;
+  }
+
+  #body_all {
+    display: flex;
+    justify-content: space-between;
+    width: 950px;
+    margin: 0 auto;
+  }
+
+  #body_left {
+    width: 750px;
+  }
+
+  #body_right {
+    width: 176px;
+  }
+
+  /* 広告表記 */
+  .adTxt {
+    text-align: right;
+    max-width: 950px;
+    /* 横幅 LPに合わせて調整 */
+    padding: 0;
+    /* right: calc((100% - 950px) / 2); */
+  }
+
+  .adTxt span {
+    font-size: 18px;
+    padding: 2px 14px;
+  }
+
+  /* ========================================================
+  header
+  =========================================================*/
+  .header {
+    height: 38px;
+    margin: 0 auto;
+  }
+
+  .header::before {
+    width: 230px;
+    height: 35px;
+  }
+
+  /* ========================================================
+  MV
+  =========================================================*/
+  .mv {
+    width: 950px;
+    margin: 0 auto;
+  }
+
+  /* ========================================================
+  満足度
+  =========================================================*/
+  .best {}
+
+  .best__rank {
+    width: 80px;
+    top: -52px;
+  }
+
+  .best__list {
+    gap: 15px;
+    padding: 48px 15px 0;
+  }
+
+  .best__item {
+    width: calc((100% - 30px) / 3);
+    padding: 36px 15px 68px;
+  }
+
+  .best__item:first-child {
+    padding: 34px 13px 66px;
+  }
+
+  .best__logo {
+    height: 60px;
+    padding: 10px 16px;
+  }
+
+  .best_catch {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .best_catch .check {
+    padding-left: 19px;
+  }
+
+  .best_catch .check::before {
+    position: absolute;
+    top: 4px;
+    left: 0;
+    width: 14px;
+    height: 14px;
+    content: "";
+  }
+
+  .best__btn {
+    font-size: 15px;
+    width: 74%;
+    padding: 8px 16px;
+    bottom: 15px;
+  }
+
+  .best__btn::after {
+    background-size: 12px 12px;
+    width: 12px;
+    height: 12px;
+  }
+
+  .best__item:first-child .best__btn {
+    width: 74%;
+    bottom: 13px;
+  }
+
+  .fb .best_catch {
+    font-size: 12px;
+  }
+
+  .fb .best__item:first-child {
+    padding-bottom: 60px;
+  }
+
+
+  /* ========================================================
+  目的別
+  =========================================================*/
+  .purpose__tab-list li {
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .purpose__tab-list li:hover {
+    opacity: 0.6;
+  }
+
+  /* ========================================================
+  ポジショニングマップ
+  =========================================================*/
+  .positioningMap__ttl {
+    display: block;
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .positioningMap__inner {
+    width: 64%;
+    margin: 0 auto;
+  }
+
+  .positioningMap__top-ttl {
+    font-size: 28px;
+    line-height: 64px;
+    height: 64px;
+  }
+
+  .positioningMap__top-subTtl {
+    font-size: 16px;
+  }
+
+  .positioningMap__subLabel {
+    font-size: 14px;
+  }
+
+  .positioningMap__subLabel02 {
+    top: 51%;
+    left: 92%;
+  }
+
+  .positioningMap__label-01,
+  .positioningMap__label-02 {
+    font-size: 20px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .positioningMap__label-03,
+  .positioningMap__label-04 {
+    font-size: 20px;
+  }
+
+  a.positioningMap__item {
+    width: 132px;
+    height: 54px;
+    padding: 6px 8px;
+  }
+
+  a.positioningMap__item-01 {
+    width: 35%;
+    height: auto;
+  }
+
+  .positioningMap__item-logo {
+    height: 40px;
+  }
+
+  .positioningMap__item-01 .positioningMap__item-logo {
+    height: 38px;
+  }
+
+  .positioningMap__item-catch {
+    font-size: 12px;
+    margin-top: 8px;
+  }
+
+  .positioningMap__notes {
+    font-size: 14px;
+    padding-left: 30px;
+  }
+
+  /* ========================================================
+  ランキング
+  =========================================================*/
+  .ranking__item-top {
+    height: 53px;
+  }
+
+  .ranking__point-contents::after {
+    border-left: 356.25px solid transparent;
+    border-right: 356.25px solid transparent;
+  }
+
+  .ranking__tenpo-aco_btn {
+    display: block;
+    width: 80%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .ranking__item-rank--img {
+    width: 50px;
+  }
+
+  .aco__btn {
+    cursor: pointer;
+    transition: 0.2s;
+  }
+
+  .aco__btn:hover {
+    opacity: 0.6;
+  }
+
+  body>div.contents>div.result_data__area>div>section>div>div:nth-child(1)>div .ranking__item-top::before {
+    content: "";
+    display: inline-block;
+    background: url(../img/ct_ico_rank_01.png) no-repeat center / 50px 50px;
+    width: 50px;
+    height: 50px;
+  }
+
+  body>div.contents>div.result_data__area>div>section>div>div:nth-child(2)>div .ranking__item-top::before {
+    content: "";
+    display: inline-block;
+    background: url(../img/ct_ico_rank_02.png) no-repeat center / 50px 50px;
+    width: 50px;
+    height: 50px;
+  }
+
+  body>div.contents>div.result_data__area>div>section>div>div:nth-child(3)>div .ranking__item-top::before {
+    content: "";
+    display: inline-block;
+    background: url(../img/ct_ico_rank_03.png) no-repeat center / 50px 50px;
+    width: 50px;
+    height: 50px;
+  }
+
+  /* ========================================================
+  比較表
+  =========================================================*/
+  .compare__inner {
+    overflow-x: hidden;
+  }
+
+  .compare__table {
+    margin: 0;
+  }
+
+  /* ========================================================
+  ポイント
+  =========================================================*/
+  .point__inner {
+    overflow-x: hidden;
+  }
+
+  .point__list {
+    overflow-x: hidden;
+  }
+
+  .point__item {
+    width: calc((100% - 1.875rem) / 3);
+  }
+
+  .point__item-ttl {
+    font-size: 16px;
+    margin-top: 8px;
+  }
+
+  .point__item-img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .point__item-catch {
+    font-size: 13px;
+  }
+
+  .point__item-catch+p {
+    font-size: 12px;
+  }
+
+  /* ========================================================
+  検索結果
+  =========================================================*/
+  .result .contents {
+    width: 750px;
+    margin: 0 auto;
+  }
+
+  .result__ttl {
+    width: 750px;
+    margin: 0 auto;
+  }
+
+  #PANKUZU .pankuzu {
+    width: 750px;
+    padding-left: 0;
+  }
+
+  /* ========================================================
+  サイドバー
+  =========================================================*/
+  .menu {
+    padding: 0;
+  }
+
+  .menu__item-ttl {
+    margin-top: 0.9375rem;
+  }
+
+  .menu__item:nth-child(n + 2) .menu__item-ttl {
+    margin-top: 40px;
+  }
+
+  /* ========================================================
+  記事ページ
+  =========================================================*/
+  .page {
+    padding-bottom: 121px;
+  }
+
+  .page .footer {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  /* ========================================================
+  20230403 FB版用調整
+  =========================================================*/
+  body.fb .buibetsu__item {
+    width: calc((100% - 0.9375rem) / 2);
+  }
+
+  /* ========================================================
+  20230412 ctaTop3
+  20230602 追記
+  =========================================================*/
+  .ctaTop3 {
+    padding-bottom: 60px;
+  }
+
+  .ctaTop3__item {
+    grid-template-columns: 52px 180px 222px 140px;
+    border-width: 4px;
+    height: 130px;
+    padding: 0 20px;
+  }
+
+  .ctaTop3__item:nth-of-type(n + 2) {
+    margin-top: 30px;
+  }
+
+  .ctaTop3__item:nth-of-type(1) {
+    height: 130px;
+  }
+
+  .ctaTop3__item:nth-of-type(2),
+  .ctaTop3__item:nth-of-type(3) {
+    grid-template-columns: 46px 162px 222px 110px;
+  }
+
+  .ctaTop3__rank {
+    width: 52px;
+    height: 70px;
+  }
+
+  .ctaTop3__item:nth-of-type(2) .ctaTop3__rank,
+  .ctaTop3__item:nth-of-type(3) .ctaTop3__rank {
+    height: 60px;
+  }
+
+  .ctaTop3__txt {
+    font-size: 14px;
+  }
+
+  .ctaTop3__name {
+    font-size: 18px;
+  }
+
+  .ctaTop3__item:nth-of-type(2) .ctaTop3__name,
+  .ctaTop3__item:nth-of-type(3) .ctaTop3__name {
+    font-size: 18px;
+  }
+
+  .ctaTop3__ctaBtn {
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-bottom-width: 4px;
+    height: 87px;
+  }
+
+  .ctaTop3__item:nth-of-type(2) .ctaTop3__ctaBtn,
+  .ctaTop3__item:nth-of-type(3) .ctaTop3__ctaBtn {
+    font-size: 15px;
+  }
+
+  /* ========================================================
+  20231201 FBコンテンツ追加
+  =========================================================*/
+  /* 4つのヒミツ */
+  .secret__inner {
+    width: 600px;
+    margin: 8px auto 0;
+    padding: 0;
+  }
+
+  .secret__item {
+    border-width: 2px;
+  }
+
+  .secret__item-top {
+    grid-template-columns: 1fr 359px 1fr;
+    padding: 8px 40px;
+    cursor: pointer;
+  }
+
+  .secret__item:nth-child(1) .secret__item-top::before {
+    background-size: 106px auto;
+    width: 106px;
+    right: -16px;
+  }
+
+  .secret__item-top::after {
+    border-width: 3px;
+    width: 14px;
+    height: 14px;
+    right: 40px;
+  }
+
+  .secret__item-num {
+    width: 64px;
+    height: 64px;
+  }
+
+  .secret__item-ttl {
+    font-size: 24px;
+    border-bottom-width: 4px;
+    padding-bottom: 1px;
+  }
+
+  .secret__item-ttl-wrap {
+    height: 64px;
+  }
+
+  .secret__item-img {
+    width: 86px;
+  }
+
+  .secret__item-txt {
+    font-size: 18px;
+  }
+
+  .secret__item-content {
+    gap: 20px;
+    padding: 0 60px 8px;
+  }
+
+  .secret__item-content-inner {
+    gap: 20px
+  }
+
+  /* 選び方のコツ */
+  .howto__inner {
+    width: 600px;
+    padding: 0;
+    margin: 0 auto;
+  }
+
+  .howto__list {
+    padding: 30px 54px 32px;
+  }
+
+  .howto__item {
+    height: 112px;
+  }
+
+  .howto__item:nth-child(n+2) {
+    border-top-width: 4px;
+  }
+
+  .howto__item-num {
+    width: 92px;
+  }
+
+  .howto__item-ttl {
+    font-size: 24px;
+  }
+
+  .howto__item-img-wrap {
+    width: 130px;
+    height: 100px;
+  }
+
+  .howto__item-img {
+    width: 120px;
+    height: 120px;
+  }
+
+  .howto__item-txt {
+    font-size: 20px;
+    margin-top: 10px;
+  }
+
+  /* ========================================================
+  20231213 FB版改修
+  =========================================================*/
+  .fb .compare__inner {
+    padding: 0;
+  }
+
+  .fb .compare__table th:first-child {
+    width: 120px;
+  }
+
+  .fb .compare__table td {
+    font-size: 14px;
+  }
+
+  .fb .compare__table tbody th {
+    font-size: 12px;
+  }
+
+  .fb .compare__table tbody th,
+  .fb .compare__table tbody td {
+    padding: 10px;
+  }
+
+  .fb .compare__table tbody td p {
+    font-size: 14px;
+  }
+
+  .fb .compare__table-txtlink {
+    font-size: 15px;
+  }
+
+  .fb .compare__table-logo {
+    max-width: 130px;
+    object-fit: contain;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .fb .compare__table-icon_txt {
+    min-height: 36px;
+  }
+
+  .fb .compare__table-btn {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  .fb .compare__table .ctaBtn,
+  .fb .compare__table-btn .toRank {
+    font-size: 14px;
+  }
+
+  .fb .compare__table-btn .toRank::after {
+    right: 9%;
+  }
+
+
+  /* ========================================================
+  20231213 FB版診断コンテンツ
+  =========================================================*/
+  .shindan {
+    width: 750px;
+    height: 872px;
+    aspect-ratio: auto;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 0px;
+    padding-top: 30px;
+  }
+
+  .shindan__ttl {
+    height: 110px;
+    width: auto;
+    margin: 0 auto;
+  }
+
+  /* .shindan:has(.shindan__result.slide-in-next) {
+    height: auto;
+  } */
+  .question {
+    padding: 20px 20px 0;
+  }
+
+  .question__txt-img {
+    width: 150px;
+    height: 54px;
+  }
+
+  .question__txt {
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .question__txt>small {
+    top: 58%;
+    right: 88px;
+    transform: translateY(-50%);
+  }
+
+  .question__img {
+    height: 300px;
+    object-fit: contain;
+    margin-top: 16px;
+  }
+
+  .question__wrapper {
+    aspect-ratio: 713 / 196;
+    row-gap: 14px;
+    margin-top: 16px;
+  }
+
+  .question label {
+    font-size: 20px;
+  }
+
+  .question2 label,
+  .question3 label {
+    justify-content: center;
+    text-align: center;
+  }
+
+  .shindan__result {
+    padding: 40px 20px 0;
+  }
+
+  .shindan__result-img {
+    height: 300px;
+    object-fit: contain;
+  }
+
+  .shindan__result-list {
+    aspect-ratio: 713 / 196;
+    row-gap: 14px;
+  }
+
+  .shindan__result-list dt,
+  .shindan__result-list dd {
+    font-size: 20px;
+  }
+
+  .shindan__result-notes {
+    margin-top: 10px;
+  }
+
+  .shindan__btnArea {
+    margin-top: 24px;
+  }
+
+  .shindan__btn {
+    font-size: 20px;
+    height: 56px;
+    cursor: pointer;
+  }
+
+  .shindan__result .shindan__btnArea {
+    margin-top: 48px;
+  }
+
+  .shindan__restartBtn {
+    height: 56px;
+  }
+
+  .shindan__open-btn {
+    height: 48px;
+    margin-top: 18px;
+  }
+
+  .shindan--servey {
+    height: auto;
+    min-height: 828px;
+  }
+
+  .shindan--servey .shindan__ttl {
+    width: 550px;
+  }
+
+  .shindan--servey .question__box {
+    justify-content: center;
+    gap: 15px;
+    height: 300px;
+    padding: 0;
+  }
+
+  .shindan--servey .question__box-img {
+    width: auto;
+    height: 300px;
+  }
+
+  .shindan--servey .shindan__result-list {
+    width: 320px;
+    aspect-ratio: 290 / 124;
+  }
+
+  .shindan--servey .question__box-txt {
+    font-size: 20px;
+  }
+
+  .shindan--servey .shindan__result-thanks {
+    width: 482px;
+    height: auto;
+    padding: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .shindan--servey .shindan__result-price {
+    width: calc(100% + 30px);
+    margin: 0 -20px 0;
+  }
+
+  .shindan--servey .shindan__result-txt {
+    font-size: 20px;
+    line-height: 1.6;
+    margin-top: 32px;
+  }
+
+  .shindan--servey .shindan__result-txt-big {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+
+  .shindan--servey .shindan__result-chevron {
+    width: 365px;
+    margin-top: 28px;
+  }
+
+  /* ========================================================
+  20240301 ハシゴ脱毛
+  =========================================================*/
+  .hashigo {
+    background: none;
+    padding-top: 40px;
+    padding-bottom: 54px;
+  }
+
+  .hashigo-img {
+    margin-top: 20px;
+  }
+
+  .hashigo__catch {
+    font-size: 16px;
+  }
+
+  .hashigo .best__list {
+    gap: 45px;
+    padding-top: 60px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .hashigo .best__item {
+    width: calc((100% - 90px) / 3);
+    padding: 45px 15px 78px;
+  }
+
+  .hashigo .best__item:first-child {
+    box-shadow: 0 0 0 2px var(--navy);
+    padding-bottom: 78px;
+  }
+
+  .hashigo .best__item:nth-child(n+2)::before {
+    background-size: 30px auto;
+    width: 30px;
+    height: 26px;
+    left: -36px;
+  }
+
+  .hashigo .best__rank {
+    width: 83px;
+    top: -30px;
+  }
+
+  .hashigo .best__item:first-child .best__rank {
+    top: -30px;
+  }
+
+  .hashigo .best__logo {
+    height: 50px;
+    padding: 4px 30px;
+    margin-top: 20px;
+  }
+
+  .hashigo .best__btn {
+    bottom: 16px;
+  }
+
+  .hashigo .best__item:first-child .best__btn {
+    bottom: 16px;
+  }
+
+  .hashigo .best__item .best__bnr {
+    margin-bottom: 0;
+  }
+
+
+  /* ========================================================
+  20240319 FB版調整
+  =========================================================*/
+  .fb:not(.ret) .buibetsu__item {
+    width: 60%;
+  }
+
+  .fb:not(.ret) .compare__table {
+    width: 100%;
+  }
+
+  .fb:not(.ret) .compare__table td {
+    font-size: 12px;
+    padding: 10px 4px;
+  }
+
+  .fb:not(.ret) .compare__table tbody td p {
+    font-size: 12px;
+  }
+
+  .fb:not(.ret) .compare__table .ctaBtn {
+    font-size: 12px;
+  }
+
+  .result.db_fb_top .buibetsu__item {
+    width: 60%;
+  }
+
+  .fb:not(.ret) .buibetsu__item-img,
+  .result.db_fb_top .buibetsu__item-img {
+    padding: 20px 60px;
+  }
+
+  /* ========================================================
+20240329 ロードマップ
+=========================================================*/
+  section.roadmap {
+    margin-top: 20px;
+  }
+
+  .roadmap_box_wrap {
+    padding: 0 66px;
+  }
+
+  .roadmap_box_wrap {
+    margin-top: 22px;
+    gap: 24px;
+  }
+
+  .roadmap_box {
+    gap: 10px;
+  }
+
+  .roadmap_inner_box {
+    padding: 16px 24px;
+  }
+
+  .roadmap_txt_wrap {
+    font-size: 16px;
+    padding: 20px 0 16px;
+  }
+
+  .roadmap_cta_btn {
+    font-size: 16px;
+  }
+
+  .arrow_down_wrap.first::before,
+  .arrow_down_wrap.second::before {
+    top: 66%;
+  }
+
+  /* ========================================================
+20240329 残りわずか
+=========================================================*/
+  section.onlyleft {
+    padding: 10px 10px 40px;
+    margin-top: 30px;
+  }
+
+  .onlyleft_cta_box:not(:last-of-type) {
+    border-bottom: dotted 4px #e76199;
+  }
+
+  .onlyleft_cta_wrap {
+    width: 600px;
+    margin-inline: auto;
+  }
+
+  .onlyleft_txt_wrap p+p {
+    margin-top: 1em;
+  }
+
+  .onlyleft_txt:not(:first-of-type) {
+    margin-top: 30px;
+  }
+
+  .onlyleft_txt {
+    font-size: 20px;
+    letter-spacing: 2px;
+  }
+
+  section.onlyleft .accent {
+    font-size: 30px;
+  }
+
+  .onlyleft_cta_head,
+  .onlyleft_cta_num {
+    font-size: 15px;
+  }
+
+  .onlyleft_cta_btn {
+    font-size: 15px;
+
+  }
+
+  .onlyleft-img {
+    height: 140px;
+    width: 363px;
+  }
+
+  .onlyleft_cta_box {
+    grid-template-columns: 1fr 34%;
+    padding-bottom: 14px;
+  }
+
+  .onlyleft_cta_head::after {
+    bottom: -13px;
+    border-right: 9px solid transparent;
+    border-left: 9px solid transparent;
+    border-top: 9px solid #031c55;
+  }
+
+  .onlyleft_cta_link {
+    font-size: 16px;
+  }
+
+  /* ========================================================
+20240415 医療脱毛比較表改修
+=========================================================*/
+  .hikaku .compare__inner {
+    overflow-x: hidden;
+  }
+
+  .hikaku .compare__table {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .hikaku .compare__table-logo {
+    height: 40px;
+  }
+
+  .hikaku .compare__table th,
+  .compare__table td {
+    padding: 10px;
+    font-size: 15px;
+  }
+
+  /* ========================================================
+20240418 fb PR表記調整
+=========================================================*/
+  .fb .adTxt {
+    transform: translateY(-40px);
+  }
+
+  /* ========================================================
+20250221 部位タブ
+=========================================================*/
+  .tabs {
+    margin: 10px 20px 30px;
+  }
+
+  .tab-btn {
+    font-size: 0.875rem;
+  }
+
+  /* ========================================================
+20250304 脱毛機器比較コンテンツ
+=========================================================*/
+  .machine__table {
+    width: 100%;
+  }
+
+  .machine__table-scroll {
+    margin-top: 10px;
+  }
+
+  .machine__table th,
+  td {
+    font-size: 15px;
+  }
+
+  .machine__table-recoTxt {
+    font-size: 15px;
+  }
+
+  .machine__table-recoStar {
+    font-size: 20px;
+  }
+
+  /* アンケートもっと見るボタン修正 */
+  .survey__aco-btn {
+    display: block;
+    width: 80%;
+    max-width: 540px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* ========================================================
+20250304 安心3つのポイント
+=========================================================*/
+  .anshin {
+    margin-bottom: 55px;
+    padding-block: 20px 30px;
+  }
+
+  .anshin::after {
+    bottom: -35px;
+    width: 63px;
+    height: 25px;
+    clip-path: polygon(50% 25px, 0% 0%, 63px 0%);
+  }
+
+  .anshin__item {
+    padding-left: 34px;
+    font-size: 24px;
+  }
+
+  .anshin__item::before {
+    position: absolute;
+    top: 7px;
+    transform: translateY(0);
+    width: 24px;
+    height: 24px;
+  }
+  /* ========================================================
+20250312 検索項目改修
+=========================================================*/
+  .multi__item label {
+    height: 56px;
+  }
+
+  #Refine_Search_Area .Refine_Search_number {
+    left: 90px;
+  }
+
+  .age__list label,
+  .kodawari__list02 label {
+    min-height: 2.5rem;
+    padding: 5px;
+  }
+
+  .machine__list {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+
+  .machine__list .form-icon {
+    width: 100px;
+  }
+
+  .kodawari__list02 {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  /* ========================================================
+20250321 レビュータブ
+=========================================================*/
+.review__tab-menu {
+  gap: 10px;
+}
+
+.review__tab-btn {
+  padding: 10px;
+}
+
+.review__tab-contents {
+  padding: 15px 30px;
+}
+
+.review__tab__item-icon {
+  width: 80px;
+}
+
+/* ========================================================
+20250415 レビューアコーディオン
+=========================================================*/
+.review__aco__btn {
+  display: block;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+}

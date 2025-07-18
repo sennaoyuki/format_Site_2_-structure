@@ -1,5 +1,0 @@
-id,name,test_data
-1,"Normal Data","正常なデータ"
-2,"<script>alert('XSS')</script>","XSSテスト"
-3,"'; DROP TABLE users; --","SQLインジェクションテスト"
-4,"../../../etc/passwd","パストラバーサルテスト"
