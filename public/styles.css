@@ -2292,9 +2292,6 @@ section {
 }
 
 .detail-rank {
-    display: flex;
-    align-items: center;
-    gap: 15px;
     margin-bottom: 20px;
 }
 
@@ -2303,13 +2300,14 @@ section {
     height: 60px;
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
     border-radius: 50%;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 1.5rem;
     color: white;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
+    margin-bottom: 15px;
 }
 
 .detail-rank-badge.silver {
@@ -2323,7 +2321,7 @@ section {
 }
 
 .detail-title {
-    flex: 1;
+    margin-bottom: 15px;
 }
 
 .detail-title h3 {
@@ -2336,6 +2334,27 @@ section {
     font-size: 1rem;
     color: #666;
     margin: 0;
+}
+
+/* 詳細セクションのranking__name スタイル */
+.detail-rank .ranking__name {
+    font-size: 1.125rem;
+    padding: 0.75rem;
+    margin-top: 0;
+    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
+    border-radius: 8px;
+    text-align: center;
+}
+
+.detail-rank .ranking__name a {
+    color: #5a4fcf;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+}
+
+.detail-rank .ranking__name a:hover {
+    text-decoration: underline;
 }
 
 .detail-cta-link {
