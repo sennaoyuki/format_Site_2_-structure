@@ -466,7 +466,7 @@ class RankingApp {
                 <td class="benefit-text">${benefits[clinic.rank] || '特典あり'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="#" class="cta-button">${this.getClinicDisplayName(clinic)}公式はこちら</a>
+                        <a href="#" class="cta-button">公式サイト</a>
                         <a href="#" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
@@ -500,7 +500,7 @@ class RankingApp {
                 <td><i class="fas fa-circle feature-icon"></i></td>
                 <td>
                     <div class="cta-cell">
-                        <a href="#" class="cta-button">${this.getClinicDisplayName(clinic)}公式はこちら</a>
+                        <a href="#" class="cta-button">公式サイト</a>
                         <a href="#" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
@@ -534,7 +534,7 @@ class RankingApp {
                 <td>${clinic.rank <= 2 ? '<i class="fas fa-circle feature-icon"></i>' : '-'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="#" class="cta-button">${this.getClinicDisplayName(clinic)}公式はこちら</a>
+                        <a href="#" class="cta-button">公式サイト</a>
                         <a href="#" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
@@ -1388,15 +1388,9 @@ class RankingApp {
                     
                     <div class="cv_box_img">
                         ＼月額・総額がリーズナブルなクリニック／
-                        <div class="clinic-cta-button-wrapper">
-                            <a href="${campaign.ctaUrl}" class="clinic-cta-button" target="_blank" rel="noopener noreferrer">
-                                <span class="cta-text">無料カウンセリングはコチラ</span>
-                                <span class="cta-arrow">→</span>
-                            </a>
-                        </div>
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
                             <a href="${campaign.ctaUrl}" target="_blank" rel="noopener">
-                                <span class="bt_s">${campaign.ctaText}</span>
+                                <span class="bt_s">DIO公式はコチラ</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
