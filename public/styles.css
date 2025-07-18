@@ -2295,19 +2295,26 @@ section {
     margin-bottom: 20px;
 }
 
+.detail-rank-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
 .detail-rank-badge {
     width: 60px;
     height: 60px;
     background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
     border-radius: 50%;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     justify-content: center;
     font-weight: 800;
     font-size: 1.5rem;
     color: white;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
-    margin-bottom: 15px;
+    flex-shrink: 0;
 }
 
 .detail-rank-badge.silver {
@@ -2321,7 +2328,7 @@ section {
 }
 
 .detail-title {
-    margin-bottom: 15px;
+    flex: 1;
 }
 
 .detail-title h3 {
@@ -3327,8 +3334,7 @@ section {
         margin: 5px;
     }
     
-    .detail-rank {
-        flex-wrap: wrap;
+    .detail-rank-header {
         gap: 10px;
     }
     
@@ -3336,6 +3342,11 @@ section {
         width: 45px;
         height: 45px;
         font-size: 1rem;
+    }
+    
+    .detail-rank .ranking__name {
+        font-size: 1rem;
+        padding: 0.5rem;
     }
     
     .detail-title h3 {
