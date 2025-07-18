@@ -1451,12 +1451,15 @@ section {
 
 /* ランキングコンテナ */
 .ranking-container {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 25px;
-    max-width: 1200px;
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 2px;
+    width: 98%;
+    max-width: 98%;
     margin: 0 auto;
-    padding: 20px;
+    box-sizing: border-box;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 /* ランキングアイテム */
