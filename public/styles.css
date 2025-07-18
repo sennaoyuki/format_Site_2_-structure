@@ -1281,6 +1281,10 @@ section {
     transition: all 0.3s;
     position: relative;
     box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 600px;
 }
 
 .rank-1 .clinic-card {
@@ -1411,7 +1415,7 @@ section {
 
 /* 価格情報 */
 .price-info {
-    margin-bottom: 25px;
+    margin-bottom: auto;
     padding: 20px 0;
     border-top: 1px solid #f0f0f0;
     border-bottom: 1px solid #f0f0f0;
@@ -1445,10 +1449,9 @@ section {
 
 /* CTAボタン */
 .clinic-cta-button {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background: #14b8a6;
+    display: block;
+    text-align: center;
+    background: #10b981;
     color: white;
     padding: 15px 40px;
     border-radius: 30px;
@@ -1456,12 +1459,14 @@ section {
     font-weight: 700;
     font-size: 1.1rem;
     transition: all 0.3s;
-    box-shadow: 0 5px 20px rgba(20, 184, 166, 0.3);
+    box-shadow: 0 5px 20px rgba(16, 185, 129, 0.3);
+    margin-top: auto;
 }
 
 .clinic-cta-button:hover {
+    background: #059669;
     transform: translateY(-2px);
-    box-shadow: 0 8px 30px rgba(20, 184, 166, 0.4);
+    box-shadow: 0 8px 30px rgba(16, 185, 129, 0.4);
 }
 
 /* ===== 比較表セクション ===== */
@@ -2352,10 +2357,11 @@ section {
     
     /* ランキングセクション */
     .clinic-rankings {
-        padding: 20px 10px;
+        padding: 20px 5px;
         background: white;
         box-sizing: border-box;
-        overflow-x: hidden;
+        overflow-x: visible;
+        width: 100%;
     }
     
     .ranking-header-banner {
@@ -2373,20 +2379,23 @@ section {
     
     .ranking-container {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         gap: 3px;
-        padding: 0;
+        padding: 0 5px;
         width: 100%;
         max-width: calc(100vw - 20px);
         margin: 0 auto;
         box-sizing: border-box;
         justify-content: center;
+        overflow-x: visible;
     }
     
     .ranking-item {
         position: relative;
         width: calc((100% - 6px) / 3);
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
     }
     
     .rank-medal {
@@ -2398,10 +2407,15 @@ section {
     }
     
     .clinic-card {
-        padding: 45px 3px 8px;
+        padding: 40px 5px 8px;
         border-radius: 12px;
         border-width: 2px;
         box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        min-height: 300px;
+        position: relative;
     }
     
     .satisfaction-badge {
@@ -2457,21 +2471,22 @@ section {
     
     .clinic-banner {
         margin-bottom: 6px;
-        min-height: 60px;
+        min-height: 50px;
     }
     
     .clinic-banner img {
         width: 100%;
-        height: 60px;
+        height: 50px;
         border-radius: 6px;
         object-fit: contain;
     }
     
     .price-info {
-        padding: 6px 0;
-        margin-bottom: 6px;
+        padding: 8px 0;
+        margin-bottom: 10px;
         border-top: 1px solid #f0f0f0;
         border-bottom: 1px solid #f0f0f0;
+        flex-grow: 1;
     }
     
     .price-main {
@@ -2500,12 +2515,25 @@ section {
     }
     
     .clinic-cta-button {
-        padding: 6px 10px;
-        font-size: 0.7rem;
-        border-radius: 15px;
-        width: calc(100% - 4px);
-        margin: 0 2px;
+        padding: 10px 12px;
+        font-size: 0.8rem;
+        border-radius: 20px;
+        width: 100%;
+        margin: auto 0 0 0;
         box-sizing: border-box;
+        background: #10b981;
+        color: white;
+        text-align: center;
+        text-decoration: none;
+        display: block;
+        font-weight: 600;
+        border: none;
+        transition: all 0.3s;
+    }
+    
+    .clinic-cta-button:hover {
+        background: #059669;
+        transform: translateY(-1px);
     }
 
     .hero-title {
