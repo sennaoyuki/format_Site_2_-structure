@@ -279,56 +279,76 @@
 
 /* 口コミセクション */
 .reviews-section {
-    margin: 30px auto;
-    padding: 30px 20px;
+    margin: 20px 0;
+    padding: 0;
     background: white;
-    border-radius: 20px;
-    max-width: 800px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 0;
+    max-width: 100%;
+    box-shadow: none;
+}
+
+.reviews-section .section-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0;
+    padding: 15px 15px 0;
+    color: #333;
+    background: white;
+    border-bottom: none;
 }
 
 /* レビュータブメニュー */
 .review-tabs {
     display: flex;
-    gap: 8px;
-    margin: 20px 0;
-    padding-bottom: 15px;
-    border-bottom: 1px solid #e5e7eb;
+    gap: 0;
+    margin: 15px 0 0;
+    padding: 0;
+    border-bottom: 1px solid #eee;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
+    background: white;
 }
 
 .review-tab-button {
     flex-shrink: 0;
-    padding: 8px 16px;
-    background: #f3f4f6;
+    padding: 15px 20px;
+    background: transparent;
     border: none;
-    border-radius: 20px;
-    font-size: 0.9rem;
+    border-bottom: 3px solid transparent;
+    border-radius: 0;
+    font-size: 0.95rem;
     font-weight: 500;
-    color: #6b7280;
+    color: #666;
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+    flex: 1;
+    text-align: center;
+    min-width: 80px;
     white-space: nowrap;
 }
 
 .review-tab-button:hover {
-    background: #e5e7eb;
+    background: #f9f9f9;
+    color: #333;
 }
 
 .review-tab-button.active {
-    background: #ec4899;
-    color: white;
+    background: transparent;
+    color: #ec4899;
+    border-bottom-color: #ec4899;
+    font-weight: 700;
 }
 
 /* レビューコンテンツ */
 .review-tab-content {
-    margin-top: 20px;
+    margin-top: 0;
 }
 
 .review-content {
     display: none;
+    padding: 20px 15px;
+    background: white;
 }
 
 .review-content.active {
@@ -348,17 +368,27 @@
 }
 
 .review-item {
-    padding: 15px;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid #fbbf24;
+    padding: 15px 0;
+    background: transparent;
+    border-radius: 0;
+    border-left: none;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.review-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.review-item:first-child {
+    padding-top: 0;
 }
 
 .review-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .review-rating {
@@ -368,17 +398,26 @@
 
 .review-rating .fas.fa-star {
     color: #fbbf24;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+}
+
+.review-rating .star {
+    color: #fbbf24;
+    font-size: 0.85rem;
+}
+
+.review-rating .star.empty {
+    color: #e5e5e5;
 }
 
 .review-date {
-    color: #666;
+    color: #999;
     font-size: 0.8rem;
 }
 
 .review-text {
     color: #333;
-    line-height: 1.5;
+    line-height: 1.6;
     font-size: 0.9rem;
 }
 
@@ -1171,7 +1210,7 @@ section {
 
 /* ===== ランキングセクション ===== */
 .clinic-rankings {
-    max-width: 1200px;
+    max-width: 375px;
     margin: 0 auto;
     padding: 40px 20px;
 }
@@ -2423,7 +2462,7 @@ section {
     }
     
     .clinic-card {
-        padding: 38px 6px 10px;
+        padding: 38px 4px 8px;
         border-radius: 15px;
         border-width: 3px;
         box-sizing: border-box;
@@ -2531,11 +2570,11 @@ section {
     }
     
     .clinic-cta-button {
-        padding: 12px 8px;
-        font-size: 0.85rem;
-        border-radius: 25px;
-        width: 100%;
-        margin: auto 0 0 0;
+        padding: 10px 4px;
+        font-size: 0.7rem;
+        border-radius: 20px;
+        width: calc(100% - 4px);
+        margin: auto 2px 2px 2px;
         box-sizing: border-box;
         background: #10b981;
         color: white;
@@ -2544,19 +2583,21 @@ section {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 3px;
+        gap: 2px;
         font-weight: 600;
         border: none;
         transition: all 0.3s;
-        letter-spacing: 0.5px;
+        letter-spacing: 0;
+        white-space: nowrap;
+        flex-shrink: 0;
     }
     
     .clinic-cta-button .cta-text {
-        font-size: 0.85rem;
+        font-size: 0.7rem;
     }
     
     .clinic-cta-button i {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
     }
     
     .clinic-cta-button:hover {
@@ -2911,32 +2952,31 @@ section {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
         white-space: nowrap;
-        padding: 0 10px;
-        margin: 0 -10px 20px -10px;
+        padding: 0;
+        margin: 15px 0 0;
         scrollbar-width: none;
         -ms-overflow-style: none;
         display: flex;
-        gap: 8px;
+        gap: 0;
     }
     
     .review-tabs::-webkit-scrollbar {
         display: none;
     }
     
-    .review-tab {
-        padding: 8px 16px;
+    .review-tab-button {
+        padding: 12px 16px;
         font-size: 0.85rem;
-        white-space: nowrap;
-        flex-shrink: 0;
+        min-width: 70px;
     }
     
     .review-content {
-        padding: 15px;
+        padding: 15px 10px;
     }
     
     .review-item {
-        padding: 12px;
-        margin-bottom: 10px;
+        padding: 12px 0;
+        margin-bottom: 0;
     }
     
     .review-header {
@@ -2961,6 +3001,10 @@ section {
     /* 店舗表示のモバイル対応 */
     .stores-display-container {
         padding: 0;
+    }
+    
+    .stores-list {
+        padding: 15px 10px;
     }
     
     .store-item {
