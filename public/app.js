@@ -1077,16 +1077,12 @@ class RankingApp {
                 <div class="clinic-points-section">
                     <h4 class="section-title">POINT</h4>
                     <div class="points-container">
-                        ${data.points.map(point => `
+                        ${data.points.map((point, index) => `
                             <div class="point-item">
-                                <div class="point-icon ${point.icon}">
-                                    ${point.icon === 'lightbulb' ? '<i class="far fa-lightbulb"></i>' : 
-                                      point.icon === 'phone' ? '<i class="fas fa-mobile-alt"></i>' : 
-                                      '<i class="fas fa-coins"></i>'}
-                                </div>
+                                <div class="point-number">${index + 1}</div>
                                 <div class="point-content">
-                                    <h5>${point.title.replace(/5万円台/g, '<span class="highlight">5万円台</span>')}</h5>
-                                    <p>${point.description}</p>
+                                    <h5>${point.title.replace(/5万円台/g, '<span class="highlight">5万円台</span>').replace(/◎/g, '<span class="emoji">◎</span>')}</h5>
+                                    <p>${point.description.replace(/◎/g, '<span class="emoji">◎</span>').replace(/♪/g, '<span class="emoji">♪</span>')}</p>
                                 </div>
                             </div>
                         `).join('')}
