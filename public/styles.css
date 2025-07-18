@@ -2288,7 +2288,7 @@ section {
 }
 
 .ranking_box_3 {
-    background: #ffd586; /* イエロー */
+    background: #e4b997; /* ブラウン */
 }
 
 .detail-rank {
@@ -3262,7 +3262,7 @@ section {
     /* 案件詳細セクション */
     .clinic-details-section {
         margin: 40px 0;
-        padding: 0 10px;
+        padding: 0 5px;
     }
     
     .details-header-banner {
@@ -3304,7 +3304,7 @@ section {
     }
     
     .ranking_box_in {
-        padding: 20px 15px;
+        padding: 20px 10px 1px;
         margin: 5px;
     }
     
@@ -3707,7 +3707,7 @@ section {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
-        padding: 15px 10px !important;
+        padding: 0px 10px 15px  !important;
         box-sizing: border-box !important;
     }
     
@@ -3755,7 +3755,7 @@ section {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 0 15px 0 !important;
-        padding: 10px !important;
+        padding: 2% !important;
         box-sizing: border-box !important;
     }
     

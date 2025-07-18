@@ -6,6 +6,7 @@ class DataManager {
         this.stores = [];
         this.rankings = [];
         this.storeViews = [];
+        this.campaigns = [];
         this.dataPath = './data/';
     }
 
@@ -17,7 +18,8 @@ class DataManager {
                 this.loadClinics(),
                 this.loadStores(),
                 this.loadRankings(),
-                this.loadStoreViews()
+                this.loadStoreViews(),
+                this.loadCampaigns()
             ]);
 
             // 店舗と地域の関連付け
@@ -145,6 +147,24 @@ class DataManager {
         });
     }
 
+    // キャンペーンデータの読み込み
+    async loadCampaigns() {
+        const data = await this.loadCsvFile('出しわけSS - campaigns.csv');
+        this.campaigns = data.map(row => ({
+            id: row.campaign_id,
+            regionId: row.region_id,
+            clinicId: row.clinic_id,
+            title: row.title,
+            headerText: row.header_text,
+            logoSrc: row.logo_src,
+            logoAlt: row.logo_alt,
+            description: row.description,
+            ctaText: row.cta_text,
+            ctaUrl: row.cta_url,
+            footerText: row.footer_text
+        }));
+    }
+
     // 店舗と地域の関連付け
     associateStoresWithRegions() {
         this.stores.forEach(store => {
@@ -216,6 +236,18 @@ class DataManager {
     getStoresByRegionAndClinic(regionId, clinicName) {
         return this.stores.filter(s => 
             s.regionId === regionId && s.clinicName === clinicName
+        );
+    }
+
+    // 地域IDでキャンペーンを取得
+    getCampaignsByRegionId(regionId) {
+        return this.campaigns.filter(c => c.regionId === regionId);
+    }
+
+    // 地域IDとクリニックIDでキャンペーンを取得
+    getCampaignByRegionAndClinic(regionId, clinicId) {
+        return this.campaigns.find(c => 
+            c.regionId === regionId && c.clinicId === clinicId
         );
     }
 }

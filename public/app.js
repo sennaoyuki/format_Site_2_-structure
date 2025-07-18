@@ -225,6 +225,9 @@ class RankingApp {
             // データマネージャーの初期化
             this.dataManager = new DataManager();
             await this.dataManager.init();
+            
+            // グローバルアクセス用にwindowオブジェクトに設定
+            window.dataManager = this.dataManager;
 
             // 初期地域IDの取得
             this.currentRegionId = this.urlHandler.getRegionId();
@@ -328,7 +331,7 @@ class RankingApp {
             this.updateComparisonTable(allClinics, ranking);
             
             // 詳細コンテンツの更新
-            this.updateClinicDetails(allClinics, ranking);
+            this.updateClinicDetails(allClinics, ranking, regionId);
 
             // エラーメッセージを隠す
             this.displayManager.hideError();
@@ -595,7 +598,7 @@ class RankingApp {
     }
 
     // クリニック詳細の更新
-    updateClinicDetails(clinics, ranking) {
+    updateClinicDetails(clinics, ranking, regionId) {
         const detailsList = document.getElementById('clinic-details-list');
         if (!detailsList) return;
 
@@ -972,8 +975,9 @@ class RankingApp {
                 }
             };
 
-            // クリニックIDに基づいてデータを取得
+            // クリニックIDに基づいてデータを取得し、地域IDを追加
             const data = clinicDetailDataMap[clinicId] || clinicDetailDataMap['1'];
+            data.regionId = regionId;
 
             detailItem.innerHTML = `
                 <div class="ranking_box_in">
@@ -1194,7 +1198,7 @@ class RankingApp {
                 
                 <!-- 特典情報 -->
                 <div class="campaign-section">
-                    ${this.generateCampaignDisplay(data.campaigns || [])}
+                    ${this.generateCampaignDisplay(data.regionId, clinic.id)}
                 </div>
                 </div>
             `;
@@ -1354,36 +1358,43 @@ class RankingApp {
         return html;
     }
     
-    // キャンペーン表示のHTML生成
-    generateCampaignDisplay(campaigns) {
-        // 固定のフレイアキャンペーンを表示
-        // 注意: /img/freya-logo.png の画像ファイルを配置してください
+    // キャンペーン表示のHTML生成（地域IDとクリニックIDで動的生成）
+    generateCampaignDisplay(regionId, clinicId) {
+        // データマネージャーから該当地域・クリニックのキャンペーンを取得
+        if (!window.dataManager) {
+            return ''; // データマネージャーが初期化されていない場合は空を返す
+        }
+        
+        const campaign = window.dataManager.getCampaignByRegionAndClinic(regionId, clinicId);
+        
+        if (!campaign) {
+            return ''; // 該当するキャンペーンがない場合は空を返す
+        }
+        
         return `
             <div class="campaign-container">
-                <div class="campaign-header">INFORMATION!</div>
+                <div class="campaign-header">${campaign.headerText}</div>
                 <div class="campaign-content">
-                    <div class="campaign_title">フレイアの6周年記念</div>
+                    <div class="campaign_title">${campaign.title}</div>
                     
                     <div class="camp_header3">
                         <div class="freya-logo">
-                            <img src="/img/freya-logo.png" alt="FREY-A">
+                            <img src="${campaign.logoSrc}" alt="${campaign.logoAlt}">
                         </div>
                         <div class="camp_txt">
-                            人気プランが最大10万円OFF<br>
-                            ペア・学割・のりかえ割併用も<br>
-                            OK♪
+                            ${campaign.description}
                         </div>
                     </div>
                     
                     <div class="cv_box_img">
                         ＼月額・総額がリーズナブルなクリニック／
                         <p class="btn btn_second_primary">
-                            <a href="https://xn--eckp2g630n3ukyzxne8a.com/freya_url?page=vio-iryou&amp;p=quick_bt&amp;location=tokyo&amp;no=ivio-kantou&amp;gclid=EAIaIQobChMIqNGJ5qWbjgMVIcJMAh2n5DtZEAAYAyAAEgJNsfD_BwE&amp;ca=11027584297&amp;gr=110882177929&amp;k=kwd-407066983568&amp;sid=1752560034179.128009585659" target="_blank" rel="noopener">
-                                <span class="bt_s">フレイア公式はコチラ</span>
+                            <a href="${campaign.ctaUrl}" target="_blank" rel="noopener">
+                                <span class="bt_s">${campaign.ctaText}</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
-                        コスパと効果のどっちも譲れない人におすすめ！
+                        ${campaign.footerText}
                     </div>
                 </div>
             </div>
