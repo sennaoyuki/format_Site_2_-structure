@@ -4946,3 +4946,77 @@ section {
         font-size: 14px;
     }
 }
+
+/* Tips Section Mobile Responsive Styles */
+/* Hide mobile line breaks on desktop */
+.sp {
+    display: none;
+}
+
+/* Show mobile line breaks on mobile devices */
+@media (max-width: 768px) {
+    .sp {
+        display: inline;
+    }
+}
+
+/* Tips container mobile responsiveness */
+@media (max-width: 375px) {
+    .tips-container {
+        padding: 0 10px !important;
+        margin: 20px auto !important;
+    }
+    
+    .tips-container .tabs {
+        gap: 5px !important;
+    }
+    
+    .tips-container .tab {
+        padding: 10px 8px !important;
+        font-size: 12px !important;
+    }
+    
+    .tips-container .slider-content {
+        padding: 20px 10px !important;
+        min-height: auto !important;
+    }
+    
+    .tips-container .slide {
+        padding: 0 10px !important;
+    }
+    
+    .tips-container .slider-nav {
+        width: 35px !important;
+        height: 35px !important;
+        font-size: 16px !important;
+        left: 10px !important;
+        right: 10px !important;
+    }
+    
+    .tips-container h2 {
+        font-size: 20px !important;
+    }
+    
+    .tips-container h3 {
+        font-size: 18px !important;
+    }
+    
+    .tips-container h4 {
+        font-size: 16px !important;
+    }
+    
+    .tips-container p,
+    .tips-container li,
+    .tips-container label {
+        font-size: 14px !important;
+    }
+    
+    .tips-container img {
+        max-width: 200px !important;
+    }
+    
+    /* Make grids stack on mobile */
+    .tips-container div[style*="display: grid"] {
+        grid-template-columns: 1fr !important;
+    }
+}
