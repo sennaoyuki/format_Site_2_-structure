@@ -763,23 +763,29 @@
 
 /* キャンペーンセクション */
 .campaign-section {
-    margin: 30px -15px; /* 左右のマージンを負の値にして親要素の余白を完全に相殺 */
+    margin: 30px 0;
 }
 
-.campaign {
-    background-color: #fef0f2;
+.campaign-container {
+    background-color: #fff;
     border: 1px solid #f6cfd5;
-    border-radius: 0; /* 角丸を削除して画面端まで広げる */
-    border-left: none; /* 左右のボーダーを削除 */
-    border-right: none;
-    padding: 15px 15px;
-    margin-bottom: 20px;
-    margin-left: 0;
-    margin-right: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-.campaign.contain {
-    padding: 20px 20px 25px;
+.campaign-header {
+    background-color: #f37286;
+    color: #fff;
+    text-align: center;
+    padding: 12px 0;
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.campaign-content {
+    padding: 25px 20px 30px;
 }
 
 .campaign img {
@@ -796,44 +802,55 @@
 }
 
 .camp_header3 {
-    padding: 0px 0px;
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin: 20px 0;
 }
 
-.camp_header3:after {
-    content: "";
-    clear: both;
-    height: 0;
-    display: block;
-    visibility: hidden;
+.freya-logo {
+    flex-shrink: 0;
+    width: 80px;
+    height: 40px;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-.camp_header3 img {
-    width: 66px;
-    float: left;
-    margin-top: 0px;
+.freya-logo img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
 }
 
 .camp_header3 .camp_txt {
     position: relative;
-    font-size: 14px;
-    padding: 10px 10px;
-    border-radius: 8px;
-    background: #f37286;
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 15px 20px;
+    border-radius: 12px;
+    background: #e8869b;
     color: #ffffff;
-    margin: 0px 0px 0px 80px;
+    flex: 1;
+    box-shadow: 0 2px 6px rgba(232, 134, 155, 0.3);
 }
 
-.camp_header3 .camp_txt::after {
+.camp_header3 .camp_txt::before {
     content: '';
     position: absolute;
     display: block;
     width: 0;
     height: 0;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    left: -10px;
-    top: 35%;
-    border-right: 10px solid #f37286;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    left: -15px;
+    top: 20px;
+    border-right: 15px solid #e8869b;
 }
 
 .cv_box_img {
@@ -885,14 +902,24 @@
 }
 
 .btn_second_primary a {
-    background-color: #2fc1c7;
-    border-bottom: solid 3px #2aa0a5;
-    text-shadow: 0 1px 2px #2aa0a5;
-    display: block;
-    padding: 14px 0;
+    background-color: #5ab9bd;
+    border: none;
+    box-shadow: 0 3px 0 #4a9a9e;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px 20px;
     position: relative;
     overflow: hidden;
-    font-size: 1.125rem;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    transition: all 0.2s ease;
+}
+
+.btn_second_primary a:hover {
+    transform: translateY(1px);
+    box-shadow: 0 2px 0 #4a9a9e;
 }
 
 .btn_second_primary a:after {
@@ -955,8 +982,16 @@
     font-size: 16px;
 }
 
-.btn_second_primary i {
-    margin: 0px 0px 0px 5px;
+.btn-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    font-size: 14px;
 }
 
 .no-campaigns {
@@ -1058,6 +1093,56 @@
 
 .clinic-link:hover {
     text-decoration: underline;
+}
+
+/* キャンペーンセクションのモバイル対応 (375px基準) */
+@media (max-width: 375px) {
+    .campaign-section {
+        margin: 20px 0;
+    }
+
+    .campaign-container {
+        border-radius: 8px;
+    }
+
+    .campaign-header {
+        font-size: 16px;
+        padding: 10px 0;
+    }
+
+    .campaign-content {
+        padding: 20px 15px 25px;
+    }
+
+    .camp_header3 {
+        gap: 10px;
+    }
+
+    .freya-logo {
+        width: 70px;
+        height: 35px;
+        padding: 6px;
+    }
+
+    .camp_header3 .camp_txt {
+        font-size: 14px;
+        padding: 12px 15px;
+    }
+
+    .cv_box_img {
+        font-size: 12px;
+    }
+
+    .btn_second_primary a {
+        font-size: 15px;
+        padding: 14px 18px;
+    }
+
+    .btn-arrow {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
+    }
 }
 
 /* モバイル対応 */
