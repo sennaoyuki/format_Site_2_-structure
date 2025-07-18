@@ -1279,21 +1279,21 @@ class RankingApp {
     // 店舗表示のHTML生成（MAX3店舗 + アコーディオン）
     generateStoresDisplay(stores) {
         if (!stores || stores.length === 0) {
-            return '<p class="no-stores">店舗情報がありません</p>';
+            return '<div class="shops"><p class="no-stores">店舗情報がありません</p></div>';
         }
         
         const visibleStores = stores.slice(0, 3);
         const hiddenStores = stores.slice(3);
+        const storeId = `shops-${Date.now()}`; // ユニークなIDを生成
         
-        let html = '<div class="shops">';
+        let html = `<div class="shops" id="${storeId}">`;
         
         // 最初の3店舗を表示
         visibleStores.forEach((store, index) => {
-            const zipcode = store.zipcode ? store.zipcode.replace(/^〒/, '') : '';
             html += `
                 <div class='shop'>
                     <div class='shop-image'>
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='16'%3E店舗${index + 1}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='12'%3E店舗${index + 1}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -1310,46 +1310,39 @@ class RankingApp {
             `;
         });
         
-        // 4店舗以上ある場合はアコーディオンに格納
-        if (hiddenStores.length > 0) {
+        // 4店舗以上ある場合は隠しコンテンツとして追加
+        hiddenStores.forEach((store, index) => {
             html += `
-                <div class="accordion-container">
-                    <button class="accordion-button" onclick="toggleAccordion(this)">
-                        他件のクリニックを見る
-                        <i class="fas fa-chevron-down accordion-icon"></i>
-                    </button>
-                    <div class="accordion-content">
-            `;
-            
-            hiddenStores.forEach((store, index) => {
-                const zipcode = store.zipcode ? store.zipcode.replace(/^〒/, '') : '';
-                html += `
-                    <div class='shop'>
-                        <div class='shop-image'>
-                            <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='16'%3E店舗${index + 4}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
-                        </div>
-                        <div class='shop-info'>
-                            <div class='shop-name'>
-                                <a href="#" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
-                            </div>
-                            <div class='shop-address line-clamp'>
-                                ${store.address || '住所情報なし'}
-                            </div>
-                        </div>
-                        <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
-                        地図
-                        </a>
+                <div class='shop hidden-content hidden'>
+                    <div class='shop-image'>
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='12'%3E店舗${index + 4}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
                     </div>
-                `;
-            });
-            
-            html += `
+                    <div class='shop-info'>
+                        <div class='shop-name'>
+                            <a href="#" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
+                        </div>
+                        <div class='shop-address line-clamp'>
+                            ${store.address || '住所情報なし'}
+                        </div>
                     </div>
+                    <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
+                    地図
+                    </a>
                 </div>
             `;
-        }
+        });
         
         html += '</div>';
+        
+        // 4店舗以上ある場合はボタンを追加
+        if (hiddenStores.length > 0) {
+            html += `
+                <a class="section-btn" data-target="#${storeId}" href="javascript:void(0);" onclick="toggleStores(this)">
+                    他${hiddenStores.length}件のクリニックを見る
+                    <i class="fas fa-chevron-down btn-icon"></i>
+                </a>
+            `;
+        }
         
         return html;
     }
@@ -1465,20 +1458,31 @@ class RankingApp {
     }
 }
 
-// アコーディオンのトグル関数
-function toggleAccordion(button) {
-    const accordionContent = button.nextElementSibling;
-    const accordionIcon = button.querySelector('.accordion-icon');
-    
-    button.classList.toggle('active');
-    accordionContent.classList.toggle('active');
+// 店舗の表示/非表示を切り替える関数
+function toggleStores(button) {
+    const targetId = button.getAttribute('data-target');
+    const targetShops = document.querySelector(targetId);
+    const hiddenShops = targetShops.querySelectorAll('.hidden-content');
+    const btnIcon = button.querySelector('.btn-icon');
     
     if (button.classList.contains('active')) {
-        accordionIcon.classList.remove('fa-chevron-down');
-        accordionIcon.classList.add('fa-chevron-up');
+        // 隠す
+        hiddenShops.forEach(shop => {
+            shop.classList.add('hidden');
+        });
+        button.classList.remove('active');
+        btnIcon.classList.remove('fa-chevron-up');
+        btnIcon.classList.add('fa-chevron-down');
+        button.innerHTML = `他${hiddenShops.length}件のクリニックを見る<i class="fas fa-chevron-down btn-icon"></i>`;
     } else {
-        accordionIcon.classList.remove('fa-chevron-up');
-        accordionIcon.classList.add('fa-chevron-down');
+        // 表示
+        hiddenShops.forEach(shop => {
+            shop.classList.remove('hidden');
+        });
+        button.classList.add('active');
+        btnIcon.classList.remove('fa-chevron-down');
+        btnIcon.classList.add('fa-chevron-up');
+        button.innerHTML = `閉じる<i class="fas fa-chevron-up btn-icon"></i>`;
     }
 }
 

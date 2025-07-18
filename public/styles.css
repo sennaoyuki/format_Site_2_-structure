@@ -3994,3 +3994,41 @@ section {
         height: 72px;
     }
 }
+
+/* アコーディオンボタンスタイル */
+.section-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    margin-top: 12px;
+    padding: 12px 0;
+    border: 1px solid #f25496;
+    border-radius: 99px;
+    background-color: #fff;
+    color: #f25496;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.section-btn:hover {
+    background-color: #f25496;
+    color: #fff;
+}
+
+.section-btn .btn-icon {
+    position: absolute;
+    right: 12px;
+    transition: transform 0.3s ease;
+}
+
+.section-btn.active .btn-icon {
+    transform: rotate(180deg);
+}
+
+/* 非表示クラス */
+.hidden {
+    display: none !important;
+}
