@@ -189,75 +189,8 @@ class DisplayManager {
             return;
         }
         
+        // 店舗リストセクションを完全に削除
         brandSectionWrapper.innerHTML = '';
-
-        if (!stores || stores.length === 0) {
-            brandSectionWrapper.innerHTML = '<div class="empty-state"><p>この地域に店舗はありません</p></div>';
-            return;
-        }
-
-        // クリニックごとにグループ化された店舗を表示
-        if (clinicsWithStores && clinicsWithStores.size > 0) {
-            let clinicIndex = 0;
-            clinicsWithStores.forEach((clinicStores, clinic) => {
-                clinicIndex++;
-                
-                // 各ブランドのbrand-sectionを作成
-                const brandSection = document.createElement('div');
-                brandSection.className = 'brand-section';
-                brandSection.innerHTML = `
-                    <h4 class='section-heading'>
-                        ${clinic.name}の店舗
-                    </h4>
-                    <div class='shops' id='shops-${clinic.id}'>
-                        ${clinicStores.length > 0 ? clinicStores.map(store => {
-                            // 郵便番号の重複を修正
-                            const zipcode = store.zipcode.replace(/^〒/, '');
-                            
-                            return `
-                                <div class='shop'>
-                                    <div class='shop-image'>
-                                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='16'%3E店舗${clinicIndex}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
-                                    </div>
-                                    <div class='shop-info'>
-                                        <div class='shop-name'>
-                                            <a href="#" target="_blank" rel="nofollow">${store.name}</a>
-                                        </div>
-                                        <div class='shop-address line-clamp'>
-                                            ${store.address}
-                                        </div>
-                                    </div>
-                                    <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
-                                    地図
-                                    </a>
-                                </div>
-                            `;
-                        }).join('') : '<div class="empty-state"><p>該当店舗なし</p></div>'}
-                    </div>
-                `;
-
-                brandSectionWrapper.appendChild(brandSection);
-            });
-        } else {
-            // フォールバック：グループ化できない場合は従来の表示
-            stores.forEach(store => {
-                const storeItem = document.createElement('div');
-                storeItem.className = 'store-item';
-
-                const zipcode = store.zipcode.replace(/^〒/, '');
-
-                storeItem.innerHTML = `
-                    <div class="store-name">${store.name}</div>
-                    <div class="store-details">
-                        <p class="store-zipcode">〒${zipcode}</p>
-                        <p class="store-address">${store.address}</p>
-                        <p class="store-access">アクセス: ${store.access}</p>
-                    </div>
-                `;
-
-                this.storesList.appendChild(storeItem);
-            });
-        }
     }
 
     showError(message) {

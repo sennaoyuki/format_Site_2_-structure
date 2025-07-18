@@ -764,6 +764,8 @@
 /* キャンペーンセクション */
 .campaign-section {
     margin: 30px 0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .campaign-container {
@@ -3632,26 +3634,48 @@ section {
         padding: 10px 3px;
     }
     
+    /* グローバルリセット */
+    html {
+        overflow-x: hidden;
+        width: 100%;
+    }
+    
     /* ボディのオーバーフロー制御 */
     body {
         overflow-x: hidden;
-        width: 100vw;
+        width: 100%;
+        position: relative;
+        margin: 0;
+        padding: 0;
+    }
+    
+    /* すべての要素に対するボックスサイジング */
+    * {
+        box-sizing: border-box;
+        max-width: 100%;
     }
     
     /* コンテナの最適化 */
     .container {
         max-width: 100%;
         overflow-x: hidden;
+        padding: 0;
+        margin: 0;
     }
     
     /* セクションの幅制御 */
     main > section {
-        max-width: 100vw;
+        max-width: 100%;
         overflow-x: hidden;
+        box-sizing: border-box;
+        margin: 0;
+        padding-left: 10px;
+        padding-right: 10px;
     }
     
     .ranking-item {
         transform: scale(0.95);
+        margin: 0;
     }
     
     .hero-title {
@@ -3660,6 +3684,111 @@ section {
     
     .title-main {
         font-size: 2rem;
+    }
+    
+    /* キャンペーンセクションの修正 */
+    .campaign-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 20px 0 !important;
+        padding: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    .campaign-container {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* ブランドセクションの修正 */
+    .brand-section {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 15px 10px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* ディテールアイテムの修正 */
+    .detail-item {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 20px 0 !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* タブコンテンツの修正 */
+    .tab-content,
+    .review-tab-section,
+    .review_tab_box {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* フレイアロゴの修正 */
+    .freya-logo img {
+        max-width: 100px !important;
+        height: auto !important;
+    }
+    
+    /* すべてのimgタグの制御 */
+    img {
+        max-width: 100% !important;
+        height: auto !important;
+    }
+    
+    /* 負のマージンを持つ要素の修正 */
+    .ribbon::before,
+    .ribbon::after {
+        display: none !important;
+    }
+    
+    /* 固定幅の要素を修正 */
+    .ranking_box_inner,
+    .ranking_box_1,
+    .ranking_box_2,
+    .ranking_box_3 {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 0 15px 0 !important;
+        padding: 10px !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* 右に突出する要素の修正 */
+    [style*="right:"],
+    [style*="left:"] {
+        position: relative !important;
+        right: auto !important;
+        left: auto !important;
+    }
+    
+    /* ヘッダーセクションの最適化 */
+    .header-content,
+    .site-header {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        padding: 0 10px !important;
+    }
+    
+    /* 比較表の最適化 */
+    .comparison-table,
+    .comparison-table * {
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* ナビゲーションメニューの最適化 */
+    .nav-menu,
+    .nav-list {
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
     }
     
     .title-sub {
@@ -3683,7 +3812,9 @@ section {
     }
     
     .comparison-table {
-        min-width: 355px;
+        min-width: 320px;
+        max-width: 100%;
+        width: 100%;
     }
     
     .comparison-table th,
