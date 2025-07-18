@@ -1723,6 +1723,51 @@ section {
     box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
 }
 
+/* 新しいボタンスタイル（DIOスタイル） */
+.btn.btn_second_primary {
+    display: inline-block;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.btn.btn_second_primary a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+    color: white;
+    padding: 15px 25px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.btn.btn_second_primary .bt_s {
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+.btn.btn_second_primary .btn-arrow {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+}
+
+.btn.btn_second_primary a:hover {
+    background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+}
+
+.btn.btn_second_primary a:hover .btn-arrow {
+    transform: translateX(3px);
+}
+
 /* ===== 比較表セクション ===== */
 .comparison-section {
     max-width: 1200px;
@@ -2197,7 +2242,19 @@ section {
     margin-top: 0;
     background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
     border-radius: 8px;
-    text-align: center;
+}
+
+.detail-rank .ranking__name a {
+    color: #5a4fcf;
+    text-decoration: none;
+    font-weight: bold;
+    display: block;
+    text-align: left;
+    padding-left: 3%;
+}
+
+.detail-rank .ranking__name a:hover {
+    text-decoration: underline;
 }
 
 .detail-rank .ranking__name a {

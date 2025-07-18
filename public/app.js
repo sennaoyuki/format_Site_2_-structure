@@ -170,10 +170,12 @@ class DisplayManager {
                         ${price.discount ? `<div class="price-discount">${price.discount}</div>` : ''}
                         ${price.note ? `<div class="price-note">${price.note}</div>` : ''}
                     </div>
-                    <a href="#" class="clinic-cta-button">
-                        <span class="cta-text">無料カウンセリングはコチラ</span>
-                        <i class="fas fa-chevron-right"></i>
-                    </a>
+                    <p class="btn btn_second_primary">
+                        <a href="#" target="_blank" rel="noopener">
+                            <span class="bt_s">無料カウンセリングはコチラ</span>
+                            <span class="btn-arrow">▶</span>
+                        </a>
+                    </p>
                 </div>
             `;
 
@@ -1016,10 +1018,12 @@ class RankingApp {
                 
                 <!-- CTAボタン -->
                 <div class="clinic-cta-button-wrapper">
-                    <a href="${clinic.accessUrl || '#'}" class="clinic-cta-button" target="_blank" rel="noopener noreferrer">
-                        <span class="cta-text">無料カウンセリングはコチラ</span>
-                        <span class="cta-arrow">→</span>
-                    </a>
+                    <p class="btn btn_second_primary">
+                        <a href="${clinic.accessUrl || '#'}" target="_blank" rel="noopener noreferrer">
+                            <span class="bt_s">無料カウンセリングはコチラ</span>
+                            <span class="btn-arrow">▶</span>
+                        </a>
+                    </p>
                 </div>
                 
                 <!-- クリニックのポイント -->
