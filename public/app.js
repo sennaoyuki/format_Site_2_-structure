@@ -1068,7 +1068,7 @@ class RankingApp {
                 <!-- CTAボタン -->
                 <div class="clinic-cta-button-wrapper">
                     <a href="${clinic.accessUrl || '#'}" class="clinic-cta-button" target="_blank" rel="noopener noreferrer">
-                        <span class="cta-text">詳しく見る</span>
+                        <span class="cta-text">無料カウンセリングはコチラ</span>
                         <span class="cta-arrow">→</span>
                     </a>
                 </div>
