@@ -155,67 +155,8 @@
     transform: translateX(5px);
 }
 
-/* クリニックポイントセクション */
-.clinic-points-section {
-    padding: 40px 20px;
-    background: #fff;
-    border: 2px solid #e5e7eb;
-    border-radius: 20px;
-    margin: 30px auto;
-    max-width: 640px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-}
-
-.clinic-points-section .section-title {
-    font-size: 2rem;
-    font-weight: bold;
-    text-align: center;
-    margin-bottom: 40px;
-    color: #666;
-    letter-spacing: 8px;
-    position: relative;
-    padding: 20px 0;
-}
-
-.clinic-points-section .section-title::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: #87CEEB;
-}
-
-.clinic-points-section .section-title::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 80px;
-    height: 3px;
-    background: #87CEEB;
-}
-
 .pink-text {
     color: #ec4899;
-}
-
-.points-container {
-    display: flex;
-    flex-direction: column;
-    gap: 35px;
-}
-
-.point-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 20px;
-    padding: 0;
-    background: transparent;
-    border: none;
 }
 
 .point-icon {
@@ -422,7 +363,7 @@
     font-size: 0.9rem;
 }
 
-/* POINTセクション */
+/* POINTセクション - クリニック詳細内 */
 .clinic-points-section {
     margin: 30px 0;
     padding: 0;
@@ -433,30 +374,81 @@
     text-align: center;
     font-size: 1.8rem;
     font-weight: 700;
-    color: #7dd3c0;
-    margin-bottom: 25px;
+    color: #333;
+    margin-bottom: 20px;
     padding: 0 15px;
     position: relative;
-    letter-spacing: 5px;
+    letter-spacing: 2px;
 }
 
-.points-container {
-    background: #fef0f5;
-    padding: 30px 20px;
-    margin: 0;
-    border-radius: 0;
+.clinic-points-section .section-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    border-radius: 2px;
 }
 
-.point-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 15px;
-    margin-bottom: 30px;
+/* ribbon_point_box_noスタイルを.clinic-points-section内で使用 */
+.clinic-points-section .ribbon_point_box_no {
+    border: 1px solid #d9d9d9;
+    padding: 0px 10px 10px 10px;
+    margin: 0px auto 20px;
+    max-width: 640px;
+    width: calc(100% - 30px);
+    box-sizing: border-box;
+}
+
+.clinic-points-section .ribbon_point_title2_s {
+    background: #fcf0f2;
+    padding: 5px 7px 5px 7px;
+    margin: 15px 0px 5px;
     position: relative;
 }
 
-.point-item:last-child {
-    margin-bottom: 0;
+.clinic-points-section .point-icon-inline {
+    width: 20px;
+    margin: 3px 0px 0px 3px;
+    position: absolute;
+    font-size: 16px;
+    color: #666;
+}
+
+.clinic-points-section .ribbon_point_title2_s strong {
+    margin: 0px 0px 0px 30px;
+    display: inline-block;
+    font-weight: 700;
+    color: #333;
+}
+
+.clinic-points-section .ribbon_point_txt {
+    margin: 5px 10px;
+}
+
+.clinic-points-section .ribbon_point_txt p {
+    margin: 0;
+    line-height: 1.6;
+    color: #555;
+}
+
+.clinic-points-section .ribbon_point_link {
+    text-align: right;
+    margin: 5px 0px 0px;
+    font-weight: 700;
+    color: #333;
+}
+
+.clinic-points-section .ribbon_point_link a {
+    color: #007bff;
+    text-decoration: none;
+}
+
+.clinic-points-section .ribbon_point_link a:hover {
+    text-decoration: underline;
 }
 
 .point-icon {
@@ -2334,27 +2326,53 @@ section {
     
     /* ポイントセクションのモバイル対応 */
     .clinic-points-section {
-        padding: 30px 15px;
-        margin: 20px 10px;
+        margin: 20px 0;
     }
     
     .clinic-points-section .section-title {
-        font-size: 1.6rem;
-        letter-spacing: 4px;
+        font-size: 1.5rem;
+        letter-spacing: 1px;
     }
     
-    .point-icon {
-        min-width: 50px;
-        height: 50px;
-        font-size: 2rem;
+    .clinic-points-section .section-title::after {
+        width: 50px;
+        height: 2px;
+        bottom: -6px;
     }
     
-    .point-content h5 {
-        font-size: 1.1rem;
+    .clinic-points-section .ribbon_point_box_no {
+        width: calc(100% - 20px);
+        padding: 0px 8px 8px 8px;
+        margin: 0px auto 15px;
     }
     
-    .point-content p {
-        font-size: 0.95rem;
+    .clinic-points-section .ribbon_point_title2_s {
+        padding: 4px 6px 4px 6px;
+        margin: 12px 0px 4px;
+    }
+    
+    .clinic-points-section .point-icon-inline {
+        font-size: 14px;
+        margin: 2px 0px 0px 2px;
+    }
+    
+    .clinic-points-section .ribbon_point_title2_s strong {
+        margin: 0px 0px 0px 25px;
+        font-size: 14px;
+    }
+    
+    .clinic-points-section .ribbon_point_txt {
+        margin: 4px 8px;
+    }
+    
+    .clinic-points-section .ribbon_point_txt p {
+        font-size: 13px !important;
+        line-height: 1.5;
+    }
+    
+    .clinic-points-section .ribbon_point_link {
+        margin: 4px 0px 0px;
+        font-size: 12px;
     }
 }
 
@@ -3118,36 +3136,27 @@ section {
         margin-top: 8px;
     }
     
-    /* POINTセクションのモバイル対応 */
+    /* POINTセクションのモバイル対応（375px） */
     .clinic-points-section .section-title {
         font-size: 1.4rem;
-        letter-spacing: 3px;
-        margin-bottom: 20px;
     }
     
-    .points-container {
-        padding: 20px 15px;
+    .clinic-points-section .ribbon_point_box_no {
+        width: calc(100% - 16px);
+        padding: 0px 6px 6px 6px;
     }
     
-    .point-item {
-        gap: 12px;
-        margin-bottom: 20px;
+    .clinic-points-section .ribbon_point_title2_s strong {
+        font-size: 13px;
+        margin: 0px 0px 0px 22px;
     }
     
-    .point-number {
-        width: 35px;
-        height: 35px;
-        font-size: 1rem;
+    .clinic-points-section .ribbon_point_txt p {
+        font-size: 12px !important;
     }
     
-    .point-content h5 {
-        font-size: 0.95rem;
-        padding-left: 15px;
-    }
-    
-    .point-content h5::before {
-        width: 10px;
-        height: 10px;
+    .clinic-points-section .ribbon_point_link {
+        font-size: 11px;
     }
     
     .point-content p {

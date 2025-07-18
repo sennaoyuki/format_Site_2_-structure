@@ -1076,19 +1076,26 @@ class RankingApp {
                 <!-- クリニックのポイント -->
                 <div class="clinic-points-section">
                     <h4 class="section-title">POINT</h4>
-                    <div class="points-container">
-                        ${data.points.map((point, index) => `
-                            <div class="point-item">
-                                <div class="point-number">${index + 1}</div>
-                                <div class="point-content">
-                                    <h5>${point.title.replace(/5万円台/g, '<span class="highlight">5万円台</span>').replace(/◎/g, '<span class="emoji">◎</span>')}</h5>
-                                    <p>${point.description.replace(/◎/g, '<span class="emoji">◎</span>').replace(/♪/g, '<span class="emoji">♪</span>')}</p>
-                                </div>
+                    <div class="ribbon_point_box_no">
+                        ${data.points.map((point, index) => {
+                            let iconClass = 'fa-clock';
+                            if (point.icon === 'lightbulb') iconClass = 'fa-lightbulb';
+                            else if (point.icon === 'phone') iconClass = 'fa-mobile-alt';
+                            else if (point.icon === 'coins') iconClass = 'fa-yen-sign';
+                            
+                            return `
+                            <div class="ribbon_point_title2_s">
+                                <i class="fas ${iconClass} point-icon-inline"></i>
+                                <strong>${point.title}</strong>
                             </div>
-                        `).join('')}
-                    </div>
-                    <div class="clinic-link-section">
-                        <a href="#">【公式】 https://reginaclinic.jp/</a>
+                            <div class="ribbon_point_txt">
+                                <p style="font-size:14px;">${point.description}</p>
+                            </div>
+                            `;
+                        }).join('')}
+                        <div class="ribbon_point_link">
+                            【公式】<a href="https://reginaclinic.jp/" target="_blank" rel="noopener"><strong>https://reginaclinic.jp/</strong></a>
+                        </div>
                     </div>
                 </div>
                 
