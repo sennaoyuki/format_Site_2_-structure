@@ -2195,59 +2195,115 @@ section {
 }
 
 .details-header-banner {
-    background: linear-gradient(135deg, #ec4899 0%, #f472b6 100%);
-    color: white;
-    padding: 30px 20px;
+    background: linear-gradient(135deg, #ff6ba6 0%, #ffa0c9 50%, #ffb3d1 100%);
+    padding: 20px;
     text-align: center;
-    border-radius: 30px 30px 0 0;
+    border-radius: 15px;
     position: relative;
     overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.banner-content-wrapper {
+    position: relative;
+    z-index: 2;
+}
+
+.banner-text-content {
+    color: white;
+}
+
+.banner-criteria {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 20px;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 
-.banner-decoration {
-    font-size: 2rem;
-    opacity: 0.3;
-    transform: rotate(45deg);
+.criteria-item {
+    background: #4fbddd;
+    color: white;
+    padding: 5px 15px;
+    border-radius: 5px;
+    font-size: 1rem;
 }
 
-.banner-decoration.left {
-    transform: rotate(-45deg);
+.criteria-separator {
+    color: white;
+    font-size: 1.2rem;
 }
 
-.banner-content {
-    flex: 1;
-    max-width: 500px;
+.criteria-highlight {
+    background: #ff8c42;
 }
 
-.banner-title {
-    font-size: 1.8rem;
-    font-weight: 700;
+.criteria-text {
+    color: white;
+    font-size: 1.2rem;
+    margin-left: 5px;
+}
+
+.banner-main-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
     margin: 0;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 10px;
-    flex-wrap: wrap;
+    position: relative;
 }
 
-.banner-icon {
-    font-size: 1.5rem;
-    color: #fbbf24;
+.banner-main-title::before,
+.banner-main-title::after {
+    content: '';
+    flex: 1;
+    height: 2px;
+    background: white;
+    max-width: 50px;
 }
 
-.banner-subtitle {
-    font-size: 2.2rem;
+.banner-best {
+    font-size: 2rem;
     font-weight: 900;
+    color: #ffeb3b;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
     margin-left: 10px;
 }
 
-.big-number {
+.banner-number {
     font-size: 3rem;
     font-style: italic;
+}
+
+.banner-illustrations {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+}
+
+.illustration-left,
+.illustration-right {
+    position: absolute;
+    bottom: 0;
+    font-size: 4rem;
+    color: rgba(255, 255, 255, 0.3);
+}
+
+.illustration-left {
+    left: 20px;
+    transform: scaleX(-1);
+}
+
+.illustration-right {
+    right: 20px;
 }
 
 .clinic-details-container {
@@ -3355,6 +3411,63 @@ section {
     
     .detail-title p {
         font-size: 0.9rem;
+    }
+    
+    /* 詳細バナーのモバイル対応 */
+    .details-header-banner {
+        padding: 15px 10px;
+        border-radius: 10px;
+    }
+    
+    .banner-criteria {
+        font-size: 0.9rem;
+        gap: 5px;
+        flex-wrap: wrap;
+    }
+    
+    .criteria-item {
+        font-size: 0.8rem;
+        padding: 4px 10px;
+    }
+    
+    .criteria-separator {
+        font-size: 0.9rem;
+    }
+    
+    .criteria-text {
+        font-size: 0.9rem;
+    }
+    
+    .banner-main-title {
+        font-size: 1.1rem;
+        flex-wrap: wrap;
+    }
+    
+    .banner-main-title::before,
+    .banner-main-title::after {
+        display: none;
+    }
+    
+    .banner-best {
+        font-size: 1.5rem;
+        margin-left: 5px;
+    }
+    
+    .banner-number {
+        font-size: 2rem;
+    }
+    
+    .illustration-left,
+    .illustration-right {
+        font-size: 2.5rem;
+    }
+    
+    .illustration-left {
+        left: 5px;
+    }
+    
+    .illustration-right {
+        right: 5px;
     }
     
     .detail-cta-link {
