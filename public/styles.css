@@ -451,7 +451,7 @@
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     position: relative;
 }
 
@@ -459,19 +459,29 @@
     margin-bottom: 0;
 }
 
-.point-number {
+.point-icon {
     flex-shrink: 0;
-    width: 40px;
-    height: 40px;
+    width: 45px;
+    height: 45px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2rem;
-    font-weight: 700;
+    font-size: 1.5rem;
     background: white;
     border-radius: 50%;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.point-icon.lightbulb {
     color: #333;
+}
+
+.point-icon.phone {
+    color: #333;
+}
+
+.point-icon.coin {
+    color: #f59e0b;
 }
 
 .point-content {
@@ -479,25 +489,17 @@
 }
 
 .point-content h5 {
-    font-size: 1rem;
+    font-size: 1.05rem;
     font-weight: 700;
     color: #333;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     line-height: 1.5;
     position: relative;
-    padding-left: 20px;
-}
-
-.point-content h5::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 12px;
-    height: 12px;
-    background: #333;
-    border-radius: 50%;
+    background: #FFF5E6;
+    padding: 10px 20px;
+    border-radius: 25px;
+    display: inline-block;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
 .point-content .highlight {
