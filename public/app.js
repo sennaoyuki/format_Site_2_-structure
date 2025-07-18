@@ -1251,11 +1251,11 @@ class RankingApp {
                 </div>
                 
                 <!-- 店舗情報 -->
-                <div class="clinic-info-section">
-                    <h4 class="section-title">店舗情報</h4>
-                    <div class="stores-display-container">
-                        ${this.generateStoresDisplay(data.stores || [])}
-                    </div>
+                <div class="brand-section">
+                    <h4 class="section-heading">
+                        ${clinic.name}の店舗
+                    </h4>
+                    ${this.generateStoresDisplay(data.stores || [])}
                 </div>
                 
                 <!-- 特典情報 -->
