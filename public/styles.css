@@ -2493,6 +2493,297 @@ section {
     border-bottom: none;
 }
 
+/* ===== 医療情報コラムセクション ===== */
+.medical-columns-section {
+    padding: 40px 0;
+    background-color: #f8f9fa;
+}
+
+.medical-columns-section .columns-container {
+    padding: 16px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.medical-columns-section .article-card {
+    background-color: white;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Header with image */
+.medical-columns-section .article-header {
+    position: relative;
+}
+
+.medical-columns-section .header-image {
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    position: relative;
+    overflow: hidden;
+}
+
+.medical-columns-section .header-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    font-size: 14px;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDMwQzI1LjUyMjggMzAgMzAgMjUuNTIyOCAzMCAyMEMzMCAxNC40NzcyIDI1LjUyMjggMTAgMjAgMTBDMTQuNDc3MiAxMCAxMCAxNC40NzcyIDEwIDIwQzEwIDI1LjUyMjggMTQuNDc3MiAzMCAyMCAzMFoiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHN0cm9rZSBkPSJNMTMgMjNMMjAgMTZMMjcgMjMiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+') no-repeat center;
+}
+
+.medical-columns-section .article-title {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    background-color: rgba(255,255,255,0.95);
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    max-width: calc(100% - 32px);
+    line-height: 1.4;
+}
+
+/* Table of Contents */
+.medical-columns-section .toc-section {
+    padding: 16px;
+    background-color: #f8f9fa;
+}
+
+.medical-columns-section .toc-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #333;
+}
+
+.medical-columns-section .toc-list {
+    list-style: none;
+}
+
+.medical-columns-section .toc-item {
+    margin-bottom: 8px;
+}
+
+.medical-columns-section .toc-link {
+    color: #4a90e2;
+    text-decoration: underline;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.medical-columns-section .toc-sub-item {
+    margin-left: 16px;
+    margin-top: 4px;
+    font-size: 13px;
+}
+
+/* Content Sections */
+.medical-columns-section .content-section {
+    padding: 20px 16px;
+}
+
+.medical-columns-section .section-title {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid #333;
+}
+
+.medical-columns-section .section-content {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.8;
+}
+
+.medical-columns-section .highlight-box {
+    background-color: #e3f2fd;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.medical-columns-section .highlight-box .section-title {
+    color: #1976d2;
+    margin-bottom: 12px;
+}
+
+/* Comparison Table in columns */
+.medical-columns-section .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background-color: white;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.medical-columns-section .table-header {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.medical-columns-section .table-header th {
+    padding: 12px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.medical-columns-section .table-row td {
+    padding: 12px 8px;
+    border-bottom: 1px solid #e0e0e0;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 13px;
+}
+
+.medical-columns-section .table-row:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.medical-columns-section .row-header {
+    background-color: #e3f2fd !important;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Merit/Demerit Table */
+.medical-columns-section .merit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+}
+
+.medical-columns-section .merit-header {
+    background-color: #2c3e50;
+    color: white;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.medical-columns-section .merit-category {
+    background-color: #e3f2fd;
+    color: #333;
+    font-weight: bold;
+    padding: 12px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.medical-columns-section .merit-content {
+    padding: 12px;
+    font-size: 13px;
+    line-height: 1.6;
+    vertical-align: top;
+}
+
+.medical-columns-section .merit-content ul {
+    margin: 0;
+    padding-left: 16px;
+}
+
+.medical-columns-section .merit-content li {
+    margin-bottom: 4px;
+}
+
+/* Subsection titles */
+.medical-columns-section .subsection-title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333;
+    margin: 20px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #ddd;
+}
+
+/* Pain information boxes */
+.medical-columns-section .pain-area-box {
+    background-color: #f8f9fa;
+    padding: 12px;
+    border-radius: 6px;
+    margin: 12px 0;
+}
+
+.medical-columns-section .pain-area {
+    font-size: 14px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+/* Warning sections */
+.medical-columns-section .warning-section {
+    background-color: #fff8e1;
+    border-left: 4px solid #f57f17;
+    padding: 16px;
+    margin: 16px 0;
+}
+
+.medical-columns-section .warning-title {
+    color: #f57f17;
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+}
+
+/* Contact information */
+.medical-columns-section .contact-list {
+    list-style: none;
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.medical-columns-section .contact-item {
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #ddd;
+}
+
+.medical-columns-section .contact-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.medical-columns-section .contact-link {
+    color: #4a90e2;
+    text-decoration: underline;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+/* Fee list */
+.medical-columns-section .fee-list {
+    list-style: none;
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    margin: 16px 0;
+}
+
+.medical-columns-section .fee-item {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 8px;
+    padding: 4px 0;
+}
+
 /* ===== フッター ===== */
 .site-footer {
     background-color: #2c3e50;
@@ -4555,4 +4846,47 @@ section {
 
 .card-list li:last-child {
     border-bottom: none;
+}
+/* 医療情報コラムセクションのモバイル対応 */
+@media (max-width: 375px) {
+    .medical-columns-section {
+        padding: 20px 0;
+    }
+    
+    .medical-columns-section .columns-container {
+        padding: 10px;
+        max-width: 375px;
+    }
+    
+    .medical-columns-section .header-image {
+        height: 150px;
+    }
+    
+    .medical-columns-section .article-title {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    
+    .medical-columns-section .toc-title,
+    .medical-columns-section .section-title {
+        font-size: 16px;
+    }
+    
+    .medical-columns-section .toc-link {
+        font-size: 13px;
+    }
+    
+    .medical-columns-section .section-content {
+        font-size: 13px;
+    }
+    
+    .medical-columns-section .table-header th,
+    .medical-columns-section .table-row td {
+        font-size: 11px;
+        padding: 8px 4px;
+    }
+    
+    .medical-columns-section .subsection-title {
+        font-size: 14px;
+    }
 }
