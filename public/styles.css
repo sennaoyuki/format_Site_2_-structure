@@ -3998,25 +3998,52 @@ section {
     
     .ranking-container {
         display: flex;
-        flex-direction: column;
-        gap: 15px;
+        flex-wrap: nowrap;
+        gap: 4px;
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .ranking-item {
-        width: 100%;
-        max-width: 100%;
-        margin: 0 auto;
+        width: calc((100% - 8px) / 3);
+        min-width: 115px;
+        max-width: 120px;
+        margin: 0;
         box-sizing: border-box;
+        flex-shrink: 0;
     }
     
     .clinic-card {
-        padding: 15px;
+        padding: 8px;
         margin: 0;
         box-sizing: border-box;
+        font-size: 12px;
+    }
+    
+    .clinic-logo {
+        font-size: 11px;
+        font-weight: bold;
+    }
+    
+    .price-info {
+        font-size: 10px;
+        margin: 8px 0;
+    }
+    
+    .ranking-item .clinic-cta-button {
+        width: 100%;
+        padding: 6px 4px;
+        font-size: 9px;
+        box-sizing: border-box;
+    }
+    
+    .ranking-item .cta-text {
+        font-size: 9px;
+        line-height: 1.2;
     }
     
     /* 375px専用: 比較セクション */
