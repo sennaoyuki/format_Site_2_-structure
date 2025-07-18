@@ -398,8 +398,8 @@
     border: 1px solid #d9d9d9;
     padding: 0px 10px 10px 10px;
     margin: 0px auto 20px;
-    max-width: 640px;
-    width: calc(100% - 30px);
+    max-width: 100%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -2341,9 +2341,9 @@ section {
     }
     
     .clinic-points-section .ribbon_point_box_no {
-        width: calc(100% - 20px);
+        width: 100%;
         padding: 0px 8px 8px 8px;
-        margin: 0px auto 15px;
+        margin: 0px 0 15px;
     }
     
     .clinic-points-section .ribbon_point_title2_s {
@@ -3142,7 +3142,7 @@ section {
     }
     
     .clinic-points-section .ribbon_point_box_no {
-        width: calc(100% - 16px);
+        width: 100%;
         padding: 0px 6px 6px 6px;
     }
     
@@ -3418,8 +3418,8 @@ section {
     border: 1px solid #d9d9d9;
     padding: 0px 10px 10px 10px;
     margin: 0px auto 20px;
-    max-width: 1200px;
-    width: calc(100% - 30px);
+    max-width: 100%;
+    width: 100%;
     box-sizing: border-box;
 }
 
@@ -3489,9 +3489,9 @@ section {
     }
     
     .ribbon_point_box_no {
-        width: calc(100% - 20px);
+        width: 100%;
         padding: 0px 8px 8px 8px;
-        margin: 0px auto 15px;
+        margin: 0px 0 15px;
     }
     
     .ribbon_point_title2_s {
@@ -3535,7 +3535,7 @@ section {
     }
     
     .ribbon_point_box_no {
-        width: calc(100% - 16px);
+        width: 100%;
         padding: 0px 6px 6px 6px;
     }
     
