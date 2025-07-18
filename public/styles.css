@@ -3366,3 +3366,208 @@ section {
         font-size: 0.55rem;
     }
 }
+
+/* ===== POINTセクション ===== */
+.point-section {
+    background-color: #ffffff;
+    padding: 20px 0 40px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.point-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.point-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+    letter-spacing: 2px;
+    position: relative;
+    display: inline-block;
+}
+
+.point-title::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    border-radius: 2px;
+}
+
+.point-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.point-item {
+    background: linear-gradient(135deg, #ffe8f5 0%, #fff0f8 100%);
+    border: 2px solid #ff69b4;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(255, 105, 180, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.point-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 105, 180, 0.15);
+}
+
+.point-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #ff69b4, #ff1493);
+    border-radius: 50%;
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.point-item-title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0 0 12px 0;
+    line-height: 1.4;
+}
+
+.point-item-description {
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.point-official-link {
+    margin-top: 25px;
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid #e9ecef;
+}
+
+.official-label {
+    font-weight: 700;
+    color: #ff1493;
+    margin-right: 8px;
+    font-size: 0.9rem;
+}
+
+.official-link {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    word-break: break-all;
+}
+
+.official-link:hover {
+    text-decoration: underline;
+    color: #0056b3;
+}
+
+/* モバイル最適化（375px基準） */
+@media (max-width: 768px) {
+    .point-section {
+        padding: 15px 0 30px;
+    }
+    
+    .point-title {
+        font-size: 1.5rem;
+        letter-spacing: 1px;
+    }
+    
+    .point-title::after {
+        width: 50px;
+        height: 2px;
+        bottom: -6px;
+    }
+    
+    .point-container {
+        padding: 0 10px;
+    }
+    
+    .point-item {
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 12px;
+    }
+    
+    .point-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+        margin-bottom: 12px;
+    }
+    
+    .point-item-title {
+        font-size: 1rem;
+        margin-bottom: 10px;
+        line-height: 1.3;
+    }
+    
+    .point-item-description {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+    
+    .point-official-link {
+        margin-top: 20px;
+        padding: 12px;
+        border-radius: 8px;
+    }
+    
+    .official-label {
+        font-size: 0.8rem;
+        margin-right: 6px;
+    }
+    
+    .official-link {
+        font-size: 0.8rem;
+    }
+}
+
+/* 375px幅での完璧な表示 */
+@media (max-width: 375px) {
+    .point-section {
+        padding: 12px 0 25px;
+    }
+    
+    .point-title {
+        font-size: 1.4rem;
+    }
+    
+    .point-container {
+        padding: 0 8px;
+    }
+    
+    .point-item {
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+    
+    .point-item-title {
+        font-size: 0.95rem;
+    }
+    
+    .point-item-description {
+        font-size: 0.8rem;
+    }
+}
