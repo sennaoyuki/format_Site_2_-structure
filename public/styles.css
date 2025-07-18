@@ -4176,6 +4176,27 @@ section {
     }
 }
 
+/* ランキング名リンクスタイル */
+.ranking__name {
+    margin: 8px 0;
+}
+
+.ranking__name a {
+    color: #333;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: normal;
+    display: inline-block;
+    padding: 2px 0;
+    border-bottom: none;
+    transition: color 0.3s ease;
+}
+
+.ranking__name a:hover {
+    color: #ec4899;
+    text-decoration: none;
+}
+
 /* 店舗情報セクション - brand-sectionスタイル */
 .brand-section-wrapper {
     padding: 20px 8px;
