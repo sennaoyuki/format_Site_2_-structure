@@ -57,7 +57,7 @@
                 <button class="slider-nav next-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background-color: #999; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; z-index: 10; transition: all 0.3s ease;">❯</button>
                 
                 <!-- コンテナの高さを幅の1.6倍に制限 -->
-                <div style="width: 100%; padding-bottom: 160%; position: relative;">
+                <div style="width: 100%; padding-bottom: 140%; position: relative;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column;">
                         <!-- タブナビゲーション -->
                         <div class="tabs" style="display: flex; gap: 5px; margin-bottom: 0; height: 10%;">
@@ -79,37 +79,63 @@
                                 <div class="slider-track" style="display: flex; transition: transform 0.3s ease;">
                             <!-- スライド1: 包茎のリスク -->
                             <div class="slide" style="min-width: 100%; padding: 0 10px;">
-                                <div style="background-color: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    <p style="font-size: 16px; line-height: 1.8; color: #333; margin-bottom: 20px;">
-                                        包茎の状態を放置すると、様々な健康上の問題が生じる可能性があります。清潔を保ちにくい環境により、細菌が繁殖しやすくなり、以下のようなリスクが高まります。
+                                <div style="background-color: white; padding: 15px; border-radius: 8px;">
+                                    <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">【すぐ手術をしないと手遅れに？】<br>包茎は色んなリスクが高まる？</h2>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
+                                        包茎はタイプによって様々なリスクを孕んでいます。<span style="background-color: #FFE082; padding: 1px 4px;">特にカントン包茎はリンパのうっ滞や最悪の場合は亀頭の壊死につながる恐れも。</span>真性や仮性も感染症や炎症を起こす可能性があるため早めの手術が推奨されています。
                                     </p>
                                     
-                                    <div style="margin: 20px 0;">
-                                        <h4 style="background-color: #2B5797; color: white; font-size: 16px; padding: 10px 15px; margin-bottom: 15px; border-radius: 4px;">主なリスク</h4>
-                                        <ul style="list-style: none; padding: 0;">
-                                            <li style="padding: 10px 0; display: flex; align-items: flex-start;">
-                                                <span style="color: #D32F2F; font-size: 16px; margin-right: 10px;">●</span>
-                                                <span style="font-size: 15px; line-height: 1.6;"><strong>亀頭包皮炎</strong> - 亀頭と包皮の間に細菌が繁殖し、炎症を起こすことがあります</span>
-                                            </li>
-                                            <li style="padding: 10px 0; display: flex; align-items: flex-start;">
-                                                <span style="color: #D32F2F; font-size: 16px; margin-right: 10px;">●</span>
-                                                <span style="font-size: 15px; line-height: 1.6;"><strong>性感染症リスクの増加</strong> - 粘膜が傷つきやすく、感染症にかかりやすくなります</span>
-                                            </li>
-                                            <li style="padding: 10px 0; display: flex; align-items: flex-start;">
-                                                <span style="color: #D32F2F; font-size: 16px; margin-right: 10px;">●</span>
-                                                <span style="font-size: 15px; line-height: 1.6;"><strong>陰茎がんのリスク</strong> - 恥垢の蓄積により、発がんリスクが高まる可能性があります</span>
-                                            </li>
-                                            <li style="padding: 10px 0; display: flex; align-items: flex-start;">
-                                                <span style="color: #D32F2F; font-size: 16px; margin-right: 10px;">●</span>
-                                                <span style="font-size: 15px; line-height: 1.6;"><strong>パートナーへの影響</strong> - 細菌感染により、パートナーの健康にも影響を与える可能性があります</span>
-                                            </li>
-                                        </ul>
+                                    <div style="background-color: #F5F5F5; padding: 10px; border-radius: 6px; margin-bottom: 15px;">
+                                        <h3 style="font-size: 16px; margin-bottom: 10px; text-align: center;">《包茎の種類とリスク》</h3>
+                                        <table style="width: 100%; border-collapse: separate; border-spacing: 0; background-color: white; border: 1px solid #E0E0E0; border-radius: 4px; overflow: hidden;">
+                                            <thead>
+                                                <tr style="background-color: #F8F8F8;">
+                                                    <th style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; width: 15%; text-align: center;">
+                                                        <div style="width: 30px; height: 30px; background-color: #5C9DD5; border-radius: 50%; display: inline-flex; align-items: center; justify-content: center; color: white; font-size: 20px; font-weight: bold;">+</div>
+                                                    </th>
+                                                    <th style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; width: 20%; font-size: 14px; color: #666;">種類</th>
+                                                    <th style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; width: 45%; font-size: 14px; color: #666;">症状</th>
+                                                    <th style="padding: 8px; border-bottom: 1px solid #E0E0E0; width: 20%; text-align: center;">
+                                                        <div style="display: inline-flex; align-items: center; justify-content: center;">
+                                                            <div style="width: 0; height: 0; border-left: 15px solid transparent; border-right: 15px solid transparent; border-bottom: 25px solid #FFB74D; position: relative;">
+                                                                <span style="position: absolute; top: 8px; left: -3px; font-size: 16px; color: #333;">!</span>
+                                                            </div>
+                                                        </div>
+                                                    </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; text-align: center;">
+                                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTUiIGZpbGw9IiNFM0YyRkQiLz4KPHBhdGggZD0iTTIwIDEwVjMwIiBzdHJva2U9IiMxOTc2RDIiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=" alt="仮性" style="width: 40px; height: 40px;">
+                                                    </td>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; font-size: 14px; font-weight: bold;">仮性</td>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; font-size: 13px;">普段は露出無し</td>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; text-align: center; font-size: 13px; color: #4CAF50;">性病/勃起不全<br><span style="font-size: 11px;">になる可能性</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; text-align: center;">
+                                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTUiIGZpbGw9IiNGRkU5RTYiLz4KPHBhdGggZD0iTTIwIDEwVjMwIiBzdHJva2U9IiNGRjY1NDciIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=" alt="真性" style="width: 40px; height: 40px;">
+                                                    </td>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; font-size: 14px; font-weight: bold;">真性</td>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; border-right: 1px solid #E0E0E0; font-size: 13px;">亀頭が出ない<br>包皮が癒着</td>
+                                                    <td style="padding: 8px; border-bottom: 1px solid #E0E0E0; text-align: center; font-size: 13px; color: #FF9800;">泌尿器疾患<br><span style="font-size: 11px;">になる可能性</span></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding: 8px; border-right: 1px solid #E0E0E0; text-align: center;">
+                                                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTUiIGZpbGw9IiNGRkVCRUUiLz4KPHBhdGggZD0iTTIwIDEwVjMwIiBzdHJva2U9IiNGNDQzMzYiIHN0cm9rZS13aWR0aD0iMiIvPgo8L3N2Zz4=" alt="カントン" style="width: 40px; height: 40px;">
+                                                    </td>
+                                                    <td style="padding: 8px; border-right: 1px solid #E0E0E0; font-size: 14px; font-weight: bold;">カントン</td>
+                                                    <td style="padding: 8px; border-right: 1px solid #E0E0E0; font-size: 13px;">皮が戻らない<br>締め付けられる</td>
+                                                    <td style="padding: 8px; text-align: center; font-size: 13px; color: #F44336;">亀頭が壊死<br><span style="font-size: 11px;">する可能性</span></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
                                     </div>
 
-                                    <div style="background-color: #FFF9E6; padding: 15px; border-radius: 6px; margin-top: 20px;">
-                                        <p style="margin: 0; color: #333; font-size: 14px; line-height: 1.8;">
-                                            <strong>※早期の診断・治療が重要です</strong><br>
-                                            症状が悪化する前に、専門医による適切な診断を受けることをおすすめします。包茎の程度や種類によって治療方法も異なるため、まずは医療機関でご相談ください。
+                                    <div style="background-color: #FFF9E6; padding: 12px; border-radius: 6px; border-left: 4px solid #FFB300;">
+                                        <p style="margin: 0; color: #333; font-size: 13px; line-height: 1.6;">
+                                            包茎は大人になってからの自然に解消することはありません。<strong>気になった時が手術を始めるタイミングです。</strong>
                                         </p>
                                     </div>
                                 </div>
