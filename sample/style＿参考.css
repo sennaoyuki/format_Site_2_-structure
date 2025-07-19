@@ -246,7 +246,7 @@ height: 100vh;
 #review_tab_box .review_tab2 ul li,
 #review_tab_box .review_tab3 ul li,
 #review_tab_box .review_tab4 ul li,
-#review_tab_box .review_tab5 ul li{display:-webkit-box; display:-ms-flexbox; display:flex; -webkit-box-align:center; -ms-flex-align:center; align-items:center; width:calc(230 / 710 * 100%); line-height:1; font-weight:bold; border-radius:10px 10px 0 0; background-color:#d0d0d0; color:#ffffff; font-size:14px; text-align:center; display:block; text-decoration:none; padding:7px 0 5px;}
+#review_tab_box .review_tab5 ul li{display:-webkit-box; display:-ms-flexbox; display:flex; -webkit-box-align:center; -ms-flex-align:center; align-items:center; width:calc(230 / 710 * 100%); line-height:1; font-weight:bold; border-radius:10px 10px 0 0; background-color:#d0d0d0; color:#ffffff; font-size:14px; text-align:center; display:block; text-decoration:none; padding:7px 0 5px; border:1px solid #999999; border-bottom:none;}
 
 #review_tab_box .review_tab ul li img,
 #review_tab_box .review_tab2 ul li img,
