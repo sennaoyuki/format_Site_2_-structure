@@ -427,8 +427,7 @@ class RankingApp {
             
             tr.innerHTML = `
                 <td class="ranking-table_td1">
-                    <img src="${clinic.logo}" alt="${clinic.name}" width="80">
-                    <br>
+                    <img src="${clinic.logo || 'img/clinic-default.png'}" alt="${clinic.name}" width="80">
                     <a href="#clinic${clinic.rank}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td>

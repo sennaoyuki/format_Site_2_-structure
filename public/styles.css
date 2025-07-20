@@ -1871,10 +1871,11 @@ section {
 .js-cbn-table table th,
 .js-cbn-table table td {
     text-align: center !important;
-    padding: 8px 2px;
+    padding: 10px 8px;
     border-right: 1px solid #cfcfcf;
     vertical-align: middle;
     font-weight: bold;
+    white-space: normal;
 }
 
 .js-cbn-table table td {
@@ -1882,7 +1883,8 @@ section {
     border-top: none; 
     border-left: none;
     font-size: 10px;
-    height: 80px;
+    min-height: 80px;
+    height: auto;
 }
 
 .js-cbn-table table thead th {
@@ -1920,6 +1922,29 @@ section {
 
 .js-cbn-table table tbody td:nth-of-type(1) {
     font-size: 11px;
+    vertical-align: middle;
+}
+
+/* クリニック名セルの修正 */
+.js-cbn-table .ranking-table_td1 {
+    padding: 15px 10px;
+    text-align: center;
+}
+
+.js-cbn-table .ranking-table_td1 img {
+    max-width: 80px;
+    height: auto;
+    display: block;
+    margin: 0 auto 8px;
+}
+
+.js-cbn-table .ranking-table_td1 .clinic-link {
+    display: block;
+    font-size: 11px;
+    color: #333;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 1.3;
 }
 
 .js-cbn-table table tbody td:nth-of-type(2) .ranking_evaluation {
@@ -2017,9 +2042,60 @@ section {
 }
 
 /* 幅調整用クラス */
-.td-width1 { width: 95px; }
-.td-width2 { width: 80px; }
-.td-width3 { width: 70px; }
+.td-width1 { width: 150px; }
+.td-width2 { width: 120px; }
+.td-width3 { width: 140px; }
+
+/* 評価セルのスタイル調整 */
+.js-cbn-table .ranking_evaluation {
+    display: block;
+    font-size: 16px;
+    font-weight: bold;
+    color: #ff6600;
+    margin-bottom: 4px;
+}
+
+/* 月額料金のスタイル */
+.js-cbn-table .fs10 {
+    font-size: 10px;
+    color: #666;
+}
+
+.js-cbn-table .division {
+    display: block;
+    line-height: 1.2;
+}
+
+/* 比較表のレスポンシブ対応 */
+.js-cbn-table {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* 比較表コンテナの最小幅 */
+.js-cbn-table table {
+    min-width: 800px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .js-cbn-table table {
+        font-size: 11px;
+    }
+    
+    .js-cbn-table table th,
+    .js-cbn-table table td {
+        padding: 8px 4px;
+    }
+    
+    .js-cbn-table .ranking-table_td1 img {
+        max-width: 60px;
+    }
+    
+    .td-width1 { width: 120px; }
+    .td-width2 { width: 100px; }
+    .td-width3 { width: 120px; }
+}
 
 /* クリニック名セル */
 .clinic-name-cell {
