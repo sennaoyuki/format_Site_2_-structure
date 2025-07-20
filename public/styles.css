@@ -890,7 +890,6 @@
     font-weight: bold;
     text-decoration: none;
     text-align: center;
-    margin: 5px;
     display: block;
 }
 
@@ -1118,7 +1117,7 @@
 
     .btn-arrow {
         width: 20px;
-        height: 20px;
+        height: 0px;
         font-size: 12px;
     }
 }
@@ -2993,7 +2992,6 @@ section {
     
     section {
         width: 100%;
-        padding: 0 10px;
         box-sizing: border-box;
     }
     
@@ -3088,7 +3086,6 @@ section {
     
     /* メインビジュアル */
     .hero-section {
-        padding: 40px 10px 30px;
         margin-bottom: 20px;
     }
     
@@ -3336,7 +3333,6 @@ section {
     }
 
     section {
-        padding: 20px;
     }
 
     .filter-container {
@@ -5042,7 +5038,7 @@ section {
     }
     
     .tips-container .slide {
-        padding: 0 10px !important;
+        padding: 0 0px !important;
     }
     
     .tips-container .slider-nav {
