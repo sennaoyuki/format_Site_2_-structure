@@ -173,68 +173,35 @@
                     <h3 class="comparison-subtitle">医療痩身クリニック一覧</h3>
                 </div>
                 
-                <!-- タブナビゲーション -->
-                <div class="comparison-tabs">
-                    <button class="tab-button active" data-tab="general">総合</button>
-                    <button class="tab-button" data-tab="treatment">施術内容</button>
-                    <button class="tab-button" data-tab="service">サービス</button>
-                </div>
-                
-                <!-- 比較表コンテンツ -->
-                <div class="comparison-content">
-                    <!-- 総合タブ -->
-                    <div id="general-tab" class="tab-content active">
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>クリニック</th>
-                                    <th>総合評価</th>
-                                    <th>実績</th>
-                                    <th>特典</th>
-                                    <th>公式サイト</th>
-                                </tr>
-                            </thead>
-                            <tbody id="general-tbody">
-                                <!-- JavaScriptで動的に生成 -->
-                            </tbody>
-                        </table>
+                <div class="js-cbn-table" id="tab-menu">
+                    <div class="tab-menu">
+                        <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
+                        <div class="tab-menu-item" data-tab="tab2">プラン</div>
+                        <div class="tab-menu-item" data-tab="tab3">機器</div>
+                        <div class="tab-menu-item" data-tab="tab4">サービス</div>
                     </div>
-                    
-                    <!-- 施術内容タブ -->
-                    <div id="treatment-tab" class="tab-content">
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>クリニック名</th>
-                                    <th>人気プラン</th>
-                                    <th>医療機器</th>
-                                    <th>注射治療</th>
-                                    <th>公式サイト</th>
-                                </tr>
-                            </thead>
-                            <tbody id="treatment-tbody">
-                                <!-- JavaScriptで動的に生成 -->
-                            </tbody>
-                        </table>
-                    </div>
-                    
-                    <!-- サービスタブ -->
-                    <div id="service-tab" class="tab-content">
-                        <table class="comparison-table">
-                            <thead>
-                                <tr>
-                                    <th>クリニック名</th>
-                                    <th>食事指導</th>
-                                    <th>モニター割引</th>
-                                    <th>全額返金保証</th>
-                                    <th>公式サイト</th>
-                                </tr>
-                            </thead>
-                            <tbody id="service-tbody">
-                                <!-- JavaScriptで動的に生成 -->
-                            </tbody>
-                        </table>
-                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th class="ranking-table_td1 td-width3">クリニック</th>
+                                <th class="">総合評価</th>
+                                <th class="">医療HIFU</th>
+                                <th class="td-width2 th-none">脂肪冷却</th>
+                                <th class="th-none">GLP-1</th>
+                                <th class="td-width1">特徴</th>
+                                <th class="th-none">医療機器</th>
+                                <th class="td-width2 th-none">機器名</th>
+                                <th class="td-width2 th-none">特徴</th>
+                                <th class="th-none">食事指導</th>
+                                <th class="th-none">保証</th>
+                                <th class="th-none td-width1">その他</th>
+                                <th class="td-width3">詳細</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-tbody">
+                            <!-- JavaScriptで動的に生成 -->
+                        </tbody>
+                    </table>
                 </div>
             </section>
 
@@ -760,6 +727,52 @@
     <script src="data-manager.js"></script>
     <script src="app.js"></script>
     <script>
+        // 比較表のタブ切り替え機能
+        document.addEventListener('DOMContentLoaded', function() {
+            const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+            const thElements = document.querySelectorAll('.js-cbn-table th');
+            const tdElements = document.querySelectorAll('.js-cbn-table td');
+            
+            tabMenuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // すべてのタブを非アクティブに
+                    tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
+                    // クリックしたタブをアクティブに
+                    this.classList.add('tab-active');
+                    
+                    // タブに応じて表示列を切り替え
+                    const tabType = this.getAttribute('data-tab');
+                    
+                    // すべての列を一旦非表示に
+                    thElements.forEach(th => {
+                        if (th.classList.contains('th-none')) {
+                            th.style.display = 'none';
+                        }
+                    });
+                    tdElements.forEach(td => {
+                        if (td.classList.contains('td-none')) {
+                            td.style.display = 'none';
+                        }
+                    });
+                    
+                    // タブに応じて必要な列を表示
+                    if (tabType === 'tab2' || tabType === 'tab3' || tabType === 'tab4') {
+                        // プラン、機器、サービスタブの場合は追加の列を表示
+                        thElements.forEach(th => {
+                            if (th.classList.contains('th-none')) {
+                                th.style.display = 'table-cell';
+                            }
+                        });
+                        tdElements.forEach(td => {
+                            if (td.classList.contains('td-none')) {
+                                td.style.display = 'table-cell';
+                            }
+                        });
+                    }
+                });
+            });
+        });
+
         // Smooth scrolling for table of contents links in medical columns
         document.querySelectorAll('.medical-columns-section .toc-link').forEach(link => {
             link.addEventListener('click', function(e) {

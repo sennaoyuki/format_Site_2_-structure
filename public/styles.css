@@ -1807,44 +1807,34 @@ section {
 }
 
 /* タブナビゲーション */
-.comparison-tabs {
+.tab-menu {
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    margin-bottom: 0;
-    background: linear-gradient(to bottom, #f8fbff 0%, #e8f4ff 100%);
-    border: 1px solid #90caf9;
-    border-radius: 10px 10px 0 0;
-    padding: 8px;
-    gap: 5px;
+    width: 98%;
+    margin: 0 auto;
 }
 
-.tab-button {
-    background: white;
-    border: 1px solid #64b5f6;
-    border-radius: 8px;
-    padding: 12px 35px;
-    font-size: 1rem;
-    font-weight: 600;
-    color: #1976d2;
+.tab-menu .tab-menu-item {
+    border-radius: 5px 5px 0 0;
+    border-left: 2px solid #4ecad1;
+    border-right: 2px solid #4ecad1;
+    border-top: 2px solid #4ecad1;
+    width: 24%;
+    text-align: center;
+    padding: 9px 0 7px;
+    font-weight: bold;
+    box-sizing: border-box;
+    font-size: 14px;
     cursor: pointer;
-    position: relative;
+    background: #fff;
     transition: all 0.3s;
-    box-shadow: 0 2px 4px rgba(25, 118, 210, 0.1);
 }
 
-.tab-button:hover {
-    background: #e3f2fd;
-    color: #0d47a1;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.2);
-}
-
-.tab-button.active {
-    background: linear-gradient(to bottom, #2196f3, #1976d2);
-    color: white;
-    border-color: #1976d2;
-    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
+.tab-menu-item.tab-active {
+    background: #4ecad1;
+    color: #fff;
+    pointer-events: none;
 }
 
 
@@ -1858,46 +1848,178 @@ section {
 }
 
 /* 比較表スタイル */
-.comparison-table {
-    width: 100%;
+.js-cbn-table table {
+    border-top: 3px solid #4ecad1;
+    table-layout: fixed;
     border-collapse: collapse;
-    margin-top: 0;
-    background: #fafafa;
+    width: 100%;
 }
 
-.comparison-table thead {
-    background: #8dd4e8;
-    color: white;
+.th-none,
+.td-none {
+    display: none;
+    visibility: hidden;
+    width: 0;
 }
 
-.comparison-table th {
-    padding: 15px;
-    text-align: center;
-    font-weight: 600;
-    font-size: 0.95rem;
-    border: 1px solid #7dc5d9;
+.js-cbn-table table,
+.js-cbn-table thead,
+.js-cbn-table tbody {
+    width: 100%;
 }
 
-.comparison-table th:first-child {
-    width: 25%;
-    background: #5fbfdb;
-}
-
-.comparison-table tbody tr {
-    background: white;
-    border-bottom: 1px solid #f0f0f0;
-}
-
-.comparison-table tbody tr:nth-child(odd) {
-    background: #fefef4;
-}
-
-.comparison-table td {
-    padding: 20px 15px;
-    text-align: center;
+.js-cbn-table table th,
+.js-cbn-table table td {
+    text-align: center !important;
+    padding: 8px 2px;
+    border-right: 1px solid #cfcfcf;
     vertical-align: middle;
-    border: 1px solid #f0f0f0;
+    font-weight: bold;
 }
+
+.js-cbn-table table td {
+    border-bottom: 1px solid #cfcfcf;
+    border-top: none; 
+    border-left: none;
+    font-size: 10px;
+    height: 80px;
+}
+
+.js-cbn-table table thead th {
+    background: #f3f3f3;
+    font-size: 11px;
+}
+
+.js-cbn-table table tbody tr:first-child {
+    background: #fffbdc;
+    height: 120px;
+}
+
+/* エミナルクリニックの王冠マーク */
+.js-cbn-table tbody tr:first-child td:first-child {
+    position: relative;
+}
+
+.js-cbn-table tbody tr:first-child td:first-child::after {
+    content: "";
+    display: block;
+    width: 23px;
+    height: 16px;
+    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjMiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMyAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNSAxNkw3LjUgOEwzIDEwTDAgNEw0LjUgOEw3LjUgMEwxMC41IDhMMTUgNEwxMiAxMEw3LjUgOEwxMC41IDE2SDE1TDE4LjUgOEwyMiAxNkgxOC41TDE1IDhMMTguNSAwTDIyIDRMMTkgMTBMMTguNSA4TDE1IDE2SDEwLjVaIiBmaWxsPSIjRkZENzAwIi8+Cjwvc3ZnPg==');
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.js-cbn-table table tbody tr:first-child td:nth-of-type(2) {
+    color: #f50000;
+}
+
+.js-cbn-table table tbody td:nth-of-type(1) {
+    font-size: 11px;
+}
+
+.js-cbn-table table tbody td:nth-of-type(2) .ranking_evaluation {
+    font-size: 13px;
+}
+
+.js-cbn-table table thead th:last-child,
+.js-cbn-table table tbody td:last-child {
+    border-right: none !important;
+}
+
+/* 星評価のスタイル */
+.star5_rating {
+    position: relative;
+    z-index: 0;
+    display: inline-block;
+    white-space: nowrap;
+    color: #CCCCCC;
+}
+
+.star5_rating:before,
+.star5_rating:after {
+    content: '★★★★★';
+}
+
+.star5_rating:after {
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #f77c00;
+}
+
+.star5_rating[data-rate="5"]:after { width: 100%; }
+.star5_rating[data-rate="4.9"]:after { width: 98%; }
+.star5_rating[data-rate="4.8"]:after { width: 96%; }
+.star5_rating[data-rate="4.7"]:after { width: 94%; }
+.star5_rating[data-rate="4.6"]:after { width: 92%; }
+.star5_rating[data-rate="4.5"]:after { width: 90%; }
+
+/* ボタンスタイル */
+.js-cbn-table .link_btn {
+    display: inline-block;
+    background: #ff6b6b;
+    color: white;
+    text-decoration: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin-bottom: 8px;
+    transition: all 0.3s;
+}
+
+.js-cbn-table .link_btn:hover {
+    background: #ff5252;
+    transform: translateY(-2px);
+}
+
+.js-cbn-table .detail_btn {
+    display: inline-block;
+    background: white;
+    color: #333;
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid #ddd;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    transition: all 0.3s;
+}
+
+.js-cbn-table .detail_btn:hover {
+    background: #f5f5f5;
+}
+
+/* 良い・普通・悪いの記号 */
+.sogood {
+    color: #ff4458;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.good {
+    color: #4CAF50;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.soso {
+    color: #FF9800;
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+/* 幅調整用クラス */
+.td-width1 { width: 95px; }
+.td-width2 { width: 80px; }
+.td-width3 { width: 70px; }
 
 /* クリニック名セル */
 .clinic-name-cell {

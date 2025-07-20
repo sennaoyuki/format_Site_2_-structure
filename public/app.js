@@ -403,16 +403,69 @@ class RankingApp {
             }
         });
 
-        // 各タブの内容を生成
-        this.generateGeneralTab(rankedClinics);
-        this.generateTreatmentTab(rankedClinics);
-        this.generateServiceTab(rankedClinics);
-
-        // タブ切り替え機能の設定
-        this.setupTabSwitching();
+        // 比較表の内容を生成
+        this.generateComparisonTable(rankedClinics);
         
         // レビュータブ切り替え機能の設定
         this.setupReviewTabs();
+    }
+
+    // 比較表の生成
+    generateComparisonTable(clinics) {
+        const tbody = document.getElementById('comparison-tbody');
+        if (!tbody) return;
+        
+        tbody.innerHTML = '';
+
+        clinics.forEach((clinic, index) => {
+            const tr = document.createElement('tr');
+            
+            // 1位のクリニックには特別な背景色
+            if (index === 0) {
+                tr.style.backgroundColor = '#fffbdc';
+            }
+            
+            tr.innerHTML = `
+                <td class="ranking-table_td1">
+                    <img src="${clinic.logo}" alt="${clinic.name}" width="80">
+                    <br>
+                    <a href="#clinic${clinic.rank}" class="clinic-link">${clinic.name}</a>
+                </td>
+                <td>
+                    <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
+                    <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
+                </td>
+                <td>
+                    <b class="sogood">◎</b>${clinic.hifu_price || '49,800円'}<br>
+                    <span class="fs10 division">(月々${clinic.hifu_monthly || '1,000円'}~)</span>
+                </td>
+                <td class="td-none">
+                    <b class="good">〇</b>${clinic.cooling_price || '68,000円'}<br>
+                    <span class="fs10 division">(月々${clinic.cooling_monthly || '1,400円'}~)</span>
+                </td>
+                <td class="td-none">
+                    ${clinic.glp1_price ? `<b class="good">〇</b>${clinic.glp1_price}` : 'プランなし'}
+                </td>
+                <td>${clinic.feature || 'コスパ重視！最新機器で効率よく痩身'}</td>
+                <td class="td-none">
+                    <img src="${clinic.machine_image || 'img/machine-default.jpg'}" alt="医療機器" width="60">
+                </td>
+                <td class="td-none">
+                    ${clinic.machine_name || 'HIFU機器'}<br>
+                    <span class="machine-detail">詳しく見る></span>
+                </td>
+                <td class="td-none">${clinic.machine_feature || '最新の痩身技術'}</td>
+                <td class="td-none">${clinic.diet_support || '〇'}</td>
+                <td class="td-none">${clinic.guarantee || '返金保証あり'}</td>
+                <td class="td-none">${clinic.other_service || 'カウンセリング無料'}</td>
+                <td>
+                    <a class="link_btn" href="${clinic.url}" target="_blank">公式サイト</a>
+                    <a class="detail_btn" href="#clinic${clinic.rank}">詳細をみる</a>
+                </td>
+            `;
+            
+            tbody.appendChild(tr);
+        });
     }
 
     // クリニック名の表示形式を取得
