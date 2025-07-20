@@ -1813,39 +1813,41 @@ section {
     justify-content: center;
     align-items: center;
     margin-bottom: 0;
-    border-bottom: 2px solid #f0f0f0;
-    gap: 0;
+    background: linear-gradient(to bottom, #f8fbff 0%, #e8f4ff 100%);
+    border: 1px solid #90caf9;
+    border-radius: 10px 10px 0 0;
+    padding: 8px;
+    gap: 5px;
 }
 
 .tab-button {
     background: white;
-    border: none;
-    padding: 15px 40px;
+    border: 1px solid #64b5f6;
+    border-radius: 8px;
+    padding: 12px 35px;
     font-size: 1rem;
     font-weight: 600;
-    color: #666;
+    color: #1976d2;
     cursor: pointer;
     position: relative;
     transition: all 0.3s;
+    box-shadow: 0 2px 4px rgba(25, 118, 210, 0.1);
 }
 
 .tab-button:hover {
-    color: #ec4899;
+    background: #e3f2fd;
+    color: #0d47a1;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.2);
 }
 
 .tab-button.active {
-    color: #ec4899;
+    background: linear-gradient(to bottom, #2196f3, #1976d2);
+    color: white;
+    border-color: #1976d2;
+    box-shadow: 0 4px 8px rgba(25, 118, 210, 0.3);
 }
 
-.tab-button.active::after {
-    content: '';
-    position: absolute;
-    bottom: -2px;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: #ec4899;
-}
 
 /* タブコンテンツ */
 .tab-content {
