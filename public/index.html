@@ -52,10 +52,6 @@
 
             <!-- ユーザーの悩みを解消するためのTips -->
             <div class="container tips-container" style="max-width: 1200px; margin: 40px auto; padding: 0 60px; position: relative;">
-                <!-- スライダーナビゲーションボタン -->
-                <button class="slider-nav prev-btn" style="position: absolute; left: 10px; top: 50%; transform: translateY(-50%); background-color: #999; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; z-index: 10; transition: all 0.3s ease;">❮</button>
-                <button class="slider-nav next-btn" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); background-color: #999; color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 18px; cursor: pointer; z-index: 10; transition: all 0.3s ease;">❯</button>
-                
                 <!-- コンテナの高さを幅の1.6倍に制限 -->
                 <div style="width: 100%; padding-bottom: 140%; position: relative;">
                     <div style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; display: flex; flex-direction: column;">
@@ -279,8 +275,6 @@
                     const tabs = document.querySelectorAll('.tips-container .tab');
                     const slides = document.querySelectorAll('.tips-container .slide');
                     const indicators = document.querySelectorAll('.tips-container .indicator');
-                    const prevBtn = document.querySelector('.tips-container .prev-btn');
-                    const nextBtn = document.querySelector('.tips-container .next-btn');
                     const sliderTrack = document.querySelector('.tips-container .slider-track');
                     let currentSlide = 0;
 
@@ -323,26 +317,7 @@
                         indicator.addEventListener('click', () => updateSlider(index));
                     });
 
-                    // Navigation button handlers
-                    prevBtn.addEventListener('click', () => {
-                        const newIndex = currentSlide > 0 ? currentSlide - 1 : slides.length - 1;
-                        updateSlider(newIndex);
-                    });
 
-                    nextBtn.addEventListener('click', () => {
-                        const newIndex = currentSlide < slides.length - 1 ? currentSlide + 1 : 0;
-                        updateSlider(newIndex);
-                    });
-
-                    // Hover effects for navigation buttons
-                    [prevBtn, nextBtn].forEach(btn => {
-                        btn.addEventListener('mouseenter', () => {
-                            btn.style.backgroundColor = '#666';
-                        });
-                        btn.addEventListener('mouseleave', () => {
-                            btn.style.backgroundColor = '#999';
-                        });
-                    });
                 })();
             </script>
 
