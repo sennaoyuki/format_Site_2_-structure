@@ -67,66 +67,47 @@
                             </div>
                         </div>
 
-                        <!-- スライダーコンテナ -->
-                        <div class="slider-container" style="position: relative; background-color: #F5F5F5; border: 1px solid #DDD; border-radius: 0 0 8px 8px; overflow: hidden; flex: 1;">
-                            <!-- スライダーコンテンツ -->
-                            <div class="slider-content" style="padding: 10px 30px; height: 100%; overflow-y: auto;">
-                                <div class="slider-track" style="display: flex; transition: transform 0.3s ease;">
-                            <!-- スライド1: 医療痩身 -->
-                            <div class="slide" style="min-width: 100%; padding: 0 10px;">
-                                    <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">確実に痩せたいなら医療痩身</h2>
-                                    <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
-                                        本気で痩せたいなら医療痩身が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させるので痩せる仕組みで、リバウンドしにくい！と今人気急上昇中のダイエット法！
-                                    </p>
-                                </div>
+                        <!-- タブコンテンツコンテナ -->
+                        <div class="tab-contents" style="position: relative; background-color: #F5F5F5; border: 1px solid #DDD; border-radius: 0 0 8px 8px; overflow: hidden; flex: 1; padding: 20px;">
+                            <!-- タブ1: 医療痩身の効果 -->
+                            <div class="tab-content active" data-tab="0" style="display: block;">
+                                <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">確実に痩せたいなら医療痩身</h2>
+                                <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
+                                    本気で痩せたいなら医療痩身が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させるので痩せる仕組みで、リバウンドしにくい！と今人気急上昇中のダイエット法！
+                                </p>
                             </div>
 
-                            <!-- スライド2: クリニック選び -->
-                            <div class="slide" style="min-width: 100%; padding: 0 10px;">
-                                    <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">失敗しないためクリニック選びは？</h2>
-                                    <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
-                                        クリニック選びの失敗が理想の体型実現の失敗につながります。<br>
-                                        強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>
-                                        ☑️医師が直接診察する<br>
-                                        ☑️施術後のアフターケア<br>
-                                        ☑️料金を明確に説明する
-                                    </p>
-                                </div>
+                            <!-- タブ2: クリニック選び -->
+                            <div class="tab-content" data-tab="1" style="display: none;">
+                                <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">失敗しないためクリニック選びは？</h2>
+                                <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
+                                    クリニック選びの失敗が理想の体型実現の失敗につながります。<br>
+                                    強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>
+                                    ☑️医師が直接診察する<br>
+                                    ☑️施術後のアフターケア<br>
+                                    ☑️料金を明確に説明する
+                                </p>
                             </div>
 
-                            <!-- スライド3: 今がおすすめ -->
-                            <div class="slide" style="min-width: 100%; padding: 0 10px;">
-                                    <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">夏前の今が一番おすすめ</h2>
-                                    <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
-                                        夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。
-                                    </p>
+                            <!-- タブ3: 今がおすすめ -->
+                            <div class="tab-content" data-tab="2" style="display: none;">
+                                <h2 style="font-size: 20px; font-weight: bold; margin-bottom: 10px; text-align: center;">夏前の今が一番おすすめ</h2>
+                                <p style="font-size: 14px; line-height: 1.6; color: #333; margin-bottom: 15px;">
+                                    夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。
+                                </p>
                             </div>
-
-                        </div>
-
-                        <!-- スライダーインジケーター -->
-                        <div class="slider-indicators" style="display: flex; justify-content: center; gap: 8px; padding: 15px 0;">
-                            <button class="indicator active" data-slide="0" style="width: 10px; height: 10px; border-radius: 50%; border: none; background-color: #2B5797; cursor: pointer; transition: all 0.3s ease;"></button>
-                            <button class="indicator" data-slide="1" style="width: 10px; height: 10px; border-radius: 50%; border: none; background-color: #CCCCCC; cursor: pointer; transition: all 0.3s ease;"></button>
-                            <button class="indicator" data-slide="2" style="width: 10px; height: 10px; border-radius: 50%; border: none; background-color: #CCCCCC; cursor: pointer; transition: all 0.3s ease;"></button>
                         </div>
                     </div>
                 </div>
             </div>
 
             <script>
-                // Tips section tab and slider functionality
+                // Tips section tab functionality
                 (function() {
                     const tabs = document.querySelectorAll('.tips-container .tab');
-                    const slides = document.querySelectorAll('.tips-container .slide');
-                    const indicators = document.querySelectorAll('.tips-container .indicator');
-                    const sliderTrack = document.querySelector('.tips-container .slider-track');
-                    let currentSlide = 0;
+                    const tabContents = document.querySelectorAll('.tips-container .tab-content');
 
-                    function updateSlider(index) {
-                        currentSlide = index;
-                        sliderTrack.style.transform = `translateX(-${index * 100}%)`;
-                        
+                    function updateTabs(index) {
                         // Update tabs
                         tabs.forEach((tab, i) => {
                             if (i === index) {
@@ -140,29 +121,20 @@
                             }
                         });
                         
-                        // Update indicators
-                        indicators.forEach((indicator, i) => {
+                        // Update tab contents
+                        tabContents.forEach((content, i) => {
                             if (i === index) {
-                                indicator.classList.add('active');
-                                indicator.style.backgroundColor = '#2B5797';
+                                content.style.display = 'block';
                             } else {
-                                indicator.classList.remove('active');
-                                indicator.style.backgroundColor = '#CCCCCC';
+                                content.style.display = 'none';
                             }
                         });
                     }
 
                     // Tab click handlers
                     tabs.forEach((tab, index) => {
-                        tab.addEventListener('click', () => updateSlider(index));
+                        tab.addEventListener('click', () => updateTabs(index));
                     });
-
-                    // Indicator click handlers
-                    indicators.forEach((indicator, index) => {
-                        indicator.addEventListener('click', () => updateSlider(index));
-                    });
-
-
                 })();
             </script>
 
