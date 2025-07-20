@@ -2788,8 +2788,9 @@ section {
 #footer {
     clear: both;
     padding: 30px 0 0 0;
-    background-color: #ff6f6b;
+    background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
     margin-top: 60px;
+    border-top: 2px solid #64b5f6;
 }
 
 .footer_contents {
@@ -2814,11 +2815,13 @@ section {
 }
 
 .footer_contents a {
-    color: #fff;
+    color: #1976d2;
     text-decoration: none;
+    transition: color 0.3s ease;
 }
 
 .footer_contents a:hover {
+    color: #0d47a1;
     text-decoration: underline;
 }
 
@@ -2837,31 +2840,35 @@ section {
 }
 
 .footer_contents ul h5 {
-    color: #fff;
+    color: #0d47a1;
     font-weight: bold;
     margin-bottom: 10px;
     font-size: 1rem;
+    border-bottom: 2px solid #64b5f6;
+    padding-bottom: 5px;
+    display: inline-block;
 }
 
 #footer .footer-bottom {
-    background-color: rgba(0,0,0,0.1);
+    background-color: #90caf9;
     margin: 0;
     padding: 15px 40px;
     text-align: center;
-    border-top: 1px solid rgba(255,255,255,0.2);
+    border-top: 1px solid #64b5f6;
 }
 
 #footer .copyright {
-    color: #fff;
+    color: #0d47a1;
     font-size: 0.8rem;
     margin-bottom: 5px;
+    font-weight: 500;
 }
 
 #footer .disclaimer {
-    color: #fff;
+    color: #1565c0;
     font-size: 0.75rem;
     font-weight: normal;
-    opacity: 0.9;
+    line-height: 1.5;
 }
 
 /* ===== エラーメッセージ ===== */
