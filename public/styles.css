@@ -1775,12 +1775,13 @@ section {
 
 /* ===== 比較表セクション ===== */
 .comparison-section {
-    max-width: 1200px;
-    margin: 40px auto;
-    padding: 40px 20px;
+    padding: 30px 10px;
     background: white;
-    border-radius: 0;
-    box-shadow: none;
+    overflow: hidden;
+    margin: 0px 0;
+    border-top: 1px solid #f0f0f0;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .comparison-header {
