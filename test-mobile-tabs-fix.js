@@ -37,9 +37,9 @@ const { chromium } = require('playwright');
   
   // Test all three tabs
   const tabs = [
-    { selector: '[data-tab="tab1"]', name: '総合', expectedColumns: ['クリニック名', '総合評価', '実績', '公式サイト'] },
-    { selector: '[data-tab="tab2"]', name: '施術内容', expectedColumns: ['クリニック名', '人気プラン', '医療機器', '公式サイト'] },
-    { selector: '[data-tab="tab3"]', name: 'サービス', expectedColumns: ['クリニック名', '食事指導', 'モニター割引', '公式サイト'] }
+    { selector: '[data-tab="tab1"]', name: '総合', expectedColumns: ['クリニック名', '総合評価', '実績', '特典', '公式サイト'] },
+    { selector: '[data-tab="tab2"]', name: '施術内容', expectedColumns: ['クリニック名', '人気プラン', '医療機器', '注射治療', '公式サイト'] },
+    { selector: '[data-tab="tab3"]', name: 'サービス', expectedColumns: ['クリニック名', '食事指導', 'モニター割', '返金保証', '公式サイト'] }
   ];
   
   for (const tab of tabs) {
