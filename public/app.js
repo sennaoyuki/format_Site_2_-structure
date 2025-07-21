@@ -827,13 +827,14 @@ class RankingApp {
                     ],
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'DIOクリニック開院5周年記念キャンペーン',
+                        title: 'DIOクリニックの今月のお得な情報',
                         logoSrc: '/img/dio-logo.png',
                         logoAlt: 'DIOクリニック',
-                        description: '【ランキング1位獲得記念】<br>全身脱毛5回コースが<br>特別価格で提供中！',
+                        description: '「今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://dio-clinic.jp/campaign/tokyo',
-                        ctaText: 'DIO公式はコチラ',
-                        footerText: '今なら無料カウンセリング実施中！'
+                        ctaText: 'DIOクリニックの公式サイトはこちら',
+                        footerText: '今なら無料カウンセリング実施中！',
+                        microcopy: '＼症例数50万件以上の実績で安心／'
                     }
                 },
                 '2': { // エミナルクリニック
@@ -1008,13 +1009,14 @@ class RankingApp {
                     },
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'リエートクリニック特別キャンペーン',
-                        logoSrc: '/img/lieto-logo.png',
-                        logoAlt: 'リエートクリニック',
-                        description: '【期間限定特典】<br>医療痩身が<br>特別価格で提供中！',
-                        ctaUrl: 'https://lietoclinic.com/',
-                        ctaText: 'リエート公式はコチラ',
-                        footerText: '24回まで分割手数料無料！'
+                        title: 'URARAクリニックの今月のお得な情報',
+                        logoSrc: '/img/urara-logo.png',
+                        logoAlt: 'URARAクリニック',
+                        description: '「痩せなければ返金保証<br>　さらに脂肪買取制度あり」',
+                        ctaUrl: 'https://urara-clinic.com/',
+                        ctaText: 'URARAクリニックの公式サイトはこちら',
+                        footerText: '24回まで分割手数料無料！',
+                        microcopy: '＼ダイエット成功率94％の実績／'
                     }
                 },
                 '4': { // リエートクリニック
@@ -1086,13 +1088,14 @@ class RankingApp {
                     },
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'リエートクリニック新規開院記念',
-                        logoSrc: '/img/reate-logo.png',
+                        title: 'リエートクリニックの今月のお得な情報',
+                        logoSrc: '/img/lieto-logo.png',
                         logoAlt: 'リエートクリニック',
-                        description: '【完全個室でプライベート重視】<br>新規開院記念で<br>医療痩身が特別価格！',
+                        description: '「モニター最大80％OFF<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://lietoclinic.com/',
-                        ctaText: 'リエート公式はコチラ',
-                        footerText: 'アフターケア付きで安心'
+                        ctaText: 'リエートクリニックの公式サイトはこちら',
+                        footerText: 'アフターケア付きで安心',
+                        microcopy: '＼リバウンドしない率99.8％／'
                     }
                 }
             };
@@ -1632,10 +1635,10 @@ class RankingApp {
                     </div>
                     
                     <div class="cv_box_img">
-                        ＼月額・総額がリーズナブルなクリニック／
+                        ${campaignInfo.microcopy || '＼月額・総額がリーズナブルなクリニック／'}
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
                             <a href="${campaignInfo.ctaUrl}" target="_blank" rel="noopener">
-                                <span class="bt_s">${clinicName}公式はコチラ</span>
+                                <span class="bt_s">${campaignInfo.ctaText}</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
