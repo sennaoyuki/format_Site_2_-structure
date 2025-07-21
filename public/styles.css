@@ -705,9 +705,9 @@
 
 .store-item {
     padding: 20px;
-    background: #f9fafb;
-    border-radius: 10px;
-    border: 1px solid #e5e7eb;
+    background: #FFFFFF;
+    border-radius: 4px;
+    border: 1px solid #E0E0E0;
 }
 
 .store-header {
@@ -716,8 +716,8 @@
 
 .store-name {
     font-size: 1.1rem;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #4C4C4C;
     margin: 0;
 }
 
@@ -731,13 +731,13 @@
     display: flex;
     align-items: flex-start;
     gap: 10px;
-    color: #666;
+    color: #9D9D9D;
     font-size: 0.9rem;
     line-height: 1.5;
 }
 
 .store-detail i {
-    color: #ec4899;
+    color: #2CC7C5;
     font-size: 0.9rem;
     margin-top: 2px;
     flex-shrink: 0;
@@ -4869,9 +4869,9 @@ section {
 .brand-section {
     margin-top: 24px;
     padding: 0 8px 16px;
-    border-top: 1px solid #403020;
-    border-bottom: 1px solid #403020;
-    background-color: #eaebff;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+    background-color: #F1F1F1;
 }
 
 .brand-section .section-heading {
@@ -4880,11 +4880,12 @@ section {
     width: fit-content;
     margin: 0 auto;
     padding: 8px 12px;
-    border: 1px solid #403020;
+    border: 1px solid #E0E0E0;
     border-top: none;
     background-color: #fff;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
+    color: #4C4C4C;
 }
 
 .brand-section .shops {
@@ -4896,6 +4897,8 @@ section {
     align-items: center;
     padding: 8px;
     background-color: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
 }
 
 .brand-section .shops>.shop:not(:first-child) {
@@ -4922,29 +4925,31 @@ section {
 }
 
 .brand-section .shop-name {
-    color: #4a90e2;
-    font-weight: 700;
+    color: #2CC7C5;
+    font-weight: 600;
 }
 
 .brand-section .shop-name a {
-    color: #4a90e2;
+    color: #2CC7C5;
     text-decoration: none;
 }
 
 .brand-section .shop-address {
     margin-top: 2px;
     font-size: 12px;
+    color: #9D9D9D;
 }
 
 .brand-section .shop-btn {
     margin-left: auto;
     padding: 10px 10px 10px 8px;
     border-radius: 4px;
-    background-color: #f25496;
+    background-color: #2CC7C5;
     color: #fff;
-    font-weight: 700;
+    font-weight: 600;
     white-space: nowrap;
     text-decoration: none;
+    transition: background-color 0.3s;
 }
 
 .brand-section .shop-btn .btn-icon {
@@ -4972,9 +4977,9 @@ section {
 .detail-item .brand-section {
     margin-top: 30px;
     padding: 0 8px 16px;
-    border-top: 1px solid #403020;
-    border-bottom: 1px solid #403020;
-    background-color: #eaebff;
+    border-top: 1px solid #E0E0E0;
+    border-bottom: 1px solid #E0E0E0;
+    background-color: #F1F1F1;
 }
 
 .detail-item .brand-section .section-heading {
@@ -4983,11 +4988,12 @@ section {
     width: fit-content;
     margin: 0 auto;
     padding: 8px 12px;
-    border: 1px solid #403020;
+    border: 1px solid #E0E0E0;
     border-top: none;
     background-color: #fff;
     font-size: 15px;
-    font-weight: 700;
+    font-weight: 600;
+    color: #4C4C4C;
 }
 
 .detail-item .brand-section .shops {
@@ -4999,6 +5005,8 @@ section {
     align-items: center;
     padding: 8px;
     background-color: #fff;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
 }
 
 .detail-item .brand-section .shops>.shop:not(:first-child) {
@@ -5025,30 +5033,32 @@ section {
 }
 
 .detail-item .brand-section .shop-name {
-    color: #4a90e2;
-    font-weight: 700;
+    color: #2CC7C5;
+    font-weight: 600;
 }
 
 .detail-item .brand-section .shop-name a {
-    color: #4a90e2;
+    color: #2CC7C5;
     text-decoration: none;
 }
 
 .detail-item .brand-section .shop-address {
     margin-top: 2px;
     font-size: 9px;
+    color: #9D9D9D;
 }
 
 .detail-item .brand-section .shop-btn {
     margin-left: auto;
     padding: 10px 10px 10px 8px;
     border-radius: 4px;
-    background-color: #f25496;
+    background-color: #2CC7C5;
     color: #fff;
-    font-weight: 300;
+    font-weight: 600;
     white-space: nowrap;
     text-decoration: none;
     font-size: 12px;
+    transition: background-color 0.3s;
 }
 
 .detail-item .brand-section .shop-btn .btn-icon {
@@ -5066,21 +5076,24 @@ section {
     width: 100%;
     padding: 15px;
     background-color: #fff;
-    border: 2px solid #f25496;
-    border-radius: 30px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
     font-size: 14px;
-    font-weight: 700;
-    color: #f25496;
+    font-weight: 600;
+    color: #4C4C4C;
     text-align: center;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
     position: relative;
+    transition: all 0.3s;
 }
 
 .accordion-button:hover {
-    background-color: #fff0f5;
+    background-color: #F1F1F1;
+    border-color: #2CC7C5;
+    color: #2CC7C5;
 }
 
 .accordion-icon {
@@ -5124,19 +5137,20 @@ section {
     position: relative;
     margin-top: 12px;
     padding: 12px 0;
-    border: 1px solid #f25496;
-    border-radius: 99px;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
     background-color: #fff;
-    color: #f25496;
+    color: #4C4C4C;
     font-size: 13px;
-    font-weight: 700;
+    font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .section-btn:hover {
-    background-color: #f25496;
+    background-color: #2CC7C5;
     color: #fff;
+    border-color: #2CC7C5;
 }
 
 .section-btn .btn-icon {
