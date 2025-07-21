@@ -1075,7 +1075,7 @@
 }
 
 /* キャンペーンセクションのモバイル対応 (375px基準) */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
     .campaign-section {
         margin: 20px 0;
     }
@@ -4632,7 +4632,7 @@ section {
 }
 
 /* 375px幅での完璧な表示 - 修正版 */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
     /* 375px専用: ランキングセクション */
     .clinic-rankings {
         padding: 15px 10px;
@@ -5232,7 +5232,7 @@ section {
     border-bottom: none;
 }
 /* 医療情報コラムセクションのモバイル対応 */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
     .medical-columns-section {
         padding: 20px 0;
     }
@@ -5339,7 +5339,7 @@ section {
 }
 
 /* Tips container mobile responsiveness */
-@media (max-width: 375px) {
+@media (max-width: 480px) {
     .tips-container {
         padding: 0 10px !important;
         margin: 20px auto !important;
