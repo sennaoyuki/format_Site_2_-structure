@@ -721,25 +721,52 @@
                 const headers = table.querySelectorAll('th');
                 const rows = table.querySelectorAll('tbody tr');
                 const isMobile = window.innerWidth <= 768;
-                const config = isMobile ? mobileColumnConfig : columnConfig;
-                const showColumns = config[tabType] || config['tab1'];
+                
+                // 列のインデックスマッピング
+                const columnIndexMap = {
+                    'クリニック名': 0,
+                    '総合評価': 1,
+                    '実績': 2,
+                    '特典': 3,
+                    '人気プラン': 4,
+                    '医療機器': 5,
+                    '注射治療': 6,
+                    '食事指導': 7,
+                    'モニター割引': 8,
+                    '全額返金保証': 9,
+                    '公式サイト': 10
+                };
+                
+                // タブごとの表示列インデックス
+                const tabColumnsMap = {
+                    'tab1': isMobile ? [0, 1, 2, 10] : [0, 1, 2, 3, 10], // 総合
+                    'tab2': isMobile ? [0, 4, 5, 10] : [0, 4, 5, 6, 10], // 施術内容
+                    'tab3': isMobile ? [0, 7, 8, 10] : [0, 7, 8, 9, 10]  // サービス
+                };
+                
+                const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
                 
                 // ヘッダーの表示/非表示
                 headers.forEach((th, index) => {
-                    const headerText = th.textContent.trim();
-                    if (showColumns.includes(headerText)) {
-                        th.style.display = 'table-cell';
+                    if (showIndexes.includes(index)) {
+                        th.style.display = '';
+                        th.classList.remove('th-none');
                     } else {
                         th.style.display = 'none';
+                        th.classList.add('th-none');
                     }
                 });
                 
                 // 各行のセルの表示/非表示
                 rows.forEach(row => {
                     const cells = row.querySelectorAll('td');
-                    headers.forEach((th, index) => {
-                        if (cells[index]) {
-                            cells[index].style.display = th.style.display;
+                    cells.forEach((td, index) => {
+                        if (showIndexes.includes(index)) {
+                            td.style.display = '';
+                            td.classList.remove('th-none');
+                        } else {
+                            td.style.display = 'none';
+                            td.classList.add('th-none');
                         }
                     });
                 });
@@ -768,6 +795,20 @@
             
             // 初期表示
             updateTableColumns('tab1');
+            
+            // ウィンドウサイズ変更時の処理
+            let resizeTimer;
+            window.addEventListener('resize', function() {
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(function() {
+                    // 現在アクティブなタブを取得
+                    const activeTab = document.querySelector('.tab-menu-item.tab-active');
+                    if (activeTab) {
+                        const tabType = activeTab.getAttribute('data-tab');
+                        updateTableColumns(tabType);
+                    }
+                }, 250);
+            });
         });
 
         // Smooth scrolling for table of contents links in medical columns

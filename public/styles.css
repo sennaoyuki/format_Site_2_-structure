@@ -989,7 +989,7 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 10px;
+    margin-left: 22px;
     background-color: rgba(255, 255, 255, 0.2);
     border-radius: 50%;
     width: 24px;
@@ -1735,6 +1735,7 @@ section {
 .btn.btn_second_primary {
     display: inline-block;
     margin-top: 10px;
+    margin-bottom: 5px;
     width: 100%;
 }
 
@@ -1742,27 +1743,28 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
+    gap: 3px;
     background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
     color: white;
-    padding: 15px 25px;
+    padding: 8px 25px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 0.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
-    width: 100%;
+    width: 90%;
     box-sizing: border-box;
+    margin: 0 5%;
 }
 
 .btn.btn_second_primary .bt_s {
-    font-size: 1rem;
+    font-size: 0.8rem;
     white-space: nowrap;
 }
 
 .btn.btn_second_primary .btn-arrow {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     transition: transform 0.3s ease;
 }
 
@@ -2637,7 +2639,8 @@ section {
 }
 
 .info-table td:first-child {
-    width: 30%;
+    width: 35%;
+    text-align: center;
     background: #f3f4f6;
     font-weight: 600;
     color: #374151;
@@ -2645,6 +2648,7 @@ section {
 
 .info-table td:last-child {
     color: #111827;
+    padding-left: 3%;
 }
 
 .price-highlight {
@@ -4684,6 +4688,30 @@ section {
     .ranking-item .cta-text {
         font-size: 9px;
         line-height: 1.2;
+    }
+    
+    /* クリニックカード内のボタン調整 */
+    .clinic-card .btn.btn_second_primary {
+        margin-top: 5px;
+        margin-bottom: 3px;
+    }
+    
+    .clinic-card .btn.btn_second_primary a {
+        padding: 5px 10px;
+        font-size: 0.5rem;
+        gap: 2px;
+        border-radius: 8px;
+    }
+    
+    .clinic-card .btn.btn_second_primary .bt_s {
+        font-size: 0.6rem;
+    }
+    
+    .clinic-card .btn.btn_second_primary .btn-arrow {
+        font-size: 0.5rem;
+        width: 16px;
+        height: 16px;
+        margin-left: 5px;
     }
     
     
