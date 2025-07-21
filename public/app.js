@@ -107,11 +107,11 @@ class DisplayManager {
 
             // 評価スコアとスターの生成（仮のデータ）
             const ratings = {
-                1: { score: 4.3, stars: 4.5 },
-                2: { score: 4.0, stars: 4 },
-                3: { score: 3.2, stars: 3 }
+                1: { score: 4.9, stars: 5 },
+                2: { score: 4.8, stars: 4.5 },
+                3: { score: 4.7, stars: 4.5 }
             };
-            const rating = ratings[rankNum] || { score: 3.0, stars: 3 };
+            const rating = ratings[rankNum] || { score: 4.5, stars: 4 };
 
             // スターのHTML生成
             let starsHtml = '';
@@ -144,6 +144,14 @@ class DisplayManager {
             };
             const price = prices[rankNum] || { main: '要問合せ', detail: '詳細はクリニックへ' };
 
+            // 押しメッセージの定義
+            const pushMessages = {
+                1: "【総合人気No.1】\n2025年のイチ押し！\n業界屈指のコスパ",
+                2: "【実績No.1】\n信頼の施術実績\n安心のサポート体制",
+                3: "【コスパNo.1】\nお得な料金プラン\n今なら特別価格"
+            };
+            const pushMessage = pushMessages[rankNum] || "人気のクリニック";
+
             rankingItem.innerHTML = `
                 <div class="rank-medal ${medalClass}">
                     <span class="medal-text">${medalText}</span>
@@ -161,8 +169,11 @@ class DisplayManager {
                     <div class="clinic-logo-section">
                         <div class="clinic-logo">${clinic.name}</div>
                     </div>
+                    <div class="push-message" style="padding: 10px; text-align: center; font-size: 13px; line-height: 1.4; color: #333; white-space: pre-wrap; font-weight: bold; margin: 10px 0;">
+                        ${pushMessage}
+                    </div>
                     <div class="clinic-banner">
-                        <img src="${bannerImage}" alt="${clinic.name}キャンペーンバナー">
+                        <img src="${bannerImage}" alt="${rankNum}位バナー">
                     </div>
                     <div class="price-info">
                         <div class="price-main">${price.main}</div>
