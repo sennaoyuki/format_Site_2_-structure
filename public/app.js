@@ -944,7 +944,7 @@ class RankingApp {
                     subtitle: '学生に人気の医療痩身',
                     link: 'リエートクリニック ＞',
                     features: ['24回払い無利息', 'キャンセル料無料'],
-                    priceMain: '全身+VIO+顔',
+                    priceMain: '医療痩身コース',
                     priceValue: '月々9,600円',
                     priceDetail: {
                         '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
@@ -957,23 +957,23 @@ class RankingApp {
                     },
                     vioPlans: {
                         vioOnly: {
-                            title: 'VIOのみ',
-                            price: '81,600円',
-                            sessions: '5回',
-                            monthly: '月々3,600円'
+                            title: '部分痩身',
+                            price: '30,000円',
+                            sessions: '3回',
+                            monthly: '月々3,000円'
                         },
                         fullBody: {
-                            title: '全身＋VIO',
-                            price: '252,000円',
+                            title: '全身痩身',
+                            price: '49,600円',
                             sessions: '5回',
-                            monthly: '月々4,900円'
+                            monthly: '月々9,600円'
                         }
                     },
                     points: [
                         {
                             number: '01',
-                            title: '3種類の脱毛機',
-                            description: '肌質・毛質に合わせて最適な機器を選択。効果的な脱毛を実現。'
+                            title: '3種類の施術機械',
+                            description: '脂肪冷却、医療用EMS、医療ハイフを使い分けて最適な痩身効果を実現。'
                         },
                         {
                             number: '02',
@@ -983,7 +983,7 @@ class RankingApp {
                         {
                             number: '03',
                             title: '追加料金なし',
-                            description: 'シェービング代、初診料、再診料すべて無料。'
+                            description: 'カウンセリング、初診料、再診料すべて無料。'
                         }
                     ],
                     reviews: [
