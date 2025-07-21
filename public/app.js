@@ -1178,8 +1178,8 @@ class RankingApp {
                         <nav role="navigation" class="review_tab2">
                             <ul>
                                 <li class="select2" data-tab="cost"><i class="fas fa-yen-sign"></i> コスパ</li>
-                                <li data-tab="staff"><i class="fas fa-user-md"></i> スタッフ</li>
                                 <li data-tab="access"><i class="fas fa-heart"></i> 通いやすさ</li>
+                                <li data-tab="staff"><i class="fas fa-user-md"></i> スタッフ</li>
                             </ul>
                         </nav>
 
