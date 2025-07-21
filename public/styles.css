@@ -1569,12 +1569,13 @@ section {
 .satisfaction-badge {
     background: #ec4899;
     color: white;
-    padding: 8px 20px;
-    border-radius: 20px;
+    padding: 3px 10px;
+    font-size: 0.8rem;
+    margin-bottom: 5px;
+    border-radius: 12px;
+    margin-top: 30px;
     display: inline-block;
-    margin-bottom: 15px;
     font-weight: 600;
-    font-size: 0.9rem;
 }
 
 /* 評価セクション */
@@ -3503,7 +3504,7 @@ section {
     
     .satisfaction-badge {
         padding: 3px 10px;
-        font-size: 0.65rem;
+        font-size: 0.8rem;
         margin-bottom: 5px;
         border-radius: 12px;
         margin-top: 30px;
@@ -4722,14 +4723,14 @@ section {
     }
     
     .clinic-card .btn.btn_second_primary a {
-        padding: 5px 10px;
-        font-size: 0.5rem;
-        gap: 2px;
+        padding: 5px 0px;
+        font-size: 0.7rem;
+        gap: 0px;
         border-radius: 8px;
     }
     
     .clinic-card .btn.btn_second_primary .bt_s {
-        font-size: 0.6rem;
+        font-size: 0.7rem;
     }
     
     .clinic-card .btn.btn_second_primary .btn-arrow {
