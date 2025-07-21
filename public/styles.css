@@ -1,6 +1,13 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* Vercel deployment trigger - 2025/07/21 14:30 */
+/* Vercel deployment trigger - 2025/07/21 14:35 */
+
+/* Brand section shop name styles */
+.detail-item .brand-section .shop-name {
+    color: #4a90e2;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
 
 /* Override any is-reflection animation */
 .is-reflection,
