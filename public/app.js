@@ -436,41 +436,65 @@ class RankingApp {
                 tr.style.backgroundColor = '#fffbdc';
             }
             
+            // ダミーデータの設定
+            const achievements = {
+                1: '全国100院以上',
+                2: '累計施術50万件',
+                3: '開院15年の実績',
+                4: '全圈80院展開',
+                5: '医療痩身専門'
+            };
+            const benefits = {
+                1: '初回限定50%OFF',
+                2: '学割・ペア割あり',
+                3: '全身痩身20%割引',
+                4: 'モニター割弗30%',
+                5: '平日限定プラン'
+            };
+            const popularPlans = {
+                1: '全身+部分痩身',
+                2: '医療HIFU単独',
+                3: '脂肪冷却コース',
+                4: 'GLP-1ダイエット',
+                5: 'オーダーメイド'
+            };
+            const machines = {
+                1: '最新HIFU機器',
+                2: '脂肪冷却装置',
+                3: 'EMSマシン',
+                4: 'キャビテーション',
+                5: 'ラジオ波機器'
+            };
+            const injections = {
+                1: '脂肪溶解注射',
+                2: 'GLP-1注射',
+                3: 'ボトックス',
+                4: 'ビタミン点滴',
+                5: 'プラセンタ注射'
+            };
+            
+            const rankNum = clinic.rank || index + 1;
+            
             tr.innerHTML = `
                 <td class="ranking-table_td1">
                     <img src="${clinic.logo || 'img/clinic-default.png'}" alt="${clinic.name}" width="80">
-                    <a href="#clinic${clinic.rank}" class="clinic-link">${clinic.name}</a>
+                    <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td>
                     <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
                     <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
                 </td>
+                <td>${achievements[rankNum] || '豊富な実績'}</td>
+                <td>${benefits[rankNum] || '特別キャンペーン'}</td>
+                <td class="th-none" style="display: none;">${popularPlans[rankNum] || '人気プラン'}</td>
+                <td class="th-none" style="display: none;">${machines[rankNum] || '最新機器'}</td>
+                <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
+                <td class="th-none" style="display: none;">${clinic.diet_support || '〇'}</td>
+                <td class="th-none" style="display: none;">${rankNum <= 3 ? '〇' : '×'}</td>
+                <td class="th-none" style="display: none;">${rankNum === 1 ? '〇' : '×'}</td>
                 <td>
-                    <b class="sogood">◎</b>${clinic.hifu_price || '49,800円'}<br>
-                    <span class="fs10 division">(月々${clinic.hifu_monthly || '1,000円'}~)</span>
-                </td>
-                <td class="td-none">
-                    <b class="good">〇</b>${clinic.cooling_price || '68,000円'}<br>
-                    <span class="fs10 division">(月々${clinic.cooling_monthly || '1,400円'}~)</span>
-                </td>
-                <td class="td-none">
-                    ${clinic.glp1_price ? `<b class="good">〇</b>${clinic.glp1_price}` : 'プランなし'}
-                </td>
-                <td>${clinic.feature || 'コスパ重視！最新機器で効率よく痩身'}</td>
-                <td class="td-none">
-                    <img src="${clinic.machine_image || 'img/machine-default.jpg'}" alt="医療機器" width="60">
-                </td>
-                <td class="td-none">
-                    ${clinic.machine_name || 'HIFU機器'}<br>
-                    <span class="machine-detail">詳しく見る></span>
-                </td>
-                <td class="td-none">${clinic.machine_feature || '最新の痩身技術'}</td>
-                <td class="td-none">${clinic.diet_support || '〇'}</td>
-                <td class="td-none">${clinic.guarantee || '返金保証あり'}</td>
-                <td class="td-none">${clinic.other_service || 'カウンセリング無料'}</td>
-                <td>
-                    <a class="link_btn" href="${clinic.url}" target="_blank">公式サイト</a>
-                    <a class="detail_btn" href="#clinic${clinic.rank}">詳細をみる</a>
+                    <a class="link_btn" href="${clinic.url || '#'}" target="_blank">公式サイト</a>
+                    <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>
                 </td>
             `;
             

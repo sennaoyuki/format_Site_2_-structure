@@ -148,26 +148,23 @@
                 <div class="js-cbn-table" id="tab-menu">
                     <div class="tab-menu">
                         <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
-                        <div class="tab-menu-item" data-tab="tab2">プラン</div>
-                        <div class="tab-menu-item" data-tab="tab3">機器</div>
-                        <div class="tab-menu-item" data-tab="tab4">サービス</div>
+                        <div class="tab-menu-item" data-tab="tab2">施術内容</div>
+                        <div class="tab-menu-item" data-tab="tab3">サービス</div>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th class="ranking-table_td1 td-width3">クリニック</th>
+                                <th class="ranking-table_td1 td-width3">クリニック名</th>
                                 <th class="">総合評価</th>
-                                <th class="">医療HIFU</th>
-                                <th class="td-width2 th-none" style="display: none;">脂肪冷却</th>
-                                <th class="th-none" style="display: none;">GLP-1</th>
-                                <th class="td-width1">特徴</th>
+                                <th class="">実績</th>
+                                <th class="">特典</th>
+                                <th class="th-none" style="display: none;">人気プラン</th>
                                 <th class="th-none" style="display: none;">医療機器</th>
-                                <th class="td-width2 th-none" style="display: none;">機器名</th>
-                                <th class="td-width2 th-none" style="display: none;">特徴</th>
+                                <th class="th-none" style="display: none;">注射治療</th>
                                 <th class="th-none" style="display: none;">食事指導</th>
-                                <th class="th-none" style="display: none;">保証</th>
-                                <th class="th-none td-width1" style="display: none;">その他</th>
-                                <th class="td-width3">詳細</th>
+                                <th class="th-none" style="display: none;">モニター割引</th>
+                                <th class="th-none" style="display: none;">全額返金保証</th>
+                                <th class="td-width3">公式サイト</th>
                             </tr>
                         </thead>
                         <tbody id="comparison-tbody">
@@ -706,18 +703,16 @@
             
             // 各タブで表示する列を定義
             const columnConfig = {
-                'tab1': ['クリニック', '総合評価', '医療HIFU', '特徴', '詳細'], // 総合
-                'tab2': ['クリニック', '医療HIFU', '脂肪冷却', 'GLP-1', '詳細'], // プラン
-                'tab3': ['クリニック', '医療機器', '機器名', '特徴', '詳細'], // 機器
-                'tab4': ['クリニック', '食事指導', '保証', 'その他', '詳細'] // サービス
+                'tab1': ['クリニック名', '総合評価', '実績', '特典', '公式サイト'], // 総合
+                'tab2': ['クリニック名', '人気プラン', '医療機器', '注射治療', '公式サイト'], // 施術内容
+                'tab3': ['クリニック名', '食事指導', 'モニター割引', '全額返金保証', '公式サイト'] // サービス
             };
             
             // モバイル用の列設定
             const mobileColumnConfig = {
-                'tab1': ['クリニック', '総合評価', '医療HIFU', '詳細'], // 総合
-                'tab2': ['クリニック', '医療HIFU', '脂肪冷却', '詳細'], // プラン
-                'tab3': ['クリニック', '医療機器', '機器名', '詳細'], // 機器
-                'tab4': ['クリニック', '食事指導', '保証', '詳細'] // サービス
+                'tab1': ['クリニック名', '総合評価', '実績', '公式サイト'], // 総合
+                'tab2': ['クリニック名', '人気プラン', '医療機器', '公式サイト'], // 施術内容
+                'tab3': ['クリニック名', '食事指導', 'モニター割引', '公式サイト'] // サービス
             };
             
             function updateTableColumns(tabType) {
