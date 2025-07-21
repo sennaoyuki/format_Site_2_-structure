@@ -1486,19 +1486,16 @@ section {
 
 /* クリニックカード */
 .clinic-card {
-    background: white;
-    border: 4px solid;
-    border-radius: 25px;
-    padding: 70px 25px 30px;
-    text-align: center;
-    transition: all 0.3s;
-    position: relative;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+    margin: 3%;
+    padding: 38px 4px 8px;
+    border-radius: 15px;
+    border-width: 3px;
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 100%;
-    min-height: 600px;
-    /* overflow: hidden; */
+    min-height: 310px;
+    position: relative;
 }
 
 .rank-1 .clinic-card {
