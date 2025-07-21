@@ -833,7 +833,6 @@ class RankingApp {
                         description: '「今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://dio-clinic.jp/campaign/tokyo',
                         ctaText: 'DIOクリニックの公式サイトはこちら',
-                        footerText: '今なら無料カウンセリング実施中！',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
                 },
@@ -937,7 +936,6 @@ class RankingApp {
                         description: '【期間限定】<br>全身+VIO脱毛が<br>月額1,000円から始められる！',
                         ctaUrl: 'https://eminal-clinic.jp/lp1/',
                         ctaText: 'エミナル公式はコチラ',
-                        footerText: '先着100名様限定！お急ぎください'
                     }
                 },
                 '3': { // ウララクリニック
@@ -1015,7 +1013,6 @@ class RankingApp {
                         description: '「痩せなければ返金保証<br>　さらに脂肪買取制度あり」',
                         ctaUrl: 'https://urara-clinic.com/',
                         ctaText: 'URARAクリニックの公式サイトはこちら',
-                        footerText: '24回まで分割手数料無料！',
                         microcopy: '＼ダイエット成功率94％の実績／'
                     }
                 },
@@ -1094,7 +1091,6 @@ class RankingApp {
                         description: '「モニター最大80％OFF<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://lietoclinic.com/',
                         ctaText: 'リエートクリニックの公式サイトはこちら',
-                        footerText: 'アフターケア付きで安心',
                         microcopy: '＼リバウンドしない率99.8％／'
                     }
                 }
@@ -1642,7 +1638,6 @@ class RankingApp {
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
-                        ${campaignInfo.footerText}
                     </div>
                 </div>
             </div>
