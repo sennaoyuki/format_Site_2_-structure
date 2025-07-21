@@ -767,51 +767,17 @@
             const tabMenuItems = document.querySelectorAll('.tab-menu-item');
             const table = document.querySelector('.js-cbn-table table');
             
-            // 各タブで表示する列を定義
-            const columnConfig = {
-                'tab1': ['クリニック', '総合評価', '実績', '特典', '公式サイト'], // 総合
-                'tab2': ['クリニック', '人気プラン', '医療機器', '注射治療', '公式サイト'], // 施術内容
-                'tab3': ['クリニック', '食事指導', 'モニター割引', '全額返金保証', '公式サイト'] // サービス
-            };
-            
-            // モバイル用の列設定
-            const mobileColumnConfig = {
-                'tab1': ['クリニック', '総合評価', '実績', '公式サイト'], // 総合
-                'tab2': ['クリニック', '人気プラン', '医療機器', '公式サイト'], // 施術内容
-                'tab3': ['クリニック', '食事指導', 'モニター割引', '公式サイト'] // サービス
-            };
-            
             function updateTableColumns(tabType) {
                 if (!table) return;
                 
                 const headers = table.querySelectorAll('th');
                 const rows = table.querySelectorAll('tbody tr');
-                // isMobile変数は使用しないのでコメントアウト
-                // const isMobile = window.innerWidth <= 768;
                 
-                // 列のインデックスマッピング
-                const columnIndexMap = {
-                    'クリニック': 0,
-                    '総合評価': 1,
-                    '実績': 2,
-                    '特典': 3,
-                    '人気プラン': 4,
-                    '医療機器': 5,
-                    '注射治療': 6,
-                    '食事指導': 7,
-                    'モニター割': 8,
-                    '返金保証': 9,
-                    '公式サイト': 10
-                };
-                
-                // タブごとの表示列インデックス
-                // 注意: 実際のHTMLでは公式サイトが4番目になっている場合があるため、両方のパターンに対応
-                const publicSiteIndex = headers[10] && headers[10].textContent.includes('公式サイト') ? 10 : 4;
-                
+                // タブごとの表示列インデックス（PCもスマホも同じ5項目）
                 const tabColumnsMap = {
-                    'tab1': [0, 1, 2, 3, publicSiteIndex], // 総合: クリニック, 総合評価, 実績, 特典, 公式サイト
-                    'tab2': [0, publicSiteIndex === 4 ? 5 : 4, publicSiteIndex === 4 ? 6 : 5, publicSiteIndex === 4 ? 7 : 6, publicSiteIndex], // 施術内容
-                    'tab3': [0, publicSiteIndex === 4 ? 8 : 7, publicSiteIndex === 4 ? 9 : 8, publicSiteIndex === 4 ? 10 : 9, publicSiteIndex]  // サービス
+                    'tab1': [0, 1, 2, 3, 10], // 総合: クリニック, 総合評価, 実績, 特典, 公式サイト
+                    'tab2': [0, 4, 5, 6, 10], // 施術内容: クリニック, 人気プラン, 医療機器, 注射治療, 公式サイト
+                    'tab3': [0, 7, 8, 9, 10]  // サービス: クリニック, 食事指導, モニター割, 返金保証, 公式サイト
                 };
                 
                 const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
@@ -858,19 +824,6 @@
             // 初期表示
             updateTableColumns('tab1');
             
-            // ウィンドウサイズ変更時の処理
-            let resizeTimer;
-            window.addEventListener('resize', function() {
-                clearTimeout(resizeTimer);
-                resizeTimer = setTimeout(function() {
-                    // 現在アクティブなタブを取得
-                    const activeTab = document.querySelector('.tab-menu-item.tab-active');
-                    if (activeTab) {
-                        const tabType = activeTab.getAttribute('data-tab');
-                        updateTableColumns(tabType);
-                    }
-                }, 250);
-            });
         });
 
         // Smooth scrolling for table of contents links in medical columns
