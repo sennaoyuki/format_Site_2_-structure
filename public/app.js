@@ -1119,7 +1119,7 @@ class RankingApp {
                 </div>
                 ` : ''}
                 <div class="detail-features">
-                    ${data.features.map(feature => `<span class="feature-tag">${feature}</span>`).join('')}
+                    ${data.features.map(feature => `<span class="feature-tag"># ${feature}</span>`).join('')}
                 </div>
                 
                 <!-- 拡張版価格表 -->
