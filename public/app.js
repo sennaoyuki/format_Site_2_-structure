@@ -1178,7 +1178,7 @@ class RankingApp {
                         <nav role="navigation" class="review_tab2">
                             <ul>
                                 <li class="select2" data-tab="cost"><i class="fas fa-yen-sign"></i> コスパ</li>
-                                <li data-tab="pain"><i class="fas fa-bolt"></i> 痛み</li>
+                                <li data-tab="staff"><i class="fas fa-user-md"></i> スタッフ</li>
                                 <li data-tab="access"><i class="fas fa-heart"></i> 通いやすさ</li>
                             </ul>
                         </nav>
@@ -1190,9 +1190,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>サービスが充実しています！</strong></div>
+                                    <div class="review_tab_box_title"><strong>ストイックな運動より効果的！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        追加費用も一切かからないし、シェービングやキャンセル代が無料だったりサービスも充実していて良かった！        
+                                        某スポーツジムでストイックに食事管理をしても減らなかった体重が、薬で無理なく減っていきビックリしました。え、あの辛い運動や糖質制限はなんだったんだろう…。
                                     </div>
                                 </div>
                             </div>
@@ -1203,9 +1203,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>自己処理いらずでラク！</strong></div>
+                                    <div class="review_tab_box_title"><strong>2ヶ月で8キロ減！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        5回通いました！産毛は正直まだ生えてますが、一番気になっていた足とワキの毛がほぼなくなった！脱毛して良かったです！    
+                                        なかなかジムなどに通っても減らなくなってしまっていましたが、こちらに通い始めて2ヶ月ぐらいで8キロぐらい減らすことができました！
                                     </div>
                                 </div>
                             </div>
@@ -1213,12 +1213,12 @@ class RankingApp {
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
                                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
-                                    <span>★★★★★</span>
+                                    <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>剛毛でもキレイになれた！</strong></div>
+                                    <div class="review_tab_box_title"><strong>周りから痩せたと言われる！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        肌質や毛質をしっかり見てくれたうえで、脱毛の機器を当ててくれるので効果も高くおすすめできます。    
+                                        2ヶ月たって、周りの人から痩せたねと言われることが多くなりました！サクセンダのおかげで空腹感をあまり感じずに食事制限することが出来ました！
                                     </div>
                                 </div>
                             </div>
@@ -1232,9 +1232,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>しっかり冷却してくれる！</strong></div>
+                                    <div class="review_tab_box_title"><strong>言葉遣いが丁寧！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        しっかり冷却しながらレーザーを当ててくれるのでそこまで痛くないです。痛みに弱い方は麻酔をやってもらうと安心だと思います。
+                                        言葉遣いも、めちゃくちゃ丁寧で、こちらが恐縮してしまうくらい、しっかり教育もされていたので、毎回、気持ち良く通わせて頂きました。ありがとうございました。
                                     </div>
                                 </div>
                             </div>
@@ -1245,9 +1245,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>テスト照射あり♪</strong></div>
+                                    <div class="review_tab_box_title"><strong>清潔感があり丁寧な対応</strong></div>
                                     <div class="review_tab_box_txt">
-                                        痛みが心配だったのでテスト照射をしてもらえました。痛いときはレベルの調整も行ってくれるので無理せず通えてます。    
+                                        院内は清潔感があって、スタッフはどの方も丁寧で優しいです。距離感は付かず離れずの丁度良い感じでした。
                                     </div>
                                 </div>
                             </div>
@@ -1255,12 +1255,12 @@ class RankingApp {
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
                                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
-                                    <span>★★★★</span>
+                                    <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>少し痛かったけど効果あり</strong></div>
+                                    <div class="review_tab_box_title"><strong>栄養士さんが熱心！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        少し痛かったですが、ムダ毛がなくなるなら。。。と我慢しながら通ってました。我慢した甲斐もあって効果はでてます。        
+                                        受付の方の対応も、とても落ち着いていて且つ優しくて、ほっとします。栄養士さんが糖質の摂り方など、熱心に教えてくださるので、楽しくて勉強になります。
                                     </div>
                                 </div>
                             </div>
@@ -1274,9 +1274,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>院内がとてもキレイ！</strong></div>
+                                    <div class="review_tab_box_title"><strong>人生一度きり！頑張ります</strong></div>
                                     <div class="review_tab_box_txt">
-                                        カウンセリングで予算とか脱毛したい部位を相談しながら私に合ったコースを選んでくれました。院内も清潔感がありキレイです！        
+                                        今まで色んなことをしても痩せられなかったので、人生一度きりだと思い通うことを決めました。1ヶ月で、食事制限などが苦手な私でも、−５㌔落ちました！
                                     </div>
                                 </div>
                             </div>
@@ -1287,9 +1287,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>ゆったり過ごせる◎</strong></div>
+                                    <div class="review_tab_box_title"><strong>栄養士の指導で結果が出た！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        完全個室なので、人目を気にせずに脱毛できる。 スタッフも親切で、落ち着いた雰囲気で脱毛できます。
+                                        栄養士の先生の指導と最先端の機材を使った施術でしっかりと結果が出ました。無理のない範囲で食事指導もして頂き、停滞したら新しい一手を提案して貰えるので、頑張れます。
                                     </div>
                                 </div>
                             </div>
@@ -1297,12 +1297,12 @@ class RankingApp {
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
                                     <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
-                                    <span>★★★★</span>
+                                    <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>平日に通うのがおすすめ</strong></div>
+                                    <div class="review_tab_box_title"><strong>1ヶ月半で簡単に体重が落ちた！</strong></div>
                                     <div class="review_tab_box_txt">
-                                        土日など休日は予約が取りにくいですが、平日であれば問題なく通えます。前日でも予約できるので空いた時間に合わせて通えます。        
+                                        約1か月半たち、自分ではどうしても落とさなかった体重が、簡単に落とせてびっくりです！通うたびに変化が出るので、とてもモチベーションが上がります！！
                                     </div>
                                 </div>
                             </div>
