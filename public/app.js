@@ -1182,7 +1182,133 @@ class RankingApp {
                                 <li data-tab="staff"><i class="fas fa-user-md"></i> スタッフ</li>
                             </ul>
                         </nav>
+                        ${rank === 2 ? `
+                        <div class="wrap_long2 active">
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>25キロ減量に成功！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        25キロ弱体重を落とせました。自分1人の力だけでは絶対になし得なかったので良かったと思ってます。
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>3ヶ月で10キロ減！辛くない</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        3ヶ月の契約をして結果10キロの減量できました。特に辛いこともなく順調だったと思います。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>きつい運動なしで6kg減！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        3ヶ月で6kg減でした！(継続中) きつい運動や厳しい食事制限も無い中で、順調に体重減少しているので、良かったです。
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                        </div>
+
+                        <div class="wrap_long2 disnon2">
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★☆</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>多角的なアプローチで効果的！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        医療美容ということで施術と並行して点滴や錠剤など多角的にダイエットと向き合いました。管理栄養士による栄養指導もあり、モチベーションを保つには最適な環境でした。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23e2e3e5'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%236c757d'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>スタッフが素晴らしい！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        関わっていただいた全てのスタッフの方々が本当に感じが良いので毎週通うのが苦ではなかったです。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★☆☆</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>運動嫌いでも6キロ減！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        食習慣が変わったり運動が嫌いですが3〜4ヶ月で6キロほど体重も落ちました。予約も比較的取りやすく駅からも近いので無理なく通えました。
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                        </div>
+
+                        <div class="wrap_long2 disnon2">
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>投薬なしで3キロ減！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        初めに投薬なしで3ヶ月間リバースエイジングコースをし、体重が3㌔ほど痩せました。スタッフの方々も皆さん、優しく、毎日楽しく通わせてもらっています。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>教育が行き届いている！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        16回の通院の中、医師、看護師、管理栄養士の方々の対応はとても丁寧で、教育が行き届いているという印象を受けました。
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="review_tab_box_in">
+                                <div class="review_tab_box_img">
+                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <span>★★★★★</span>
+                                </div>
+                                <div class="review_tab_box_r">
+                                    <div class="review_tab_box_title"><strong>専門知識で安心施術！</strong></div>
+                                    <div class="review_tab_box_txt">
+                                        スタッフさんが明るくて優しかったので不安な施術も安心して受けられました。専門的な知識を教えてくださったり栄養指導もしてくれるので無理なく出来ました。
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                        </div>
+                        ` : `
                         <div class="wrap_long2 active">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
@@ -1308,6 +1434,7 @@ class RankingApp {
                             </div>
                             <p style="font-size:8px;text-align:right">※個人の感想です</p>
                         </div>
+                        `}
                     </section>
                 </div>
                 
