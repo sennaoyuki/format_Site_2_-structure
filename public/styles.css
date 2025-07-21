@@ -17,6 +17,12 @@
     overflow: hidden;
 }
 
+/* Campaign header text styles */
+.camp_header3 .camp_txt {
+    font-size: 14px;
+    padding: 12px 12px;
+}
+
 /* Override any is-reflection animation */
 .is-reflection,
 *[class*="is-reflection"] {
