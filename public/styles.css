@@ -9,6 +9,14 @@
     font-weight: 700;
 }
 
+/* Line clamp utility class */
+.line-clamp {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    overflow: hidden;
+}
+
 /* Override any is-reflection animation */
 .is-reflection,
 *[class*="is-reflection"] {
