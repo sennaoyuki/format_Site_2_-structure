@@ -2793,10 +2793,11 @@ section {
 
 .medical-columns-section .article-card {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 4px;
     margin-bottom: 16px;
     /* overflow: hidden; */
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    box-shadow: none;
+    border: 1px solid #E0E0E0;
 }
 
 /* Header with image */
@@ -2807,9 +2808,10 @@ section {
 .medical-columns-section .header-image {
     width: 100%;
     height: 200px;
-    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    background: #F1F1F1;
     position: relative;
     /* overflow: hidden; */
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .header-image-placeholder {
@@ -2818,9 +2820,9 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #666;
+    color: #9D9D9D;
     font-size: 14px;
-    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDMwQzI1LjUyMjggMzAgMzAgMjUuNTIyOCAzMCAyMEMzMCAxNC40NzcyIDI1LjUyMjggMTAgMjAgMTBDMTQuNDc3MiAxMCAxMCAxNC40NzcyIDEwIDIwQzEwIDI1LjUyMjggMTQuNDc3MiAzMCAyMCAzMFoiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHN0cm9rZSBkPSJNMTMgMjNMMjAgMTZMMjcgMjMiIHN0cm9rZT0iIzY2NjY2NiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+') no-repeat center;
+    background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTIwIDMwQzI1LjUyMjggMzAgMzAgMjUuNTIyOCAzMCAyMEMzMCAxNC40NzcyIDI1LjUyMjggMTAgMjAgMTBDMTQuNDc3MiAxMCAxMCAxNC40NzcyIDEwIDIwQzEwIDI1LjUyMjggMTQuNDc3MiAzMCAyMCAzMFoiIHN0cm9rZT0iIzlEOUQ5RCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPHN0cm9rZSBkPSJNMTMgMjNMMjAgMTZMMjcgMjMiIHN0cm9rZT0iIzlEOUQ5RCIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtbGluZWNhcD0icm91bmQiIHN0cm9rZS1saW5lam9pbj0icm91bmQiLz4KPC9zdmc+') no-repeat center;
 }
 
 .medical-columns-section .article-title {
@@ -2840,16 +2842,18 @@ section {
 /* Table of Contents */
 .medical-columns-section .toc-section {
     padding: 16px;
-    background-color: #f8f9fa;
+    background-color: #F1F1F1;
+    border: 1px solid #E0E0E0;
+    border-radius: 4px;
 }
 
 .medical-columns-section .toc-title {
     font-size: 18px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #4C4C4C;
     margin-bottom: 16px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #333;
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .toc-list {
@@ -2861,7 +2865,7 @@ section {
 }
 
 .medical-columns-section .toc-link {
-    color: #4a90e2;
+    color: #2CC7C5;
     text-decoration: underline;
     font-size: 14px;
     line-height: 1.5;
@@ -2880,28 +2884,29 @@ section {
 
 .medical-columns-section .section-title {
     font-size: 18px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #4C4C4C;
     margin-bottom: 16px;
     padding-bottom: 8px;
-    border-bottom: 2px solid #333;
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .section-content {
-    color: #666;
+    color: #9D9D9D;
     font-size: 14px;
     line-height: 1.8;
 }
 
 .medical-columns-section .highlight-box {
-    background-color: #e3f2fd;
+    background-color: #F0FAF9;
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin: 16px 0;
+    border: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .highlight-box .section-title {
-    color: #1976d2;
+    color: #2CC7C5;
     margin-bottom: 12px;
 }
 
@@ -2916,7 +2921,7 @@ section {
 }
 
 .medical-columns-section .table-header {
-    background-color: #2c3e50;
+    background-color: #2CC7C5;
     color: white;
 }
 
@@ -2929,7 +2934,7 @@ section {
 
 .medical-columns-section .table-row td {
     padding: 12px 8px;
-    border-bottom: 1px solid #e0e0e0;
+    border-bottom: 1px solid #E0E0E0;
     text-align: center;
     vertical-align: middle;
     font-size: 13px;
@@ -2989,25 +2994,26 @@ section {
 /* Subsection titles */
 .medical-columns-section .subsection-title {
     font-size: 16px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #4C4C4C;
     margin: 20px 0 12px 0;
     padding-bottom: 6px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #E0E0E0;
 }
 
 /* Pain information boxes */
 .medical-columns-section .pain-area-box {
-    background-color: #f8f9fa;
+    background-color: #F1F1F1;
     padding: 12px;
-    border-radius: 6px;
+    border-radius: 4px;
     margin: 12px 0;
+    border: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .pain-area {
     font-size: 14px;
-    font-weight: bold;
-    color: #333;
+    font-weight: 600;
+    color: #4C4C4C;
     margin-bottom: 8px;
 }
 
@@ -3029,16 +3035,17 @@ section {
 /* Contact information */
 .medical-columns-section .contact-list {
     list-style: none;
-    background-color: #f8f9fa;
+    background-color: #F1F1F1;
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin: 16px 0;
+    border: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .contact-item {
     margin-bottom: 12px;
     padding-bottom: 12px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .contact-item:last-child {
@@ -3048,7 +3055,7 @@ section {
 }
 
 .medical-columns-section .contact-link {
-    color: #4a90e2;
+    color: #2CC7C5;
     text-decoration: underline;
     font-size: 14px;
     line-height: 1.5;
@@ -3057,15 +3064,16 @@ section {
 /* Fee list */
 .medical-columns-section .fee-list {
     list-style: none;
-    background-color: #f8f9fa;
+    background-color: #F1F1F1;
     padding: 16px;
-    border-radius: 8px;
+    border-radius: 4px;
     margin: 16px 0;
+    border: 1px solid #E0E0E0;
 }
 
 .medical-columns-section .fee-item {
     font-size: 14px;
-    color: #333;
+    color: #4C4C4C;
     margin-bottom: 8px;
     padding: 4px 0;
 }
