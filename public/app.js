@@ -1614,6 +1614,10 @@ class RankingApp {
             return ''; // キャンペーン情報がない場合は空を返す
         }
         
+        // クリニック名を取得
+        const clinic = this.dataManager.getAllClinics().find(c => c.id === clinicId);
+        const clinicName = clinic ? clinic.name : 'クリニック';
+        
         return `
             <div class="campaign-container">
                 <div class="campaign-header">${campaignInfo.header}</div>
@@ -1631,7 +1635,7 @@ class RankingApp {
                         ＼月額・総額がリーズナブルなクリニック／
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
                             <a href="${campaignInfo.ctaUrl}" target="_blank" rel="noopener">
-                                <span class="bt_s">${campaignInfo.ctaText}</span>
+                                <span class="bt_s">${clinicName}公式はコチラ</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
