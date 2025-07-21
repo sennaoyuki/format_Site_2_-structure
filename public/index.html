@@ -815,25 +815,42 @@
         document.querySelectorAll('.medical-columns-section .toc-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
+                
                 const targetId = this.getAttribute('href').substring(1);
                 const targetElement = document.getElementById(targetId);
                 
                 if (targetElement) {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                    
+                    window.scrollTo({
+                        top: targetPosition - 80,
+                        behavior: 'smooth'
                     });
                 }
+                
+                return false;
             });
         });
 
         // Add click animation to links
         document.querySelectorAll('.medical-columns-section .toc-link, .medical-columns-section .contact-link').forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function(e) {
+                // contact-linkの場合はデフォルト動作を防ぐ
+                if (this.classList.contains('contact-link')) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                
                 this.style.opacity = '0.7';
                 setTimeout(() => {
                     this.style.opacity = '1';
                 }, 150);
+                
+                // contact-linkの場合はfalseを返す
+                if (this.classList.contains('contact-link')) {
+                    return false;
+                }
             });
         });
     </script>
