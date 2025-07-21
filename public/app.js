@@ -430,41 +430,62 @@ class RankingApp {
                 tr.style.backgroundColor = '#fffbdc';
             }
             
-            // ダミーデータの設定
+            // 実際のデータ設定
             const achievements = {
-                1: '全国100院以上',
-                2: '累計施術50万件',
-                3: '開院15年の実績',
-                4: '全圈80院展開',
-                5: '医療痩身専門'
+                1: 'ダイエット成功率99％<br>平均13.7kg減',
+                2: 'ダイエット成功率94%',
+                3: 'ダイエット成功率94%',
+                4: '豊富な実績',
+                5: '豊富な実績'
             };
             const benefits = {
-                1: '初回限定50%OFF',
-                2: '学割・ペア割あり',
-                3: '全身痩身20%割引',
-                4: 'モニター割弗30%',
-                5: '平日限定プラン'
+                1: '今なら<br>12ヶ月分0円！',
+                2: '今なら<br>最大79%OFF！',
+                3: '最大80%OFF<br>（モニター割引）',
+                4: '特別キャンペーン',
+                5: '特別キャンペーン'
             };
             const popularPlans = {
-                1: '全身+部分痩身',
-                2: '医療HIFU単独',
-                3: '脂肪冷却コース',
-                4: 'GLP-1ダイエット',
-                5: 'オーダーメイド'
+                1: '脂肪冷却',
+                2: '脂肪冷却',
+                3: '脂肪冷却',
+                4: '人気プラン',
+                5: '人気プラン'
             };
             const machines = {
-                1: '最新HIFU機器',
-                2: '脂肪冷却装置',
-                3: 'EMSマシン',
-                4: 'キャビテーション',
-                5: 'ラジオ波機器'
+                1: '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
+                2: '脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波',
+                3: '脂肪冷却<br>医療用EMS<br>医療ハイフ',
+                4: '最新機器',
+                5: '最新機器'
             };
             const injections = {
-                1: '脂肪溶解注射',
-                2: 'GLP-1注射',
-                3: 'ボトックス',
-                4: 'ビタミン点滴',
-                5: 'プラセンタ注射'
+                1: '脂肪溶解注射<br>サンサム注射<br>ダイエット点滴<br>GLP-1<br>サクセンダ',
+                2: '脂肪溶解注射<br>ダイエット点滴<br>GLP-1<br>オルリスタット<br>ビグアナイド系薬剤',
+                3: '脂肪溶解注射<br>ダイエット美容点滴<br>エクソソーム点滴',
+                4: '注射療法',
+                5: '注射療法'
+            };
+            const dietSupport = {
+                1: '栄養管理士<br>による指導',
+                2: '管理栄養士<br>による指導',
+                3: '医師監修のもと<br>管理栄養士の指導',
+                4: '〇',
+                5: '〇'
+            };
+            const monitorDiscount = {
+                1: 'あり<br>75％OFF',
+                2: 'あり<br>最大79%OFF',
+                3: 'あり<br>最大80%OFF',
+                4: '×',
+                5: '×'
+            };
+            const moneyBack = {
+                1: '痩せなかったら返金',
+                2: '痩せなかったら返金',
+                3: 'あり（※条件付き）',
+                4: '×',
+                5: '×'
             };
             
             const rankNum = clinic.rank || index + 1;
@@ -487,9 +508,9 @@ class RankingApp {
                 <td class="th-none" style="display: none;">${popularPlans[rankNum] || '人気プラン'}</td>
                 <td class="th-none" style="display: none;">${machines[rankNum] || '最新機器'}</td>
                 <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
-                <td class="th-none" style="display: none;">${clinic.diet_support || '〇'}</td>
-                <td class="th-none" style="display: none;">${rankNum <= 3 ? '〇' : '×'}</td>
-                <td class="th-none" style="display: none;">${rankNum === 1 ? '〇' : '×'}</td>
+                <td class="th-none" style="display: none;">${dietSupport[rankNum] || '〇'}</td>
+                <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
+                <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
             `;
             
             tbody.appendChild(tr);
