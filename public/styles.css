@@ -2590,18 +2590,20 @@ section {
 .detail-features {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 10px;
     margin: 20px 0;
     flex-wrap: wrap;
 }
 
 .feature-tag {
-    background: #fce7f3;
-    color: #be185d;
+    display: inline-block;
+    background: #E8E7F6;
+    color: #4C4C4C;
     padding: 8px 16px;
     border-radius: 20px;
-    font-size: 0.9rem;
-    font-weight: 500;
+    font-size: 14px;
+    font-weight: 400;
+    white-space: nowrap;
 }
 
 .detail-info-table {
@@ -3950,12 +3952,12 @@ section {
     }
     
     .detail-features {
-        gap: 10px;
+        gap: 8px;
         margin: 15px 0;
     }
     
     .feature-tag {
-        font-size: 0.8rem;
+        font-size: 12px;
         padding: 6px 12px;
     }
     
