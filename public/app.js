@@ -169,7 +169,7 @@ class DisplayManager {
                     <div class="clinic-logo-section">
                         <div class="clinic-logo">${clinic.name}</div>
                     </div>
-                    <div class="push-message" style="padding: 10px; text-align: center; font-size: 13px; line-height: 1.4; color: #333; white-space: pre-wrap; font-weight: bold; margin: 10px 0;">
+                    <div class="push-message" style="padding: 0px; text-align: center; font-size: 10px; line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0;">
                         ${pushMessage}
                     </div>
                     <div class="clinic-banner">

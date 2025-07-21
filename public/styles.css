@@ -1568,7 +1568,7 @@ section {
 
 /* 評価セクション */
 .rating-section {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 .stars {
@@ -1606,7 +1606,11 @@ section {
 
 /* クリニックロゴ */
 .clinic-logo-section {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
+    min-height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .clinic-logo {
@@ -3497,7 +3501,7 @@ section {
     }
     
     .clinic-logo-section {
-        margin-bottom: 8px;
+        margin-bottom: 0px;
         min-height: 35px;
         display: flex;
         align-items: center;
@@ -4654,7 +4658,7 @@ section {
     }
     
     .clinic-card {
-        padding: 8px;
+        padding: 3px;
         margin: 0;
         box-sizing: border-box;
         font-size: 12px;
