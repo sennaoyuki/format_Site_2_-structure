@@ -264,7 +264,7 @@
 #review_tab_box .wrap_long2 {
     padding: 10px 10px 0px;
     border: 2px solid #f0a0a5;
-    overflow: hidden;
+    /* overflow: hidden; */
     background: #ffffff;
     font-size: 14px;
     margin: 0px 0px 20px;
