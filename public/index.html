@@ -814,6 +814,8 @@
         });
 
         // Smooth scrolling for table of contents links in medical columns
+        // Temporarily disabled for debugging scroll issues
+        /*
         document.querySelectorAll('.medical-columns-section .toc-link').forEach(link => {
             link.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -834,6 +836,7 @@
                 return false;
             });
         });
+        */
 
         // Add click animation to links
         document.querySelectorAll('.medical-columns-section .toc-link, .medical-columns-section .contact-link').forEach(link => {

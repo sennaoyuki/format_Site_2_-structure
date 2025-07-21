@@ -1548,6 +1548,8 @@ document.addEventListener('DOMContentLoaded', () => {
     app.init();
     
     // Smooth scrolling for table of contents links
+    // Temporarily disabled for debugging scroll issues
+    /*
     document.querySelectorAll('.toc-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1568,9 +1570,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         });
     });
+    */
     
     // Prevent default behavior for all href="#" links
     // This prevents page jumping to top
+    // Temporarily disabled for debugging - too broad impact with capture phase
+    /*
     document.addEventListener('click', function(e) {
         const link = e.target.closest('a[href="#"]');
         if (link) {
@@ -1579,4 +1584,5 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         }
     }, true);
+    */
 });
