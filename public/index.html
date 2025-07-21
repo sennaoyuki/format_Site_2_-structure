@@ -788,8 +788,10 @@
                     const tabType = this.getAttribute('data-tab');
                     updateTableColumns(tabType);
                     
-                    // スクロール位置を復元
-                    window.scrollTo(0, currentScroll);
+                    // DOM更新が完了してからスクロール位置を復元
+                    requestAnimationFrame(() => {
+                        window.scrollTo(0, currentScroll);
+                    });
                 });
             });
             

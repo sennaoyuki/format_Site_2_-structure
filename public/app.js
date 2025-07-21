@@ -1568,4 +1568,15 @@ document.addEventListener('DOMContentLoaded', () => {
             return false;
         });
     });
+    
+    // Prevent default behavior for all href="#" links
+    // This prevents page jumping to top
+    document.addEventListener('click', function(e) {
+        const link = e.target.closest('a[href="#"]');
+        if (link) {
+            e.preventDefault();
+            e.stopPropagation();
+            return false;
+        }
+    }, true);
 });
