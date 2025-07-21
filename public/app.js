@@ -1112,7 +1112,7 @@ class RankingApp {
                             </div>
                         </div>
                         <div class="ranking__name">
-                            <a href="#" target="_blank" rel="noopener nofollow">${data.link}</a>
+                            <a href="#" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
                         </div>
                     </div>
                 ${data.banner ? `
