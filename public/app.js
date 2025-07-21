@@ -733,7 +733,7 @@ class RankingApp {
                         '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
                         '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': '<a href="https://dioclinic.jp/" class="clinic-link">公式サイトへ ></a>'
+                        '公式サイト': 'https://dioclinic.jp/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -850,7 +850,7 @@ class RankingApp {
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
                         '店舗': '東京 (新宿, 銀座)',
-                        '公式サイト': '<a href="https://uraraclinic.jp/" class="clinic-link">公式サイトへ ></a>'
+                        '公式サイト': 'https://uraraclinic.jp/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -953,7 +953,7 @@ class RankingApp {
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
                         '店舗': '池袋／横浜／名古屋',
-                        '公式サイト': '<a href="https://lietoclinic.com/" class="clinic-link">公式サイトへ ></a>'
+                        '公式サイト': 'https://lietoclinic.com/'
                     },
                     vioPlans: {
                         vioOnly: {
