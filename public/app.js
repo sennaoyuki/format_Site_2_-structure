@@ -147,8 +147,8 @@ class DisplayManager {
             // 押しメッセージの定義
             const pushMessages = {
                 1: "【総合人気No.1】\n2025年のイチ押し！\n業界屈指のコスパ",
-                2: "【実績No.1】\n信頼の施術実績\n安心のサポート体制",
-                3: "【コスパNo.1】\nお得な料金プラン\n今なら特別価格"
+                2: "次世代医療！\n成功率94%の実績",
+                3: "厚労省承認マシン\n科学的に脂肪を減らす"
             };
             const pushMessage = pushMessages[rankNum] || "人気のクリニック";
 
