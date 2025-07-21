@@ -1618,8 +1618,6 @@ class RankingApp {
             <div class="campaign-container">
                 <div class="campaign-header">${campaignInfo.header}</div>
                 <div class="campaign-content">
-                    <div class="campaign_title">${campaignInfo.title}</div>
-                    
                     <div class="camp_header3">
                         <div class="freya-logo">
                             <img src="${campaignInfo.logoSrc}" alt="${campaignInfo.logoAlt}">
