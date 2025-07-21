@@ -2811,9 +2811,8 @@ section {
 }
 
 .medical-columns-section .columns-container {
-    padding: 16px;
-    max-width: 1200px;
-    margin: 0 auto;
+    padding: 2%;
+    max-width: 100%;
 }
 
 .medical-columns-section .article-card {
@@ -5263,8 +5262,8 @@ section {
     }
     
     .medical-columns-section .columns-container {
-        padding: 10px;
-        max-width: 375px;
+        padding: 2%;
+        max-width: 100%;
     }
     
     .medical-columns-section .header-image {
