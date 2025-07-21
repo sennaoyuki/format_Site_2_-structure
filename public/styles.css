@@ -1410,9 +1410,11 @@ section {
 
 /* ===== ランキングセクション ===== */
 .clinic-rankings {
-    max-width: 1400px;
+    padding: 15px 10px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 60px 40px;
+    box-sizing: border-box;
 }
 
 /* ランキングヘッダーバナー */
