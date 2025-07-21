@@ -4426,7 +4426,7 @@ section {
         width: 100% !important;
         max-width: 100% !important;
         box-sizing: border-box !important;
-        padding: 0 10px !important;
+        padding: 0 4px !important;
     }
     
     /* 比較表の最適化 */
