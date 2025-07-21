@@ -1551,15 +1551,21 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.toc-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
+            e.stopPropagation();
+            
             const targetId = this.getAttribute('href').substring(1);
             const targetElement = document.getElementById(targetId);
             
             if (targetElement) {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                
+                window.scrollTo({
+                    top: targetPosition - 80,
+                    behavior: 'smooth'
                 });
             }
+            
+            return false;
         });
     });
 });
