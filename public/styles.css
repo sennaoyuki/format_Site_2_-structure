@@ -1853,7 +1853,7 @@ section {
 
 .js-cbn-table table {
     border-top: 1px solid #E0E0E0;
-    table-layout: fixed;
+    table-layout: auto;
     border-collapse: collapse;
     width: 100%;
     background: white;
@@ -1861,9 +1861,11 @@ section {
 
 .th-none,
 .td-none {
-    display: none;
-    visibility: hidden;
-    width: 0;
+    display: none !important;
+    visibility: hidden !important;
+    width: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
 }
 
 .js-cbn-table table,
@@ -1880,6 +1882,22 @@ section {
     vertical-align: middle;
     font-weight: 600;
     white-space: normal;
+}
+
+/* 表示されている列の幅調整 */
+.js-cbn-table table th:first-child,
+.js-cbn-table table td:first-child {
+    width: 25%;
+}
+
+.js-cbn-table table th:not(:first-child):not(:last-child):not(.th-none),
+.js-cbn-table table td:not(:first-child):not(:last-child):not(.td-none) {
+    width: 18.75%;
+}
+
+.js-cbn-table table th:last-child,
+.js-cbn-table table td:last-child {
+    width: 18.75%;
 }
 
 .js-cbn-table table td {

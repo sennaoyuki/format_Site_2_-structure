@@ -219,7 +219,7 @@ class DisplayManager {
 }
 
 // アプリケーションクラス
-class RankingApp {
+ {
     constructor() {
         this.urlHandler = new UrlParamHandler();
         this.displayManager = new DisplayManager();
@@ -479,22 +479,22 @@ class RankingApp {
                     <img src="${clinic.logo || 'img/clinic-default.png'}" alt="${clinic.name}" width="80">
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
-                <td>
+                <td class="" style="">
                     <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
                     <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
                 </td>
-                <td>${achievements[rankNum] || '豊富な実績'}</td>
-                <td>${benefits[rankNum] || '特別キャンペーン'}</td>
-                <td>
-                    <a class="link_btn" href="${clinic.url || '#'}" target="_blank">公式サイト</a>
-                    <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>
-                </td>
+                <td class="" style="">${achievements[rankNum] || '豊富な実績'}</td>
+                <td class="" style="">${benefits[rankNum] || '特別キャンペーン'}</td>
                 <td class="th-none" style="display: none;">${popularPlans[rankNum] || '人気プラン'}</td>
-                <td class="th-none" style="display: none;">${machines[rankNum] || '最新機器'}</td>
+                <td class="th-none" style="display: none;">${machines[rankNum] || '医療機器'}</td>
                 <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
                 <td class="th-none" style="display: none;">${dietSupport[rankNum] || '〇'}</td>
                 <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
                 <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
+                <td>
+                    <a class="link_btn" href="${clinic.url || '#'}" target="_blank">公式サイト</a>
+                    <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>
+                </td>
             `;
             
             tbody.appendChild(tr);
