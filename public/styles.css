@@ -3415,11 +3415,8 @@ section {
         margin: 0 auto 10px;
         padding: 20px 15px;
         font-size: 16px;
-        border-radius: 30px;
-        background: #e233a5;
-        color: white;
-        text-align: center;
-        background: #e233a5;
+        border-radius: 8px;
+        background: #2CC7C5;
         color: white;
         text-align: center;
     }
