@@ -19,12 +19,6 @@
     display: block;
 }
 
-/* Shop name link styles in brand section */
-.detail-item .brand-section .shop-name a {
-    color: #4a90e2;
-    font-size: 0.8rem;
-    text-decoration: none;
-}
 
 /* ハンバーガーメニュー */
 .hamburger-menu {
