@@ -970,9 +970,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    mar: 5px;
+    margin-left: 5px;
     background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 50%;
+    border-radius: 4px;
     width: 24px;
     height: 24px;
     font-size: 14px;
@@ -1393,6 +1393,7 @@ section {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    background: #F1F1F1;
 }
 
 /* ランキングヘッダーバナー */
@@ -1401,8 +1402,8 @@ section {
     margin: 0 auto 10px;
     padding: 20px 15px;
     font-size: 16px;
-    border-radius: 30px;
-    background: #e233a5;
+    border-radius: 8px;
+    background: #2CC7C5;
     color: white;
     text-align: center;
 }
@@ -1410,10 +1411,10 @@ section {
 
 
 .ranking-banner-text {
-    font-size: 1.8rem;
-    font-weight: 700;
+    font-size: 1.6rem;
+    font-weight: 600;
     margin: 0;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    text-shadow: none;
     position: relative;
     z-index: 1;
 }
@@ -1453,30 +1454,31 @@ section {
     transform: translateX(-50%);
     width: 80px;
     height: 80px;
-    border-radius: 50%;
+    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 800;
+    font-weight: 600;
     font-size: 1.2rem;
     color: white;
     z-index: 2;
-    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+    box-shadow: none;
+    border: 1px solid #E0E0E0;
 }
 
 .gold-medal {
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
-    border: 3px solid #fff;
+    background: #2CC7C5;
+    border: 1px solid #E0E0E0;
 }
 
 .silver-medal {
-    background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
-    border: 3px solid #fff;
+    background: #9D9D9D;
+    border: 1px solid #E0E0E0;
 }
 
 .bronze-medal {
-    background: linear-gradient(135deg, #cd7f32 0%, #e4a853 100%);
-    border: 3px solid #fff;
+    background: #B0B0B0;
+    border: 1px solid #E0E0E0;
 }
 
 .rank-medal:not(.gold-medal):not(.silver-medal):not(.bronze-medal) {
@@ -1485,37 +1487,39 @@ section {
 }
 
 .medal-text {
-    font-style: italic;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+    font-style: normal;
+    text-shadow: none;
 }
 
 /* クリニックカード */
 .clinic-card {
     margin: 3%;
     padding: 38px 4px 8px;
-    border-radius: 15px;
-    border-width: 3px;
+    border-radius: 8px;
+    border-width: 1px;
+    border-style: solid;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 310px;
     position: relative;
+    transition: border-color 0.3s ease;
 }
 
 .rank-1 .clinic-card {
-    border-color: #ec4899;
-    background-color: #fdf2f8;
+    border-color: #E0E0E0;
+    background-color: #FFFFFF;
 }
 
 .rank-2 .clinic-card {
-    border-color: #d1d5db;
-    background-color: #f9fafb;
+    border-color: #E0E0E0;
+    background-color: #FFFFFF;
 }
 
 .rank-3 .clinic-card {
-    border-color: #daa520;
-    background-color: #fffbf0;
+    border-color: #E0E0E0;
+    background-color: #FFFFFF;
 }
 
 .rank-4 .clinic-card {
@@ -1527,21 +1531,22 @@ section {
 }
 
 .clinic-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    transform: none;
+    box-shadow: none;
+    border-color: #2CC7C5;
 }
 
 /* 満足度バッジ */
 .satisfaction-badge {
-    background: #ec4899;
+    background: #2CC7C5;
     color: white;
     padding: 3px 10px;
     font-size: 0.8rem;
     margin-bottom: 5px;
-    border-radius: 12px;
+    border-radius: 4px;
     margin-top: 30px;
     display: inline-block;
-    font-weight: 600;
+    font-weight: 400;
 }
 
 /* 評価セクション */
@@ -1558,22 +1563,22 @@ section {
 }
 
 .rank-1 .stars {
-    color: #ec4899;
+    color: #2CC7C5;
 }
 
 .rank-2 .stars {
-    color: #ec4899;
+    color: #2CC7C5;
 }
 
 .rank-3 .stars {
-    color: #ec4899;
+    color: #2CC7C5;
 }
 
 .rating-score {
     font-size: 2.5rem;
-    font-weight: 700;
-    color: #ec4899;
-    font-style: italic;
+    font-weight: 600;
+    color: #4C4C4C;
+    font-style: normal;
 }
 
 .score-max {
@@ -1593,8 +1598,8 @@ section {
 
 .clinic-logo {
     font-size: 1.8rem;
-    font-weight: 900;
-    color: #333;
+    font-weight: 600;
+    color: #4C4C4C;
     line-height: 1.2;
 }
 
@@ -1722,15 +1727,15 @@ section {
     align-items: center;
     justify-content: center;
     gap: 0px;
-    background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+    background: #2CC7C5;
     color: white;
     padding: 22px 25px;
-    border-radius: 10px;
+    border-radius: 4px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 600;
     font-size: 0.5rem;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
+    box-shadow: none;
     width: 100%;
     box-sizing: border-box;
     margin: 0 0%;
@@ -1747,9 +1752,9 @@ section {
 }
 
 .btn.btn_second_primary a:hover {
-    background: linear-gradient(135deg, #ff0080 0%, #ff1493 100%);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(255, 20, 147, 0.4);
+    background: #25B5B3;
+    transform: none;
+    box-shadow: none;
 }
 
 .btn.btn_second_primary a:hover .btn-arrow {
