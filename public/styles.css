@@ -1400,7 +1400,7 @@ section {
 .ranking-header-banner {
     max-width: 100%;
     margin: 0 auto 10px;
-    padding: 20px 15px;
+    padding: 20px 5px;
     font-size: 16px;
     border-radius: 8px;
     background: #2CC7C5;
@@ -3429,7 +3429,7 @@ section {
     .ranking-header-banner {
         max-width: 100%;
         margin: 0 auto 10px;
-        padding: 20px 15px;
+        padding: 20px 5px;
         font-size: 16px;
         border-radius: 8px;
         background: #2CC7C5;
