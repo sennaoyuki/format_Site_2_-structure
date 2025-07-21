@@ -1417,14 +1417,14 @@ section {
 
 /* ランキングヘッダーバナー */
 .ranking-header-banner {
-    background: #ec4899;
+    max-width: 100%;
+    margin: 0 auto 10px;
+    padding: 20px 15px;
+    font-size: 16px;
+    border-radius: 30px;
+    background: #e233a5;
     color: white;
-    padding: 20px;
     text-align: center;
-    border-radius: 15px;
-    margin-bottom: 40px;
-    position: relative;
-    overflow: hidden;
 }
 
 .ranking-header-banner::before {
@@ -1454,11 +1454,15 @@ section {
 
 /* ランキングコンテナ */
 .ranking-container {
+    padding: 10px 0px;
+}
+
+.ranking-container {
     display: flex;
     flex-wrap: nowrap;
-    gap: 2px;
-    width: 98%;
-    max-width: 98%;
+    gap: 0px;
+    width: 100%;
+    max-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
     overflow-x: auto;
@@ -1467,7 +1471,12 @@ section {
 
 /* ランキングアイテム */
 .ranking-item {
-    position: relative;
+    width: calc((100% - 8px) / 3);
+    min-width: 115px;
+    /* max-width: 130px; */
+    margin: 0;
+    box-sizing: border-box;
+    flex-shrink: 0;
 }
 
 /* ランクメダル */
@@ -3428,10 +3437,13 @@ section {
     
     .ranking-header-banner {
         max-width: 100%;
-        margin: 0 auto 20px;
+        margin: 0 auto 10px;
         padding: 20px 15px;
         font-size: 16px;
         border-radius: 30px;
+        background: #e233a5;
+        color: white;
+        text-align: center;
         background: #e233a5;
         color: white;
         text-align: center;
@@ -3445,24 +3457,27 @@ section {
     }
     
     .ranking-container {
+        padding: 10px 0px;
+    }
+
+    .ranking-container {
         display: flex;
         flex-wrap: nowrap;
-        gap: 4px;
-        padding: 0;
+        gap: 0px;
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
-        justify-content: center;
-        overflow-x: visible;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     
     .ranking-item {
-        position: relative;
         width: calc((100% - 8px) / 3);
+        min-width: 115px;
+        /* max-width: 130px; */
+        margin: 0;
         box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
         flex-shrink: 0;
     }
     
@@ -4281,7 +4296,7 @@ section {
 @media (max-width: 480px) {
     /* さらに小さい画面用の微調整 */
     .ranking-container {
-        padding: 10px 3px;
+        padding: 10px 0px;
     }
     
     /* グローバルリセット */
@@ -4647,9 +4662,13 @@ section {
     }
     
     .ranking-container {
+        padding: 10px 0px;
+    }
+
+    .ranking-container {
         display: flex;
         flex-wrap: nowrap;
-        gap: 4px;
+        gap: 0px;
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
@@ -4661,7 +4680,7 @@ section {
     .ranking-item {
         width: calc((100% - 8px) / 3);
         min-width: 115px;
-        max-width: 120px;
+        /* max-width: 130px; */
         margin: 0;
         box-sizing: border-box;
         flex-shrink: 0;
