@@ -712,12 +712,22 @@
                 'tab4': ['クリニック', '食事指導', '保証', 'その他', '詳細'] // サービス
             };
             
+            // モバイル用の列設定
+            const mobileColumnConfig = {
+                'tab1': ['クリニック', '総合評価', '医療HIFU', '詳細'], // 総合
+                'tab2': ['クリニック', '医療HIFU', '脂肪冷却', '詳細'], // プラン
+                'tab3': ['クリニック', '医療機器', '機器名', '詳細'], // 機器
+                'tab4': ['クリニック', '食事指導', '保証', '詳細'] // サービス
+            };
+            
             function updateTableColumns(tabType) {
                 if (!table) return;
                 
                 const headers = table.querySelectorAll('th');
                 const rows = table.querySelectorAll('tbody tr');
-                const showColumns = columnConfig[tabType] || columnConfig['tab1'];
+                const isMobile = window.innerWidth <= 768;
+                const config = isMobile ? mobileColumnConfig : columnConfig;
+                const showColumns = config[tabType] || config['tab1'];
                 
                 // ヘッダーの表示/非表示
                 headers.forEach((th, index) => {
