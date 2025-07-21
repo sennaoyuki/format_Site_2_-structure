@@ -929,7 +929,7 @@ class RankingApp {
                         }
                     ],
                     campaignInfo: {
-                        header: 'NEWS!',
+                        header: 'INFORMATION!',
                         title: 'エミナルクリニック新春キャンペーン',
                         logoSrc: '/img/eminal-logo.png',
                         logoAlt: 'エミナルクリニック',
@@ -1007,7 +1007,7 @@ class RankingApp {
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     },
                     campaignInfo: {
-                        header: 'CAMPAIGN!',
+                        header: 'INFORMATION!',
                         title: 'リエートクリニック特別キャンペーン',
                         logoSrc: '/img/lieto-logo.png',
                         logoAlt: 'リエートクリニック',
@@ -1085,7 +1085,7 @@ class RankingApp {
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     },
                     campaignInfo: {
-                        header: 'SPECIAL!',
+                        header: 'INFORMATION!',
                         title: 'リエートクリニック新規開院記念',
                         logoSrc: '/img/reate-logo.png',
                         logoAlt: 'リエートクリニック',
