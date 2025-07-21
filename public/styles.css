@@ -318,7 +318,9 @@
 }
 
 #review_tab_box .disnon2 {
-    display: none;
+    visibility: hidden;
+    height: 0;
+    overflow: hidden;
 }
 
 .review_tab_box_in {
@@ -927,61 +929,9 @@
     box-shadow: 0 2px 0 #4a9a9e;
 }
 
-.btn_second_primary a:after {
-    content: '';
-    -moz-animation: is-reflection 4s ease-in-out infinite;
-    -moz-transform: rotate(45deg);
-    -ms-animation: is-reflection 4s ease-in-out infinite;
-    -ms-transform: rotate(45deg);
-    -o-animation: is-reflection 4s ease-in-out infinite;
-    -o-transform: rotate(45deg);
-    -webkit-animation: is-reflection 4s ease-in-out infinite;
-    -webkit-transform: rotate(45deg);
-    animation: is-reflection 4s ease-in-out infinite;
-    background-color: #fff;
-    content: " ";
-    height: 100%;
-    left: 0;
-    opacity: 0;
-    position: absolute;
-    top: -180px;
-    transform: rotate(45deg);
-    width: 30px;
-}
 
-@keyframes is-reflection {
-    0% {
-        transform: rotate(45deg) translateX(-200%);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        transform: rotate(45deg) translateX(200%);
-        opacity: 0;
-    }
-}
 
-@-webkit-keyframes is-reflection {
-    0% {
-        -webkit-transform: rotate(45deg) translateX(-200%);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1;
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        -webkit-transform: rotate(45deg) translateX(200%);
-        opacity: 0;
-    }
-}
+
 
 .bt_s {
     font-size: 16px;
