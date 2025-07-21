@@ -349,9 +349,7 @@
 }
 
 #review_tab_box .disnon2 {
-    visibility: hidden;
-    height: 0;
-    overflow: hidden;
+    display: none;
 }
 
 .review_tab_box_in {
