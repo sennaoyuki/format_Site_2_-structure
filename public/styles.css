@@ -2,6 +2,14 @@
 
 /* Vercel deployment trigger - 2025/07/21 */
 
+/* Override any is-reflection animation */
+.is-reflection,
+*[class*="is-reflection"] {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+}
+
 /* ハンバーガーメニュー */
 .hamburger-menu {
     background: none;

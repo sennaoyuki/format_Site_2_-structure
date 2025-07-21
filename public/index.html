@@ -774,13 +774,6 @@
             
             tabMenuItems.forEach(item => {
                 item.addEventListener('click', function() {
-                    // テーブルコンテナの高さを固定してレイアウトシフトを防ぐ
-                    const tableContainer = document.querySelector('.js-cbn-table');
-                    if (tableContainer) {
-                        const currentHeight = tableContainer.offsetHeight;
-                        tableContainer.style.minHeight = currentHeight + 'px';
-                    }
-
                     // すべてのタブを非アクティブに
                     tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
                     // クリックしたタブをアクティブに
@@ -789,14 +782,6 @@
                     // タブに応じて表示列を切り替え
                     const tabType = this.getAttribute('data-tab');
                     updateTableColumns(tabType);
-
-                    // DOM更新後に高さの固定を解除
-                    if (tableContainer) {
-                        // setTimeoutを使い、ブラウザのレンダリング後に高さをリセット
-                        setTimeout(() => {
-                            tableContainer.style.minHeight = '';
-                        }, 0);
-                    }
                 });
             });
             
