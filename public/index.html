@@ -775,9 +775,17 @@
             tabMenuItems.forEach(item => {
                 item.addEventListener('click', function(e) {
                     e.preventDefault();
+                    e.stopPropagation();
                     
                     // 現在のスクロール位置を保存
-                    const currentScroll = window.pageYOffset;
+                    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                    
+                    // テーブルコンテナの高さを固定してレイアウトシフトを防ぐ
+                    const tableContainer = document.querySelector('.js-cbn-table');
+                    if (tableContainer) {
+                        const currentHeight = tableContainer.offsetHeight;
+                        tableContainer.style.minHeight = currentHeight + 'px';
+                    }
                     
                     // すべてのタブを非アクティブに
                     tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
@@ -788,10 +796,26 @@
                     const tabType = this.getAttribute('data-tab');
                     updateTableColumns(tabType);
                     
-                    // DOM更新が完了してからスクロール位置を復元
+                    // DOM更新が完全に完了してからスクロール位置を復元
                     requestAnimationFrame(() => {
-                        window.scrollTo(0, currentScroll);
+                        requestAnimationFrame(() => {
+                            // スクロール位置を復元
+                            window.scrollTo({
+                                top: currentScroll,
+                                left: 0,
+                                behavior: 'instant'
+                            });
+                            
+                            // 高さの固定を解除
+                            if (tableContainer) {
+                                setTimeout(() => {
+                                    tableContainer.style.minHeight = '';
+                                }, 100);
+                            }
+                        });
                     });
+                    
+                    return false;
                 });
             });
             
