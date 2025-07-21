@@ -2795,17 +2795,12 @@ section {
 .medical-columns-section .article-card {
     background-color: transparent;
     border-radius: 0;
-    margin-bottom: 40px;
+    margin-bottom: 0px;
     /* overflow: hidden; */
     box-shadow: none;
     border: none;
-    padding-bottom: 40px;
-    border-bottom: 1px solid #E0E0E0;
-}
-
-.medical-columns-section .article-card:last-child {
-    border-bottom: none;
-    padding-bottom: 0;
+    padding-bottom: 0px;
+    /* border-bottom: 1px solid #E0E0E0; */
 }
 
 /* Header with image */
@@ -3090,9 +3085,9 @@ section {
 #footer {
     clear: both;
     padding: 30px 0 0 0;
-    background: linear-gradient(180deg, #e3f2fd 0%, #bbdefb 100%);
+    background: #F1F1F1;
     margin-top: 60px;
-    border-top: 2px solid #64b5f6;
+    border-top: 1px solid #E0E0E0;
 }
 
 .footer_contents {
@@ -3114,16 +3109,18 @@ section {
     padding: 0;
     /* overflow: hidden; */
     font-size: 1.3rem;
+    color: #4C4C4C;
+    font-weight: 600;
 }
 
 .footer_contents a {
-    color: #1976d2;
+    color: #2CC7C5;
     text-decoration: none;
     transition: color 0.3s ease;
 }
 
 .footer_contents a:hover {
-    color: #0d47a1;
+    color: #25B5B3;
     text-decoration: underline;
 }
 
@@ -3139,35 +3136,36 @@ section {
     text-align: left;
     /* overflow: hidden; */
     font-size: 0.9rem;
+    color: #9D9D9D;
 }
 
 .footer_contents ul h5 {
-    color: #0d47a1;
-    font-weight: bold;
+    color: #4C4C4C;
+    font-weight: 600;
     margin-bottom: 10px;
     font-size: 1rem;
-    border-bottom: 2px solid #64b5f6;
+    border-bottom: 1px solid #E0E0E0;
     padding-bottom: 5px;
     display: inline-block;
 }
 
 #footer .footer-bottom {
-    background-color: #90caf9;
+    background-color: #E0E0E0;
     margin: 0;
     padding: 15px 40px;
     text-align: center;
-    border-top: 1px solid #64b5f6;
+    border-top: 1px solid #D0D0D0;
 }
 
 #footer .copyright {
-    color: #0d47a1;
+    color: #4C4C4C;
     font-size: 0.8rem;
     margin-bottom: 5px;
-    font-weight: 500;
+    font-weight: 400;
 }
 
 #footer .disclaimer {
-    color: #1565c0;
+    color: #9D9D9D;
     font-size: 0.75rem;
     font-weight: normal;
     line-height: 1.5;
