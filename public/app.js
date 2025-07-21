@@ -939,15 +939,15 @@ class RankingApp {
                         footerText: '先着100名様限定！お急ぎください'
                     }
                 },
-                '3': { // ウララクリニック
+                '3': { // リエートクリニック
                     title: 'リーズナブルな価格設定',
-                    subtitle: '学生に人気の医療脱毛',
-                    link: 'ウララクリニック ＞',
+                    subtitle: '学生に人気の医療痩身',
+                    link: 'リエートクリニック ＞',
                     features: ['24回払い無利息', 'キャンセル料無料'],
                     priceMain: '全身+VIO+顔',
-                    priceValue: '月々4,800円',
+                    priceValue: '月々9,600円',
                     priceDetail: {
-                        '料金': '通常価格49,600円<br>80%OFF 月々9,600円',
+                        '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
                         '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
                         '目安期間': '-5〜10kg：約6ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
@@ -999,21 +999,21 @@ class RankingApp {
                         }
                     ],
                     clinicInfo: {
-                        name: 'ウララクリニック 渋谷院',
-                        address: '東京都渋谷区神南1-10-1 神南ビル6F',
-                        access: 'JR渋谷駅ハチ公口より徒歩5分',
-                        tel: '0120-ZZZ-ZZZ',
-                        hours: '10:00〜14:00 / 15:00〜20:00',
+                        name: 'リエートクリニック 池袋院',
+                        address: '東京都豊島区南池袋1-25-1 池袋MYTビル4F',
+                        access: 'JR池袋駅東口より徒歩3分',
+                        tel: '0120-LLL-LLL',
+                        hours: '10:00〜20:00',
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     },
                     campaignInfo: {
                         header: 'CAMPAIGN!',
-                        title: 'ウララクリニック学割キャンペーン',
-                        logoSrc: '/img/urara-logo.png',
-                        logoAlt: 'ウララクリニック',
-                        description: '【学生限定特典】<br>学生証提示で<br>全コース20%OFF！',
-                        ctaUrl: 'https://urara-clinic.jp/',
-                        ctaText: 'ウララ公式はコチラ',
+                        title: 'リエートクリニック特別キャンペーン',
+                        logoSrc: '/img/lieto-logo.png',
+                        logoAlt: 'リエートクリニック',
+                        description: '【期間限定特典】<br>医療痩身が<br>特別価格で提供中！',
+                        ctaUrl: 'https://lietoclinic.com/',
+                        ctaText: 'リエート公式はコチラ',
                         footerText: '24回まで分割手数料無料！'
                     }
                 },
