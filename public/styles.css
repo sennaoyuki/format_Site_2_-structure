@@ -1505,14 +1505,17 @@ section {
 
 .rank-1 .clinic-card {
     border-color: #ec4899;
+    background-color: #fdf2f8;
 }
 
 .rank-2 .clinic-card {
-    border-color: #8b5cf6;
+    border-color: #d1d5db;
+    background-color: #f9fafb;
 }
 
 .rank-3 .clinic-card {
-    border-color: #f59e0b;
+    border-color: #daa520;
+    background-color: #fffbf0;
 }
 
 .rank-4 .clinic-card {
@@ -2187,6 +2190,7 @@ section {
     font-weight: 700;
     font-size: 0.8rem;
     flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .rank-badge.silver {
@@ -2483,16 +2487,19 @@ section {
     color: white;
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4);
     flex-shrink: 0;
+    border: 3px solid #ffed4e;
 }
 
 .detail-rank-badge.silver {
     background: linear-gradient(135deg, #c0c0c0 0%, #e8e8e8 100%);
     box-shadow: 0 4px 15px rgba(192, 192, 192, 0.4);
+    border: 3px solid #e8e8e8;
 }
 
 .detail-rank-badge.bronze {
     background: linear-gradient(135deg, #cd7f32 0%, #e4a853 100%);
     box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
+    border: 3px solid #e4a853;
 }
 
 .detail-title {
