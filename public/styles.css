@@ -776,7 +776,7 @@
     background-color: #fff;
     border: 1px solid #f6cfd5;
     border-radius: 12px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
@@ -915,7 +915,7 @@
     justify-content: center;
     padding: 16px 20px;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 16px;
     font-weight: bold;
     border-radius: 30px;
@@ -1269,7 +1269,7 @@ body {
 .hero-section {
     width: 100%;
     margin-bottom: 20px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .hero-image-wrapper {
@@ -1428,21 +1428,7 @@ section {
     text-align: center;
 }
 
-.ranking-header-banner::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -50%;
-    width: 200%;
-    height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
-    animation: sparkle 3s linear infinite;
-}
 
-@keyframes sparkle {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-}
 
 .ranking-banner-text {
     font-size: 1.8rem;
@@ -1538,7 +1524,7 @@ section {
     flex-direction: column;
     height: 100%;
     min-height: 600px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .rank-1 .clinic-card {
@@ -1795,7 +1781,7 @@ section {
 .comparison-section {
     padding: 30px 10px;
     background: white;
-    overflow: hidden;
+    /* overflow: hidden; */
     /* margin: 0px 0; */
     border-top: 1px solid #f0f0f0;
     width: 100%;
@@ -2008,7 +1994,7 @@ section {
     z-index: 1;
     top: 0;
     left: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     white-space: nowrap;
     color: #f77c00;
 }
@@ -2201,7 +2187,7 @@ section {
     /* 長いテキストの省略 */
     .js-cbn-table td {
         max-width: 80px;
-        overflow: hidden;
+        /* overflow: hidden; */
         text-overflow: ellipsis;
     }
 }
@@ -2350,7 +2336,7 @@ section {
     text-align: center;
     border-radius: 15px;
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
     margin-bottom: 20px;
 }
 
@@ -2460,7 +2446,7 @@ section {
     background: white;
     border-radius: 0 0 20px 20px;
     box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .detail-item {
@@ -2601,7 +2587,7 @@ section {
 .detail-banner {
     margin: 20px 0;
     border-radius: 15px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
@@ -2819,7 +2805,7 @@ section {
     background-color: white;
     border-radius: 8px;
     margin-bottom: 16px;
-    overflow: hidden;
+    /* overflow: hidden; */
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
 
@@ -2833,7 +2819,7 @@ section {
     height: 200px;
     background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
     position: relative;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .medical-columns-section .header-image-placeholder {
@@ -2936,7 +2922,7 @@ section {
     margin: 16px 0;
     background-color: white;
     border-radius: 8px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .medical-columns-section .table-header {
@@ -3108,7 +3094,7 @@ section {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 40px 30px 40px;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 .footer_contents:after {
@@ -3120,7 +3106,7 @@ section {
 .footer_contents h4 {
     margin: 0 auto 20px;
     padding: 0;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 1.3rem;
 }
 
@@ -3145,7 +3131,7 @@ section {
 .footer_contents li {
     margin: 0 5px 8px 15px;
     text-align: left;
-    overflow: hidden;
+    /* overflow: hidden; */
     font-size: 0.9rem;
 }
 
@@ -3678,7 +3664,7 @@ section {
     .comparison-section {
         padding: 30px 10px;
         background: white;
-        overflow: hidden;
+        /* overflow: hidden; */
         /* margin: 40px 0; */
         border-top: 1px solid #f0f0f0;
         width: 100%;
@@ -4984,7 +4970,7 @@ section {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
-    overflow: hidden;
+    /* overflow: hidden; */
 }
 
 /* モバイル向けのレスポンシブスタイル */
