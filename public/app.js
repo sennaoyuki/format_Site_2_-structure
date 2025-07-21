@@ -169,17 +169,11 @@ class DisplayManager {
                     <div class="clinic-logo-section">
                         <div class="clinic-logo">${clinic.name}</div>
                     </div>
-                    <div class="push-message" style="padding: 0px; text-align: center; font-size: 10px; line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0;">
-                        ${pushMessage}
-                    </div>
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${rankNum}位バナー">
                     </div>
-                    <div class="price-info">
-                        <div class="price-main">${price.main}</div>
-                        <div class="price-details">${price.detail}</div>
-                        ${price.discount ? `<div class="price-discount">${price.discount}</div>` : ''}
-                        ${price.note ? `<div class="price-note">${price.note}</div>` : ''}
+                    <div class="push-message" style="padding: 0px; text-align: center; font-size: 10px; line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0;">
+                        ${pushMessage}
                     </div>
                     <p class="btn btn_second_primary">
                         <a href="#" target="_blank" rel="noopener">
