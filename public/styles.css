@@ -4721,7 +4721,7 @@ section {
     .clinic-details-section {
         padding: 20px 10px;
         width: 100%;
-        max-width: 375px;
+        /* max-width: 480px; */
         margin: 0 auto;
         box-sizing: border-box;
     }
@@ -4744,7 +4744,7 @@ section {
     
     .info-table td {
         padding: 6px 4px;
-        font-size: 13px;
+        font-size: 12px;
         word-wrap: break-word;
         white-space: normal;
     }
