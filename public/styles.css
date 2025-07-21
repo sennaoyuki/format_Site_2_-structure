@@ -1835,6 +1835,8 @@ section {
     background: #4ecad1;
     color: #fff;
     pointer-events: none;
+    position: relative;
+    z-index: 10;
 }
 
 
@@ -1848,6 +1850,11 @@ section {
 }
 
 /* 比較表スタイル */
+.js-cbn-table {
+    position: relative;
+    z-index: 1;
+}
+
 .js-cbn-table table {
     border-top: 3px solid #4ecad1;
     table-layout: fixed;
@@ -4921,7 +4928,7 @@ section {
 
 .detail-item .brand-section .shop-address {
     margin-top: 2px;
-    font-size: 12px;
+    font-size: 9px;
 }
 
 .detail-item .brand-section .shop-btn {
@@ -4930,9 +4937,10 @@ section {
     border-radius: 4px;
     background-color: #f25496;
     color: #fff;
-    font-weight: 700;
+    font-weight: 300;
     white-space: nowrap;
     text-decoration: none;
+    font-size: 12px;
 }
 
 .detail-item .brand-section .shop-btn .btn-icon {

@@ -702,11 +702,51 @@
         // 比較表のタブ切り替え機能
         document.addEventListener('DOMContentLoaded', function() {
             const tabMenuItems = document.querySelectorAll('.tab-menu-item');
-            const thElements = document.querySelectorAll('.js-cbn-table th');
-            const tdElements = document.querySelectorAll('.js-cbn-table td');
+            const table = document.querySelector('.js-cbn-table table');
+            
+            // 各タブで表示する列を定義
+            const columnConfig = {
+                'tab1': ['クリニック', '総合評価', '医療HIFU', '特徴', '詳細'], // 総合
+                'tab2': ['クリニック', '医療HIFU', '脂肪冷却', 'GLP-1', '詳細'], // プラン
+                'tab3': ['クリニック', '医療機器', '機器名', '特徴', '詳細'], // 機器
+                'tab4': ['クリニック', '食事指導', '保証', 'その他', '詳細'] // サービス
+            };
+            
+            function updateTableColumns(tabType) {
+                if (!table) return;
+                
+                const headers = table.querySelectorAll('th');
+                const rows = table.querySelectorAll('tbody tr');
+                const showColumns = columnConfig[tabType] || columnConfig['tab1'];
+                
+                // ヘッダーの表示/非表示
+                headers.forEach((th, index) => {
+                    const headerText = th.textContent.trim();
+                    if (showColumns.includes(headerText)) {
+                        th.style.display = 'table-cell';
+                    } else {
+                        th.style.display = 'none';
+                    }
+                });
+                
+                // 各行のセルの表示/非表示
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    headers.forEach((th, index) => {
+                        if (cells[index]) {
+                            cells[index].style.display = th.style.display;
+                        }
+                    });
+                });
+            }
             
             tabMenuItems.forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // 現在のスクロール位置を保存
+                    const currentScroll = window.pageYOffset;
+                    
                     // すべてのタブを非アクティブに
                     tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
                     // クリックしたタブをアクティブに
@@ -714,35 +754,15 @@
                     
                     // タブに応じて表示列を切り替え
                     const tabType = this.getAttribute('data-tab');
+                    updateTableColumns(tabType);
                     
-                    // すべての列を一旦非表示に
-                    thElements.forEach(th => {
-                        if (th.classList.contains('th-none')) {
-                            th.style.display = 'none';
-                        }
-                    });
-                    tdElements.forEach(td => {
-                        if (td.classList.contains('td-none')) {
-                            td.style.display = 'none';
-                        }
-                    });
-                    
-                    // タブに応じて必要な列を表示
-                    if (tabType === 'tab2' || tabType === 'tab3' || tabType === 'tab4') {
-                        // プラン、機器、サービスタブの場合は追加の列を表示
-                        thElements.forEach(th => {
-                            if (th.classList.contains('th-none')) {
-                                th.style.display = 'table-cell';
-                            }
-                        });
-                        tdElements.forEach(td => {
-                            if (td.classList.contains('td-none')) {
-                                td.style.display = 'table-cell';
-                            }
-                        });
-                    }
+                    // スクロール位置を復元
+                    window.scrollTo(0, currentScroll);
                 });
             });
+            
+            // 初期表示
+            updateTableColumns('tab1');
         });
 
         // Smooth scrolling for table of contents links in medical columns
