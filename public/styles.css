@@ -2789,15 +2789,23 @@ section {
 .medical-columns-section .columns-container {
     padding: 2%;
     max-width: 100%;
+    background-color: white;
 }
 
 .medical-columns-section .article-card {
-    background-color: white;
-    border-radius: 4px;
-    margin-bottom: 16px;
+    background-color: transparent;
+    border-radius: 0;
+    margin-bottom: 40px;
     /* overflow: hidden; */
     box-shadow: none;
-    border: 1px solid #E0E0E0;
+    border: none;
+    padding-bottom: 40px;
+    border-bottom: 1px solid #E0E0E0;
+}
+
+.medical-columns-section .article-card:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
 }
 
 /* Header with image */
