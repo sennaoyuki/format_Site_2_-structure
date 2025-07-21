@@ -1718,19 +1718,19 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 0px;
     background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
     color: white;
-    padding: 8px 25px;
+    padding: 22px 25px;
     border-radius: 10px;
     text-decoration: none;
     font-weight: bold;
     font-size: 0.5rem;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(255, 20, 147, 0.3);
-    width: 90%;
+    width: 100%;
     box-sizing: border-box;
-    margin: 0 5%;
+    margin: 0 0%;
 }
 
 .btn.btn_second_primary .bt_s {
