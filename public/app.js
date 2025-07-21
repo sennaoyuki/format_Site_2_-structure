@@ -91,8 +91,8 @@ class DisplayManager {
 
             const rankNum = parseInt(position.replace('no', ''));
             
-            // 3位までに制限
-            if (rankNum > 3) return;
+            // 5位までに制限
+            if (rankNum > 5) return;
             
             // ランキングアイテムのコンテナ
             const rankingItem = document.createElement('div');
@@ -435,57 +435,41 @@ class RankingApp {
                 1: 'ダイエット成功率99％<br>平均13.7kg減',
                 2: 'ダイエット成功率94%',
                 3: 'ダイエット成功率94%',
-                4: '豊富な実績',
-                5: '豊富な実績'
             };
             const benefits = {
                 1: '今なら<br>12ヶ月分0円！',
                 2: '今なら<br>最大79%OFF！',
                 3: '最大80%OFF<br>（モニター割引）',
-                4: '特別キャンペーン',
-                5: '特別キャンペーン'
             };
             const popularPlans = {
                 1: '脂肪冷却',
                 2: '脂肪冷却',
                 3: '脂肪冷却',
-                4: '人気プラン',
-                5: '人気プラン'
             };
             const machines = {
                 1: '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
                 2: '脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波',
                 3: '脂肪冷却<br>医療用EMS<br>医療ハイフ',
-                4: '最新機器',
-                5: '最新機器'
             };
             const injections = {
                 1: '脂肪溶解注射<br>サンサム注射<br>ダイエット点滴<br>GLP-1<br>サクセンダ',
                 2: '脂肪溶解注射<br>ダイエット点滴<br>GLP-1<br>オルリスタット<br>ビグアナイド系薬剤',
                 3: '脂肪溶解注射<br>ダイエット美容点滴<br>エクソソーム点滴',
-                4: '注射療法',
-                5: '注射療法'
             };
             const dietSupport = {
                 1: '栄養管理士<br>による指導',
                 2: '管理栄養士<br>による指導',
                 3: '医師監修のもと<br>管理栄養士の指導',
-                4: '〇',
-                5: '〇'
             };
             const monitorDiscount = {
                 1: 'あり<br>75％OFF',
                 2: 'あり<br>最大79%OFF',
                 3: 'あり<br>最大80%OFF',
-                4: '×',
-                5: '×'
             };
             const moneyBack = {
                 1: '痩せなかったら返金',
                 2: '痩せなかったら返金',
                 3: 'あり（※条件付き）',
-                4: '×',
-                5: '×'
             };
             
             const rankNum = clinic.rank || index + 1;
