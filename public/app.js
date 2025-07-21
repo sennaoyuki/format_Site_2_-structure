@@ -1018,34 +1018,33 @@ class RankingApp {
                     }
                 },
                 '4': { // リエートクリニック
-                    title: '最新技術で安心脱毛',
+                    title: '最新技術で安心痩身',
                     subtitle: '個人に合わせたオーダーメイド施術',
                     link: 'リエートクリニック ＞',
                     features: ['痛みの少ない最新機器', '完全個室でプライバシー配慮'],
-                    priceMain: '全身+VIO+顔',
-                    priceValue: '月々2,800円',
+                    priceMain: '医療痩身コース',
+                    priceValue: '月々9,600円',
                     priceDetail: {
-                        '料金': '総額148,000円',
-                        '脱毛機': '最新蓄熱式レーザー',
-                        '完了目安期間': '最短6ヶ月',
-                        '営業時間': '11:00〜20:00',
-                        'シェービング代': '無料',
-                        '麻酔代': '無料',
-                        '店舗': '全国20院',
-                        '公式サイト': '<a href="#" class="clinic-link">公式サイトへ ></a>'
+                        '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
+                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
+                        '目安期間': '-5〜10kg：約6ヶ月',
+                        '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
+                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
+                        '店舗': '池袋／横浜／名古屋',
+                        '公式サイト': 'https://lietoclinic.com/'
                     },
                     vioPlans: {
                         vioOnly: {
-                            title: 'VIOのみ',
-                            price: '55,000円',
-                            sessions: '5回',
-                            monthly: '月々1,800円'
+                            title: '部分痩身',
+                            price: '30,000円',
+                            sessions: '3回',
+                            monthly: '月々3,000円'
                         },
                         fullBody: {
-                            title: '全身＋VIO',
-                            price: '148,000円',
+                            title: '全身痩身',
+                            price: '49,600円',
                             sessions: '5回',
-                            monthly: '月々2,800円'
+                            monthly: '月々9,600円'
                         }
                     },
                     points: [
@@ -1057,7 +1056,7 @@ class RankingApp {
                         {
                             number: '02',
                             title: '最新機器で痛み軽減',
-                            description: '蓄熱式の最新脱毛機を導入。痛みを最小限に抑えた施術が可能。'
+                            description: '脂肪冷却、医療用EMS、医療ハイフを導入。痛みを最小限に抑えた痩身施術が可能。'
                         },
                         {
                             number: '03',
@@ -1090,8 +1089,8 @@ class RankingApp {
                         title: 'リエートクリニック新規開院記念',
                         logoSrc: '/img/reate-logo.png',
                         logoAlt: 'リエートクリニック',
-                        description: '【完全個室でプライベート重視】<br>新規開院記念で<br>全身脱毛が特別価格！',
-                        ctaUrl: 'https://reate-clinic.jp/',
+                        description: '【完全個室でプライベート重視】<br>新規開院記念で<br>医療痩身が特別価格！',
+                        ctaUrl: 'https://lietoclinic.com/',
                         ctaText: 'リエート公式はコチラ',
                         footerText: 'アフターケア付きで安心'
                     }
