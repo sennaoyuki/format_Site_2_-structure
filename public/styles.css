@@ -1211,8 +1211,8 @@ body {
 
 .site-logo {
     font-size: 1.2rem;
-    font-weight: 600;
-    color: #4C4C4C;
+    font-weight: 400;
+    color: #6b6b6b;
     margin: 0;
     letter-spacing: -0.5px;
 }
@@ -3372,7 +3372,7 @@ section {
     }
 
     .site-logo {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
     
     .logo-icon {
