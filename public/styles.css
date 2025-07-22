@@ -1951,6 +1951,14 @@ section {
     color: #4C4C4C;
 }
 
+.rank-4 .clinic-card {
+    border-color: #E0E0E0;
+}
+.rank-5 .clinic-card {
+    border-color: #E0E0E0;
+}
+}
+
 .js-cbn-table table thead th {
     background: #f0f0f0;
     font-size: 11px;
