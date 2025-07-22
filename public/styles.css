@@ -1,6 +1,6 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* Vercel deployment trigger - 2025/01/22 17:21 */
+/* Vercel deployment trigger - 2025/01/22 17:25 */
 
 /* Brand section shop name styles */
 .detail-item .brand-section .shop-name {
@@ -1563,15 +1563,15 @@ section {
 }
 
 .rank-1 .stars {
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .rank-2 .stars {
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .rank-3 .stars {
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .rating-score {
@@ -2036,7 +2036,7 @@ section {
     left: 0;
     /* overflow: hidden; */
     white-space: nowrap;
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .star5_rating[data-rate="5"]:after { width: 100%; }
@@ -2049,7 +2049,7 @@ section {
 /* ボタンスタイル */
 .js-cbn-table .link_btn {
     display: inline-block;
-    background: #f99aaa;
+    background: #f69ca8;
     color: white;
     text-decoration: none;
     padding: 8px 15px;
