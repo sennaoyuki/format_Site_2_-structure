@@ -1405,12 +1405,11 @@ section {
 section.clinic-rankings .ranking-header-banner {
     max-width: 100%;
     margin: 0 auto 10px;
-    padding: 20px 5px;
-    font-size: 16px;
+    padding: 0;
     border-radius: 8px;
-    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%) !important;
-    color: white;
+    background: transparent;
     text-align: center;
+    overflow: hidden;
 }
 
 
@@ -1423,6 +1422,14 @@ section.clinic-rankings .ranking-header-banner {
     color: white;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     margin: 0;
+}
+
+/* ランキングバナー画像 */
+.ranking-banner-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
 }
 
 /* ランキングコンテナ */
