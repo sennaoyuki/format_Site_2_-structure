@@ -1,6 +1,6 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* Vercel deployment trigger - 2025/01/22 17:40 */
+/* Vercel deployment trigger - 2025/01/22 17:45 */
 
 /* Brand section shop name styles */
 .detail-item .brand-section .shop-name {
@@ -566,19 +566,24 @@
     padding: 5px 7px 5px 7px;
     margin: 15px 0px 5px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .clinic-points-section .point-icon-inline {
     width: 20px;
-    margin: 3px 0px 0px 3px;
-    position: absolute;
+    margin: 0 5px 0 0;
+    position: static;
     font-size: 16px;
     color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .clinic-points-section .ribbon_point_title2_s strong {
     font-size: 14px;
-    margin: 0px 0px 0px 22px;
+    margin: 0;
     display: inline-block;
     font-weight: 700;
     color: #6a6a6a;
@@ -4604,18 +4609,23 @@ section {
     padding: 5px 7px 5px 7px;
     margin: 15px 0px 5px;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .point-icon-inline {
     width: 20px;
-    margin: 3px 0px 0px 3px;
-    position: absolute;
+    margin: 0 5px 0 0;
+    position: static;
     font-size: 16px;
     color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .ribbon_point_title2_s strong {
-    margin: 0px 0px 0px 30px;
+    margin: 0;
     display: inline-block;
     font-weight: 700;
     color: #333;
