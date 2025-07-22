@@ -7,7 +7,7 @@
     <!-- Vercel deployment: 2025-07-21 22:26 -->
     <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css?v=2025012102">
 </head>
 <body>
     <div class="container">
@@ -146,7 +146,7 @@
                     <h3 class="comparison-subtitle">医療痩身クリニック一覧</h3>
                 </div>
                 
-                <div class="js-cbn-table" id="tab-menu">
+                <div class="js-cbn-table" id="tab-menu" data-active-tab="tab1">
                     <div class="tab-menu">
                         <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
                         <div class="tab-menu-item" data-tab="tab2">施術内容</div>
@@ -770,6 +770,7 @@
             function updateTableColumns(tabType) {
                 if (!table) return;
                 
+                const tableContainer = document.querySelector('.js-cbn-table');
                 const headers = table.querySelectorAll('th');
                 const rows = table.querySelectorAll('tbody tr');
                 
@@ -782,43 +783,48 @@
                 
                 const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
                 
-                // ヘッダーの表示/非表示
-                headers.forEach((th, index) => {
-                    if (showIndexes.includes(index)) {
-                        th.style.display = '';
-                        th.style.visibility = 'visible';
-                        th.style.width = '';
-                        th.classList.remove('th-none');
-                    } else {
-                        th.style.display = 'none';
-                        th.style.visibility = 'hidden';
-                        th.style.width = '0';
-                        th.classList.add('th-none');
-                    }
-                });
+                // コンテナにアクティブなタブを設定
+                tableContainer.setAttribute('data-active-tab', tabType);
                 
-                // 各行のセルの表示/非表示
-                rows.forEach(row => {
-                    const cells = row.querySelectorAll('td');
-                    cells.forEach((td, index) => {
+                // requestAnimationFrameを使用して最適化
+                requestAnimationFrame(() => {
+                    // ヘッダーの表示/非表示
+                    headers.forEach((th, index) => {
                         if (showIndexes.includes(index)) {
-                            td.style.display = '';
-                            td.style.visibility = 'visible';
-                            td.style.width = '';
-                            td.classList.remove('td-none');
+                            th.style.display = '';
+                            th.style.visibility = 'visible';
+                            th.style.width = '';
+                            th.classList.remove('th-none');
                         } else {
-                            td.style.display = 'none';
-                            td.style.visibility = 'hidden';
-                            td.style.width = '0';
-                            td.classList.add('td-none');
+                            th.style.display = 'none';
+                            th.style.visibility = 'hidden';
+                            th.style.width = '0';
+                            th.style.padding = '0';
+                            th.style.border = '0';
+                            th.classList.add('th-none');
                         }
                     });
+                    
+                    // 各行のセルの表示/非表示
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        cells.forEach((td, index) => {
+                            if (showIndexes.includes(index)) {
+                                td.style.display = '';
+                                td.style.visibility = 'visible';
+                                td.style.width = '';
+                                td.classList.remove('td-none');
+                            } else {
+                                td.style.display = 'none';
+                                td.style.visibility = 'hidden';
+                                td.style.width = '0';
+                                td.style.padding = '0';
+                                td.style.border = '0';
+                                td.classList.add('td-none');
+                            }
+                        });
+                    });
                 });
-                
-                // テーブルレイアウトを強制的に再計算
-                table.style.display = 'none';
-                table.offsetHeight; // reflow
-                table.style.display = 'table';
             }
             
             tabMenuItems.forEach(item => {
