@@ -1939,6 +1939,13 @@ section {
     border-top: none;
     border-left: none;
     font-size: 10px;
+}
+
+.js-cbn-table table tbody td:nth-of-type(1) {
+    font-size: 11px;
+    vertical-align: middle;
+    border-bottom: 1px solid #E0E0E0;
+    font-size: 10px;
     min-height: 120px;
     height: auto;
     color: #4C4C4C;
