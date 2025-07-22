@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>地域別クリニックランキング | 優良医療機関検索</title>
-    <!-- Vercel deployment: 2025-07-21 22:45 -->
+    <!-- Vercel deployment: 2025-07-21 23:05 -->
     <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="stylesheet" href="styles.css?v=2025012103">
+    <link rel="stylesheet" href="styles.css?v=2025012104">
 </head>
 <body>
     <div class="container">
@@ -791,11 +791,12 @@
                     // ヘッダーの表示/非表示
                     headers.forEach((th, index) => {
                         if (showIndexes.includes(index)) {
-                            th.style.display = '';
-                            th.style.visibility = 'visible';
-                            th.style.width = '';
+                            // 表示する列: すべてのインラインスタイルを削除
+                            th.removeAttribute('style');
                             th.classList.remove('th-none');
+                            th.classList.remove('td-none');
                         } else {
+                            // 非表示の列
                             th.style.display = 'none';
                             th.style.visibility = 'hidden';
                             th.style.width = '0';
@@ -810,11 +811,12 @@
                         const cells = row.querySelectorAll('td');
                         cells.forEach((td, index) => {
                             if (showIndexes.includes(index)) {
-                                td.style.display = '';
-                                td.style.visibility = 'visible';
-                                td.style.width = '';
+                                // 表示する列: すべてのインラインスタイルを削除
+                                td.removeAttribute('style');
+                                td.classList.remove('th-none');
                                 td.classList.remove('td-none');
                             } else {
+                                // 非表示の列
                                 td.style.display = 'none';
                                 td.style.visibility = 'hidden';
                                 td.style.width = '0';
