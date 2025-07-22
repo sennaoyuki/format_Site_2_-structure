@@ -1877,7 +1877,8 @@ section {
 .js-cbn-table table th {
     text-align: center !important;
     padding: 15px 8px;
-    border-right: 1px solid #E0E0E0;
+    border-right: 1px solid #ffffff;
+    background: #efefef;
     vertical-align: middle;
     font-weight: 700;
     white-space: normal;
@@ -1900,39 +1901,39 @@ section {
 
 /* 総合タブの列幅 */
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(1) { width: 17%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(1) { width: 19%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(2),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(2) { width: 22%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(2) { width: 19%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(3),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(3) { width: 22%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(3) { width: 20%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(4),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(4) { width: 22%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(4) { width: 20%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(11) { width: 17%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(11) { width: 18%; }
 
 /* 施術内容タブの列幅 */
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(1) { width: 17%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(5),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(5) { width: 22%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(6),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(6) { width: 22%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(7),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(7) { width: 22%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(1) { width: 19%; }
+.js-cbn-table[data-active-tab="tab2"] table th:nth-child(2),
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(2) { width: 19%; }
+.js-cbn-table[data-active-tab="tab2"] table th:nth-child(3),
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(3) { width: 20%; }
+.js-cbn-table[data-active-tab="tab2"] table th:nth-child(4),
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(4) { width: 20%; }
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(11) { width: 17%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(11) { width: 18%; }
 
 /* サービスタブの列幅 */
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(1) { width: 17%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(8),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(8) { width: 22%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(9),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(9) { width: 22%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(10),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(10) { width: 22%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(1) { width: 19%; }
+.js-cbn-table[data-active-tab="tab3"] table th:nth-child(2),
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(2) { width: 19%; }
+.js-cbn-table[data-active-tab="tab3"] table th:nth-child(3),
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(3) { width: 20%; }
+.js-cbn-table[data-active-tab="tab3"] table th:nth-child(4),
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(4) { width: 20%; }
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(11) { width: 17%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(11) { width: 18%; }
 
 .js-cbn-table table td:not(.ranking-table_td1) {
     border-bottom: 1px solid #E0E0E0;
@@ -2150,7 +2151,7 @@ section {
     .js-cbn-table table th,
     .js-cbn-table table td {
         padding: 8px 2px;
-        font-size: 10px;
+        font-size: 12px;
         word-break: break-word;
         white-space: normal;
     }
@@ -2189,11 +2190,10 @@ section {
     }
     
     /* ボタンの調整 */
-    .js-cbn-table .link_btn,
-    .js-cbn-table .detail_btn {
-        padding: 4px 4px;
-        font-size: 9px;
-    }
+.js-cbn-table .link_btn, .js-cbn-table .detail_btn {
+    padding: 4px 4px;
+    font-size: 9px;
+}
     
     /* 総合タブ以外で特定の列を非表示 */
     .tab-menu-item[data-tab="tab1"].tab-active ~ table .td-width2,
@@ -2211,7 +2211,7 @@ section {
     .js-cbn-table table th,
     .js-cbn-table table td {
         padding: 6px 1px;
-        font-size: 9px;
+        font-size: 11px;
     }
     
     .js-cbn-table .ranking-table_td1 img {
