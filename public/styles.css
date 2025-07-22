@@ -1467,41 +1467,31 @@ section.clinic-rankings .ranking-header-banner {
     transform: translateX(-50%);
     width: 80px;
     height: 80px;
-    border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 600;
-    font-size: 1.2rem;
-    color: white;
     z-index: 2;
-    box-shadow: none;
-    border: 1px solid #E0E0E0;
+    background: transparent;
+    border: none;
 }
 
-.gold-medal {
-    background: #6bd1d0;
-    border: 1px solid #E0E0E0;
-}
-
-.silver-medal {
-    background: #9D9D9D;
-    border: 1px solid #E0E0E0;
-}
-
+/* メダルクラスは画像を使用するため背景を削除 */
+.gold-medal,
+.silver-medal,
 .bronze-medal {
-    background: #B0B0B0;
-    border: 1px solid #E0E0E0;
-}
-
-.rank-medal:not(.gold-medal):not(.silver-medal):not(.bronze-medal) {
-    background: linear-gradient(135deg, #9ca3af 0%, #d1d5db 100%);
-    border: 3px solid #fff;
+    /* 画像で表示するため背景不要 */
 }
 
 .medal-text {
     font-style: normal;
     text-shadow: none;
+}
+
+/* メダル画像 */
+.medal-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
 }
 
 /* クリニックカード */
@@ -2419,13 +2409,17 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 .details-header-banner {
-    background: linear-gradient(135deg, #ff95ad 0%, #f0a0a5 50%, #ffc0cb 100%);
-    padding: 20px;
     text-align: center;
-    border-radius: 15px;
-    position: relative;
-    /* overflow: hidden; */
     margin-bottom: 20px;
+}
+
+/* 詳細バナー画像 */
+.details-banner-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 15px;
 }
 
 .banner-content-wrapper {
