@@ -128,13 +128,15 @@ class DisplayManager {
                 starsHtml += '<i class="far fa-star"></i>';
             }
 
-            // バナー画像の設定（プレースホルダー画像）
+            // バナー画像の設定（クリニックロゴを使用）
             const bannerImages = {
-                1: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3Crect fill="%23fce0ec" width="300" height="150"/%3E%3Ctext x="20" y="30" fill="%23ec4899" font-size="12" font-weight="bold"%3EFREY-A CLINIC%3C/text%3E%3Ctext x="20" y="55" fill="%23333" font-size="10"%3E医療脱毛%3C/text%3E%3Ctext x="20" y="75" fill="%23ec4899" font-size="18" font-weight="bold"%3E5周年記念%3C/text%3E%3Ctext x="20" y="95" fill="%23333" font-size="11"%3E全身%2BVIO%2B顔%3C/text%3E%3Ctext x="20" y="115" fill="%23ec4899" font-size="14" font-weight="bold"%3E¥101,000~%3C/text%3E%3Ctext x="20" y="135" fill="%23666" font-size="9"%3E月額￥1,500~%3C/text%3E%3C/svg%3E',
-                2: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3Crect fill="%23fff7e6" width="300" height="150"/%3E%3Ctext x="20" y="30" fill="%23f59e0b" font-size="12" font-weight="bold"%3EREGINA CLINIC%3C/text%3E%3Ctext x="20" y="55" fill="%23333" font-size="10"%3E医療脱毛%3C/text%3E%3Ctext x="20" y="80" fill="%23f59e0b" font-size="20" font-weight="bold"%3E¥48,000円%3C/text%3E%3Ctext x="20" y="100" fill="%23666" font-size="9"%3E(5回総額)%3C/text%3E%3Ctext x="20" y="120" fill="%23333" font-size="10"%3E月々¥1,000~%3C/text%3E%3C/svg%3E',
-                3: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 150"%3E%3Crect fill="%23e6f3ff" width="300" height="150"/%3E%3Ctext x="20" y="30" fill="%233b82f6" font-size="12" font-weight="bold"%3ERIZE%3C/text%3E%3Ctext x="20" y="55" fill="%23333" font-size="10"%3E全身%2BVIO%2B顔%3C/text%3E%3Ctext x="20" y="80" fill="%233b82f6" font-size="16" font-weight="bold"%3E月々¥4,800~%3C/text%3E%3Ctext x="20" y="100" fill="%23ec4899" font-size="14" font-weight="bold"%3E+¥500%3C/text%3E%3Ctext x="20" y="120" fill="%23666" font-size="9"%3Eニードル脱毛%3C/text%3E%3C/svg%3E'
+                1: '/images/clinics/dio/dio-logo.jpg',
+                2: '/images/clinics/urara/urara-logo.jpg',
+                3: '/images/clinics/lieto/lieto-logo.jpg',
+                4: '/images/clinics/eminal/eminal-logo.jpg',
+                5: '/images/clinics/sbc/sbc-logo.jpg'
             };
-            const bannerImage = bannerImages[rankNum] || bannerImages[1];
+            const bannerImage = bannerImages[rankNum] || '/images/clinics/dio/dio-logo.jpg';
 
             // 価格情報の生成（仮のデータ）
             const prices = {
@@ -474,9 +476,21 @@ class RankingApp {
             
             const rankNum = clinic.rank || index + 1;
             
+            // クリニックのロゴ画像パスを設定
+            const clinicLogos = {
+                'ディオクリニック': '/images/clinics/dio/dio-logo.jpg',
+                'DIOクリニック': '/images/clinics/dio/dio-logo.jpg',
+                'ウララクリニック': '/images/clinics/urara/urara-logo.jpg',
+                'URARAクリニック': '/images/clinics/urara/urara-logo.jpg',
+                'リエートクリニック': '/images/clinics/lieto/lieto-logo.jpg',
+                'エミナルクリニック': '/images/clinics/eminal/eminal-logo.jpg',
+                'SBCクリニック': '/images/clinics/sbc/sbc-logo.jpg'
+            };
+            const logoPath = clinicLogos[clinic.name] || '/images/clinics/dio/dio-logo.jpg';
+            
             tr.innerHTML = `
                 <td class="ranking-table_td1">
-                    <img src="${clinic.logo || 'img/clinic-default.png'}" alt="${clinic.name}" width="80">
+                    <img src="${logoPath}" alt="${clinic.name}" width="80">
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td class="" style="">
