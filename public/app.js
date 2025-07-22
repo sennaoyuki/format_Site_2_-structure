@@ -1439,7 +1439,7 @@ class RankingApp {
                 <!-- 店舗情報 -->
                 <div class="brand-section">
                     <h4 class="section-heading">
-                        ${clinic.name}の${this.getRegionName(data.regionId)}の店舗
+                        ${clinic.name}の【${this.getRegionName(data.regionId)}】の店舗
                     </h4>
                     ${this.generateStoresDisplay(data.stores || [])}
                 </div>
