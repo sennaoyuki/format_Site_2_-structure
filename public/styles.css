@@ -189,7 +189,7 @@
 }
 
 .pink-text {
-    color: #2CC7C5;
+    color: #6bd1d0;
 }
 
 .point-icon {
@@ -203,7 +203,7 @@
 }
 
 .point-icon.lightbulb {
-    color: #FFD700;
+    color: #f0a0a5;
 }
 
 .point-icon.phone {
@@ -281,7 +281,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    background: linear-gradient(90deg, #ff95ad, #f0a0a5);
     border-radius: 2px;
 }
 
@@ -547,7 +547,7 @@
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    background: linear-gradient(90deg, #ff95ad, #f0a0a5);
     border-radius: 2px;
 }
 
@@ -737,7 +737,7 @@
 }
 
 .store-detail i {
-    color: #2CC7C5;
+    color: #6bd1d0;
     font-size: 0.9rem;
     margin-top: 2px;
     flex-shrink: 0;
@@ -1203,7 +1203,7 @@ body {
     justify-content: center;
     width: 30px;
     height: 30px;
-    background: #2CC7C5;
+    background: #6bd1d0;
     border-radius: 4px;
     color: white;
     font-size: 1.2rem;
@@ -1230,8 +1230,8 @@ body {
     width: 45px;
     height: 45px;
     background-color: #fff;
-    border: 2px solid #2CC7C5;
-    color: #2CC7C5;
+    border: 2px solid #6bd1d0;
+    color: #6bd1d0;
     font-weight: 600;
     font-size: 1rem;
     text-decoration: none;
@@ -1240,7 +1240,7 @@ body {
 }
 
 .pr-badge:hover {
-    background-color: #2CC7C5;
+    background-color: #6bd1d0;
     color: white;
 }
 
@@ -1403,7 +1403,7 @@ section {
     padding: 20px 5px;
     font-size: 16px;
     border-radius: 8px;
-    background: #2CC7C5;
+    background: #6bd1d0;
     color: white;
     text-align: center;
 }
@@ -1467,7 +1467,7 @@ section {
 }
 
 .gold-medal {
-    background: #2CC7C5;
+    background: #6bd1d0;
     border: 1px solid #E0E0E0;
 }
 
@@ -1533,12 +1533,12 @@ section {
 .clinic-card:hover {
     transform: none;
     box-shadow: none;
-    border-color: #2CC7C5;
+    border-color: #6bd1d0;
 }
 
 /* 満足度バッジ */
 .satisfaction-badge {
-    background: #2CC7C5;
+    background: #6bd1d0;
     color: white;
     padding: 3px 10px;
     font-size: 0.8rem;
@@ -1563,21 +1563,21 @@ section {
 }
 
 .rank-1 .stars {
-    color: #2CC7C5;
+    color: #6bd1d0;
 }
 
 .rank-2 .stars {
-    color: #2CC7C5;
+    color: #6bd1d0;
 }
 
 .rank-3 .stars {
-    color: #2CC7C5;
+    color: #6bd1d0;
 }
 
 .rating-score {
     font-size: 2.5rem;
     font-weight: 600;
-    color: #4C4C4C;
+    color: #f0a0a5;
     font-style: normal;
 }
 
@@ -1727,7 +1727,7 @@ section {
     align-items: center;
     justify-content: center;
     gap: 0px;
-    background: #2CC7C5;
+    background: linear-gradient(135deg, #ff95ad 0%, #f0a0a5 100%);
     color: white;
     padding: 22px 25px;
     border-radius: 4px;
@@ -1785,7 +1785,7 @@ section {
 }
 
 .pink-text {
-    color: #2CC7C5;
+    color: #6bd1d0;
 }
 
 .comparison-subtitle {
@@ -1812,9 +1812,9 @@ section {
 
 .tab-menu .tab-menu-item {
     border-radius: 4px 4px 0 0;
-    border-left: 1px solid #2CC7C5;
-    border-right: 1px solid #2CC7C5;
-    border-top: 1px solid #2CC7C5;
+    border-left: 1px solid #6bd1d0;
+    border-right: 1px solid #6bd1d0;
+    border-top: 1px solid #6bd1d0;
     width: 32%;
     text-align: center;
     padding: 8px 0 8px;
@@ -1823,12 +1823,12 @@ section {
     font-size: 14px;
     cursor: pointer;
     background: #ffffff;
-    color: #2CC7C5;
+    color: #6bd1d0;
     transition: all 0.3s;
 }
 
 .tab-menu-item.tab-active {
-    background: #2CC7C5;
+    background: #6bd1d0;
     color: #fff;
     pointer-events: none;
     position: relative;
@@ -2035,7 +2035,7 @@ section {
     left: 0;
     /* overflow: hidden; */
     white-space: nowrap;
-    color: #2CC7C5;
+    color: #6bd1d0;
 }
 
 .star5_rating[data-rate="5"]:after { width: 100%; }
@@ -2048,7 +2048,7 @@ section {
 /* ボタンスタイル */
 .js-cbn-table .link_btn {
     display: inline-block;
-    background: #2CC7C5;
+    background: #6bd1d0;
     color: white;
     text-decoration: none;
     padding: 8px 15px;
@@ -2082,13 +2082,13 @@ section {
 
 /* 良い・普通・悪いの記号 */
 .sogood {
-    color: #2CC7C5;
+    color: #6bd1d0;
     font-size: 1.2em;
     font-weight: 600;
 }
 
 .good {
-    color: #2CC7C5;
+    color: #6bd1d0;
     font-size: 1.2em;
     font-weight: 600;
 }
@@ -2109,7 +2109,7 @@ section {
     display: block;
     font-size: 16px;
     font-weight: 600;
-    color: #2CC7C5;
+    color: #6bd1d0;
     margin-bottom: -15px;
 }
 
@@ -2370,7 +2370,7 @@ section {
 }
 
 .details-header-banner {
-    background: linear-gradient(135deg, #ff6ba6 0%, #ffa0c9 50%, #ffb3d1 100%);
+    background: linear-gradient(135deg, #ff95ad 0%, #f0a0a5 50%, #ffc0cb 100%);
     padding: 20px;
     text-align: center;
     border-radius: 15px;
@@ -2536,7 +2536,7 @@ section {
 .detail-rank-badge {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    background: linear-gradient(135deg, #f0a0a5 0%, #ffc0cb 100%);
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -2556,7 +2556,7 @@ section {
 }
 
 .detail-rank-badge.bronze {
-    background: linear-gradient(135deg, #cd7f32 0%, #e4a853 100%);
+    background: linear-gradient(135deg, #f0a0a5 0%, #e4a853 100%);
     box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
     border: 3px solid #e4a853;
 }
@@ -2922,7 +2922,7 @@ section {
 }
 
 .medical-columns-section .toc-link {
-    color: #2CC7C5;
+    color: #6bd1d0;
     text-decoration: underline;
     font-size: 14px;
     line-height: 1.5;
@@ -2963,7 +2963,7 @@ section {
 }
 
 .medical-columns-section .highlight-box .section-title {
-    color: #2CC7C5;
+    color: #6bd1d0;
     margin-bottom: 12px;
 }
 
@@ -2978,7 +2978,7 @@ section {
 }
 
 .medical-columns-section .table-header {
-    background-color: #2CC7C5;
+    background-color: #6bd1d0;
     color: white;
 }
 
@@ -3112,7 +3112,7 @@ section {
 }
 
 .medical-columns-section .contact-link {
-    color: #2CC7C5;
+    color: #6bd1d0;
     text-decoration: underline;
     font-size: 14px;
     line-height: 1.5;
@@ -3168,7 +3168,7 @@ section {
 }
 
 .footer_contents a {
-    color: #2CC7C5;
+    color: #6bd1d0;
     text-decoration: none;
     transition: color 0.3s ease;
 }
@@ -3486,7 +3486,7 @@ section {
         padding: 20px 5px;
         font-size: 16px;
         border-radius: 8px;
-        background: #2CC7C5;
+        background: #6bd1d0;
         color: white;
         text-align: center;
     }
@@ -4577,7 +4577,7 @@ section {
     transform: translateX(-50%);
     width: 60px;
     height: 3px;
-    background: linear-gradient(90deg, #ff69b4, #ff1493);
+    background: linear-gradient(90deg, #ff95ad, #f0a0a5);
     border-radius: 2px;
 }
 
@@ -4993,12 +4993,12 @@ section {
 }
 
 .brand-section .shop-name {
-    color: #2CC7C5;
+    color: #6bd1d0;
     font-weight: 600;
 }
 
 .brand-section .shop-name a {
-    color: #2CC7C5;
+    color: #6bd1d0;
     text-decoration: none;
 }
 
@@ -5012,7 +5012,7 @@ section {
     margin-left: auto;
     padding: 10px 10px 10px 8px;
     border-radius: 4px;
-    background-color: #2CC7C5;
+    background-color: #6bd1d0;
     color: #fff;
     font-weight: 600;
     white-space: nowrap;
@@ -5101,12 +5101,12 @@ section {
 }
 
 .detail-item .brand-section .shop-name {
-    color: #2CC7C5;
+    color: #6bd1d0;
     font-weight: 600;
 }
 
 .detail-item .brand-section .shop-name a {
-    color: #2CC7C5;
+    color: #6bd1d0;
     text-decoration: none;
 }
 
@@ -5120,7 +5120,7 @@ section {
     margin-left: auto;
     padding: 10px 10px 10px 8px;
     border-radius: 4px;
-    background-color: #2CC7C5;
+    background-color: #6bd1d0;
     color: #fff;
     font-weight: 600;
     white-space: nowrap;
@@ -5160,8 +5160,8 @@ section {
 
 .accordion-button:hover {
     background-color: #F1F1F1;
-    border-color: #2CC7C5;
-    color: #2CC7C5;
+    border-color: #6bd1d0;
+    color: #6bd1d0;
 }
 
 .accordion-icon {
@@ -5216,9 +5216,9 @@ section {
 }
 
 .section-btn:hover {
-    background-color: #2CC7C5;
+    background-color: #6bd1d0;
     color: #fff;
-    border-color: #2CC7C5;
+    border-color: #6bd1d0;
 }
 
 .section-btn .btn-icon {
