@@ -2048,7 +2048,7 @@ section {
     border-radius: 4px;
     font-size: 0.8rem;
     font-weight: 600;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
     transition: all 0.3s;
 }
 
@@ -2184,8 +2184,8 @@ section {
     /* ボタンの調整 */
     .js-cbn-table .link_btn,
     .js-cbn-table .detail_btn {
-        padding: 4px 8px;
-        font-size: 10px;
+        padding: 4px 6px;
+        font-size: 9px;
     }
     
     /* 総合タブ以外で特定の列を非表示 */
