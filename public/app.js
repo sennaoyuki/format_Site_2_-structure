@@ -492,7 +492,7 @@ class RankingApp {
                 <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
                 <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
                 <td>
-                    <a class="link_btn" href="${clinic.url || '#'}" target="_blank">公式サイト</a>
+                    <a class="link_btn" href="${clinic.url || '#'}" target="_blank">公式サイト &gt;</a>
                     <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>
                 </td>
             `;
