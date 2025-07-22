@@ -1956,24 +1956,7 @@ section {
     height: auto;
 }
 
-/* エミナルクリニックの王冠マーク */
-.js-cbn-table tbody tr:first-child td:first-child {
-    position: relative;
-}
-
-.js-cbn-table tbody tr:first-child td:first-child::after {
-    content: "";
-    display: block;
-    width: 23px;
-    height: 16px;
-    background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjMiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAyMyAxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTQuNSAxNkw3LjUgOEwzIDEwTDAgNEw0LjUgOEw3LjUgMEwxMC41IDhMMTUgNEwxMiAxMEw3LjUgOEwxMC41IDE2SDE1TDE4LjUgOEwyMiAxNkgxOC41TDE1IDhMMTguNSAwTDIyIDRMMTkgMTBMMTguNSA4TDE1IDE2SDEwLjVaIiBmaWxsPSIjRkZENzAwIi8+Cjwvc3ZnPg==');
-    background-size: cover;
-    background-position: center;
-    position: absolute;
-    top: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-}
+/* 王冠マークを削除 */
 
 .js-cbn-table table tbody tr:first-child td:nth-of-type(2) {
     color: #f50000;
