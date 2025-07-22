@@ -1,6 +1,6 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* Vercel deployment trigger - 2025/01/22 17:30 */
+/* Vercel deployment trigger - 2025/01/22 17:35 */
 
 /* Brand section shop name styles */
 .detail-item .brand-section .shop-name {
@@ -1403,20 +1403,19 @@ section {
     padding: 20px 5px;
     font-size: 16px;
     border-radius: 8px;
-    background: #6bd1d0;
-    color: white;
+    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
     text-align: center;
 }
 
 
 
 .ranking-banner-text {
-    font-size: 1.6rem;
-    font-weight: 600;
-    margin: 0;
-    text-shadow: none;
-    position: relative;
-    z-index: 1;
+    font-size: 1.1rem;
+    line-height: 1.3;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: #ff849d;
+    text-shadow: 1px 1px 0 #ffffff, -1px 1px 0 #ffffff, 1px -1px 0 #ffffff, -1px -1px 0 #ffffff;
 }
 
 /* ランキングコンテナ */
@@ -1538,15 +1537,19 @@ section {
 
 /* 満足度バッジ */
 .satisfaction-badge {
-    background: #6bd1d0;
-    color: white;
+    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
+    color: #ff849d;
+    text-shadow: 1px 1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px -1px 0 #fff;
     padding: 3px 10px;
     font-size: 0.8rem;
     margin-bottom: 5px;
     border-radius: 4px;
     margin-top: 30px;
     display: inline-block;
-    font-weight: 400;
+    font-weight: 700;
 }
 
 /* 評価セクション */
@@ -1563,7 +1566,7 @@ section {
 }
 
 .rank-1 .stars {
-    color: #f69ca8;
+    color: #6bd1d0;
 }
 
 .rank-2 .stars {
@@ -2591,6 +2594,10 @@ section {
     text-decoration: none;
     font-weight: bold;
     display: block;
+    text-shadow: 1px 1px 0 #fff,
+        -1px 1px 0 #fff,
+        1px -1px 0 #fff,
+        -1px -1px 0 #fff;
     text-align: left;
     padding-left: 3%;
 }
