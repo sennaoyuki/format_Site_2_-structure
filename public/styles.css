@@ -1,6 +1,6 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* Vercel deployment trigger - 2025/01/22 17:46 */
+/* Vercel deployment trigger - 2025/01/22 17:47 */
 
 /* Brand section shop name styles */
 .detail-item .brand-section .shop-name {
@@ -582,8 +582,8 @@
 }
 
 .clinic-points-section .ribbon_point_title2_s strong {
-    font-size: 14px;
-    margin: 0;
+    font-size: 13px;
+    margin: 0px 0px 0px 10px;
     display: inline-block;
     font-weight: 700;
     color: #6a6a6a;
