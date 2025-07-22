@@ -827,7 +827,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'DIOクリニックの今月のお得な情報',
-                        logoSrc: '/img/dio-logo.png',
+                        logoSrc: '/images/clinics/dio/dio-logo.jpg',
                         logoAlt: 'DIOクリニック',
                         description: '「今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://dio-clinic.jp/campaign/tokyo',
@@ -930,7 +930,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'エミナルクリニック新春キャンペーン',
-                        logoSrc: '/img/eminal-logo.png',
+                        logoSrc: '/images/clinics/eminal/eminal-logo.jpg',
                         logoAlt: 'エミナルクリニック',
                         description: '【期間限定】<br>全身+VIO脱毛が<br>月額1,000円から始められる！',
                         ctaUrl: 'https://eminal-clinic.jp/lp1/',
@@ -1007,7 +1007,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'URARAクリニックの今月のお得な情報',
-                        logoSrc: '/img/urara-logo.png',
+                        logoSrc: '/images/clinics/urara/urara-logo.jpg',
                         logoAlt: 'URARAクリニック',
                         description: '「痩せなければ返金保証<br>　さらに脂肪買取制度あり」',
                         ctaUrl: 'https://urara-clinic.com/',
@@ -1085,7 +1085,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'リエートクリニックの今月のお得な情報',
-                        logoSrc: '/img/lieto-logo.png',
+                        logoSrc: '/images/clinics/lieto/lieto-logo.jpg',
                         logoAlt: 'リエートクリニック',
                         description: '「モニター最大80％OFF<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://lietoclinic.com/',
