@@ -1479,7 +1479,7 @@ section.clinic-rankings .ranking-header-banner {
 .gold-medal,
 .silver-medal,
 .bronze-medal {
-    /* 画像で表示するため背景不要 */
+    /* SVG画像で表示するため背景不要 */
 }
 
 .medal-text {

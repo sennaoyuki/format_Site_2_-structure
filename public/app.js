@@ -156,7 +156,7 @@ class DisplayManager {
 
             rankingItem.innerHTML = `
                 <div class="rank-medal ${medalClass}">
-                    <img src="/images/badges/rank-${rankNum}.png" alt="${medalText}" class="medal-image">
+                    <img src="/images/badges/rank-${rankNum}.svg" alt="${medalText}" class="medal-image">
                 </div>
                 <div class="clinic-card">
                     <div class="satisfaction-badge">
