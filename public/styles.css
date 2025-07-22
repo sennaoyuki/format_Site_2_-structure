@@ -1563,15 +1563,15 @@ section {
 }
 
 .rank-1 .stars {
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .rank-2 .stars {
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .rank-3 .stars {
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .rating-score {
@@ -2036,7 +2036,7 @@ section {
     left: 0;
     /* overflow: hidden; */
     white-space: nowrap;
-    color: #6bd1d0;
+    color: #f69ca8;
 }
 
 .star5_rating[data-rate="5"]:after { width: 100%; }
@@ -2049,7 +2049,7 @@ section {
 /* ボタンスタイル */
 .js-cbn-table .link_btn {
     display: inline-block;
-    background: #6bd1d0;
+    background: #f69ca8;
     color: white;
     text-decoration: none;
     padding: 8px 15px;
@@ -2110,7 +2110,7 @@ section {
     display: block;
     font-size: 16px;
     font-weight: 600;
-    color: #6bd1d0;
+    color: #f69ca8;
     margin-bottom: -15px;
 }
 
