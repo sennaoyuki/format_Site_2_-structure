@@ -1874,13 +1874,21 @@ section {
     width: 100%;
 }
 
-.js-cbn-table table th,
+.js-cbn-table table th {
+    text-align: center !important;
+    padding: 15px 8px;
+    border-right: 1px solid #E0E0E0;
+    vertical-align: middle;
+    font-weight: 700;
+    white-space: normal;
+}
+
 .js-cbn-table table td {
     text-align: center !important;
     padding: 15px 8px;
     border-right: 1px solid #E0E0E0;
     vertical-align: middle;
-    font-weight: 600;
+    font-weight: 500;
     white-space: normal;
 }
 
@@ -1926,7 +1934,7 @@ section {
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(11),
 .js-cbn-table[data-active-tab="tab3"] table td:nth-child(11) { width: 17%; }
 
-.js-cbn-table table td {
+.js-cbn-table table td:not(.ranking-table_td1) {
     border-bottom: 1px solid #E0E0E0;
     border-top: none; 
     border-left: none;
