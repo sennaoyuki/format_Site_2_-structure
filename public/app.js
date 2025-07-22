@@ -128,15 +128,6 @@ class DisplayManager {
                 starsHtml += '<i class="far fa-star"></i>';
             }
 
-            // バナー画像の設定（クリニックロゴを使用）
-            const bannerImages = {
-                1: '/images/clinics/dio/dio-logo.jpg',
-                2: '/images/clinics/urara/urara-logo.jpg',
-                3: '/images/clinics/lieto/lieto-logo.jpg',
-                4: '/images/clinics/eminal/eminal-logo.jpg',
-                5: '/images/clinics/sbc/sbc-logo.jpg'
-            };
-            const bannerImage = bannerImages[rankNum] || '/images/clinics/dio/dio-logo.jpg';
 
             // 価格情報の生成（仮のデータ）
             const prices = {
@@ -173,9 +164,6 @@ class DisplayManager {
                             ? '<img src="/images/clinics/sbc/sbc-logo.jpg" alt="湘南美容クリニック" width="80" class="clinic-logo-image">' 
                             : `<div class="clinic-logo">${clinic.name}</div>`
                         }
-                    </div>
-                    <div class="clinic-banner">
-                        <img src="${bannerImage}" alt="${rankNum}位バナー">
                     </div>
                     <div class="push-message" style="padding: 0px; text-align: center; font-size: 10px; line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0; height: 15%;">
                         ${pushMessage}
