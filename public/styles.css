@@ -1936,9 +1936,9 @@ section {
 
 .js-cbn-table table td:not(.ranking-table_td1) {
     border-bottom: 1px solid #E0E0E0;
-    border-top: none; 
+    border-top: none;
     border-left: none;
-    font-size: 12px;
+    font-size: 10px;
     min-height: 120px;
     height: auto;
     color: #4C4C4C;
