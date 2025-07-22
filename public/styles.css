@@ -1616,8 +1616,32 @@ section {
 .clinic-logo {
     font-size: 1.8rem;
     font-weight: 600;
-    color: #4C4C4C;
+    color: #6a6a6a;
     line-height: 1.2;
+}
+
+/* 1位〜5位のクリニック名のスタイル */
+.rank-1 .clinic-logo,
+.rank-2 .clinic-logo,
+.rank-3 .clinic-logo,
+.rank-4 .clinic-logo,
+.rank-5 .clinic-logo {
+    padding: 0px;
+    text-align: center;
+    font-size: 10px;
+    line-height: 1.4;
+    color: #6a6a6a;
+    font-weight: bold;
+    margin: 4px 0;
+    height: 15%;
+}
+
+/* クリニックロゴ画像のスタイル */
+.clinic-logo-image {
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
 }
 
 .clinic-logo.regina {

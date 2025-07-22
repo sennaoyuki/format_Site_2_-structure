@@ -169,7 +169,10 @@ class DisplayManager {
                         <div class="rating-score">${rating.score}<span class="score-max">/5.0</span></div>
                     </div>
                     <div class="clinic-logo-section">
-                        <div class="clinic-logo">${clinic.name}</div>
+                        ${clinic.name === '湘南美容クリニック' 
+                            ? '<img src="/images/clinics/sbc/sbc-logo.jpg" alt="湘南美容クリニック" width="80" class="clinic-logo-image">' 
+                            : `<div class="clinic-logo">${clinic.name}</div>`
+                        }
                     </div>
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${rankNum}位バナー">
@@ -484,7 +487,8 @@ class RankingApp {
                 'URARAクリニック': '/images/clinics/urara/urara-logo.jpg',
                 'リエートクリニック': '/images/clinics/lieto/lieto-logo.jpg',
                 'エミナルクリニック': '/images/clinics/eminal/eminal-logo.jpg',
-                'SBCクリニック': '/images/clinics/sbc/sbc-logo.jpg'
+                'SBCクリニック': '/images/clinics/sbc/sbc-logo.jpg',
+                '湘南美容クリニック': '/images/clinics/sbc/sbc-logo.jpg'
             };
             const logoPath = clinicLogos[clinic.name] || '/images/clinics/dio/dio-logo.jpg';
             
