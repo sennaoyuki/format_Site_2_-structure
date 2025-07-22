@@ -1402,13 +1402,13 @@ section {
 }
 
 /* ランキングヘッダーバナー */
-.ranking-header-banner {
+section.clinic-rankings .ranking-header-banner {
     max-width: 100%;
     margin: 0 auto 10px;
     padding: 20px 5px;
     font-size: 16px;
     border-radius: 8px;
-    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
+    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%) !important;
     color: white;
     text-align: center;
 }
