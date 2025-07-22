@@ -1823,7 +1823,7 @@ section {
     font-size: 14px;
     cursor: pointer;
     background: #F1F1F1;
-    color: #4C4C4C;
+    color: #adadad;
     transition: all 0.3s;
 }
 
@@ -1892,39 +1892,39 @@ section {
 
 /* 総合タブの列幅 */
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(1) { width: 25%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(1) { width: 17%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(2),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(2) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(2) { width: 22%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(3),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(3) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(3) { width: 22%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(4),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(4) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(4) { width: 22%; }
 .js-cbn-table[data-active-tab="tab1"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(11) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab1"] table td:nth-child(11) { width: 17%; }
 
 /* 施術内容タブの列幅 */
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(1) { width: 25%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(1) { width: 17%; }
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(5),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(5) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(5) { width: 22%; }
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(6),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(6) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(6) { width: 22%; }
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(7),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(7) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(7) { width: 22%; }
 .js-cbn-table[data-active-tab="tab2"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(11) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab2"] table td:nth-child(11) { width: 17%; }
 
 /* サービスタブの列幅 */
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(1) { width: 25%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(1) { width: 17%; }
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(8),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(8) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(8) { width: 22%; }
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(9),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(9) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(9) { width: 22%; }
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(10),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(10) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(10) { width: 22%; }
 .js-cbn-table[data-active-tab="tab3"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(11) { width: 18.75%; }
+.js-cbn-table[data-active-tab="tab3"] table td:nth-child(11) { width: 17%; }
 
 .js-cbn-table table td {
     border-bottom: 1px solid #E0E0E0;
@@ -1937,9 +1937,10 @@ section {
 }
 
 .js-cbn-table table thead th {
-    background: #F9F9F9;
-    font-size: 13px;
+    background: #d9d9d9;
+    font-size: 11px;
     color: #4C4C4C;
+    border-right: 1px solid white;
 }
 
 .js-cbn-table table tbody tr:first-child {
@@ -2103,7 +2104,7 @@ section {
     font-size: 16px;
     font-weight: 600;
     color: #2CC7C5;
-    margin-bottom: 4px;
+    margin-bottom: -15px;
 }
 
 /* 月額料金のスタイル */
@@ -2184,7 +2185,7 @@ section {
     /* ボタンの調整 */
     .js-cbn-table .link_btn,
     .js-cbn-table .detail_btn {
-        padding: 4px 6px;
+        padding: 4px 4px;
         font-size: 9px;
     }
     
