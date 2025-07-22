@@ -219,7 +219,7 @@ class DisplayManager {
 }
 
 // アプリケーションクラス
- {
+class RankingApp {
     constructor() {
         this.urlHandler = new UrlParamHandler();
         this.displayManager = new DisplayManager();
@@ -1711,4 +1711,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, true);
     */
+});
+
+// アプリケーションの初期化
+document.addEventListener('DOMContentLoaded', function() {
+    const app = new RankingApp();
+    app.init();
 });
