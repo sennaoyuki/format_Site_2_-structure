@@ -4753,7 +4753,7 @@ section.clinic-rankings .ranking-header-banner {
     .clinic-rankings {
         padding: 15px 10px;
         width: 100%;
-        max-width: 375px;
+        max-width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
     }
