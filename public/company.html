@@ -80,9 +80,22 @@
     </style>
 </head>
 <body>
+    <script>
+        function navigateWithParams(event, link) {
+            event.preventDefault();
+            const currentParams = new URLSearchParams(window.location.search);
+            const regionId = currentParams.get('region_id');
+            if (regionId) {
+                window.location.href = link.href + '?region_id=' + regionId;
+            } else {
+                window.location.href = link.href;
+            }
+            return false;
+        }
+    </script>
     <header class="header">
         <div class="header-container">
-            <a href="/" class="site-logo-link">
+            <a href="/" class="site-logo-link" onclick="return navigateWithParams(event, this);">
                 <h1 class="site-logo">医療ダイエット比較.com</h1>
             </a>
         </div>
