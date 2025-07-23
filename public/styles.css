@@ -1400,6 +1400,7 @@ section {
     max-width: 100%;
     box-sizing: border-box;
     background: #F1F1F1;
+    position: relative;
 }
 
 /* ランキングヘッダーバナー */
@@ -1411,6 +1412,7 @@ section.clinic-rankings .ranking-header-banner {
     background: transparent;
     text-align: center;
     overflow: hidden;
+    position: relative;
 }
 
 
