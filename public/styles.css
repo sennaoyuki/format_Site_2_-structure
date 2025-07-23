@@ -1400,6 +1400,8 @@ section {
     max-width: 100%;
     box-sizing: border-box;
     background: #F1F1F1;
+    position: relative;
+    overflow: hidden;
 }
 
 /* ランキングヘッダーバナー */
@@ -1446,12 +1448,12 @@ section.clinic-rankings .ranking-header-banner {
     max-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    overflow-x: auto;
+    overflow-x: scroll;
+    overflow-y: hidden;
     -webkit-overflow-scrolling: touch;
-    padding: 0 10px;
+    padding: 0 10px 10px;
     scroll-behavior: smooth;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    position: relative;
 }
 
 /* スクロールバーを非表示 */
@@ -1461,7 +1463,7 @@ section.clinic-rankings .ranking-header-banner {
 
 /* ランキングアイテム */
 .ranking-item {
-    width: calc((100vw - 60px) / 3);
+    width: 30%;
     min-width: 110px;
     max-width: 140px;
     margin: 0;
