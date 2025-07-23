@@ -174,7 +174,7 @@ class DisplayManager {
                         ${pushMessage}
                     </div>
                     <p class="btn btn_second_primary">
-                        <a href="#" target="_blank" rel="noopener">
+                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="noopener">
                             <span class="bt_s">公式サイト</span>
                             <span class="btn-arrow">▶</span>
                         </a>
@@ -608,8 +608,8 @@ class RankingApp {
                 <td class="benefit-text">${benefits[clinic.rank] || '特典あり'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="#" class="cta-button">公式サイト</a>
-                        <a href="#" class="cta-link">詳細を見る</a>
+                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : '#'}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -641,8 +641,8 @@ class RankingApp {
                 <td><i class="fas fa-circle feature-icon"></i></td>
                 <td>
                     <div class="cta-cell">
-                        <a href="#" class="cta-button">公式サイト</a>
-                        <a href="#" class="cta-link">詳細を見る</a>
+                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : '#'}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -674,8 +674,8 @@ class RankingApp {
                 <td>${clinic.rank <= 2 ? '<i class="fas fa-circle feature-icon"></i>' : '-'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="#" class="cta-button">公式サイト</a>
-                        <a href="#" class="cta-link">詳細を見る</a>
+                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : '#'}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1173,7 +1173,7 @@ class RankingApp {
                             </div>
                         </div>
                         <div class="ranking__name">
-                            <a href="#" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
+                            <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
                         </div>
                     </div>
                 ${data.banner ? `
@@ -1198,7 +1198,7 @@ class RankingApp {
                 <!-- CTAボタン -->
                 <div class="clinic-cta-button-wrapper">
                     <p class="btn btn_second_primary">
-                        <a href="${clinic.accessUrl || '#'}" target="_blank" rel="noopener noreferrer">
+                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="noopener noreferrer">
                             <span class="bt_s">無料カウンセリングはコチラ</span>
                             <span class="btn-arrow">▶</span>
                         </a>
@@ -1548,7 +1548,7 @@ class RankingApp {
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
-                            <a href="#" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
+                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
                         </div>
                         <div class='shop-address line-clamp'>
                             ${store.address || '住所情報なし'}
@@ -1570,7 +1570,7 @@ class RankingApp {
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
-                            <a href="#" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
+                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
                         </div>
                         <div class='shop-address line-clamp'>
                             ${store.address || '住所情報なし'}
