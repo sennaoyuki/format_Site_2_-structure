@@ -1226,7 +1226,7 @@ class RankingApp {
                             `;
                         }).join('')}
                         <div class="ribbon_point_link">
-                            【公式】<a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener"><strong>${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}</strong></a>
+                            【公式】<a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener"><strong>${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://eminal-clinic.jp/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/' : clinic.id === '5' ? 'https://www.s-b-c.net/' : '#'}</strong></a>
                         </div>
                     </div>
                 </div>
