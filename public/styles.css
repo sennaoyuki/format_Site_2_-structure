@@ -2422,10 +2422,12 @@ section.clinic-rankings .ranking-header-banner {
     max-width: 1200px;
     margin: 60px auto;
     padding: 0 20px;
+    position: relative;
 }
 
 .details-header-banner {
     text-align: center;
+    position: relative;
 }
 
 /* 詳細バナー画像 */
