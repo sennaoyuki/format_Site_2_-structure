@@ -1198,18 +1198,22 @@ body {
 }
 
 .site-logo {
-    font-family: 'Comfortaa', 'Quicksand', 'Noto Sans JP', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 600;
+    font-family: 'Comfortaa', cursive;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #667eea; /* フォールバック色 */
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    -moz-background-clip: text;
+    -moz-text-fill-color: transparent;
     margin: 0;
-    letter-spacing: 0.5px;
+    letter-spacing: 1px;
     text-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);
     position: relative;
     transition: all 0.3s ease;
+    display: inline-block;
 }
 
 .site-logo:hover {
@@ -3406,8 +3410,8 @@ section.clinic-rankings .ranking-header-banner {
     }
 
     .site-logo {
-        font-size: 1.1rem;
-        letter-spacing: 0;
+        font-size: 1.2rem;
+        letter-spacing: 0.5px;
     }
     
     .logo-icon {

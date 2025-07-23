@@ -850,7 +850,7 @@ class RankingApp {
                         logoAlt: 'DIOクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
                         ctaUrl: 'https://dioclinic.jp/',
-                        ctaText: 'DIOクリニックの公式サイトはこちら',
+                        ctaText: 'DIOクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
                 },
@@ -1032,7 +1032,7 @@ class RankingApp {
                         logoAlt: 'URARAクリニック',
                         description: '痩せなければ返金保証<br>さらに脂肪買取制度あり',
                         ctaUrl: 'https://urara-clinic.com/',
-                        ctaText: 'URARAクリニックの公式サイトはこちら',
+                        ctaText: 'URARAクリニックの公式サイト',
                         microcopy: '＼ダイエット成功率94％の実績／'
                     }
                 },
