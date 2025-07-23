@@ -1128,8 +1128,20 @@ class RankingApp {
             
             // 店舗データを動的に取得（store_view.csvに基づいてフィルタリング）
             const allStores = this.dataManager.getStoresByRegionId(regionId);
+            
+            // クリニック名のマッピング（stores.csvとitems.csvの名前の違いを解決）
+            const clinicNameMap = {
+                'ディオクリニック': 'DIO',
+                'エミナルクリニック': 'エミナルクリニック',
+                'ウララクリニック': 'ウララクリニック',
+                'リエートクリニック': 'リエートクリニック',
+                '湘南美容クリニック': '湘南美容クリニック'
+            };
+            
+            const storeClinicName = clinicNameMap[clinic.name] || clinic.name;
+            
             // 現在のクリニックに属する店舗のみをフィルタリング
-            data.stores = allStores.filter(store => store.clinicName === clinic.name);
+            data.stores = allStores.filter(store => store.clinicName === storeClinicName);
 
             detailItem.innerHTML = `
                 <div class="ranking_box_in">
