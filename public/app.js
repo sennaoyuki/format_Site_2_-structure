@@ -108,8 +108,10 @@ class DisplayManager {
             // 評価スコアとスターの生成（仮のデータ）
             const ratings = {
                 1: { score: 4.9, stars: 5 },
-                2: { score: 4.8, stars: 4.5 },
-                3: { score: 4.7, stars: 4.5 }
+                2: { score: 4.8, stars: 4.8 },
+                3: { score: 4.7, stars: 4.7 },
+                4: { score: 4.6, stars: 4.6 },
+                5: { score: 4.5, stars: 4.5 }
             };
             const rating = ratings[rankNum] || { score: 4.5, stars: 4 };
 
@@ -138,19 +140,13 @@ class DisplayManager {
             };
             const bannerImage = bannerImages[rankNum] || '/images/clinics/dio/dio-logo.jpg';
 
-            // 価格情報の生成（仮のデータ）
-            const prices = {
-                1: { main: '全身+VIO+顔', detail: '月額1,500円〜', discount: '最大13万円OFF！', note: '記念プラン開始！' },
-                2: { main: '全身+VIO', detail: '月額1,000円〜' },
-                3: { main: '全身+VIO+顔', detail: '月々4,800円' }
-            };
-            const price = prices[rankNum] || { main: '要問合せ', detail: '詳細はクリニックへ' };
-
             // 押しメッセージの定義
             const pushMessages = {
                 1: "【総合人気No.1】\n2025年のイチ押し！\n業界屈指のコスパ",
                 2: "次世代医療！\n成功率94%の実績",
-                3: "厚労省承認マシン\n科学的に脂肪を減らす"
+                3: "厚労省承認マシン\n科学的に脂肪を減らす",
+                4: "多店舗展開\n笑なる",
+                5: "大手美容クリニック\nメニュー豊富"
             };
             const pushMessage = pushMessages[rankNum] || "人気のクリニック";
 
@@ -169,10 +165,7 @@ class DisplayManager {
                         <div class="rating-score">${rating.score}<span class="score-max">/5.0</span></div>
                     </div>
                     <div class="clinic-logo-section">
-                        ${clinic.name === '湘南美容クリニック' 
-                            ? '<img src="/images/clinics/sbc/sbc-logo.jpg" alt="湘南美容クリニック" width="80" class="clinic-logo-image">' 
-                            : `<div class="clinic-logo">${clinic.name}</div>`
-                        }
+                        ${clinic.name}
                     </div>
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${rankNum}位バナー">
