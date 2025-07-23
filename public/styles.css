@@ -850,7 +850,7 @@
     margin: 20px 0;
 }
 
-.freya-logo {
+.info_logo {
     flex-shrink: 0;
     width: 80px;
     height: 40px;
@@ -864,7 +864,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
-.freya-logo img {
+.info_logo img {
     width: 100%;
     height: auto;
     object-fit: contain;
@@ -1058,12 +1058,12 @@
     }
 
     .camp_header3 {
-        gap: 10px;
+        gap: 15px;
     }
 
-    .freya-logo {
-        width: 70px;
-        height: 35px;
+    .info_logo {
+        width: 75px;
+        height: 70px;
         padding: 6px;
     }
 
@@ -4470,7 +4470,7 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     /* フレイアロゴの修正 */
-    .freya-logo img {
+    .info_logo img {
         max-width: 100px !important;
         height: auto !important;
     }
