@@ -905,7 +905,7 @@ class RankingApp {
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
                         '店舗': '東京 (新宿, 銀座)',
-                        '公式サイト': 'https://uraraclinic.jp/'
+                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -925,7 +925,7 @@ class RankingApp {
                         {
                             icon: 'lightbulb',
                             title: '専門家チームが徹底サポート！無理な勧誘なしで安心',
-                            description: 'URARAクリニックでは、ダイエット専門医や管理栄養士がサポートし、独自開発の医療痩身プログラムを提供しています。医学的根拠に基づいた治療でリバウンドしにくい体質へ改善を目指します。無理な勧誘は一切なく、初めての方も安心です。'
+                            description: 'エミナルクリニックでは、ダイエット専門医や管理栄養士がサポートし、独自開発の医療痩身プログラムを提供しています。医学的根拠に基づいた治療でリバウンドしにくい体質へ改善を目指します。無理な勧誘は一切なく、初めての方も安心です。'
                         },
                         {
                             icon: 'phone',
@@ -1008,7 +1008,7 @@ class RankingApp {
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
                         '店舗': '東京 (新宿, 銀座)',
-                        '公式サイト': 'https://uraraclinic.jp/'
+                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1226,7 +1226,7 @@ class RankingApp {
                             `;
                         }).join('')}
                         <div class="ribbon_point_link">
-                            【公式】<a href="https://dioclinic.jp/" target="_blank" rel="noopener"><strong>https://dioclinic.jp/</strong></a>
+                            【公式】<a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener"><strong>${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}</strong></a>
                         </div>
                     </div>
                 </div>
