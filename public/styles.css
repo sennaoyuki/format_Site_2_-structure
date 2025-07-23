@@ -1400,7 +1400,6 @@ section {
     max-width: 100%;
     box-sizing: border-box;
     background: #F1F1F1;
-    position: relative;
 }
 
 /* ランキングヘッダーバナー */
@@ -1412,7 +1411,6 @@ section.clinic-rankings .ranking-header-banner {
     background: transparent;
     text-align: center;
     overflow: hidden;
-    position: relative;
 }
 
 
@@ -1495,7 +1493,6 @@ section.clinic-rankings .ranking-header-banner {
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background: transparent;
 }
 
 /* クリニックカード */
@@ -2414,7 +2411,6 @@ section.clinic-rankings .ranking-header-banner {
 
 .details-header-banner {
     text-align: center;
-    margin-bottom: 20px;
 }
 
 /* 詳細バナー画像 */
@@ -2423,7 +2419,6 @@ section.clinic-rankings .ranking-header-banner {
     height: auto;
     display: block;
     margin: 0 auto;
-    border-radius: 15px;
 }
 
 .banner-content-wrapper {
@@ -3920,10 +3915,7 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     .details-header-banner {
-        padding: 20px 10px;
-        border-radius: 20px 20px 0 0;
         flex-direction: column;
-        gap: 10px;
     }
     
     .banner-decoration {
@@ -3986,10 +3978,7 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     /* 詳細バナーのモバイル対応 */
-    .details-header-banner {
-        padding: 15px 10px;
-        border-radius: 10px;
-    }
+
     
     .banner-criteria {
         font-size: 0.9rem;

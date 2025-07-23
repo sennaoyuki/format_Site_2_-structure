@@ -329,10 +329,16 @@ class RankingApp {
                 comparisonRegionElement.textContent = region.name;
             }
 
-            // 比較表の地域名も更新
+            //MVの地域名も更新
             const mvRegionElement = document.getElementById('mv-region-name');
             if (mvRegionElement) {
                 mvRegionElement.textContent = region.name;
+            }
+
+            //ランキングの地域名も更新
+            const rankRegionElement = document.getElementById('rank-region-name');
+            if (rankRegionElement) {
+                rankRegionElement.textContent = region.name;
             }
 
             // ランキングの取得と表示
