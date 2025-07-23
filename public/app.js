@@ -130,7 +130,7 @@ class DisplayManager {
                 starsHtml += '<i class="far fa-star"></i>';
             }
 
-            // バナー画像の設定（クリニックロゴを使用）
+            // バナー画像の設定（クリニックIDに基づく）
             const bannerImages = {
                 1: '/images/clinics/dio/dio-logo.jpg',
                 2: '/images/clinics/eminal/eminal-logo.jpg',
@@ -138,7 +138,7 @@ class DisplayManager {
                 4: '/images/clinics/lieto/lieto-logo.jpg',
                 5: '/images/clinics/sbc/sbc-logo.jpg'
             };
-            const bannerImage = bannerImages[rankNum] || '/images/clinics/dio/dio-logo.jpg';
+            const bannerImage = bannerImages[clinic.id] || '/images/clinics/dio/dio-logo.jpg';
 
             // 押しメッセージの定義
             const pushMessages = {
@@ -989,7 +989,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/eminal/eminal-logo.jpg',
                         logoAlt: 'エミナルクリニック',
                         description: '【期間限定】<br>全身+VIO脱毛が<br>月額1,000円から始められる！',
-                        ctaUrl: 'https://eminal-clinic.jp/lp1/',
+                        ctaUrl: 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
                         ctaText: 'エミナル公式はコチラ',
                     }
                 },
