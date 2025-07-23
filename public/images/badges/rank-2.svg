@@ -10,7 +10,7 @@
     </filter>
   </defs>
   <!-- Medal background -->
-  <circle cx="40" cy="40" r="35" fill="url(#silver)" stroke="#C0C0C0" stroke-width="3" filter="url(#shadow)"/>
+  <circle cx="40" cy="40" r="35" fill="url(#silver)" fill-opacity="0.9" stroke="#C0C0C0" stroke-width="3" filter="url(#shadow)"/>
   <!-- Inner circle -->
   <circle cx="40" cy="40" r="28" fill="none" stroke="#FFF" stroke-width="1" opacity="0.5"/>
   <!-- Star -->
