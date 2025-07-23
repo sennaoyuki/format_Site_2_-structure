@@ -1764,7 +1764,7 @@ section.clinic-rankings .ranking-header-banner {
     gap: 0px;
     background: linear-gradient(135deg, #ff95ad 0%, #f0a0a5 100%);
     color: white;
-    padding: 0px 25px;
+    padding: 15px 25px;
     border-radius: 4px;
     text-decoration: none;
     font-weight: 600;
@@ -1777,7 +1777,7 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 .btn.btn_second_primary .bt_s {
-    font-size: 0.8rem;
+    font-size: 1rem;
     white-space: nowrap;
 }
 
@@ -3943,7 +3943,7 @@ section.clinic-rankings .ranking-header-banner {
     
     .ranking_box_in {
         padding: 4px 10px 1px;
-        margin: 0px 2%;
+        margin: 2%;
     }
     
     .detail-rank-header {
