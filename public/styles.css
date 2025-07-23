@@ -1182,20 +1182,39 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 30px;
-    height: 30px;
-    background: #6bd1d0;
-    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+    transition: all 0.3s ease;
+}
+
+.logo-icon:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
 .site-logo {
-    font-size: 1.2rem;
-    font-weight: 400;
-    color: #6b6b6b;
+    font-family: 'Comfortaa', 'Quicksand', 'Noto Sans JP', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     margin: 0;
-    letter-spacing: -0.5px;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 10px rgba(102, 126, 234, 0.1);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.site-logo:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.1);
 }
 
 .header-nav {
@@ -3387,13 +3406,16 @@ section.clinic-rankings .ranking-header-banner {
     }
 
     .site-logo {
-        font-size: 1rem;
+        font-size: 1.1rem;
+        letter-spacing: 0;
     }
     
     .logo-icon {
-        width: 30px;
-        height: 30px;
-        font-size: 1.2rem;
+        width: 32px;
+        height: 32px;
+        font-size: 1.1rem;
+        border-radius: 6px;
+        box-shadow: 0 3px 10px rgba(102, 126, 234, 0.25);
     }
     
     .pr-badge {
