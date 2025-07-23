@@ -885,7 +885,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.jpg',
                         logoAlt: 'DIOクリニック',
                         description: '「今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり」',
-                        ctaUrl: 'https://dio-clinic.jp/campaign/tokyo',
+                        ctaUrl: 'https://dioclinic.jp/',
                         ctaText: 'DIOクリニックの公式サイトはこちら',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
@@ -1147,7 +1147,7 @@ class RankingApp {
                         logoAlt: 'リエートクリニック',
                         description: '「モニター最大80％OFF<br>　痩せなければ返金保証あり」',
                         ctaUrl: 'https://lietoclinic.com/',
-                        ctaText: 'リエートクリニックの公式サイトはこちら',
+                        ctaText: 'リエートクリニックの公式サイト',
                         microcopy: '＼リバウンドしない率99.8％／'
                     }
                 }
@@ -1693,7 +1693,7 @@ class RankingApp {
                 <div class="campaign-header">${campaignInfo.header}</div>
                 <div class="campaign-content">
                     <div class="camp_header3">
-                        <div class="freya-logo">
+                        <div class="info_logo">
                             <img src="${campaignInfo.logoSrc}" alt="${campaignInfo.logoAlt}">
                         </div>
                         <div class="camp_txt">
