@@ -255,7 +255,7 @@
 /* 口コミセクション */
 .reviews-section {
     margin: 20px 0;
-    padding: 0;
+    padding: 2%;
     background: white;
     border-radius: 0;
     max-width: 100%;
@@ -2564,6 +2564,7 @@ section.clinic-rankings .ranking-header-banner {
     align-items: flex-start;
     gap: 15px;
     margin-bottom: 15px;
+    padding: 2%;
 }
 
 .detail-rank-badge {
@@ -2613,10 +2614,8 @@ section.clinic-rankings .ranking-header-banner {
 /* 詳細セクションのranking__name スタイル */
 .detail-rank .ranking__name {
     font-size: 1.125rem;
-    padding: 0.75rem;
     margin-top: 0;
     background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
-    border-radius: 8px;
 }
 
 .detail-rank .ranking__name a {
@@ -2681,6 +2680,7 @@ section.clinic-rankings .ranking-header-banner {
     align-items: center;
     gap: 10px;
     margin: 20px 0;
+    padding: 2%;
     flex-wrap: wrap;
 }
 
@@ -3300,6 +3300,7 @@ section.clinic-rankings .ranking-header-banner {
     /* ポイントセクションのモバイル対応 */
     .clinic-points-section {
         margin: 20px 0;
+        padding: 2%;
     }
     
     .clinic-points-section .section-title {
@@ -3942,7 +3943,7 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     .ranking_box_in {
-        padding: 4px 10px 1px;
+        padding: 4px 0px 1px;
         margin: 2%;
     }
     
@@ -3958,7 +3959,6 @@ section.clinic-rankings .ranking-header-banner {
     
     .detail-rank .ranking__name {
         font-size: 1rem;
-        padding: 0.5rem;
     }
     
     .detail-title h3 {
@@ -4031,7 +4031,7 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     .detail-banner {
-        margin: 15px 0;
+        margin: 15px 0px;
         border-radius: 10px;
     }
     
@@ -4431,7 +4431,7 @@ section.clinic-rankings .ranking-header-banner {
         width: 100% !important;
         max-width: 100% !important;
         margin: 20px 0 !important;
-        padding: 0 !important;
+        padding: 2% !important;
         box-sizing: border-box !important;
     }
     
@@ -4447,7 +4447,7 @@ section.clinic-rankings .ranking-header-banner {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 !important;
-        padding: 0px 10px 15px  !important;
+        /* padding: 0px 10px 15px  !important; */
         box-sizing: border-box !important;
     }
     
@@ -4873,6 +4873,7 @@ section.clinic-rankings .ranking-header-banner {
         width: 100%;
         font-size: 10px;
         box-sizing: border-box;
+        padding: 2%;
     }
     
     .info-table td {
@@ -4989,6 +4990,7 @@ section.clinic-rankings .ranking-header-banner {
     text-decoration: underline;
     font-weight: normal;
     font-size: 1.125rem;
+    padding: 2%;
     transition: color 0.3s ease;
 }
 
@@ -5112,7 +5114,7 @@ section.clinic-rankings .ranking-header-banner {
 /* 詳細コンテンツ内の店舗情報スタイル - brand-sectionを継承 */
 .detail-item .brand-section {
     margin-top: 30px;
-    padding: 0 8px 16px;
+    padding: 2%;
     border-top: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
     background-color: #F1F1F1;
