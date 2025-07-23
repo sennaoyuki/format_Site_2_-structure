@@ -1221,7 +1221,7 @@ class RankingApp {
                         <div class="wrap_long2 active">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon4.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1234,7 +1234,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon5.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1247,7 +1247,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon6.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1263,7 +1263,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon4.png" alt="レビューアイコン">
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1276,7 +1276,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23e2e3e5'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%236c757d'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon5.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1289,7 +1289,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon6.png" alt="レビューアイコン">
                                     <span>★★★☆☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1305,7 +1305,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon7.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1318,7 +1318,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon8.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1331,7 +1331,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon9.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1347,7 +1347,7 @@ class RankingApp {
                         <div class="wrap_long2 active">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon${rank === 1 ? '1' : rank === 3 ? '7' : rank === 4 ? '10' : '3'}.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1360,7 +1360,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon${rank === 1 ? '2' : rank === 3 ? '8' : rank === 4 ? '1' : '4'}.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1373,7 +1373,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon${rank === 1 ? '3' : rank === 3 ? '9' : rank === 4 ? '2' : '5'}.png" alt="レビューアイコン">
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1389,7 +1389,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon9.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1402,7 +1402,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23e2e3e5'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%236c757d'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon5.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1415,7 +1415,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23f8d7da'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23e91e63'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon6.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1431,7 +1431,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23fff3cd'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%23ffc107'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon7.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1444,7 +1444,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d1ecf1'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2317a2b8'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon8.png" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1457,7 +1457,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='45' fill='%23d4edda'/%3E%3Cpath d='M50 25c-8 0-15 7-15 15s15 25 15 25 15-17 15-25-7-15-15-15z' fill='%2328a745'/%3E%3C/svg%3E" alt="">
+                                    <img src="/images/review_icon/review_icon9.png" alt="レビューアイコン">
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
