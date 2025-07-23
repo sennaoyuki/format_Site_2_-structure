@@ -3893,7 +3893,6 @@ section {
     }
     
     .details-header-banner {
-        padding: 20px 10px;
         border-radius: 20px 20px 0 0;
         flex-direction: column;
         gap: 10px;
@@ -3959,10 +3958,7 @@ section {
     }
     
     /* 詳細バナーのモバイル対応 */
-    .details-header-banner {
-        padding: 15px 10px;
-        border-radius: 10px;
-    }
+
     
     .banner-criteria {
         font-size: 0.9rem;
@@ -4527,7 +4523,7 @@ section {
     }
     
     .comparison-subtitle {
-        font-size: 1rem;
+        font-size: 1.3rem;
     }
     
     .tab-button {
