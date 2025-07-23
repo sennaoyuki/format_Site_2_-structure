@@ -2531,7 +2531,7 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0px 0 15px;
     width: 100%;
     height: auto;
-    padding: 0px 0 10px;
+    padding: 2%;
 }
 
 .ranking_box_in {
@@ -5153,8 +5153,8 @@ section.clinic-rankings .ranking-header-banner {
 
 .detail-item .brand-section .shop-image {
     flex-shrink: 0;
-    width: 48px;
-    height: 48px;
+    width:14vw;
+    height: 8vw;
     margin-right: 8px;
     background-color: #f2f2f2;
 }
@@ -5262,8 +5262,8 @@ section.clinic-rankings .ranking-header-banner {
 /* レスポンシブ対応 */
 @media (min-width: 720px) {
     .detail-item .brand-section .shop-image {
-        width: 72px;
-        height: 72px;
+        width: 14vw;
+        height: 8vw;
     }
 }
 

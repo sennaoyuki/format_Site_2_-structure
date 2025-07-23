@@ -1719,11 +1719,19 @@ class RankingApp {
     getStoreImage(clinicName, storeNumber) {
         // 店舗番号を3桁の文字列に変換
         const paddedNumber = String(storeNumber).padStart(3, '0');
-        const storeImagePath = `/images/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.jpg`;
-        const logoImagePath = `/images/clinics/${clinicName}/${clinicName}-logo.jpg`;
         
-        // 画像の存在を確認する処理は省略し、常に店舗画像パスを返す
-        // ブラウザが404エラーを返した場合は、onerrorハンドラで対処できるように後で実装可能
+        // クリニックごとの画像拡張子を定義
+        const imageExtensions = {
+            'dio': 'jpg',
+            'eminal': 'webp',
+            'lieto': 'jpg',
+            'sbc': 'jpg',
+            'urara': 'jpg'
+        };
+        
+        const extension = imageExtensions[clinicName] || 'jpg';
+        const storeImagePath = `/images/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
+        
         return storeImagePath;
     }
 
