@@ -253,7 +253,9 @@ class DisplayManager {
 
             const li = document.createElement('li');
             const link = document.createElement('a');
-            link.href = `#clinic-details-${clinic.id}`;
+            link.href = clinic.url || '#';
+            link.target = '_blank';
+            link.rel = 'noopener noreferrer';
             link.textContent = clinic.name;
             li.appendChild(link);
             footerClinicsContainer.appendChild(li);
