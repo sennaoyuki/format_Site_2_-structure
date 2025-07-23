@@ -1504,7 +1504,7 @@ class RankingApp {
                     <h4 class="section-heading">
                         ${clinic.name}の【${this.getRegionName(data.regionId)}】の店舗
                     </h4>
-                    ${this.generateStoresDisplay(data.stores || [])}
+                    ${this.generateStoresDisplay(data.stores || [], clinicId)}
                 </div>
                 
                 <!-- 特典情報 -->
@@ -1519,7 +1519,16 @@ class RankingApp {
     }
     
     // 店舗表示のHTML生成（MAX3店舗 + アコーディオン）
-    generateStoresDisplay(stores) {
+    generateStoresDisplay(stores, clinicId) {
+        // クリニック名を取得（IDに基づいて）
+        const clinicNames = {
+            '1': 'dio',
+            '2': 'eminal',
+            '3': 'urara',
+            '4': 'lieto',
+            '5': 'sbc'
+        };
+        const clinicName = clinicNames[clinicId] || 'dio';
         if (!stores || stores.length === 0) {
             return '<div class="shops"><p class="no-stores">店舗情報がありません</p></div>';
         }
@@ -1535,7 +1544,7 @@ class RankingApp {
             html += `
                 <div class='shop'>
                     <div class='shop-image'>
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='12'%3E店舗${index + 1}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
+                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -1557,7 +1566,7 @@ class RankingApp {
             html += `
                 <div class='shop hidden-content hidden'>
                     <div class='shop-image'>
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23f2f2f2'/%3E%3Ctext x='50' y='50' text-anchor='middle' dy='.3em' fill='%23999' font-family='sans-serif' font-size='12'%3E店舗${index + 4}%3C/text%3E%3C/svg%3E" alt="${store.name}" />
+                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -1704,6 +1713,18 @@ class RankingApp {
                 </div>
             </div>
         `;
+    }
+
+    // 店舗画像のパスを取得するメソッド
+    getStoreImage(clinicName, storeNumber) {
+        // 店舗番号を3桁の文字列に変換
+        const paddedNumber = String(storeNumber).padStart(3, '0');
+        const storeImagePath = `/images/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.jpg`;
+        const logoImagePath = `/images/clinics/${clinicName}/${clinicName}-logo.jpg`;
+        
+        // 画像の存在を確認する処理は省略し、常に店舗画像パスを返す
+        // ブラウザが404エラーを返した場合は、onerrorハンドラで対処できるように後で実装可能
+        return storeImagePath;
     }
 
     // 地域IDから地域名を取得するヘルパーメソッド
