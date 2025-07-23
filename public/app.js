@@ -884,7 +884,7 @@ class RankingApp {
                         title: 'DIOクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/dio/dio-logo.jpg',
                         logoAlt: 'DIOクリニック',
-                        description: '「今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり」',
+                        description: '今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり',
                         ctaUrl: 'https://dioclinic.jp/',
                         ctaText: 'DIOクリニックの公式サイトはこちら',
                         microcopy: '＼症例数50万件以上の実績で安心／'
@@ -1066,7 +1066,7 @@ class RankingApp {
                         title: 'URARAクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/urara/urara-logo.jpg',
                         logoAlt: 'URARAクリニック',
-                        description: '「痩せなければ返金保証<br>　さらに脂肪買取制度あり」',
+                        description: '痩せなければ返金保証<br>　さらに脂肪買取制度あり',
                         ctaUrl: 'https://urara-clinic.com/',
                         ctaText: 'URARAクリニックの公式サイトはこちら',
                         microcopy: '＼ダイエット成功率94％の実績／'
@@ -1145,7 +1145,7 @@ class RankingApp {
                         title: 'リエートクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/lieto/lieto-logo.jpg',
                         logoAlt: 'リエートクリニック',
-                        description: '「モニター最大80％OFF<br>　痩せなければ返金保証あり」',
+                        description: 'モニター最大80％OFF<br>　痩せなければ返金保証あり',
                         ctaUrl: 'https://lietoclinic.com/',
                         ctaText: 'リエートクリニックの公式サイト',
                         microcopy: '＼リバウンドしない率99.8％／'

@@ -169,11 +169,7 @@
     box-sizing: border-box;
 }
 
-.clinic-cta-button:hover {
-    background-color: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-}
+
 
 .cta-text {
     font-size: 0.9rem;
@@ -1224,10 +1220,7 @@ body {
     transition: all 0.3s;
 }
 
-.pr-badge:hover {
-    background-color: #6bd1d0;
-    color: white;
-}
+
 
 /* ===== メインビジュアル ===== */
 .hero-section {
@@ -1529,11 +1522,7 @@ section.clinic-rankings .ranking-header-banner {
     border-color: #666;
 }
 
-.clinic-card:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: #6bd1d0;
-}
+
 
 /* 満足度バッジ */
 .satisfaction-badge {
@@ -1743,11 +1732,6 @@ section.clinic-rankings .ranking-header-banner {
     font-size: 0.8rem;
 }
 
-.clinic-cta-button:hover {
-    background: #059669;
-    transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3);
-}
 
 /* 新しいボタンスタイル（DIOスタイル） */
 .btn.btn_second_primary {
@@ -2089,10 +2073,7 @@ section.clinic-rankings .ranking-header-banner {
     transition: all 0.3s;
 }
 
-.js-cbn-table .link_btn:hover {
-    background: #25B5B3;
-    transform: none;
-}
+
 
 .js-cbn-table .detail_btn {
     display: inline-block;
@@ -3210,10 +3191,6 @@ section.clinic-rankings .ranking-header-banner {
     transition: color 0.3s ease;
 }
 
-.footer_contents a:hover {
-    color: #25B5B3;
-    text-decoration: underline;
-}
 
 .footer_contents ul {
     margin: 5px 20px 5px 10px;
@@ -3710,10 +3687,7 @@ section.clinic-rankings .ranking-header-banner {
         font-size: 0.55rem;
     }
     
-    .clinic-cta-button:hover {
-        background: #059669;
-        transform: translateY(-1px);
-    }
+  
 
     .hero-title {
         font-size: 2rem;
@@ -5228,11 +5202,6 @@ section.clinic-rankings .ranking-header-banner {
     transition: all 0.3s;
 }
 
-.accordion-button:hover {
-    background-color: #F1F1F1;
-    border-color: #6bd1d0;
-    color: #6bd1d0;
-}
 
 .accordion-icon {
     margin-left: 8px;
@@ -5283,12 +5252,6 @@ section.clinic-rankings .ranking-header-banner {
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
-}
-
-.section-btn:hover {
-    background-color: #6bd1d0;
-    color: #fff;
-    border-color: #6bd1d0;
 }
 
 .section-btn .btn-icon {
