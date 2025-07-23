@@ -332,6 +332,20 @@ class RankingApp {
             const rankRegionElement = document.getElementById('rank-region-name');
             if (rankRegionElement) {
                 rankRegionElement.textContent = region.name + 'で人気の医療ダイエットはここ！';
+                
+                // 地域名の文字数に応じてleftの位置を調整
+                const regionNameLength = region.name.length;
+                let leftPosition = '6%'; // デフォルト値
+                
+                if (regionNameLength === 2) {
+                    leftPosition = '9%'; // 2文字（例：千葉）
+                } else if (regionNameLength === 3) {
+                    leftPosition = '7.5%'; // 3文字（例：神奈川）
+                } else if (regionNameLength === 4) {
+                    leftPosition = '6%'; // 4文字（例：神奈川）
+                }
+                
+                rankRegionElement.style.left = leftPosition;
             }
 
             //詳細セクションの地域名も更新
