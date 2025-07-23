@@ -1260,6 +1260,7 @@ body {
     width: 100%;
     display: block;
     line-height: 0;
+    position: relative;
 }
 
 .hero-image {
@@ -4513,14 +4514,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 0.3% !important;
         box-sizing: border-box !important;
     }
-    
-    /* 右に突出する要素の修正 */
-    [style*="right:"],
-    [style*="left:"] {
-        position: relative !important;
-        right: auto !important;
-        left: auto !important;
-    }
+
     
     /* ヘッダーセクションの最適化 */
     .header-content,

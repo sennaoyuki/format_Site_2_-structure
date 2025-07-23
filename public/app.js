@@ -329,6 +329,12 @@ class RankingApp {
                 comparisonRegionElement.textContent = region.name;
             }
 
+            // 比較表の地域名も更新
+            const mvRegionElement = document.getElementById('mv-region-name');
+            if (mvRegionElement) {
+                mvRegionElement.textContent = region.name;
+            }
+
             // ランキングの取得と表示
             const ranking = this.dataManager.getRankingByRegionId(regionId);
             const allClinics = this.dataManager.getAllClinics();
