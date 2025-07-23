@@ -777,7 +777,11 @@ class RankingApp {
                     subtitle: 'リバウンドしにくい体質へ',
                     link: 'DIO ＞',
                     banner: '/images/clinics/dio/dio_detail_bnr.jpg',
-                    features: ['医療機器をオーダーメイド', '全額返金保証あり'],
+                    features: [
+                        '医療ダイエット', '医療痩身', 'リバウンド防止',
+                        '医師監修', '栄養士指導', '切らない痩身',
+                        '19時以降OK', '駅チカ', '完全個室'
+                    ],
                     priceMain: '医療痩身コース',
                     priceValue: '月々4,900円',
                     priceDetail: {
@@ -962,7 +966,11 @@ class RankingApp {
                     subtitle: '学生に人気の医療痩身',
                     link: 'ウララクリニック ＞',
                     banner: '/images/clinics/urara/urara_detail_bnr.jpg',
-                    features: ['24回払い無利息', 'キャンセル料無料'],
+                    features: [
+                        '医療ダイエット', '医療痩身', '美痩身',
+                        'リバウンド防止', '医師監修', '管理栄養士指導',
+                        '切らない痩身', '駅チカ', '健康的に美しく'
+                    ],
                     priceMain: '医療痩身コース',
                     priceValue: '月々9,780円',
                     priceDetail: {
@@ -1041,7 +1049,11 @@ class RankingApp {
                     subtitle: '個人に合わせたオーダーメイド施術',
                     link: 'リエートクリニック ＞',
                     banner: '/images/clinics/lieto/lieto_detail_bnr.jpg',
-                    features: ['痛みの少ない最新機器', '完全個室でプライバシー配慮'],
+                    features: [
+                        '医療ダイエット', '医療痩身', 'リバウンド防止',
+                        '医師監修', '管理栄養士指導', '切らない痩身',
+                        'オーダーメイド治療', '駅チカ', '完全個室'
+                    ],
                     priceMain: '医療痩身コース',
                     priceValue: '月々9,600円',
                     priceDetail: {
