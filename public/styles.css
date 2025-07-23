@@ -904,13 +904,12 @@
 .cv_box_img a {
     margin: 2px 0px;
     font-size: 16px !important;
-    padding: 12px 0 !important;
+    padding: 16px 0 !important;
     vertical-align: middle;
 }
 
 .cv_box_img .btn {
     display: block;
-    max-width: 300px;
     margin: 10px auto;
 }
 
@@ -942,26 +941,7 @@
     display: block;
 }
 
-.btn_second_primary a {
-    background-color: #5ab9bd;
-    border: none;
-    box-shadow: 0 3px 0 #4a9a9e;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 16px 20px;
-    position: relative;
-    /* overflow: hidden; */
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 30px;
-    transition: all 0.2s ease;
-}
 
-.btn_second_primary a:hover {
-    transform: translateY(1px);
-    box-shadow: 0 2px 0 #4a9a9e;
-}
 
 
 
@@ -1804,12 +1784,6 @@ section.clinic-rankings .ranking-header-banner {
 .btn.btn_second_primary .btn-arrow {
     font-size: 0.7rem;
     transition: transform 0.3s ease;
-}
-
-.btn.btn_second_primary a:hover {
-    background: #25B5B3;
-    transform: none;
-    box-shadow: none;
 }
 
 .btn.btn_second_primary a:hover .btn-arrow {
