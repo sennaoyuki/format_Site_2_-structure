@@ -1789,5 +1789,6 @@ document.addEventListener('DOMContentLoaded', () => {
 // アプリケーションの初期化
 document.addEventListener('DOMContentLoaded', function() {
     const app = new RankingApp();
+    window.app = app; // グローバルアクセス用
     app.init();
 });
