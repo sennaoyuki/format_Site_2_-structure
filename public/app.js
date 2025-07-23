@@ -334,6 +334,12 @@ class RankingApp {
                 rankRegionElement.textContent = region.name;
             }
 
+            //詳細セクションの地域名も更新
+            const detailRegionElement = document.getElementById('detail-region-name');
+            if (detailRegionElement) {
+                detailRegionElement.textContent = region.name + 'で人気のクリニック';
+            }
+
             // ランキングの取得と表示
             const ranking = this.dataManager.getRankingByRegionId(regionId);
             const allClinics = this.dataManager.getAllClinics();
