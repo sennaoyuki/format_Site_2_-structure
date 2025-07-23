@@ -745,7 +745,7 @@ class RankingApp {
                     title: '肌に優しい脱毛機を採用！',
                     subtitle: '日焼け肌も産毛もスベスベに',
                     link: 'DIO ＞',
-                    banner: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400"%3E%3Crect fill="%23fce0ec" width="800" height="400"/%3E%3Ctext x="40" y="60" fill="%23ec4899" font-size="24" font-weight="bold"%3EFREY-A CLINIC%3C/text%3E%3Ctext x="40" y="100" fill="%23333" font-size="18"%3E※自由診療%3C/text%3E%3Ctext x="40" y="140" fill="%23ec4899" font-size="32" font-weight="bold"%3Eフレイア開院5周年記念キャンペーン%3C/text%3E%3Ctext x="40" y="180" fill="%23333" font-size="20"%3E全身%2BVIO%2B顔 5回コース%3C/text%3E%3Ctext x="40" y="220" fill="%23ec4899" font-size="36" font-weight="bold"%3E月額 1,500円%3C/text%3E%3Ctext x="350" y="220" fill="%23666" font-size="16"%3E(税込)%3C/text%3E%3Ctext x="40" y="260" fill="%23666" font-size="16"%3E払い 101,000円%3C/text%3E%3Ctext x="40" y="290" fill="%23666" font-size="14"%3E111,100円(税込)/月々1,500円(税込)%3C/text%3E%3Ctext x="40" y="330" fill="%23ec4899" font-size="20" font-weight="bold"%3E学割 5周年記念キャンペーン%3C/text%3E%3Ctext x="40" y="360" fill="%23333" font-size="16"%3E全身%2BVIO%2B顔 5回 月額 1,300円%3C/text%3E%3C/svg%3E',
+                    banner: '/images/clinics/dio/dio_detail_bnr.jpg',
                     features: ['熱破壊式が蓄熱式の照射方法を選択可◯', '痛みに敏感な方も◯'],
                     priceMain: '全身+VIO+顔 5回コース',
                     priceValue: '月々1,500円',
@@ -863,6 +863,7 @@ class RankingApp {
                     title: '豊富なプランから選べる！',
                     subtitle: '肌質・毛質に合わせた施術',
                     link: 'エミナルクリニック ＞',
+                    banner: '/images/clinics/eminal/eminal_detail_bnr.jpg',
                     features: ['最新機器導入', '短時間施術'],
                     priceMain: '全身+VIO',
                     priceValue: '月額1,000円〜',
@@ -965,6 +966,7 @@ class RankingApp {
                     title: 'リーズナブルな価格設定',
                     subtitle: '学生に人気の医療痩身',
                     link: 'ウララクリニック ＞',
+                    banner: '/images/clinics/urara/urara_detail_bnr.jpg',
                     features: ['24回払い無利息', 'キャンセル料無料'],
                     priceMain: '医療痩身コース',
                     priceValue: '月々9,780円',
@@ -1043,6 +1045,7 @@ class RankingApp {
                     title: '最新技術で安心痩身',
                     subtitle: '個人に合わせたオーダーメイド施術',
                     link: 'リエートクリニック ＞',
+                    banner: '/images/clinics/lieto/lieto_detail_bnr.jpg',
                     features: ['痛みの少ない最新機器', '完全個室でプライバシー配慮'],
                     priceMain: '医療痩身コース',
                     priceValue: '月々9,600円',
@@ -1122,6 +1125,11 @@ class RankingApp {
             // クリニックIDに基づいてデータを取得し、地域IDを追加
             const data = clinicDetailDataMap[clinicId] || clinicDetailDataMap['1'];
             data.regionId = regionId;
+            
+            // 5番目のクリニック（湘南美容クリニック）の場合、bannerを追加
+            if (clinicId === '5' && !data.banner) {
+                data.banner = '/images/clinics/sbc/sbc_detail_bnr.jpg';
+            }
 
             detailItem.innerHTML = `
                 <div class="ranking_box_in">

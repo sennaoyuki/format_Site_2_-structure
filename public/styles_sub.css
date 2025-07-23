@@ -3763,7 +3763,7 @@ section {
     }
     
     .comparison-subtitle {
-        font-size: 1.1rem;
+        font-size: 1.3rem;
     }
     
     .comparison-tabs {
@@ -4490,13 +4490,6 @@ section {
         box-sizing: border-box !important;
     }
     
-    /* 右に突出する要素の修正 */
-    [style*="right:"],
-    [style*="left:"] {
-        position: relative !important;
-        right: auto !important;
-        left: auto !important;
-    }
     
     /* ヘッダーセクションの最適化 */
     .header-content,
