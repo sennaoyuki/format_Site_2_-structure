@@ -1440,24 +1440,25 @@ section.clinic-rankings .ranking-header-banner {
 
 .ranking-container {
     display: flex;
-    flex-wrap: nowrap;
-    gap: 0px;
+    flex-wrap: wrap;
+    gap: 4px;
     width: 100%;
     max-width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    overflow-x: hidden;
+    padding: 0 4px;
 }
 
 /* ランキングアイテム */
 .ranking-item {
-    width: calc((100% - 8px) / 3);
-    min-width: 115px;
-    /* max-width: 130px; */
+    width: calc((100% - 16px) / 3);
+    min-width: 100px;
+    max-width: 33%;
     margin: 0;
     box-sizing: border-box;
-    flex-shrink: 0;
+    flex-shrink: 1;
+    position: relative;
 }
 
 /* ランクメダル */
@@ -3553,23 +3554,23 @@ section.clinic-rankings .ranking-header-banner {
 
     .ranking-container {
         display: flex;
-        flex-wrap: nowrap;
-        gap: 0px;
+        flex-wrap: wrap;
+        gap: 4px;
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+        padding: 0 4px;
     }
     
     .ranking-item {
-        width: calc((100% - 8px) / 3);
-        min-width: 115px;
-        /* max-width: 130px; */
+        width: calc((100% - 16px) / 3);
+        min-width: 100px;
+        max-width: 33%;
         margin: 0;
         box-sizing: border-box;
-        flex-shrink: 0;
+        flex-shrink: 1;
     }
     
     .rank-medal {
@@ -4764,23 +4765,23 @@ section.clinic-rankings .ranking-header-banner {
 
     .ranking-container {
         display: flex;
-        flex-wrap: nowrap;
-        gap: 0px;
+        flex-wrap: wrap;
+        gap: 4px;
         width: 100%;
         max-width: 100%;
         margin: 0 auto;
         box-sizing: border-box;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
+        overflow-x: hidden;
+        padding: 0 4px;
     }
     
     .ranking-item {
-        width: calc((100% - 8px) / 3);
-        min-width: 115px;
-        /* max-width: 130px; */
+        width: calc((100% - 16px) / 3);
+        min-width: 100px;
+        max-width: 33%;
         margin: 0;
         box-sizing: border-box;
-        flex-shrink: 0;
+        flex-shrink: 1;
     }
     
     .clinic-card {
