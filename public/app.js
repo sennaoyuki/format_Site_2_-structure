@@ -331,7 +331,7 @@ class RankingApp {
             //ランキングの地域名も更新
             const rankRegionElement = document.getElementById('rank-region-name');
             if (rankRegionElement) {
-                rankRegionElement.textContent = region.name;
+                rankRegionElement.textContent = region.name + 'で人気の医療ダイエットはここ！';
             }
 
             //詳細セクションの地域名も更新
