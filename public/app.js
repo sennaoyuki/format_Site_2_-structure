@@ -352,6 +352,18 @@ class RankingApp {
             const detailRegionElement = document.getElementById('detail-region-name');
             if (detailRegionElement) {
                 detailRegionElement.textContent = region.name + 'で人気のクリニック';
+                
+                // 地域名の文字数に応じてleftの位置を調整
+                const regionNameLength = region.name.length;
+                let leftPosition = '3%'; // デフォルト値（3文字以上）
+                
+                if (regionNameLength === 2) {
+                    leftPosition = '4%'; // 2文字（例：千葉、東京）
+                } else if (regionNameLength === 3) {
+                    leftPosition = '1%'; // 3文字（例：神奈川、埼玉）
+                }
+                
+                detailRegionElement.style.left = leftPosition;
             }
 
             // ランキングの取得と表示
