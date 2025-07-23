@@ -773,13 +773,13 @@ class RankingApp {
             // クリニック詳細データ（拡張版）
             const clinicDetailDataMap = {
                 '1': { // DIO
-                    title: '肌に優しい脱毛機を採用！',
-                    subtitle: '日焼け肌も産毛もスベスベに',
+                    title: '最新医療機器で確実に痩せる！',
+                    subtitle: 'リバウンドしにくい体質へ',
                     link: 'DIO ＞',
                     banner: '/images/clinics/dio/dio_detail_bnr.jpg',
-                    features: ['熱破壊式が蓄熱式の照射方法を選択可◯', '痛みに敏感な方も◯'],
-                    priceMain: '全身+VIO+顔 5回コース',
-                    priceValue: '月々1,500円',
+                    features: ['医療機器をオーダーメイド', '全額返金保証あり'],
+                    priceMain: '医療痩身コース',
+                    priceValue: '月々4,900円',
                     priceDetail: {
                         '料金': '通常価格24,800円<br>80%OFF 月々4,900円',
                         '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
@@ -884,7 +884,7 @@ class RankingApp {
                         title: 'DIOクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/dio/dio-logo.jpg',
                         logoAlt: 'DIOクリニック',
-                        description: '今なら12ヶ月分が0円！<br>　痩せなければ返金保証あり',
+                        description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
                         ctaUrl: 'https://dioclinic.jp/',
                         ctaText: 'DIOクリニックの公式サイトはこちら',
                         microcopy: '＼症例数50万件以上の実績で安心／'
@@ -1066,7 +1066,7 @@ class RankingApp {
                         title: 'URARAクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/urara/urara-logo.jpg',
                         logoAlt: 'URARAクリニック',
-                        description: '痩せなければ返金保証<br>　さらに脂肪買取制度あり',
+                        description: '痩せなければ返金保証<br>さらに脂肪買取制度あり',
                         ctaUrl: 'https://urara-clinic.com/',
                         ctaText: 'URARAクリニックの公式サイトはこちら',
                         microcopy: '＼ダイエット成功率94％の実績／'
@@ -1145,7 +1145,7 @@ class RankingApp {
                         title: 'リエートクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/lieto/lieto-logo.jpg',
                         logoAlt: 'リエートクリニック',
-                        description: 'モニター最大80％OFF<br>　痩せなければ返金保証あり',
+                        description: 'モニター最大80％OFF<br>痩せなければ返金保証あり',
                         ctaUrl: 'https://lietoclinic.com/',
                         ctaText: 'リエートクリニックの公式サイト',
                         microcopy: '＼リバウンドしない率99.8％／'
