@@ -133,9 +133,9 @@ class DisplayManager {
             // バナー画像の設定（クリニックロゴを使用）
             const bannerImages = {
                 1: '/images/clinics/dio/dio-logo.jpg',
-                2: '/images/clinics/urara/urara-logo.jpg',
-                3: '/images/clinics/lieto/lieto-logo.jpg',
-                4: '/images/clinics/eminal/eminal-logo.jpg',
+                2: '/images/clinics/eminal/eminal-logo.jpg',
+                3: '/images/clinics/urara/urara-logo.jpg',
+                4: '/images/clinics/lieto/lieto-logo.jpg',
                 5: '/images/clinics/sbc/sbc-logo.jpg'
             };
             const bannerImage = bannerImages[rankNum] || '/images/clinics/dio/dio-logo.jpg';
