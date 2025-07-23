@@ -5088,7 +5088,7 @@ section.clinic-rankings .ranking-header-banner {
 /* 詳細コンテンツ内の店舗情報スタイル - brand-sectionを継承 */
 .detail-item .brand-section {
     margin-top: 30px;
-    padding: 2%;
+    padding: 0% 2% 2% 2%;
     border-top: 1px solid #E0E0E0;
     border-bottom: 1px solid #E0E0E0;
     background-color: #F1F1F1;

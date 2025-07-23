@@ -832,43 +832,7 @@ class RankingApp {
                             text: '予約が取りやすく、効果も実感できています。'
                         }
                     ],
-                    stores: [
-                        {
-                            name: 'DIO 銀座院',
-                            address: '東京都中央区銀座5-5-1 マツモトキヨシ銀座5thビル5F',
-                            access: '東京メトロ銀座駅B5出口より徒歩2分',
-                            tel: '0120-XXX-XXX',
-                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
-                        },
-                        {
-                            name: 'DIO 新宿院',
-                            address: '東京都新宿区西新宿1-4-1 プリンスビル7F',
-                            access: 'JR新宿駅西口より徒歩3分',
-                            tel: '0120-XXX-XXX',
-                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
-                        },
-                        {
-                            name: 'DIO 渋谷院',
-                            address: '東京都渋谷区神南1-10-1 神南ビル6F',
-                            access: 'JR渋谷駅ハチ公口より徒歩5分',
-                            tel: '0120-XXX-XXX',
-                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
-                        },
-                        {
-                            name: 'DIO 池袋院',
-                            address: '東京都豊島区西池袋1-20-1 池袋ビル8F',
-                            access: 'JR池袋駅西口より徒歩4分',
-                            tel: '0120-XXX-XXX',
-                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
-                        },
-                        {
-                            name: 'DIO 表参道院',
-                            address: '東京都港区南青山3-18-20 青山ビル3F',
-                            access: '東京メトロ表参道駅A4出口より徒歩1分',
-                            tel: '0120-XXX-XXX',
-                            hours: '平日 12:00〜21:00 / 土日祝 11:00〜20:00'
-                        }
-                    ],
+                    // stores: [] // 店舗は動的に取得するため削除
                     campaigns: [
                         {
                             title: '全身＋VIO ＋顔',
@@ -1161,6 +1125,11 @@ class RankingApp {
             if (clinicId === '5' && !data.banner) {
                 data.banner = '/images/clinics/sbc/sbc_detail_bnr.jpg';
             }
+            
+            // 店舗データを動的に取得（store_view.csvに基づいてフィルタリング）
+            const allStores = this.dataManager.getStoresByRegionId(regionId);
+            // 現在のクリニックに属する店舗のみをフィルタリング
+            data.stores = allStores.filter(store => store.clinicName === clinic.name);
 
             detailItem.innerHTML = `
                 <div class="ranking_box_in">

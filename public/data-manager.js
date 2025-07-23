@@ -211,10 +211,10 @@ class DataManager {
         // 表示する店舗IDのリストを作成
         const storeIdsToShow = [];
         
-        // ランキングのno1〜no5に対応するclinic_1〜clinic_5の店舗IDをマッピング
+        // ランキングに表示されているクリニックIDに対応する店舗IDを取得
         Object.entries(ranking.ranks).forEach(([position, clinicId]) => {
-            const positionNum = parseInt(position.replace('no', ''));
-            const clinicKey = `clinic_${positionNum}`;
+            // clinic_1〜clinic_5はクリニックID（1〜5）に対応
+            const clinicKey = `clinic_${clinicId}`;
             
             if (storeView.clinicStores[clinicKey]) {
                 storeIdsToShow.push(...storeView.clinicStores[clinicKey]);
