@@ -214,6 +214,51 @@ class DisplayManager {
     hideError() {
         this.errorMessage.style.display = 'none';
     }
+
+    updateFooterClinics(clinics, ranking) {
+        // フッター内のすべてのulタグを取得
+        const footerUls = document.querySelectorAll('#footer ul');
+        let footerClinicsContainer = null;
+        
+        // "人気クリニック"を含むh5を持つulを探す
+        for (const ul of footerUls) {
+            const h5 = ul.querySelector('h5');
+            if (h5 && h5.textContent === '人気クリニック') {
+                footerClinicsContainer = ul;
+                break;
+            }
+        }
+        
+        if (!footerClinicsContainer) return;
+
+        // 既存のクリニックリンクを削除（h5タイトルは残す）
+        const clinicLinks = footerClinicsContainer.querySelectorAll('li');
+        clinicLinks.forEach(link => link.remove());
+
+        if (!ranking || Object.keys(ranking.ranks).length === 0) {
+            return;
+        }
+
+        // ランキング順にソート（最大5件）
+        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
+            const numA = parseInt(a[0].replace('no', ''));
+            const numB = parseInt(b[0].replace('no', ''));
+            return numA - numB;
+        }).slice(0, 5);
+
+        // フッターにクリニックリンクを追加
+        sortedRanks.forEach(([position, clinicId]) => {
+            const clinic = clinics.find(c => c.id === clinicId);
+            if (!clinic) return;
+
+            const li = document.createElement('li');
+            const link = document.createElement('a');
+            link.href = `#clinic-details-${clinic.id}`;
+            link.textContent = clinic.name;
+            li.appendChild(link);
+            footerClinicsContainer.appendChild(li);
+        });
+    }
 }
 
 // アプリケーションクラス
@@ -370,6 +415,9 @@ class RankingApp {
             const ranking = this.dataManager.getRankingByRegionId(regionId);
             const allClinics = this.dataManager.getAllClinics();
             this.displayManager.updateRankingDisplay(allClinics, ranking);
+
+            // フッターの人気クリニックを更新
+            this.displayManager.updateFooterClinics(allClinics, ranking);
 
             // 店舗リストの取得と表示（クリニックごとにグループ化）
             const stores = this.dataManager.getStoresByRegionId(regionId);
