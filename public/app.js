@@ -1548,7 +1548,7 @@ class RankingApp {
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
-                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
+                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : clinicName === 'eminal' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinicName === 'urara' ? 'https://uraraclinic.jp/' : clinicName === 'lieto' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinicName === 'sbc' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
                         </div>
                         <div class='shop-address line-clamp'>
                             ${store.address || '住所情報なし'}
@@ -1570,7 +1570,7 @@ class RankingApp {
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
-                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
+                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : clinicName === 'eminal' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinicName === 'urara' ? 'https://uraraclinic.jp/' : clinicName === 'lieto' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinicName === 'sbc' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
                         </div>
                         <div class='shop-address line-clamp'>
                             ${store.address || '住所情報なし'}
