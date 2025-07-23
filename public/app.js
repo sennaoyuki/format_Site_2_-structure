@@ -891,13 +891,13 @@ class RankingApp {
                     }
                 },
                 '2': { // エミナルクリニック
-                    title: '豊富なプランから選べる！',
-                    subtitle: '肌質・毛質に合わせた施術',
+                    title: '次世代医療で理想のボディへ！',
+                    subtitle: '成功率94%の高い実績',
                     link: 'エミナルクリニック ＞',
                     banner: '/images/clinics/eminal/eminal_detail_bnr.jpg',
-                    features: ['最新機器導入', '短時間施術'],
-                    priceMain: '全身+VIO',
-                    priceValue: '月額1,000円〜',
+                    features: ['最新医療機器導入', '全額返金保証制度'],
+                    priceMain: '医療痩身コース',
+                    priceValue: '月々9,780円',
                     priceDetail: {
                         '料金': '通常価格45,591円<br>79%OFF 月々9,780円',
                         '施術機械': '脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波',
