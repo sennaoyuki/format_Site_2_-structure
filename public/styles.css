@@ -2,6 +2,16 @@
 
 /* Vercel deployment trigger - 2025/01/22 17:47 */
 
+/* グローバル幅制限 - PC表示でも768pxに制限 */
+html {
+    overflow-x: hidden;
+}
+
+body {
+    overflow-x: hidden;
+    max-width: 100vw;
+}
+
 /* Brand section shop name styles */
 .detail-item .brand-section .shop-name {
     color: #4a90e2;
@@ -1130,30 +1140,32 @@ body {
 
 /* PC表示でも全体のレイアウトを768pxに制限 */
 body > .container {
-    max-width: 768px;
+    max-width: 768px !important;
+    width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
 }
 
 /* 大画面でのセンタリング */
 @media (min-width: 769px) {
-    body {
-        display: flex;
-        justify-content: center;
-        min-height: 100vh;
+    body > .container {
+        width: 768px !important;
+        max-width: 768px !important;
+        margin: 0 auto;
     }
     
-    body > .container {
-        width: 100%;
-        max-width: 768px;
+    /* すべての子要素も最大幅を制限 */
+    body > .container * {
+        max-width: 100%;
     }
 }
 
 /* コンテナ */
 .container {
-    max-width: 768px;
+    max-width: 768px !important;
     margin: 0 auto;
     padding: 0 20px;
+    box-sizing: border-box;
 }
 
 @media (max-width: 768px) {
