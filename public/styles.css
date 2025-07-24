@@ -1128,9 +1128,30 @@ body {
     font-size: 14px;
 }
 
+/* PC表示でも全体のレイアウトを768pxに制限 */
+body > .container {
+    max-width: 768px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+/* 大画面でのセンタリング */
+@media (min-width: 769px) {
+    body {
+        display: flex;
+        justify-content: center;
+        min-height: 100vh;
+    }
+    
+    body > .container {
+        width: 100%;
+        max-width: 768px;
+    }
+}
+
 /* コンテナ */
 .container {
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -1156,7 +1177,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 0 20px;
 }
@@ -1769,7 +1790,7 @@ section.clinic-rankings .ranking-header-banner {
     align-items: center;
     justify-content: center;
     gap: 0px;
-    background: linear-gradient(135deg, #ff95ad 0%, #f0a0a5 100%);
+    background: linear-gradient(135deg, #ff95ad 0%, #ff95ad 100%);
     color: white;
     padding: 15px 25px;
     border-radius: 4px;
@@ -2397,7 +2418,7 @@ section.clinic-rankings .ranking-header-banner {
 
 /* ===== 案件詳細セクション ===== */
 .clinic-details-section {
-    max-width: 1200px;
+    max-width: 768px;
     margin: 60px auto;
     padding: 0 20px;
     position: relative;
@@ -2690,7 +2711,7 @@ section.clinic-rankings .ranking-header-banner {
 
 .feature-tag {
     display: inline-block;
-    background: #E8E7F6;
+    background: linear-gradient(90deg, #e6e8f5 0%, #faeaf1 100%);
     color: #4C4C4C;
     padding: 8px 16px;
     border-radius: 20px;
@@ -3183,7 +3204,7 @@ section.clinic-rankings .ranking-header-banner {
 
 .footer_contents {
     width: 100%;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 0 40px 30px 40px;
     /* overflow: hidden; */
@@ -5318,7 +5339,7 @@ section.clinic-rankings .ranking-header-banner {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 0 20px;
 }
