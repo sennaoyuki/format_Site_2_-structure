@@ -2196,7 +2196,7 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 .js-cbn-table table tbody td:nth-of-type(2) .ranking_evaluation {
-    font-size: 13px;
+    font-size: clamp(10px, 2.3vw, 15px);
 }
 
 .js-cbn-table table thead th:last-child,

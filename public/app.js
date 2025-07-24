@@ -345,6 +345,14 @@ class RankingApp {
             this.changeRegion(newRegionId);
         });
 
+        // クリニック名検索機能
+        const searchInput = document.getElementById('sidebar-clinic-search');
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                this.handleClinicSearch(e.target.value);
+            });
+        }
+
         // ハンバーガーメニューのイベント
         if (this.displayManager.hamburgerMenu) {
             this.displayManager.hamburgerMenu.addEventListener('click', () => {
@@ -389,6 +397,52 @@ class RankingApp {
 
         // ページコンテンツの更新
         this.updatePageContent(regionId);
+    }
+
+    // クリニック検索処理
+    handleClinicSearch(searchTerm) {
+        const rankingItems = document.querySelectorAll('.ranking-item');
+        const detailItems = document.querySelectorAll('.detail-item');
+        const searchTermLower = searchTerm.toLowerCase();
+
+        // ランキングセクションの検索
+        rankingItems.forEach(item => {
+            const clinicName = item.querySelector('.clinic-logo-section')?.textContent || '';
+            if (clinicName.toLowerCase().includes(searchTermLower) || searchTerm === '') {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // 詳細セクションの検索
+        detailItems.forEach(item => {
+            const clinicName = item.querySelector('.clinic-name')?.textContent || '';
+            if (clinicName.toLowerCase().includes(searchTermLower) || searchTerm === '') {
+                item.style.display = '';
+            } else {
+                item.style.display = 'none';
+            }
+        });
+
+        // 検索結果が0件の場合のメッセージ表示
+        const visibleRankingItems = Array.from(rankingItems).filter(item => item.style.display !== 'none');
+        const rankingContainer = document.getElementById('ranking-list');
+        
+        if (visibleRankingItems.length === 0 && searchTerm !== '') {
+            if (!document.getElementById('no-search-results')) {
+                const noResultsMsg = document.createElement('div');
+                noResultsMsg.id = 'no-search-results';
+                noResultsMsg.className = 'empty-state';
+                noResultsMsg.innerHTML = '<p>検索結果が見つかりませんでした</p>';
+                rankingContainer.appendChild(noResultsMsg);
+            }
+        } else {
+            const noResultsMsg = document.getElementById('no-search-results');
+            if (noResultsMsg) {
+                noResultsMsg.remove();
+            }
+        }
     }
 
     updatePageContent(regionId) {
