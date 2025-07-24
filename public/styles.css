@@ -160,6 +160,30 @@ section, main, header, footer, nav, aside, article {
     margin-bottom: 20px;
 }
 
+.sidebar-search-button {
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #e9ecef;
+}
+
+.sidebar-search-link {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    background-color: #ff6b35;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.sidebar-search-link:hover {
+    background-color: #e5522a;
+    transform: translateY(-1px);
+}
+
 .sidebar-filter-label {
     display: block;
     margin-bottom: 8px;
