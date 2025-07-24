@@ -138,8 +138,6 @@ class SearchResultsApp {
             // 仮の対応部位データ（実際のデータがない場合のデモ用）
             clinic.bodyParts = this.getBodyPartsForClinic(clinicName);
             
-            // デバッグ: 各クリニックのデータを確認
-            console.log(`${clinicName}: 店舗数=${clinic.storeCount}, 地域=${Array.from(clinic.regions).join(',')}`);
         });
     }
     
@@ -179,17 +177,17 @@ class SearchResultsApp {
     }
 
     getBodyPartsForClinic(clinicName) {
-        // 仮のデータ（実際のデータがない場合のデモ用）
+        // 各クリニックの実際の対応部位情報（ウェブ調査結果より）
         const bodyPartsMap = {
-            'DIO': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh'],
-            'ディオクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh'],
-            'エミナルクリニック': ['face', 'stomach', 'thigh'],
-            'ウララクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'],
-            'リエートクリニック': ['face', 'stomach', 'thigh'],
-            '湘南美容クリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other']
+            'DIO': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'],
+            'ディオクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'],
+            'エミナルクリニック': ['stomach', 'thigh', 'upperarm', 'other'], // 医療ハイフ、EMS、脂肪冷却で全身対応
+            'ウララクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'], // 脂肪冷却、脂肪溶解注射で全身対応
+            'リエートクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'], // 医療HIFU、脂肪冷却、脂肪溶解注射で全身対応
+            '湘南美容クリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'] // 脂肪溶解注射で全身対応
         };
         
-        return bodyPartsMap[clinicName] || ['face', 'stomach'];
+        return bodyPartsMap[clinicName] || ['stomach', 'thigh']; // デフォルトは腹部と太もも
     }
 
     setupEventListeners() {
@@ -366,15 +364,20 @@ class SearchResultsApp {
         resultsGrid.innerHTML = this.filteredResults.map(clinic => {
             const bodyPartsText = this.getBodyPartsText(clinic.bodyParts);
             const regionsText = Array.from(clinic.regions).map(r => this.getRegionText(r)).join('、');
+            const clinicFeatures = this.getClinicFeatures(clinic.clinic_name);
+            const logoColor = this.getClinicLogoColor(clinic.clinic_name);
             
             return `
                 <div class="result-card">
                     <div class="result-card-header">
-                        <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666;">${clinic.clinic_name.substring(0, 2)}</div>
+                        <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: ${logoColor}; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 24px;">${clinic.clinic_name.substring(0, 2)}</div>
                         <div class="clinic-info">
                             <h3 class="clinic-name">${clinic.clinic_name}</h3>
-                            <p class="clinic-region">${regionsText}</p>
+                            <p class="clinic-region">${regionsText || '全国'}</p>
                         </div>
+                    </div>
+                    <div class="result-card-features">
+                        <p class="clinic-features">${clinicFeatures}</p>
                     </div>
                     <div class="result-card-details">
                         <div class="detail-row">
@@ -384,6 +387,10 @@ class SearchResultsApp {
                         <div class="detail-row">
                             <span class="detail-label">店舗数</span>
                             <span class="detail-value">${clinic.storeCount}店舗</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">主な施術</span>
+                            <span class="detail-value">${this.getMainTreatments(clinic.clinic_name)}</span>
                         </div>
                     </div>
                     <div class="result-card-actions">
@@ -396,6 +403,42 @@ class SearchResultsApp {
         
         // 検索条件のサマリーを更新
         this.updateSearchSummary();
+    }
+    
+    getClinicFeatures(clinicName) {
+        const features = {
+            'ディオクリニック': '419万通りのメニューから選べるオーダーメイド医療ダイエット',
+            'エミナルクリニック': '注射が苦手な方も安心！医療機器メインの痩身プログラム',
+            'ウララクリニック': '次世代医療テクノロジーで健康的に美しく痩せる',
+            'リエートクリニック': '非侵襲的な施術でダウンタイムなし！即日常生活に戻れます',
+            '湘南美容クリニック': '豊富な脂肪溶解注射メニューで理想のボディデザインを実現'
+        };
+        
+        return features[clinicName] || '医療ダイエット専門クリニック';
+    }
+    
+    getClinicLogoColor(clinicName) {
+        const colors = {
+            'ディオクリニック': '#FF6B35',
+            'エミナルクリニック': '#E91E63',
+            'ウララクリニック': '#9C27B0',
+            'リエートクリニック': '#3F51B5',
+            '湘南美容クリニック': '#00BCD4'
+        };
+        
+        return colors[clinicName] || '#757575';
+    }
+    
+    getMainTreatments(clinicName) {
+        const treatments = {
+            'ディオクリニック': '脂肪冷却・医療HIFU',
+            'エミナルクリニック': '医療ハイフ・医療EMS・脂肪冷却',
+            'ウララクリニック': '脂肪冷却・脂肪溶解注射',
+            'リエートクリニック': '脂肪冷却・医療HIFU・StimSure',
+            '湘南美容クリニック': '脂肪溶解注射・小顔注射'
+        };
+        
+        return treatments[clinicName] || '医療ダイエット';
     }
 
     getBodyPartsText(bodyParts) {

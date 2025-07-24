@@ -28,14 +28,14 @@ async function testSearchResults() {
         // フィルターテスト
         console.log('\n📍 フィルターを適用...');
         
-        // 対応部位: 顔を選択
-        await page.click('input[value="face"]');
+        // 対応部位: お腹を選択（全クリニックが対応）
+        await page.click('input[value="stomach"]');
         
-        // 地域: 東京を選択
+        // 地域: 東京を選択（複数のクリニックが対応）
         await page.click('input[value="tokyo"]');
         
-        // 店舗数: 10〜20店舗を選択
-        await page.click('input[value="large"]');
+        // 店舗数: それ以上を選択（20店舗以上）
+        await page.click('input[value="xlarge"]');
         
         // フィルターを適用
         await page.click('#apply-filters');
