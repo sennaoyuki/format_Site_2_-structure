@@ -1853,4 +1853,18 @@ document.addEventListener('DOMContentLoaded', function() {
     const app = new RankingApp();
     window.app = app; // グローバルアクセス用
     app.init();
+    
+    // フッターのページリンクにパラメータ引き継ぎ機能を追加
+    document.querySelectorAll('.footer-page-link').forEach(link => {
+        link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const currentParams = new URLSearchParams(window.location.search);
+            const regionId = currentParams.get('region_id');
+            if (regionId) {
+                window.location.href = this.href + '?region_id=' + regionId;
+            } else {
+                window.location.href = this.href;
+            }
+        });
+    });
 });
