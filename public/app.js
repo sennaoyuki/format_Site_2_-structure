@@ -313,8 +313,11 @@ class DataManager {
         this.storeViews = [];
         this.campaigns = [];
         // Handle subdirectory paths
-        const basePath = window.MEDICAL_DIET_BASE_PATH || '';
-        this.dataPath = basePath ? '../data/' : './data/';
+        if (window.SITE_CONFIG) {
+            this.dataPath = window.SITE_CONFIG.dataPath + '/';
+        } else {
+            this.dataPath = './data/';
+        }
     }
 
     async init() {
@@ -2010,7 +2013,7 @@ class RankingApp {
             html += `
                 <div class='shop'>
                     <div class='shop-image'>
-                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
+                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : ''}/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -2032,7 +2035,7 @@ class RankingApp {
             html += `
                 <div class='shop hidden-content hidden'>
                     <div class='shop-image'>
-                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
+                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : ''}/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -2196,8 +2199,8 @@ class RankingApp {
         };
         
         const extension = imageExtensions[clinicName] || 'jpg';
-        const basePath = window.MEDICAL_DIET_BASE_PATH ? '..' : '';
-        const storeImagePath = `${basePath}/images/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
+        const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '/images';
+        const storeImagePath = `${imagesPath}/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
         
         return storeImagePath;
     }

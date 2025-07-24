@@ -24,16 +24,16 @@ class SearchResultsApp {
     async loadData() {
         try {
             // Handle subdirectory paths
-            const basePath = window.MEDICAL_DIET_BASE_PATH ? '..' : '.';
+            const dataPath = window.SITE_CONFIG ? window.SITE_CONFIG.dataPath : './data';
             
             // クリニックデータの読み込み
-            const clinicsResponse = await fetch(`${basePath}/data/出しわけSS - items.csv`);
+            const clinicsResponse = await fetch(`${dataPath}/出しわけSS - items.csv`);
             const clinicsText = await clinicsResponse.text();
             this.clinicsData = this.parseCSV(clinicsText);
             console.log('クリニックデータ読み込み完了:', this.clinicsData.length, '件');
             
             // 店舗データの読み込み
-            const storesResponse = await fetch(`${basePath}/data/出しわけSS - stores.csv`);
+            const storesResponse = await fetch(`${dataPath}/出しわけSS - stores.csv`);
             const storesText = await storesResponse.text();
             this.storesData = this.parseCSV(storesText);
             console.log('店舗データ読み込み完了:', this.storesData.length, '件');
@@ -383,7 +383,7 @@ class SearchResultsApp {
             return `
                 <div class="result-card">
                     <div class="result-card-header">
-                        <img src="${window.MEDICAL_DIET_BASE_PATH ? '..' : '.'}/images/clinics/${clinic.id}/${clinic.id}-logo.jpg" alt="${clinic.clinic_name}" class="clinic-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <img src="${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '.'}/images/clinics/${clinic.id}/${clinic.id}-logo.jpg" alt="${clinic.clinic_name}" class="clinic-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
                         <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: ${logoColor}; border-radius: 8px; display: none; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 24px;">${clinic.clinic_name.substring(0, 2)}</div>
                         <div class="clinic-info">
                             <h3 class="clinic-name">${clinic.clinic_name}</h3>
