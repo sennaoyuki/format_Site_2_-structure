@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>地域別クリニックランキング | 優良医療機関検索</title>
+    <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../styles.css?v=2025072201">
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="site-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="/medical-diet001/" class="logo-link">
+                        <div class="logo-main">
+                            <span class="logo-icon"><i class="fas fa-stethoscope"></i></span>
+                            <h1 class="site-logo">医療ダイエット比較.com</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="header-nav">
+                    <button class="hamburger-menu" id="hamburger-menu" aria-label="メニュー">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- メインビジュアル -->
+        <section class="hero-section">
+            <div class="hero-image-wrapper">
+                <img src="../images/MV2.jpg" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image">
+                <div id="mv-region-name" style="position:absolute;top: 6%;left: 1%;width: clamp(60px, 15vw, 115px);text-align: center;color: #808080;font-size: clamp(14px, 3.5vw, 27px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
+                <div style="position:absolute;top: 1.88%;left: 100.5%;width: clamp(60px, 15vw, 115px);text-align: center;color: #838383;font-size: clamp(12px, 2vw, 15px);font-weight: 100;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">[PR]</div>
+            </div>
+        </section>
+
+        <main>
+            <!-- ランキング表示セクション -->
+            <section class="clinic-rankings">
+                <h2 class="section-title">
+                    <span id="selected-region-name">東京</span>の医療ダイエットクリニックランキング
+                </h2>
+                <div class="ranking-list" id="ranking-container">
+                    <!-- ランキングアイテムはJavaScriptで動的に生成 -->
+                </div>
+            </section>
+
+            <!-- 比較テーブルエリア -->
+            <div id="comparison-section" style="display: none;">
+                <div style="max-width: 1200px; margin: 0 auto; padding: 0 20px;">
+                    <h2 class="section-title">クリニック比較表</h2>
+                    <div id="comparison-container">
+                        <!-- 比較テーブルはJavaScriptで動的に生成 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 詳細セクション -->
+            <section class="clinic-details-section">
+                <h2 class="section-title">各クリニックの詳細紹介</h2>
+                <div id="clinic-details-container">
+                    <!-- クリニック詳細はJavaScriptで動的に生成 -->
+                </div>
+            </section>
+
+            <!-- 横比較バナー（PC専用） -->
+            <section class="clinic-banner">
+                <div class="banner-wrapper">
+                    <img src="../images/詳細-下部バナー.jpg" alt="クリニック比較バナー" class="banner-image">
+                </div>
+            </section>
+        </main>
+
+        <!-- サイドバー（ハンバーガーメニュー） -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3 class="sidebar-title">絞り込み検索</h3>
+                <button class="sidebar-close" id="sidebar-close" aria-label="メニューを閉じる">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="sidebar-filters">
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-region-filter" class="sidebar-filter-label">地域選択</label>
+                    <select id="sidebar-region-filter" class="sidebar-select">
+                        <option value="013">東京</option>
+                        <option value="011">北海道</option>
+                        <option value="004">宮城</option>
+                        <option value="008">埼玉</option>
+                        <option value="012">神奈川</option>
+                        <option value="009">千葉</option>
+                        <option value="017">愛知</option>
+                        <option value="020">京都</option>
+                        <option value="021">大阪</option>
+                        <option value="022">兵庫</option>
+                        <option value="028">広島</option>
+                        <option value="033">福岡</option>
+                    </select>
+                </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-clinic-filter" class="sidebar-filter-label">クリニック名</label>
+                    <select id="sidebar-clinic-filter" class="sidebar-select">
+                        <option value="">すべて</option>
+                        <option value="ディオクリニック">ディオクリニック</option>
+                        <option value="エミナルクリニック">エミナルクリニック</option>
+                        <option value="ウララクリニック">ウララクリニック</option>
+                        <option value="リエートクリニック">リエートクリニック</option>
+                        <option value="湘南美容クリニック">湘南美容クリニック</option>
+                    </select>
+                </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-specialty-filter" class="sidebar-filter-label">対応部位</label>
+                    <select id="sidebar-specialty-filter" class="sidebar-select">
+                        <option value="">すべての部位</option>
+                        <option value="face">顔</option>
+                        <option value="upperarm">二の腕</option>
+                        <option value="stomach">お腹</option>
+                        <option value="buttocks">お尻</option>
+                        <option value="thigh">太もも</option>
+                        <option value="other">その他</option>
+                    </select>
+                </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-hours-filter" class="sidebar-filter-label">店舗数</label>
+                    <select id="sidebar-hours-filter" class="sidebar-select">
+                        <option value="">すべて</option>
+                        <option value="0-5">0〜5店舗</option>
+                        <option value="6-10">6〜10店舗</option>
+                        <option value="10-20">10〜20店舗</option>
+                        <option value="20+">それ以上</option>
+                    </select>
+                </div>
+                <button type="button" class="sidebar-search-button" id="sidebar-search-button">
+                    <i class="fas fa-search"></i> 検索
+                </button>
+            </form>
+        </div>
+
+        <!-- フッター -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon"><i class="fas fa-stethoscope"></i></span>
+                    <span class="footer-site-name">医療ダイエット比較.com</span>
+                </div>
+                <nav class="footer-nav">
+                    <ul class="footer-links">
+                        <li><a href="#about">サイトについて</a></li>
+                        <li><a href="#privacy">プライバシーポリシー</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-info">
+                    <p>&copy; 2025 医療ダイエット比較.com All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>
+        // Adjust base path for subdirectory
+        window.MEDICAL_DIET_BASE_PATH = '/medical-diet001';
+    </script>
+    <script src="../app.js"></script>
+</body>
+</html>

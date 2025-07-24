@@ -312,7 +312,9 @@ class DataManager {
         this.rankings = [];
         this.storeViews = [];
         this.campaigns = [];
-        this.dataPath = './data/';
+        // Handle subdirectory paths
+        const basePath = window.MEDICAL_DIET_BASE_PATH || '';
+        this.dataPath = basePath ? '../data/' : './data/';
     }
 
     async init() {
@@ -2194,7 +2196,8 @@ class RankingApp {
         };
         
         const extension = imageExtensions[clinicName] || 'jpg';
-        const storeImagePath = `/images/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
+        const basePath = window.MEDICAL_DIET_BASE_PATH ? '..' : '';
+        const storeImagePath = `${basePath}/images/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
         
         return storeImagePath;
     }
