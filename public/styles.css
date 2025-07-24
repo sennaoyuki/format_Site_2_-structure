@@ -1153,11 +1153,47 @@ body > .container {
         max-width: 768px !important;
         margin: 0 auto;
     }
-    
-    /* すべての子要素も最大幅を制限 */
-    body > .container * {
-        max-width: 100%;
+}
+
+/* セクションの幅をリセット - 親コンテナの幅に従う */
+body > .container > section,
+body > .container > main,
+body > .container > header,
+body > .container > footer {
+    max-width: 100% !important;
+    width: 100% !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    box-sizing: border-box;
+}
+
+/* PCで.containerのpaddingを無効化してセクションを端まで広げる */
+@media (min-width: 769px) {
+    body > .container {
+        padding: 0 !important;
     }
+    
+    /* 各セクション内のコンテンツに個別のpaddingを設定 */
+    .site-header .header-content,
+    .hero-section > *,
+    .tips-container {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    
+    /* ランキングセクションの内部要素にパディング */
+    .clinic-rankings .ranking-header-banner,
+    .clinic-rankings .ranking-container {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+/* tips-containerの特別なスタイル */
+.tips-container {
+    margin: 20px 0;
+    padding: 0 10px;
+    position: relative;
 }
 
 /* コンテナ */
@@ -1424,7 +1460,7 @@ section {
 
 /* ===== ランキングセクション ===== */
 .clinic-rankings {
-    padding: 15px 10px;
+    padding: 15px 0;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
