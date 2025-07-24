@@ -352,6 +352,22 @@ class RankingApp {
                 this.handleClinicSearch(e.target.value);
             });
         }
+        
+        // 対応部位フィルター
+        const specialtyFilter = document.getElementById('sidebar-specialty-filter');
+        if (specialtyFilter) {
+            specialtyFilter.addEventListener('change', () => {
+                this.handleClinicSearch(this.displayManager.searchInput?.value || '');
+            });
+        }
+        
+        // 店舗数フィルター
+        const hoursFilter = document.getElementById('sidebar-hours-filter');
+        if (hoursFilter) {
+            hoursFilter.addEventListener('change', () => {
+                this.handleClinicSearch(this.displayManager.searchInput?.value || '');
+            });
+        }
 
         // ハンバーガーメニューのイベント
         console.log('ハンバーガーメニュー要素:', this.displayManager.hamburgerMenu);
@@ -415,6 +431,10 @@ class RankingApp {
     // クリニック検索処理
     handleClinicSearch(searchTerm) {
         const searchTermLower = searchTerm.toLowerCase().trim();
+        
+        // フィルター条件を取得
+        const specialtyFilter = document.getElementById('sidebar-specialty-filter')?.value || '';
+        const hoursFilter = document.getElementById('sidebar-hours-filter')?.value || '';
 
         // ランキングカードの検索
         const rankingItems = document.querySelectorAll('.ranking-item');
@@ -424,7 +444,15 @@ class RankingApp {
             const clinicNameElement = item.querySelector('.clinic-logo-section');
             const clinicName = clinicNameElement ? clinicNameElement.textContent.trim() : '';
             
-            if (searchTermLower === '' || clinicName.toLowerCase().includes(searchTermLower)) {
+            // クリニック名の条件
+            const nameMatch = searchTermLower === '' || clinicName.toLowerCase().includes(searchTermLower);
+            
+            // フィルター条件の判定（現時点ではクリニック名のみ）
+            // TODO: 実際のクリニックデータに対応部位と店舗数の情報を追加する必要がある
+            const specialtyMatch = specialtyFilter === '';
+            const hoursMatch = hoursFilter === '';
+            
+            if (nameMatch && specialtyMatch && hoursMatch) {
                 item.style.display = '';
                 visibleRankingCount++;
             } else {
