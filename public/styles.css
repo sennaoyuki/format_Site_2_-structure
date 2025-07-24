@@ -15,6 +15,33 @@ html {
 body {
     overflow-x: hidden;
     max-width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* メインコンテナ - PC表示でも最大768pxに制限 */
+body > * {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
+/* 全てのセクションを768px内に収める */
+section, main, header, footer, nav, aside, article {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 全幅背景を持つセクションの内部コンテンツを制限 */
+.full-width-section > *,
+[class*="banner"] > *,
+[class*="hero"] > * {
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Brand section shop name styles */
@@ -1804,6 +1831,9 @@ section.clinic-rankings .ranking-header-banner {
     display: flex;
     align-items: center;
     justify-content: center;
+    max-width: 768px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .clinic-banner img {
@@ -2292,7 +2322,8 @@ section.clinic-rankings .ranking-header-banner {
 
 /* 比較表コンテナの最小幅 */
 .js-cbn-table table {
-    min-width: 800px;
+    width: 100%;
+    max-width: 768px;
 }
 
 /* モバイル対応 - 横スクロール排除 */
@@ -3416,7 +3447,8 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     .comparison-table {
-        min-width: 700px;
+        width: 100%;
+        max-width: 768px;
     }
     
     /* ポイントセクションのモバイル対応 */
