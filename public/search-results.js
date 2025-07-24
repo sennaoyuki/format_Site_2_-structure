@@ -380,7 +380,8 @@ class SearchResultsApp {
             return `
                 <div class="result-card">
                     <div class="result-card-header">
-                        <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: ${logoColor}; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 24px;">${clinic.clinic_name.substring(0, 2)}</div>
+                        <img src="images/clinics/${clinic.id}/${clinic.id}-logo.jpg" alt="${clinic.clinic_name}" class="clinic-logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';" />
+                        <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: ${logoColor}; border-radius: 8px; display: none; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 24px;">${clinic.clinic_name.substring(0, 2)}</div>
                         <div class="clinic-info">
                             <h3 class="clinic-name">${clinic.clinic_name}</h3>
                             <p class="clinic-region">${regionsText || '全国'}</p>
