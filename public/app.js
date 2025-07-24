@@ -209,7 +209,7 @@ class DisplayManager {
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${rankNum}位バナー">
                     </div>
-                    <div class="push-message" style="padding: 0px; text-align: center; font-size: 10px; line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0; height: 15%;">
+                    <div class="push-message" style="padding: 0px; text-align: center; font-size: clamp(10px, 2.3vw, 15px); line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0; height: 15%;">
                         ${pushMessage}
                     </div>
                     <p class="btn btn_second_primary">

@@ -47,7 +47,7 @@ section, main, header, footer, nav, aside, article {
 /* Brand section shop name styles */
 .detail-item .brand-section .shop-name {
     color: #4a90e2;
-    font-size: 0.8rem;
+    font-size: clamp(12px, 2.3vw, 15px);
     font-weight: 700;
 }
 
@@ -890,8 +890,8 @@ section, main, header, footer, nav, aside, article {
 
 .info_logo {
     flex-shrink: 0;
-    width: 80px;
-    height: 40px;
+    width: clamp(40px, 25vw, 150px);
+    height: clamp(40px, 25vw, 150px);
     background-color: #fff;
     border: 1px solid #e0e0e0;
     border-radius: 8px;
@@ -1100,8 +1100,8 @@ section, main, header, footer, nav, aside, article {
     }
 
     .info_logo {
-        width: 75px;
-        height: 70px;
+        width: clamp(40px, 25vw, 150px);
+        height: clamp(40px, 25vw, 150px);
         padding: 6px;
     }
 
@@ -1201,9 +1201,7 @@ body > .container {
     }
     
     .ranking-item {
-        width: calc((100% - 40px) / 5) !important;
-        max-width: 140px !important;
-        min-width: 120px !important;
+        width: calc((100% - 40px) / 3) !important;
         flex: 0 1 auto;
     }
 }
@@ -1562,6 +1560,7 @@ section.clinic-rankings .ranking-header-banner {
     background: transparent;
     text-align: center;
     overflow: hidden;
+    color: white;
 }
 
 
@@ -1663,7 +1662,7 @@ section.clinic-rankings .ranking-header-banner {
 .clinic-card {
     margin: 3%;
     padding: 38px 4px 8px;
-    border-radius: 8px;
+    border-radius: 15px;
     border-width: 1px;
     border-style: solid;
     box-sizing: border-box;
@@ -1733,8 +1732,7 @@ section.clinic-rankings .ranking-header-banner {
 .stars {
     justify-content: center;
     gap: 5px;
-    margin-bottom: 10px;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 .rank-1 .stars {
@@ -1834,7 +1832,6 @@ section.clinic-rankings .ranking-header-banner {
 /* クリニックバナー */
 .clinic-banner {
     margin-bottom: 20px;
-    min-height: 140px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1845,8 +1842,6 @@ section.clinic-rankings .ranking-header-banner {
 
 .clinic-banner img {
     width: 100%;
-    max-width: 300px;
-    height: 140px;
     object-fit: cover;
     border-radius: 12px;
     box-shadow: 0 3px 15px rgba(0,0,0,0.1);
@@ -1963,7 +1958,7 @@ section.clinic-rankings .ranking-header-banner {
 /* ===== 比較表セクション ===== */
 .comparison-section {
     padding: 30px 10px;
-    background: #F1F1F1;
+    background: white;
     /* overflow: hidden; */
     /* margin: 0px 0; */
     border-top: 1px solid #E0E0E0;
@@ -2138,7 +2133,7 @@ section.clinic-rankings .ranking-header-banner {
     border-bottom: 1px solid #E0E0E0;
     border-top: none;
     border-left: none;
-    font-size: 10px;
+    font-size: clamp(10px, 2.3vw, 15px);
 }
 
 .js-cbn-table table tbody td:nth-of-type(1) {
@@ -2555,7 +2550,6 @@ section.clinic-rankings .ranking-header-banner {
 .clinic-details-section {
     max-width: 768px;
     margin: 60px auto;
-    padding: 0 20px;
     position: relative;
 }
 
@@ -2566,7 +2560,7 @@ section.clinic-rankings .ranking-header-banner {
 
 /* 詳細バナー画像 */
 .details-banner-image {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     display: block;
     margin: 0 auto;
@@ -2691,7 +2685,7 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0px 0 15px;
     width: 100%;
     height: auto;
-    padding: 2%;
+    padding: 1% 0 1%;
 }
 
 .ranking_box_in {
@@ -4894,6 +4888,7 @@ section.clinic-rankings .ranking-header-banner {
 @media (min-width: 768px) {
     .clinic-rankings {
         padding: 20px 15px;
+        background-color: white;
     }
     
     .ranking-item {
@@ -5326,7 +5321,7 @@ section.clinic-rankings .ranking-header-banner {
 
 .detail-item .brand-section .shop-address {
     margin-top: 2px;
-    font-size: 9px;
+    font-size: clamp(9px , 2.1vw, 12px);
     color: #5c5c5c;
 }
 
