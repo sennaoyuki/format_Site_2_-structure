@@ -89,6 +89,10 @@ class DisplayManager {
 
     // 地域セレクターを更新し、選択された地域を設定
     updateRegionSelector(regions, selectedRegionId) {
+        if (!this.regionSelect) {
+            console.warn('Region selector not found');
+            return;
+        }
         this.regionSelect.innerHTML = '';
         regions.forEach(region => {
             const option = document.createElement('option');
