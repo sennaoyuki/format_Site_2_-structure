@@ -2,5 +2,7 @@
   "outputDirectory": "public",
   "buildCommand": "",
   "installCommand": "",
-  "framework": null
+  "framework": null,
+  "functions": {},
+  "rewrites": []
 }
