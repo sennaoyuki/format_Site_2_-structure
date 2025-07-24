@@ -2,6 +2,11 @@
 
 /* Vercel deployment trigger - 2025/01/22 17:47 */
 
+/* グローバルリセット */
+*, *::before, *::after {
+    box-sizing: border-box !important;
+}
+
 /* グローバル幅制限 - PC表示でも768pxに制限 */
 html {
     overflow-x: hidden;
@@ -1144,6 +1149,8 @@ body > .container {
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
+    /* デバッグ用: 確実に768pxに制限 */
+    overflow-x: hidden;
 }
 
 /* 大画面でのセンタリング */
@@ -1151,7 +1158,9 @@ body > .container {
     body > .container {
         width: 768px !important;
         max-width: 768px !important;
+        min-width: 768px !important;
         margin: 0 auto;
+        box-sizing: border-box !important;
     }
 }
 
@@ -1159,7 +1168,8 @@ body > .container {
 body > .container > section,
 body > .container > main,
 body > .container > header,
-body > .container > footer {
+body > .container > footer,
+body > .container main section {
     max-width: 100% !important;
     width: 100% !important;
     margin-left: 0 !important;
