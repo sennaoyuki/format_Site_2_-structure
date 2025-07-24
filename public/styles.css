@@ -1158,7 +1158,6 @@ body > .container {
     body > .container {
         width: 768px !important;
         max-width: 768px !important;
-        min-width: 768px !important;
         margin: 0 auto;
         box-sizing: border-box !important;
     }
@@ -1166,15 +1165,19 @@ body > .container {
     /* PC表示時はランキングを横並びで全表示 */
     .ranking-container {
         overflow-x: visible !important;
-        flex-wrap: wrap !important;
-        justify-content: space-between;
-        gap: 15px;
+        flex-wrap: nowrap !important;
+        justify-content: space-evenly;
+        gap: 8px;
+        padding: 20px 5px !important;
+        max-width: 768px;
+        margin: 0 auto;
     }
     
     .ranking-item {
-        width: calc(20% - 12px) !important;
-        max-width: none !important;
-        min-width: 140px !important;
+        width: calc((100% - 40px) / 5) !important;
+        max-width: 140px !important;
+        min-width: 120px !important;
+        flex: 0 1 auto;
     }
 }
 
@@ -1198,21 +1201,48 @@ body > .container main section {
     }
     
     /* 各セクション内のコンテンツに個別のpaddingを設定 */
-    .site-header .header-content,
-    .hero-section > *,
+    .site-header .header-content {
+        padding-left: 20px;
+        padding-right: 20px;
+        max-width: 768px;
+        margin: 0 auto;
+    }
+    
+    .hero-section > * {
+        max-width: 100%;
+    }
+    
     .tips-container {
         padding-left: 20px;
         padding-right: 20px;
+        max-width: 768px;
+        margin: 20px auto;
     }
     
-    /* ランキングセクションの内部要素にパディング */
+    /* ランキングセクションの内部要素を768px内に収める */
+    .clinic-rankings {
+        width: 100%;
+        max-width: 768px;
+        margin: 0 auto;
+    }
+    
     .clinic-rankings .ranking-header-banner {
-        padding-left: 10px;
-        padding-right: 10px;
+        padding: 0 10px;
+        max-width: 100%;
     }
     
-    .clinic-rankings .ranking-container {
-        padding: 20px 10px;
+    /* 比較テーブルを768px内に収める */
+    .js-cbn-table {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 0 10px;
+    }
+    
+    /* 詳細セクションも768px内に収める */
+    .detail-item {
+        max-width: 768px;
+        margin: 0 auto;
+        padding: 0 10px;
     }
 }
 
