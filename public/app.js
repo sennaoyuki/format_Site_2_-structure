@@ -1943,13 +1943,15 @@ function toggleStores(button) {
 }
 
 // アプリケーションの起動（DOM読み込み完了後に実行）
+// 注: この部分は削除して、下の初期化コードに統合します
+/*
 document.addEventListener('DOMContentLoaded', () => {
     const app = new RankingApp();
     app.init();
     
     // Smooth scrolling for table of contents links
     // Temporarily disabled for debugging scroll issues
-    /*
+    
     document.querySelectorAll('.toc-link').forEach(link => {
         link.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1985,7 +1987,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }, true);
     */
-});
+// });
 
 // アプリケーションの初期化
 document.addEventListener('DOMContentLoaded', function() {
