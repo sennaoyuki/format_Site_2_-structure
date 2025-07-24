@@ -81,11 +81,14 @@ section, main, header, footer, nav, aside, article {
     border: none;
     cursor: pointer;
     padding: 10px;
+    right: 10%;
     display: flex;
     flex-direction: column;
+    position: absolute;
+    right: 2%;
     justify-content: space-around;
-    width: 40px;
-    height: 40px;
+    width: clamp(30px, 6vw, 300px);
+    height: clamp(30px, 6vw, 300px);
 }
 
 .hamburger-line {
@@ -3303,6 +3306,15 @@ section.clinic-rankings .ranking-header-banner {
     text-decoration: underline;
     font-size: 14px;
     line-height: 1.5;
+    position: relative;
+    z-index: 10;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.medical-columns-section .contact-link:hover {
+    color: #4a9e9d;
+    text-decoration: underline;
 }
 
 /* Fee list */
