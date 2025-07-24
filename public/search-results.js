@@ -112,11 +112,21 @@ class SearchResultsApp {
             storeCountMap[clinicName]++;
         });
         
+        // クリニック名のマッピング（CSVの不一致を解決）
+        const clinicNameMapping = {
+            'ディオクリニック': 'DIO',
+            'エミナルクリニック': 'エミナルクリニック',
+            'ウララクリニック': 'ウララクリニック', 
+            'リエートクリニック': 'リエートクリニック',
+            '湘南美容クリニック': '湘南美容クリニック'
+        };
+        
         // クリニックデータに店舗数を追加
         this.clinicsData.forEach(clinic => {
             // clinic_nameを正しく設定
             const clinicName = clinic.clinic_name || 'Unknown';
-            clinic.storeCount = storeCountMap[clinicName] || 0;
+            const mappedName = clinicNameMapping[clinicName] || clinicName;
+            clinic.storeCount = storeCountMap[mappedName] || 0;
             
             // IDを設定（codeフィールドがあればそれを使用）
             clinic.id = clinic.code || clinic.clinic_id || clinicName.toLowerCase();
@@ -127,7 +137,7 @@ class SearchResultsApp {
             // 店舗がある地域を収集
             clinic.regions = new Set();
             this.storesData.forEach(store => {
-                if (store.clinic_name === clinicName) {
+                if (store.clinic_name === mappedName) {
                     const region = this.getRegionFromAddress(store.adress);
                     if (region) {
                         clinic.regions.add(region);
