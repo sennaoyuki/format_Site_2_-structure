@@ -354,12 +354,25 @@ class RankingApp {
         }
 
         // ハンバーガーメニューのイベント
+        console.log('ハンバーガーメニュー要素:', this.displayManager.hamburgerMenu);
+        console.log('サイドバーメニュー要素:', this.displayManager.sidebarMenu);
+        console.log('オーバーレイ要素:', this.displayManager.sidebarOverlay);
+        
         if (this.displayManager.hamburgerMenu) {
-            this.displayManager.hamburgerMenu.addEventListener('click', () => {
+            this.displayManager.hamburgerMenu.addEventListener('click', (e) => {
+                console.log('ハンバーガーメニューがクリックされました');
+                e.stopPropagation(); // イベントの伝播を停止
+                
                 this.displayManager.hamburgerMenu.classList.toggle('active');
                 this.displayManager.sidebarMenu.classList.toggle('active');
                 this.displayManager.sidebarOverlay.classList.toggle('active');
+                
+                console.log('ハンバーガーメニューactive:', this.displayManager.hamburgerMenu.classList.contains('active'));
+                console.log('サイドバーメニューactive:', this.displayManager.sidebarMenu.classList.contains('active'));
             });
+            console.log('ハンバーガーメニューのイベントリスナーを設定しました');
+        } else {
+            console.error('ハンバーガーメニュー要素が見つかりません');
         }
 
         // サイドバーを閉じる
