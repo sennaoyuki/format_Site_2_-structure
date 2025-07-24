@@ -1678,24 +1678,31 @@ section.clinic-rankings .ranking-header-banner {
 .rank-1 .clinic-card {
     border-color: #E0E0E0;
     background-color: #FFFFFF;
+    text-align: center;
 }
 
 .rank-2 .clinic-card {
     border-color: #E0E0E0;
     background-color: #FFFFFF;
+    text-align: center;
 }
 
 .rank-3 .clinic-card {
     border-color: #E0E0E0;
     background-color: #FFFFFF;
+    text-align: center;
 }
 
 .rank-4 .clinic-card {
-    border-color: #666;
+    border-color: #E0E0E0;
+    background-color: #FFFFFF;
+    text-align: center;
 }
 
 .rank-5 .clinic-card {
-    border-color: #666;
+    border-color: #E0E0E0;
+    background-color: #FFFFFF;
+    text-align: center;
 }
 
 
@@ -1715,6 +1722,7 @@ section.clinic-rankings .ranking-header-banner {
     margin-top: 30px;
     display: inline-block;
     font-weight: 700;
+    text-align: center;
 }
 
 /* 評価セクション */
@@ -1723,7 +1731,6 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 .stars {
-    display: flex;
     justify-content: center;
     gap: 5px;
     margin-bottom: 10px;
@@ -2142,14 +2149,6 @@ section.clinic-rankings .ranking-header-banner {
     min-height: 120px;
     height: auto;
     color: #4C4C4C;
-}
-
-.rank-4 .clinic-card {
-    border-color: #E0E0E0;
-}
-.rank-5 .clinic-card {
-    border-color: #E0E0E0;
-}
 }
 
 .js-cbn-table table thead th {
@@ -3435,10 +3434,6 @@ section.clinic-rankings .ranking-header-banner {
 
 /* ===== レスポンシブデザイン ===== */
 @media (max-width: 992px) {
-    .ranking-container {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
     
     /* 比較表のレスポンシブ対応 */
     .comparison-content {
@@ -4899,11 +4894,6 @@ section.clinic-rankings .ranking-header-banner {
 @media (min-width: 768px) {
     .clinic-rankings {
         padding: 20px 15px;
-    }
-    
-    .ranking-container {
-        justify-content: center;
-        padding: 0 20px;
     }
     
     .ranking-item {
