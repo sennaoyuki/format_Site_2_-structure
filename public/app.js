@@ -27,11 +27,50 @@ class UrlParamHandler {
     updateRegionId(regionId) {
         this.setParam('region_id', regionId);
     }
+
+    // クリニックURLにregion_idパラメータを付与するヘルパー関数
+    getClinicUrlWithRegionId(clinicId) {
+        const baseUrls = {
+            '1': 'https://dioclinic.jp/',
+            '2': 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
+            '3': 'https://uraraclinic.jp/',
+            '4': 'https://lietoclinic.com/lpbot/lpbot07kana15',
+            '5': 'https://www.s-b-c.net/slimming/'
+        };
+        
+        const baseUrl = baseUrls[clinicId];
+        if (!baseUrl) return '#';
+        
+        const regionId = this.getRegionId();
+        const url = new URL(baseUrl);
+        url.searchParams.set('region_id', regionId);
+        return url.toString();
+    }
+
+    // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数
+    getClinicUrlByNameWithRegionId(clinicName) {
+        const baseUrls = {
+            'dio': 'https://dioclinic.jp/',
+            'eminal': 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
+            'urara': 'https://uraraclinic.jp/',
+            'lieto': 'https://lietoclinic.com/lpbot/lpbot07kana15',
+            'sbc': 'https://www.s-b-c.net/slimming/'
+        };
+        
+        const baseUrl = baseUrls[clinicName];
+        if (!baseUrl) return '#';
+        
+        const regionId = this.getRegionId();
+        const url = new URL(baseUrl);
+        url.searchParams.set('region_id', regionId);
+        return url.toString();
+    }
 }
 
 // 表示管理クラス
 class DisplayManager {
-    constructor() {
+    constructor(urlHandler) {
+        this.urlHandler = urlHandler;
         this.regionSelect = document.getElementById('sidebar-region-select');
         this.selectedRegionName = document.getElementById('selected-region-name');
         this.rankingList = document.getElementById('ranking-list');
@@ -174,7 +213,7 @@ class DisplayManager {
                         ${pushMessage}
                     </div>
                     <p class="btn btn_second_primary">
-                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener">
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener">
                             <span class="bt_s">公式サイト</span>
                             <span class="btn-arrow">▶</span>
                         </a>
@@ -253,7 +292,7 @@ class DisplayManager {
 
             const li = document.createElement('li');
             const link = document.createElement('a');
-            link.href = clinic.url || '#';
+            link.href = this.urlHandler.getClinicUrlWithRegionId(clinic.id);
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.textContent = clinic.name;
@@ -267,7 +306,7 @@ class DisplayManager {
 class RankingApp {
     constructor() {
         this.urlHandler = new UrlParamHandler();
-        this.displayManager = new DisplayManager();
+        this.displayManager = new DisplayManager(this.urlHandler);
         this.dataManager = null;
         this.currentRegionId = null;
     }
@@ -597,7 +636,7 @@ class RankingApp {
                 <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
                 <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
                 <td>
-                    <a class="link_btn" href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank">公式サイト &gt;</a>
+                    <a class="link_btn" href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank">公式サイト &gt;</a>
                     <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>
                 </td>
             `;
@@ -658,7 +697,7 @@ class RankingApp {
                 <td class="benefit-text">${benefits[clinic.rank] || '特典あり'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
@@ -691,7 +730,7 @@ class RankingApp {
                 <td><i class="fas fa-circle feature-icon"></i></td>
                 <td>
                     <div class="cta-cell">
-                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
@@ -724,7 +763,7 @@ class RankingApp {
                 <td>${clinic.rank <= 2 ? '<i class="fas fa-circle feature-icon"></i>' : '-'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
                     </div>
                 </td>
@@ -1216,7 +1255,7 @@ class RankingApp {
                             </div>
                         </div>
                         <div class="ranking__name">
-                            <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
+                            <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
                         </div>
                     </div>
                 ${data.banner ? `
@@ -1241,7 +1280,7 @@ class RankingApp {
                 <!-- CTAボタン -->
                 <div class="clinic-cta-button-wrapper">
                     <p class="btn btn_second_primary">
-                        <a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener noreferrer">
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener noreferrer">
                             <span class="bt_s">無料カウンセリングはコチラ</span>
                             <span class="btn-arrow">▶</span>
                         </a>
@@ -1269,7 +1308,7 @@ class RankingApp {
                             `;
                         }).join('')}
                         <div class="ribbon_point_link">
-                            【公式】<a href="${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinic.id === '5' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="noopener"><strong>${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://eminal-clinic.jp/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/' : clinic.id === '5' ? 'https://www.s-b-c.net/' : '#'}</strong></a>
+                            【公式】<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener"><strong>${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://eminal-clinic.jp/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/' : clinic.id === '5' ? 'https://www.s-b-c.net/' : '#'}</strong></a>
                         </div>
                     </div>
                 </div>
@@ -1591,7 +1630,7 @@ class RankingApp {
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
-                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : clinicName === 'eminal' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinicName === 'urara' ? 'https://uraraclinic.jp/' : clinicName === 'lieto' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinicName === 'sbc' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
+                            <a href="${this.urlHandler.getClinicUrlByNameWithRegionId(clinicName)}" target="_blank" rel="nofollow">${store.name || `店舗${index + 1}`}</a>
                         </div>
                         <div class='shop-address line-clamp'>
                             ${store.address || '住所情報なし'}
@@ -1613,7 +1652,7 @@ class RankingApp {
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
-                            <a href="${clinicName === 'dio' ? 'https://dioclinic.jp/' : clinicName === 'eminal' ? 'https://diet.eminal-clinic.jp/lp/m_bodymake/' : clinicName === 'urara' ? 'https://uraraclinic.jp/' : clinicName === 'lieto' ? 'https://lietoclinic.com/lpbot/lpbot07kana15' : clinicName === 'sbc' ? 'https://www.s-b-c.net/slimming/' : '#'}" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
+                            <a href="${this.urlHandler.getClinicUrlByNameWithRegionId(clinicName)}" target="_blank" rel="nofollow">${store.name || `店舗${index + 4}`}</a>
                         </div>
                         <div class='shop-address line-clamp'>
                             ${store.address || '住所情報なし'}
