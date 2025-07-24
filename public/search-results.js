@@ -27,18 +27,61 @@ class SearchResultsApp {
             const clinicsResponse = await fetch('data/出しわけSS - items.csv');
             const clinicsText = await clinicsResponse.text();
             this.clinicsData = this.parseCSV(clinicsText);
+            console.log('クリニックデータ読み込み完了:', this.clinicsData.length, '件');
             
             // 店舗データの読み込み
             const storesResponse = await fetch('data/出しわけSS - stores.csv');
             const storesText = await storesResponse.text();
             this.storesData = this.parseCSV(storesText);
+            console.log('店舗データ読み込み完了:', this.storesData.length, '件');
             
             // 各クリニックの店舗数を計算
             this.calculateStoreCount();
+            console.log('データ処理完了');
+            
+            // 初期表示
+            this.filteredResults = this.clinicsData;
+            this.displayResults();
             
         } catch (error) {
             console.error('データの読み込みに失敗しました:', error);
+            // エラー時はダミーデータを使用
+            this.useDummyData();
         }
+    }
+    
+    useDummyData() {
+        console.log('ダミーデータを使用します');
+        // ダミーデータの設定
+        this.clinicsData = [
+            {
+                id: 'dio',
+                clinic_name: 'DIO',
+                official_url: 'https://dioclinic.jp/',
+                storeCount: 22,
+                regions: new Set(['hokkaido', 'miyagi', 'tokyo', 'saitama', 'kanagawa', 'chiba', 'aichi', 'kyoto', 'osaka', 'hyogo', 'hiroshima', 'fukuoka']),
+                bodyParts: ['face', 'upperarm', 'stomach', 'buttocks', 'thigh']
+            },
+            {
+                id: 'eminal',
+                clinic_name: 'エミナルクリニック',
+                official_url: 'https://eminal-clinic.jp/',
+                storeCount: 15,
+                regions: new Set(['tokyo', 'osaka', 'fukuoka']),
+                bodyParts: ['face', 'stomach', 'thigh']
+            },
+            {
+                id: 'fire',
+                clinic_name: 'ファイヤークリニック',
+                official_url: 'https://www.fire-method.com/',
+                storeCount: 8,
+                regions: new Set(['tokyo', 'osaka']),
+                bodyParts: ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other']
+            }
+        ];
+        
+        this.filteredResults = this.clinicsData;
+        this.displayResults();
     }
 
     parseCSV(text) {
@@ -71,12 +114,20 @@ class SearchResultsApp {
         
         // クリニックデータに店舗数を追加
         this.clinicsData.forEach(clinic => {
-            clinic.storeCount = storeCountMap[clinic.clinic_name] || 0;
+            // clinic_nameを正しく設定
+            const clinicName = clinic.clinic_name || 'Unknown';
+            clinic.storeCount = storeCountMap[clinicName] || 0;
+            
+            // IDを設定（codeフィールドがあればそれを使用）
+            clinic.id = clinic.code || clinic.clinic_id || clinicName.toLowerCase();
+            
+            // 公式URLを設定（仮のURL）
+            clinic.official_url = this.getOfficialUrl(clinic.id);
             
             // 店舗がある地域を収集
             clinic.regions = new Set();
             this.storesData.forEach(store => {
-                if (store.clinic_name === clinic.clinic_name) {
+                if (store.clinic_name === clinicName) {
                     const region = this.getRegionFromAddress(store.adress);
                     if (region) {
                         clinic.regions.add(region);
@@ -85,8 +136,22 @@ class SearchResultsApp {
             });
             
             // 仮の対応部位データ（実際のデータがない場合のデモ用）
-            clinic.bodyParts = this.getBodyPartsForClinic(clinic.clinic_name);
+            clinic.bodyParts = this.getBodyPartsForClinic(clinicName);
+            
+            // デバッグ: 各クリニックのデータを確認
+            console.log(`${clinicName}: 店舗数=${clinic.storeCount}, 地域=${Array.from(clinic.regions).join(',')}`);
         });
+    }
+    
+    getOfficialUrl(clinicId) {
+        const urlMap = {
+            'dio': 'https://dioclinic.jp/',
+            'eminal': 'https://eminal-clinic.jp/',
+            'urara': 'https://urara-clinic.jp/',
+            'lieto': 'https://lieto-clinic.jp/',
+            'sbc': 'https://www.s-b-c.net/'
+        };
+        return urlMap[clinicId] || '#';
     }
 
     getRegionFromAddress(address) {
@@ -117,12 +182,11 @@ class SearchResultsApp {
         // 仮のデータ（実際のデータがない場合のデモ用）
         const bodyPartsMap = {
             'DIO': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh'],
-            'エミナル': ['face', 'stomach', 'thigh'],
-            'ファイヤー': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'],
-            'グロウ': ['face', 'stomach', 'buttocks', 'thigh'],
-            'レアビューティー': ['face', 'upperarm', 'stomach', 'thigh'],
-            '湘南美容クリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'],
-            'リエートクリニック': ['face', 'stomach', 'thigh']
+            'ディオクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh'],
+            'エミナルクリニック': ['face', 'stomach', 'thigh'],
+            'ウララクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other'],
+            'リエートクリニック': ['face', 'stomach', 'thigh'],
+            '湘南美容クリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other']
         };
         
         return bodyPartsMap[clinicName] || ['face', 'stomach'];
@@ -221,44 +285,64 @@ class SearchResultsApp {
     }
 
     filterResults() {
+        console.log('フィルター適用前のデータ数:', this.clinicsData.length);
+        console.log('適用するフィルター:', {
+            bodyParts: this.filters.bodyParts,
+            regions: this.filters.regions,
+            storeCount: this.filters.storeCount
+        });
+        
         this.filteredResults = this.clinicsData.filter(clinic => {
             // 対応部位フィルター
             if (this.filters.bodyParts.length > 0) {
                 const hasBodyPart = this.filters.bodyParts.some(part => 
-                    clinic.bodyParts.includes(part)
+                    clinic.bodyParts && clinic.bodyParts.includes(part)
                 );
-                if (!hasBodyPart) return false;
+                if (!hasBodyPart) {
+                    console.log(`${clinic.clinic_name}: 対応部位でフィルタリング`);
+                    return false;
+                }
             }
             
             // 地域フィルター
             if (this.filters.regions.length > 0) {
                 const hasRegion = this.filters.regions.some(region => 
-                    clinic.regions.has(region)
+                    clinic.regions && clinic.regions.has(region)
                 );
-                if (!hasRegion) return false;
+                if (!hasRegion) {
+                    console.log(`${clinic.clinic_name}: 地域でフィルタリング`);
+                    return false;
+                }
             }
             
             // 店舗数フィルター
             if (this.filters.storeCount !== 'all') {
-                const count = clinic.storeCount;
+                const count = clinic.storeCount || 0;
+                let passFilter = true;
                 switch (this.filters.storeCount) {
                     case 'small':
-                        if (count > 5) return false;
+                        passFilter = count <= 5;
                         break;
                     case 'medium':
-                        if (count < 6 || count > 10) return false;
+                        passFilter = count >= 6 && count <= 10;
                         break;
                     case 'large':
-                        if (count < 11 || count > 20) return false;
+                        passFilter = count >= 11 && count <= 20;
                         break;
                     case 'xlarge':
-                        if (count <= 20) return false;
+                        passFilter = count > 20;
                         break;
+                }
+                if (!passFilter) {
+                    console.log(`${clinic.clinic_name}: 店舗数でフィルタリング (${count}店舗)`);
+                    return false;
                 }
             }
             
             return true;
         });
+        
+        console.log('フィルター適用後のデータ数:', this.filteredResults.length);
     }
 
     displayResults() {
@@ -286,7 +370,7 @@ class SearchResultsApp {
             return `
                 <div class="result-card">
                     <div class="result-card-header">
-                        <img src="images/clinics/${clinic.id}/logo.png" alt="${clinic.clinic_name}" class="clinic-logo" onerror="this.src='images/placeholder-logo.png'">
+                        <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: #f0f0f0; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: #666;">${clinic.clinic_name.substring(0, 2)}</div>
                         <div class="clinic-info">
                             <h3 class="clinic-name">${clinic.clinic_name}</h3>
                             <p class="clinic-region">${regionsText}</p>

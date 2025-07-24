@@ -1,5 +1,12 @@
 /* 検索結果ページ専用スタイル */
 
+/* メインコンテナ - PC表示でも最大768pxに制限 */
+body > * {
+    width: 100%;
+    max-width: 768px;
+    margin: 0 auto;
+}
+
 /* 検索結果ヘッダー */
 .search-results-header {
     padding: 20px;
@@ -139,8 +146,10 @@
 
 .results-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 25px;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    max-width: 768px;
+    margin: 0 auto;
 }
 
 /* 検索結果カード */
@@ -162,10 +171,11 @@
     margin-bottom: 15px;
 }
 
-.clinic-logo {
+.clinic-logo-placeholder {
     width: 80px;
     height: 80px;
     margin-right: 15px;
+    flex-shrink: 0;
 }
 
 .clinic-info {
@@ -269,14 +279,16 @@
 @media (max-width: 768px) {
     .search-filters {
         padding: 20px;
+        margin: 0 10px 20px;
+    }
+
+    .search-results-content {
+        padding: 20px;
+        margin: 0 10px;
     }
 
     .filter-options {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-    }
-
-    .results-grid {
-        grid-template-columns: 1fr;
     }
 
     .apply-filters-btn,
@@ -284,5 +296,19 @@
         display: block;
         width: 100%;
         margin-bottom: 10px;
+        margin-right: 0;
+    }
+    
+    .result-card {
+        padding: 15px;
+    }
+    
+    .result-card-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .clinic-logo-placeholder {
+        margin: 0 auto 15px;
     }
 }
