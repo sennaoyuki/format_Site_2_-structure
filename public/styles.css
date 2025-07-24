@@ -1663,7 +1663,7 @@ section.clinic-rankings .ranking-header-banner {
 
 /* クリニックカード */
 .clinic-card {
-    margin: 3%;
+    margin: 0%;
     padding: 38px 4px 8px;
     border-radius: 15px;
     border-width: 1px;

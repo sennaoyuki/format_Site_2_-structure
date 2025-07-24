@@ -72,6 +72,7 @@ class DisplayManager {
     constructor(urlHandler) {
         this.urlHandler = urlHandler;
         this.regionSelect = document.getElementById('sidebar-region-select');
+        this.searchInput = document.getElementById('sidebar-clinic-search');
         this.selectedRegionName = document.getElementById('selected-region-name');
         this.rankingList = document.getElementById('ranking-list');
         this.storesList = document.getElementById('stores-list');
@@ -346,9 +347,8 @@ class RankingApp {
         });
 
         // クリニック名検索機能
-        const searchInput = document.getElementById('sidebar-clinic-search');
-        if (searchInput) {
-            searchInput.addEventListener('input', (e) => {
+        if (this.displayManager.searchInput) {
+            this.displayManager.searchInput.addEventListener('input', (e) => {
                 this.handleClinicSearch(e.target.value);
             });
         }
@@ -401,48 +401,81 @@ class RankingApp {
 
     // クリニック検索処理
     handleClinicSearch(searchTerm) {
-        const rankingItems = document.querySelectorAll('.ranking-item');
-        const detailItems = document.querySelectorAll('.detail-item');
-        const searchTermLower = searchTerm.toLowerCase();
+        const searchTermLower = searchTerm.toLowerCase().trim();
 
-        // ランキングセクションの検索
+        // ランキングカードの検索
+        const rankingItems = document.querySelectorAll('.ranking-item');
+        let visibleRankingCount = 0;
+        
         rankingItems.forEach(item => {
-            const clinicName = item.querySelector('.clinic-logo-section')?.textContent || '';
-            if (clinicName.toLowerCase().includes(searchTermLower) || searchTerm === '') {
+            const clinicNameElement = item.querySelector('.clinic-logo-section');
+            const clinicName = clinicNameElement ? clinicNameElement.textContent.trim() : '';
+            
+            if (searchTermLower === '' || clinicName.toLowerCase().includes(searchTermLower)) {
                 item.style.display = '';
+                visibleRankingCount++;
             } else {
                 item.style.display = 'none';
+            }
+        });
+
+        // テーブル内の行を検索（すべてのタブ）
+        const allTableRows = document.querySelectorAll('#ranking-tbody tr, #treatment-tbody tr, #service-tbody tr');
+        let visibleRowCount = 0;
+        
+        allTableRows.forEach(row => {
+            const clinicName = row.querySelector('.clinic-main-name')?.textContent || '';
+            if (clinicName.toLowerCase().includes(searchTermLower) || searchTermLower === '') {
+                row.style.display = '';
+                visibleRowCount++;
+            } else {
+                row.style.display = 'none';
             }
         });
 
         // 詳細セクションの検索
+        const detailItems = document.querySelectorAll('.detail-item');
         detailItems.forEach(item => {
             const clinicName = item.querySelector('.clinic-name')?.textContent || '';
-            if (clinicName.toLowerCase().includes(searchTermLower) || searchTerm === '') {
+            if (clinicName.toLowerCase().includes(searchTermLower) || searchTermLower === '') {
                 item.style.display = '';
             } else {
                 item.style.display = 'none';
             }
         });
 
-        // 検索結果が0件の場合のメッセージ表示
-        const visibleRankingItems = Array.from(rankingItems).filter(item => item.style.display !== 'none');
-        const rankingContainer = document.getElementById('ranking-list');
+        // ランキングカードセクションの検索結果メッセージ
+        const rankingList = document.getElementById('ranking-list');
+        const existingMsg = document.getElementById('no-search-results');
         
-        if (visibleRankingItems.length === 0 && searchTerm !== '') {
-            if (!document.getElementById('no-search-results')) {
+        if (visibleRankingCount === 0 && searchTermLower !== '') {
+            if (!existingMsg) {
                 const noResultsMsg = document.createElement('div');
                 noResultsMsg.id = 'no-search-results';
                 noResultsMsg.className = 'empty-state';
-                noResultsMsg.innerHTML = '<p>検索結果が見つかりませんでした</p>';
-                rankingContainer.appendChild(noResultsMsg);
+                noResultsMsg.innerHTML = '<p>「' + searchTerm + '」に一致するクリニックが見つかりませんでした</p>';
+                rankingList.appendChild(noResultsMsg);
             }
-        } else {
-            const noResultsMsg = document.getElementById('no-search-results');
-            if (noResultsMsg) {
-                noResultsMsg.remove();
-            }
+        } else if (existingMsg) {
+            existingMsg.remove();
         }
+
+        // テーブルの検索結果メッセージ
+        const activeTabContent = document.querySelector('.tab-content.active tbody');
+        const existingTableMsg = document.getElementById('no-search-results-row');
+        
+        if (visibleRowCount === 0 && searchTermLower !== '' && activeTabContent) {
+            if (!existingTableMsg) {
+                const noResultsRow = document.createElement('tr');
+                noResultsRow.id = 'no-search-results-row';
+                noResultsRow.innerHTML = '<td colspan="5" class="empty-state"><p>検索結果が見つかりませんでした</p></td>';
+                activeTabContent.appendChild(noResultsRow);
+            }
+        } else if (existingTableMsg) {
+            existingTableMsg.remove();
+        }
+
+        console.log('検索実行:', searchTerm, 'ランキング:', visibleRankingCount, 'テーブル:', visibleRowCount);
     }
 
     updatePageContent(regionId) {
