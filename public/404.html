@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ページが見つかりません | 医療ダイエット比較.com</title>
+    <meta name="description" content="お探しのページは見つかりませんでした。医療ダイエット比較.comのトップページへお戻りください。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9f2f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #333;
+        }
+
+        .error-container {
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            width: 90%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 背景の装飾 */
+        .error-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(75, 192, 192, 0.1) 0%, transparent 70%);
+            z-index: -1;
+        }
+
+        /* 404アイコン */
+        .error-icon {
+            font-size: 120px;
+            color: #4bc0c0;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+
+        /* 404数字 */
+        .error-code {
+            font-size: 72px;
+            font-weight: 700;
+            color: #4bc0c0;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        /* エラーメッセージ */
+        .error-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .error-message {
+            font-size: 16px;
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        /* ボタンコンテナ */
+        .button-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            align-items: center;
+        }
+
+        /* メインボタン */
+        .btn-primary {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 40px;
+            background: linear-gradient(135deg, #4bc0c0 0%, #3da9a9 100%);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(75, 192, 192, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(75, 192, 192, 0.4);
+        }
+
+        /* サブボタン */
+        .btn-secondary {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 30px;
+            background: white;
+            color: #4bc0c0;
+            text-decoration: none;
+            border: 2px solid #4bc0c0;
+            border-radius: 50px;
+            font-weight: 500;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-secondary:hover {
+            background: #4bc0c0;
+            color: white;
+        }
+
+        /* 人気クリニックリンク */
+        .popular-links {
+            margin-top: 40px;
+            padding-top: 40px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .popular-links h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .clinic-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .clinic-link {
+            display: inline-block;
+            padding: 8px 20px;
+            background: #f8f9fa;
+            color: #666;
+            text-decoration: none;
+            border-radius: 20px;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            border: 1px solid #e0e0e0;
+        }
+
+        .clinic-link:hover {
+            background: #4bc0c0;
+            color: white;
+            border-color: #4bc0c0;
+        }
+
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .error-code {
+                font-size: 56px;
+            }
+
+            .error-title {
+                font-size: 20px;
+            }
+
+            .error-message {
+                font-size: 14px;
+            }
+
+            .btn-primary {
+                padding: 12px 30px;
+                font-size: 14px;
+            }
+
+            .popular-links {
+                margin-top: 30px;
+                padding-top: 30px;
+            }
+        }
+
+        /* アニメーション */
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container fade-in">
+        <div class="error-icon">
+            <i class="fas fa-stethoscope"></i>
+        </div>
+        
+        <div class="error-code">404</div>
+        
+        <h1 class="error-title">ページが見つかりません</h1>
+        
+        <p class="error-message">
+            申し訳ございません。お探しのページは見つかりませんでした。<br>
+            URLが変更されたか、ページが削除された可能性があります。
+        </p>
+        
+        <div class="button-container">
+            <a href="/" class="btn-primary">
+                <i class="fas fa-home"></i>
+                トップページへ戻る
+            </a>
+            
+            <a href="/search-results.html" class="btn-secondary">
+                <i class="fas fa-search"></i>
+                クリニックを検索
+            </a>
+        </div>
+        
+        <div class="popular-links">
+            <h3>人気のクリニック</h3>
+            <div class="clinic-links">
+                <a href="/#clinic1" class="clinic-link">ディオクリニック</a>
+                <a href="/#clinic2" class="clinic-link">エミナルクリニック</a>
+                <a href="/#clinic3" class="clinic-link">ウララクリニック</a>
+                <a href="/#clinic4" class="clinic-link">リエートクリニック</a>
+                <a href="/#clinic5" class="clinic-link">湘南美容クリニック</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // region_idがある場合は引き継ぐ
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const regionId = urlParams.get('region_id');
+            
+            if (regionId) {
+                // すべてのリンクにregion_idを追加
+                const links = document.querySelectorAll('a[href^="/"]');
+                links.forEach(link => {
+                    const url = new URL(link.href, window.location.origin);
+                    url.searchParams.set('region_id', regionId);
+                    link.href = url.toString();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
