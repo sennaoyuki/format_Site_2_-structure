@@ -41,8 +41,11 @@ class UrlParamHandler {
         const baseUrl = baseUrls[clinicId];
         if (!baseUrl) return '#';
         
-        // region_idは付与しない
-        return baseUrl;
+        // 現在のregion_idを取得してURLに付与
+        const regionId = this.getRegionId();
+        const url = new URL(baseUrl);
+        url.searchParams.set('region_id', regionId);
+        return url.toString();
     }
 
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数
@@ -58,8 +61,11 @@ class UrlParamHandler {
         const baseUrl = baseUrls[clinicName];
         if (!baseUrl) return '#';
         
-        // region_idは付与しない
-        return baseUrl;
+        // 現在のregion_idを取得してURLに付与
+        const regionId = this.getRegionId();
+        const url = new URL(baseUrl);
+        url.searchParams.set('region_id', regionId);
+        return url.toString();
     }
 }
 
