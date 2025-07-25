@@ -250,12 +250,54 @@
                             </tr>
                         </tbody>
                     </table>
-                    <div style="font-size: 10px; color: #666; margin-top: 10px; line-height: 1.5;">
-                        <p>「-10kg以上」※3ヶ月医療痩身ボディメイクを契約されたモニター対象の会員の代表的な事例を提示しています。</p>
-                        <p>「12ヶ月分0円！」※支払総額の12ヶ月分が無料 ※他キャンペーンとの併用不可</p>
-                        <p>「月々4,900円」※他キャンペーンとの併用不可 ※契約時に同意契約書を結んだ場合のみ適用 ※当院指定の信販会社を利用した分割の料金</p>
-                        <p>「モニター割」※他キャンペーンとの併用不可 ※契約時に同意書契約を結んだ場合のみで適用</p>
-                        <p>「全額返金保証」「痩せなかったら返金」「痩せなければ返金保証あり」※他キャンペーンとの併用不可 ※契約時に同意契約書を結んだ場合のみで適用 ※コースによって適用できる条件が異なります</p>
+                    <!-- 注意事項アコーディオン -->
+                    <div class="disclaimer-accordion" style="margin-top: 20px;">
+                        <!-- ディオクリニック -->
+                        <div class="disclaimer-item">
+                            <button class="disclaimer-header" onclick="toggleDisclaimer('dio')" style="width: 100%; text-align: left; padding: 12px 16px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                <span style="font-size: 12px; font-weight: 600; color: #333;">ディオクリニックの注意事項</span>
+                                <span id="dio-arrow" style="transition: transform 0.3s;">▼</span>
+                            </button>
+                            <div id="dio-content" class="disclaimer-content" style="display: none; padding: 12px 16px; background-color: #fff; border: 1px solid #dee2e6; border-top: none; border-radius: 0 0 4px 4px; margin-top: -5px;">
+                                <div style="font-size: 10px; color: #666; line-height: 1.5;">
+                                    <p>「-10kg以上」※3ヶ月医療痩身ボディメイクを契約されたモニター対象の会員の代表的な事例を提示しています。</p>
+                                    <p>「12ヶ月分0円！」※支払総額の12ヶ月分が無料 ※他キャンペーンとの併用不可</p>
+                                    <p>「月々4,900円」※他キャンペーンとの併用不可 ※契約時に同意契約書を結んだ場合のみ適用 ※当院指定の信販会社を利用した分割の料金</p>
+                                    <p>「モニター割」※他キャンペーンとの併用不可 ※契約時に同意書契約を結んだ場合のみで適用</p>
+                                    <p>「全額返金保証」「痩せなかったら返金」「痩せなければ返金保証あり」※他キャンペーンとの併用不可 ※契約時に同意契約書を結んだ場合のみで適用 ※コースによって適用できる条件が異なります</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- エミナルクリニック -->
+                        <div class="disclaimer-item">
+                            <button class="disclaimer-header" onclick="toggleDisclaimer('eminal')" style="width: 100%; text-align: left; padding: 12px 16px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                <span style="font-size: 12px; font-weight: 600; color: #333;">エミナルクリニックの注意事項</span>
+                                <span id="eminal-arrow" style="transition: transform 0.3s;">▼</span>
+                            </button>
+                            <div id="eminal-content" class="disclaimer-content" style="display: none; padding: 12px 16px; background-color: #fff; border: 1px solid #dee2e6; border-top: none; border-radius: 0 0 4px 4px; margin-top: -5px;">
+                                <div style="font-size: 10px; color: #666; line-height: 1.5;">
+                                    <p>「最大79%OFF」※他キャンペーンとの併用不可 ※モニター協力が条件となります</p>
+                                    <p>「ダイエット成功率94%」※当院で3ヶ月以上継続された方の統計データ（2023年度実績）</p>
+                                    <p>「全額返金保証」※他キャンペーンとの併用不可 ※契約時に同意契約書を結んだ場合のみで適用</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- URARAクリニック -->
+                        <div class="disclaimer-item">
+                            <button class="disclaimer-header" onclick="toggleDisclaimer('urara')" style="width: 100%; text-align: left; padding: 12px 16px; background-color: #f8f9fa; border: 1px solid #dee2e6; border-radius: 4px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                <span style="font-size: 12px; font-weight: 600; color: #333;">URARAクリニックの注意事項</span>
+                                <span id="urara-arrow" style="transition: transform 0.3s;">▼</span>
+                            </button>
+                            <div id="urara-content" class="disclaimer-content" style="display: none; padding: 12px 16px; background-color: #fff; border: 1px solid #dee2e6; border-top: none; border-radius: 0 0 4px 4px; margin-top: -5px;">
+                                <div style="font-size: 10px; color: #666; line-height: 1.5;">
+                                    <p>「最大80%OFF」※モニター割引適用時 ※他キャンペーンとの併用不可</p>
+                                    <p>「ダイエット成功率94%」※当院で3ヶ月以上継続された方の統計データ</p>
+                                    <p>「返金保証」※条件付き ※詳細は無料カウンセリングでご確認ください</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -858,6 +900,20 @@
             });
         });
         */
+
+        // アコーディオン機能
+        function toggleDisclaimer(clinicId) {
+            const content = document.getElementById(clinicId + '-content');
+            const arrow = document.getElementById(clinicId + '-arrow');
+            
+            if (content.style.display === 'none' || content.style.display === '') {
+                content.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+            } else {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+            }
+        }
 
         // Add click animation to links
         document.querySelectorAll('.medical-columns-section .toc-link, .medical-columns-section .contact-link').forEach(link => {
