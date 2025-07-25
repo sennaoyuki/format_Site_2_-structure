@@ -541,20 +541,20 @@ class SearchResultsApp {
     applyFiltersFromURL() {
         const params = new URLSearchParams(window.location.search);
         
-        // URLパラメータから対応部位を設定
-        const bodyParts = params.get('bodyParts');
-        if (bodyParts) {
-            bodyParts.split(',').forEach(part => {
+        // URLパラメータから対応部位を設定（単数形と複数形の両方に対応）
+        const bodyPart = params.get('bodyPart') || params.get('bodyParts');
+        if (bodyPart) {
+            bodyPart.split(',').forEach(part => {
                 const checkbox = document.querySelector(`input[name="body-parts"][value="${part}"]`);
                 if (checkbox) checkbox.checked = true;
             });
         }
         
-        // URLパラメータから地域を設定
-        const regions = params.get('regions');
-        if (regions) {
-            regions.split(',').forEach(region => {
-                const checkbox = document.querySelector(`input[name="regions"][value="${region}"]`);
+        // URLパラメータから地域を設定（単数形と複数形の両方に対応）
+        const region = params.get('region') || params.get('regions');
+        if (region) {
+            region.split(',').forEach(reg => {
+                const checkbox = document.querySelector(`input[name="regions"][value="${reg}"]`);
                 if (checkbox) checkbox.checked = true;
             });
         }
@@ -564,6 +564,15 @@ class SearchResultsApp {
         if (storeCount) {
             const radio = document.querySelector(`input[name="store-count"][value="${storeCount}"]`);
             if (radio) radio.checked = true;
+        }
+        
+        // URLパラメータからクリニック名検索を設定
+        const clinic = params.get('clinic');
+        if (clinic) {
+            // クリニック名でフィルタリング（部分一致）
+            this.clinicsData = this.clinicsData.filter(c => 
+                c.clinic_name.toLowerCase().includes(clinic.toLowerCase())
+            );
         }
         
         // フィルターを適用
