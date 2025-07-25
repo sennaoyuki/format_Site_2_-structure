@@ -19,6 +19,7 @@ class SearchResultsApp {
         this.setupEventListeners();
         this.applyFiltersFromURL();
         this.setupHamburgerMenu();
+        this.updateRegionBadge();
     }
 
     async loadData() {
@@ -601,6 +602,34 @@ class SearchResultsApp {
         
         // フィルターを適用
         this.applyFilters();
+    }
+    
+    updateRegionBadge() {
+        const params = new URLSearchParams(window.location.search);
+        const regionId = params.get('region_id');
+        const regionBadge = document.getElementById('hero-region-badge');
+        
+        if (regionBadge && regionId) {
+            // 地域IDから地域名を取得
+            const regionMap = {
+                '001': '北海道',
+                '004': '宮城',
+                '008': '埼玉',
+                '009': '千葉',
+                '011': '北海道',
+                '012': '神奈川',
+                '013': '東京',
+                '017': '愛知',
+                '020': '京都',
+                '021': '大阪',
+                '022': '兵庫',
+                '028': '広島',
+                '033': '福岡'
+            };
+            
+            const regionName = regionMap[regionId] || '東京';
+            regionBadge.textContent = `${regionName}版`;
+        }
     }
 }
 

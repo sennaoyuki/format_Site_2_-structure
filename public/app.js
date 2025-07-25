@@ -713,6 +713,9 @@ class RankingApp {
                     params.append('storeCount', hoursFilter.value);
                 }
                 
+                // 現在のregion_idを追加
+                params.append('region_id', this.currentRegionId);
+                
                 // 検索結果ページへ遷移
                 const basePath = window.SITE_CONFIG ? window.SITE_CONFIG.basePath : '';
                 const searchUrl = `${basePath}/search-results.html?${params.toString()}`;
