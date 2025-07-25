@@ -630,8 +630,8 @@ class RankingApp {
             // グローバルアクセス用にwindowオブジェクトに設定
             window.dataManager = this.dataManager;
 
-            // 初期地域IDの取得（URLパラメータは使用しない）
-            this.currentRegionId = '013'; // デフォルトは東京
+            // 初期地域IDの取得（URLパラメータから取得、なければデフォルト）
+            this.currentRegionId = this.urlHandler.getRegionId();
 
             // 地域セレクターの初期化
             const regions = this.dataManager.getAllRegions();
