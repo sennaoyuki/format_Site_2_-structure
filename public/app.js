@@ -2438,7 +2438,7 @@ class RankingApp {
         };
         
         const extension = imageExtensions[clinicName] || 'jpg';
-        const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '/images';
+        const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
         const storeImagePath = `${imagesPath}/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
         
         return storeImagePath;
