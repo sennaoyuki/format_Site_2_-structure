@@ -592,10 +592,9 @@ class SearchResultsApp {
         // URLパラメータから地域を設定（search-region、region、regions に対応）
         const region = params.get('search-region') || params.get('region') || params.get('regions');
         if (region) {
-            region.split(',').forEach(reg => {
-                const checkbox = document.querySelector(`input[name="regions"][value="${reg}"]`);
-                if (checkbox) checkbox.checked = true;
-            });
+            // 地域チェックボックスが存在しない場合は、直接フィルターに追加
+            this.filters.regions = region.split(',');
+            console.log('URLパラメータから地域フィルターを設定:', this.filters.regions);
         }
         
         // URLパラメータから店舗数を設定
