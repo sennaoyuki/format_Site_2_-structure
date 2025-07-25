@@ -242,11 +242,23 @@ class DisplayManager {
     }
 
     updateStoresDisplay(stores, clinicsWithStores) {
-        // brand-section-wrapperを取得
-        const brandSectionWrapper = document.querySelector('.brand-section-wrapper');
+        // brand-section-wrapperを取得（複数の方法で試行）
+        let brandSectionWrapper = document.querySelector('.brand-section-wrapper');
+        
         if (!brandSectionWrapper) {
-            console.error('brand-section-wrapper not found');
-            return;
+            // 要素が見つからない場合、bodyの最後に新しく作成
+            console.log('Creating new brand-section-wrapper');
+            brandSectionWrapper = document.createElement('section');
+            brandSectionWrapper.className = 'brand-section-wrapper';
+            
+            // ランキングセクションの後に挿入
+            const rankingSection = document.querySelector('.ranking-section');
+            if (rankingSection && rankingSection.parentNode) {
+                rankingSection.parentNode.insertBefore(brandSectionWrapper, rankingSection.nextSibling);
+            } else {
+                // rankingセクションが見つからない場合はbodyの最後に追加
+                document.body.appendChild(brandSectionWrapper);
+            }
         }
         
         // デバッグログ
