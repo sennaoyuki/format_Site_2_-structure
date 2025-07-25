@@ -704,13 +704,12 @@ class RankingApp {
     }
 
     setupEventListeners() {
-        // 地域選択の変更イベント（検索機能での地域選択はサイト全体に影響しない）
-        /*
-        this.displayManager.regionSelect.addEventListener('change', (e) => {
-            const newRegionId = e.target.value;
-            this.changeRegion(newRegionId);
-        });
-        */
+        // 地域選択の変更イベント（検索フィルター用）
+        if (this.displayManager.regionSelect) {
+            this.displayManager.regionSelect.addEventListener('change', () => {
+                this.handleClinicSearch(this.displayManager.searchInput?.value || '');
+            });
+        }
 
         // クリニック名検索機能
         if (this.displayManager.searchInput) {
@@ -840,11 +839,35 @@ class RankingApp {
         this.updatePageContent(regionId);
     }
 
+    // 指定地域にクリニックの店舗があるかチェック
+    getClinicStoresByRegion(clinicName, regionId) {
+        // クリニック名を正規化
+        const normalizedClinicName = clinicName.replace(/の\d+$/, '').trim(); // 「ディオクリニックの1」→「ディオクリニック」
+        
+        // 該当地域の店舗を取得
+        const regionStores = this.dataManager.getStoresByRegionId(regionId);
+        
+        // クリニック名のマッピング
+        const clinicNameMap = {
+            'ディオクリニック': 'ディオクリニック',
+            'エミナルクリニック': 'エミナルクリニック',
+            'ウララクリニック': 'ウララクリニック',
+            'リエートクリニック': 'リエートクリニック',
+            '湘南美容クリニック': '湘南美容クリニック'
+        };
+        
+        const storeClinicName = clinicNameMap[normalizedClinicName] || normalizedClinicName;
+        
+        // 該当するクリニックの店舗をフィルタリング
+        return regionStores.filter(store => store.clinicName === storeClinicName);
+    }
+
     // クリニック検索処理
     handleClinicSearch(searchTerm) {
         const searchTermLower = searchTerm.toLowerCase().trim();
         
         // フィルター条件を取得
+        const regionFilter = document.getElementById('sidebar-region-select')?.value || '';
         const specialtyFilter = document.getElementById('sidebar-specialty-filter')?.value || '';
         const hoursFilter = document.getElementById('sidebar-hours-filter')?.value || '';
 
@@ -859,12 +882,19 @@ class RankingApp {
             // クリニック名の条件
             const nameMatch = searchTermLower === '' || clinicName.toLowerCase().includes(searchTermLower);
             
-            // フィルター条件の判定（現時点ではクリニック名のみ）
-            // TODO: 実際のクリニックデータに対応部位と店舗数の情報を追加する必要がある
+            // 地域フィルタリングの条件
+            let regionMatch = true;
+            if (regionFilter) {
+                // クリニックに対応する店舗が選択された地域にあるかチェック
+                const clinicStores = this.getClinicStoresByRegion(clinicName, regionFilter);
+                regionMatch = clinicStores.length > 0;
+            }
+            
+            // フィルター条件の判定
             const specialtyMatch = specialtyFilter === '';
             const hoursMatch = hoursFilter === '';
             
-            if (nameMatch && specialtyMatch && hoursMatch) {
+            if (nameMatch && regionMatch && specialtyMatch && hoursMatch) {
                 item.style.display = '';
                 visibleRankingCount++;
             } else {
@@ -878,7 +908,18 @@ class RankingApp {
         
         allTableRows.forEach(row => {
             const clinicName = row.querySelector('.clinic-main-name')?.textContent || '';
-            if (clinicName.toLowerCase().includes(searchTermLower) || searchTermLower === '') {
+            
+            // クリニック名の条件
+            const nameMatch = searchTermLower === '' || clinicName.toLowerCase().includes(searchTermLower);
+            
+            // 地域フィルタリングの条件
+            let regionMatch = true;
+            if (regionFilter) {
+                const clinicStores = this.getClinicStoresByRegion(clinicName, regionFilter);
+                regionMatch = clinicStores.length > 0;
+            }
+            
+            if (nameMatch && regionMatch) {
                 row.style.display = '';
                 visibleRowCount++;
             } else {
@@ -890,7 +931,18 @@ class RankingApp {
         const detailItems = document.querySelectorAll('.detail-item');
         detailItems.forEach(item => {
             const clinicName = item.querySelector('.clinic-name')?.textContent || '';
-            if (clinicName.toLowerCase().includes(searchTermLower) || searchTermLower === '') {
+            
+            // クリニック名の条件
+            const nameMatch = searchTermLower === '' || clinicName.toLowerCase().includes(searchTermLower);
+            
+            // 地域フィルタリングの条件
+            let regionMatch = true;
+            if (regionFilter) {
+                const clinicStores = this.getClinicStoresByRegion(clinicName, regionFilter);
+                regionMatch = clinicStores.length > 0;
+            }
+            
+            if (nameMatch && regionMatch) {
                 item.style.display = '';
             } else {
                 item.style.display = 'none';
