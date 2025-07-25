@@ -844,8 +844,12 @@ class RankingApp {
         // クリニック名を正規化
         const normalizedClinicName = clinicName.replace(/の\d+$/, '').trim(); // 「ディオクリニックの1」→「ディオクリニック」
         
+        // デバッグログ
+        console.log(`Checking stores for ${normalizedClinicName} in region ${regionId}`);
+        
         // 該当地域の店舗を取得
         const regionStores = this.dataManager.getStoresByRegionId(regionId);
+        console.log(`Region ${regionId} has ${regionStores.length} stores total`);
         
         // クリニック名のマッピング
         const clinicNameMap = {
@@ -859,7 +863,10 @@ class RankingApp {
         const storeClinicName = clinicNameMap[normalizedClinicName] || normalizedClinicName;
         
         // 該当するクリニックの店舗をフィルタリング
-        return regionStores.filter(store => store.clinicName === storeClinicName);
+        const clinicStores = regionStores.filter(store => store.clinicName === storeClinicName);
+        console.log(`Found ${clinicStores.length} stores for ${normalizedClinicName}`);
+        
+        return clinicStores;
     }
 
     // クリニック検索処理
@@ -1053,9 +1060,10 @@ class RankingApp {
             this.displayManager.updateFooterClinics(allClinics, ranking);
 
             // 店舗リストの取得と表示（クリニックごとにグループ化）
-            const stores = this.dataManager.getStoresByRegionId(regionId);
-            const clinicsWithStores = this.groupStoresByClinics(stores, ranking, allClinics);
-            this.displayManager.updateStoresDisplay(stores, clinicsWithStores);
+            // 店舗情報の表示を無効化
+            // const stores = this.dataManager.getStoresByRegionId(regionId);
+            // const clinicsWithStores = this.groupStoresByClinics(stores, ranking, allClinics);
+            // this.displayManager.updateStoresDisplay(stores, clinicsWithStores);
 
             // 比較表の更新
             this.updateComparisonTable(allClinics, ranking);
