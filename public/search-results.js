@@ -19,6 +19,7 @@ class SearchResultsApp {
         this.setupEventListeners();
         this.applyFiltersFromURL();
         this.setupHamburgerMenu();
+        this.updateHeaderLogoLink();
     }
 
     async loadData() {
@@ -635,6 +636,17 @@ class SearchResultsApp {
             
             const regionName = regionMap[regionId] || '東京';
             regionBadge.textContent = `${regionName}版`;
+        }
+    }
+    
+    updateHeaderLogoLink() {
+        const params = new URLSearchParams(window.location.search);
+        const regionId = params.get('region_id');
+        const logoLink = document.getElementById('header-logo-link');
+        
+        if (logoLink && regionId) {
+            const basePath = window.SITE_CONFIG ? window.SITE_CONFIG.basePath : '';
+            logoLink.href = `${basePath}/?region_id=${regionId}`;
         }
     }
 }
