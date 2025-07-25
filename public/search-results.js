@@ -349,11 +349,12 @@ class SearchResultsApp {
             
             // 地域フィルター
             if (this.filters.regions.length > 0) {
+                // 選択された地域のいずれかに店舗があるかチェック
                 const hasRegion = this.filters.regions.some(region => 
                     clinic.regions && clinic.regions.has(region)
                 );
                 if (!hasRegion) {
-                    console.log(`${clinic.clinic_name}: 地域でフィルタリング`);
+                    console.log(`${clinic.clinic_name}: 選択された地域に店舗なし`);
                     return false;
                 }
             }
