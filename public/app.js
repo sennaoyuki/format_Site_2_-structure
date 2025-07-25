@@ -326,22 +326,63 @@ class DataManager {
 
     async init() {
         try {
-            // CSVファイルの読み込み
-            await Promise.all([
-                this.loadRegions(),
-                this.loadClinics(),
-                this.loadStores(),
-                this.loadRankings(),
-                this.loadStoreViews(),
-                this.loadCampaigns()
-            ]);
-
-            // 店舗と地域の関連付け
-            this.associateStoresWithRegions();
+            // JSONファイルの読み込み
+            const response = await fetch(this.dataPath + 'compiled-data.json');
+            if (!response.ok) {
+                throw new Error('Failed to load compiled-data.json');
+            }
+            const data = await response.json();
+            
+            // データの設定
+            this.regions = data.regions;
+            this.clinics = data.clinics;
+            
+            // ランキングデータの変換
+            this.rankings = Object.entries(data.rankings).map(([regionId, ranks]) => ({
+                regionId: regionId,
+                ranks: ranks
+            }));
+            
+            // 店舗ビューデータの変換
+            this.storeViews = Object.entries(data.storeViews).map(([regionId, clinicStores]) => ({
+                regionId: regionId,
+                clinicStores: clinicStores
+            }));
+            
+            // キャンペーンデータの設定
+            this.campaigns = data.campaigns;
+            
+            // 店舗データをクリニックから抽出
+            this.stores = [];
+            this.clinics.forEach(clinic => {
+                clinic.stores.forEach(store => {
+                    this.stores.push({
+                        id: store.id,
+                        clinicName: clinic.name,
+                        storeName: store.name,
+                        address: store.address,
+                        zipcode: store.zipcode,
+                        access: store.access,
+                        regionId: this.getRegionIdFromAddress(store.address)
+                    });
+                });
+            });
+            
         } catch (error) {
             console.error('データの初期化に失敗しました:', error);
             throw error;
         }
+    }
+    
+    // 住所から地域IDを取得するヘルパーメソッド
+    getRegionIdFromAddress(address) {
+        if (!address) return null;
+        for (const region of this.regions) {
+            if (address.includes(region.name)) {
+                return region.id;
+            }
+        }
+        return null;
     }
 
     // CSVファイルを読み込む汎用関数（エラーハンドリング付き）

@@ -26,21 +26,43 @@ class SearchResultsApp {
             // Handle subdirectory paths
             const dataPath = window.SITE_CONFIG ? window.SITE_CONFIG.dataPath : './data';
             
-            // クリニックデータの読み込み
-            const clinicsResponse = await fetch(`${dataPath}/出しわけSS - items.csv`);
-            const clinicsText = await clinicsResponse.text();
-            this.clinicsData = this.parseCSV(clinicsText);
-            console.log('クリニックデータ読み込み完了:', this.clinicsData.length, '件');
+            // JSONファイルの読み込み
+            const response = await fetch(`${dataPath}/compiled-data.json`);
+            if (!response.ok) {
+                throw new Error('Failed to load compiled-data.json');
+            }
+            const data = await response.json();
+            console.log('JSONデータ読み込み完了');
             
-            // 店舗データの読み込み
-            const storesResponse = await fetch(`${dataPath}/出しわけSS - stores.csv`);
-            const storesText = await storesResponse.text();
-            this.storesData = this.parseCSV(storesText);
-            console.log('店舗データ読み込み完了:', this.storesData.length, '件');
+            // クリニックデータの設定
+            this.clinicsData = data.clinics.map(clinic => ({
+                id: clinic.code,
+                clinic_name: clinic.name,
+                clinic_id: clinic.id,
+                code: clinic.code,
+                storeCount: clinic.storeCount,
+                regions: new Set(clinic.regions),
+                bodyParts: clinic.bodyParts,
+                features: clinic.features
+            }));
             
-            // 各クリニックの店舗数を計算
-            this.calculateStoreCount();
-            console.log('データ処理完了');
+            // 店舗データの設定
+            this.storesData = [];
+            data.clinics.forEach(clinic => {
+                clinic.stores.forEach(store => {
+                    this.storesData.push({
+                        store_id: store.id,
+                        clinic_name: clinic.name,
+                        store_name: store.name,
+                        adress: store.address,
+                        Zipcode: store.zipcode,
+                        access: store.access
+                    });
+                });
+            });
+            
+            console.log('クリニックデータ:', this.clinicsData.length, '件');
+            console.log('店舗データ:', this.storesData.length, '件');
             
             // 初期表示
             this.filteredResults = this.clinicsData;
@@ -104,6 +126,8 @@ class SearchResultsApp {
         return data;
     }
 
+    // calculateStoreCount()は不要になりました（JSONファイルに店舗数が含まれているため）
+    /*
     calculateStoreCount() {
         // 各クリニックの店舗数を計算
         const storeCountMap = {};
@@ -153,6 +177,7 @@ class SearchResultsApp {
             
         });
     }
+    */
     
     getOfficialUrl(clinicId) {
         const urlMap = {
