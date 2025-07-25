@@ -632,6 +632,46 @@ class RankingApp {
             });
         }
 
+        // サイドバー検索ボタンのイベント
+        const sidebarSearchButton = document.querySelector('.sidebar-search-link');
+        if (sidebarSearchButton) {
+            sidebarSearchButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // フィルター値を取得
+                const params = new URLSearchParams();
+                
+                // 地域
+                const regionFilter = document.getElementById('sidebar-region-select');
+                if (regionFilter && regionFilter.value) {
+                    params.append('region', regionFilter.value);
+                }
+                
+                // クリニック名
+                const clinicSearch = document.getElementById('sidebar-clinic-search');
+                if (clinicSearch && clinicSearch.value) {
+                    params.append('clinic', clinicSearch.value);
+                }
+                
+                // 対応部位
+                const specialtyFilter = document.getElementById('sidebar-specialty-filter');
+                if (specialtyFilter && specialtyFilter.value) {
+                    params.append('bodyPart', specialtyFilter.value);
+                }
+                
+                // 店舗数
+                const hoursFilter = document.getElementById('sidebar-hours-filter');
+                if (hoursFilter && hoursFilter.value) {
+                    params.append('storeCount', hoursFilter.value);
+                }
+                
+                // 検索結果ページへ遷移
+                const basePath = window.SITE_CONFIG ? window.SITE_CONFIG.basePath : '';
+                const searchUrl = `${basePath}/search-results.html?${params.toString()}`;
+                window.location.href = searchUrl;
+            });
+        }
+        
         // ハンバーガーメニューのイベント
         console.log('ハンバーガーメニュー要素:', this.displayManager.hamburgerMenu);
         console.log('サイドバーメニュー要素:', this.displayManager.sidebarMenu);
