@@ -5765,14 +5765,14 @@ section.clinic-rankings .ranking-header-banner {
 /* インフォメーションアイコン */
 .info-icon {
     display: inline-block;
-    width: 16px;
-    height: 16px;
-    line-height: 16px;
+    width: 10px;
+    height: 10px;
+    line-height: 10px;
     text-align: center;
-    background-color: #007bff;
+    background-color: #c1c1c1;
     color: white;
     border-radius: 50%;
-    font-size: 11px;
+    font-size: 7px;
     font-weight: bold;
     cursor: pointer;
     margin-left: 4px;
@@ -5781,7 +5781,7 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 .info-icon:hover {
-    background-color: #0056b3;
+    background-color: #999;
 }
 
 /* 詳細情報モーダル */
