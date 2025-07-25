@@ -2232,7 +2232,7 @@ class RankingApp {
             html += `
                 <div class='shop'>
                     <div class='shop-image'>
-                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : ''}/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
+                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '/images'}/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -2254,7 +2254,7 @@ class RankingApp {
             html += `
                 <div class='shop hidden-content hidden'>
                     <div class='shop-image'>
-                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : ''}/images/clinics/${clinicName}/${clinicName}-logo.jpg'" />
+                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '/images'}/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>

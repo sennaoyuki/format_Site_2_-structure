@@ -3,5 +3,5 @@ window.SITE_CONFIG = {
     basePath: '/medical-diet001',
     assetsPath: '..',
     dataPath: '../data',
-    imagesPath: '../images'
+    imagesPath: '..'
 };
