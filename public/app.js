@@ -844,12 +844,8 @@ class RankingApp {
         // クリニック名を正規化
         const normalizedClinicName = clinicName.replace(/の\d+$/, '').trim(); // 「ディオクリニックの1」→「ディオクリニック」
         
-        // デバッグログ
-        console.log(`Checking stores for ${normalizedClinicName} in region ${regionId}`);
-        
         // 該当地域の店舗を取得
         const regionStores = this.dataManager.getStoresByRegionId(regionId);
-        console.log(`Region ${regionId} has ${regionStores.length} stores total`);
         
         // クリニック名のマッピング
         const clinicNameMap = {
@@ -863,10 +859,7 @@ class RankingApp {
         const storeClinicName = clinicNameMap[normalizedClinicName] || normalizedClinicName;
         
         // 該当するクリニックの店舗をフィルタリング
-        const clinicStores = regionStores.filter(store => store.clinicName === storeClinicName);
-        console.log(`Found ${clinicStores.length} stores for ${normalizedClinicName}`);
-        
-        return clinicStores;
+        return regionStores.filter(store => store.clinicName === storeClinicName);
     }
 
     // クリニック検索処理
@@ -892,11 +885,9 @@ class RankingApp {
             // 地域フィルタリングの条件
             let regionMatch = true;
             if (regionFilter) {
-                console.log(`Region filter active: ${regionFilter} for clinic: ${clinicName}`);
                 // クリニックに対応する店舗が選択された地域にあるかチェック
                 const clinicStores = this.getClinicStoresByRegion(clinicName, regionFilter);
                 regionMatch = clinicStores.length > 0;
-                console.log(`Region match result: ${regionMatch}`);
             }
             
             // フィルター条件の判定
