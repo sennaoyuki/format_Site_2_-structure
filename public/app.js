@@ -261,14 +261,8 @@ class DisplayManager {
             }
         }
         
-        // デバッグログ
-        console.log('updateStoresDisplay called:');
-        console.log('stores:', stores?.length || 0);
-        console.log('clinicsWithStores size:', clinicsWithStores?.size || 0);
-        
         // 店舗データがない場合は非表示にする
         if (!stores || stores.length === 0) {
-            console.log('No stores data, hiding brand section');
             brandSectionWrapper.innerHTML = '';
             return;
         }
@@ -621,16 +615,12 @@ class DataManager {
 
     // 地域IDで店舗を取得（store_viewデータを使用してランキングに対応した店舗を取得）
     getStoresByRegionId(regionId) {
-        console.log(`getStoresByRegionId called with regionId: ${regionId}`);
-        
         // store_viewから該当地域のデータを取得
         const storeView = this.storeViews.find(sv => sv.regionId === regionId);
-        console.log('storeView found:', !!storeView);
         if (!storeView) return [];
         
         // ランキングデータを取得して、表示されているクリニックを特定
         const ranking = this.getRankingByRegionId(regionId);
-        console.log('ranking found:', !!ranking);
         if (!ranking) return [];
         
         // 表示する店舗IDのリストを作成
@@ -647,14 +637,9 @@ class DataManager {
         });
         
         // 店舗IDに基づいて実際の店舗情報を取得
-        const result = this.stores.filter(store => 
+        return this.stores.filter(store => 
             storeIdsToShow.includes(store.id)
         );
-        
-        console.log('storeIdsToShow:', storeIdsToShow);
-        console.log('filtered stores count:', result.length);
-        
-        return result;
     }
 
     // クリニック名で店舗を取得
@@ -1058,8 +1043,9 @@ class RankingApp {
             const clinic = allClinics.find(c => c.id === clinicId);
             if (clinic) {
                 // クリニック名のマッピング（items.csvとstores.csvの名前の違いを解決）
+                // 実際のstores.csvを確認した結果、すべて同じ名前で統一されていることが判明
                 const clinicNameMap = {
-                    'ディオクリニック': 'DIO',
+                    'ディオクリニック': 'ディオクリニック',
                     'エミナルクリニック': 'エミナルクリニック',
                     'ウララクリニック': 'ウララクリニック',
                     'リエートクリニック': 'リエートクリニック',
@@ -1068,15 +1054,10 @@ class RankingApp {
                 
                 const storeClinicName = clinicNameMap[clinic.name] || clinic.name;
                 
-                console.log(`Processing clinic: ${clinic.name} -> searching for: ${storeClinicName}`);
-                console.log('Available clinic names in stores:', [...new Set(stores.map(s => s.clinicName))]);
-                
                 // このクリニックに属する店舗をクリニック名でフィルタリング
                 const clinicStores = stores.filter(store => 
                     store.clinicName === storeClinicName
                 );
-                
-                console.log(`Found ${clinicStores.length} stores for ${clinic.name}`);
                 
                 // 店舗がない場合も空配列でMapに追加（全クリニックを表示するため）
                 clinicsWithStores.set(clinic, clinicStores);
@@ -1802,8 +1783,9 @@ class RankingApp {
             const allStores = this.dataManager.getStoresByRegionId(regionId);
             
             // クリニック名のマッピング（stores.csvとitems.csvの名前の違いを解決）
+            // 実際のstores.csvを確認した結果、すべて同じ名前で統一されていることが判明
             const clinicNameMap = {
-                'ディオクリニック': 'DIO',
+                'ディオクリニック': 'ディオクリニック',
                 'エミナルクリニック': 'エミナルクリニック',
                 'ウララクリニック': 'ウララクリニック',
                 'リエートクリニック': 'リエートクリニック',
