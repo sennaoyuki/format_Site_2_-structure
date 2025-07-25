@@ -240,13 +240,19 @@ class SearchResultsApp {
         });
         
         // ボタンのイベントリスナー
-        document.getElementById('apply-filters').addEventListener('click', () => {
-            this.applyFilters();
-        });
+        const applyFiltersBtn = document.getElementById('apply-filters');
+        if (applyFiltersBtn) {
+            applyFiltersBtn.addEventListener('click', () => {
+                this.applyFilters();
+            });
+        }
         
-        document.getElementById('clear-filters').addEventListener('click', () => {
-            this.clearFilters();
-        });
+        const clearFiltersBtn = document.getElementById('clear-filters');
+        if (clearFiltersBtn) {
+            clearFiltersBtn.addEventListener('click', () => {
+                this.clearFilters();
+            });
+        }
     }
 
     setupHamburgerMenu() {
