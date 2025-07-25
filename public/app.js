@@ -691,6 +691,7 @@ class RankingApp {
                 
                 // 地域（検索フィルター用）
                 const regionFilter = document.getElementById('sidebar-region-select');
+                console.log('地域フィルター値:', regionFilter?.value);
                 if (regionFilter && regionFilter.value) {
                     params.append('search-region', regionFilter.value);
                 }

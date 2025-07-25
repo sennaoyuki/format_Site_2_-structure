@@ -19,7 +19,6 @@ class SearchResultsApp {
         this.setupEventListeners();
         this.applyFiltersFromURL();
         this.setupHamburgerMenu();
-        this.updateRegionBadge();
     }
 
     async loadData() {
