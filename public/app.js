@@ -1068,10 +1068,15 @@ class RankingApp {
                 
                 const storeClinicName = clinicNameMap[clinic.name] || clinic.name;
                 
+                console.log(`Processing clinic: ${clinic.name} -> searching for: ${storeClinicName}`);
+                console.log('Available clinic names in stores:', [...new Set(stores.map(s => s.clinicName))]);
+                
                 // このクリニックに属する店舗をクリニック名でフィルタリング
                 const clinicStores = stores.filter(store => 
                     store.clinicName === storeClinicName
                 );
+                
+                console.log(`Found ${clinicStores.length} stores for ${clinic.name}`);
                 
                 // 店舗がない場合も空配列でMapに追加（全クリニックを表示するため）
                 clinicsWithStores.set(clinic, clinicStores);
