@@ -41,10 +41,8 @@ class UrlParamHandler {
         const baseUrl = baseUrls[clinicId];
         if (!baseUrl) return '#';
         
-        const regionId = this.getRegionId();
-        const url = new URL(baseUrl);
-        url.searchParams.set('region_id', regionId);
-        return url.toString();
+        // region_idは付与しない
+        return baseUrl;
     }
 
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数
@@ -60,10 +58,8 @@ class UrlParamHandler {
         const baseUrl = baseUrls[clinicName];
         if (!baseUrl) return '#';
         
-        const regionId = this.getRegionId();
-        const url = new URL(baseUrl);
-        url.searchParams.set('region_id', regionId);
-        return url.toString();
+        // region_idは付与しない
+        return baseUrl;
     }
 }
 
@@ -625,8 +621,8 @@ class RankingApp {
             // グローバルアクセス用にwindowオブジェクトに設定
             window.dataManager = this.dataManager;
 
-            // 初期地域IDの取得
-            this.currentRegionId = this.urlHandler.getRegionId();
+            // 初期地域IDの取得（URLパラメータは使用しない）
+            this.currentRegionId = '013'; // デフォルトは東京
 
             // 地域セレクターの初期化
             const regions = this.dataManager.getAllRegions();
@@ -753,7 +749,8 @@ class RankingApp {
             });
         }
 
-        // ブラウザの戻る/進むボタン対応
+        // ブラウザの戻る/進むボタン対応（region_idは使用しない）
+        /*
         window.addEventListener('popstate', () => {
             const regionId = this.urlHandler.getRegionId();
             if (regionId !== this.currentRegionId) {
@@ -761,11 +758,12 @@ class RankingApp {
                 this.displayManager.regionSelect.value = regionId;
             }
         });
+        */
     }
 
     changeRegion(regionId) {
-        // URLパラメータの更新
-        this.urlHandler.updateRegionId(regionId);
+        // URLパラメータの更新はしない（region_idを付与しない）
+        // this.urlHandler.updateRegionId(regionId);
         this.currentRegionId = regionId;
 
         // ページコンテンツの更新
