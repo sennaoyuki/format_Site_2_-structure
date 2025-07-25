@@ -249,8 +249,43 @@ class DisplayManager {
             return;
         }
         
-        // 店舗リストセクションを完全に削除
-        brandSectionWrapper.innerHTML = '';
+        // 店舗データがない場合は非表示にする
+        if (!stores || stores.length === 0) {
+            brandSectionWrapper.innerHTML = '';
+            return;
+        }
+        
+        // 店舗情報を表示
+        let html = '<div class="brand-section"><h3>地域の店舗情報</h3>';
+        
+        // クリニックごとに店舗をグループ化して表示
+        clinicsWithStores.forEach((clinicStores, clinic) => {
+            if (clinicStores && clinicStores.length > 0) {
+                html += `
+                    <div class="clinic-stores-section">
+                        <h4>${clinic.name}の店舗</h4>
+                        <div class="stores-list">
+                `;
+                
+                clinicStores.forEach(store => {
+                    html += `
+                        <div class="store-item">
+                            <div class="store-name">${store.storeName || store.name || '店舗名不明'}</div>
+                            <div class="store-address">${store.address || '住所不明'}</div>
+                            <div class="store-access">${store.access || ''}</div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            }
+        });
+        
+        html += '</div>';
+        brandSectionWrapper.innerHTML = html;
     }
 
     showError(message) {
@@ -371,6 +406,7 @@ class DataManager {
                         id: store.id,
                         clinicName: clinic.name,
                         storeName: store.name,
+                        name: store.name,  // 両方のフィールドで互換性を保つ
                         address: store.address,
                         zipcode: store.zipcode,
                         access: store.access,
@@ -456,7 +492,8 @@ class DataManager {
         this.stores = data.map(row => ({
             id: row.store_id,
             clinicName: row.clinic_name,
-            name: row.store_name,
+            storeName: row.store_name,
+            name: row.store_name,  // 両方のフィールドで互換性を保つ
             zipcode: row.Zipcode,
             address: row.adress,
             access: row.access,
@@ -993,10 +1030,27 @@ class RankingApp {
         sortedRanks.forEach(([position, clinicId]) => {
             const clinic = allClinics.find(c => c.id === clinicId);
             if (clinic) {
+                // クリニック名のマッピング（items.csvとstores.csvの名前の違いを解決）
+                const clinicNameMap = {
+                    'ディオクリニック': 'DIO',
+                    'エミナルクリニック': 'エミナルクリニック',
+                    'ウララクリニック': 'ウララクリニック',
+                    'リエートクリニック': 'リエートクリニック',
+                    '湘南美容クリニック': '湘南美容クリニック'
+                };
+                
+                const storeClinicName = clinicNameMap[clinic.name] || clinic.name;
+                
+                // デバッグログ
+                console.log(`クリニック: ${clinic.name} -> 店舗検索名: ${storeClinicName}`);
+                console.log('利用可能な店舗クリニック名:', stores.map(s => s.clinicName).filter((v, i, a) => a.indexOf(v) === i));
+                
                 // このクリニックに属する店舗をクリニック名でフィルタリング
                 const clinicStores = stores.filter(store => 
-                    store.clinicName === clinic.name
+                    store.clinicName === storeClinicName
                 );
+                
+                console.log(`${clinic.name} の店舗数: ${clinicStores.length}`);
                 
                 // 店舗がない場合も空配列でMapに追加（全クリニックを表示するため）
                 clinicsWithStores.set(clinic, clinicStores);
@@ -1353,8 +1407,8 @@ class RankingApp {
             // クリニック詳細データ（拡張版）
             const clinicDetailDataMap = {
                 '1': { // DIO
-                    title: '最新医療機器で確実に痩せる！',
-                    subtitle: 'リバウンドしにくい体質へ',
+                    title: '99%が実感した医療痩せ！',
+                    subtitle: '我慢・失敗・リバウンドなし',
                     link: 'DIO ＞',
                     banner: '/images/clinics/dio/dio_detail_bnr.jpg',
                     features: [
@@ -1473,7 +1527,7 @@ class RankingApp {
                         {
                             icon: 'lightbulb',
                             title: '専門家チームが徹底サポート！無理な勧誘なしで安心',
-                            description: 'エミナルクリニックでは、ダイエット専門医や管理栄養士がサポートし、独自開発の医療痩身プログラムを提供しています。医学的根拠に基づいた治療でリバウンドしにくい体質へ改善を目指します。無理な勧誘は一切なく、初めての方も安心です。'
+                            description: 'エミナルクリニックでは、ダイエット専門医や管理栄養士がサポートし、独自開発の医療痩身プログラムを提供しています。医学的根拠に基づいた治療で我慢・失敗・リバウンドなし改善を目指します。無理な勧誘は一切なく、初めての方も安心です。'
                         },
                         {
                             icon: 'phone',
