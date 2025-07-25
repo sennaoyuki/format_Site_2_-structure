@@ -5634,9 +5634,6 @@ section.clinic-rankings .ranking-header-banner {
         font-size: 12px !important;
     }
     
-    .tips-container img {
-        max-width: 150px !important;
-    }
     
     .tips-container .slide {
         padding: 0 5px !important;
@@ -5699,10 +5696,6 @@ section.clinic-rankings .ranking-header-banner {
     .tips-container li,
     .tips-container label {
         font-size: 14px !important;
-    }
-    
-    .tips-container img {
-        max-width: 200px !important;
     }
     
     /* Make grids stack on mobile */
