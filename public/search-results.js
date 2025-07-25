@@ -291,12 +291,15 @@ class SearchResultsApp {
         this.filters.bodyParts = Array.from(document.querySelectorAll('input[name="body-parts"]:checked'))
             .map(checkbox => checkbox.value);
         
-        // 地域フィルター
-        this.filters.regions = Array.from(document.querySelectorAll('input[name="regions"]:checked'))
-            .map(checkbox => checkbox.value);
+        // 地域フィルター（既に設定されている場合は上書きしない）
+        if (this.filters.regions.length === 0) {
+            this.filters.regions = Array.from(document.querySelectorAll('input[name="regions"]:checked'))
+                .map(checkbox => checkbox.value);
+        }
         
         // 店舗数フィルター
-        this.filters.storeCount = document.querySelector('input[name="store-count"]:checked').value;
+        const storeCountInput = document.querySelector('input[name="store-count"]:checked');
+        this.filters.storeCount = storeCountInput ? storeCountInput.value : 'all';
     }
 
     applyFilters() {
@@ -350,11 +353,12 @@ class SearchResultsApp {
             // 地域フィルター
             if (this.filters.regions.length > 0) {
                 // 選択された地域のいずれかに店舗があるかチェック
+                console.log(`${clinic.clinic_name}の地域:`, Array.from(clinic.regions || []));
                 const hasRegion = this.filters.regions.some(region => 
                     clinic.regions && clinic.regions.has(region)
                 );
                 if (!hasRegion) {
-                    console.log(`${clinic.clinic_name}: 選択された地域に店舗なし`);
+                    console.log(`${clinic.clinic_name}: 選択された地域に店舗なし（フィルター対象: ${this.filters.regions}）`);
                     return false;
                 }
             }
