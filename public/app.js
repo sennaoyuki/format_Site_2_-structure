@@ -2399,25 +2399,25 @@ class RankingApp {
                         </p>
                     </div>
                 </div>
-                ${clinicId === '1' ? `
-                    <!-- ディオクリニックの確認事項アコーディオン -->
-                    <div class="disclaimer-accordion" style="margin-top: 15px;">
-                        <button class="disclaimer-header" onclick="toggleDisclaimer('dio-campaign')" style="width: 100%; text-align: left; padding: 8px 12px; background-color: #fafafa; border: 1px solid #f0f0f0; border-radius: 3px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-size: 10px; font-weight: 500; color: #666;">ディオクリニックの確認事項</span>
-                            <span id="dio-campaign-arrow" style="font-size: 8px; color: #999; transition: transform 0.2s;">▼</span>
-                        </button>
-                        <div id="dio-campaign-content" class="disclaimer-content" style="display: none; padding: 8px 12px; background-color: #fcfcfc; border: 1px solid #f0f0f0; border-top: none; border-radius: 0 0 3px 3px; margin-top: -1px;">
-                            <div style="font-size: 9px; color: #777; line-height: 1.4;">
-                                <p>「通院者の99%が体重減少効果あり」※最終体重測定2023/2/1～2023/7/31で薬なし、食事指導なしを除く、3ヶ月コース（ビューティー/リピート除く）の契約終了者が対象。効果には個人差があります。初回体重50kg以上or初回BMI25以上の方限定。</p>
-                                <p>「平均13.7kg減量」※2023/2/1~7/31の3ヶ月コース（楽やせ食事指導なし、ビューティーリピートを除く）全卒業者が対象</p>
-                                <p>「12ヶ月分 0円」※支払総額193,992円を64回、月々3,000円に分割し、12ヶ月分（12回分）の分割金が減額されます。※他キャンペーンとの併用不可※当社指定の信販会社で契約をした方限定※コースのみ契約者適用※契約時の申し出のみ有効。</p>
-                                <p>「モニター75%OFF」※1～3：他キャンペーンと併用不可／契約時の申し出のみ有効コースご契約者様限定、但し一部コースを除く※3：医師の判断で適用できない場合がございます。</p>
-                                <p>「痩せなかったら全額返金保証」※他のキャンペーンの併用不可※初回ご来院時測定体重を元に目標体重を設定し、減量率が50%未満の場合、契約終了を条件に全額返金の適用を受けられます※契約時に同意書契約を結んだ場合のみ適用※落ち幅3.0%での計算に限る※中途解約手数料なし。</p>
-                            </div>
+            </div>
+            ${clinicId === '1' ? `
+                <!-- ディオクリニックの確認事項アコーディオン -->
+                <div class="disclaimer-accordion" style="margin-top: 15px;">
+                    <button class="disclaimer-header" onclick="toggleDisclaimer('dio-campaign')" style="width: 100%; text-align: left; padding: 8px 12px; background-color: #fafafa; border: 1px solid #f0f0f0; border-radius: 3px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
+                        <span style="font-size: 10px; font-weight: 500; color: #666;">ディオクリニックの確認事項</span>
+                        <span id="dio-campaign-arrow" style="font-size: 8px; color: #999; transition: transform 0.2s;">▼</span>
+                    </button>
+                    <div id="dio-campaign-content" class="disclaimer-content" style="display: none; padding: 8px 12px; background-color: #fcfcfc; border: 1px solid #f0f0f0; border-top: none; border-radius: 0 0 3px 3px; margin-top: -1px;">
+                        <div style="font-size: 9px; color: #777; line-height: 1.4;">
+                            <p>「通院者の99%が体重減少効果あり」※最終体重測定2023/2/1～2023/7/31で薬なし、食事指導なしを除く、3ヶ月コース（ビューティー/リピート除く）の契約終了者が対象。効果には個人差があります。初回体重50kg以上or初回BMI25以上の方限定。</p>
+                            <p>「平均13.7kg減量」※2023/2/1~7/31の3ヶ月コース（楽やせ食事指導なし、ビューティーリピートを除く）全卒業者が対象</p>
+                            <p>「12ヶ月分 0円」※支払総額193,992円を64回、月々3,000円に分割し、12ヶ月分（12回分）の分割金が減額されます。※他キャンペーンとの併用不可※当社指定の信販会社で契約をした方限定※コースのみ契約者適用※契約時の申し出のみ有効。</p>
+                            <p>「モニター75%OFF」※1～3：他キャンペーンと併用不可／契約時の申し出のみ有効コースご契約者様限定、但し一部コースを除く※3：医師の判断で適用できない場合がございます。</p>
+                            <p>「痩せなかったら全額返金保証」※他のキャンペーンの併用不可※初回ご来院時測定体重を元に目標体重を設定し、減量率が50%未満の場合、契約終了を条件に全額返金の適用を受けられます※契約時に同意書契約を結んだ場合のみ適用※落ち幅3.0%での計算に限る※中途解約手数料なし。</p>
                         </div>
                     </div>
-                ` : ''}
-            </div>
+                </div>
+            ` : ''}
         `;
     }
 
