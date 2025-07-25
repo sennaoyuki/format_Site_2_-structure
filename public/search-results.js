@@ -645,8 +645,11 @@ class SearchResultsApp {
         const logoLink = document.getElementById('header-logo-link');
         
         if (logoLink && regionId) {
-            const basePath = window.SITE_CONFIG ? window.SITE_CONFIG.basePath : '';
-            logoLink.href = `${basePath}/?region_id=${regionId}`;
+            // 現在のhref値を取得して、region_idを追加
+            const currentHref = logoLink.href;
+            const url = new URL(currentHref, window.location.origin);
+            url.searchParams.set('region_id', regionId);
+            logoLink.href = url.toString();
         }
     }
 }
