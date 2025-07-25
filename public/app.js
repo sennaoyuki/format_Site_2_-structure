@@ -1099,7 +1099,7 @@ class RankingApp {
             // クリニックのロゴ画像パスを設定
             const clinicLogos = {
                 'ディオクリニック': '/images/clinics/dio/dio-logo.jpg',
-                'DIOクリニック': '/images/clinics/dio/dio-logo.jpg',
+                'ディオクリニック': '/images/clinics/dio/dio-logo.jpg',
                 'ウララクリニック': '/images/clinics/urara/urara-logo.jpg',
                 'URARAクリニック': '/images/clinics/urara/urara-logo.jpg',
                 'リエートクリニック': '/images/clinics/lieto/lieto-logo.jpg',
@@ -1429,12 +1429,12 @@ class RankingApp {
                     ],
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'DIOクリニックの今月のお得な情報',
+                        title: 'ディオクリニックの今月のお得な情報',
                         logoSrc: '/images/clinics/dio/dio-logo.jpg',
-                        logoAlt: 'DIOクリニック',
+                        logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
                         ctaUrl: 'https://dioclinic.jp/',
-                        ctaText: 'DIOクリニックの公式サイト',
+                        ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
                 },
@@ -1856,7 +1856,7 @@ class RankingApp {
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                            <p style="font-size:8px;text-align:right">※効果には個人差があります<br>※個人の感想です</p>
                         </div>
 
                         <div class="wrap_long2 disnon2">
@@ -1898,7 +1898,7 @@ class RankingApp {
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                            <p style="font-size:8px;text-align:right">※効果には個人差があります<br>※個人の感想です</p>
                         </div>
 
                         <div class="wrap_long2 disnon2">
@@ -1940,7 +1940,7 @@ class RankingApp {
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                            <p style="font-size:8px;text-align:right">※効果には個人差があります<br>※個人の感想です</p>
                         </div>
                         ` : `
                         <div class="wrap_long2 active">
@@ -1982,7 +1982,7 @@ class RankingApp {
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                            <p style="font-size:8px;text-align:right">※効果には個人差があります<br>※個人の感想です</p>
                         </div>
 
                         <div class="wrap_long2 disnon2">
@@ -2024,7 +2024,7 @@ class RankingApp {
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                            <p style="font-size:8px;text-align:right">※効果には個人差があります<br>※個人の感想です</p>
                         </div>
 
                         <div class="wrap_long2 disnon2">
@@ -2066,7 +2066,7 @@ class RankingApp {
                                     </div>
                                 </div>
                             </div>
-                            <p style="font-size:8px;text-align:right">※個人の感想です</p>
+                            <p style="font-size:8px;text-align:right">※効果には個人差があります<br>※個人の感想です</p>
                         </div>
                         `}
                     </section>
