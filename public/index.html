@@ -959,7 +959,7 @@
         */
 
         // アコーディオン機能（2段階）
-        function toggleMainDisclaimer() {
+        window.toggleMainDisclaimer = function() {
             const content = document.getElementById('main-content');
             const arrow = document.getElementById('main-arrow');
             
@@ -972,7 +972,7 @@
             }
         }
         
-        function toggleDisclaimer(clinicId) {
+        window.toggleDisclaimer = function(clinicId) {
             const content = document.getElementById(clinicId + '-content');
             const arrow = document.getElementById(clinicId + '-arrow');
             
