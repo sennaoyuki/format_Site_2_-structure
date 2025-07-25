@@ -83,18 +83,27 @@ class DisplayManager {
         this.closeSidebar = document.getElementById('close-sidebar');
     }
 
-    // 地域セレクターを更新し、選択された地域を設定
+    // 地域セレクターを更新（検索用、現在の地域選択は反映しない）
     updateRegionSelector(regions, selectedRegionId) {
         if (!this.regionSelect) {
             console.warn('Region selector not found');
             return;
         }
         this.regionSelect.innerHTML = '';
+        
+        // 「全地域」オプションを追加
+        const allOption = document.createElement('option');
+        allOption.value = '';
+        allOption.textContent = '全地域';
+        allOption.selected = true; // デフォルトで「全地域」を選択
+        this.regionSelect.appendChild(allOption);
+        
+        // 各地域を追加
         regions.forEach(region => {
             const option = document.createElement('option');
             option.value = region.id;
             option.textContent = region.name;
-            option.selected = region.id === selectedRegionId;
+            // 現在の地域選択は反映しない
             this.regionSelect.appendChild(option);
         });
     }
@@ -640,11 +649,13 @@ class RankingApp {
     }
 
     setupEventListeners() {
-        // 地域選択の変更イベント
+        // 地域選択の変更イベント（検索機能での地域選択はサイト全体に影響しない）
+        /*
         this.displayManager.regionSelect.addEventListener('change', (e) => {
             const newRegionId = e.target.value;
             this.changeRegion(newRegionId);
         });
+        */
 
         // クリニック名検索機能
         if (this.displayManager.searchInput) {
