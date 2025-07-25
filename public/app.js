@@ -1168,7 +1168,7 @@ class RankingApp {
             
             // 実際のデータ設定
             const achievements = {
-                1: 'ダイエット成功率99％<br>平均13.7kg減',
+                1: 'ダイエット成功率99％<span class="info-icon" onclick="showDisclaimerInfo(\'dio-success-rate\')" title="詳細情報">ⓘ</span><br>平均13.7kg減',
                 2: 'ダイエット成功率94%',
                 3: 'ダイエット成功率94%',
             };
