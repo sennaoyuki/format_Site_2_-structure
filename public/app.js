@@ -892,9 +892,11 @@ class RankingApp {
             // 地域フィルタリングの条件
             let regionMatch = true;
             if (regionFilter) {
+                console.log(`Region filter active: ${regionFilter} for clinic: ${clinicName}`);
                 // クリニックに対応する店舗が選択された地域にあるかチェック
                 const clinicStores = this.getClinicStoresByRegion(clinicName, regionFilter);
                 regionMatch = clinicStores.length > 0;
+                console.log(`Region match result: ${regionMatch}`);
             }
             
             // フィルター条件の判定
