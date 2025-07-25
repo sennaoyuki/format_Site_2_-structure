@@ -186,14 +186,15 @@ class DisplayManager {
             }
 
             // バナー画像の設定（クリニックIDに基づく）
+            const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const bannerImages = {
-                1: '/images/clinics/dio/dio-logo.jpg',
-                2: '/images/clinics/eminal/eminal-logo.jpg',
-                3: '/images/clinics/urara/urara-logo.jpg',
-                4: '/images/clinics/lieto/lieto-logo.jpg',
-                5: '/images/clinics/sbc/sbc-logo.jpg'
+                1: `${imagesPath}/clinics/dio/dio-logo.jpg`,
+                2: `${imagesPath}/clinics/eminal/eminal-logo.jpg`,
+                3: `${imagesPath}/clinics/urara/urara-logo.jpg`,
+                4: `${imagesPath}/clinics/lieto/lieto-logo.jpg`,
+                5: `${imagesPath}/clinics/sbc/sbc-logo.jpg`
             };
-            const bannerImage = bannerImages[clinic.id] || '/images/clinics/dio/dio-logo.jpg';
+            const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/dio/dio-logo.jpg`;
 
             // 押しメッセージの定義
             const pushMessages = {
@@ -223,7 +224,7 @@ class DisplayManager {
                         ${clinic.name}
                     </div>
                     <div class="clinic-banner">
-                        <img src="${bannerImage}" alt="${rankNum}位バナー">
+                        <img src="${bannerImage}" alt="${rankNum}位バナー" onerror="this.style.display='none'">
                     </div>
                     <div class="push-message" style="padding: 0px; text-align: center; font-size: clamp(10px, 2.3vw, 15px); line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0; height: 15%;">
                         ${pushMessage}
@@ -1211,17 +1212,18 @@ class RankingApp {
             const rankNum = clinic.rank || index + 1;
             
             // クリニックのロゴ画像パスを設定
+            const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const clinicLogos = {
-                'ディオクリニック': '/images/clinics/dio/dio-logo.jpg',
-                'ディオクリニック': '/images/clinics/dio/dio-logo.jpg',
-                'ウララクリニック': '/images/clinics/urara/urara-logo.jpg',
-                'URARAクリニック': '/images/clinics/urara/urara-logo.jpg',
-                'リエートクリニック': '/images/clinics/lieto/lieto-logo.jpg',
-                'エミナルクリニック': '/images/clinics/eminal/eminal-logo.jpg',
-                'SBCクリニック': '/images/clinics/sbc/sbc-logo.jpg',
-                '湘南美容クリニック': '/images/clinics/sbc/sbc-logo.jpg'
+                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.jpg`,
+                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.jpg`,
+                'ウララクリニック': `${imagesPath}/clinics/urara/urara-logo.jpg`,
+                'URARAクリニック': `${imagesPath}/clinics/urara/urara-logo.jpg`,
+                'リエートクリニック': `${imagesPath}/clinics/lieto/lieto-logo.jpg`,
+                'エミナルクリニック': `${imagesPath}/clinics/eminal/eminal-logo.jpg`,
+                'SBCクリニック': `${imagesPath}/clinics/sbc/sbc-logo.jpg`,
+                '湘南美容クリニック': `${imagesPath}/clinics/sbc/sbc-logo.jpg`
             };
-            const logoPath = clinicLogos[clinic.name] || '/images/clinics/dio/dio-logo.jpg';
+            const logoPath = clinicLogos[clinic.name] || `${imagesPath}/clinics/dio/dio-logo.jpg`;
             
             tr.innerHTML = `
                 <td class="ranking-table_td1">
@@ -2232,7 +2234,7 @@ class RankingApp {
             html += `
                 <div class='shop'>
                     <div class='shop-image'>
-                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '/images'}/clinics/${clinicName}/${clinicName}-logo.jpg'" />
+                        <img src="${this.getStoreImage(clinicName, index + 1)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images'}/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
@@ -2254,7 +2256,7 @@ class RankingApp {
             html += `
                 <div class='shop hidden-content hidden'>
                     <div class='shop-image'>
-                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath : '/images'}/clinics/${clinicName}/${clinicName}-logo.jpg'" />
+                        <img src="${this.getStoreImage(clinicName, index + 4)}" alt="${store.name}" onerror="this.src='${window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images'}/clinics/${clinicName}/${clinicName}-logo.jpg'" />
                     </div>
                     <div class='shop-info'>
                         <div class='shop-name'>
