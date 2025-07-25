@@ -689,10 +689,10 @@ class RankingApp {
                 // フィルター値を取得
                 const params = new URLSearchParams();
                 
-                // 地域
+                // 地域（検索フィルター用）
                 const regionFilter = document.getElementById('sidebar-region-select');
                 if (regionFilter && regionFilter.value) {
-                    params.append('region', regionFilter.value);
+                    params.append('search-region', regionFilter.value);
                 }
                 
                 // クリニック名

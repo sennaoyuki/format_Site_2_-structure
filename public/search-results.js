@@ -544,12 +544,19 @@ class SearchResultsApp {
     updateURL() {
         const params = new URLSearchParams();
         
+        // 既存のregion_idを保持
+        const currentParams = new URLSearchParams(window.location.search);
+        const regionId = currentParams.get('region_id');
+        if (regionId) {
+            params.set('region_id', regionId);
+        }
+        
         if (this.filters.bodyParts.length > 0) {
             params.set('bodyParts', this.filters.bodyParts.join(','));
         }
         
         if (this.filters.regions.length > 0) {
-            params.set('regions', this.filters.regions.join(','));
+            params.set('search-region', this.filters.regions.join(','));
         }
         
         if (this.filters.storeCount !== 'all') {
@@ -575,8 +582,8 @@ class SearchResultsApp {
             });
         }
         
-        // URLパラメータから地域を設定（単数形と複数形の両方に対応）
-        const region = params.get('region') || params.get('regions');
+        // URLパラメータから地域を設定（search-region、region、regions に対応）
+        const region = params.get('search-region') || params.get('region') || params.get('regions');
         if (region) {
             region.split(',').forEach(reg => {
                 const checkbox = document.querySelector(`input[name="regions"][value="${reg}"]`);
