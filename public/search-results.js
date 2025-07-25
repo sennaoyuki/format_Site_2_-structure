@@ -412,7 +412,6 @@ class SearchResultsApp {
                         <div class="clinic-logo-placeholder" style="width: 80px; height: 80px; background: ${logoColor}; border-radius: 8px; display: none; align-items: center; justify-content: center; font-weight: bold; color: white; font-size: 24px;">${clinic.clinic_name.substring(0, 2)}</div>
                         <div class="clinic-info">
                             <h3 class="clinic-name">${clinic.clinic_name}</h3>
-                            <p class="clinic-region">${regionsText || '全国'}</p>
                         </div>
                     </div>
                     <div class="result-card-features">
