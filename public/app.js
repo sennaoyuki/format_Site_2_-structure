@@ -268,7 +268,7 @@ class DisplayManager {
         }
         
         // 店舗情報を表示
-        let html = '<div class="brand-section"><h3>地域の店舗情報</h3>';
+        let html = '<div class="brand-section">';
         
         // クリニックごとに店舗をグループ化して表示
         clinicsWithStores.forEach((clinicStores, clinic) => {
