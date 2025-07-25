@@ -249,8 +249,14 @@ class DisplayManager {
             return;
         }
         
+        // デバッグログ
+        console.log('updateStoresDisplay called:');
+        console.log('stores:', stores?.length || 0);
+        console.log('clinicsWithStores size:', clinicsWithStores?.size || 0);
+        
         // 店舗データがない場合は非表示にする
         if (!stores || stores.length === 0) {
+            console.log('No stores data, hiding brand section');
             brandSectionWrapper.innerHTML = '';
             return;
         }
