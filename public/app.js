@@ -609,12 +609,16 @@ class DataManager {
 
     // 地域IDで店舗を取得（store_viewデータを使用してランキングに対応した店舗を取得）
     getStoresByRegionId(regionId) {
+        console.log(`getStoresByRegionId called with regionId: ${regionId}`);
+        
         // store_viewから該当地域のデータを取得
         const storeView = this.storeViews.find(sv => sv.regionId === regionId);
+        console.log('storeView found:', !!storeView);
         if (!storeView) return [];
         
         // ランキングデータを取得して、表示されているクリニックを特定
         const ranking = this.getRankingByRegionId(regionId);
+        console.log('ranking found:', !!ranking);
         if (!ranking) return [];
         
         // 表示する店舗IDのリストを作成
@@ -631,9 +635,14 @@ class DataManager {
         });
         
         // 店舗IDに基づいて実際の店舗情報を取得
-        return this.stores.filter(store => 
+        const result = this.stores.filter(store => 
             storeIdsToShow.includes(store.id)
         );
+        
+        console.log('storeIdsToShow:', storeIdsToShow);
+        console.log('filtered stores count:', result.length);
+        
+        return result;
     }
 
     // クリニック名で店舗を取得
