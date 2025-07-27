@@ -188,13 +188,13 @@ class DisplayManager {
             // バナー画像の設定（クリニックIDに基づく）
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const bannerImages = {
-                1: `${imagesPath}/clinics/dio/dio-logo.jpg`,
-                2: `${imagesPath}/clinics/eminal/eminal-logo.jpg`,
-                3: `${imagesPath}/clinics/urara/urara-logo.jpg`,
-                4: `${imagesPath}/clinics/lieto/lieto-logo.jpg`,
-                5: `${imagesPath}/clinics/sbc/sbc-logo.jpg`
+                1: `${imagesPath}/clinics/dio/dio-logo.webp`,
+                2: `${imagesPath}/clinics/eminal/eminal-logo.webp`,
+                3: `${imagesPath}/clinics/urara/urara-logo.webp`,
+                4: `${imagesPath}/clinics/lieto/lieto-logo.webp`,
+                5: `${imagesPath}/clinics/sbc/sbc-logo.webp`
             };
-            const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/dio/dio-logo.jpg`;
+            const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/dio/dio-logo.webp`;
 
             // 押しメッセージの定義
             const pushMessages = {
@@ -1214,16 +1214,16 @@ class RankingApp {
             // クリニックのロゴ画像パスを設定
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const clinicLogos = {
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.jpg`,
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.jpg`,
-                'ウララクリニック': `${imagesPath}/clinics/urara/urara-logo.jpg`,
-                'URARAクリニック': `${imagesPath}/clinics/urara/urara-logo.jpg`,
-                'リエートクリニック': `${imagesPath}/clinics/lieto/lieto-logo.jpg`,
-                'エミナルクリニック': `${imagesPath}/clinics/eminal/eminal-logo.jpg`,
-                'SBCクリニック': `${imagesPath}/clinics/sbc/sbc-logo.jpg`,
-                '湘南美容クリニック': `${imagesPath}/clinics/sbc/sbc-logo.jpg`
+                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
+                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
+                'ウララクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
+                'URARAクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
+                'リエートクリニック': `${imagesPath}/clinics/lieto/lieto-logo.webp`,
+                'エミナルクリニック': `${imagesPath}/clinics/eminal/eminal-logo.webp`,
+                'SBCクリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`,
+                '湘南美容クリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`
             };
-            const logoPath = clinicLogos[clinic.name] || `${imagesPath}/clinics/dio/dio-logo.jpg`;
+            const logoPath = clinicLogos[clinic.name] || `${imagesPath}/clinics/dio/dio-logo.webp`;
             
             tr.innerHTML = `
                 <td class="ranking-table_td1">
@@ -1546,7 +1546,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'ディオクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/dio/dio-logo.jpg',
+                        logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
                         ctaUrl: 'https://dioclinic.jp/',
@@ -1650,7 +1650,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'エミナルクリニック新春キャンペーン',
-                        logoSrc: '/images/clinics/eminal/eminal-logo.jpg',
+                        logoSrc: '/images/clinics/eminal/eminal-logo.webp',
                         logoAlt: 'エミナルクリニック',
                         description: '【期間限定】<br>全身+VIO脱毛が<br>月額1,000円から始められる！',
                         ctaUrl: 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
@@ -1732,7 +1732,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'URARAクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/urara/urara-logo.jpg',
+                        logoSrc: '/images/clinics/urara/urara-logo.webp',
                         logoAlt: 'URARAクリニック',
                         description: '痩せなければ返金保証<br>さらに脂肪買取制度あり',
                         ctaUrl: 'https://urara-clinic.com/',
@@ -1815,7 +1815,7 @@ class RankingApp {
                     campaignInfo: {
                         header: 'INFORMATION!',
                         title: 'リエートクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/lieto/lieto-logo.jpg',
+                        logoSrc: '/images/clinics/lieto/lieto-logo.webp',
                         logoAlt: 'リエートクリニック',
                         description: 'モニター最大80％OFF<br>痩せなければ返金保証あり',
                         ctaUrl: 'https://lietoclinic.com/',
