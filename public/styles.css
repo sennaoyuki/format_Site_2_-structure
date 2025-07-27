@@ -258,6 +258,30 @@ section, main, header, footer, nav, aside, article {
     font-size: 1rem;
 }
 
+/* セレクトボックスの矢印を黒色に */
+.sidebar-select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
+/* 全てのselect要素の矢印を黒色に統一 */
+select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 20px;
+    padding-right: 40px;
+}
+
 .sidebar-overlay {
     position: fixed;
     top: 0;
@@ -1423,7 +1447,6 @@ body > .container main section {
     justify-content: center;
     width: 36px;
     height: 36px;
-    background: linear-gradient(135deg, #cfe8ff 0%, #21d2ce 100%);
     border-radius: 8px;
     color: white;
     font-size: 1.3rem;
@@ -3668,7 +3691,6 @@ section.clinic-rankings .ranking-header-banner {
         font-size: 1.1rem;
         border-radius: 6px;
         box-shadow: 0 3px 10px rgba(102, 126, 234, 0.25);
-        padding: 6px;
     }
     
     .pr-badge {
