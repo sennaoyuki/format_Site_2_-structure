@@ -1472,7 +1472,7 @@ class RankingApp {
                     title: '99%が実感した医療痩せ！<span class="info-icon" onclick="showDisclaimerInfo(\'dio-success-rate\')" title="詳細情報">ⓘ</span>',
                     subtitle: '我慢・失敗・リバウンド防止',
                     link: 'DIO ＞',
-                    banner: '/images/clinics/dio/dio_detail_bnr.jpg',
+                    banner: '/images/clinics/dio/dio_detail_bnr.webp',
                     features: [
                         '医療ダイエット', '医療痩身', 'リバウンド防止',
                         '医師監修', '栄養士指導', '切らない痩身',
@@ -1558,7 +1558,7 @@ class RankingApp {
                     title: '次世代医療で理想のボディへ！',
                     subtitle: '成功率94%の高い実績',
                     link: 'エミナルクリニック ＞',
-                    banner: '/images/clinics/eminal/eminal_detail_bnr.jpg',
+                    banner: '/images/clinics/eminal/eminal_detail_bnr.webp',
                     features: ['最新医療機器導入', '全額返金保証制度'],
                     priceMain: '医療痩身コース',
                     priceValue: '月々9,780円',
@@ -1661,7 +1661,7 @@ class RankingApp {
                     title: 'リーズナブルな価格設定',
                     subtitle: '学生に人気の医療痩身',
                     link: 'ウララクリニック ＞',
-                    banner: '/images/clinics/urara/urara_detail_bnr.jpg',
+                    banner: '/images/clinics/urara/urara_detail_bnr.webp',
                     features: [
                         '医療ダイエット', '医療痩身', '美痩身',
                         'リバウンド防止', '医師監修', '管理栄養士指導',
@@ -1744,7 +1744,7 @@ class RankingApp {
                     title: '最新技術で安心痩身',
                     subtitle: '個人に合わせたオーダーメイド施術',
                     link: 'リエートクリニック ＞',
-                    banner: '/images/clinics/lieto/lieto_detail_bnr.jpg',
+                    banner: '/images/clinics/lieto/lieto_detail_bnr.webp',
                     features: [
                         '医療ダイエット', '医療痩身', 'リバウンド防止',
                         '医師監修', '管理栄養士指導', '切らない痩身',
@@ -1831,7 +1831,7 @@ class RankingApp {
             
             // 5番目のクリニック（湘南美容クリニック）の場合、bannerを追加
             if (clinicId === '5' && !data.banner) {
-                data.banner = '/images/clinics/sbc/sbc_detail_bnr.jpg';
+                data.banner = '/images/clinics/sbc/sbc_detail_bnr.webp';
             }
             
             // 店舗データを動的に取得（store_view.csvに基づいてフィルタリング）
