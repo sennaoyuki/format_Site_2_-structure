@@ -8,10 +8,24 @@
     <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- 重要なリソースのpreload -->
+    <link rel="preload" as="image" href="../images/MV2.webp" fetchpriority="high">
+    <link rel="preload" as="style" href="../styles.css?v=2025072201">
+    <link rel="preload" as="font" href="https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.woff2" type="font/woff2" crossorigin>
+    <!-- スタイルシート -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="../styles.css?v=2025072201">
     <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Critical CSS -->
+    <style>
+        body{margin:0;padding:0;font-family:'Noto Sans JP',sans-serif;background-color:#fafafa;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+        body>*{width:100%;max-width:768px;margin:0 auto}
+        .container{max-width:768px!important;margin:0 auto;padding:0 20px;box-sizing:border-box}
+        .hero-section{margin:0;position:relative}.hero-image-wrapper{position:relative;width:100%;max-width:768px;margin:0 auto;overflow:hidden}
+        .hero-image{width:100%;height:auto;display:block}
+        @media(max-width:768px){.container{padding:0}}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -39,7 +53,7 @@
         <!-- メインビジュアル -->
         <section class="hero-section">
             <div class="hero-image-wrapper">
-                <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image">
+                <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image" loading="eager" fetchpriority="high">
                 <div id="mv-region-name" style="position:absolute;top: 6%;left: 1%;width: clamp(60px, 15vw, 115px);text-align: center;color: #808080;font-size: clamp(14px, 3.5vw, 27px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
                 <div style="position:absolute;top: 1.88%;left: 100.5%;width: clamp(60px, 15vw, 115px);text-align: center;color: #838383;font-size: clamp(12px, 2vw, 15px);font-weight: 100;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">[PR]</div>
             </div>
@@ -845,8 +859,8 @@
         </div>
     </div>
 
-    <script src="config.js"></script>
-    <script src="../app.js"></script>
+    <script src="config.js" defer></script>
+    <script src="../app.js" defer></script>
     <script>
         // 比較表のタブ切り替え機能
         document.addEventListener('DOMContentLoaded', function() {
