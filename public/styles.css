@@ -21,16 +21,16 @@ body {
     min-height: 100vh;
 }
 
-/* メインコンテナ - PC表示では1200px、モバイルでは768pxに制限 */
+/* メインコンテナ - PC表示でも最大768pxに制限 */
 body > * {
     width: 100%;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
 }
 
-/* 全てのセクションをPC表示では1200px内に収める */
+/* 全てのセクションを768px内に収める */
 section, main, header, footer, nav, aside, article {
-    max-width: 1200px;
+    max-width: 768px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -39,7 +39,7 @@ section, main, header, footer, nav, aside, article {
 .full-width-section > *,
 [class*="banner"] > *,
 [class*="hero"] > * {
-    max-width: 1200px;
+    max-width: 768px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -1257,9 +1257,9 @@ body {
     font-size: 14px;
 }
 
-/* PC表示では全体のレイアウトを1200pxに制限 */
+/* PC表示でも全体のレイアウトを768pxに制限 */
 body > .container {
-    max-width: 1200px !important;
+    max-width: 768px !important;
     width: 100%;
     margin: 0 auto;
     box-sizing: border-box;
@@ -1270,8 +1270,8 @@ body > .container {
 /* 大画面でのセンタリング */
 @media (min-width: 769px) {
     body > .container {
-        width: 100%;
-        max-width: 1200px !important;
+        width: 768px !important;
+        max-width: 768px !important;
         margin: 0 auto;
         box-sizing: border-box !important;
     }
@@ -1283,7 +1283,7 @@ body > .container {
         justify-content: space-evenly;
         gap: 8px;
         padding: 20px 5px !important;
-        max-width: 1200px;
+        max-width: 768px;
         margin: 0 auto;
     }
     
@@ -1316,7 +1316,7 @@ body > .container main section {
     .site-header .header-content {
         padding-left: 20px;
         padding-right: 20px;
-        max-width: 1200px;
+        max-width: 768px;
         margin: 0 auto;
     }
     
@@ -1327,14 +1327,14 @@ body > .container main section {
     .tips-container {
         padding-left: 20px;
         padding-right: 20px;
-        max-width: 1200px;
+        max-width: 768px;
         margin: 20px auto;
     }
     
-    /* ランキングセクションの内部要素を1200px内に収める */
+    /* ランキングセクションの内部要素を768px内に収める */
     .clinic-rankings {
         width: 100%;
-        max-width: 1200px;
+        max-width: 768px;
         margin: 0 auto;
     }
     
@@ -1343,16 +1343,16 @@ body > .container main section {
         max-width: 100%;
     }
     
-    /* 比較テーブルを1200px内に収める */
+    /* 比較テーブルを768px内に収める */
     .js-cbn-table {
-        max-width: 1200px;
+        max-width: 768px;
         margin: 0 auto;
         padding: 0 10px;
     }
     
-    /* 詳細セクションも1200px内に収める */
+    /* 詳細セクションも768px内に収める */
     .detail-item {
-        max-width: 1200px;
+        max-width: 768px;
         margin: 0 auto;
         padding: 0 10px;
     }
@@ -1367,7 +1367,7 @@ body > .container main section {
 
 /* コンテナ */
 .container {
-    max-width: 1200px !important;
+    max-width: 768px !important;
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
@@ -1394,7 +1394,7 @@ body > .container main section {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 0 20px;
     position: relative;
@@ -1923,7 +1923,7 @@ section.clinic-rankings .ranking-header-banner {
     display: flex;
     align-items: center;
     justify-content: center;
-    max-width: 1200px;
+    max-width: 768px;
     margin-left: auto;
     margin-right: auto;
 }
@@ -2405,7 +2405,7 @@ section.clinic-rankings .ranking-header-banner {
 /* 比較表コンテナの最小幅 */
 .js-cbn-table table {
     width: 100%;
-    max-width: 1200px;
+    max-width: 768px;
 }
 
 /* モバイル対応 - 横スクロール排除 */
@@ -2637,7 +2637,7 @@ section.clinic-rankings .ranking-header-banner {
 
 /* ===== 案件詳細セクション ===== */
 .clinic-details-section {
-    max-width: 1200px;
+    max-width: 768px;
     margin: 60px auto;
     position: relative;
 }
@@ -3431,7 +3431,7 @@ section.clinic-rankings .ranking-header-banner {
 
 .footer_contents {
     width: 100%;
-    max-width: 1200px;
+    max-width: 768px;
     margin: 0 auto;
     padding: 0 40px 30px 40px;
     /* overflow: hidden; */
