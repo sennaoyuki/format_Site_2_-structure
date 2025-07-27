@@ -1937,7 +1937,7 @@ class RankingApp {
                         <div class="wrap_long2 active">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon4.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon4.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1950,7 +1950,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon5.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon5.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1963,7 +1963,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon6.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon6.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1979,7 +1979,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon4.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon4.webp" alt="レビューアイコン">
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -1992,7 +1992,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon5.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon5.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2005,7 +2005,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon6.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon6.webp" alt="レビューアイコン">
                                     <span>★★★☆☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2021,7 +2021,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon7.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon7.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2034,7 +2034,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon8.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon8.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2047,7 +2047,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon9.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon9.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2063,7 +2063,7 @@ class RankingApp {
                         <div class="wrap_long2 active">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon${rank === 1 ? '1' : rank === 3 ? '7' : rank === 4 ? '10' : '3'}.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon${rank === 1 ? '1' : rank === 3 ? '7' : rank === 4 ? '10' : '3'}.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2076,7 +2076,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon${rank === 1 ? '2' : rank === 3 ? '8' : rank === 4 ? '1' : '4'}.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon${rank === 1 ? '2' : rank === 3 ? '8' : rank === 4 ? '1' : '4'}.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2089,7 +2089,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon${rank === 1 ? '3' : rank === 3 ? '9' : rank === 4 ? '2' : '5'}.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon${rank === 1 ? '3' : rank === 3 ? '9' : rank === 4 ? '2' : '5'}.webp" alt="レビューアイコン">
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2105,7 +2105,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon9.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon9.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2118,7 +2118,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon5.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon5.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2131,7 +2131,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon6.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon6.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2147,7 +2147,7 @@ class RankingApp {
                         <div class="wrap_long2 disnon2">
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon7.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon7.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2160,7 +2160,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon8.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon8.webp" alt="レビューアイコン">
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2173,7 +2173,7 @@ class RankingApp {
 
                             <div class="review_tab_box_in">
                                 <div class="review_tab_box_img">
-                                    <img src="/images/review_icon/review_icon9.png" alt="レビューアイコン">
+                                    <img src="/images/review_icon/review_icon9.webp" alt="レビューアイコン">
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
@@ -2430,14 +2430,14 @@ class RankingApp {
         
         // クリニックごとの画像拡張子を定義
         const imageExtensions = {
-            'dio': 'jpg',
+            'dio': 'webp',
             'eminal': 'webp',
-            'lieto': 'jpg',
-            'sbc': 'jpg',
-            'urara': 'jpg'
+            'lieto': 'webp',
+            'sbc': 'webp',
+            'urara': 'webp'
         };
         
-        const extension = imageExtensions[clinicName] || 'jpg';
+        const extension = imageExtensions[clinicName] || 'webp';
         const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
         const storeImagePath = `${imagesPath}/clinics/${clinicName}/${clinicName}_clinic/clinic_image_${paddedNumber}.${extension}`;
         
