@@ -8,24 +8,50 @@
     <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <!-- 重要なリソースのpreload -->
     <link rel="preload" as="image" href="images/MV2.webp" fetchpriority="high">
     <link rel="preload" as="style" href="styles.css?v=2025072201">
     <link rel="preload" as="font" href="https://fonts.gstatic.com/s/notosansjp/v53/-F6jfjtqLzI2JPCgQBnw7HFyzSD-AsregP8VFBEj75s.woff2" type="font/woff2" crossorigin>
     <!-- スタイルシート -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="styles.css?v=2025072201">
+    <link rel="stylesheet" href="styles.css?v=2025072201" media="all">
     <link rel="icon" type="image/png" href="images/favicon.png">
     <!-- Critical CSS -->
     <style>
-        body{margin:0;padding:0;font-family:'Noto Sans JP',sans-serif;background-color:#fafafa;display:flex;flex-direction:column;align-items:center;min-height:100vh}
+        /* Reset and base styles */
+        *{box-sizing:border-box}
+        body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background-color:#fafafa;display:flex;flex-direction:column;align-items:center;min-height:100vh}
         body>*{width:100%;max-width:768px;margin:0 auto}
+        
+        /* Container */
         .container{max-width:768px!important;margin:0 auto;padding:0 20px;box-sizing:border-box}
-        .hero-section{margin:0;position:relative}.hero-image-wrapper{position:relative;width:100%;max-width:768px;margin:0 auto;overflow:hidden}
+        
+        /* Header */
+        .site-header{position:sticky;top:0;background:#fff;width:100%;z-index:1000;border-bottom:1px solid #f0f0f0}
+        .header-content{display:flex;justify-content:space-between;align-items:center;max-width:768px;margin:0 auto;padding:0 20px;position:relative}
+        .site-logo{font-size:1.25rem;font-weight:700;color:#333;letter-spacing:1px}
+        
+        /* Hero section */
+        .hero-section{margin:0;position:relative}
+        .hero-image-wrapper{position:relative;width:100%;max-width:768px;margin:0 auto;overflow:hidden}
         .hero-image{width:100%;height:auto;display:block}
-        @media(max-width:768px){.container{padding:0}}
+        
+        /* Prevent layout shift */
+        img{max-width:100%;height:auto}
+        
+        /* Mobile styles */
+        @media(max-width:768px){
+            .container{padding:0}
+            .header-content{padding:0}
+        }
+        
+        /* Font loading optimization */
+        .fonts-loaded body{font-family:'Noto Sans JP',sans-serif}
     </style>
+    <!-- Font loading detection -->
+    <script>'fonts' in document&&document.fonts.ready.then(function(){document.documentElement.classList.add('fonts-loaded')})</script>
 </head>
 <body>
     <div class="container">
