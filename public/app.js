@@ -710,6 +710,11 @@ class RankingApp {
 
             // 初期表示の更新
             this.updatePageContent(this.currentRegionId);
+            
+            // 地図アコーディオンの設定
+            setTimeout(() => {
+                this.clinicDetailHandler.setupMapAccordions();
+            }, 100);
         } catch (error) {
             console.error('アプリケーションの初期化に失敗しました:', error);
             this.displayManager.showError('データの読み込みに失敗しました。ページを再読み込みしてください。');
@@ -1076,6 +1081,11 @@ class RankingApp {
             
             // 詳細コンテンツの更新
             this.updateClinicDetails(allClinics, ranking, regionId);
+
+            // 地図アコーディオンの設定
+            setTimeout(() => {
+                this.clinicDetailHandler.setupMapAccordions();
+            }, 100);
 
             // エラーメッセージを隠す
             this.displayManager.hideError();
@@ -2418,9 +2428,39 @@ class RankingApp {
                             ${store.address || '住所情報なし'}
                         </div>
                     </div>
-                    <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
-                    地図
+                    <a class="shop-btn map-toggle-btn" href="javascript:void(0);" data-store-id="${storeId}-${index}">
+                        <i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
                     </a>
+                    <!-- 地図アコーディオン -->
+                    <div class="map-accordion" id="map-${storeId}-${index}" style="display: none;">
+                        <div class="map-content">
+                            <div class="map-iframe-container">
+                                ${this.generateMapIframe(store.address)}
+                            </div>
+                            <div class="map-details">
+                                <div class="map-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="map-detail-label">住所:</span>
+                                    <span>${store.address || '住所情報なし'}</span>
+                                </div>
+                                ${store.access ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-train"></i>
+                                    <span class="map-detail-label">アクセス:</span>
+                                    <span>${store.access}</span>
+                                </div>
+                                ` : ''}
+                                ${store.hours ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="map-detail-label">営業時間:</span>
+                                    <span>${store.hours}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `;
         });
@@ -2440,9 +2480,39 @@ class RankingApp {
                             ${store.address || '住所情報なし'}
                         </div>
                     </div>
-                    <a class="shop-btn" href="javascript:void(0);"><i class='fas fa-map-marker-alt btn-icon'></i>
-                    地図
+                    <a class="shop-btn map-toggle-btn" href="javascript:void(0);" data-store-id="${storeId}-${index + 3}">
+                        <i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
                     </a>
+                    <!-- 地図アコーディオン -->
+                    <div class="map-accordion" id="map-${storeId}-${index + 3}" style="display: none;">
+                        <div class="map-content">
+                            <div class="map-iframe-container">
+                                ${this.generateMapIframe(store.address)}
+                            </div>
+                            <div class="map-details">
+                                <div class="map-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="map-detail-label">住所:</span>
+                                    <span>${store.address || '住所情報なし'}</span>
+                                </div>
+                                ${store.access ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-train"></i>
+                                    <span class="map-detail-label">アクセス:</span>
+                                    <span>${store.access}</span>
+                                </div>
+                                ` : ''}
+                                ${store.hours ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="map-detail-label">営業時間:</span>
+                                    <span>${store.hours}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             `;
         });
@@ -2631,6 +2701,67 @@ class RankingApp {
         }
         const region = window.dataManager.getRegionById(regionId);
         return region ? region.name : '';
+    }
+
+    // Google Maps iframeを生成
+    generateMapIframe(address) {
+        if (!address) {
+            return '<p>住所情報がありません</p>';
+        }
+        
+        // 住所をエンコード
+        const encodedAddress = encodeURIComponent(address);
+        
+        // Google Maps Embed APIのURL
+        const mapUrl = `https://maps.google.com/maps?q=${encodedAddress}&output=embed&z=16`;
+        
+        return `
+            <iframe 
+                src="${mapUrl}"
+                width="100%" 
+                height="300" 
+                style="border:0;" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="Google Maps">
+            </iframe>
+        `;
+    }
+
+    // 地図アコーディオンのイベントリスナーを設定
+    setupMapAccordions() {
+        // 既存のイベントリスナーを削除
+        document.querySelectorAll('.map-toggle-btn').forEach(btn => {
+            const newBtn = btn.cloneNode(true);
+            btn.parentNode.replaceChild(newBtn, btn);
+        });
+
+        // 新しいイベントリスナーを追加
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.map-toggle-btn')) {
+                e.preventDefault();
+                const button = e.target.closest('.map-toggle-btn');
+                const storeId = button.getAttribute('data-store-id');
+                const accordion = document.getElementById(`map-${storeId}`);
+                
+                if (accordion) {
+                    const isOpen = accordion.style.display !== 'none';
+                    
+                    // 他のアコーディオンを閉じる
+                    document.querySelectorAll('.map-accordion').forEach(acc => {
+                        acc.style.display = 'none';
+                    });
+                    
+                    // クリックしたアコーディオンを開く/閉じる
+                    if (!isOpen) {
+                        accordion.style.display = 'block';
+                        // スムーズスクロール
+                        accordion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                }
+            }
+        });
     }
 }
 
