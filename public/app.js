@@ -1444,10 +1444,14 @@ class RankingApp {
     setupDetailScrollLinks() {
         // 少し遅延を入れてDOMが完全に生成されるのを待つ
         setTimeout(() => {
-            document.querySelectorAll('.detail-scroll-link').forEach(link => {
+            const links = document.querySelectorAll('.detail-scroll-link');
+            console.log('Found detail-scroll-link elements:', links.length);
+            
+            links.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const rank = parseInt(link.getAttribute('data-rank'));
+                    console.log('Detail link clicked, rank:', rank);
                     this.scrollToClinicDetail(rank);
                 });
             });
@@ -1456,26 +1460,36 @@ class RankingApp {
     
     // クリニック詳細へスクロール
     scrollToClinicDetail(rank) {
+        console.log('scrollToClinicDetail called with rank:', rank);
         const detailSection = document.getElementById('clinic-details-list');
+        console.log('detailSection:', detailSection);
+        
         if (detailSection) {
             // 対応するクリニックの詳細要素を探す
             const targetElement = detailSection.querySelector(`.ranking_box_${rank}`);
+            console.log('targetElement:', targetElement);
+            console.log('Available elements:', detailSection.querySelectorAll('[class*="ranking_box"]'));
+            
             if (targetElement) {
                 // 要素の位置を取得してスクロール
                 const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
                 const offset = 100; // ヘッダーの高さ分のオフセット
+                console.log('Scrolling to:', elementTop - offset);
                 window.scrollTo({
                     top: elementTop - offset,
                     behavior: 'smooth'
                 });
             } else {
                 // 詳細要素が見つからない場合は、セクション全体にスクロール
+                console.log('Target element not found, scrolling to section');
                 const sectionTop = detailSection.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({
                     top: sectionTop - 100,
                     behavior: 'smooth'
                 });
             }
+        } else {
+            console.error('clinic-details-list not found');
         }
     }
     
