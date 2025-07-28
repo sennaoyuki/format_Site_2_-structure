@@ -2406,7 +2406,7 @@ class RankingApp {
                     <div class="cv_box_img">
                         ${campaignInfo.microcopy || '＼月額・総額がリーズナブルなクリニック／'}
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
-                            <a href="${campaignInfo.ctaUrl}" target="_blank" rel="noopener">
+                            <a href="${this.dataManager.getClinicUrlWithRegionId(clinicId)}" target="_blank" rel="noopener">
                                 <span class="bt_s">${campaignInfo.ctaText}</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
