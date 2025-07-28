@@ -28,44 +28,56 @@ class UrlParamHandler {
         this.setParam('region_id', regionId);
     }
 
-    // クリニックURLにregion_idパラメータを付与するヘルパー関数
+    // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlWithRegionId(clinicId) {
-        const baseUrls = {
-            '1': 'https://dioclinic.jp/',
-            '2': 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
-            '3': 'https://uraraclinic.jp/',
-            '4': 'https://lietoclinic.com/lpbot/lpbot07kana15',
-            '5': 'https://www.s-b-c.net/slimming/'
+        const redirectUrls = {
+            '1': '/go/dio/',
+            '2': '/go/eminal/',
+            '3': '/go/urara/',
+            '4': '/go/lieto/',
+            '5': '/go/sbc/'
         };
         
-        const baseUrl = baseUrls[clinicId];
-        if (!baseUrl) return '#';
+        const redirectUrl = redirectUrls[clinicId];
+        if (!redirectUrl) return '#';
         
-        // 現在のregion_idを取得してURLに付与
-        const regionId = this.getRegionId();
-        const url = new URL(baseUrl);
-        url.searchParams.set('region_id', regionId);
-        return url.toString();
+        // 現在のURLパラメータを全て取得
+        const currentParams = new URLSearchParams(window.location.search);
+        
+        // region_idがない場合は現在の地域IDを設定
+        if (!currentParams.has('region_id')) {
+            currentParams.set('region_id', this.getRegionId());
+        }
+        
+        // リダイレクトURLにパラメータを付与
+        const finalUrl = redirectUrl + (currentParams.toString() ? '?' + currentParams.toString() : '');
+        return finalUrl;
     }
 
-    // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数
+    // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlByNameWithRegionId(clinicName) {
-        const baseUrls = {
-            'dio': 'https://dioclinic.jp/',
-            'eminal': 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
-            'urara': 'https://uraraclinic.jp/',
-            'lieto': 'https://lietoclinic.com/lpbot/lpbot07kana15',
-            'sbc': 'https://www.s-b-c.net/slimming/'
+        const redirectUrls = {
+            'dio': '/go/dio/',
+            'eminal': '/go/eminal/',
+            'urara': '/go/urara/',
+            'lieto': '/go/lieto/',
+            'sbc': '/go/sbc/'
         };
         
-        const baseUrl = baseUrls[clinicName];
-        if (!baseUrl) return '#';
+        const redirectUrl = redirectUrls[clinicName];
+        if (!redirectUrl) return '#';
         
-        // 現在のregion_idを取得してURLに付与
-        const regionId = this.getRegionId();
-        const url = new URL(baseUrl);
-        url.searchParams.set('region_id', regionId);
-        return url.toString();
+        // 現在のURLパラメータを全て取得
+        const currentParams = new URLSearchParams(window.location.search);
+        
+        // region_idがない場合は現在の地域IDを設定
+        if (!currentParams.has('region_id')) {
+            currentParams.set('region_id', this.getRegionId());
+        }
+        
+        // リダイレクトURLにパラメータを付与
+        const finalUrl = redirectUrl + (currentParams.toString() ? '?' + currentParams.toString() : '');
+        return finalUrl;
     }
 }
 

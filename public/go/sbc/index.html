@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>湘南美容クリニック公式サイトへ移動中...</title>
+    <meta name="description" content="湘南美容クリニックの公式サイトへリダイレクトしています。">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9f2f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            color: #333;
+        }
+        .redirect-container {
+            text-align: center;
+            padding: 40px;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .clinic-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .redirect-message {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #4bc0c0;
+        }
+        .redirect-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .loading-animation {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4bc0c0;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .manual-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #4bc0c0;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .manual-link:hover {
+            background: #3da9a9;
+        }
+        .countdown {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <img src="/images/clinics/sbc/sbc-logo.webp" alt="湘南美容クリニック" class="clinic-logo">
+        <div class="loading-animation"></div>
+        <h1 class="redirect-message">湘南美容クリニック公式サイトへ移動中...</h1>
+        <p class="redirect-description">
+            まもなく自動的に湘南美容クリニックの公式サイトへリダイレクトします。<br>
+            移動しない場合は下のボタンをクリックしてください。
+        </p>
+        <div class="countdown" id="countdown">3秒後に移動します...</div>
+        <a href="#" id="manualLink" class="manual-link" style="display: none;">湘南美容クリニック公式サイトへ</a>
+    </div>
+
+    <script>
+        // URLパラメータを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // ベースURL
+        const baseUrl = 'https://www.s-b-c.net/slimming/';
+        
+        // パラメータを引き継いでリダイレクトURLを構築
+        const redirectUrl = new URL(baseUrl);
+        
+        // 全てのパラメータを引き継ぎ
+        for (const [key, value] of urlParams) {
+            redirectUrl.searchParams.set(key, value);
+        }
+        
+        // region_idがない場合は東京をデフォルト設定
+        if (!redirectUrl.searchParams.has('region_id')) {
+            redirectUrl.searchParams.set('region_id', '013');
+        }
+        
+        const finalUrl = redirectUrl.toString();
+        
+        // 手動リンクにもURLを設定
+        document.getElementById('manualLink').href = finalUrl;
+        
+        // アナリティクスにクリックイベントを送信
+        if (window.trackEvent) {
+            trackEvent('clinic_redirect', {
+                clinic_name: 'sbc',
+                destination_url: finalUrl,
+                source_page: document.referrer || 'direct'
+            });
+        }
+        
+        // カウントダウン機能
+        let countdown = 3;
+        const countdownElement = document.getElementById('countdown');
+        const manualLink = document.getElementById('manualLink');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                countdownElement.textContent = `${countdown}秒後に移動します...`;
+            } else {
+                countdownElement.textContent = '移動中...';
+                clearInterval(timer);
+                
+                // 3秒後にリダイレクト
+                setTimeout(() => {
+                    window.location.href = finalUrl;
+                }, 500);
+            }
+        }, 1000);
+        
+        // 5秒後に手動リンクを表示（何らかの理由でリダイレクトが失敗した場合）
+        setTimeout(() => {
+            manualLink.style.display = 'inline-block';
+            countdownElement.textContent = '自動移動に時間がかかっています。下のボタンをクリックしてください。';
+        }, 5000);
+    </script>
+</body>
+</html>
