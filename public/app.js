@@ -2522,6 +2522,12 @@ class RankingApp {
 
     // 店舗画像のパスを取得するメソッド
     getStoreImage(clinicName, storeNumber) {
+        // SBCクリニックの場合は、ロゴ画像を使用
+        if (clinicName === 'sbc') {
+            const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
+            return `${imagesPath}/clinics/sbc/sbc-logo.webp`;
+        }
+        
         // 店舗番号を3桁の文字列に変換
         const paddedNumber = String(storeNumber).padStart(3, '0');
         
@@ -2530,7 +2536,6 @@ class RankingApp {
             'dio': 'webp',
             'eminal': 'webp',
             'lieto': 'webp',
-            'sbc': 'webp',
             'urara': 'webp'
         };
         
