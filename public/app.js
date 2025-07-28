@@ -1582,112 +1582,9 @@ class RankingApp {
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
                 },
-                '2': { // エミナルクリニック
-                    title: '次世代医療で理想のボディへ！',
-                    subtitle: '成功率94%の高い実績',
-                    link: 'エミナルクリニック ＞',
-                    banner: '/images/clinics/eminal/eminal_detail_bnr.webp',
-                    features: ['最新医療機器導入', '全額返金保証制度'],
-                    priceMain: '医療痩身コース',
-                    priceValue: '月々9,780円',
-                    priceDetail: {
-                        '料金': '通常価格45,591円<br>79%OFF 月々9,780円',
-                        '施術機械': '脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波',
-                        '目安期間': '-5〜10kg：約3ヶ月',
-                        '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
-                        '店舗': '東京 (新宿, 銀座)',
-                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
-                    },
-                    vioPlans: {
-                        vioOnly: {
-                            title: 'VIOのみ',
-                            price: '40,800円',
-                            sessions: '5回',
-                            monthly: '月々1,000円'
-                        },
-                        fullBody: {
-                            title: '全身＋VIO',
-                            price: '98,000円',
-                            sessions: '5回',
-                            monthly: '月々1,600円'
-                        }
-                    },
-                    points: [
-                        {
-                            icon: 'lightbulb',
-                            title: '専門家チームが徹底サポート！無理な勧誘なしで安心',
-                            description: 'エミナルクリニックでは、ダイエット専門医や管理栄養士がサポートし、独自開発の医療痩身プログラムを提供しています。医学的根拠に基づいた治療で我慢・失敗・リバウンドなし改善を目指します。無理な勧誘は一切なく、初めての方も安心です。'
-                        },
-                        {
-                            icon: 'phone',
-                            title: '最新医療マシンをオーダーメイド！短期間で理想のボディへ',
-                            description: '医療電磁場装置、脂肪冷却装置、直流EMS、ラジオ波など、最新の医療機器で効率よく脂肪を減少させます。全身にアプローチし、短期間での効果が期待できます。厳しい食事制限や運動が苦手な方にもおすすめです。'
-                        },
-                        {
-                            icon: 'coin',
-                            title: '高い成功率と全額返金保証で安心！',
-                            description: 'ダイエット成功率94%、リバウンド率6%と高い実績を誇ります。モニター協力で全額返金保証制度もあり、安心して医療ダイエットに挑戦できます。'
-                        }
-                    ],
-                    reviews: [
-                        {
-                            rating: 5,
-                            date: '2024年1月',
-                            text: '料金が安くて効果もしっかり。コスパ最高です！'
-                        },
-                        {
-                            rating: 5,
-                            date: '2023年12月',
-                            text: '予約も取りやすく、スタッフさんも親切です。'
-                        }
-                    ],
-                    stores: [
-                        {
-                            name: 'エミナルクリニック 新宿院',
-                            address: '東京都新宿区西新宿1-4-1 プリンスビル7F',
-                            access: 'JR新宿駅西口より徒歩3分',
-                            tel: '0120-YYY-YYY',
-                            hours: '11:00〜21:00（不定休）'
-                        },
-                        {
-                            name: 'エミナルクリニック 銀座院',
-                            address: '東京都中央区銀座7-5-2 居酒屋ビル4F',
-                            access: '東京メトロ銀座駅A2出口より徒歩3分',
-                            tel: '0120-YYY-YYY',
-                            hours: '11:00〜21:00（不定休）'
-                        },
-                        {
-                            name: 'エミナルクリニック 池袋院',
-                            address: '東京都豊島区南池袋3-13-10 ISP第3ビル4F',
-                            access: 'JR池袋駅東口より徒歩4分',
-                            tel: '0120-YYY-YYY',
-                            hours: '11:00〜21:00（不定休）'
-                        }
-                    ],
-                    campaigns: [
-                        {
-                            title: '全身＋VIO 医療脱毛',
-                            subtitle: '5回完了コース',
-                            originalPrice: '174,900円',
-                            discountPrice: '98,000円',
-                            monthlyPrice: '月額1,600円〜',
-                            discount: '今だけ価格'
-                        }
-                    ],
-                    campaignInfo: {
-                        header: 'INFORMATION!',
-                        title: 'エミナルクリニック新春キャンペーン',
-                        logoSrc: '/images/clinics/eminal/eminal-logo.webp',
-                        logoAlt: 'エミナルクリニック',
-                        description: '【期間限定】<br>全身+VIO脱毛が<br>月額1,000円から始められる！',
-                        ctaUrl: 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
-                        ctaText: 'エミナル公式はコチラ',
-                    }
-                },
-                '3': { // ウララクリニック
-                    title: 'リーズナブルな価格設定',
-                    subtitle: '学生に人気の医療痩身',
+                '2': { // ウララクリニック
+                    title: '次世代医療！<span class="info-icon" onclick="showDisclaimerInfo(\'urara-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '成功率94%の実績',
                     link: 'ウララクリニック ＞',
                     banner: '/images/clinics/urara/urara_detail_bnr.webp',
                     features: [
@@ -1704,7 +1601,84 @@ class RankingApp {
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
                         '店舗': '東京 (新宿, 銀座)',
-                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
+                        '公式サイト': 'https://uraraclinic.jp/'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: '部分痩身',
+                            price: '30,000円',
+                            sessions: '3回',
+                            monthly: '月々3,000円'
+                        },
+                        fullBody: {
+                            title: '全身痩身',
+                            price: '49,600円',
+                            sessions: '5回',
+                            monthly: '月々9,600円'
+                        }
+                    },
+                    points: [
+                        {
+                            icon: 'lightbulb',
+                            title: '専門家チームが徹底伴走！',
+                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                        },
+                        {
+                            icon: 'mobile-alt',
+                            title: '医療マシンをオーダーメイド！',
+                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                        },
+                        {
+                            icon: 'clock',
+                            title: '安心のサポートと保証制度',
+                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: '料金が安くて効果もしっかり。コスパ最高です！'
+                        },
+                        {
+                            rating: 5,
+                            date: '2023年12月',
+                            text: '予約も取りやすく、スタッフさんも親切です。'
+                        }
+                    ],
+                    // stores: [] // 店舗は動的に取得するため削除
+                    campaigns: [],
+                    campaignInfo: {
+                        header: 'INFORMATION!',
+                        title: 'URARAクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/urara/urara-logo.webp',
+                        logoAlt: 'URARAクリニック',
+                        description: '痩せなければ返金保証<br>さらに脂肪買取制度あり',
+                        ctaUrl: 'https://uraraclinic.jp/',
+                        ctaText: 'URARAクリニックの公式サイト',
+                        microcopy: '＼ダイエット成功率94％の実績／'
+                    }
+                },
+                '3': { // リエートクリニック
+                    title: '最新技術で安心痩身<span class="info-icon" onclick="showDisclaimerInfo(\'lieto-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '個人に合わせたオーダーメイド施術',
+                    link: 'リエートクリニック ＞',
+                    banner: '/images/clinics/lieto/lieto_detail_bnr.webp',
+                    features: [
+                        '医療ダイエット', '医療痩身', 'リバウンド防止',
+                        '医師監修', '管理栄養士指導', '切らない痩身',
+                        'オーダーメイド治療', '駅チカ', '完全個室'
+                    ],
+                    priceMain: '医療痩身コース',
+                    priceValue: '月々9,600円',
+                    priceDetail: {
+                        '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
+                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
+                        '目安期間': '-5〜10kg：約6ヶ月',
+                        '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
+                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
+                        '店舗': '池袋／横浜／名古屋',
+                        '公式サイト': 'https://lietoclinic.com/lpbot/lpbot07kana15'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1768,26 +1742,26 @@ class RankingApp {
                         microcopy: '＼ダイエット成功率94％の実績／'
                     }
                 },
-                '4': { // リエートクリニック
-                    title: '最新技術で安心痩身',
-                    subtitle: '個人に合わせたオーダーメイド施術',
-                    link: 'リエートクリニック ＞',
-                    banner: '/images/clinics/lieto/lieto_detail_bnr.webp',
+                '4': { // エミナルクリニック
+                    title: '医療の力で本気のボディメイク<span class="info-icon" onclick="showDisclaimerInfo(\'eminal-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '医療と食事指導で理想の姿へ',
+                    link: 'エミナルクリニック ＞',
+                    banner: '/images/clinics/eminal/eminal_detail_bnr.webp',
                     features: [
-                        '医療ダイエット', '医療痩身', 'リバウンド防止',
-                        '医師監修', '管理栄養士指導', '切らない痩身',
-                        'オーダーメイド治療', '駅チカ', '完全個室'
+                        'メディカルダイエット', 'ボディメイク', '痩身',
+                        '部分痩せ', 'リバウンド防止', '医療ハイフ',
+                        '脂肪冷却', 'エミナルクリニック', '全国展開'
                     ],
-                    priceMain: '医療痩身コース',
-                    priceValue: '月々9,600円',
+                    priceMain: '3ヶ月コース特別モニター',
+                    priceValue: 'モニタープラン',
                     priceDetail: {
-                        '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
-                        '目安期間': '-5〜10kg：約6ヶ月',
-                        '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
-                        '店舗': '池袋／横浜／名古屋',
-                        '公式サイト': 'https://lietoclinic.com/'
+                        '料金': 'モニタープラン<br>月額制で負担軽減',
+                        '施術機械': '医療ハイフ<br>EMS<br>脂肪冷却',
+                        '目安期間': '3ヶ月コースが基本<br>個人の目標に合わせ調整可',
+                        '営業時間': '多くの院で11:00〜21:00<br>店舗により異なる',
+                        '対応部位': '全身対応<br>お腹・二の腕・太もも・顔',
+                        '店舗': '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）',
+                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1832,23 +1806,92 @@ class RankingApp {
                             text: '痛みが少なく、スタッフの対応も丁寧でした。'
                         }
                     ],
-                    clinicInfo: {
-                        name: 'リエートクリニック 池袋院',
-                        address: '東京都豊島区南池袋1-25-1 池袋MYTビル4F',
-                        access: 'JR池袋駅東口より徒歩3分',
-                        tel: '0120-AAA-AAA',
-                        hours: '11:00〜20:00（年中無休）',
-                        image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
-                    },
+                    // stores: [] // 店舗は動的に取得するため削除
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'リエートクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/lieto/lieto-logo.webp',
-                        logoAlt: 'リエートクリニック',
-                        description: 'モニター最大80％OFF<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://lietoclinic.com/',
-                        ctaText: 'リエートクリニックの公式サイト',
-                        microcopy: '＼リバウンドしない率99.8％／'
+                        title: 'エミナルクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/eminal/eminal-logo.webp',
+                        logoAlt: 'エミナルクリニック',
+                        description: 'モニタープランで<br>大幅割引実施中',
+                        ctaUrl: 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
+                        ctaText: 'エミナルクリニックの公式サイト',
+                        microcopy: '＼全国60院以上の安心ネットワーク／'
+                    }
+                },
+                '5': { // 湘南美容クリニック
+                    title: '医療の力で楽して痩せる<span class="info-icon" onclick="showDisclaimerInfo(\'sbc-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '豊富なメニューで最適な痩身治療',
+                    link: '湘南美容クリニック ＞',
+                    banner: '/images/clinics/sbc/sbc_detail_bnr.webp',
+                    features: [
+                        '医療ダイエット', '部分痩せ', 'クールスカルプティング',
+                        '脂肪溶解注射', 'GLP1', 'サクセンダ',
+                        'リバウンド防止', '食事指導', '湘南美容クリニック'
+                    ],
+                    priceMain: 'クールスカルプティング®エリート',
+                    priceValue: '1エリア 29,800円～',
+                    priceDetail: {
+                        '料金': 'クールスカルプティング®<br>1エリア 29,800円～',
+                        '施術機械': 'クールスカルプティング®エリート<br>トゥルースカルプiD<br>脂肪溶解リニアハイフ<br>オンダリフト',
+                        '目安期間': '施術内容による<br>ダウンタイムほとんどなし',
+                        '営業時間': '店舗により異なる<br>多くは10:00〜19:00',
+                        '対応部位': 'お腹・二の腕・太もも・顔<br>全身の気になる部位',
+                        '店舗': '日本全国および海外に展開',
+                        '公式サイト': 'https://www.s-b-c.net/slimming/'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: '部分痩身',
+                            price: '29,800円',
+                            sessions: '1エリア',
+                            monthly: '応相談'
+                        },
+                        fullBody: {
+                            title: '複数エリア',
+                            price: '特別価格',
+                            sessions: '応相談',
+                            monthly: '応相談'
+                        }
+                    },
+                    points: [
+                        {
+                            icon: 'user-md',
+                            title: '経験豊富な医師の的確な診断',
+                            description: '湘南美容クリニックでは経験豊富な医師があなたの体質やライフスタイルに合わせて最適な痩身プランを提案します。一人一人に最適化された治療で確実な結果を目指します。'
+                        },
+                        {
+                            icon: 'list-ul',
+                            title: '豊富なメニューで一人一人に最適化',
+                            description: '湘南美容クリニックでは豊富なメニューを用意しており、あなたの悩みや目標に合わせて最適な治療を選択できます。クールスカルプティングから脂肪溶解注射まで、一人一人に最適化した痩身治療を提供します。'
+                        },
+                        {
+                            icon: 'award',
+                            title: '経験豊富な医師と安心サポート',
+                            description: '湘南美容クリニックは経験豊富な医師が在籍し、あなたの不安や疑問に丁寧に答えます。最新の医療技術と安心のサポート体制で、理想のボディラインを実現します。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: '大手なので安心感があります。効果も確実でした。'
+                        },
+                        {
+                            rating: 5,
+                            date: '2023年12月',
+                            text: '色々なメニューから選べるのが良かったです。'
+                        }
+                    ],
+                    // stores: [] // 店舗は動的に取得するため削除
+                    campaignInfo: {
+                        header: 'INFORMATION!',
+                        title: '湘南美容クリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/sbc/sbc-logo.webp',
+                        logoAlt: '湘南美容クリニック',
+                        description: '期間限定キャンペーン<br>モニター募集中',
+                        ctaUrl: 'https://www.s-b-c.net/slimming/',
+                        ctaText: '湘南美容クリニックの公式サイト',
+                        microcopy: '＼症例実績30万件以上の実績／'
                     }
                 }
             };
