@@ -92,10 +92,22 @@
         }
     });
 
-    // body要素の変更を監視
-    observer.observe(document.body, {
-        childList: true,
-        subtree: true
-    });
+    // body要素の変更を監視（body要素が存在する場合のみ）
+    if (document.body) {
+        observer.observe(document.body, {
+            childList: true,
+            subtree: true
+        });
+    } else {
+        // bodyがまだ存在しない場合は、DOMContentLoadedを待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            if (document.body) {
+                observer.observe(document.body, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+        });
+    }
 
 })();
