@@ -201,7 +201,7 @@ class DisplayManager {
                 1: "【総合人気No.1】\n2025年のイチ押し！\n業界屈指のコスパ",
                 2: "次世代医療！\n成功率94%の実績",
                 3: "厚労省承認マシン\n科学的に脂肪を減らす",
-                4: "多店舗展開\n笑なる",
+                4: "多店舗展開\nエミナル",
                 5: "大手美容クリニック\nメニュー豊富"
             };
             const pushMessage = pushMessages[rankNum] || "人気のクリニック";
@@ -2527,9 +2527,13 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function(e) {
             e.preventDefault();
             const currentParams = new URLSearchParams(window.location.search);
-            const regionId = currentParams.get('region_id');
-            if (regionId) {
-                window.location.href = this.href + '?region_id=' + regionId;
+            if (currentParams.toString()) {
+                const url = new URL(this.href, window.location.origin);
+                // 全てのパラメータを追加
+                for (const [key, value] of currentParams) {
+                    url.searchParams.set(key, value);
+                }
+                window.location.href = url.toString();
             } else {
                 window.location.href = this.href;
             }

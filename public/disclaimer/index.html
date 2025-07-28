@@ -11,6 +11,8 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@700&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
     <style>
         .disclaimer-container {
             max-width: 800px;
@@ -58,14 +60,44 @@
         function navigateWithParams(event, link) {
             event.preventDefault();
             const currentParams = new URLSearchParams(window.location.search);
-            const regionId = currentParams.get('region_id');
-            if (regionId) {
-                window.location.href = link.href + '?region_id=' + regionId;
+            if (currentParams.toString()) {
+                const url = new URL(link.href, window.location.origin);
+                // 全てのパラメータを追加
+                for (const [key, value] of currentParams) {
+                    url.searchParams.set(key, value);
+                }
+                window.location.href = url.toString();
             } else {
                 window.location.href = link.href;
             }
             return false;
         }
+        
+        // ページロード時に全てのリンクにパラメータを付与
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentParams = new URLSearchParams(window.location.search);
+            if (currentParams.toString()) {
+                const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="../"], a[href]:not([href^="http"]):not([href^="#"])');
+                links.forEach(link => {
+                    if (link.onclick) return; // 既にonclickがある場合はスキップ
+                    
+                    try {
+                        const url = new URL(link.href, window.location.origin);
+                        // 既存のパラメータを保持しつつ、現在のパラメータを追加
+                        for (const [key, value] of currentParams) {
+                            if (!url.searchParams.has(key)) {
+                                url.searchParams.set(key, value);
+                            }
+                        }
+                        link.href = url.toString();
+                    } catch (e) {
+                        // 相対URLの場合
+                        const separator = link.href.includes('?') ? '&' : '?';
+                        link.href = link.href + separator + currentParams.toString();
+                    }
+                });
+            }
+        });
     </script>
     <header class="header">
         <div class="header-container">

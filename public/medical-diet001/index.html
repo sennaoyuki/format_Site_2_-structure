@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="../styles.css?v=2025072201" media="all">
     <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
     <!-- Critical CSS -->
     <style>
         /* Reset and base styles */
@@ -889,7 +891,35 @@
     <script src="../app.js" defer></script>
     <script>
         // 比較表のタブ切り替え機能
+        // 全てのパラメータを引き継ぐ共通処理
+        function preserveAllParams() {
+            const currentParams = new URLSearchParams(window.location.search);
+            if (currentParams.toString()) {
+                // すべての内部リンクにパラメータを追加
+                const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="../"], a[href]:not([href^="http"]):not([href^="#"])');
+                links.forEach(link => {
+                    try {
+                        const url = new URL(link.href, window.location.origin);
+                        // 既存のパラメータを保持しつつ、現在のパラメータを追加
+                        for (const [key, value] of currentParams) {
+                            if (!url.searchParams.has(key)) {
+                                url.searchParams.set(key, value);
+                            }
+                        }
+                        link.href = url.toString();
+                    } catch (e) {
+                        // 相対URLの場合
+                        const separator = link.href.includes('?') ? '&' : '?';
+                        link.href = link.href + separator + currentParams.toString();
+                    }
+                });
+            }
+        }
+
         document.addEventListener('DOMContentLoaded', function() {
+            // パラメータを引き継ぐ
+            preserveAllParams();
+            
             const tabMenuItems = document.querySelectorAll('.tab-menu-item');
             const table = document.querySelector('.js-cbn-table table');
             

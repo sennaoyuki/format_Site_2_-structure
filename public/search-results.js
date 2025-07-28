@@ -555,11 +555,13 @@ class SearchResultsApp {
     updateURL() {
         const params = new URLSearchParams();
         
-        // 既存のregion_idを保持
+        // 既存の全パラメータを保持
         const currentParams = new URLSearchParams(window.location.search);
-        const regionId = currentParams.get('region_id');
-        if (regionId) {
-            params.set('region_id', regionId);
+        // 現在のパラメータを全て新しいパラメータに追加
+        for (const [key, value] of currentParams) {
+            if (!params.has(key)) {
+                params.set(key, value);
+            }
         }
         
         if (this.filters.bodyParts.length > 0) {
@@ -651,14 +653,15 @@ class SearchResultsApp {
     
     updateHeaderLogoLink() {
         const params = new URLSearchParams(window.location.search);
-        const regionId = params.get('region_id');
         const logoLink = document.getElementById('header-logo-link');
         
-        if (logoLink && regionId) {
-            // 現在のhref値を取得して、region_idを追加
+        if (logoLink && params.toString()) {
+            // 現在のhref値を取得して、全パラメータを追加
             const currentHref = logoLink.href;
             const url = new URL(currentHref, window.location.origin);
-            url.searchParams.set('region_id', regionId);
+            for (const [key, value] of params) {
+                url.searchParams.set(key, value);
+            }
             logoLink.href = url.toString();
         }
     }
