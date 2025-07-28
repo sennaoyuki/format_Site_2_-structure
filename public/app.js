@@ -1162,6 +1162,9 @@ class RankingApp {
         
         // レビュータブ切り替え機能の設定
         this.setupReviewTabs();
+        
+        // 詳細を見るリンクのイベントリスナーを設定
+        this.setupDetailScrollLinks();
     }
 
     // 比較表の生成
@@ -1334,7 +1337,7 @@ class RankingApp {
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         ${clinic.rank <= 3 
-                            ? `<a href="#clinic-details-list" class="cta-link" onclick="scrollToClinicDetail(${clinic.rank})">詳細を見る</a>`
+                            ? `<a href="#clinic-details-list" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>`
                             : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
                         }
                     </div>
@@ -1370,7 +1373,7 @@ class RankingApp {
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         ${clinic.rank <= 3 
-                            ? `<a href="#clinic-details-list" class="cta-link" onclick="scrollToClinicDetail(${clinic.rank})">詳細を見る</a>`
+                            ? `<a href="#clinic-details-list" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>`
                             : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
                         }
                     </div>
@@ -1406,7 +1409,7 @@ class RankingApp {
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         ${clinic.rank <= 3 
-                            ? `<a href="#clinic-details-list" class="cta-link" onclick="scrollToClinicDetail(${clinic.rank})">詳細を見る</a>`
+                            ? `<a href="#clinic-details-list" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>`
                             : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
                         }
                     </div>
@@ -1435,6 +1438,45 @@ class RankingApp {
                 document.getElementById(`${targetTab}-tab`).classList.add('active');
             });
         });
+    }
+    
+    // 詳細を見るリンクのイベントリスナーを設定
+    setupDetailScrollLinks() {
+        // 少し遅延を入れてDOMが完全に生成されるのを待つ
+        setTimeout(() => {
+            document.querySelectorAll('.detail-scroll-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const rank = parseInt(link.getAttribute('data-rank'));
+                    this.scrollToClinicDetail(rank);
+                });
+            });
+        }, 100);
+    }
+    
+    // クリニック詳細へスクロール
+    scrollToClinicDetail(rank) {
+        const detailSection = document.getElementById('clinic-details-list');
+        if (detailSection) {
+            // 対応するクリニックの詳細要素を探す
+            const targetElement = detailSection.querySelector(`.ranking_box_${rank}`);
+            if (targetElement) {
+                // 要素の位置を取得してスクロール
+                const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+                const offset = 100; // ヘッダーの高さ分のオフセット
+                window.scrollTo({
+                    top: elementTop - offset,
+                    behavior: 'smooth'
+                });
+            } else {
+                // 詳細要素が見つからない場合は、セクション全体にスクロール
+                const sectionTop = detailSection.getBoundingClientRect().top + window.pageYOffset;
+                window.scrollTo({
+                    top: sectionTop - 100,
+                    behavior: 'smooth'
+                });
+            }
+        }
     }
     
     // レビュータブ切り替え機能の設定
@@ -2625,28 +2667,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }, true);
     */
 // });
-
-// 詳細セクションへのスクロール関数（グローバル）
-window.scrollToClinicDetail = function(rank) {
-    const detailSection = document.getElementById('clinic-details-list');
-    if (detailSection) {
-        // 対応するクリニックの詳細要素を探す
-        const targetElement = detailSection.querySelector(`.ranking_box_${rank}`);
-        if (targetElement) {
-            // 要素の位置を取得してスクロール
-            const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
-            const offset = 100; // ヘッダーの高さ分のオフセット
-            window.scrollTo({
-                top: elementTop - offset,
-                behavior: 'smooth'
-            });
-        } else {
-            // 詳細要素が見つからない場合は、セクション全体にスクロール
-            detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
-    return false; // デフォルトのアンカー動作を防ぐ
-};
 
 // アプリケーションの初期化
 document.addEventListener('DOMContentLoaded', function() {
