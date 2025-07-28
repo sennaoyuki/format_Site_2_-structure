@@ -1444,14 +1444,28 @@ class RankingApp {
     setupDetailScrollLinks() {
         // 少し遅延を入れてDOMが完全に生成されるのを待つ
         setTimeout(() => {
-            const links = document.querySelectorAll('.detail-scroll-link');
-            console.log('Found detail-scroll-link elements:', links.length);
+            // 動的に生成される比較表のリンク
+            const dynamicLinks = document.querySelectorAll('.detail-scroll-link');
+            console.log('Found detail-scroll-link elements:', dynamicLinks.length);
             
-            links.forEach(link => {
+            dynamicLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     const rank = parseInt(link.getAttribute('data-rank'));
-                    console.log('Detail link clicked, rank:', rank);
+                    console.log('Dynamic detail link clicked, rank:', rank);
+                    this.scrollToClinicDetail(rank);
+                });
+            });
+            
+            // 静的な比較表のリンク
+            const staticLinks = document.querySelectorAll('.detail-static-link');
+            console.log('Found detail-static-link elements:', staticLinks.length);
+            
+            staticLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const rank = parseInt(link.getAttribute('data-rank'));
+                    console.log('Static detail link clicked, rank:', rank);
                     this.scrollToClinicDetail(rank);
                 });
             });
