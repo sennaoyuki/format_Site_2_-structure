@@ -1463,25 +1463,47 @@ class RankingApp {
 
     // クリニック詳細の更新
     updateClinicDetails(clinics, ranking, regionId) {
+        console.log('updateClinicDetails called:', { clinics, ranking, regionId });
         const detailsList = document.getElementById('clinic-details-list');
-        if (!detailsList) return;
-
-        detailsList.innerHTML = '';
-
-        if (!ranking || Object.keys(ranking.ranks).length === 0) {
+        if (!detailsList) {
+            console.error('clinic-details-list要素が見つかりません');
             return;
         }
 
-        // ランキング順のクリニックデータを取得（3位まで）
+        detailsList.innerHTML = '';
+
+        if (!ranking) {
+            console.error('ランキングデータがnullです');
+            return;
+        }
+        
+        if (!ranking.ranks) {
+            console.error('ranking.ranksが存在しません:', ranking);
+            return;
+        }
+        
+        if (Object.keys(ranking.ranks).length === 0) {
+            console.error('ranking.ranksが空です:', ranking.ranks);
+            return;
+        }
+        
+        console.log('ランキングデータ:', ranking);
+
+        // ランキング順のクリニックデータを取得（5位まで）
         const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
             const numA = parseInt(a[0].replace('no', ''));
             const numB = parseInt(b[0].replace('no', ''));
             return numA - numB;
-        }).slice(0, 3);
+        }).slice(0, 5);
 
+        console.log('sortedRanks:', sortedRanks);
         sortedRanks.forEach(([position, clinicId]) => {
             const clinic = clinics.find(c => c.id === clinicId);
-            if (!clinic) return;
+            console.log('Processing clinic:', { position, clinicId, clinic });
+            if (!clinic) {
+                console.error('クリニックが見つかりません:', clinicId);
+                return;
+            }
 
             const rank = parseInt(position.replace('no', ''));
             const detailItem = document.createElement('div');
@@ -2275,7 +2297,9 @@ class RankingApp {
                 </div>
             `;
 
+            console.log('Appending detail item for clinic:', clinic.name);
             detailsList.appendChild(detailItem);
+            console.log('Detail item appended. Current HTML length:', detailsList.innerHTML.length);
         });
     }
     
