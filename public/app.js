@@ -1333,7 +1333,10 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
+                        ${clinic.rank <= 3 
+                            ? `<a href="#clinic-details-list" class="cta-link" onclick="scrollToClinicDetail(${clinic.rank})">詳細を見る</a>`
+                            : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
+                        }
                     </div>
                 </td>
             `;
@@ -1366,7 +1369,10 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
+                        ${clinic.rank <= 3 
+                            ? `<a href="#clinic-details-list" class="cta-link" onclick="scrollToClinicDetail(${clinic.rank})">詳細を見る</a>`
+                            : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
+                        }
                     </div>
                 </td>
             `;
@@ -1399,7 +1405,10 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        <a href="#clinic${clinic.rank}" class="cta-link">詳細を見る</a>
+                        ${clinic.rank <= 3 
+                            ? `<a href="#clinic-details-list" class="cta-link" onclick="scrollToClinicDetail(${clinic.rank})">詳細を見る</a>`
+                            : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
+                        }
                     </div>
                 </td>
             `;
@@ -2616,6 +2625,28 @@ document.addEventListener('DOMContentLoaded', () => {
     }, true);
     */
 // });
+
+// 詳細セクションへのスクロール関数（グローバル）
+window.scrollToClinicDetail = function(rank) {
+    const detailSection = document.getElementById('clinic-details-list');
+    if (detailSection) {
+        // 対応するクリニックの詳細要素を探す
+        const targetElement = detailSection.querySelector(`.ranking_box_${rank}`);
+        if (targetElement) {
+            // 要素の位置を取得してスクロール
+            const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offset = 100; // ヘッダーの高さ分のオフセット
+            window.scrollTo({
+                top: elementTop - offset,
+                behavior: 'smooth'
+            });
+        } else {
+            // 詳細要素が見つからない場合は、セクション全体にスクロール
+            detailSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+    return false; // デフォルトのアンカー動作を防ぐ
+};
 
 // アプリケーションの初期化
 document.addEventListener('DOMContentLoaded', function() {
