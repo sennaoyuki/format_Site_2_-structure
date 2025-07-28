@@ -2522,10 +2522,10 @@ class RankingApp {
 
     // 店舗画像のパスを取得するメソッド
     getStoreImage(clinicName, storeNumber) {
-        // SBCクリニックの場合は、ロゴ画像を使用
-        if (clinicName === 'sbc') {
+        // SBCクリニックまたはウララクリニックの場合は、ロゴ画像を使用
+        if (clinicName === 'sbc' || clinicName === 'urara') {
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
-            return `${imagesPath}/clinics/sbc/sbc-logo.webp`;
+            return `${imagesPath}/clinics/${clinicName}/${clinicName}-logo.webp`;
         }
         
         // 店舗番号を3桁の文字列に変換
@@ -2535,8 +2535,7 @@ class RankingApp {
         const imageExtensions = {
             'dio': 'webp',
             'eminal': 'webp',
-            'lieto': 'webp',
-            'urara': 'webp'
+            'lieto': 'webp'
         };
         
         const extension = imageExtensions[clinicName] || 'webp';
