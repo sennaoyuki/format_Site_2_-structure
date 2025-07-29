@@ -2824,6 +2824,12 @@ section.clinic-rankings .ranking-header-banner {
 .ranking_box_3 {
     background: #e4b997; /* ブラウン */
 }
+.ranking_box_4 {
+    background: #c8c8c8; /* グレー */
+}
+.ranking_box_5 {
+    background: #c8c8c8; /* グレー */
+}
 
 .detail-rank {
     margin-bottom: 20px;
@@ -2863,6 +2869,18 @@ section.clinic-rankings .ranking-header-banner {
     background: linear-gradient(135deg, #f0a0a5 0%, #e4a853 100%);
     box-shadow: 0 4px 15px rgba(205, 127, 50, 0.4);
     border: 3px solid #e4a853;
+}
+/* 4位のバッジスタイル */
+.detail-rank-badge.ranking4 {
+    background: linear-gradient(135deg, #a8a8a8 0%, #e4e4e4 100%);
+    box-shadow: 0 4px 15px rgb(255 250 245 / 40%);
+    border: 3px solid #cfcfcf;
+}
+/* 5位のバッジスタイル */
+.detail-rank-badge.ranking5 {
+    background: linear-gradient(135deg, #a8a8a8 0%, #e4e4e4 100%);
+    box-shadow: 0 4px 15px rgb(255 250 245 / 40%);
+    border: 3px solid #cfcfcf;
 }
 
 .detail-title {

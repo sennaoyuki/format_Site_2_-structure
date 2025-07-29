@@ -1605,6 +1605,8 @@ class RankingApp {
             let badgeClass = '';
             if (rank === 2) badgeClass = 'silver';
             else if (rank === 3) badgeClass = 'bronze';
+            else if (rank === 4) badgeClass = 'ranking4';
+            else if (rank === 5) badgeClass = 'ranking5';
 
             // クリニック詳細データ（拡張版）
             const clinicDetailDataMap = {
