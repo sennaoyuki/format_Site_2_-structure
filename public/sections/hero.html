@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <section class="hero-section">
+        <div class="hero-image-wrapper">
+            <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image" loading="eager" fetchpriority="high" decoding="async" width="768" height="432">
+            <div id="mv-region-name" style="position:absolute;top: 8%;left: 1%;width: clamp(60px, 15vw, 115px);text-align: center;color: #808080;font-size: clamp(14px, 3.5vw, 27px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
+        </div>
+        <div style="text-align: right; padding: 5px 20px; color: #808080; font-size: 10px; font-weight: normal; max-width: 768px; margin: 0 auto;">PR：医療法人社団　正恵会</div>
+    </section>
+    
+    <script>
+        // 親ウィンドウから地域名を受け取る
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'update-region') {
+                document.getElementById('mv-region-name').textContent = e.data.regionName;
+            }
+        });
+    </script>
+</body>
+</html>

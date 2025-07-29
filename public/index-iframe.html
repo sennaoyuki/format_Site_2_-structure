@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NR2WZVQX');</script>
+    <!-- End Google Tag Manager -->
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年決定版｜医療ダイエット比較ランキング</title>
+    <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="styles.css?v=2025072201">
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <style>
+        /* iframeのスタイル */
+        .section-iframe {
+            width: 100%;
+            border: none;
+            overflow: hidden;
+            display: block;
+        }
+        
+        /* 各セクションのコンテナ */
+        .iframe-container {
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+        
+        /* メインコンテナ */
+        .main-container {
+            background-color: #fafafa;
+            min-height: 100vh;
+        }
+        
+        /* ローディングインジケーター */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR2WZVQX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <div class="main-container">
+        <!-- 1. ヘッダーセクション -->
+        <div class="iframe-container">
+            <iframe id="header-iframe" 
+                    src="sections/header.html" 
+                    class="section-iframe"
+                    style="height: 60px;"
+                    title="ヘッダー">
+            </iframe>
+        </div>
+
+        <!-- 2. メインビジュアルセクション -->
+        <div class="iframe-container">
+            <iframe id="hero-iframe" 
+                    src="sections/hero.html" 
+                    class="section-iframe"
+                    style="height: 460px;"
+                    title="メインビジュアル">
+            </iframe>
+        </div>
+
+        <!-- 3. ランキングセクション -->
+        <div class="iframe-container">
+            <iframe id="ranking-iframe" 
+                    src="sections/ranking.html" 
+                    class="section-iframe"
+                    style="height: 800px;"
+                    title="ランキング">
+            </iframe>
+        </div>
+
+        <!-- 4. Tipsセクション -->
+        <div class="iframe-container">
+            <iframe id="tips-iframe" 
+                    src="sections/tips.html" 
+                    class="section-iframe"
+                    style="height: 400px;"
+                    title="Tips">
+            </iframe>
+        </div>
+
+        <!-- 5. 比較表セクション -->
+        <div class="iframe-container">
+            <iframe id="comparison-iframe" 
+                    src="sections/comparison.html" 
+                    class="section-iframe"
+                    style="height: 600px;"
+                    title="比較表">
+            </iframe>
+        </div>
+
+        <!-- 6. 詳細セクション -->
+        <div class="iframe-container">
+            <iframe id="details-iframe" 
+                    src="sections/details.html" 
+                    class="section-iframe"
+                    style="height: 2000px;"
+                    title="詳細情報">
+            </iframe>
+        </div>
+
+        <!-- 7. 医療情報コラムセクション（通常のHTML） -->
+        <section class="medical-columns-section">
+            <!-- コラムの内容は元のHTMLから -->
+        </section>
+
+        <!-- 8. フッター（通常のHTML） -->
+        <div id="footer">
+            <!-- フッターの内容は元のHTMLから -->
+        </div>
+
+        <!-- サイドバー、モーダルなど（通常のHTML） -->
+    </div>
+
+    <script>
+        // iframeの高さ自動調整
+        function adjustIframeHeight(iframeId) {
+            const iframe = document.getElementById(iframeId);
+            iframe.onload = function() {
+                try {
+                    const height = iframe.contentWindow.document.body.scrollHeight;
+                    iframe.style.height = height + 'px';
+                } catch (e) {
+                    console.error('Cannot adjust iframe height:', e);
+                }
+            };
+        }
+
+        // 各iframeの高さを自動調整
+        ['header-iframe', 'hero-iframe', 'ranking-iframe', 'tips-iframe', 'comparison-iframe', 'details-iframe'].forEach(id => {
+            adjustIframeHeight(id);
+        });
+
+        // メッセージハンドラー（iframe間通信用）
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'toggle-menu') {
+                // ハンバーガーメニューの処理
+                const overlay = document.getElementById('sidebar-overlay');
+                const menu = document.getElementById('sidebar-menu');
+                if (overlay && menu) {
+                    overlay.classList.toggle('active');
+                    menu.classList.toggle('active');
+                }
+            }
+        });
+
+        // 地域データを各iframeに送信
+        function updateRegionInIframes(regionName) {
+            const iframes = ['hero-iframe', 'ranking-iframe', 'comparison-iframe', 'details-iframe'];
+            iframes.forEach(id => {
+                const iframe = document.getElementById(id);
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage({
+                        action: 'update-region',
+                        regionName: regionName
+                    }, '*');
+                }
+            });
+        }
+
+        // データを読み込んでiframeに送信する関数
+        function loadDataAndUpdateIframes() {
+            // app.jsから必要なデータを取得してiframeに送信
+            // この部分は実際のapp.jsとの統合時に実装
+        }
+
+        // ページ読み込み時の処理
+        document.addEventListener('DOMContentLoaded', function() {
+            // URLパラメータから地域IDを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const regionId = urlParams.get('region_id') || '013';
+            
+            // 地域データを更新
+            // updateRegionInIframes('東京'); // 実際はregionIdから地域名を取得
+            
+            // データを読み込み
+            // loadDataAndUpdateIframes();
+        });
+    </script>
+</body>
+</html>

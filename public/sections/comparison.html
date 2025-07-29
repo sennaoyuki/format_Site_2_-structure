@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <section class="comparison-section">
+        <div class="comparison-header">
+            <h2 class="comparison-title"><span id="comparison-region-name">東京</span>で人気の医療ダイエット</h2>
+            <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
+        </div>
+        
+        <div class="js-cbn-table" id="tab-menu" data-active-tab="tab1">
+            <div class="tab-menu">
+                <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
+                <div class="tab-menu-item" data-tab="tab2">施術内容</div>
+                <div class="tab-menu-item" data-tab="tab3">サービス</div>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>クリニック</th>
+                        <th class="">総合評価</th>
+                        <th class="">実績</th>
+                        <th class="">特典</th>
+                        <th class="th-none" style="display: none;">人気プラン</th>
+                        <th class="th-none" style="display: none;">医療機器</th>
+                        <th class="th-none" style="display: none;">注射治療</th>
+                        <th class="th-none" style="display: none;">食事指導</th>
+                        <th class="th-none" style="display: none;">モニター割</th>
+                        <th class="th-none" style="display: none;">返金保証</th>
+                        <th>公式サイト</th>
+                    </tr>
+                </thead>
+                <tbody id="comparison-tbody">
+                    <!-- 比較表の内容は親ウィンドウから挿入 -->
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <script>
+        // 親ウィンドウから比較表データを受け取る
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'update-comparison') {
+                document.getElementById('comparison-tbody').innerHTML = e.data.comparisonHtml;
+                document.getElementById('comparison-region-name').textContent = e.data.regionName;
+            }
+        });
+
+        // タブ切り替え機能
+        const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+        const table = document.querySelector('.js-cbn-table table');
+        
+        function updateTableColumns(tabType) {
+            if (!table) return;
+            
+            const tableContainer = document.querySelector('.js-cbn-table');
+            const headers = table.querySelectorAll('th');
+            const rows = table.querySelectorAll('tbody tr');
+            
+            const tabColumnsMap = {
+                'tab1': [0, 1, 2, 3, 10],
+                'tab2': [0, 4, 5, 6, 10],
+                'tab3': [0, 7, 8, 9, 10]
+            };
+            
+            const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
+            
+            tableContainer.setAttribute('data-active-tab', tabType);
+            
+            requestAnimationFrame(() => {
+                headers.forEach((th, index) => {
+                    if (showIndexes.includes(index)) {
+                        th.removeAttribute('style');
+                        th.classList.remove('th-none');
+                    } else {
+                        th.style.display = 'none';
+                        th.classList.add('th-none');
+                    }
+                });
+                
+                rows.forEach(row => {
+                    const cells = row.querySelectorAll('td');
+                    cells.forEach((td, index) => {
+                        if (showIndexes.includes(index)) {
+                            td.removeAttribute('style');
+                            td.classList.remove('th-none');
+                        } else {
+                            td.style.display = 'none';
+                            td.classList.add('th-none');
+                        }
+                    });
+                });
+            });
+        }
+        
+        tabMenuItems.forEach(item => {
+            item.addEventListener('click', function() {
+                tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
+                this.classList.add('tab-active');
+                const tabType = this.getAttribute('data-tab');
+                updateTableColumns(tabType);
+            });
+        });
+        
+        updateTableColumns('tab1');
+    </script>
+</body>
+</html>
