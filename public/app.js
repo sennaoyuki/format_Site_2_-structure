@@ -2782,18 +2782,31 @@ class RankingApp {
                     const addressElement = shopContainer.querySelector('.shop-address');
                     const address = addressElement?.textContent?.trim() || '住所情報なし';
                     
-                    // アクセス情報を取得（shop-infoセクション内から）
-                    const shopInfoElement = shopContainer.querySelector('.shop-info');
+                    // アクセス情報を取得
                     let access = '駅から徒歩圏内'; // デフォルト値
                     
-                    // shop-info内のテキストからアクセス情報を抽出
-                    if (shopInfoElement) {
-                        const infoText = shopInfoElement.textContent;
-                        // 「駅」を含む行を探す
-                        const lines = infoText.split('\n').map(line => line.trim()).filter(line => line);
-                        const accessLine = lines.find(line => line.includes('駅') && (line.includes('徒歩') || line.includes('分')));
-                        if (accessLine) {
-                            access = accessLine;
+                    // CSVデータから正確なアクセス情報を取得
+                    if (self.dataManager) {
+                        const stores = self.dataManager.getAllStores();
+                        // 店舗名と住所が一致する店舗を探す
+                        const matchingStore = stores.find(store => {
+                            return store.name === storeName && store.address === address;
+                        });
+                        
+                        if (matchingStore && matchingStore.access) {
+                            access = matchingStore.access;
+                            console.log('Found store in CSV:', matchingStore);
+                        } else {
+                            // CSVから見つからない場合は、HTMLから取得を試みる
+                            const shopInfoElement = shopContainer.querySelector('.shop-info');
+                            if (shopInfoElement) {
+                                const infoText = shopInfoElement.textContent;
+                                const lines = infoText.split('\n').map(line => line.trim()).filter(line => line);
+                                const accessLine = lines.find(line => line.includes('駅') && (line.includes('徒歩') || line.includes('分')));
+                                if (accessLine) {
+                                    access = accessLine;
+                                }
+                            }
                         }
                     }
                     
@@ -2829,7 +2842,9 @@ class RankingApp {
                     
                     // モーダルに情報を設定
                     try {
-                        self.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
+                        // ディオクリニック新宿院のように完全な店舗名を設定
+                        const fullStoreName = clinicName + storeName.replace(clinicName, ''); // 重複を避ける
+                        self.showMapModal(fullStoreName, address, access, clinicName);
                     } catch (error) {
                         console.error('Error in showMapModal:', error);
                     }
