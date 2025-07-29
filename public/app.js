@@ -687,7 +687,6 @@ class RankingApp {
         this.displayManager = new DisplayManager(this.urlHandler);
         this.dataManager = null;
         this.currentRegionId = null;
-        this.clinicDetailHandler = null;
     }
 
     async init() {
@@ -699,8 +698,6 @@ class RankingApp {
             // グローバルアクセス用にwindowオブジェクトに設定
             window.dataManager = this.dataManager;
             
-            // ClinicDetailHandlerの初期化
-            this.clinicDetailHandler = new ClinicDetailHandler(this.urlHandler);
 
             // 初期地域IDの取得（URLパラメータから取得、なければデフォルト）
             this.currentRegionId = this.urlHandler.getRegionId();
@@ -715,9 +712,9 @@ class RankingApp {
             // 初期表示の更新
             this.updatePageContent(this.currentRegionId);
             
-            // 地図アコーディオンの設定
+            // 地図モーダルの設定
             setTimeout(() => {
-                this.clinicDetailHandler.setupMapAccordions();
+                this.setupMapAccordions();
             }, 100);
         } catch (error) {
             console.error('アプリケーションの初期化に失敗しました:', error);
@@ -1086,9 +1083,9 @@ class RankingApp {
             // 詳細コンテンツの更新
             this.updateClinicDetails(allClinics, ranking, regionId);
 
-            // 地図アコーディオンの設定
+            // 地図モーダルの設定
             setTimeout(() => {
-                this.clinicDetailHandler.setupMapAccordions();
+                this.setupMapAccordions();
             }, 100);
 
             // エラーメッセージを隠す
