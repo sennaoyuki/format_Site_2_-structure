@@ -2784,8 +2784,9 @@ class RankingApp {
                     
                     // アクセス情報を取得
                     let access = '駅から徒歩圏内'; // デフォルト値
+                    let clinicName = 'クリニック'; // デフォルト値
                     
-                    // CSVデータから正確なアクセス情報を取得
+                    // CSVデータから正確なアクセス情報とクリニック名を取得
                     if (self.dataManager) {
                         const stores = self.dataManager.stores; // 直接storesプロパティを参照
                         // 店舗名と住所が一致する店舗を探す
@@ -2793,8 +2794,14 @@ class RankingApp {
                             return store.storeName === storeName && store.address === address;
                         });
                         
-                        if (matchingStore && matchingStore.access) {
-                            access = matchingStore.access;
+                        if (matchingStore) {
+                            if (matchingStore.access) {
+                                access = matchingStore.access;
+                            }
+                            // CSVからクリニック名を取得
+                            if (matchingStore.clinicName) {
+                                clinicName = matchingStore.clinicName;
+                            }
                             console.log('Found store in CSV:', matchingStore);
                         } else {
                             // CSVから見つからない場合は、HTMLから取得を試みる
@@ -2810,30 +2817,31 @@ class RankingApp {
                         }
                     }
                     
-                    // クリニック名を取得（data属性またはh3要素から）
-                    const shopsContainer = shopContainer.closest('.shops');
-                    const clinicDetailElement = shopsContainer?.closest('.detail-item');
-                    let clinicName = 'クリニック';
-                    
-                    // h3要素から正しいクリニック名を取得（例: ディオクリニック）
-                    const h3Element = clinicDetailElement?.querySelector('h3');
-                    if (h3Element) {
-                        // h3のテキストから「ⓘ」などの記号を除去
-                        const h3Text = h3Element.childNodes[0]?.textContent?.trim() || h3Element.textContent?.trim();
-                        // 実際のクリニック名を抽出（ボタンのクラス名などから推測）
-                        const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
-                        if (detailButtons.length > 0) {
-                            const href = detailButtons[0].getAttribute('href');
-                            if (href?.includes('/go/dio/')) {
-                                clinicName = 'ディオクリニック';
-                            } else if (href?.includes('/go/eminal/')) {
-                                clinicName = 'エミナルクリニック';
-                            } else if (href?.includes('/go/urara/')) {
-                                clinicName = 'ウララクリニック';
-                            } else if (href?.includes('/go/lieto/')) {
-                                clinicName = 'リエートクリニック';
-                            } else if (href?.includes('/go/sbc/')) {
-                                clinicName = '湘南美容クリニック';
+                    // CSVからクリニック名を取得できなかった場合のみ、HTMLから取得
+                    if (clinicName === 'クリニック') {
+                        const shopsContainer = shopContainer.closest('.shops');
+                        const clinicDetailElement = shopsContainer?.closest('.detail-item');
+                        
+                        // h3要素から正しいクリニック名を取得（例: ディオクリニック）
+                        const h3Element = clinicDetailElement?.querySelector('h3');
+                        if (h3Element) {
+                            // h3のテキストから「ⓘ」などの記号を除去
+                            const h3Text = h3Element.childNodes[0]?.textContent?.trim() || h3Element.textContent?.trim();
+                            // 実際のクリニック名を抽出（ボタンのクラス名などから推測）
+                            const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
+                            if (detailButtons.length > 0) {
+                                const href = detailButtons[0].getAttribute('href');
+                                if (href?.includes('/go/dio/')) {
+                                    clinicName = 'ディオクリニック';
+                                } else if (href?.includes('/go/eminal/')) {
+                                    clinicName = 'エミナルクリニック';
+                                } else if (href?.includes('/go/urara/')) {
+                                    clinicName = 'ウララクリニック';
+                                } else if (href?.includes('/go/lieto/')) {
+                                    clinicName = 'リエートクリニック';
+                                } else if (href?.includes('/go/sbc/')) {
+                                    clinicName = '湘南美容クリニック';
+                                }
                             }
                         }
                     }
@@ -2842,6 +2850,14 @@ class RankingApp {
                     
                     // モーダルに情報を設定
                     try {
+                        // デバッグ用に詳細ログを追加
+                        console.log('Processing store name:', {
+                            originalStoreName: storeName,
+                            clinicName: clinicName,
+                            startsWithClinic: storeName.startsWith('クリニック'),
+                            includesClinicName: storeName.includes(clinicName)
+                        });
+                        
                         // 店舗名が「クリニック 渋谷院」のような形式の場合、「クリニック」を正しいクリニック名に置換
                         let fullStoreName = storeName;
                         if (storeName.startsWith('クリニック')) {
@@ -2851,6 +2867,8 @@ class RankingApp {
                             // 店舗名にクリニック名が含まれていない場合、追加
                             fullStoreName = clinicName + storeName;
                         }
+                        
+                        console.log('Final store name:', fullStoreName);
                         self.showMapModal(fullStoreName, address, access, clinicName);
                     } catch (error) {
                         console.error('Error in showMapModal:', error);
