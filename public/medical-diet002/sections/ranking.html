@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <section class="clinic-rankings">
+        <div class="ranking-header-banner">
+            <img src="../../images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">                    
+        </div>
+        <div id="rank-region-name" style="position:absolute;top: 6%;left: 8%;text-align: center;color: #ffffff;font-size: clamp(16px, 5.2vw, 38px);font-weight: 600;z-index:10;pointer-events:none;">東京</div>
+        <div id="ranking-list" class="ranking-container">
+            <!-- ランキングは親ウィンドウから動的に挿入 -->
+        </div>
+    </section>
+    
+    <script>
+        // 親ウィンドウからランキングデータを受け取る
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'update-ranking') {
+                document.getElementById('ranking-list').innerHTML = e.data.rankingHtml;
+                document.getElementById('rank-region-name').textContent = e.data.regionName;
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <header class="site-header">
+        <div class="header-content">
+            <div class="logo-section">
+                <a href="/" class="logo-link" target="_parent">
+                    <div class="logo-main">
+                        <span class="logo-icon"><img src="../../images/favicon.png" alt="医療ダイエット比較.com" style="width: 20px; height: 20px; vertical-align: middle;"></span>
+                        <h1 class="site-logo">医療ダイエット比較.com</h1>
+                    </div>
+                </a>
+            </div>
+            <nav class="header-nav">
+                <button class="hamburger-menu" id="hamburger-menu" aria-label="メニュー">
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                    <span class="hamburger-line"></span>
+                </button>
+            </nav>
+        </div>
+    </header>
+    
+    <script>
+        // ハンバーガーメニューの動作を親ウィンドウに委譲
+        document.getElementById('hamburger-menu').addEventListener('click', function() {
+            window.parent.postMessage({action: 'toggle-menu'}, '*');
+        });
+    </script>
+</body>
+</html>

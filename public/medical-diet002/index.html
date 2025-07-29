@@ -12,56 +12,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2025年決定版｜医療ダイエット比較ランキング</title>
-    <!-- Vercel deployment: 2025-07-21 23:40 -->
-    <!-- Map modal feature added: 2024-01-29 15:30 -->
     <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
-    <!-- 重要なリソースのpreload -->
-    <link rel="preload" as="image" href="../images/MV2.webp" fetchpriority="high" type="image/webp">
-    <link rel="preload" as="style" href="styles.css?v=2025072201">
-    <link rel="preload" as="script" href="app.js?v=2025072201">
-    <!-- Google Fontsはプリロードせず、通常のロードのみにする -->
-    <!-- スタイルシート -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="styles.css?v=2025072201" media="all">
+    <link rel="stylesheet" href="styles.css?v=2025072201">
     <link rel="icon" type="image/png" href="../images/favicon.png">
-    <!-- Critical CSS -->
+    
     <style>
-        /* Reset and base styles */
-        *{box-sizing:border-box}
-        body{margin:0;padding:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;background-color:#fafafa;display:flex;flex-direction:column;align-items:center;min-height:100vh}
-        body>*{width:100%;max-width:768px;margin:0 auto}
-        
-        /* Container */
-        .container{max-width:768px!important;margin:0 auto;padding:0 20px;box-sizing:border-box}
-        
-        /* Header */
-        .site-header{position:sticky;top:0;background:#fff;width:100%;z-index:1000;border-bottom:1px solid #f0f0f0}
-        .header-content{display:flex;justify-content:space-between;align-items:center;max-width:768px;margin:0 auto;padding:0 20px;position:relative}
-        .site-logo{font-size:1.25rem;font-weight:700;color:#333;letter-spacing:1px}
-        
-        /* Hero section */
-        .hero-section{margin:0;position:relative}
-        .hero-image-wrapper{position:relative;width:100%;max-width:768px;margin:0 auto;overflow:hidden}
-        .hero-image{width:100%;height:auto;display:block}
-        
-        /* Prevent layout shift */
-        img{max-width:100%;height:auto}
-        
-        /* Mobile styles */
-        @media(max-width:768px){
-            .container{padding:0}
-            .header-content{padding:0}
+        /* iframeのスタイル */
+        .section-iframe {
+            width: 100%;
+            border: none;
+            overflow: hidden;
+            display: block;
         }
         
-        /* Font loading optimization */
-        .fonts-loaded body{font-family:'Noto Sans JP',sans-serif}
+        /* 各セクションのコンテナ */
+        .iframe-container {
+            width: 100%;
+            max-width: 768px;
+            margin: 0 auto;
+        }
+        
+        /* メインコンテナ */
+        .main-container {
+            background-color: #fafafa;
+            min-height: 100vh;
+        }
+        
+        /* ローディングインジケーター */
+        .loading {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+        }
+        
+        /* iframeロード中の表示 */
+        .iframe-loading {
+            background: #f0f0f0;
+            min-height: 100px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
     </style>
-    <!-- Font loading detection -->
-    <script>'fonts' in document&&document.fonts.ready.then(function(){document.documentElement.classList.add('fonts-loaded')})</script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -69,759 +65,82 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <div class="container">
-        <!-- ヘッダー -->
-        <header class="site-header">
-            <div class="header-content">
-                <div class="logo-section">
-                    <a href="/" class="logo-link">
-                        <div class="logo-main">
-                            <span class="logo-icon"><img src="/images/favicon.png" alt="医療ダイエット比較.com" style="width: 20px; height: 20px; vertical-align: middle;"></span>
-                            <h1 class="site-logo">医療ダイエット比較.com</h1>
-                        </div>
-                    </a>
-                </div>
-                <nav class="header-nav">
-                    <button class="hamburger-menu" id="hamburger-menu" aria-label="メニュー">
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                        <span class="hamburger-line"></span>
-                    </button>
-                </nav>
-            </div>
-        </header>
-
-        <!-- メインビジュアル -->
-        <section class="hero-section">
-            <div class="hero-image-wrapper">
-                <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image" loading="eager" fetchpriority="high" decoding="async" width="768" height="432">
-                <div id="mv-region-name" style="position:absolute;top: 8%;left: 1%;width: clamp(60px, 15vw, 115px);text-align: center;color: #808080;font-size: clamp(14px, 3.5vw, 27px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
-            </div>
-            <div style="text-align: right; padding: 5px 20px; color: #808080; font-size: 10px; font-weight: normal; max-width: 768px; margin: 0 auto;">PR：医療法人社団　正恵会</div>
-        </section>
-
-        <main>
-
-            <!-- ランキング表示セクション -->
-            <section class="clinic-rankings">
-                <div class="ranking-header-banner">
-                    <img src="/images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">                    
-                </div>
-                <div id="rank-region-name" style="position:absolute;top: 6%;left: 8%;text-align: center;color: #ffffff;font-size: clamp(16px, 5.2vw, 38px);font-weight: 600;z-index:10;pointer-events:none;">東京</div>
-                <div id="ranking-list" class="ranking-container">
-                    <!-- ランキングはJavaScriptで動的に生成 -->
-                </div>
-            </section>
-
-
-            <!-- ユーザーの悩みを解消するためのTips -->
-            <div class="container tips-container" style="max-width: 768px; margin: 20px auto; padding: 0 10px; position: relative;">
-                <div style="width: 100%;">
-                    <div style="display: flex; flex-direction: column;">
-                        <!-- タブナビゲーション -->
-                        <div class="tabs" style="display: flex; gap: 5px; margin-bottom: 0;">
-                            <div class="tab active" data-tab="0" style="flex: 1; background-color: #2CC7C5; color: white; padding: 10px 15px; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; font-weight: 600; transition: all 0.3s ease; font-size: 14px; display: flex; align-items: center; justify-content: center;">
-                                <span class="tab-text">医療痩身の効果</span>
-                            </div>
-                            <div class="tab" data-tab="1" style="flex: 1; background-color: #F1F1F1; color: #4C4C4C; padding: 10px 15px; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; font-weight: 600; transition: all 0.3s ease; font-size: 14px; display: flex; align-items: center; justify-content: center;">
-                                <span class="tab-text">クリニック選び</span>
-                            </div>
-                            <div class="tab" data-tab="2" style="flex: 1; background-color: #F1F1F1; color: #4C4C4C; padding: 10px 15px; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; font-weight: 600; transition: all 0.3s ease; font-size: 14px; display: flex; align-items: center; justify-content: center;">
-                                <span class="tab-text">今がおすすめ</span>
-                            </div>
-                        </div>
-
-                        <!-- タブコンテンツコンテナ -->
-                        <div class="tab-contents" style="position: relative; background-color: #FFFFFF; border: 1px solid #E0E0E0; border-radius: 0 0 4px 4px; padding: 15px;">
-                            <!-- タブ1: 医療痩身の効果 -->
-                            <div class="tab-content active" data-tab="0" style="display: block;">
-                                <div style="width: 100%; margin-bottom: 15px;">
-                                    <img src="/images/Tips1.webp" alt="医療痩身の効果" style="width: 100%; height: auto; border-radius: 4px;" loading="lazy">
-                                </div>
-                                <p style="font-size: 14px; line-height: 1.8; color: #4C4C4C; margin-bottom: 15px;">
-                                    本気で痩せたいなら医療痩身が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させるので痩せる仕組みで、リバウンドしにくい！と今人気急上昇中のダイエット法！
-                                </p>
-                            </div>
-
-                            <!-- タブ2: クリニック選び -->
-                            <div class="tab-content" data-tab="1" style="display: none;">
-                                <div style="width: 100%; margin-bottom: 15px;">
-                                    <img src="/images/Tips2.webp" alt="クリニック選びのポイント" style="width: 100%; height: auto; border-radius: 4px;" loading="lazy">
-                                </div>
-                                <p style="font-size: 14px; line-height: 1.8; color: #4C4C4C; margin-bottom: 15px;">
-                                    クリニック選びの失敗が理想の体型実現の失敗につながります。<br>
-                                    強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>
-                                    ☑️医師が直接診察する<br>
-                                    ☑️施術後のアフターケア<br>
-                                    ☑️料金を明確に説明する
-                                </p>
-                            </div>
-
-                            <!-- タブ3: 今がおすすめ -->
-                            <div class="tab-content" data-tab="2" style="display: none;">
-                                <div style="width: 100%; margin-bottom: 15px;">
-                                    <img src="/images/Tips3.webp" alt="今がおすすめの理由" style="width: 100%; height: auto; border-radius: 4px;" loading="lazy">
-                                </div>
-                                <p style="font-size: 14px; line-height: 1.8; color: #4C4C4C; margin-bottom: 15px;">
-                                    夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <script>
-                // Tips section tab functionality
-                (function() {
-                    const tabs = document.querySelectorAll('.tips-container .tab');
-                    const tabContents = document.querySelectorAll('.tips-container .tab-content');
-
-                    function updateTabs(index) {
-                        // Update tabs
-                        tabs.forEach((tab, i) => {
-                            if (i === index) {
-                                tab.classList.add('active');
-                                tab.style.backgroundColor = '#2B5797';
-                                tab.style.color = 'white';
-                            } else {
-                                tab.classList.remove('active');
-                                tab.style.backgroundColor = '#CCCCCC';
-                                tab.style.color = '#333';
-                            }
-                        });
-                        
-                        // Update tab contents
-                        tabContents.forEach((content, i) => {
-                            if (i === index) {
-                                content.style.display = 'block';
-                            } else {
-                                content.style.display = 'none';
-                            }
-                        });
-                    }
-
-                    // Tab click handlers
-                    tabs.forEach((tab, index) => {
-                        tab.addEventListener('click', () => updateTabs(index));
-                    });
-                })();
-            </script>
-        
-        <script>
-        // 詳細情報を表示する関数
-        function showDisclaimerInfo(type) {
-            const modal = document.getElementById('disclaimer-modal');
-            const modalBody = document.getElementById('disclaimer-modal-body');
-            
-            const disclaimers = {
-                'dio-success-rate': {
-                    title: 'ダイエット成功率99％について',
-                    content: '※最終体重測定2023/2/1～2023/7/31で薬なし、食事指導なしを除く、3ヶ月コース（ビューティー/リピート除く）の契約終了者が対象。効果には個人差があります。初回体重50kg以上or初回BMI25以上の方限定。'
-                }
-            };
-            
-            const info = disclaimers[type];
-            if (info) {
-                modalBody.innerHTML = `
-                    <h3 style="margin-top: 0; color: #333;">${info.title}</h3>
-                    <p style="font-size: 14px; line-height: 1.6; color: #666;">${info.content}</p>
-                `;
-                modal.style.display = 'block';
-            }
-        }
-        
-        // モーダルを閉じる関数
-        function closeDisclaimerInfo() {
-            document.getElementById('disclaimer-modal').style.display = 'none';
-        }
-        
-        // モーダルの外側をクリックしたら閉じる
-        window.onclick = function(event) {
-            const modal = document.getElementById('disclaimer-modal');
-            if (event.target == modal) {
-                modal.style.display = 'none';
-            }
-        }
-        </script>
-
-            <!-- 比較表セクション -->
-            <section class="comparison-section">
-                <div class="comparison-header">
-                    <h2 class="comparison-title"><span id="comparison-region-name">関東</span>で人気の医療ダイエット</h2>
-                    <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
-                </div>
-                
-                <div class="js-cbn-table" id="tab-menu" data-active-tab="tab1">
-                    <div class="tab-menu">
-                        <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
-                        <div class="tab-menu-item" data-tab="tab2">施術内容</div>
-                        <div class="tab-menu-item" data-tab="tab3">サービス</div>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>クリニック</th>
-                                <th class="" style="">総合評価</th>
-                                <th class="" style="">実績</th>
-                                <th class="" style="">特典</th>
-                                <th class="th-none" style="display: none;">人気プラン</th>
-                                <th class="th-none" style="display: none;">医療機器</th>
-                                <th class="th-none" style="display: none;">注射治療</th>
-                                <th class="th-none" style="display: none;">食事指導</th>
-                                <th class="th-none" style="display: none;">モニター割</th>
-                                <th class="th-none" style="display: none;">返金保証</th>
-                                <th>公式サイト</th>
-                            </tr>
-                        </thead>
-                        <tbody id="comparison-tbody">
-                            <tr style="background-color: rgb(255, 251, 220);">
-                                <td class="ranking-table_td1">
-                                    <img src="/images/clinics/dio/dio-logo.webp" alt="ディオクリニック" width="80">
-                                    <a href="#clinic1" class="clinic-link">ディオクリニック</a>
-                                </td>
-                                <td class="">
-                                    <span class="ranking_evaluation">4.9</span><br>
-                                    <span class="star5_rating" data-rate="4.9"></span>
-                                </td>
-                                <td class="">ダイエット成功率99％<br>平均13.7kg減</td>
-                                <td class="">今なら<br>12ヶ月分0円！</td>
-                                <td class="th-none" style="display: none;">脂肪冷却</td>
-                                <td class="th-none" style="display: none;">脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波</td>
-                                <td class="th-none" style="display: none;">脂肪溶解注射<br>サンサム注射<br>ダイエット点滴<br>GLP-1<br>サクセンダ</td>
-                                <td class="th-none" style="display: none;">栄養管理士<br>による指導</td>
-                                <td class="th-none" style="display: none;">あり<br>75％OFF</td>
-                                <td class="th-none" style="display: none;">痩せなかったら返金</td>
-                                <td>
-                                    <a class="link_btn" href="#" target="_blank">公式サイト</a>
-                                    <a class="detail_btn detail-static-link" href="#clinic-details-list" data-rank="1">詳細をみる</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ranking-table_td1">
-                                    <img src="/images/clinics/urara/urara-logo.webp" alt="URARAクリニック" width="80">
-                                    <a href="#clinic2" class="clinic-link">URARAクリニック</a>
-                                </td>
-                                <td class="">
-                                    <span class="ranking_evaluation">4.6</span><br>
-                                    <span class="star5_rating" data-rate="4.6"></span>
-                                </td>
-                                <td class="">ダイエット成功率94%</td>
-                                <td class="">今なら<br>最大79%OFF！</td>
-                                <td class="th-none" style="display: none;">脂肪冷却</td>
-                                <td class="th-none" style="display: none;">脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波</td>
-                                <td class="th-none" style="display: none;">脂肪溶解注射<br>ダイエット点滴<br>GLP-1<br>オルリスタット<br>ビグアナイド系薬剤</td>
-                                <td class="th-none" style="display: none;">管理栄養士<br>による指導</td>
-                                <td class="th-none" style="display: none;">あり<br>最大79%OFF</td>
-                                <td class="th-none" style="display: none;">痩せなかったら返金</td>
-                                <td>
-                                    <a class="link_btn" href="#" target="_blank">公式サイト</a>
-                                    <a class="detail_btn detail-static-link" href="#clinic-details-list" data-rank="2">詳細をみる</a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="ranking-table_td1">
-                                    <img src="/images/clinics/lieto/lieto-logo.webp" alt="リエートクリニック" width="80">
-                                    <a href="#clinic3" class="clinic-link">リエートクリニック</a>
-                                </td>
-                                <td class="">
-                                    <span class="ranking_evaluation">4.4</span><br>
-                                    <span class="star5_rating" data-rate="4.4"></span>
-                                </td>
-                                <td class="">ダイエット成功率94%</td>
-                                <td class="">最大80%OFF<br>（モニター割引）</td>
-                                <td class="th-none" style="display: none;">脂肪冷却</td>
-                                <td class="th-none" style="display: none;">脂肪冷却<br>医療用EMS<br>医療ハイフ</td>
-                                <td class="th-none" style="display: none;">脂肪溶解注射<br>ダイエット美容点滴<br>エクソソーム点滴</td>
-                                <td class="th-none" style="display: none;">医師監修のもと<br>管理栄養士の指導</td>
-                                <td class="th-none" style="display: none;">あり<br>最大80%OFF</td>
-                                <td class="th-none" style="display: none;">あり（※条件付き）</td>
-                                <td>
-                                    <a class="link_btn" href="#" target="_blank">公式サイト</a>
-                                    <a class="detail_btn detail-static-link" href="#clinic-details-list" data-rank="3">詳細をみる</a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <!-- 注意事項アコーディオン -->
-                    <div class="disclaimer-accordion" style="margin-top: 15px;">
-                        <!-- 第1段階: 各クリニックの注意事項 -->
-                        <div class="main-disclaimer">
-                            <button class="main-disclaimer-header" onclick="toggleMainDisclaimer()" style="width: 100%; text-align: left; padding: 8px 12px; background-color: #fafafa; border: 1px solid #f0f0f0; border-radius: 3px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
-                                <span style="font-size: 10px; font-weight: 500; color: #666;">各クリニックの注意事項</span>
-                                <span id="main-arrow" style="font-size: 8px; color: #999; transition: transform 0.2s;">▼</span>
-                            </button>
-                            <div id="main-content" class="main-disclaimer-content" style="display: none; padding: 5px; background-color: #fcfcfc; border: 1px solid #f0f0f0; border-top: none; border-radius: 0 0 3px 3px; margin-top: -5px;">
-                                
-                                <!-- 第2段階: ディオクリニック -->
-                                <div class="disclaimer-item">
-                                    <button class="disclaimer-header" onclick="toggleDisclaimer('dio')" style="width: 100%; text-align: left; padding: 6px 10px; background-color: #f8f8f8; border: 1px solid #eeeeee; border-radius: 2px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                                        <span style="font-size: 9px; font-weight: 400; color: #777;">ディオクリニック</span>
-                                        <span id="dio-arrow" style="font-size: 7px; color: #aaa; transition: transform 0.2s;">▼</span>
-                                    </button>
-                                    <div id="dio-content" class="disclaimer-content" style="display: none; padding: 6px 10px; background-color: #fefefe; border: 1px solid #eeeeee; border-top: none; border-radius: 0 0 2px 2px; margin-top: -2px;">
-                                        <div style="font-size: 9px; color: #777; line-height: 1.4;">
-                                            <p>「通院者の99%が体重減少効果あり」※最終体重測定2023/2/1～2023/7/31で薬なし、食事指導なしを除く、3ヶ月コース（ビューティー/リピート除く）の契約終了者が対象。効果には個人差があります。初回体重50kg以上or初回BMI25以上の方限定。</p>
-                                            <p>「平均13.7kg減量」※2023/2/1~7/31の3ヶ月コース（楽やせ食事指導なし、ビューティーリピートを除く）全卒業者が対象</p>
-                                            <p>「12ヶ月分 0円」※支払総額193,992円を64回、月々3,000円に分割し、12ヶ月分（12回分）の分割金が減額されます。※他キャンペーンとの併用不可※当社指定の信販会社で契約をした方限定※コースのみ契約者適用※契約時の申し出のみ有効。</p>
-                                            <p>「モニター75%OFF」※1～3：他キャンペーンと併用不可／契約時の申し出のみ有効コースご契約者様限定、但し一部コースを除く※3：医師の判断で適用できない場合がございます。</p>
-                                            <p>「痩せなかったら<br>全額返金保証」※他のキャンペーンの併用不可※初回ご来院時測定体重を元に目標体重を設定し、減量率が50%未満の場合、契約終了を条件に全額返金の適用を受けられます※契約時に同意書契約を結んだ場合のみ適用※落ち幅3.0%での計算に限る※中途解約手数料なし。</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 第2段階: エミナルクリニック -->
-                                <div class="disclaimer-item">
-                                    <button class="disclaimer-header" onclick="toggleDisclaimer('eminal')" style="width: 100%; text-align: left; padding: 6px 10px; background-color: #f8f8f8; border: 1px solid #eeeeee; border-radius: 2px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                                        <span style="font-size: 9px; font-weight: 400; color: #777;">エミナルクリニック</span>
-                                        <span id="eminal-arrow" style="font-size: 7px; color: #aaa; transition: transform 0.2s;">▼</span>
-                                    </button>
-                                    <div id="eminal-content" class="disclaimer-content" style="display: none; padding: 6px 10px; background-color: #fefefe; border: 1px solid #eeeeee; border-top: none; border-radius: 0 0 2px 2px; margin-top: -2px;">
-                                        <div style="font-size: 9px; color: #777; line-height: 1.4;">
-                                            <p>「最大79%OFF」※他キャンペーンとの併用不可 ※モニター協力が条件となります</p>
-                                            <p>「ダイエット成功率94%」※当院で3ヶ月以上継続された方の統計データ（2023年度実績）</p>
-                                            <p>「全額返金保証」※他キャンペーンとの併用不可 ※契約時に同意契約書を結んだ場合のみで適用</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                                <!-- 第2段階: URARAクリニック -->
-                                <div class="disclaimer-item">
-                                    <button class="disclaimer-header" onclick="toggleDisclaimer('urara')" style="width: 100%; text-align: left; padding: 6px 10px; background-color: #f8f8f8; border: 1px solid #eeeeee; border-radius: 2px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px;">
-                                        <span style="font-size: 9px; font-weight: 400; color: #777;">URARAクリニック</span>
-                                        <span id="urara-arrow" style="font-size: 7px; color: #aaa; transition: transform 0.2s;">▼</span>
-                                    </button>
-                                    <div id="urara-content" class="disclaimer-content" style="display: none; padding: 6px 10px; background-color: #fefefe; border: 1px solid #eeeeee; border-top: none; border-radius: 0 0 2px 2px; margin-top: -2px;">
-                                        <div style="font-size: 9px; color: #777; line-height: 1.4;">
-                                            <p>「最大80%OFF」※モニター割引適用時 ※他キャンペーンとの併用不可</p>
-                                            <p>「ダイエット成功率94%」※当院で3ヶ月以上継続された方の統計データ</p>
-                                            <p>「返金保証」※条件付き ※詳細は無料カウンセリングでご確認ください</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- 案件詳細セクション -->
-            <section class="clinic-details-section">
-                <div class="details-header-banner">
-                    <img src="/images/details_header_bannar3.webp" alt="コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3" class="details-banner-image">
-                    <div id="detail-region-name" style="position:absolute;top: 54%;left: 3%;text-align: center;color: #ffffff;font-size: clamp(16px, 4vw, 31px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(2px, 0.5vw, 4px) clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
-                </div>
-                
-                <div id="clinic-details-list" class="clinic-details-container">
-                    <!-- 詳細コンテンツはJavaScriptで動的に生成 -->
-                </div>
-            </section>
-
-            <!-- 医療情報コラムセクション -->
-            <section class="medical-columns-section">
-                <div class="columns-container">
-                    <!-- Main Article Card -->
-                    <div class="article-card">
-                        <div class="article-header">
-                            <div class="article-title">
-                                医療痩身を始める前に知っ<br>
-                                ておくべきこと
-                            </div>
-                            <div class="header-image">
-                                <img src="/images/column.webp" alt="医療ダイエット解説" style="width: 100%; height: 100%; object-fit: cover;">
-                            </div>
-                        </div>
-
-                        <!-- Table of Contents -->
-                        <div class="toc-section">
-                            <div class="toc-title">目次</div>
-                            <ul class="toc-list">
-                                <li class="toc-item">
-                                    <a href="#comparison" class="toc-link">医療痩身とエステ痩身の違い</a>
-                                    <div class="toc-sub-item">
-                                        <a href="#mechanism" class="toc-link">医療痩身とエステ痩身の仕組み</a>
-                                    </div>
-                                    <div class="toc-sub-item">
-                                        <a href="#merits" class="toc-link">医療痩身とエステ痩身メリット・デメリット</a>
-                                    </div>
-                                </li>
-                                <li class="toc-item">
-                                    <a href="#risks" class="toc-link">医療痩身に伴うリスクや副作用</a>
-                                    <div class="toc-sub-item">
-                                        <a href="#side-effects" class="toc-link">医療痩身で起こりうる副作用</a>
-                                    </div>
-                                    <div class="toc-sub-item">
-                                        <a href="#pain" class="toc-link">医療痩身の痛みについて</a>
-                                    </div>
-                                    <div class="toc-sub-item">
-                                        <a href="#precautions" class="toc-link">手術前にやってはいけないこと</a>
-                                    </div>
-                                </li>
-                                <li class="toc-item">
-                                    <a href="#contract" class="toc-link">医療痩身を契約する時の注意点</a>
-                                    <div class="toc-sub-item">
-                                        <a href="#insurance" class="toc-link">医療痩身は保険適用外</a>
-                                    </div>
-                                    <div class="toc-sub-item">
-                                        <a href="#details" class="toc-link">手術内容について細かく確認する</a>
-                                    </div>
-                                    <div class="toc-sub-item">
-                                        <a href="#additional-fees" class="toc-link">追加費用がかからないか確認する</a>
-                                    </div>
-                                    <div class="toc-sub-item">
-                                        <a href="#troubles" class="toc-link">それでもトラブルになってしまったら</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <!-- Medical vs Salon Slimming Comparison -->
-                    <div class="article-card">
-                        <div class="content-section" id="comparison">
-                            <div class="section-title">医療痩身とエステ痩身の違い</div>
-                            <div class="section-content">
-                                「痩身」には、大きく分けて「医療痩身」と「エステ痩身（美容痩身・エステサロン）」の<span style="background-color: #fff3cd; padding: 2px 4px;">2種類があります</span>。それぞれの仕組みやメリット・デメリットを理解して、どちらが自分に適しているか判断するようにしましょう。
-                            </div>
-
-                            <table class="comparison-table">
-                                <thead class="table-header">
-                                    <tr>
-                                        <th></th>
-                                        <th>医療痩身</th>
-                                        <th>エステ痩身</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr class="table-row">
-                                        <td class="row-header">治療方法</td>
-                                        <td>医療機器・注射</td>
-                                        <td>美容機器・マッサージ</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="row-header">ダウンタイム</td>
-                                        <td>軽度</td>
-                                        <td>ほぼなし</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="row-header">施術回数(※)</td>
-                                        <td>5～10回</td>
-                                        <td>15～30回</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="row-header">期間(※)</td>
-                                        <td>2～6ヶ月</td>
-                                        <td>半年～2年</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="row-header">総額</td>
-                                        <td>20～100万円<br>（部分痩身）</td>
-                                        <td>30～150万円</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="row-header">運営元</td>
-                                        <td>医療機関<br>（クリニック）</td>
-                                        <td>民間企業</td>
-                                    </tr>
-                                    <tr class="table-row">
-                                        <td class="row-header">技術者</td>
-                                        <td>医師のみ</td>
-                                        <td>エステティシャン</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-
-                            <div class="section-content">
-                                <small>（※）回数・期間は目安です。個人差や施術部位による違いがあります。また、上記の効果を保証するものではありません。</small>
-                            </div>
-
-                            <div class="section-content" style="margin-top: 16px;">
-                                医療痩身は、医療機器や医薬品を使用するため効果が期待できますが、軽いダウンタイムを伴う可能性があります。一方で、エステ痩身は施術回数が多くなりますが、リラクゼーション効果も期待できます。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mechanism Section -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="mechanism">
-                            <div class="section-title">医療痩身とエステ痩身の仕組み</div>
-                            <div class="section-content">
-                                医療痩身とエステ痩身では、脂肪へのアプローチ方法が異なります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                医療痩身は、医療機器や薬剤を使用して<span style="background-color: #fff3cd; padding: 2px 4px;">脂肪細胞を破壊・減少させます</span>。脂肪冷却、HIFU、脂肪溶解注射などにより、脂肪細胞の数自体を減らすため、リバウンドしにくい特徴があります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                一方のエステ痩身では、マッサージや美容機器により脂肪細胞のサイズを小さくすることが目的です。そのため、エステ痩身でできるのは、<span style="background-color: #fff3cd; padding: 2px 4px;">「一時的なサイズダウン」が中心になります</span>。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Merits and Demerits -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="merits">
-                            <div class="section-title">医療痩身とエステ痩身メリット・デメリット</div>
-                            <div class="section-content">
-                                以上の内容を踏まえて、医療痩身とエステ痩身のメリット・デメリットをまとめました。自分に適した痩身方法選びの参考にしてください。
-                            </div>
-
-                            <table class="merit-table">
-                                <thead>
-                                    <tr>
-                                        <th class="merit-header"></th>
-                                        <th class="merit-header">医療痩身</th>
-                                        <th class="merit-header">エステ痩身</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="merit-category">メリット</td>
-                                        <td class="merit-content">
-                                            <ul>
-                                                <li>脂肪細胞を減らすためリバウンドしにくい</li>
-                                                <li>部分痩せが可能で狙った箇所を細くできる</li>
-                                            </ul>
-                                        </td>
-                                        <td class="merit-content">
-                                            <ul>
-                                                <li>リラックス効果があり癒される</li>
-                                                <li>1回あたりの料金が比較的安い</li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="merit-category">デメリット</td>
-                                        <td class="merit-content">
-                                            <ul>
-                                                <li>軽度のダウンタイムがある</li>
-                                                <li>施術内容によっては費用が高額になる</li>
-                                            </ul>
-                                        </td>
-                                        <td class="merit-content">
-                                            <ul>
-                                                <li>効果が一時的でリバウンドしやすい</li>
-                                            </ul>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Risks and Side Effects -->
-                    <div class="article-card">
-                        <div class="content-section" id="risks">
-                            <div class="section-title">医療痩身に伴うリスクや副作用</div>
-                            <div class="header-image" style="margin: 16px 0;">
-                                <img src="/images/column2.webp" alt="医療痩身の副作用について" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                            </div>
-                            <div class="section-content">
-                                医療痩身は高い効果が期待できる一方で、医療行為であるためリスクや副作用の可能性があります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                各クリニックでは、できる限り安全に施術が行えるような取り組みを行っています。とはいえ、リスクが全くないわけではなく、体調不良や副作用を引き起こしてしまう可能性もあります
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Side Effects Detail -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="side-effects">
-                            <div class="section-title">医療痩身で起こりうる副作用</div>
-                            <div class="section-content">
-                                医療痩身の副作用として起こりうる症状は以下の通りです
-                            </div>
-
-                            <div class="subsection-title">内出血・腫れ</div>
-                            <div class="section-content">
-                                脂肪冷却やHIFUなどの施術後に、施術部位に内出血や腫れが生じることがあります。通常は1～2週間で治まります。
-                            </div>
-
-                            <div class="subsection-title">痛み・筋肉痛</div>
-                            <div class="section-content">
-                                施術後数日間は、施術部位に痛みや筋肉痛のような症状が出ることがあります。特にHIFUや脂肪溶解注射後に多く見られます。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Hardening -->
-                    <div class="article-card">
-                        <div class="content-section">
-                            <div class="subsection-title">皮膚のたるみ</div>
-                            <div class="section-content">
-                                脂肪が減少した後、皮膚が余ってたるみが生じることがあります。特に大幅なサイズダウンを行った場合に起こりやすい副作用です。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                脂肪溶解注射や脂肪吸引の場合、施術部位の凹凸や左右差が生じることがあります
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                医療痩身を受けるときには、あらかじめ副作用について説明を受け、万が一副作用が起きた場合の対処法まで確認しておきましょう。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                また、服用中の薬や既往症によって副作用のリスクも異なる場合があるので、カウンセリング時に必ず伝えておくようにしましょう。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pain Information -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="pain">
-                            <div class="section-title">医療痩身の痛みについて</div>
-                            <div class="section-content">
-                                医療痩身の痛みは、<span style="background-color: #fff3cd; padding: 2px 4px;">施術内容や部位によって異なります</span>。痛みの感じ方は個人差があり、施術方法によっても変化します。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                一般的に痛みを感じやすい施術や部位は以下の通りです。
-                            </div>
-
-                            <div class="pain-area-box">
-                                <div class="pain-area">脂肪溶解注射（注射時の痛み）</div>
-                                <div class="pain-area">HIFU（照射時の熱感）</div>
-                                <div class="pain-area">脂肪吸引（術後の痛み）</div>
-                            </div>
-
-                            <div class="section-content">
-                                医療痩身を受ける際は、施術中や施術後に痛みを伴う可能性があることを理解しておく必要があります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                ただし、痛み対策に注力しているクリニックも多く、麻酔クリームや局所麻酔、鎮痛剤などを使用することで、痛みを最小限に抑える対策を取ることが可能です。カウンセリング時に、痛みに関する説明を受けるようにしましょう。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Pre-treatment Precautions -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="precautions">
-                            <div class="section-title">施術前にやってはいけないこと</div>
-                            <div class="section-content">
-                                医療痩身における副作用や効果を最大化するために、以下のことはやらないようにご注意ください。
-                            </div>
-
-                            <div class="subsection-title">極端な食事制限</div>
-                            <div class="section-content">
-                                施術前の極端な食事制限は、体調不良や施術効果の低下につながる可能性があります。バランスの良い食事を心がけ、体調を整えておくことが重要です。
-                            </div>
-
-                            <div class="subsection-title">アルコール摂取</div>
-                            <div class="section-content">
-                                施術前日からのアルコール摂取は控えましょう。アルコールは血行を促進し、むくみや内出血のリスクを高める可能性があります。
-                            </div>
-
-                            <div class="subsection-title">激しい運動</div>
-                            <div class="section-content">
-                                施術前日の激しい運動は避けましょう。筋肉疲労や炎症があると、施術効果が十分に得られない場合があります。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Contract Considerations -->
-                    <div class="article-card">
-                        <div class="content-section" id="contract">
-                            <div class="section-title">医療痩身を契約する時の注意点</div>
-                            <div class="header-image" style="margin: 16px 0;">
-                                <img src="/images/column3.webp" alt="医療痩身契約の注意点" style="width: 100%; height: 100%; object-fit: cover;" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Insurance Coverage -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="insurance">
-                            <div class="section-title">医療痩身は保険適用外</div>
-                            <div class="section-content">
-                                「医療痩身は、医療行為だから保険が適用される」と考えている人が多いですが、ほとんどの場合、医療痩身は保険が適用されません。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                医療痩身の主な目的は、「美しいボディラインを作りたい」や「部分痩せしたい」という美容目的である場合が多いため、保険が適用されない自由診療に分類されます。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                <span style="background-color: #fff3cd; padding: 2px 4px;">医療痩身は全額が自費負担</span>になりますので、契約の際は注意しておきましょう。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Detailed Service Confirmation -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="details">
-                            <div class="section-title">施術内容について細かく確認する</div>
-                            <div class="section-content">
-                                医療痩身を契約するときは、施術内容について細かく確認しましょう。クリニックごとに様々なプランやメニューがあるため、自分の目的に沿っているかどうか判断する必要があります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                例えば「二の腕痩せ」と言っても、脂肪冷却のみのプランもあれば、HIFUや脂肪溶解注射を組み合わせたプランもあります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                契約した後に変更すると、さらに料金が加算されることも考えられるため、契約する前に<span style="background-color: #fff3cd; padding: 2px 4px;">施術内容はしっかりと確認しておくことが大切です</span>。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Additional Fees -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="additional-fees">
-                            <div class="section-title">追加費用がかからないか確認する</div>
-                            <div class="section-content">
-                                医療痩身の契約時には、追加の費用についても確認するようにしましょう。提示された料金とは別に、予想外の追加費用がかかってしまう可能性もあります。
-                            </div>
-                            <div class="section-content" style="margin-top: 12px;">
-                                追加費用が掛かる項目として、代表的なものは以下の通りです。
-                            </div>
-
-                            <ul class="fee-list">
-                                <li class="fee-item">麻酔代</li>
-                                <li class="fee-item">初診料・カウンセリング料</li>
-                                <li class="fee-item">キャンセル代</li>
-                                <li class="fee-item">追加施術料</li>
-                                <li class="fee-item">アフターケア商品代</li>
-                            </ul>
-
-                            <div class="section-content">
-                                特に麻酔代は、クリニックによって異なる費用です。<span style="background-color: #fff3cd; padding: 2px 4px;">追加費用については、契約前に必ず確認する</span>ようにしてください。
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Troubleshooting -->
-                    <div class="article-card">
-                        <div class="highlight-box" id="troubles">
-                            <div class="section-title">それでもトラブルになってしまったら</div>
-                            <div class="section-content">
-                                万が一、医療痩身の契約についてトラブルになってしまった場合は、以下の窓口に相談することが可能です。
-                            </div>
-
-                            <ul class="contact-list">
-                                <li class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <a href="https://www.anzen-shien.jp/center/" target="_blank" rel="noopener noreferrer" class="contact-link" style="position: relative; z-index: 10; display: inline-block;">医療安全支援センター（医療に関する苦情・心配事の相談）</a>
-                                </li>
-                                <li class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <a href="https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/" target="_blank" rel="noopener noreferrer" class="contact-link" style="position: relative; z-index: 10; display: inline-block;">消費者ホットライン（契約内容や契約条件など、契約に関する相談）</a>
-                                </li>
-                                <li class="contact-item">
-                                    <i class="fas fa-phone"></i>
-                                    <a href="https://www.caa.go.jp/policies/policy/local_cooperation/local_consumer_administration/hotline/" target="_blank" rel="noopener noreferrer" class="contact-link" style="position: relative; z-index: 10; display: inline-block;">医療相談窓口（医療に関する広告についての相談）</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-
-
-        </main>
-
-        <!-- 詳細情報モーダル -->
-        <div id="disclaimer-modal" class="disclaimer-modal" style="display: none;">
-            <div class="disclaimer-modal-content">
-                <span class="disclaimer-modal-close" onclick="closeDisclaimerInfo()">&times;</span>
-                <div id="disclaimer-modal-body"></div>
-            </div>
+    <div class="main-container">
+        <!-- 1. ヘッダーセクション -->
+        <div class="iframe-container">
+            <div class="iframe-loading" id="header-loading">読み込み中...</div>
+            <iframe id="header-iframe" 
+                    src="sections/header.html" 
+                    class="section-iframe"
+                    style="height: 60px; display: none;"
+                    title="ヘッダー">
+            </iframe>
         </div>
 
-        <!-- フッター -->
+        <!-- 2. メインビジュアルセクション -->
+        <div class="iframe-container">
+            <div class="iframe-loading" id="hero-loading">読み込み中...</div>
+            <iframe id="hero-iframe" 
+                    src="sections/hero.html" 
+                    class="section-iframe"
+                    style="height: 460px; display: none;"
+                    title="メインビジュアル">
+            </iframe>
+        </div>
+
+        <!-- 3. ランキングセクション -->
+        <div class="iframe-container">
+            <div class="iframe-loading" id="ranking-loading">読み込み中...</div>
+            <iframe id="ranking-iframe" 
+                    src="sections/ranking.html" 
+                    class="section-iframe"
+                    style="height: 800px; display: none;"
+                    title="ランキング">
+            </iframe>
+        </div>
+
+        <!-- 4. Tipsセクション -->
+        <div class="iframe-container">
+            <div class="iframe-loading" id="tips-loading">読み込み中...</div>
+            <iframe id="tips-iframe" 
+                    src="sections/tips.html" 
+                    class="section-iframe"
+                    style="height: 400px; display: none;"
+                    title="Tips">
+            </iframe>
+        </div>
+
+        <!-- 5. 比較表セクション -->
+        <div class="iframe-container">
+            <div class="iframe-loading" id="comparison-loading">読み込み中...</div>
+            <iframe id="comparison-iframe" 
+                    src="sections/comparison.html" 
+                    class="section-iframe"
+                    style="height: 600px; display: none;"
+                    title="比較表">
+            </iframe>
+        </div>
+
+        <!-- 6. 詳細セクション -->
+        <div class="iframe-container">
+            <div class="iframe-loading" id="details-loading">読み込み中...</div>
+            <iframe id="details-iframe" 
+                    src="sections/details.html" 
+                    class="section-iframe"
+                    style="height: 2000px; display: none;"
+                    title="詳細情報">
+            </iframe>
+        </div>
+
+        <!-- 7. 医療情報コラムセクション（通常のHTML） -->
+        <section class="medical-columns-section">
+            <div class="columns-container">
+                <!-- コラムの内容は必要に応じて追加 -->
+                <p style="text-align: center; padding: 40px;">医療情報コラムセクション</p>
+            </div>
+        </section>
+
+        <!-- 8. フッター（通常のHTML） -->
         <div id="footer">
             <div class="footer_contents">
                 <h4><a href="/">医療ダイエット比較.com</a></h4>
@@ -835,21 +154,21 @@
                                 
                 <ul>
                     <h5>運営</h5>
-                    <li><a href="company/" class="footer-page-link">運営者情報</a></li>
-                    <li><a href="privacy/" class="footer-page-link">プライバシーポリシー</a></li>
-                    <li><a href="disclaimer/" class="footer-page-link">免責事項</a></li>
+                    <li><a href="../company/" class="footer-page-link">運営者情報</a></li>
+                    <li><a href="../privacy/" class="footer-page-link">プライバシーポリシー</a></li>
+                    <li><a href="../disclaimer/" class="footer-page-link">免責事項</a></li>
                     <li><a href="mailto:clinic.hikaku.review@gmail.com">お問い合わせ</a></li>
                 </ul>
                 
             </div>
             
             <div class="footer-bottom">
-                <p class="copyright">© 2025 医療ダイエット比較.com</div></p>
+                <p class="copyright">© 2025 医療ダイエット比較.com</p>
                 <p class="disclaimer">※本サイトの情報は参考程度に留め、必ず医療機関にご相談ください。</p>
             </div>
         </div>
 
-        <!-- サイドバーメニュー -->
+        <!-- サイドバー、モーダルなど -->
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <div class="sidebar-menu" id="sidebar-menu">
             <div class="sidebar-header">
@@ -863,78 +182,8 @@
                         <!-- 地域オプションはJavaScriptで動的に生成 -->
                     </select>
                 </div>
-                <div class="sidebar-filter-group">
-                    <label for="sidebar-clinic-search" class="sidebar-filter-label">クリニック名検索</label>
-                    <input type="text" id="sidebar-clinic-search" class="sidebar-search-input" placeholder="クリニック名を入力">
-                </div>
-                <div class="sidebar-filter-group">
-                    <label for="sidebar-specialty-filter" class="sidebar-filter-label">対応部位</label>
-                    <select id="sidebar-specialty-filter" class="sidebar-select">
-                        <option value="">すべての部位</option>
-                        <option value="face">顔</option>
-                        <option value="upperarm">二の腕</option>
-                        <option value="stomach">お腹</option>
-                        <option value="buttocks">お尻</option>
-                        <option value="thigh">太もも</option>
-                        <option value="other">その他</option>
-                    </select>
-                </div>
-                <div class="sidebar-filter-group">
-                    <label for="sidebar-hours-filter" class="sidebar-filter-label">店舗数</label>
-                    <select id="sidebar-hours-filter" class="sidebar-select">
-                        <option value="">店舗数指定なし</option>
-                        <option value="small">0〜5店舗</option>
-                        <option value="medium">6〜10店舗</option>
-                        <option value="large">10〜20店舗</option>
-                        <option value="xlarge">それ以上</option>
-                    </select>
-                </div>
                 <div class="sidebar-search-button">
                     <a href="search-results/" class="sidebar-search-link">詳細検索ページへ</a>
-                </div>
-            </div>
-        </div>
-
-        <div id="error-message" class="error-message" style="display: none;">
-            <p id="error-text"></p>
-        </div>
-        
-        <!-- 地図モーダル -->
-        <div id="map-modal" class="map-modal" style="display: none;">
-            <div class="map-modal-overlay"></div>
-            <div class="map-modal-content">
-                <div class="map-modal-header">
-                    <h3 class="map-modal-title" id="map-modal-clinic-name">クリニック名</h3>
-                    <button class="map-modal-close" id="map-modal-close" aria-label="閉じる">&times;</button>
-                </div>
-                <div class="map-modal-body">
-                    <div class="map-modal-map" id="map-modal-map-container">
-                        <!-- Google Maps iframe will be inserted here -->
-                    </div>
-                    <table class="map-modal-info-table">
-                        <tbody>
-                            <tr>
-                                <th>住所</th>
-                                <td id="map-modal-address"></td>
-                            </tr>
-                            <tr>
-                                <th>アクセス</th>
-                                <td id="map-modal-access"></td>
-                            </tr>
-                            <tr>
-                                <th>営業時間</th>
-                                <td id="map-modal-hours">11:00〜21:00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <div class="map-modal-footer">
-                        <p class="btn btn_second_primary" style="margin-top: 20px;">
-                            <a id="map-modal-button" href="#" target="_blank" rel="noopener">
-                                <span class="bt_s" id="map-modal-button-text">公式サイトから申し込む</span>
-                                <span class="btn-arrow">▶</span>
-                            </a>
-                        </p>
-                    </div>
                 </div>
             </div>
         </div>
@@ -942,231 +191,152 @@
 
     <script src="app.js?v=2025072201" defer></script>
     <script>
-        // 比較表のタブ切り替え機能
-        // 全てのパラメータを引き継ぐ共通処理
-        function preserveAllParams() {
-            const currentParams = new URLSearchParams(window.location.search);
-            if (currentParams.toString()) {
-                // すべての内部リンクにパラメータを追加
-                const links = document.querySelectorAll('a[href^="/"], a[href^="./"], a[href^="../"], a[href]:not([href^="http"]):not([href^="#"])');
-                links.forEach(link => {
-                    try {
-                        const url = new URL(link.href, window.location.origin);
-                        // 既存のパラメータを保持しつつ、現在のパラメータを追加
-                        for (const [key, value] of currentParams) {
-                            if (!url.searchParams.has(key)) {
-                                url.searchParams.set(key, value);
-                            }
-                        }
-                        link.href = url.toString();
-                    } catch (e) {
-                        // 相対URLの場合
-                        const separator = link.href.includes('?') ? '&' : '?';
-                        link.href = link.href + separator + currentParams.toString();
-                    }
-                });
-            }
-        }
+        // iframeの読み込み管理
+        const iframes = [
+            { id: 'header-iframe', loadingId: 'header-loading' },
+            { id: 'hero-iframe', loadingId: 'hero-loading' },
+            { id: 'ranking-iframe', loadingId: 'ranking-loading' },
+            { id: 'tips-iframe', loadingId: 'tips-loading' },
+            { id: 'comparison-iframe', loadingId: 'comparison-loading' },
+            { id: 'details-iframe', loadingId: 'details-loading' }
+        ];
 
-        document.addEventListener('DOMContentLoaded', function() {
-            // パラメータを引き継ぐ
-            preserveAllParams();
+        // 各iframeの読み込み完了を処理
+        iframes.forEach(({ id, loadingId }) => {
+            const iframe = document.getElementById(id);
+            const loading = document.getElementById(loadingId);
             
-            const tabMenuItems = document.querySelectorAll('.tab-menu-item');
-            const table = document.querySelector('.js-cbn-table table');
-            
-            function updateTableColumns(tabType) {
-                if (!table) return;
+            iframe.onload = function() {
+                // ローディング表示を隠す
+                loading.style.display = 'none';
+                iframe.style.display = 'block';
                 
-                const tableContainer = document.querySelector('.js-cbn-table');
-                const headers = table.querySelectorAll('th');
-                const rows = table.querySelectorAll('tbody tr');
-                
-                // タブごとの表示列インデックス（PCもスマホも同じ5項目）
-                const tabColumnsMap = {
-                    'tab1': [0, 1, 2, 3, 10], // 総合: クリニック, 総合評価, 実績, 特典, 公式サイト
-                    'tab2': [0, 4, 5, 6, 10], // 施術内容: クリニック, 人気プラン, 医療機器, 注射治療, 公式サイト
-                    'tab3': [0, 7, 8, 9, 10]  // サービス: クリニック, 食事指導, モニター割, 返金保証, 公式サイト
-                };
-                
-                const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
-                
-                // コンテナにアクティブなタブを設定
-                tableContainer.setAttribute('data-active-tab', tabType);
-                
-                // requestAnimationFrameを使用して最適化
-                requestAnimationFrame(() => {
-                    // ヘッダーの表示/非表示
-                    headers.forEach((th, index) => {
-                        if (showIndexes.includes(index)) {
-                            // 表示する列: すべてのインラインスタイルを削除
-                            th.removeAttribute('style');
-                            th.classList.remove('th-none');
-                            th.classList.remove('td-none');
-                        } else {
-                            // 非表示の列
-                            th.style.display = 'none';
-                            th.style.visibility = 'hidden';
-                            th.style.width = '0';
-                            th.style.padding = '0';
-                            th.style.border = '0';
-                            th.classList.add('th-none');
-                        }
-                    });
-                    
-                    // 各行のセルの表示/非表示
-                    rows.forEach(row => {
-                        const cells = row.querySelectorAll('td');
-                        cells.forEach((td, index) => {
-                            if (showIndexes.includes(index)) {
-                                // 表示する列: すべてのインラインスタイルを削除
-                                td.removeAttribute('style');
-                                td.classList.remove('th-none');
-                                td.classList.remove('td-none');
-                            } else {
-                                // 非表示の列
-                                td.style.display = 'none';
-                                td.style.visibility = 'hidden';
-                                td.style.width = '0';
-                                td.style.padding = '0';
-                                td.style.border = '0';
-                                td.classList.add('td-none');
-                            }
-                        });
-                    });
-                });
-            }
-            
-            tabMenuItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    // すべてのタブを非アクティブに
-                    tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
-                    // クリックしたタブをアクティブに
-                    this.classList.add('tab-active');
-
-                    // タブに応じて表示列を切り替え
-                    const tabType = this.getAttribute('data-tab');
-                    updateTableColumns(tabType);
-                });
-            });
-            
-            // 初期表示
-            updateTableColumns('tab1');
-            
-        });
-
-        // Smooth scrolling for table of contents links in medical columns
-        // Temporarily disabled for debugging scroll issues
-        /*
-        document.querySelectorAll('.medical-columns-section .toc-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                
-                const targetId = this.getAttribute('href').substring(1);
-                const targetElement = document.getElementById(targetId);
-                
-                if (targetElement) {
-                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                    
-                    window.scrollTo({
-                        top: targetPosition - 80,
-                        behavior: 'smooth'
-                    });
+                // iframeの高さを自動調整
+                try {
+                    const height = iframe.contentWindow.document.body.scrollHeight;
+                    iframe.style.height = height + 'px';
+                } catch (e) {
+                    console.error('Cannot adjust iframe height:', e);
                 }
-                
-                return false;
-            });
+            };
         });
-        */
 
-        // アコーディオン機能（2段階）
-        window.toggleMainDisclaimer = function() {
-            const content = document.getElementById('main-content');
-            const arrow = document.getElementById('main-arrow');
-            
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                content.style.display = 'none';
-                arrow.style.transform = 'rotate(0deg)';
+        // メッセージハンドラー（iframe間通信用）
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'toggle-menu') {
+                // ハンバーガーメニューの処理
+                const overlay = document.getElementById('sidebar-overlay');
+                const menu = document.getElementById('sidebar-menu');
+                if (overlay && menu) {
+                    overlay.classList.toggle('active');
+                    menu.classList.toggle('active');
+                }
             }
-        }
-        
-        window.toggleDisclaimer = function(clinicId) {
-            const content = document.getElementById(clinicId + '-content');
-            const arrow = document.getElementById(clinicId + '-arrow');
             
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                arrow.style.transform = 'rotate(180deg)';
-            } else {
-                content.style.display = 'none';
-                arrow.style.transform = 'rotate(0deg)';
+            // 高さ調整リクエスト
+            if (e.data.action === 'resize') {
+                const iframe = document.getElementById(e.data.iframeId);
+                if (iframe) {
+                    iframe.style.height = e.data.height + 'px';
+                }
             }
-        }
+        });
 
-        // Add click animation to links
-        document.querySelectorAll('.medical-columns-section .toc-link, .medical-columns-section .contact-link').forEach(link => {
-            link.addEventListener('click', function(e) {
-                // contact-linkの場合は外部リンクなので、アニメーションのみ実行
-                this.style.opacity = '0.7';
-                setTimeout(() => {
-                    this.style.opacity = '1';
-                }, 150);
-                
-                // toc-linkの場合のみスムーズスクロールを実行
-                if (this.classList.contains('toc-link') && this.getAttribute('href').startsWith('#')) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href').substring(1);
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        targetElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    }
+        // 地域データを各iframeに送信
+        function updateRegionInIframes(regionName) {
+            const targetIframes = ['hero-iframe', 'ranking-iframe', 'comparison-iframe', 'details-iframe'];
+            targetIframes.forEach(id => {
+                const iframe = document.getElementById(id);
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.postMessage({
+                        action: 'update-region',
+                        regionName: regionName
+                    }, '*');
                 }
             });
-        });
-
-        // Tips Section Tab Functionality
-        document.addEventListener('DOMContentLoaded', function() {
-            const tabs = document.querySelectorAll('.tips-container .tab');
-            const tabContents = document.querySelectorAll('.tips-container .tab-content');
-
-            tabs.forEach(tab => {
-                tab.addEventListener('click', function() {
-                    const tabIndex = this.getAttribute('data-tab');
-                    
-                    // Update tab styles
-                    tabs.forEach(t => {
-                        t.style.backgroundColor = '#F1F1F1';
-                        t.style.color = '#4C4C4C';
-                    });
-                    this.style.backgroundColor = '#2CC7C5';
-                    this.style.color = 'white';
-                    
-                    // Show/hide content
-                    tabContents.forEach(content => {
-                        if (content.getAttribute('data-tab') === tabIndex) {
-                            content.style.display = 'block';
-                        } else {
-                            content.style.display = 'none';
-                        }
-                    });
-                });
-            });
-        });
-    </script>
-    
-    <!-- Service Worker登録 -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js')
-                    .then(registration => console.log('ServiceWorker registered'))
-                    .catch(err => console.log('ServiceWorker registration failed'));
-            });
         }
+
+        // アプリケーションの初期化を待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            // URLパラメータから地域IDを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const regionId = urlParams.get('region_id') || '013';
+            
+            // app.jsの初期化を待つ
+            setTimeout(() => {
+                if (window.app && window.app.dataManager) {
+                    const region = window.app.dataManager.getRegionById(regionId);
+                    if (region) {
+                        updateRegionInIframes(region.name);
+                        
+                        // ランキングデータを送信
+                        const ranking = window.app.dataManager.getRankingByRegionId(regionId);
+                        const clinics = window.app.dataManager.getAllClinics();
+                        
+                        // ランキングiframeにデータを送信
+                        const rankingIframe = document.getElementById('ranking-iframe');
+                        if (rankingIframe && rankingIframe.contentWindow) {
+                            // HTMLを生成してiframeに送信
+                            const rankingHtml = generateRankingHtml(clinics, ranking);
+                            rankingIframe.contentWindow.postMessage({
+                                action: 'update-ranking',
+                                rankingHtml: rankingHtml,
+                                regionName: region.name
+                            }, '*');
+                        }
+                        
+                        // 比較表iframeにデータを送信
+                        const comparisonIframe = document.getElementById('comparison-iframe');
+                        if (comparisonIframe && comparisonIframe.contentWindow) {
+                            const comparisonHtml = generateComparisonHtml(clinics, ranking);
+                            comparisonIframe.contentWindow.postMessage({
+                                action: 'update-comparison',
+                                comparisonHtml: comparisonHtml,
+                                regionName: region.name
+                            }, '*');
+                        }
+                        
+                        // 詳細iframeにデータを送信
+                        const detailsIframe = document.getElementById('details-iframe');
+                        if (detailsIframe && detailsIframe.contentWindow) {
+                            const detailsHtml = generateDetailsHtml(clinics, ranking, regionId);
+                            detailsIframe.contentWindow.postMessage({
+                                action: 'update-details',
+                                detailsHtml: detailsHtml,
+                                regionName: region.name
+                            }, '*');
+                        }
+                    }
+                }
+            }, 1000);
+        });
+
+        // ランキングHTML生成関数（app.jsから必要な部分を抽出）
+        function generateRankingHtml(clinics, ranking) {
+            // 簡略版 - 実際はapp.jsのロジックを使用
+            return '<div class="ranking-item">ランキングコンテンツ</div>';
+        }
+
+        function generateComparisonHtml(clinics, ranking) {
+            // 簡略版 - 実際はapp.jsのロジックを使用
+            return '<tr><td>比較表コンテンツ</td></tr>';
+        }
+
+        function generateDetailsHtml(clinics, ranking, regionId) {
+            // 簡略版 - 実際はapp.jsのロジックを使用
+            return '<div class="detail-item">詳細コンテンツ</div>';
+        }
+
+        // サイドバーの処理
+        document.getElementById('close-sidebar')?.addEventListener('click', function() {
+            document.getElementById('sidebar-overlay').classList.remove('active');
+            document.getElementById('sidebar-menu').classList.remove('active');
+        });
+
+        document.getElementById('sidebar-overlay')?.addEventListener('click', function() {
+            this.classList.remove('active');
+            document.getElementById('sidebar-menu').classList.remove('active');
+        });
     </script>
 </body>
 </html>

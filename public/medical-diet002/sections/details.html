@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../styles.css">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background: transparent;
+        }
+    </style>
+</head>
+<body>
+    <section class="clinic-details-section">
+        <div class="details-header-banner">
+            <img src="../../images/details_header_bannar3.webp" alt="コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3" class="details-banner-image">
+            <div id="detail-region-name" style="position:absolute;top: 54%;left: 3%;text-align: center;color: #ffffff;font-size: clamp(16px, 4vw, 31px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(2px, 0.5vw, 4px) clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
+        </div>
+        
+        <div id="clinic-details-list" class="clinic-details-container">
+            <!-- 詳細コンテンツは親ウィンドウから動的に挿入 -->
+        </div>
+    </section>
+
+    <script>
+        // 親ウィンドウから詳細データを受け取る
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'update-details') {
+                document.getElementById('clinic-details-list').innerHTML = e.data.detailsHtml;
+                document.getElementById('detail-region-name').textContent = e.data.regionName;
+            }
+        });
+    </script>
+</body>
+</html>
