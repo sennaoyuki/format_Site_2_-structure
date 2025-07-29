@@ -1348,7 +1348,7 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        <a href="#clinic-detail-${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
+                        <a href="#clinic${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1381,7 +1381,7 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        <a href="#clinic-detail-${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
+                        <a href="#clinic${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1414,7 +1414,7 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        <a href="#clinic-detail-${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
+                        <a href="#clinic${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1562,21 +1562,23 @@ class RankingApp {
         console.log('=== scrollToClinicDetail START ===');
         console.log('Rank parameter:', rank, typeof rank);
         
-        // 直接IDで要素を取得
-        const targetId = `clinic-detail-${rank}`;
+        // 直接IDで要素を取得（静的比較表と同じ形式）
+        const targetId = `clinic${rank}`;
         console.log('Looking for element with ID:', targetId);
         
         const targetElement = document.getElementById(targetId);
         console.log('Target element found:', !!targetElement);
         
         // すべての詳細要素を確認
-        const allDetailElements = document.querySelectorAll('[id^="clinic-detail-"]');
-        console.log('All clinic detail elements found:', allDetailElements.length);
+        const allDetailElements = document.querySelectorAll('[id^="clinic"]');
+        console.log('All clinic elements found:', allDetailElements.length);
         allDetailElements.forEach(el => {
-            console.log(`- ${el.id}`, {
-                visible: el.offsetParent !== null,
-                position: el.getBoundingClientRect().top
-            });
+            if (el.id.match(/^clinic\d+$/)) {
+                console.log(`- ${el.id}`, {
+                    visible: el.offsetParent !== null,
+                    position: el.getBoundingClientRect().top
+                });
+            }
         });
         
         // clinic-details-listセクションの存在確認
@@ -1706,7 +1708,7 @@ class RankingApp {
             detailItem.className = `detail-item ranking_box_inner ranking_box_${rank}`;
             detailItem.setAttribute('data-rank', rank);
             detailItem.setAttribute('data-clinic-id', clinicId);
-            detailItem.id = `clinic-detail-${rank}`; // アンカーリンク用のIDを追加
+            detailItem.id = `clinic${rank}`; // アンカーリンク用のIDを追加（静的比較表と一致）
 
             // ランクに応じたバッジクラス
             let badgeClass = '';
