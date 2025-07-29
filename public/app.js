@@ -687,6 +687,7 @@ class RankingApp {
         this.displayManager = new DisplayManager(this.urlHandler);
         this.dataManager = null;
         this.currentRegionId = null;
+        this.clinicDetailHandler = null;
     }
 
     async init() {
@@ -697,6 +698,9 @@ class RankingApp {
             
             // グローバルアクセス用にwindowオブジェクトに設定
             window.dataManager = this.dataManager;
+            
+            // ClinicDetailHandlerの初期化
+            this.clinicDetailHandler = new ClinicDetailHandler(this.urlHandler);
 
             // 初期地域IDの取得（URLパラメータから取得、なければデフォルト）
             this.currentRegionId = this.urlHandler.getRegionId();
