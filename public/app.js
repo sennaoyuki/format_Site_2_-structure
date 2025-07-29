@@ -236,7 +236,7 @@ class DisplayManager {
                         ${clinic.name}
                     </div>
                     <div class="clinic-banner">
-                        <img src="${bannerImage}" alt="${rankNum}位バナー" onerror="this.style.display='none'">
+                        <img src="${bannerImage}" alt="${clinic.name}バナー" onerror="this.style.display='none'">
                     </div>
                     <div class="push-message" style="padding: 0px; text-align: center; font-size: clamp(10px, 2.3vw, 15px); line-height: 1.4; color: #333; font-weight: bold; margin: 4px 0; height: 15%;">
                         ${pushMessage}
@@ -2279,9 +2279,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>ストイックな運動より効果的！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '若い頃の体型に戻れました！' : 'ストイックな運動より効果的！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        某スポーツジムでストイックに食事管理をしても減らなかった体重が、薬で無理なく減っていきビックリしました。え、あの辛い運動や糖質制限はなんだったんだろう…。
+                                        ${rank === 3 ? '6カ月間通い終わり、80kgあった体重が62kgになり、体脂肪率は40%から27%に。昔のジーンズをはいてみたり、若い頃に戻ったようです。' : '某スポーツジムでストイックに食事管理をしても減らなかった体重が、薬で無理なく減っていきビックリしました。え、あの辛い運動や糖質制限はなんだったんだろう…。'}
                                     </div>
                                 </div>
                             </div>
@@ -2292,9 +2292,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>2ヶ月で8キロ減！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '不安からのスタートでしたが、今は大満足！' : '2ヶ月で8キロ減！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        なかなかジムなどに通っても減らなくなってしまっていましたが、こちらに通い始めて2ヶ月ぐらいで8キロぐらい減らすことができました！
+                                        ${rank === 3 ? 'なんと85kgあった体重が70kgに！正直、最初は効果があるか不安でしたが、結果が出て大満足です。適正体重を取り戻せたので、今後もキープしたいです。' : 'なかなかジムなどに通っても減らなくなってしまっていましたが、こちらに通い始めて2ヶ月ぐらいで8キロぐらい減らすことができました！'}
                                     </div>
                                 </div>
                             </div>
@@ -2305,9 +2305,9 @@ class RankingApp {
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>周りから痩せたと言われる！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '見た目も体重も変化を実感！' : '周りから痩せたと言われる！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        2ヶ月たって、周りの人から痩せたねと言われることが多くなりました！サクセンダのおかげで空腹感をあまり感じずに食事制限することが出来ました！
+                                        ${rank === 3 ? '今の時点では見た目にも体重的にも効果は出てきていると思うのでやって後悔はしていません。' : '2ヶ月たって、周りの人から痩せたねと言われることが多くなりました！サクセンダのおかげで空腹感をあまり感じずに食事制限することが出来ました！'}
                                     </div>
                                 </div>
                             </div>
@@ -2321,9 +2321,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>言葉遣いが丁寧！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '丁寧な対応と万全のフォローで安心' : '言葉遣いが丁寧！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        言葉遣いも、めちゃくちゃ丁寧で、こちらが恐縮してしまうくらい、しっかり教育もされていたので、毎回、気持ち良く通わせて頂きました。ありがとうございました。
+                                        ${rank === 3 ? '予約の取りやすさや対応の丁寧さが素晴らしい。施術後のフォローも含め、疑問や不安があればすぐに相談できて助かります！' : '言葉遣いも、めちゃくちゃ丁寧で、こちらが恐縮してしまうくらい、しっかり教育もされていたので、毎回、気持ち良く通わせて頂きました。ありがとうございました。'}
                                     </div>
                                 </div>
                             </div>
@@ -2334,9 +2334,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>清潔感があり丁寧な対応</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '駅近で会社帰りにも◎' : '清潔感があり丁寧な対応'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        院内は清潔感があって、スタッフはどの方も丁寧で優しいです。距離感は付かず離れずの丁度良い感じでした。
+                                        ${rank === 3 ? '駅近で会社帰りに行きやすく、仕事が終わってから毎回通わせていただいています。ここで独自に出されているプロテインは飲みやすく、置き換えしやすい。' : '院内は清潔感があって、スタッフはどの方も丁寧で優しいです。距離感は付かず離れずの丁度良い感じでした。'}
                                     </div>
                                 </div>
                             </div>
@@ -2347,9 +2347,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>栄養士さんが熱心！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '急な予定変更にも柔軟に対応！' : '栄養士さんが熱心！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        受付の方の対応も、とても落ち着いていて且つ優しくて、ほっとします。栄養士さんが糖質の摂り方など、熱心に教えてくださるので、楽しくて勉強になります。
+                                        ${rank === 3 ? 'みなさん優しく、丁寧な対応をしていただけるので、安心して通えます！仕事都合で急なキャンセルや予約変更にも対応していただけるところも、通いやすいです！' : '受付の方の対応も、とても落ち着いていて且つ優しくて、ほっとします。栄養士さんが糖質の摂り方など、熱心に教えてくださるので、楽しくて勉強になります。'}
                                     </div>
                                 </div>
                             </div>
@@ -2363,9 +2363,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>人生一度きり！頑張ります</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '接遇レベルの高さに感動！' : '人生一度きり！頑張ります'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        今まで色んなことをしても痩せられなかったので、人生一度きりだと思い通うことを決めました。1ヶ月で、食事制限などが苦手な私でも、−５㌔落ちました！
+                                        ${rank === 3 ? '美容クリニックは施術が大事なのはもちろんですが、接遇のレベルが高いと次もまた来たくなりますね！スタッフの皆さんの気遣いが素晴らしく、いつも快適に過ごせてます。' : '今まで色んなことをしても痩せられなかったので、人生一度きりだと思い通うことを決めました。1ヶ月で、食事制限などが苦手な私でも、−５㌔落ちました！'}
                                     </div>
                                 </div>
                             </div>
@@ -2376,9 +2376,9 @@ class RankingApp {
                                     <span>★★★★★</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>栄養士の指導で結果が出た！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '分かりやすいカウンセリング' : '栄養士の指導で結果が出た！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        栄養士の先生の指導と最先端の機材を使った施術でしっかりと結果が出ました。無理のない範囲で食事指導もして頂き、停滞したら新しい一手を提案して貰えるので、頑張れます。
+                                        ${rank === 3 ? 'カウンセリングの際、その都度分からないことがあるか確認していただけたのでプランの内容も理解しやすかったです！看護師さん達もとても丁寧で、終始安心して受けられます。' : '栄養士の先生の指導と最先端の機材を使った施術でしっかりと結果が出ました。無理のない範囲で食事指導もして頂き、停滞したら新しい一手を提案して貰えるので、頑張れます。'}
                                     </div>
                                 </div>
                             </div>
@@ -2389,9 +2389,9 @@ class RankingApp {
                                     <span>★★★★☆</span>
                                 </div>
                                 <div class="review_tab_box_r">
-                                    <div class="review_tab_box_title"><strong>1ヶ月半で簡単に体重が落ちた！</strong></div>
+                                    <div class="review_tab_box_title"><strong>${rank === 3 ? '心からおすすめしたいクリニック' : '1ヶ月半で簡単に体重が落ちた！'}</strong></div>
                                     <div class="review_tab_box_txt">
-                                        約1か月半たち、自分ではどうしても落とさなかった体重が、簡単に落とせてびっくりです！通うたびに変化が出るので、とてもモチベーションが上がります！！
+                                        ${rank === 3 ? 'スタッフのみなさんお一人お一人がとてもご親切ご丁寧な対応で驚きました。リエートクリニックは本当におすすめなので、ぜひとも、たくさんの方に紹介したいです！！' : '約1か月半たち、自分ではどうしても落とさなかった体重が、簡単に落とせてびっくりです！通うたびに変化が出るので、とてもモチベーションが上がります！！'}
                                     </div>
                                 </div>
                             </div>
