@@ -2744,6 +2744,7 @@ class RankingApp {
         });
 
         // 新しいイベントリスナーを追加
+        const self = this; // thisを保存
         document.addEventListener('click', (e) => {
             if (e.target.closest('.map-toggle-btn')) {
                 e.preventDefault();
@@ -2770,7 +2771,7 @@ class RankingApp {
                     const access = accessElement?.textContent?.trim() || 'アクセス情報なし';
                     
                     // モーダルに情報を設定
-                    this.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
+                    self.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
                 }
             }
         });
@@ -2778,20 +2779,20 @@ class RankingApp {
         // モーダルを閉じるイベント
         if (mapModalClose) {
             mapModalClose.addEventListener('click', () => {
-                this.hideMapModal();
+                self.hideMapModal();
             });
         }
         
         if (mapModalOverlay) {
             mapModalOverlay.addEventListener('click', () => {
-                this.hideMapModal();
+                self.hideMapModal();
             });
         }
         
         // ESCキーでモーダルを閉じる
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && mapModal?.style.display !== 'none') {
-                this.hideMapModal();
+                self.hideMapModal();
             }
         });
     }
