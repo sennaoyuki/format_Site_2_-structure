@@ -2842,8 +2842,15 @@ class RankingApp {
                     
                     // モーダルに情報を設定
                     try {
-                        // ディオクリニック新宿院のように完全な店舗名を設定
-                        const fullStoreName = clinicName + storeName.replace(clinicName, ''); // 重複を避ける
+                        // 店舗名が「クリニック 渋谷院」のような形式の場合、「クリニック」を正しいクリニック名に置換
+                        let fullStoreName = storeName;
+                        if (storeName.startsWith('クリニック')) {
+                            // 「クリニック 新宿院」→「ディオクリニック新宿院」
+                            fullStoreName = clinicName + storeName.replace('クリニック', '').trim();
+                        } else if (!storeName.includes(clinicName)) {
+                            // 店舗名にクリニック名が含まれていない場合、追加
+                            fullStoreName = clinicName + storeName;
+                        }
                         self.showMapModal(fullStoreName, address, access, clinicName);
                     } catch (error) {
                         console.error('Error in showMapModal:', error);

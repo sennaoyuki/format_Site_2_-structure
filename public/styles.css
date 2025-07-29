@@ -6082,7 +6082,7 @@ section.clinic-rankings .ranking-header-banner {
 }
 .map-modal-info-table th,
 .map-modal-info-table td {
-    padding: 12px 16px;
+    padding: 12px 6px;
     text-align: left;
     border-bottom: 1px solid #e0e0e0;
 }
@@ -6091,10 +6091,10 @@ section.clinic-rankings .ranking-header-banner {
     color: #666;
     font-size: 13px;
     font-weight: 600;
-    width: 120px;
+    width: 86px;
 }
 .map-modal-info-table td {
-    font-size: 14px;
+    font-size: 12px;
     line-height: 1.6;
     color: #333;
 }
