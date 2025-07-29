@@ -2732,21 +2732,40 @@ class RankingApp {
 
     // 地図モーダルのイベントリスナーを設定
     setupMapAccordions() {
+        console.log('setupMapAccordions called');
+        
         // モーダル要素を取得
         const mapModal = document.getElementById('map-modal');
         const mapModalClose = document.getElementById('map-modal-close');
         const mapModalOverlay = document.querySelector('.map-modal-overlay');
         
-        // 既存のイベントリスナーを削除
-        document.querySelectorAll('.map-toggle-btn').forEach(btn => {
-            const newBtn = btn.cloneNode(true);
-            btn.parentNode.replaceChild(newBtn, btn);
+        console.log('Modal elements:', {
+            modal: !!mapModal,
+            close: !!mapModalClose,
+            overlay: !!mapModalOverlay
         });
+        
+        // 既存のイベントリスナーを削除（この処理は不要なのでコメントアウト）
+        // const mapButtons = document.querySelectorAll('.map-toggle-btn');
+        // console.log('Map buttons found:', mapButtons.length);
+        // 
+        // mapButtons.forEach(btn => {
+        //     const newBtn = btn.cloneNode(true);
+        //     btn.parentNode.replaceChild(newBtn, btn);
+        // });
 
-        // 新しいイベントリスナーを追加
+        // イベント委譲を使用して、動的に追加されたボタンにも対応
         const self = this; // thisを保存
-        document.addEventListener('click', (e) => {
+        
+        // 既存のイベントリスナーがあれば削除
+        if (this.mapButtonClickHandler) {
+            document.removeEventListener('click', this.mapButtonClickHandler);
+        }
+        
+        // 新しいイベントリスナーを作成
+        this.mapButtonClickHandler = (e) => {
             if (e.target.closest('.map-toggle-btn')) {
+                console.log('Map button clicked!');
                 e.preventDefault();
                 const button = e.target.closest('.map-toggle-btn');
                 
@@ -2774,7 +2793,10 @@ class RankingApp {
                     self.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
                 }
             }
-        });
+        };
+        
+        // イベントリスナーを追加
+        document.addEventListener('click', this.mapButtonClickHandler);
         
         // モーダルを閉じるイベント
         if (mapModalClose) {

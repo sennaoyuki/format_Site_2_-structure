@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>地図ボタンテスト</title>
+    <script>
+        // コンソールログ確認用
+        window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOMContentLoaded fired');
+            
+            // app.jsが読み込まれているか確認
+            setTimeout(() => {
+                console.log('window.app:', window.app);
+                console.log('setupMapAccordions exists:', window.app && typeof window.app.setupMapAccordions === 'function');
+                
+                // 地図ボタンの数を確認
+                const buttons = document.querySelectorAll('.map-toggle-btn');
+                console.log('Map buttons found:', buttons.length);
+                
+                // イベントリスナーテスト
+                if (buttons.length > 0) {
+                    buttons[0].addEventListener('click', (e) => {
+                        e.preventDefault();
+                        console.log('Button clicked directly!');
+                    });
+                }
+            }, 2000);
+        });
+    </script>
+</head>
+<body>
+    <h1>地図ボタンテスト</h1>
+    <p>ブラウザのコンソールを開いて、<a href="http://localhost:8890/public/" target="_blank">こちら</a>をクリックしてサイトを開いてください。</p>
+    
+    <h2>確認手順：</h2>
+    <ol>
+        <li>コンソールを開く（F12キー）</li>
+        <li>上記リンクからサイトを開く</li>
+        <li>店舗一覧セクションまでスクロール</li>
+        <li>地図ボタンをクリック</li>
+        <li>コンソールにエラーが表示されるか確認</li>
+    </ol>
+    
+    <h2>デバッグコマンド（コンソールで実行）：</h2>
+    <pre>
+// 1. appインスタンスの確認
+console.log('app exists:', !!window.app);
+
+// 2. setupMapAccordionsメソッドの確認
+console.log('setupMapAccordions:', typeof window.app?.setupMapAccordions);
+
+// 3. 手動でsetupMapAccordionsを実行
+if (window.app && window.app.setupMapAccordions) {
+    window.app.setupMapAccordions();
+    console.log('setupMapAccordions called manually');
+}
+
+// 4. 地図ボタンの確認
+const buttons = document.querySelectorAll('.map-toggle-btn');
+console.log('Number of map buttons:', buttons.length);
+
+// 5. モーダル要素の確認
+const modal = document.getElementById('map-modal');
+console.log('Modal exists:', !!modal);
+    </pre>
+</body>
+</html>
