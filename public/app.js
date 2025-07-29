@@ -1445,66 +1445,144 @@ class RankingApp {
     
     // 詳細を見るリンクのイベントリスナーを設定
     setupDetailScrollLinks() {
-        console.log('setupDetailScrollLinks called');
+        console.log('=== setupDetailScrollLinks START ===');
+        console.log('Current DOM state:', document.readyState);
+        console.log('Comparison table element exists:', !!document.getElementById('comparison-table'));
         
         // 少し遅延を入れてDOMが完全に生成されるのを待つ
         setTimeout(() => {
-            console.log('Searching for detail links after delay...');
+            console.log('=== After 100ms delay ===');
+            console.log('Searching for detail links...');
+            
+            // すべてのaタグを確認
+            const allLinks = document.querySelectorAll('a');
+            console.log('Total <a> tags in document:', allLinks.length);
+            
+            // 詳細を見るというテキストを含むリンクを探す
+            const detailTextLinks = Array.from(allLinks).filter(link => link.textContent.includes('詳細を見る'));
+            console.log('Links containing "詳細を見る":', detailTextLinks.length);
+            detailTextLinks.forEach((link, i) => {
+                console.log(`Detail link ${i + 1}:`, {
+                    text: link.textContent.trim(),
+                    href: link.href,
+                    className: link.className,
+                    parentElement: link.parentElement?.tagName,
+                    hasClickHandler: link.onclick !== null
+                });
+            });
             
             // 動的に生成される比較表のリンク
             const dynamicLinks = document.querySelectorAll('.detail-scroll-link');
-            console.log('Found detail-scroll-link elements:', dynamicLinks.length);
+            console.log('Found .detail-scroll-link elements:', dynamicLinks.length);
             
             // 各リンクの詳細情報を表示
             dynamicLinks.forEach((link, index) => {
-                console.log(`Link ${index + 1}:`, {
+                console.log(`=== Setting up link ${index + 1} ===`);
+                console.log('Link details:', {
                     text: link.textContent,
                     href: link.getAttribute('href'),
                     dataRank: link.getAttribute('data-rank'),
-                    classes: link.className
+                    classes: link.className,
+                    isVisible: link.offsetParent !== null,
+                    computedDisplay: window.getComputedStyle(link).display,
+                    computedVisibility: window.getComputedStyle(link).visibility
                 });
                 
-                link.addEventListener('click', (e) => {
-                    console.log('Click event triggered!');
-                    e.preventDefault();
-                    const rank = parseInt(link.getAttribute('data-rank'));
-                    console.log('Dynamic detail link clicked, rank:', rank);
-                    this.scrollToClinicDetail(rank);
-                });
+                // 既存のイベントリスナーを確認
+                const hasExistingListener = link.hasAttribute('data-listener-attached');
+                console.log('Has existing listener:', hasExistingListener);
+                
+                if (!hasExistingListener) {
+                    link.setAttribute('data-listener-attached', 'true');
+                    link.addEventListener('click', (e) => {
+                        console.log('=== CLICK EVENT TRIGGERED ===');
+                        console.log('Event details:', {
+                            type: e.type,
+                            target: e.target.tagName,
+                            targetClass: e.target.className,
+                            currentTarget: e.currentTarget.tagName
+                        });
+                        e.preventDefault();
+                        e.stopPropagation();
+                        const rank = parseInt(link.getAttribute('data-rank'));
+                        console.log('Dynamic detail link clicked, rank:', rank);
+                        this.scrollToClinicDetail(rank);
+                    });
+                    console.log('Event listener attached successfully');
+                } else {
+                    console.log('Skipping - listener already attached');
+                }
             });
             
             // 静的な比較表のリンク
             const staticLinks = document.querySelectorAll('.detail-static-link');
-            console.log('Found detail-static-link elements:', staticLinks.length);
+            console.log('Found .detail-static-link elements:', staticLinks.length);
             
-            staticLinks.forEach(link => {
+            staticLinks.forEach((link, index) => {
+                console.log(`Static link ${index + 1} details:`, {
+                    text: link.textContent,
+                    href: link.getAttribute('href'),
+                    dataRank: link.getAttribute('data-rank')
+                });
+                
                 link.addEventListener('click', (e) => {
+                    console.log('=== STATIC LINK CLICK EVENT ===');
                     e.preventDefault();
                     const rank = parseInt(link.getAttribute('data-rank'));
                     console.log('Static detail link clicked, rank:', rank);
                     this.scrollToClinicDetail(rank);
                 });
             });
+            
+            // 比較表内のすべてのボタンやリンクを確認
+            const comparisonTable = document.getElementById('comparison-table');
+            if (comparisonTable) {
+                const allTableLinks = comparisonTable.querySelectorAll('a');
+                console.log('All links in comparison table:', allTableLinks.length);
+                allTableLinks.forEach((link, i) => {
+                    if (link.textContent.includes('詳細')) {
+                        console.log(`Table detail link ${i}:`, {
+                            text: link.textContent,
+                            href: link.href,
+                            className: link.className,
+                            onclick: link.onclick
+                        });
+                    }
+                });
+            }
+            
+            console.log('=== setupDetailScrollLinks END ===');
         }, 100);
     }
     
     // クリニック詳細へスクロール
     scrollToClinicDetail(rank) {
-        console.log('scrollToClinicDetail called with rank:', rank);
+        console.log('=== scrollToClinicDetail START ===');
+        console.log('Rank parameter:', rank, typeof rank);
         
         // 直接IDで要素を取得
         const targetId = `clinic-detail-${rank}`;
         console.log('Looking for element with ID:', targetId);
         
         const targetElement = document.getElementById(targetId);
-        console.log('targetElement found:', !!targetElement);
+        console.log('Target element found:', !!targetElement);
         
         // すべての詳細要素を確認
         const allDetailElements = document.querySelectorAll('[id^="clinic-detail-"]');
-        console.log('All clinic detail elements:', allDetailElements.length);
+        console.log('All clinic detail elements found:', allDetailElements.length);
         allDetailElements.forEach(el => {
-            console.log('Found detail element:', el.id);
+            console.log(`- ${el.id}`, {
+                visible: el.offsetParent !== null,
+                position: el.getBoundingClientRect().top
+            });
         });
+        
+        // clinic-details-listセクションの存在確認
+        const detailsList = document.getElementById('clinic-details-list');
+        console.log('clinic-details-list exists:', !!detailsList);
+        if (detailsList) {
+            console.log('Details list children:', detailsList.children.length);
+        }
         
         if (targetElement) {
             // 要素の位置を取得してスクロール
@@ -2078,11 +2156,22 @@ class RankingApp {
                             <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
                         </div>
                     </div>
-                ${data.banner ? `
-                <div class="detail-banner">
-                    <img src="${data.banner}" alt="${clinic.name}キャンペーン">
-                </div>
-                ` : ''}
+                ${(() => {
+                    // クリニック名に基づいて正しいバナーパスを設定
+                    const clinicNameToBannerMap = {
+                        'ディオクリニック': '/images/clinics/dio/dio_detail_bnr.webp',
+                        'ウララクリニック': '/images/clinics/urara/urara_detail_bnr.webp',
+                        'リエートクリニック': '/images/clinics/lieto/lieto_detail_bnr.webp',
+                        'エミナルクリニック': '/images/clinics/eminal/eminal_detail_bnr.webp',
+                        '湘南美容クリニック': '/images/clinics/sbc/sbc_detail_bnr.webp'
+                    };
+                    const correctBanner = clinicNameToBannerMap[clinic.name] || data.banner;
+                    return correctBanner ? `
+                    <div class="detail-banner">
+                        <img src="${correctBanner}" alt="${clinic.name}キャンペーン">
+                    </div>
+                    ` : '';
+                })()}
                 <div class="detail-features">
                     ${data.features.map(feature => `<span class="feature-tag"># ${feature}</span>`).join('')}
                 </div>
@@ -3100,9 +3189,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // アプリケーションの初期化
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('=== DOMContentLoaded Event Fired ===');
+    console.log('DOM ready state:', document.readyState);
+    
     const app = new RankingApp();
     window.app = app; // グローバルアクセス用
+    
+    console.log('=== Initializing RankingApp ===');
     app.init();
+    
+    // 初期化後にも一度詳細リンクをチェック
+    setTimeout(() => {
+        console.log('=== Post-init check for detail links ===');
+        const allDetailLinks = document.querySelectorAll('a[href*="#clinic"]');
+        console.log('Found links with #clinic in href:', allDetailLinks.length);
+        
+        // グローバルなクリックイベントリスナーも追加（デバッグ用）
+        document.addEventListener('click', (e) => {
+            if (e.target.tagName === 'A' && e.target.textContent.includes('詳細を見る')) {
+                console.log('=== Global click listener detected 詳細を見る click ===');
+                console.log('Clicked element:', {
+                    text: e.target.textContent,
+                    href: e.target.href,
+                    className: e.target.className
+                });
+            }
+        }, true);
+    }, 500);
     
     // フッターのページリンクにパラメータ引き継ぎ機能を追加
     document.querySelectorAll('.footer-page-link').forEach(link => {
