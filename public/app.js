@@ -1013,6 +1013,9 @@ class RankingApp {
             // 地域名の更新
             this.displayManager.updateSelectedRegionName(region.name);
             
+            // ページタイトルを更新
+            document.title = `2025年${region.name}版｜医療ダイエット比較ランキング`;
+            
             // 比較表の地域名も更新
             const comparisonRegionElement = document.getElementById('comparison-region-name');
             if (comparisonRegionElement) {
