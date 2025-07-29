@@ -2936,10 +2936,31 @@ class RankingApp {
             // Google Maps iframeを生成
             modalMapContainer.innerHTML = this.generateMapIframe(address);
             
-            // 公式サイトボタンのURLを設定
+            // 公式サイトボタンのURLとテキストを設定
             if (modalButton && clinicCode) {
                 const clinicNameLower = clinicCode.toLowerCase().replace(/クリニック|美容外科|美容/g, '').trim();
                 modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicNameLower);
+                
+                // ボタンテキストを設定
+                const buttonText = document.getElementById('map-modal-button-text');
+                if (buttonText) {
+                    // クリニック名を取得
+                    let clinicBaseName = '';
+                    if (clinicCode.includes('ディオ')) {
+                        clinicBaseName = 'ディオクリニック';
+                    } else if (clinicCode.includes('エミナル')) {
+                        clinicBaseName = 'エミナルクリニック';
+                    } else if (clinicCode.includes('湘南')) {
+                        clinicBaseName = '湘南美容クリニック';
+                    } else if (clinicCode.includes('リエート')) {
+                        clinicBaseName = 'リエートクリニック';
+                    } else if (clinicCode.includes('ウララ')) {
+                        clinicBaseName = 'ウララクリニック';
+                    } else {
+                        clinicBaseName = 'クリニック';
+                    }
+                    buttonText.textContent = clinicBaseName + 'の公式サイト';
+                }
             }
             
             // モーダルを表示

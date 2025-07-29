@@ -6074,6 +6074,55 @@ section.clinic-rankings .ranking-header-banner {
     background-color: #45a049;
 }
 
+/* 地図モーダルの表形式スタイル */
+.map-modal-info-table {
+    width: calc(100% - 40px);
+    border-collapse: collapse;
+    margin: 20px;
+}
+.map-modal-info-table th,
+.map-modal-info-table td {
+    padding: 12px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+.map-modal-info-table th {
+    background-color: #f5f5f5;
+    color: #666;
+    font-size: 13px;
+    font-weight: 600;
+    width: 120px;
+}
+.map-modal-info-table td {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #333;
+}
+.map-modal-info-table tr:last-child th,
+.map-modal-info-table tr:last-child td {
+    border-bottom: none;
+}
+
+/* 地図モーダル内のCTAボタンのスタイルを調整 */
+.map-modal-footer {
+    padding: 0 20px 20px;
+    text-align: center;
+}
+.map-modal-footer .btn_second_primary {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+.map-modal-footer .btn_second_primary a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .map-modal-content {

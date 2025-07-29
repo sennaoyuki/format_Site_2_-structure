@@ -910,22 +910,29 @@
                     <div class="map-modal-map" id="map-modal-map-container">
                         <!-- Google Maps iframe will be inserted here -->
                     </div>
-                    <div class="map-modal-info">
-                        <div class="map-modal-info-item">
-                            <span class="map-modal-info-label">住所</span>
-                            <div class="map-modal-info-content" id="map-modal-address"></div>
-                        </div>
-                        <div class="map-modal-info-item">
-                            <span class="map-modal-info-label">アクセス</span>
-                            <div class="map-modal-info-content" id="map-modal-access"></div>
-                        </div>
-                        <div class="map-modal-info-item">
-                            <span class="map-modal-info-label">営業時間</span>
-                            <div class="map-modal-info-content" id="map-modal-hours">11:00〜21:00</div>
-                        </div>
-                    </div>
+                    <table class="map-modal-info-table">
+                        <tbody>
+                            <tr>
+                                <th>住所</th>
+                                <td id="map-modal-address"></td>
+                            </tr>
+                            <tr>
+                                <th>アクセス</th>
+                                <td id="map-modal-access"></td>
+                            </tr>
+                            <tr>
+                                <th>営業時間</th>
+                                <td id="map-modal-hours">11:00〜21:00</td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <div class="map-modal-footer">
-                        <a class="map-modal-button" id="map-modal-button" href="#" target="_blank">公式サイトから申し込む</a>
+                        <p class="btn btn_second_primary" style="margin-top: 20px;">
+                            <a id="map-modal-button" href="#" target="_blank" rel="noopener">
+                                <span class="bt_s" id="map-modal-button-text">公式サイトから申し込む</span>
+                                <span class="btn-arrow">▶</span>
+                            </a>
+                        </p>
                     </div>
                 </div>
             </div>
