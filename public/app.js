@@ -2729,8 +2729,13 @@ class RankingApp {
         `;
     }
 
-    // 地図アコーディオンのイベントリスナーを設定
+    // 地図モーダルのイベントリスナーを設定
     setupMapAccordions() {
+        // モーダル要素を取得
+        const mapModal = document.getElementById('map-modal');
+        const mapModalClose = document.getElementById('map-modal-close');
+        const mapModalOverlay = document.querySelector('.map-modal-overlay');
+        
         // 既存のイベントリスナーを削除
         document.querySelectorAll('.map-toggle-btn').forEach(btn => {
             const newBtn = btn.cloneNode(true);
@@ -2742,26 +2747,113 @@ class RankingApp {
             if (e.target.closest('.map-toggle-btn')) {
                 e.preventDefault();
                 const button = e.target.closest('.map-toggle-btn');
-                const storeId = button.getAttribute('data-store-id');
-                const accordion = document.getElementById(`map-${storeId}`);
                 
-                if (accordion) {
-                    const isOpen = accordion.style.display !== 'none';
+                // 店舗情報を取得
+                const storeContainer = button.closest('.store-col, .store-item-1 > .text-group > .group1');
+                if (storeContainer) {
+                    // クリニック名を取得
+                    const clinicNameElement = storeContainer.closest('.stores-list')?.previousElementSibling?.querySelector('h4') ||
+                                            storeContainer.closest('.store-item-1')?.parentElement?.parentElement?.previousElementSibling?.querySelector('h4');
+                    const clinicName = clinicNameElement?.textContent?.trim() || 'クリニック';
                     
-                    // 他のアコーディオンを閉じる
-                    document.querySelectorAll('.map-accordion').forEach(acc => {
-                        acc.style.display = 'none';
-                    });
+                    // 店舗名を取得
+                    const storeNameElement = storeContainer.querySelector('.store-name, .store-item-1 .store-name');
+                    const storeName = storeNameElement?.textContent?.trim() || '店舗';
                     
-                    // クリックしたアコーディオンを開く/閉じる
-                    if (!isOpen) {
-                        accordion.style.display = 'block';
-                        // スムーズスクロール
-                        accordion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }
+                    // 住所を取得
+                    const addressElement = storeContainer.querySelector('.store-address, [style*="font-weight:400"]');
+                    const address = addressElement?.textContent?.trim() || '住所情報なし';
+                    
+                    // アクセスを取得
+                    const accessElement = storeContainer.querySelector('.store-access');
+                    const access = accessElement?.textContent?.trim() || 'アクセス情報なし';
+                    
+                    // モーダルに情報を設定
+                    this.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
                 }
             }
         });
+        
+        // モーダルを閉じるイベント
+        if (mapModalClose) {
+            mapModalClose.addEventListener('click', () => {
+                this.hideMapModal();
+            });
+        }
+        
+        if (mapModalOverlay) {
+            mapModalOverlay.addEventListener('click', () => {
+                this.hideMapModal();
+            });
+        }
+        
+        // ESCキーでモーダルを閉じる
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && mapModal?.style.display !== 'none') {
+                this.hideMapModal();
+            }
+        });
+    }
+    
+    // 地図モーダルを表示
+    showMapModal(clinicName, address, access, clinicCode) {
+        const modal = document.getElementById('map-modal');
+        const modalClinicName = document.getElementById('map-modal-clinic-name');
+        const modalAddress = document.getElementById('map-modal-address');
+        const modalAccess = document.getElementById('map-modal-access');
+        const modalHours = document.getElementById('map-modal-hours');
+        const modalMapContainer = document.getElementById('map-modal-map-container');
+        const modalButton = document.getElementById('map-modal-button');
+        
+        if (modal && modalClinicName && modalAddress && modalAccess && modalMapContainer) {
+            // モーダルの内容を設定
+            modalClinicName.textContent = clinicName;
+            modalAddress.textContent = address;
+            modalAccess.textContent = access;
+            
+            // 営業時間を設定（クリニックごとに異なる場合は条件分岐を追加）
+            if (modalHours) {
+                // デフォルトの営業時間を設定
+                let hours = '11:00〜21:00';
+                
+                // クリニック名に基づいて営業時間を調整（必要に応じて）
+                if (clinicName.includes('DIO') || clinicName.includes('ディオ')) {
+                    hours = '11:00〜21:00';
+                } else if (clinicName.includes('エミナル')) {
+                    hours = '11:00〜21:00';
+                } else if (clinicName.includes('湘南')) {
+                    hours = '10:00〜19:00';
+                } else if (clinicName.includes('リエート')) {
+                    hours = '11:00〜20:00';
+                } else if (clinicName.includes('ウララ')) {
+                    hours = '11:00〜20:00';
+                }
+                
+                modalHours.textContent = hours;
+            }
+            
+            // Google Maps iframeを生成
+            modalMapContainer.innerHTML = this.generateMapIframe(address);
+            
+            // 公式サイトボタンのURLを設定
+            if (modalButton && clinicCode) {
+                const clinicNameLower = clinicCode.toLowerCase().replace(/クリニック|美容外科|美容/g, '').trim();
+                modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicNameLower);
+            }
+            
+            // モーダルを表示
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // スクロールを無効化
+        }
+    }
+    
+    // 地図モーダルを非表示
+    hideMapModal() {
+        const modal = document.getElementById('map-modal');
+        if (modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = ''; // スクロールを再度有効化
+        }
     }
 }
 

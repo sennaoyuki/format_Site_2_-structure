@@ -885,6 +885,39 @@
         <div id="error-message" class="error-message" style="display: none;">
             <p id="error-text"></p>
         </div>
+        
+        <!-- 地図モーダル -->
+        <div id="map-modal" class="map-modal" style="display: none;">
+            <div class="map-modal-overlay"></div>
+            <div class="map-modal-content">
+                <div class="map-modal-header">
+                    <h3 class="map-modal-title" id="map-modal-clinic-name">クリニック名</h3>
+                    <button class="map-modal-close" id="map-modal-close" aria-label="閉じる">&times;</button>
+                </div>
+                <div class="map-modal-body">
+                    <div class="map-modal-map" id="map-modal-map-container">
+                        <!-- Google Maps iframe will be inserted here -->
+                    </div>
+                    <div class="map-modal-info">
+                        <div class="map-modal-info-item">
+                            <span class="map-modal-info-label">住所</span>
+                            <div class="map-modal-info-content" id="map-modal-address"></div>
+                        </div>
+                        <div class="map-modal-info-item">
+                            <span class="map-modal-info-label">アクセス</span>
+                            <div class="map-modal-info-content" id="map-modal-access"></div>
+                        </div>
+                        <div class="map-modal-info-item">
+                            <span class="map-modal-info-label">営業時間</span>
+                            <div class="map-modal-info-content" id="map-modal-hours">11:00〜21:00</div>
+                        </div>
+                    </div>
+                    <div class="map-modal-footer">
+                        <a class="map-modal-button" id="map-modal-button" href="#" target="_blank">公式サイトから申し込む</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="app.js" defer></script>
