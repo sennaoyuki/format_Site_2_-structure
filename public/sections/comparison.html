@@ -19,7 +19,7 @@
             <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
         </div>
         
-        <div class="clinic-comparison-table" id="tab-menu" data-active-tab="tab1">
+        <div class="js-cbn-table" id="tab-menu" data-active-tab="tab1">
             <div class="tab-menu">
                 <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
                 <div class="tab-menu-item" data-tab="tab2">施術内容</div>
@@ -59,12 +59,12 @@
 
         // タブ切り替え機能
         const tabMenuItems = document.querySelectorAll('.tab-menu-item');
-        const table = document.querySelector('.clinic-comparison-table table');
+        const table = document.querySelector('.js-cbn-table table');
         
         function updateTableColumns(tabType) {
             if (!table) return;
             
-            const tableContainer = document.querySelector('.clinic-comparison-table');
+            const tableContainer = document.querySelector('.js-cbn-table');
             const headers = table.querySelectorAll('th');
             const rows = table.querySelectorAll('tbody tr');
             
