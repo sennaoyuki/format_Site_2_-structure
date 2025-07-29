@@ -1458,9 +1458,11 @@ class RankingApp {
             const allLinks = document.querySelectorAll('a');
             console.log('Total <a> tags in document:', allLinks.length);
             
-            // 詳細を見るというテキストを含むリンクを探す
-            const detailTextLinks = Array.from(allLinks).filter(link => link.textContent.includes('詳細を見る'));
-            console.log('Links containing "詳細を見る":', detailTextLinks.length);
+            // 詳細を見る・詳細をみるというテキストを含むリンクを探す
+            const detailTextLinks = Array.from(allLinks).filter(link => 
+                link.textContent.includes('詳細を見る') || link.textContent.includes('詳細をみる')
+            );
+            console.log('Links containing "詳細を見る/詳細をみる":', detailTextLinks.length);
             detailTextLinks.forEach((link, i) => {
                 console.log(`Detail link ${i + 1}:`, {
                     text: link.textContent.trim(),
@@ -2228,7 +2230,7 @@ class RankingApp {
                             `;
                         }).join('')}
                         <div class="ribbon_point_link">
-                            【公式】<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener"><strong>${clinic.id === '1' ? 'https://dioclinic.jp/' : clinic.id === '2' ? 'https://eminal-clinic.jp/' : clinic.id === '3' ? 'https://uraraclinic.jp/' : clinic.id === '4' ? 'https://lietoclinic.com/' : clinic.id === '5' ? 'https://www.s-b-c.net/' : '#'}</strong></a>
+                            【公式】<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener"><strong>${data.priceDetail['公式サイト'] || '#'}</strong></a>
                         </div>
                     </div>
                 </div>
@@ -3215,10 +3217,29 @@ document.addEventListener('DOMContentLoaded', function() {
         const allDetailLinks = document.querySelectorAll('a[href*="#clinic"]');
         console.log('Found links with #clinic in href:', allDetailLinks.length);
         
+        // #clinicを含むリンクにイベントリスナーを追加
+        allDetailLinks.forEach((link, index) => {
+            console.log(`#clinic link ${index + 1}:`, {
+                text: link.textContent.trim(),
+                href: link.getAttribute('href'),
+                className: link.className
+            });
+            
+            link.addEventListener('click', (e) => {
+                console.log('=== #clinic link clicked ===');
+                console.log('Link details:', {
+                    text: e.target.textContent,
+                    href: e.target.getAttribute('href'),
+                    className: e.target.className
+                });
+                // デフォルトの動作（アンカーリンクへのジャンプ）は維持
+            });
+        });
+        
         // グローバルなクリックイベントリスナーも追加（デバッグ用）
         document.addEventListener('click', (e) => {
-            if (e.target.tagName === 'A' && e.target.textContent.includes('詳細を見る')) {
-                console.log('=== Global click listener detected 詳細を見る click ===');
+            if (e.target.tagName === 'A' && (e.target.textContent.includes('詳細を見る') || e.target.textContent.includes('詳細をみる'))) {
+                console.log('=== Global click listener detected 詳細を見る/詳細をみる click ===');
                 console.log('Clicked element:', {
                     text: e.target.textContent,
                     href: e.target.href,
