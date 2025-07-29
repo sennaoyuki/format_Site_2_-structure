@@ -1174,6 +1174,7 @@ class RankingApp {
         // レビュータブ切り替え機能の設定
         this.setupReviewTabs();
         
+        console.log('Comparison table update completed, setting up detail scroll links...');
         // 詳細を見るリンクのイベントリスナーを設定
         this.setupDetailScrollLinks();
     }
@@ -1444,14 +1445,27 @@ class RankingApp {
     
     // 詳細を見るリンクのイベントリスナーを設定
     setupDetailScrollLinks() {
+        console.log('setupDetailScrollLinks called');
+        
         // 少し遅延を入れてDOMが完全に生成されるのを待つ
         setTimeout(() => {
+            console.log('Searching for detail links after delay...');
+            
             // 動的に生成される比較表のリンク
             const dynamicLinks = document.querySelectorAll('.detail-scroll-link');
             console.log('Found detail-scroll-link elements:', dynamicLinks.length);
             
-            dynamicLinks.forEach(link => {
+            // 各リンクの詳細情報を表示
+            dynamicLinks.forEach((link, index) => {
+                console.log(`Link ${index + 1}:`, {
+                    text: link.textContent,
+                    href: link.getAttribute('href'),
+                    dataRank: link.getAttribute('data-rank'),
+                    classes: link.className
+                });
+                
                 link.addEventListener('click', (e) => {
+                    console.log('Click event triggered!');
                     e.preventDefault();
                     const rank = parseInt(link.getAttribute('data-rank'));
                     console.log('Dynamic detail link clicked, rank:', rank);
@@ -1479,18 +1493,41 @@ class RankingApp {
         console.log('scrollToClinicDetail called with rank:', rank);
         
         // 直接IDで要素を取得
-        const targetElement = document.getElementById(`clinic-detail-${rank}`);
-        console.log('targetElement:', targetElement);
+        const targetId = `clinic-detail-${rank}`;
+        console.log('Looking for element with ID:', targetId);
+        
+        const targetElement = document.getElementById(targetId);
+        console.log('targetElement found:', !!targetElement);
+        
+        // すべての詳細要素を確認
+        const allDetailElements = document.querySelectorAll('[id^="clinic-detail-"]');
+        console.log('All clinic detail elements:', allDetailElements.length);
+        allDetailElements.forEach(el => {
+            console.log('Found detail element:', el.id);
+        });
         
         if (targetElement) {
             // 要素の位置を取得してスクロール
-            const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const rect = targetElement.getBoundingClientRect();
+            console.log('Element position:', {
+                top: rect.top,
+                currentScrollY: window.pageYOffset
+            });
+            
+            const elementTop = rect.top + window.pageYOffset;
             const offset = 100; // ヘッダーの高さ分のオフセット
-            console.log('Scrolling to:', elementTop - offset);
+            const scrollTo = elementTop - offset;
+            
+            console.log('Scrolling to position:', scrollTo);
             window.scrollTo({
-                top: elementTop - offset,
+                top: scrollTo,
                 behavior: 'smooth'
             });
+            
+            // スクロール後の確認
+            setTimeout(() => {
+                console.log('Scroll completed, current position:', window.pageYOffset);
+            }, 1000);
         } else {
             // 詳細要素が見つからない場合は、セクション全体にスクロール
             const detailSection = document.getElementById('clinic-details-list');
