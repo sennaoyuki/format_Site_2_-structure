@@ -2787,10 +2787,10 @@ class RankingApp {
                     
                     // CSVデータから正確なアクセス情報を取得
                     if (self.dataManager) {
-                        const stores = self.dataManager.getAllStores();
+                        const stores = self.dataManager.stores; // 直接storesプロパティを参照
                         // 店舗名と住所が一致する店舗を探す
                         const matchingStore = stores.find(store => {
-                            return store.name === storeName && store.address === address;
+                            return store.storeName === storeName && store.address === address;
                         });
                         
                         if (matchingStore && matchingStore.access) {
