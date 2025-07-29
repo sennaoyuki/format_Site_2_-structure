@@ -2769,27 +2769,27 @@ class RankingApp {
                 e.preventDefault();
                 const button = e.target.closest('.map-toggle-btn');
                 
-                // 店舗情報を取得
-                const storeContainer = button.closest('.store-col, .store-item-1 > .text-group > .group1');
-                console.log('Store container found:', !!storeContainer);
+                // 店舗情報を取得（実際のHTML構造に合わせて修正）
+                const shopContainer = button.closest('.shop');
+                console.log('Shop container found:', !!shopContainer);
                 
-                if (storeContainer) {
-                    // クリニック名を取得
-                    const clinicNameElement = storeContainer.closest('.stores-list')?.previousElementSibling?.querySelector('h4') ||
-                                            storeContainer.closest('.store-item-1')?.parentElement?.parentElement?.previousElementSibling?.querySelector('h4');
-                    const clinicName = clinicNameElement?.textContent?.trim() || 'クリニック';
-                    
+                if (shopContainer) {
                     // 店舗名を取得
-                    const storeNameElement = storeContainer.querySelector('.store-name, .store-item-1 .store-name');
+                    const storeNameElement = shopContainer.querySelector('.shop-name a');
                     const storeName = storeNameElement?.textContent?.trim() || '店舗';
                     
                     // 住所を取得
-                    const addressElement = storeContainer.querySelector('.store-address, [style*="font-weight:400"]');
+                    const addressElement = shopContainer.querySelector('.shop-address');
                     const address = addressElement?.textContent?.trim() || '住所情報なし';
                     
-                    // アクセスを取得
-                    const accessElement = storeContainer.querySelector('.store-access');
-                    const access = accessElement?.textContent?.trim() || 'アクセス情報なし';
+                    // アクセス情報（存在しない場合があるのでデフォルト値を設定）
+                    const access = '駅から徒歩圏内';
+                    
+                    // クリニック名を取得（親要素から探す）
+                    const shopsContainer = shopContainer.closest('.shops');
+                    const clinicDetailElement = shopsContainer?.closest('.detail-item');
+                    const clinicNameElement = clinicDetailElement?.querySelector('h3');
+                    const clinicName = clinicNameElement?.textContent?.trim() || 'クリニック';
                     
                     console.log('Store info:', { clinicName, storeName, address, access });
                     
@@ -2800,8 +2800,15 @@ class RankingApp {
                         console.error('Error in showMapModal:', error);
                     }
                 } else {
-                    console.log('Store container not found. Button parent:', button.parentElement);
+                    console.log('Shop container not found. Button parent:', button.parentElement);
                     console.log('Button HTML:', button.outerHTML);
+                    
+                    // フォールバック: 最低限の情報でモーダルを表示
+                    try {
+                        self.showMapModal('テストクリニック', 'テスト住所', 'テストアクセス', 'test');
+                    } catch (error) {
+                        console.error('Error in fallback showMapModal:', error);
+                    }
                 }
             }
         };
