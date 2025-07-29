@@ -1817,14 +1817,14 @@ class RankingApp {
                     ],
                     reviews: [
                         {
-                            rating: 4,
+                            rating: 5,
                             date: '2024年1月',
-                            text: '追加料金がないから安心。効果も満足しています。'
+                            text: '若い頃の体型に戻れました！6カ月間通い終わり、80kgあった体重が62kgに、体脂肪率は40%から27%に。'
                         },
                         {
                             rating: 5,
-                            date: '2023年11月',
-                            text: 'カウンセリングが丁寧で、不安なく始められました。'
+                            date: '2023年12月',
+                            text: 'スタッフのみなさんお一人お一人がとてもご親切ご丁寧な対応で驚きました。リエートクリニックは本当におすすめ！'
                         }
                     ],
                     clinicInfo: {
@@ -1837,13 +1837,13 @@ class RankingApp {
                     },
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'URARAクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/urara/urara-logo.webp',
-                        logoAlt: 'URARAクリニック',
-                        description: '痩せなければ返金保証<br>さらに脂肪買取制度あり',
-                        ctaUrl: 'https://urara-clinic.com/',
-                        ctaText: 'URARAクリニックの公式サイト',
-                        microcopy: '＼ダイエット成功率94％の実績／'
+                        title: 'リエートクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/lieto/lieto-logo.webp',
+                        logoAlt: 'リエートクリニック',
+                        description: 'モニター最大80％OFF<br>痩せなければ返金保証あり',
+                        ctaUrl: 'https://lietoclinic.com/lpbot/lpbot07kana15',
+                        ctaText: 'リエートクリニックの公式サイト',
+                        microcopy: '＼リバウンドしない率99.8％／'
                     }
                 },
                 '4': { // エミナルクリニック
@@ -2043,7 +2043,7 @@ class RankingApp {
                     </div>
                 ${data.banner ? `
                 <div class="detail-banner">
-                    <img src="${data.banner}" alt="${this.getClinicDisplayName(clinic)}キャンペーン">
+                    <img src="${data.banner}" alt="${clinic.name}キャンペーン">
                 </div>
                 ` : ''}
                 <div class="detail-features">
