@@ -1347,10 +1347,7 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        ${clinic.rank <= 3 
-                            ? `<a href="#clinic-details-list" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>`
-                            : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
-                        }
+                        <a href="#clinic-detail-${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1383,10 +1380,7 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        ${clinic.rank <= 3 
-                            ? `<a href="#clinic-details-list" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>`
-                            : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
-                        }
+                        <a href="#clinic-detail-${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1419,10 +1413,7 @@ class RankingApp {
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
-                        ${clinic.rank <= 3 
-                            ? `<a href="#clinic-details-list" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>`
-                            : `<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-link" target="_blank" rel="noopener">詳細を見る</a>`
-                        }
+                        <a href="#clinic-detail-${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
             `;
@@ -1486,35 +1477,33 @@ class RankingApp {
     // クリニック詳細へスクロール
     scrollToClinicDetail(rank) {
         console.log('scrollToClinicDetail called with rank:', rank);
-        const detailSection = document.getElementById('clinic-details-list');
-        console.log('detailSection:', detailSection);
         
-        if (detailSection) {
-            // 対応するクリニックの詳細要素を探す
-            const targetElement = detailSection.querySelector(`.ranking_box_${rank}`);
-            console.log('targetElement:', targetElement);
-            console.log('Available elements:', detailSection.querySelectorAll('[class*="ranking_box"]'));
-            
-            if (targetElement) {
-                // 要素の位置を取得してスクロール
-                const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
-                const offset = 100; // ヘッダーの高さ分のオフセット
-                console.log('Scrolling to:', elementTop - offset);
-                window.scrollTo({
-                    top: elementTop - offset,
-                    behavior: 'smooth'
-                });
-            } else {
-                // 詳細要素が見つからない場合は、セクション全体にスクロール
-                console.log('Target element not found, scrolling to section');
+        // 直接IDで要素を取得
+        const targetElement = document.getElementById(`clinic-detail-${rank}`);
+        console.log('targetElement:', targetElement);
+        
+        if (targetElement) {
+            // 要素の位置を取得してスクロール
+            const elementTop = targetElement.getBoundingClientRect().top + window.pageYOffset;
+            const offset = 100; // ヘッダーの高さ分のオフセット
+            console.log('Scrolling to:', elementTop - offset);
+            window.scrollTo({
+                top: elementTop - offset,
+                behavior: 'smooth'
+            });
+        } else {
+            // 詳細要素が見つからない場合は、セクション全体にスクロール
+            const detailSection = document.getElementById('clinic-details-list');
+            console.log('Target element not found, scrolling to section');
+            if (detailSection) {
                 const sectionTop = detailSection.getBoundingClientRect().top + window.pageYOffset;
                 window.scrollTo({
                     top: sectionTop - 100,
                     behavior: 'smooth'
                 });
+            } else {
+                console.error('clinic-details-list not found');
             }
-        } else {
-            console.error('clinic-details-list not found');
         }
     }
     
@@ -1600,6 +1589,7 @@ class RankingApp {
             detailItem.className = `detail-item ranking_box_inner ranking_box_${rank}`;
             detailItem.setAttribute('data-rank', rank);
             detailItem.setAttribute('data-clinic-id', clinicId);
+            detailItem.id = `clinic-detail-${rank}`; // アンカーリンク用のIDを追加
 
             // ランクに応じたバッジクラス
             let badgeClass = '';

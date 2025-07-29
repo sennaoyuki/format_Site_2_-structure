@@ -5325,14 +5325,6 @@ section.clinic-rankings .ranking-header-banner {
     margin-top: 8px;
 }
 
-.brand-section .shop-image {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    margin-right: 8px;
-    background-color: #f2f2f2;
-}
-
 .brand-section .shop-image img {
     width: 100%;
     height: 100%;
@@ -5438,7 +5430,6 @@ section.clinic-rankings .ranking-header-banner {
     width:14vw;
     height: 8vw;
     margin-right: 8px;
-    background-color: #f2f2f2;
 }
 
 .detail-item .brand-section .shop-image img {
