@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <style>
         body {
             margin: 0;
@@ -49,9 +49,12 @@
     </section>
 
     <script>
+        console.log('Comparison iframe script loaded');
         // 親ウィンドウから比較表データを受け取る
         window.addEventListener('message', function(e) {
+            console.log('Comparison iframe received message:', e.data);
             if (e.data.action === 'update-comparison') {
+                console.log('Updating comparison table with data');
                 document.getElementById('comparison-tbody').innerHTML = e.data.comparisonHtml;
                 document.getElementById('comparison-region-name').textContent = e.data.regionName;
             }

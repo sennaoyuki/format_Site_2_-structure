@@ -201,12 +201,16 @@
             { id: 'details-iframe', loadingId: 'details-loading' }
         ];
 
+        // iframe読み込み完了フラグ
+        const iframeLoadStatus = {};
+        
         // 各iframeの読み込み完了を処理
         iframes.forEach(({ id, loadingId }) => {
             const iframe = document.getElementById(id);
             const loading = document.getElementById(loadingId);
             
             iframe.onload = function() {
+                console.log(`iframe loaded: ${id}`);
                 // ローディング表示を隠す
                 loading.style.display = 'none';
                 iframe.style.display = 'block';
@@ -217,6 +221,15 @@
                     iframe.style.height = height + 'px';
                 } catch (e) {
                     console.error('Cannot adjust iframe height:', e);
+                }
+                
+                // 読み込み完了フラグを立てる
+                iframeLoadStatus[id] = true;
+                
+                // 全てのiframeが読み込まれたらデータを送信
+                if (Object.keys(iframeLoadStatus).length === iframes.length) {
+                    console.log('All iframes loaded, sending data...');
+                    sendDataToIframes();
                 }
             };
         });
@@ -256,75 +269,185 @@
             });
         }
 
-        // アプリケーションの初期化を待つ
-        document.addEventListener('DOMContentLoaded', function() {
+        // データをiframeに送信する関数
+        function sendDataToIframes() {
             // URLパラメータから地域IDを取得
             const urlParams = new URLSearchParams(window.location.search);
             const regionId = urlParams.get('region_id') || '013';
             
-            // app.jsの初期化を待つ
-            setTimeout(() => {
-                if (window.app && window.app.dataManager) {
-                    const region = window.app.dataManager.getRegionById(regionId);
-                    if (region) {
-                        updateRegionInIframes(region.name);
-                        
-                        // ランキングデータを送信
-                        const ranking = window.app.dataManager.getRankingByRegionId(regionId);
-                        const clinics = window.app.dataManager.getAllClinics();
-                        
-                        // ランキングiframeにデータを送信
-                        const rankingIframe = document.getElementById('ranking-iframe');
-                        if (rankingIframe && rankingIframe.contentWindow) {
-                            // HTMLを生成してiframeに送信
-                            const rankingHtml = generateRankingHtml(clinics, ranking);
-                            rankingIframe.contentWindow.postMessage({
-                                action: 'update-ranking',
-                                rankingHtml: rankingHtml,
-                                regionName: region.name
-                            }, '*');
-                        }
-                        
-                        // 比較表iframeにデータを送信
-                        const comparisonIframe = document.getElementById('comparison-iframe');
-                        if (comparisonIframe && comparisonIframe.contentWindow) {
-                            const comparisonHtml = generateComparisonHtml(clinics, ranking);
-                            comparisonIframe.contentWindow.postMessage({
-                                action: 'update-comparison',
-                                comparisonHtml: comparisonHtml,
-                                regionName: region.name
-                            }, '*');
-                        }
-                        
-                        // 詳細iframeにデータを送信
-                        const detailsIframe = document.getElementById('details-iframe');
-                        if (detailsIframe && detailsIframe.contentWindow) {
-                            const detailsHtml = generateDetailsHtml(clinics, ranking, regionId);
-                            detailsIframe.contentWindow.postMessage({
-                                action: 'update-details',
-                                detailsHtml: detailsHtml,
-                                regionName: region.name
-                            }, '*');
-                        }
+            console.log('sendDataToIframes called, checking app...', window.app);
+            if (window.app && window.app.dataManager) {
+                console.log('DataManager found, getting region data for:', regionId);
+                const region = window.app.dataManager.getRegionById(regionId);
+                if (region) {
+                    console.log('Region found:', region);
+                    updateRegionInIframes(region.name);
+                    
+                    // ランキングデータを送信
+                    const ranking = window.app.dataManager.getRankingByRegionId(regionId);
+                    const clinics = window.app.dataManager.getAllClinics();
+                    console.log('Ranking data:', ranking);
+                    console.log('Clinics data:', clinics);
+                    
+                    // ランキングiframeにデータを送信
+                    const rankingIframe = document.getElementById('ranking-iframe');
+                    if (rankingIframe && rankingIframe.contentWindow) {
+                        // HTMLを生成してiframeに送信
+                        const rankingHtml = generateRankingHtml(clinics, ranking);
+                        console.log('Sending ranking HTML to iframe');
+                        rankingIframe.contentWindow.postMessage({
+                            action: 'update-ranking',
+                            rankingHtml: rankingHtml,
+                            regionName: region.name
+                        }, '*');
+                    }
+                    
+                    // 比較表iframeにデータを送信
+                    const comparisonIframe = document.getElementById('comparison-iframe');
+                    if (comparisonIframe && comparisonIframe.contentWindow) {
+                        const comparisonHtml = generateComparisonHtml(clinics, ranking);
+                        console.log('Sending comparison HTML to iframe');
+                        comparisonIframe.contentWindow.postMessage({
+                            action: 'update-comparison',
+                            comparisonHtml: comparisonHtml,
+                            regionName: region.name
+                        }, '*');
+                    }
+                    
+                    // 詳細iframeにデータを送信
+                    const detailsIframe = document.getElementById('details-iframe');
+                    if (detailsIframe && detailsIframe.contentWindow) {
+                        const detailsHtml = generateDetailsHtml(clinics, ranking, regionId);
+                        console.log('Sending details HTML to iframe');
+                        detailsIframe.contentWindow.postMessage({
+                            action: 'update-details',
+                            detailsHtml: detailsHtml,
+                            regionName: region.name
+                        }, '*');
                     }
                 }
-            }, 1000);
+            } else {
+                // app.jsがまだ初期化されていない場合は再試行
+                console.log('App not initialized yet, retrying in 500ms...');
+                setTimeout(sendDataToIframes, 500);
+            }
+        }
+
+        // アプリケーションの初期化を待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded fired');
+            // app.jsの読み込みを待つ
+            if (!window.app) {
+                console.log('Waiting for app.js to load...');
+            }
         });
 
-        // ランキングHTML生成関数（app.jsから必要な部分を抽出）
+        // ランキングHTML生成関数（app.jsのロジックを再利用）
         function generateRankingHtml(clinics, ranking) {
-            // 簡略版 - 実際はapp.jsのロジックを使用
-            return '<div class="ranking-item">ランキングコンテンツ</div>';
+            if (!ranking) return '';
+            
+            let html = '';
+            const clinicRanks = ranking.ranks.slice(0, 5);
+            
+            clinicRanks.forEach((clinicId, index) => {
+                const clinic = clinics.find(c => c.id === clinicId);
+                if (!clinic) return;
+                
+                const rank = index + 1;
+                const crownClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
+                
+                html += `
+                    <div class="ranking-item ranking${rank}" data-clinic-id="${clinic.id}">
+                        <div class="rank-number">
+                            <div class="rank-badge ${crownClass}">
+                                ${rank === 1 ? '👑' : rank}${rank === 1 ? '' : '位'}
+                            </div>
+                        </div>
+                        <div class="clinic-info">
+                            <div class="clinic-header">
+                                <img src="../images/clinics/${clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc'}/${clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc'}-logo.webp" alt="${clinic.name}" class="clinic-logo">
+                                <h3 class="clinic-name">${clinic.name}</h3>
+                            </div>
+                            <div class="clinic-details">
+                                <p class="clinic-catchphrase">${clinic.catchphrase || ''}</p>
+                                <div class="rating-section">
+                                    <span class="rating-score">${clinic.rating}</span>
+                                    <div class="star-rating" data-rate="${clinic.rating}"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            return html;
         }
 
         function generateComparisonHtml(clinics, ranking) {
-            // 簡略版 - 実際はapp.jsのロジックを使用
-            return '<tr><td>比較表コンテンツ</td></tr>';
+            if (!ranking) return '';
+            
+            let html = '';
+            const clinicRanks = ranking.ranks.slice(0, 5);
+            
+            clinicRanks.forEach((clinicId) => {
+                const clinic = clinics.find(c => c.id === clinicId);
+                if (!clinic) return;
+                
+                const logoPath = clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc';
+                
+                html += `
+                    <tr>
+                        <td class="ranking-table_td1">
+                            <img src="../images/clinics/${logoPath}/${logoPath}-logo.webp" alt="${clinic.name}" width="80">
+                            <a href="#clinic${clinic.id}" class="clinic-link">${clinic.name}</a>
+                        </td>
+                        <td class="">
+                            <span class="ranking_evaluation">${clinic.rating}</span><br>
+                            <span class="star5_rating" data-rate="${clinic.rating}"></span>
+                        </td>
+                        <td class="">${clinic.feature1 || ''}</td>
+                        <td class="">${clinic.feature2 || ''}</td>
+                        <td>
+                            <a class="link_btn" href="/go/${logoPath}/" target="_blank">公式サイト &gt;</a>
+                            <a class="detail_btn" href="#clinic${clinic.id}">詳細をみる</a>
+                        </td>
+                    </tr>
+                `;
+            });
+            
+            return html;
         }
 
         function generateDetailsHtml(clinics, ranking, regionId) {
-            // 簡略版 - 実際はapp.jsのロジックを使用
-            return '<div class="detail-item">詳細コンテンツ</div>';
+            if (!ranking) return '';
+            
+            let html = '';
+            const clinicRanks = ranking.ranks.slice(0, 5);
+            
+            clinicRanks.forEach((clinicId, index) => {
+                const clinic = clinics.find(c => c.id === clinicId);
+                if (!clinic) return;
+                
+                const rank = index + 1;
+                const logoPath = clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc';
+                
+                html += `
+                    <div class="clinic-detail" id="clinic${clinic.id}">
+                        <div class="detail-header">
+                            <div class="detail-rank-badge ranking${rank}">${rank}位</div>
+                            <h2 class="detail-clinic-name">${clinic.name}</h2>
+                        </div>
+                        <div class="detail-content">
+                            <img src="../images/clinics/${logoPath}/${logoPath}-banner.webp" alt="${clinic.name}" class="detail-banner">
+                            <div class="detail-description">
+                                <p>${clinic.description || ''}</p>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            return html;
         }
 
         // サイドバーの処理

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../../styles.css">
+    <link rel="stylesheet" href="../styles.css">
     <style>
         body {
             margin: 0;
@@ -24,9 +24,12 @@
     </section>
     
     <script>
+        console.log('Ranking iframe script loaded');
         // 親ウィンドウからランキングデータを受け取る
         window.addEventListener('message', function(e) {
+            console.log('Ranking iframe received message:', e.data);
             if (e.data.action === 'update-ranking') {
+                console.log('Updating ranking with data');
                 document.getElementById('ranking-list').innerHTML = e.data.rankingHtml;
                 document.getElementById('rank-region-name').textContent = e.data.regionName;
             }
