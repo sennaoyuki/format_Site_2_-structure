@@ -2115,8 +2115,19 @@ class RankingApp {
                 }
             };
 
-            // クリニックIDに基づいてデータを取得し、地域IDを追加
-            const data = clinicDetailDataMap[clinicId] || clinicDetailDataMap['1'];
+            // クリニック名に基づいて正しいクリニックIDを取得
+            const clinicNameToIdMap = {
+                'ディオクリニック': '1',
+                'ウララクリニック': '2',
+                'リエートクリニック': '3',
+                'エミナルクリニック': '4',
+                '湘南美容クリニック': '5'
+            };
+            
+            const correctClinicId = clinicNameToIdMap[clinic.name] || clinicId;
+            
+            // 正しいクリニックIDに基づいてデータを取得し、地域IDを追加
+            const data = clinicDetailDataMap[correctClinicId] || clinicDetailDataMap['1'];
             data.regionId = regionId;
             
             // 5番目のクリニック（湘南美容クリニック）の場合、bannerを追加
