@@ -1367,7 +1367,7 @@ body > .container main section {
     }
     
     /* 比較テーブルを768px内に収める */
-    .js-cbn-table {
+    .clinic-comparison-table {
         max-width: 768px;
         margin: 0 auto;
         padding: 0 10px;
@@ -2105,8 +2105,8 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* 比較表の列表示制御 - 公式サイトを常に表示 */
-.js-cbn-table th:last-child,
-.js-cbn-table td:last-child {
+.clinic-comparison-table th:last-child,
+.clinic-comparison-table td:last-child {
     display: table-cell !important;
 }
 
@@ -2155,12 +2155,12 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* 比較表スタイル */
-.js-cbn-table {
+.clinic-comparison-table {
     position: relative;
     z-index: 1;
 }
 
-.js-cbn-table table {
+.clinic-comparison-table table {
     border-top: 1px solid #E0E0E0;
     table-layout: fixed;
     border-collapse: collapse;
@@ -2177,13 +2177,13 @@ section.clinic-rankings .ranking-header-banner {
     border: 0 !important;
 }
 
-.js-cbn-table table,
-.js-cbn-table thead,
-.js-cbn-table tbody {
+.clinic-comparison-table table,
+.clinic-comparison-table thead,
+.clinic-comparison-table tbody {
     width: 100%;
 }
 
-.js-cbn-table table th {
+.clinic-comparison-table table th {
     text-align: center !important;
     padding: 15px 8px;
     border-right: 1px solid #ffffff;
@@ -2193,7 +2193,7 @@ section.clinic-rankings .ranking-header-banner {
     white-space: normal;
 }
 
-.js-cbn-table table td {
+.clinic-comparison-table table td {
     text-align: center !important;
     padding: 15px 8px;
     border-right: 1px solid #E0E0E0;
@@ -2203,55 +2203,55 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* 表示されている列の幅調整 - 5列表示用 */
-.js-cbn-table table th:not(.th-none),
-.js-cbn-table table td:not(.td-none) {
+.clinic-comparison-table table th:not(.th-none),
+.clinic-comparison-table table td:not(.td-none) {
     width: auto;
 }
 
 /* 総合タブの列幅 */
-.js-cbn-table[data-active-tab="tab1"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(1) { width: 19%; }
-.js-cbn-table[data-active-tab="tab1"] table th:nth-child(2),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(2) { width: 19%; }
-.js-cbn-table[data-active-tab="tab1"] table th:nth-child(3),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(3) { width: 20%; }
-.js-cbn-table[data-active-tab="tab1"] table th:nth-child(4),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(4) { width: 20%; }
-.js-cbn-table[data-active-tab="tab1"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab1"] table td:nth-child(11) { width: 18%; }
+.clinic-comparison-table[data-active-tab="tab1"] table th:nth-child(1),
+.clinic-comparison-table[data-active-tab="tab1"] table td:nth-child(1) { width: 19%; }
+.clinic-comparison-table[data-active-tab="tab1"] table th:nth-child(2),
+.clinic-comparison-table[data-active-tab="tab1"] table td:nth-child(2) { width: 19%; }
+.clinic-comparison-table[data-active-tab="tab1"] table th:nth-child(3),
+.clinic-comparison-table[data-active-tab="tab1"] table td:nth-child(3) { width: 20%; }
+.clinic-comparison-table[data-active-tab="tab1"] table th:nth-child(4),
+.clinic-comparison-table[data-active-tab="tab1"] table td:nth-child(4) { width: 20%; }
+.clinic-comparison-table[data-active-tab="tab1"] table th:nth-child(11),
+.clinic-comparison-table[data-active-tab="tab1"] table td:nth-child(11) { width: 18%; }
 
 /* 施術内容タブの列幅 */
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(1) { width: 19%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(2),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(2) { width: 19%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(3),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(3) { width: 20%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(4),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(4) { width: 20%; }
-.js-cbn-table[data-active-tab="tab2"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab2"] table td:nth-child(11) { width: 18%; }
+.clinic-comparison-table[data-active-tab="tab2"] table th:nth-child(1),
+.clinic-comparison-table[data-active-tab="tab2"] table td:nth-child(1) { width: 19%; }
+.clinic-comparison-table[data-active-tab="tab2"] table th:nth-child(2),
+.clinic-comparison-table[data-active-tab="tab2"] table td:nth-child(2) { width: 19%; }
+.clinic-comparison-table[data-active-tab="tab2"] table th:nth-child(3),
+.clinic-comparison-table[data-active-tab="tab2"] table td:nth-child(3) { width: 20%; }
+.clinic-comparison-table[data-active-tab="tab2"] table th:nth-child(4),
+.clinic-comparison-table[data-active-tab="tab2"] table td:nth-child(4) { width: 20%; }
+.clinic-comparison-table[data-active-tab="tab2"] table th:nth-child(11),
+.clinic-comparison-table[data-active-tab="tab2"] table td:nth-child(11) { width: 18%; }
 
 /* サービスタブの列幅 */
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(1),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(1) { width: 19%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(2),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(2) { width: 19%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(3),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(3) { width: 20%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(4),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(4) { width: 20%; }
-.js-cbn-table[data-active-tab="tab3"] table th:nth-child(11),
-.js-cbn-table[data-active-tab="tab3"] table td:nth-child(11) { width: 18%; }
+.clinic-comparison-table[data-active-tab="tab3"] table th:nth-child(1),
+.clinic-comparison-table[data-active-tab="tab3"] table td:nth-child(1) { width: 19%; }
+.clinic-comparison-table[data-active-tab="tab3"] table th:nth-child(2),
+.clinic-comparison-table[data-active-tab="tab3"] table td:nth-child(2) { width: 19%; }
+.clinic-comparison-table[data-active-tab="tab3"] table th:nth-child(3),
+.clinic-comparison-table[data-active-tab="tab3"] table td:nth-child(3) { width: 20%; }
+.clinic-comparison-table[data-active-tab="tab3"] table th:nth-child(4),
+.clinic-comparison-table[data-active-tab="tab3"] table td:nth-child(4) { width: 20%; }
+.clinic-comparison-table[data-active-tab="tab3"] table th:nth-child(11),
+.clinic-comparison-table[data-active-tab="tab3"] table td:nth-child(11) { width: 18%; }
 
-.js-cbn-table table td:not(.ranking-table_td1) {
+.clinic-comparison-table table td:not(.ranking-table_td1) {
     border-bottom: 1px solid #E0E0E0;
     border-top: none;
     border-left: none;
     font-size: clamp(10px, 2.3vw, 15px);
 }
 
-.js-cbn-table table tbody td:nth-of-type(1) {
+.clinic-comparison-table table tbody td:nth-of-type(1) {
     font-size: 11px;
     vertical-align: middle;
     border-bottom: 1px solid #E0E0E0;
@@ -2261,44 +2261,44 @@ section.clinic-rankings .ranking-header-banner {
     color: #4C4C4C;
 }
 
-.js-cbn-table table thead th {
+.clinic-comparison-table table thead th {
     background: #f0f0f0;
     font-size: 11px;
     color: #4C4C4C;
     border-right: 1px solid white;
 }
 
-.js-cbn-table table tbody tr:first-child {
+.clinic-comparison-table table tbody tr:first-child {
     background: #F0FAF9;
     height: auto;
 }
 
 /* 王冠マークを削除 */
 
-.js-cbn-table table tbody tr:first-child td:nth-of-type(2) {
+.clinic-comparison-table table tbody tr:first-child td:nth-of-type(2) {
     color: #f50000;
 }
 
-.js-cbn-table table tbody td:nth-of-type(1) {
+.clinic-comparison-table table tbody td:nth-of-type(1) {
     font-size: 11px;
     vertical-align: middle;
 }
 
 /* クリニック名セルの修正 */
-.js-cbn-table .ranking-table_td1 {
+.clinic-comparison-table .ranking-table_td1 {
     padding: 10px 5px;
     text-align: center;
     vertical-align: middle;
 }
 
-.js-cbn-table .ranking-table_td1 img {
+.clinic-comparison-table .ranking-table_td1 img {
     max-width: 80px;
     height: auto;
     display: block;
     margin: 0 auto 8px;
 }
 
-.js-cbn-table .ranking-table_td1 .clinic-link {
+.clinic-comparison-table .ranking-table_td1 .clinic-link {
     display: block;
     font-size: 12px;
     color: #4C4C4C;
@@ -2307,12 +2307,12 @@ section.clinic-rankings .ranking-header-banner {
     line-height: 1.4;
 }
 
-.js-cbn-table table tbody td:nth-of-type(2) .ranking_evaluation {
+.clinic-comparison-table table tbody td:nth-of-type(2) .ranking_evaluation {
     font-size: clamp(10px, 2.3vw, 15px);
 }
 
-.js-cbn-table table thead th:last-child,
-.js-cbn-table table tbody td:last-child {
+.clinic-comparison-table table thead th:last-child,
+.clinic-comparison-table table tbody td:last-child {
     border-right: none !important;
 }
 
@@ -2348,7 +2348,7 @@ section.clinic-rankings .ranking-header-banner {
 .star5_rating[data-rate="4.5"]:after { width: 90%; }
 
 /* ボタンスタイル */
-.js-cbn-table .link_btn {
+.clinic-comparison-table .link_btn {
     display: inline-block;
     background: #f69ca8;
     color: white;
@@ -2363,7 +2363,7 @@ section.clinic-rankings .ranking-header-banner {
 
 
 
-.js-cbn-table .detail_btn {
+.clinic-comparison-table .detail_btn {
     display: inline-block;
     background: white;
     color: #4C4C4C;
@@ -2375,7 +2375,7 @@ section.clinic-rankings .ranking-header-banner {
     transition: all 0.3s;
 }
 
-.js-cbn-table .detail_btn:hover {
+.clinic-comparison-table .detail_btn:hover {
     background: #F1F1F1;
 }
 
@@ -2404,7 +2404,7 @@ section.clinic-rankings .ranking-header-banner {
 .td-width3 { width: 140px; }
 
 /* 評価セルのスタイル調整 */
-.js-cbn-table .ranking_evaluation {
+.clinic-comparison-table .ranking_evaluation {
     display: block;
     font-size: 16px;
     font-weight: 600;
@@ -2413,42 +2413,42 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* 月額料金のスタイル */
-.js-cbn-table .fs10 {
+.clinic-comparison-table .fs10 {
     font-size: 10px;
     color: #9D9D9D;
 }
 
-.js-cbn-table .division {
+.clinic-comparison-table .division {
     display: block;
     line-height: 1.2;
 }
 
 /* 比較表のレスポンシブ対応 */
-.js-cbn-table {
+.clinic-comparison-table {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
 
 /* 比較表コンテナの最小幅 */
-.js-cbn-table table {
+.clinic-comparison-table table {
     width: 100%;
     max-width: 768px;
 }
 
 /* モバイル対応 - 横スクロール排除 */
 @media (max-width: 768px) {
-    .js-cbn-table {
+    .clinic-comparison-table {
         overflow-x: hidden;
     }
     
-    .js-cbn-table table {
+    .clinic-comparison-table table {
         min-width: 0;
         width: 100%;
         font-size: 11px;
     }
     
-    .js-cbn-table table th,
-    .js-cbn-table table td {
+    .clinic-comparison-table table th,
+    .clinic-comparison-table table td {
         padding: 8px 2px;
         font-size: 12px;
         word-break: break-word;
@@ -2456,16 +2456,16 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     /* クリニック名セルの調整 */
-    .js-cbn-table .ranking-table_td1 {
+    .clinic-comparison-table .ranking-table_td1 {
         padding: 5px 2px;
     }
     
-    .js-cbn-table .ranking-table_td1 img {
+    .clinic-comparison-table .ranking-table_td1 img {
         max-width: 100%;
         height: auto;
     }
     
-    .js-cbn-table .ranking-table_td1 .clinic-link {
+    .clinic-comparison-table .ranking-table_td1 .clinic-link {
         font-size: 10px;
         line-height: 1.2;
     }
@@ -2476,21 +2476,21 @@ section.clinic-rankings .ranking-header-banner {
     .td-width3 { width: auto; }
     
     /* 評価セクションの調整 */
-    .js-cbn-table .ranking_evaluation {
+    .clinic-comparison-table .ranking_evaluation {
         font-size: 14px;
     }
     
-    .js-cbn-table .star5_rating {
+    .clinic-comparison-table .star5_rating {
         font-size: 10px;
     }
     
     /* 価格情報の調整 */
-    .js-cbn-table .fs10 {
+    .clinic-comparison-table .fs10 {
         font-size: 8px;
     }
     
     /* ボタンの調整 */
-.js-cbn-table .link_btn, .js-cbn-table .detail_btn {
+.clinic-comparison-table .link_btn, .clinic-comparison-table .detail_btn {
     padding: 4px 4px;
     font-size: 9px;
 }
@@ -2504,26 +2504,26 @@ section.clinic-rankings .ranking-header-banner {
 
 /* さらに小さい画面用 */
 @media (max-width: 400px) {
-    .js-cbn-table table {
+    .clinic-comparison-table table {
         font-size: 9px;
     }
     
-    .js-cbn-table table th,
-    .js-cbn-table table td {
+    .clinic-comparison-table table th,
+    .clinic-comparison-table table td {
         padding: 6px 1px;
         font-size: 11px;
     }
     
-    .js-cbn-table .ranking-table_td1 img {
+    .clinic-comparison-table .ranking-table_td1 img {
         max-width: 35px;
     }
     
-    .js-cbn-table .ranking_evaluation {
+    .clinic-comparison-table .ranking_evaluation {
         font-size: 12px;
     }
     
     /* 長いテキストの省略 */
-    .js-cbn-table td {
+    .clinic-comparison-table td {
         max-width: 80px;
         /* overflow: hidden; */
         text-overflow: ellipsis;
