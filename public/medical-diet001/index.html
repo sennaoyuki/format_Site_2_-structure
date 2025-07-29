@@ -19,8 +19,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <!-- 重要なリソースのpreload -->
-    <link rel="preload" as="image" href="../images/MV2.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="../images/MV2.webp" fetchpriority="high" type="image/webp">
     <link rel="preload" as="style" href="styles.css?v=2025072201">
+    <link rel="preload" as="script" href="app.js?v=2025072201">
     <!-- Google Fontsはプリロードせず、通常のロードのみにする -->
     <!-- スタイルシート -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
@@ -44,8 +45,8 @@
         
         /* Hero section */
         .hero-section{margin:0;position:relative}
-        .hero-image-wrapper{position:relative;width:100%;max-width:768px;margin:0 auto;overflow:hidden}
-        .hero-image{width:100%;height:auto;display:block}
+        .hero-image-wrapper{position:relative;width:100%;max-width:768px;margin:0 auto;overflow:hidden;aspect-ratio:768/432}
+        .hero-image{width:100%;height:100%;display:block;object-fit:cover}
         
         /* Prevent layout shift */
         img{max-width:100%;height:auto}
@@ -93,7 +94,7 @@
         <!-- メインビジュアル -->
         <section class="hero-section">
             <div class="hero-image-wrapper">
-                <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image" loading="eager" fetchpriority="high">
+                <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image" loading="eager" fetchpriority="high" decoding="async" width="768" height="432">
                 <div id="mv-region-name" style="position:absolute;top: 8%;left: 1%;width: clamp(60px, 15vw, 115px);text-align: center;color: #808080;font-size: clamp(14px, 3.5vw, 27px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
             </div>
             <div style="text-align: right; padding: 5px 20px; color: #808080; font-size: 10px; font-weight: normal; max-width: 768px; margin: 0 auto;">PR：医療法人社団　正恵会</div>
@@ -939,7 +940,7 @@
         </div>
     </div>
 
-    <script src="app.js" defer></script>
+    <script src="app.js?v=2025072201" defer></script>
     <script>
         // 比較表のタブ切り替え機能
         // 全てのパラメータを引き継ぐ共通処理
@@ -1155,6 +1156,17 @@
                 });
             });
         });
+    </script>
+    
+    <!-- Service Worker登録 -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('ServiceWorker registered'))
+                    .catch(err => console.log('ServiceWorker registration failed'));
+            });
+        }
     </script>
 </body>
 </html>
