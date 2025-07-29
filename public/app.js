@@ -2771,6 +2771,8 @@ class RankingApp {
                 
                 // 店舗情報を取得
                 const storeContainer = button.closest('.store-col, .store-item-1 > .text-group > .group1');
+                console.log('Store container found:', !!storeContainer);
+                
                 if (storeContainer) {
                     // クリニック名を取得
                     const clinicNameElement = storeContainer.closest('.stores-list')?.previousElementSibling?.querySelector('h4') ||
@@ -2789,8 +2791,17 @@ class RankingApp {
                     const accessElement = storeContainer.querySelector('.store-access');
                     const access = accessElement?.textContent?.trim() || 'アクセス情報なし';
                     
+                    console.log('Store info:', { clinicName, storeName, address, access });
+                    
                     // モーダルに情報を設定
-                    self.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
+                    try {
+                        self.showMapModal(clinicName + ' ' + storeName, address, access, clinicName);
+                    } catch (error) {
+                        console.error('Error in showMapModal:', error);
+                    }
+                } else {
+                    console.log('Store container not found. Button parent:', button.parentElement);
+                    console.log('Button HTML:', button.outerHTML);
                 }
             }
         };
@@ -2821,6 +2832,8 @@ class RankingApp {
     
     // 地図モーダルを表示
     showMapModal(clinicName, address, access, clinicCode) {
+        console.log('showMapModal called with:', { clinicName, address, access, clinicCode });
+        
         const modal = document.getElementById('map-modal');
         const modalClinicName = document.getElementById('map-modal-clinic-name');
         const modalAddress = document.getElementById('map-modal-address');
@@ -2828,6 +2841,14 @@ class RankingApp {
         const modalHours = document.getElementById('map-modal-hours');
         const modalMapContainer = document.getElementById('map-modal-map-container');
         const modalButton = document.getElementById('map-modal-button');
+        
+        console.log('Modal elements check:', {
+            modal: !!modal,
+            modalClinicName: !!modalClinicName,
+            modalAddress: !!modalAddress,
+            modalAccess: !!modalAccess,
+            modalMapContainer: !!modalMapContainer
+        });
         
         if (modal && modalClinicName && modalAddress && modalAccess && modalMapContainer) {
             // モーダルの内容を設定
@@ -2868,6 +2889,9 @@ class RankingApp {
             // モーダルを表示
             modal.style.display = 'flex';
             document.body.style.overflow = 'hidden'; // スクロールを無効化
+            console.log('Modal display set to flex');
+        } else {
+            console.error('Modal elements missing. Cannot show modal.');
         }
     }
     
