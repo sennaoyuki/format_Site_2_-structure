@@ -61,39 +61,139 @@
         .fonts-loaded body{font-family:'Noto Sans JP',sans-serif}
         
         /* CASEセクションのスタイル */
-        .client_archive .case {
+        .client_archive {
+            margin: 20px 0;
             background: #fff;
-            border-radius: 5px;
-            border: 1px solid #ff7094;
-            margin: 8px 0;
+            border-radius: 12px;
+            border: 2px solid #ff7094;
             overflow: hidden;
+            box-shadow: 0 4px 12px rgba(255, 112, 148, 0.15);
         }
         
         .client_archive .case .heading {
             color: #fff;
-            font-weight: 500;
-            font-size: 17px;
-            font-size: 1.7rem;
+            font-weight: 600;
+            font-size: 18px;
             text-align: center;
-            background-color: #ff7094;
-            padding: 6px 0;
-            border-radius: 0;
+            background: linear-gradient(135deg, #ff7094, #ff5582);
+            padding: 12px 0;
+            margin: 0;
+            letter-spacing: 1px;
         }
         
         .client_archive .case .image {
+            padding: 20px;
+            background: #fff;
+        }
+        
+        .client_archive .case-content {
+            transition: transform 0.3s ease;
+        }
+        
+        .client_archive .case-content:hover {
+            transform: translateY(-2px);
+        }
+        
+        .client_archive .case-image-wrapper {
+            overflow: hidden;
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .client_archive .case-image-wrapper img {
+            transition: transform 0.3s ease;
+        }
+        
+        .client_archive .case-image-wrapper:hover img {
+            transform: scale(1.02);
+        }
+        
+        .client_archive .case-details {
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border-radius: 8px;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ff7094;
+        }
+        
+        .client_archive .case-details div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2px 0;
+        }
+        
+        .client_archive .case-details strong {
+            color: #ff7094;
+            font-weight: 600;
+            min-width: 45px;
+        }
+        
+        .client_archive .slick-dots {
+            bottom: -35px;
             text-align: center;
-            padding: 10px 15px 0;
         }
         
-        .client_archive .case .image p {
-            font-size: 12px;
-            font-size: 1.2rem;
-            text-align: left;
-            padding-top: 5px;
+        .client_archive .slick-dots button {
+            background: #ff7094;
+            border-radius: 50%;
+            width: 12px;
+            height: 12px;
+            margin: 0 5px;
+            transition: all 0.3s ease;
         }
         
-        .client_archive .case .slick-dots {
-            bottom: -25px;
+        .client_archive .slick-dots .slick-active button {
+            background: #ff5582;
+            transform: scale(1.2);
+        }
+        
+        /* レスポンシブ対応 */
+        @media (max-width: 768px) {
+            .client_archive {
+                margin: 15px 10px;
+                border-radius: 8px;
+            }
+            
+            .client_archive .case .heading {
+                font-size: 16px;
+                padding: 10px 0;
+            }
+            
+            .client_archive .case .image {
+                padding: 15px;
+            }
+            
+            .client_archive .case-details {
+                grid-template-columns: 1fr;
+                gap: 3px;
+            }
+            
+            .client_archive .case-details div {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 3px 0;
+            }
+            
+            .client_archive .case-details strong {
+                margin-bottom: 2px;
+                font-size: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .client_archive .case .heading {
+                font-size: 14px;
+                padding: 8px 0;
+            }
+            
+            .client_archive .case .image {
+                padding: 10px;
+            }
+            
+            .client_archive .case-image-wrapper img {
+                height: 150px !important;
+            }
         }
         
         .slick-dotted.slick-slider {
@@ -1200,15 +1300,33 @@ text-align: center;
                     cases: [
                         {
                             image: '/images/cases/dio/case01.png',
-                            description: '金額：リベルサス：8,580円（3mg）+16,280円(7mg)×2+26,070円(14mg)×3 期間：6ヶ月 治療内容：リベルサス錠（3mg/7mg/14mg） 副作用：副作用で主にみられるものは、吐き気、胸やけ、下痢、便秘などの胃腸障害ですが内服継続をすることで、それらの症状は緩和していきます。一般的には問題なく服用いただける方がほとんどです。極めて稀ですが急性膵炎などの副作用もあります。'
+                            title: '6ヶ月コースで理想の体型を実現',
+                            age: '30代前半',
+                            period: '6ヶ月',
+                            cost: '約12万円',
+                            treatment: 'リベルサス錠（3mg/7mg/14mg）',
+                            result: '-15kg達成',
+                            description: '段階的に薬剤濃度を調整することで、副作用を最小限に抑えながら効果的な減量を実現。医師の丁寧な指導のもと、健康的にダイエットに成功しました。'
                         },
                         {
                             image: '/images/cases/dio/case02.png',
-                            description: '金額：53,900円×4ヶ月 期間：4ヶ月 治療内容：マンジャロ 5mg 副作用：副作用で主にみられるものは、吐き気、胸やけ、下痢、便秘などの胃腸障害ですが投与継続をすることで、それらの症状は緩和していきます。一般的には問題なく投与いただける方がほとんどです。極めて稀ですが急性膵炎などの副作用もあります。'
+                            title: '短期集中マンジャロプログラム',
+                            age: '20代後半',
+                            period: '4ヶ月',
+                            cost: '約22万円',
+                            treatment: 'マンジャロ 5mg',
+                            result: '-12kg達成',
+                            description: '最新のGLP-1受容体作動薬による効果的な治療。食欲抑制効果により無理なく食事量をコントロールし、4ヶ月で目標体重を達成。'
                         },
                         {
                             image: '/images/cases/dio/case03.png',
-                            description: '金額：リベルサス：8,580円（3mg）+16,280円(7mg)×4ヶ月 期間：4ヶ月 年齢：30代後半 治療内容：リベルサス錠（3mg/7mg） 副作用：副作用で主にみられるものは、吐き気、胸やけ、下痢、便秘などの胃腸障害ですが内服継続をすることで、それらの症状は緩和していきます。一般的には問題なく服用いただける方がほとんどです。極めて稀ですが急性膵炎などの副作用もあります。'
+                            title: 'リベルサス基本コースで着実に減量',
+                            age: '30代後半',
+                            period: '4ヶ月',
+                            cost: '約8万円',
+                            treatment: 'リベルサス錠（3mg/7mg）',
+                            result: '-8kg達成',
+                            description: '経口薬タイプで通院負担を軽減。仕事が忙しい方でも続けやすい治療プランで、着実な減量効果を実感いただけました。'
                         }
                     ]
                 },
@@ -1219,15 +1337,33 @@ text-align: center;
                     cases: [
                         {
                             image: '/images/cases/urara/case01.png',
-                            description: '金額：198,000円（6ヶ月コース） 期間：6ヶ月 治療内容：医療用EMS＋食事指導 副作用：特になし（非侵襲的治療のため） 年齢：20代後半 URARAクリニック独自のオーダーメイド治療プログラムによる結果です。'
+                            title: 'オーダーメイド治療で体質改善',
+                            age: '20代後半',
+                            period: '6ヶ月',
+                            cost: '約20万円',
+                            treatment: '医療用EMS + 栄養指導',
+                            result: '-18kg達成',
+                            description: 'URARAクリニック独自の体質分析に基づくオーダーメイド治療。非侵襲的な治療のため副作用もなく、安心して理想の体型を実現できました。'
                         },
                         {
                             image: '/images/cases/urara/case02.png',
-                            description: '金額：148,000円（4ヶ月コース） 期間：4ヶ月 治療内容：クールスカルプティング＋栄養指導 副作用：軽度の赤み（1-2日で改善） 年齢：30代前半 最大79%OFFキャンペーン適用での治療例です。'
+                            title: 'クールスカルプティングで部分痩せ',
+                            age: '30代前半',
+                            period: '4ヶ月',
+                            cost: '約15万円',
+                            treatment: 'クールスカルプティング + 栄養指導',
+                            result: '-10kg達成',
+                            description: 'FDA認証の冷却による脂肪細胞減少治療。特に気になる部分の脂肪を効率的に減らし、理想のボディラインを実現しました。'
                         },
                         {
                             image: '/images/cases/urara/case03.png',
-                            description: '金額：89,000円（3ヶ月コース） 期間：3ヶ月 治療内容：ハイフ＋生活習慣指導 副作用：特になし 年齢：40代前半 短期集中プログラムでの効果的な結果例です。'
+                            title: 'ハイフで短期集中ダイエット',
+                            age: '40代前半',
+                            period: '3ヶ月',
+                            cost: '約9万円',
+                            treatment: '医療ハイフ + 生活習慣指導',
+                            result: '-7kg達成',
+                            description: '超音波による脂肪分解治療で、短期間で効果を実感。生活習慣指導により、リバウンドのない健康的な減量を実現しました。'
                         }
                     ]
                 },
@@ -1238,15 +1374,33 @@ text-align: center;
                     cases: [
                         {
                             image: '/images/cases/lieto/case01.png',
-                            description: '金額：165,000円（6ヶ月コース・モニター価格） 期間：6ヶ月 治療内容：脂肪冷却＋管理栄養士による食事指導 副作用：軽度の冷感（施術中のみ） 年齢：20代後半 医師監修のもと安全に実施されました。'
+                            title: '医師監修の安心治療プログラム',
+                            age: '20代後半',
+                            period: '6ヶ月',
+                            cost: '約17万円（モニター価格）',
+                            treatment: '脂肪冷却 + 管理栄養士指導',
+                            result: '-16kg達成',
+                            description: '医師監修のもと安全性を最優先に実施。管理栄養士による専門的な食事指導で、健康的で持続可能な減量を実現しました。'
                         },
                         {
                             image: '/images/cases/lieto/case02.png',
-                            description: '金額：98,000円（4ヶ月コース・モニター価格） 期間：4ヶ月 治療内容：医療ハイフ＋生活習慣改善指導 副作用：特になし 年齢：30代前半 最大80%OFFモニター価格での治療例です。'
+                            title: '最大80%OFF モニター価格治療',
+                            age: '30代前半',
+                            period: '4ヶ月',
+                            cost: '約10万円（モニター価格）',
+                            treatment: '医療ハイフ + 生活習慣改善指導',
+                            result: '-12kg達成',
+                            description: '最大80%OFFモニター価格での医療ハイフ治療。生活習慣改善指導も含めて健康的に減量しました。副作用もなく安心して続けられました。'
                         },
                         {
                             image: '/images/cases/lieto/case03.png',
-                            description: '金額：58,000円（3ヶ月コース・モニター価格） 期間：3ヶ月 治療内容：医療用EMS＋栄養カウンセリング 副作用：特になし 年齢：40代前半 短期集中モニタープログラムです。'
+                            title: '短期集中EMSプログラム',
+                            age: '40代前半',
+                            period: '3ヶ月',
+                            cost: '約6万円（モニター価格）',
+                            treatment: '医療用EMS + 栄養カウンセリング',
+                            result: '-8kg達成',
+                            description: '忙しいスケジュールの中でも続けられる短期集中プログラム。EMSと栄養カウンセリングで効率的な減量を実現しました。'
                         }
                     ]
                 },
@@ -1257,15 +1411,33 @@ text-align: center;
                     cases: [
                         {
                             image: '/images/cases/sbc/case01.png',
-                            description: '金額：298,000円（6ヶ月コース） 期間：6ヶ月 治療内容：クールスカルプティング（認定機器使用） 副作用：軽度の赤み・腫れ（1週間程度） 年齢：30代前半 湘南美容クリニックの豊富な実績に基づく安心の治療です。'
+                            title: 'クールスカルプティング認定治療',
+                            age: '30代前半',
+                            period: '6ヶ月',
+                            cost: '約30万円',
+                            treatment: 'クールスカルプティング（認定機器）',
+                            result: '-18kg達成',
+                            description: '湘南美容クリニックの豊富な実績に基づく安心の治療。認定機器による確実な効果で理想のボディラインを実現しました。'
                         },
                         {
                             image: '/images/cases/sbc/case02.png',
-                            description: '金額：198,000円（4ヶ月コース） 期間：4ヶ月 治療内容：脂肪溶解注射＋食事指導 副作用：軽度の腫れ・内出血（数日で改善） 年齢：20代後半 症例実績30万件以上の豊富な経験による治療です。'
+                            title: '脂肪溶解注射 + 食事指導',
+                            age: '20代後半',
+                            period: '4ヶ月',
+                            cost: '約20万円',
+                            treatment: '脂肪溶解注射 + 専門食事指導',
+                            result: '-14kg達成',
+                            description: '症例実績30万件以上の豊富な経験による安全で効果的な治療。専門的な食事指導で確実な結果を得られました。'
                         },
                         {
                             image: '/images/cases/sbc/case03.png',
-                            description: '金額：148,000円（3ヶ月コース） 期間：3ヶ月 治療内容：医療ハイフ＋生活習慣指導 副作用：特になし 年齢：40代前半 全国展開のアクセス良好なクリニックでの治療例です。'
+                            title: '医療ハイフ + 生活習慣指導',
+                            age: '40代前半',
+                            period: '3ヶ月',
+                            cost: '約15万円',
+                            treatment: '医療ハイフ + 生活習慣指導',
+                            result: '-10kg達成',
+                            description: '全国展開でアクセス良好な湘南美容クリニック。医療ハイフと生活習慣指導で健康的に減量しました。'
                         }
                     ]
                 },
@@ -1276,15 +1448,33 @@ text-align: center;
                     cases: [
                         {
                             image: '/images/cases/eminal/case01.png',
-                            description: '金額：268,000円（6ヶ月専門プログラム） 期間：6ヶ月 治療内容：個別カウンセリング＋最適化治療プラン 副作用：治療内容により異なる（事前説明実施） 年齢：30代前半 医療ダイエット専門クリニックならではの個別対応です。'
+                            title: '個別最適化プログラム',
+                            age: '30代前半',
+                            period: '6ヶ月',
+                            cost: '約27万円',
+                            treatment: '個別カウンセリング + 最適化治療',
+                            result: '-17kg達成',
+                            description: '医療ダイエット専門クリニックならではの個別対応。詳細な体質分析に基づく最適化プログラムで確実な効果を実現しました。'
                         },
                         {
                             image: '/images/cases/eminal/case02.png',
-                            description: '金額：178,000円（4ヶ月専門プログラム） 期間：4ヶ月 治療内容：体質分析＋オーダーメイド治療 副作用：個人差あり（丁寧な事前カウンセリング実施） 年齢：20代後半 専門性の高い治療での効果的な結果例です。'
+                            title: 'オーダーメイド体質改善',
+                            age: '20代後半',
+                            period: '4ヶ月',
+                            cost: '約18万円',
+                            treatment: '体質分析 + オーダーメイド治療',
+                            result: '-13kg達成',
+                            description: '専門性の高い体質分析で一人ひとりに最適な治療を提案。丁寧な事前カウンセリングで安心して治療を受けられました。'
                         },
                         {
                             image: '/images/cases/eminal/case03.png',
-                            description: '金額：118,000円（3ヶ月専門プログラム） 期間：3ヶ月 治療内容：集中治療＋アフターサポート 副作用：軽微（充実のサポート体制） 年齢：40代前半 充実のアフターサポートによる長期効果維持を重視した治療です。'
+                            title: '集中治療 + アフターサポート',
+                            age: '40代前半',
+                            period: '3ヶ月',
+                            cost: '約12万円',
+                            treatment: '集中治療 + 充実サポート',
+                            result: '-9kg達成',
+                            description: '短期集中治療と充実のアフターサポートで長期効果を維持。専門クリニックならではの手厚いフォロー体制が魅力です。'
                         }
                     ]
                 }
@@ -1415,8 +1605,24 @@ text-align: center;
                                     <div class="slick-track" style="opacity: 1; width: ${cases.length * 100}%; transform: translate3d(0, 0, 0);">
                                         ${cases.map((caseItem, index) => `
                                             <div class="slick-slide ${index === 0 ? 'slick-current slick-active' : ''}" data-slick-index="${index}" style="width: ${100 / cases.length}%;">
-                                                <img src="${caseItem.image}" alt="症例${index + 1}" style="width: 100%; height: auto;" onerror="this.src='/images/placeholder-case.png'">
-                                                <p>${caseItem.description}</p>
+                                                <div class="case-content" style="padding: 15px;">
+                                                    <div class="case-image-wrapper" style="position: relative; margin-bottom: 15px;">
+                                                        <img src="${caseItem.image}" alt="${caseItem.title || '症例' + (index + 1)}" style="width: 100%; height: 180px; object-fit: cover; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1);" onerror="this.src='/images/placeholder-case.png'">
+                                                        <div class="case-result-badge" style="position: absolute; top: 10px; right: 10px; background: linear-gradient(135deg, #ff7094, #ff5582); color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: bold; box-shadow: 0 2px 6px rgba(255, 112, 148, 0.4);">
+                                                            ${caseItem.result || '効果実感'}
+                                                        </div>
+                                                    </div>
+                                                    <div class="case-info">
+                                                        <h5 style="color: #333; font-size: 14px; font-weight: bold; margin: 0 0 8px 0; line-height: 1.4;">${caseItem.title || '症例' + (index + 1)}</h5>
+                                                        <div class="case-details" style="display: grid; grid-template-columns: 1fr 1fr; gap: 5px; margin-bottom: 10px; font-size: 11px; color: #666;">
+                                                            <div><strong>年齢:</strong> ${caseItem.age || '非公開'}</div>
+                                                            <div><strong>期間:</strong> ${caseItem.period || '個人差あり'}</div>
+                                                            <div><strong>費用:</strong> ${caseItem.cost || 'お問い合わせ'}</div>
+                                                            <div><strong>治療:</strong> ${caseItem.treatment || '専門治療'}</div>
+                                                        </div>
+                                                        <p style="font-size: 11px; line-height: 1.4; color: #555; margin: 0; padding: 8px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #ff7094;">${caseItem.description}</p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         `).join('')}
                                     </div>
