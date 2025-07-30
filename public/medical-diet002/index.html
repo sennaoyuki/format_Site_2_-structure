@@ -398,7 +398,10 @@
                 // セクション読み込み完了後にapp.jsを初期化
                 if (window.app) {
                     console.log('Initializing app after sections loaded');
-                    window.app.init();
+                    // セクション読み込み完了を少し待ってからapp.jsを初期化
+                    setTimeout(() => {
+                        window.app.init();
+                    }, 1000);
                 } else {
                     console.log('window.app not found, skipping app initialization');
                 }

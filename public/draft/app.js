@@ -2241,35 +2241,19 @@ class RankingApp {
                 </div>
                 
                 <!-- CASE -->
-                <div class="clinic-points-section">
+                <div class="case-section">
                     <h4 class="section-title">CASE</h4>
-                    <div class="ribbon_point_box_no">
-                        <div class="ribbon_point_title2_s">
-                            <i class="fas fa-clock point-icon-inline"></i>
-                            <strong>管理栄養士によるオンライン食事指導</strong>
-                        </div>
-                        <div class="ribbon_point_txt">
-                            <p style="font-size:14px;">エミナルクリニックでは管理栄養士によるオンラインでの食事指導が受けられます。LINEなどを使って手軽に相談できるので、継続しやすいと評判です。</p>
-                        </div>
-                        
-                        <div class="ribbon_point_title2_s">
-                            <i class="fas fa-clock point-icon-inline"></i>
-                            <strong>全国60院以上の安心ネットワーク</strong>
-                        </div>
-                        <div class="ribbon_point_txt">
-                            <p style="font-size:14px;">エミナルクリニックは全国60院以上を展開しており、どこに住んでいても同じ品質の医療ダイエットを受けられます。安心・安全なネットワークで、あなたのボディメイクをサポートします。</p>
-                        </div>
-                        
-                        <div class="ribbon_point_title2_s">
-                            <i class="fas fa-clock point-icon-inline"></i>
-                            <strong>モニター満足度95%の実績</strong>
-                        </div>
-                        <div class="ribbon_point_txt">
-                            <p style="font-size:14px;">エミナルクリニックはモニター満足度95%という高い実績を誇っています。多くの方が結果に満足しており、あなたも安心して治療を始めていただけます。</p>
-                        </div>
-                        
-                        <div class="ribbon_point_link">
-                            【公式】<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener"><strong>https://diet.eminal-clinic.jp/lp/m_bodymake/</strong></a>
+                    <div class="case-slider-container">
+                        <div class="case-slick-slider" data-slider-id="${rank}">
+                            <div class="case-slide">
+                                <img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1" loading="lazy">
+                            </div>
+                            <div class="case-slide">
+                                <img src="/images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2" loading="lazy">
+                            </div>
+                            <div class="case-slide">
+                                <img src="/images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3" loading="lazy">
+                            </div>
                         </div>
                     </div>
                 </div>
