@@ -1,0 +1,86 @@
+<!-- ヘッダーセクション Design 2 - シンプル版 -->
+<header class="site-header site-header-simple">
+    <div class="header-content">
+        <div class="logo-section">
+            <a href="/" class="logo-link">
+                <div class="logo-main">
+                    <span class="logo-icon">🏥</span>
+                    <h1 class="site-logo">医療ダイエット比較</h1>
+                </div>
+            </a>
+        </div>
+        <nav class="header-nav">
+            <div class="quick-region-select">
+                <select id="quick-region" class="region-select-inline">
+                    <option value="013">東京</option>
+                    <option value="027">大阪</option>
+                    <option value="040">福岡</option>
+                    <option value="023">愛知</option>
+                    <option value="014">神奈川</option>
+                </select>
+            </div>
+            <a href="/search-results/" class="search-link">🔍 検索</a>
+        </nav>
+    </div>
+</header>
+
+<style>
+/* Design 2 専用スタイル */
+.site-header-simple {
+    background: linear-gradient(135deg, #2CC7C5 0%, #1FA7A5 100%);
+    color: white;
+}
+
+.site-header-simple .logo-link {
+    color: white;
+}
+
+.site-header-simple .logo-icon {
+    font-size: 24px;
+    margin-right: 8px;
+}
+
+.quick-region-select {
+    display: inline-block;
+    margin-right: 20px;
+}
+
+.region-select-inline {
+    padding: 5px 10px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border-radius: 4px;
+}
+
+.region-select-inline option {
+    background: #2CC7C5;
+}
+
+.search-link {
+    color: white;
+    text-decoration: none;
+    padding: 8px 16px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    transition: background 0.3s;
+}
+
+.search-link:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+</style>
+
+<script>
+// 地域選択の処理（インライン版）
+document.getElementById('quick-region').addEventListener('change', function() {
+    const regionId = this.value;
+    const url = new URL(window.location);
+    url.searchParams.set('region_id', regionId);
+    window.location.href = url.toString();
+});
+
+// 現在の地域を選択
+const currentRegion = new URLSearchParams(window.location.search).get('region_id') || '013';
+document.getElementById('quick-region').value = currentRegion;
+</script>

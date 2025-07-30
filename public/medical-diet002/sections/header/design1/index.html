@@ -1,0 +1,78 @@
+<!-- ヘッダーセクション Design 1 -->
+<header class="site-header">
+    <div class="header-content">
+        <div class="logo-section">
+            <a href="/" class="logo-link">
+                <div class="logo-main">
+                    <span class="logo-icon"><img src="/images/favicon.png" alt="医療ダイエット比較.com" style="width: 20px; height: 20px; vertical-align: middle;"></span>
+                    <h1 class="site-logo">医療ダイエット比較.com</h1>
+                </div>
+            </a>
+        </div>
+        <nav class="header-nav">
+            <button class="hamburger-menu" id="hamburger-menu" aria-label="メニュー">
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+                <span class="hamburger-line"></span>
+            </button>
+        </nav>
+    </div>
+</header>
+
+<!-- サイドバーメニュー -->
+<div class="sidebar-menu" id="sidebar-menu">
+    <div class="sidebar-header">
+        <h2>メニュー</h2>
+        <button class="close-menu" id="close-menu" aria-label="メニューを閉じる">×</button>
+    </div>
+    <div class="sidebar-content">
+        <div class="sidebar-section">
+            <label for="sidebar-region-select">地域を選択:</label>
+            <select id="sidebar-region-select" class="region-select">
+                <option value="013">東京</option>
+                <option value="027">大阪</option>
+                <option value="040">福岡</option>
+                <option value="023">愛知</option>
+                <option value="014">神奈川</option>
+            </select>
+        </div>
+        
+        <div class="sidebar-section">
+            <label for="sidebar-clinic-search">クリニック名で検索:</label>
+            <input type="text" id="sidebar-clinic-search" class="clinic-search" placeholder="例: ディオクリニック">
+            <div id="sidebar-search-results"></div>
+        </div>
+        
+        <div class="sidebar-links">
+            <a href="#ranking">ランキング</a>
+            <a href="#comparison">比較表</a>
+            <a href="#details">詳細情報</a>
+            <a href="/search-results/">詳細検索</a>
+        </div>
+    </div>
+</div>
+
+<script>
+// ハンバーガーメニューの動作
+document.getElementById('hamburger-menu').addEventListener('click', function() {
+    document.getElementById('sidebar-menu').classList.add('active');
+    document.body.style.overflow = 'hidden';
+});
+
+document.getElementById('close-menu').addEventListener('click', function() {
+    document.getElementById('sidebar-menu').classList.remove('active');
+    document.body.style.overflow = '';
+});
+
+// 地域選択の処理
+document.getElementById('sidebar-region-select').addEventListener('change', function() {
+    const regionId = this.value;
+    const url = new URL(window.location);
+    url.searchParams.set('region_id', regionId);
+    window.location.href = url.toString();
+});
+
+// 現在の地域を選択
+const currentRegion = new URLSearchParams(window.location.search).get('region_id') || '013';
+document.getElementById('sidebar-region-select').value = currentRegion;
+</script>
