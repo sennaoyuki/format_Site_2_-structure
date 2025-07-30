@@ -102,8 +102,26 @@ class SectionLoader {
     async loadAllSections() {
         const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details'];
         
-        for (const section of sections) {
+        // ヘッダーとヒーローセクションを読み込み
+        await this.loadSection('header');
+        await this.loadSection('hero');
+        
+        // メインセクションの開始タグを追加
+        const mainElement = document.createElement('main');
+        
+        // 残りのセクションをmainタグ内に配置
+        for (const section of ['ranking', 'tips', 'comparison', 'details']) {
+            const sectionContainer = document.getElementById(`${section}-section`);
+            if (sectionContainer) {
+                mainElement.appendChild(sectionContainer);
+            }
             await this.loadSection(section);
+        }
+        
+        // mainタグをcontainerに追加
+        const container = document.querySelector('.container');
+        if (container && !container.querySelector('main')) {
+            container.appendChild(mainElement);
         }
     }
     
