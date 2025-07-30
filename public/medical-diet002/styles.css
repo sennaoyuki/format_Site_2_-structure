@@ -6157,3 +6157,81 @@ section.clinic-rankings .ranking-header-banner {
         min-width: auto;
     }
 }
+
+/* Tips比較表のスタイル */
+.tips-comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.tips-comparison-table th,
+.tips-comparison-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.tips-comparison-table th {
+    background: #f5f5f5;
+    font-weight: 600;
+    color: #333;
+}
+
+.tips-comparison-table .table-header th {
+    background: #2c5aa0;
+    color: #fff;
+}
+
+.tips-comparison-table .row-header {
+    background: #f5f5f5;
+    font-weight: 600;
+}
+
+.tips-comparison-table tbody tr:nth-child(even) {
+    background: #fafafa;
+}
+
+/* メリット・デメリット表のスタイル */
+.merit-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.merit-table th,
+.merit-table td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #e0e0e0;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.merit-table .merit-header {
+    background: #2c5aa0;
+    color: #fff;
+    font-weight: 600;
+}
+
+.merit-table .merit-category {
+    background: #f5f5f5;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.merit-table .merit-content ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.merit-table .merit-content li {
+    margin: 8px 0;
+}
