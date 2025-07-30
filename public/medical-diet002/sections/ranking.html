@@ -30,8 +30,26 @@
             console.log('Ranking iframe received message:', e.data);
             if (e.data.action === 'update-ranking') {
                 console.log('Updating ranking with data');
-                document.getElementById('ranking-list').innerHTML = e.data.rankingHtml;
-                document.getElementById('rank-region-name').textContent = e.data.regionName;
+                const rankingList = document.getElementById('ranking-list');
+                const regionName = document.getElementById('rank-region-name');
+                
+                console.log('ranking-list element:', rankingList);
+                console.log('rank-region-name element:', regionName);
+                console.log('HTML length:', e.data.rankingHtml ? e.data.rankingHtml.length : 0);
+                
+                if (rankingList) {
+                    rankingList.innerHTML = e.data.rankingHtml;
+                    console.log('Ranking HTML updated');
+                } else {
+                    console.error('ranking-list element not found!');
+                }
+                
+                if (regionName) {
+                    regionName.textContent = e.data.regionName;
+                    console.log('Region name updated to:', e.data.regionName);
+                } else {
+                    console.error('rank-region-name element not found!');
+                }
             }
         });
     </script>

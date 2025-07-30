@@ -25,11 +25,32 @@
     </section>
 
     <script>
+        console.log('Details iframe script loaded');
         // 親ウィンドウから詳細データを受け取る
         window.addEventListener('message', function(e) {
+            console.log('Details iframe received message:', e.data);
             if (e.data.action === 'update-details') {
-                document.getElementById('clinic-details-list').innerHTML = e.data.detailsHtml;
-                document.getElementById('detail-region-name').textContent = e.data.regionName;
+                console.log('Updating details with data');
+                const detailsList = document.getElementById('clinic-details-list');
+                const regionName = document.getElementById('detail-region-name');
+                
+                console.log('clinic-details-list element:', detailsList);
+                console.log('detail-region-name element:', regionName);
+                console.log('HTML length:', e.data.detailsHtml ? e.data.detailsHtml.length : 0);
+                
+                if (detailsList) {
+                    detailsList.innerHTML = e.data.detailsHtml;
+                    console.log('Details HTML updated');
+                } else {
+                    console.error('clinic-details-list element not found!');
+                }
+                
+                if (regionName) {
+                    regionName.textContent = e.data.regionName;
+                    console.log('Region name updated to:', e.data.regionName);
+                } else {
+                    console.error('detail-region-name element not found!');
+                }
             }
         });
     </script>
