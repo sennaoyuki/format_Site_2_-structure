@@ -16,18 +16,20 @@
     // イベントをGTMに送信
     function trackEvent(eventCategory, eventAction, eventLabel, eventValue) {
         if (typeof window.dataLayer !== 'undefined') {
+            // GA4形式のイベント送信
             window.dataLayer.push({
-                'event': 'customEvent',
-                'eventCategory': eventCategory,
-                'eventAction': eventAction,
-                'eventLabel': eventLabel || undefined,
-                'eventValue': eventValue || undefined
+                'event': eventAction.toLowerCase().replace(/\s+/g, '_'), // イベント名をGA4形式に変換
+                'event_category': eventCategory,
+                'event_label': eventLabel || undefined,
+                'value': eventValue || undefined,
+                // カスタムイベントも同時に送信（GTMトリガー用）
+                'custom_event_trigger': 'customEvent'
             });
             
             // デバッグ用コンソール出力
             console.log('Event tracked:', {
+                event: eventAction.toLowerCase().replace(/\s+/g, '_'),
                 category: eventCategory,
-                action: eventAction,
                 label: eventLabel,
                 value: eventValue
             });
