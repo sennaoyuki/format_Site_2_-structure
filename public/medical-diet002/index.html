@@ -16,48 +16,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="styles.css?v=2025072201">
     <link rel="icon" type="image/png" href="../images/favicon.png">
-    
-    <style>
-        /* iframeのスタイル */
-        .section-iframe {
-            width: 100%;
-            border: none;
-            overflow: hidden;
-            display: block;
-        }
-        
-        /* 各セクションのコンテナ */
-        .iframe-container {
-            width: 100%;
-            max-width: 768px;
-            margin: 0 auto;
-        }
-        
-        /* メインコンテナ */
-        .main-container {
-            background-color: #fafafa;
-            min-height: 100vh;
-        }
-        
-        /* ローディングインジケーター */
-        .loading {
-            text-align: center;
-            padding: 20px;
-            color: #666;
-        }
-        
-        /* iframeロード中の表示 */
-        .iframe-loading {
-            background: #f0f0f0;
-            min-height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-        }
-    </style>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -65,93 +26,140 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     
-    <div class="main-container">
-        <!-- 1. ヘッダーセクション -->
-        <div class="iframe-container">
-            <div class="iframe-loading" id="header-loading">読み込み中...</div>
-            <iframe id="header-iframe" 
-                    src="sections/header.html" 
-                    class="section-iframe"
-                    style="height: 60px; display: none;"
-                    title="ヘッダー">
-            </iframe>
-        </div>
-
-        <!-- 2. メインビジュアルセクション -->
-        <div class="iframe-container">
-            <div class="iframe-loading" id="hero-loading">読み込み中...</div>
-            <iframe id="hero-iframe" 
-                    src="sections/hero.html" 
-                    class="section-iframe"
-                    style="height: 460px; display: none;"
-                    title="メインビジュアル">
-            </iframe>
-        </div>
-
-        <!-- 3. ランキングセクション -->
-        <div class="iframe-container">
-            <div class="iframe-loading" id="ranking-loading">読み込み中...</div>
-            <iframe id="ranking-iframe" 
-                    src="sections/ranking.html" 
-                    class="section-iframe"
-                    style="height: 800px; display: none;"
-                    title="ランキング">
-            </iframe>
-        </div>
-
-        <!-- 4. Tipsセクション -->
-        <div class="iframe-container">
-            <div class="iframe-loading" id="tips-loading">読み込み中...</div>
-            <iframe id="tips-iframe" 
-                    src="sections/tips.html" 
-                    class="section-iframe"
-                    style="height: 400px; display: none;"
-                    title="Tips">
-            </iframe>
-        </div>
-
-        <!-- 5. 比較表セクション -->
-        <div class="iframe-container">
-            <div class="iframe-loading" id="comparison-loading">読み込み中...</div>
-            <iframe id="comparison-iframe" 
-                    src="sections/comparison.html" 
-                    class="section-iframe"
-                    style="height: 600px; display: none;"
-                    title="比較表">
-            </iframe>
-        </div>
-
-        <!-- 6. 詳細セクション -->
-        <div class="iframe-container">
-            <div class="iframe-loading" id="details-loading">読み込み中...</div>
-            <iframe id="details-iframe" 
-                    src="sections/details.html" 
-                    class="section-iframe"
-                    style="height: 2000px; display: none;"
-                    title="詳細情報">
-            </iframe>
-        </div>
-
-        <!-- 7. 医療情報コラムセクション（通常のHTML） -->
-        <section class="medical-columns-section">
-            <div class="columns-container">
-                <!-- コラムの内容は必要に応じて追加 -->
-                <p style="text-align: center; padding: 40px;">医療情報コラムセクション</p>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="site-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="/" class="logo-link">
+                        <div class="logo-main">
+                            <span class="logo-icon"><img src="/images/favicon.png" alt="医療ダイエット比較.com" style="width: 20px; height: 20px; vertical-align: middle;"></span>
+                            <h1 class="site-logo">医療ダイエット比較.com</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="header-nav">
+                    <button class="hamburger-menu" id="hamburger-menu" aria-label="メニュー">
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                        <span class="hamburger-line"></span>
+                    </button>
+                </nav>
             </div>
+        </header>
+
+        <!-- メインビジュアル -->
+        <section class="hero-section">
+            <div class="hero-image-wrapper">
+                <img src="../images/MV2.webp" alt="医療ダイエットランキング - コスパ×通いやすさで選ぶ" class="hero-image" loading="eager" fetchpriority="high" decoding="async" width="768" height="432">
+                <div id="mv-region-name" style="position:absolute;top: 8%;left: 1%;width: clamp(60px, 15vw, 115px);text-align: center;color: #808080;font-size: clamp(14px, 3.5vw, 27px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
+            </div>
+            <div style="text-align: right; padding: 5px 20px; color: #808080; font-size: 10px; font-weight: normal; max-width: 768px; margin: 0 auto;">PR：医療法人社団　正恵会</div>
         </section>
 
-        <!-- 8. フッター（通常のHTML） -->
+        <main>
+            <!-- ランキング表示セクション -->
+            <section class="clinic-rankings">
+                <div class="ranking-header-banner">
+                    <img src="/images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">                    
+                </div>
+                <div id="rank-region-name" style="position:absolute;top: 6%;left: 8%;text-align: center;color: #ffffff;font-size: clamp(16px, 5.2vw, 38px);font-weight: 600;z-index:10;pointer-events:none;">東京</div>
+                <div id="ranking-list" class="ranking-container">
+                    <!-- ランキングはJavaScriptで動的に生成 -->
+                </div>
+            </section>
+
+            <!-- Tipsセクション -->
+            <div class="container tips-container" style="max-width: 768px; margin: 20px auto; padding: 0 10px; position: relative;">
+                <div style="width: 100%;">
+                    <div style="display: flex; flex-direction: column;">
+                        <!-- タブナビゲーション -->
+                        <div class="tabs" style="display: flex; gap: 5px; margin-bottom: 0;">
+                            <div class="tab active" data-tab="0" style="flex: 1; background-color: #2CC7C5; color: white; padding: 10px 15px; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; font-weight: 600; transition: all 0.3s ease; font-size: 14px; display: flex; align-items: center; justify-content: center;">
+                                <span class="tab-text">医療痩身の効果</span>
+                            </div>
+                            <div class="tab" data-tab="1" style="flex: 1; background-color: #F1F1F1; color: #4C4C4C; padding: 10px 15px; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; font-weight: 600; transition: all 0.3s ease; font-size: 14px; display: flex; align-items: center; justify-content: center;">
+                                <span class="tab-text">クリニック選び</span>
+                            </div>
+                            <div class="tab" data-tab="2" style="flex: 1; background-color: #F1F1F1; color: #4C4C4C; padding: 10px 15px; text-align: center; cursor: pointer; border-radius: 4px 4px 0 0; font-weight: 600; transition: all 0.3s ease; font-size: 14px; display: flex; align-items: center; justify-content: center;">
+                                <span class="tab-text">今がおすすめ</span>
+                            </div>
+                        </div>
+
+                        <!-- タブコンテンツコンテナ -->
+                        <div class="tab-contents" style="position: relative; background-color: #FFFFFF; border: 1px solid #E0E0E0; border-radius: 0 0 4px 4px; padding: 15px;">
+                            <!-- タブコンテンツ -->
+                            <div class="tab-content active" data-tab="0" style="display: block;">
+                                <p>本気で痩せたいなら医療痩身が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させるので痩せる仕組みで、リバウンドしにくい！と今人気急上昇中のダイエット法！</p>
+                            </div>
+                            <div class="tab-content" data-tab="1" style="display: none;">
+                                <p>クリニック選びの失敗が理想の体型実現の失敗につながります。強引な勧誘は危険信号。医師が直接診察し、アフターケアが充実、料金を明確に説明する医院を選びましょう。</p>
+                            </div>
+                            <div class="tab-content" data-tab="2" style="display: none;">
+                                <p>夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 比較表セクション -->
+            <section class="comparison-section">
+                <div class="comparison-header">
+                    <h2 class="comparison-title"><span id="comparison-region-name">関東</span>で人気の医療ダイエット</h2>
+                    <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
+                </div>
+                
+                <div class="comparison-table" id="comparison-tab-menu" data-active-tab="tab1">
+                    <div class="comparison-tab-menu">
+                        <div class="comparison-tab-menu-item tab-active" data-tab="tab1">総合</div>
+                        <div class="comparison-tab-menu-item" data-tab="tab2">施術内容</div>
+                        <div class="comparison-tab-menu-item" data-tab="tab3">サービス</div>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>クリニック</th>
+                                <th>総合評価</th>
+                                <th>実績</th>
+                                <th>特典</th>
+                                <th class="th-none" style="display: none;">人気プラン</th>
+                                <th class="th-none" style="display: none;">医療機器</th>
+                                <th class="th-none" style="display: none;">注射治療</th>
+                                <th class="th-none" style="display: none;">食事指導</th>
+                                <th class="th-none" style="display: none;">モニター割</th>
+                                <th class="th-none" style="display: none;">返金保証</th>
+                                <th>公式サイト</th>
+                            </tr>
+                        </thead>
+                        <tbody id="comparison-tbody">
+                            <!-- 比較表はJavaScriptで動的に生成 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 案件詳細セクション -->
+            <section class="clinic-details-section">
+                <div class="details-header-banner">
+                    <img src="/images/details_header_bannar3.webp" alt="コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3" class="details-banner-image">
+                    <div id="detail-region-name" style="position:absolute;top: 54%;left: 3%;text-align: center;color: #ffffff;font-size: clamp(16px, 4vw, 31px);font-weight: 600;z-index:10;pointer-events:none;">東京</div>
+                </div>
+                
+                <div id="clinic-details-list" class="clinic-details-container">
+                    <!-- 詳細コンテンツはJavaScriptで動的に生成 -->
+                </div>
+            </section>
+        </main>
+
+        <!-- フッター -->
         <div id="footer">
             <div class="footer_contents">
                 <h4><a href="/">医療ダイエット比較.com</a></h4>
-                
                 <ul>
                     <h5>人気クリニック</h5>
-                    <li><a href="#clinic1">品川美容外科</a></li>
-                    <li><a href="#clinic2">湘南美容クリニック</a></li>
-                    <li><a href="#clinic3">TCB東京中央美容外科</a></li>
+                    <!-- JavaScriptで動的に生成 -->
                 </ul>
-                                
                 <ul>
                     <h5>運営</h5>
                     <li><a href="/company/" class="footer-page-link">運営者情報</a></li>
@@ -159,16 +167,14 @@
                     <li><a href="/disclaimer/" class="footer-page-link">免責事項</a></li>
                     <li><a href="mailto:clinic.hikaku.review@gmail.com">お問い合わせ</a></li>
                 </ul>
-                
             </div>
-            
             <div class="footer-bottom">
                 <p class="copyright">© 2025 医療ダイエット比較.com</p>
                 <p class="disclaimer">※本サイトの情報は参考程度に留め、必ず医療機関にご相談ください。</p>
             </div>
         </div>
 
-        <!-- サイドバー、モーダルなど -->
+        <!-- サイドバーメニュー -->
         <div class="sidebar-overlay" id="sidebar-overlay"></div>
         <div class="sidebar-menu" id="sidebar-menu">
             <div class="sidebar-header">
@@ -182,317 +188,97 @@
                         <!-- 地域オプションはJavaScriptで動的に生成 -->
                     </select>
                 </div>
+                <div class="sidebar-filter-group">
+                    <label for="sidebar-clinic-search" class="sidebar-filter-label">クリニック名検索</label>
+                    <input type="text" id="sidebar-clinic-search" class="sidebar-search-input" placeholder="クリニック名を入力">
+                </div>
                 <div class="sidebar-search-button">
                     <a href="search-results/" class="sidebar-search-link">詳細検索ページへ</a>
                 </div>
             </div>
         </div>
+
+        <div id="error-message" class="error-message" style="display: none;">
+            <p id="error-text"></p>
+        </div>
     </div>
 
     <script src="app.js?v=2025072201"></script>
     <script>
-        // 新しいシンプルな実装
-        const IframeManager = {
-            // 状態管理
-            state: {
-                appReady: false,
-                iframesReady: {},
-                dataSent: false,
-                requiredIframes: ['header-iframe', 'hero-iframe', 'ranking-iframe', 'tips-iframe', 'comparison-iframe', 'details-iframe']
-            },
+        document.addEventListener('DOMContentLoaded', function() {
+            // Tips section tab functionality
+            const tabs = document.querySelectorAll('.tips-container .tab');
+            const tabContents = document.querySelectorAll('.tips-container .tab-content');
 
-            // 初期化
-            init() {
-                console.log('IframeManager initialized');
-                this.setupEventListeners();
-                this.setupIframeLoaders();
-            },
-
-            // イベントリスナーの設定
-            setupEventListeners() {
-                // app.js初期化完了イベント
-                window.addEventListener('app-initialized', () => {
-                    console.log('App initialized event received');
-                    this.state.appReady = true;
-                    this.checkAndSendData();
-                });
-
-                // iframe準備完了メッセージ
-                window.addEventListener('message', (e) => {
-                    if (e.data.action === 'iframe-ready') {
-                        console.log('Iframe ready:', e.data.iframeId);
-                        this.state.iframesReady[e.data.iframeId] = true;
-                        this.checkAndSendData();
-                    } else if (e.data.action === 'toggle-menu') {
-                        this.toggleMenu();
-                    }
-                });
-            },
-
-            // iframeロード処理の設定
-            setupIframeLoaders() {
-                this.state.requiredIframes.forEach(iframeId => {
-                    const iframe = document.getElementById(iframeId);
-                    const loadingId = iframeId.replace('-iframe', '-loading');
-                    const loading = document.getElementById(loadingId);
-
-                    if (!iframe || !loading) return;
-
-                    iframe.onload = () => {
-                        console.log('Iframe loaded:', iframeId);
-                        loading.style.display = 'none';
-                        iframe.style.display = 'block';
-                        
-                        // 高さ自動調整
-                        try {
-                            const height = iframe.contentWindow.document.body.scrollHeight;
-                            iframe.style.height = height + 'px';
-                        } catch (e) {
-                            // Cross-origin制限の場合は無視
+            tabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabIndex = this.getAttribute('data-tab');
+                    
+                    tabs.forEach(t => {
+                        t.classList.remove('active');
+                        t.style.backgroundColor = '#F1F1F1';
+                        t.style.color = '#4C4C4C';
+                    });
+                    this.classList.add('active');
+                    this.style.backgroundColor = '#2CC7C5';
+                    this.style.color = 'white';
+                    
+                    tabContents.forEach(content => {
+                        if (content.getAttribute('data-tab') === tabIndex) {
+                            content.style.display = 'block';
+                        } else {
+                            content.style.display = 'none';
                         }
-                    };
-
-                    iframe.onerror = () => {
-                        console.error('Failed to load iframe:', iframeId);
-                        loading.textContent = 'エラー: 読み込みに失敗しました';
-                    };
+                    });
                 });
-            },
+            });
 
-            // 全ての準備が整ったかチェックしてデータ送信
-            checkAndSendData() {
-                // すでに送信済みならスキップ
-                if (this.state.dataSent) return;
-
-                // app.jsが準備完了か
-                if (!this.state.appReady) {
-                    console.log('App not ready yet');
-                    return;
-                }
-
-                // 必要なiframeが全て準備完了か
-                const criticalIframes = ['ranking-iframe', 'comparison-iframe', 'details-iframe'];
-                const allCriticalIframesReady = criticalIframes.every(id => this.state.iframesReady[id]);
+            // 比較表のタブ切り替え機能
+            const tabMenuItems = document.querySelectorAll('.comparison-tab-menu-item');
+            const table = document.querySelector('.comparison-table table');
+            
+            function updateTableColumns(tabType) {
+                if (!table) return;
                 
-                if (!allCriticalIframesReady) {
-                    console.log('Critical iframes not ready yet');
-                    return;
-                }
-
-                // 全条件が揃ったのでデータ送信
-                console.log('All conditions met, sending data');
-                this.state.dataSent = true;
-                this.sendDataToIframes();
-            },
-
-            // データをiframeに送信
-            sendDataToIframes() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const regionId = urlParams.get('region_id') || '013';
-
-                if (!window.app || !window.app.dataManager) {
-                    console.error('App or DataManager not available');
-                    return;
-                }
-
-                const region = window.app.dataManager.getRegionById(regionId);
-                const ranking = window.app.dataManager.getRankingByRegionId(regionId);
-                const clinics = window.app.dataManager.getAllClinics();
-
-                console.log('Data check:', { region, ranking: !!ranking, clinicsCount: clinics.length });
-
-                if (!region || !ranking) {
-                    console.error('Required data not found');
-                    return;
-                }
-
-                // 地域名を全iframeに送信
-                this.updateRegionInIframes(region.name);
-
-                // ランキングデータ送信
-                const rankingIframe = document.getElementById('ranking-iframe');
-                if (rankingIframe && rankingIframe.contentWindow) {
-                    const rankingHtml = this.generateRankingHtml(clinics, ranking);
-                    rankingIframe.contentWindow.postMessage({
-                        action: 'update-ranking',
-                        rankingHtml: rankingHtml,
-                        regionName: region.name
-                    }, '*');
-                }
-
-                // 比較表データ送信
-                const comparisonIframe = document.getElementById('comparison-iframe');
-                if (comparisonIframe && comparisonIframe.contentWindow) {
-                    const comparisonHtml = this.generateComparisonHtml(clinics, ranking);
-                    comparisonIframe.contentWindow.postMessage({
-                        action: 'update-comparison',
-                        comparisonHtml: comparisonHtml,
-                        regionName: region.name
-                    }, '*');
-                }
-
-                // 詳細データ送信
-                const detailsIframe = document.getElementById('details-iframe');
-                if (detailsIframe && detailsIframe.contentWindow) {
-                    const detailsHtml = this.generateDetailsHtml(clinics, ranking, regionId);
-                    detailsIframe.contentWindow.postMessage({
-                        action: 'update-details',
-                        detailsHtml: detailsHtml,
-                        regionName: region.name
-                    }, '*');
-                }
-            },
-
-            // 地域名を各iframeに送信
-            updateRegionInIframes(regionName) {
-                const targetIframes = ['hero-iframe', 'ranking-iframe', 'comparison-iframe', 'details-iframe'];
-                targetIframes.forEach(id => {
-                    const iframe = document.getElementById(id);
-                    if (iframe && iframe.contentWindow) {
-                        iframe.contentWindow.postMessage({
-                            action: 'update-region',
-                            regionName: regionName
-                        }, '*');
-                    }
+                const tableContainer = document.querySelector('.comparison-table');
+                const headers = table.querySelectorAll('th');
+                const rows = table.querySelectorAll('tbody tr');
+                
+                const tabColumnsMap = {
+                    'tab1': [0, 1, 2, 3, 10],
+                    'tab2': [0, 4, 5, 6, 10],
+                    'tab3': [0, 7, 8, 9, 10]
+                };
+                
+                const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
+                
+                tableContainer.setAttribute('data-active-tab', tabType);
+                
+                requestAnimationFrame(() => {
+                    headers.forEach((th, index) => {
+                        th.style.display = showIndexes.includes(index) ? '' : 'none';
+                    });
+                    
+                    rows.forEach(row => {
+                        const cells = row.querySelectorAll('td');
+                        cells.forEach((td, index) => {
+                            td.style.display = showIndexes.includes(index) ? '' : 'none';
+                        });
+                    });
                 });
-            },
-
-            // ランキングHTML生成
-            generateRankingHtml(clinics, ranking) {
-                if (!ranking || !ranking.ranks) return '';
-                
-                const ranksArray = Array.isArray(ranking.ranks) ? ranking.ranks : Object.values(ranking.ranks);
-                const clinicRanks = ranksArray.slice(0, 5);
-                
-                let html = '';
-                clinicRanks.forEach((clinicId, index) => {
-                    const clinic = clinics.find(c => c.id === clinicId);
-                    if (!clinic) return;
-                    
-                    const rank = index + 1;
-                    const crownClass = rank === 1 ? 'gold' : rank === 2 ? 'silver' : rank === 3 ? 'bronze' : '';
-                    
-                    html += `
-                        <div class="ranking-item ranking${rank}" data-clinic-id="${clinic.id}">
-                            <div class="rank-number">
-                                <div class="rank-badge ${crownClass}">
-                                    ${rank === 1 ? '👑' : rank}${rank === 1 ? '' : '位'}
-                                </div>
-                            </div>
-                            <div class="clinic-info">
-                                <div class="clinic-header">
-                                    <img src="../images/clinics/${clinic.code}/${clinic.code}-logo.webp" alt="${clinic.name}" class="clinic-logo">
-                                    <h3 class="clinic-name">${clinic.name}</h3>
-                                </div>
-                                <div class="clinic-details">
-                                    <p class="clinic-catchphrase">${clinic.catchphrase || ''}</p>
-                                    <div class="rating-section">
-                                        <span class="rating-score">${clinic.rating}</span>
-                                        <div class="star-rating" data-rate="${clinic.rating}"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                return html;
-            },
-
-            // 比較表HTML生成
-            generateComparisonHtml(clinics, ranking) {
-                if (!ranking || !ranking.ranks) return '';
-                
-                const ranksArray = Array.isArray(ranking.ranks) ? ranking.ranks : Object.values(ranking.ranks);
-                const clinicRanks = ranksArray.slice(0, 5);
-                
-                let html = '';
-                clinicRanks.forEach((clinicId) => {
-                    const clinic = clinics.find(c => c.id === clinicId);
-                    if (!clinic) return;
-                    
-                    html += `
-                        <tr>
-                            <td class="ranking-table_td1">
-                                <img src="../images/clinics/${clinic.code}/${clinic.code}-logo.webp" alt="${clinic.name}" width="80">
-                                <a href="#clinic${clinic.id}" class="clinic-link">${clinic.name}</a>
-                            </td>
-                            <td class="">
-                                <span class="ranking_evaluation">${clinic.rating}</span><br>
-                                <span class="star5_rating" data-rate="${clinic.rating}"></span>
-                            </td>
-                            <td class="">${clinic.feature1 || ''}</td>
-                            <td class="">${clinic.feature2 || ''}</td>
-                            <td>
-                                <a class="link_btn" href="/go/${clinic.code}/" target="_blank">公式サイト &gt;</a>
-                                <a class="detail_btn" href="#clinic${clinic.id}">詳細をみる</a>
-                            </td>
-                        </tr>
-                    `;
-                });
-                
-                return html;
-            },
-
-            // 詳細HTML生成
-            generateDetailsHtml(clinics, ranking, regionId) {
-                if (!ranking || !ranking.ranks) return '';
-                
-                const ranksArray = Array.isArray(ranking.ranks) ? ranking.ranks : Object.values(ranking.ranks);
-                const clinicRanks = ranksArray.slice(0, 5);
-                
-                let html = '';
-                clinicRanks.forEach((clinicId, index) => {
-                    const clinic = clinics.find(c => c.id === clinicId);
-                    if (!clinic) return;
-                    
-                    const rank = index + 1;
-                    
-                    html += `
-                        <div class="clinic-detail" id="clinic${clinic.id}">
-                            <div class="detail-header">
-                                <div class="detail-rank-badge ranking${rank}">${rank}位</div>
-                                <h2 class="detail-clinic-name">${clinic.name}</h2>
-                            </div>
-                            <div class="detail-content">
-                                <img src="../images/clinics/${clinic.code}/${clinic.code}_detail_bnr.webp" alt="${clinic.name}" class="detail-banner">
-                                <div class="detail-description">
-                                    <p>${clinic.description || ''}</p>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                return html;
-            },
-
-            // メニュー切り替え
-            toggleMenu() {
-                const overlay = document.getElementById('sidebar-overlay');
-                const menu = document.getElementById('sidebar-menu');
-                if (overlay && menu) {
-                    overlay.classList.toggle('active');
-                    menu.classList.toggle('active');
-                }
             }
-        };
-
-        // DOMContentLoaded時に初期化
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOMContentLoaded - Initializing IframeManager');
-            IframeManager.init();
-        });
-
-        // サイドバーのクローズ処理
-        document.getElementById('close-sidebar')?.addEventListener('click', function() {
-            document.getElementById('sidebar-overlay').classList.remove('active');
-            document.getElementById('sidebar-menu').classList.remove('active');
-        });
-
-        document.getElementById('sidebar-overlay')?.addEventListener('click', function() {
-            this.classList.remove('active');
-            document.getElementById('sidebar-menu').classList.remove('active');
+            
+            tabMenuItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    tabMenuItems.forEach(tab => tab.classList.remove('tab-active'));
+                    this.classList.add('tab-active');
+                    const tabType = this.getAttribute('data-tab');
+                    updateTableColumns(tabType);
+                });
+            });
+            
+            // 初期表示
+            updateTableColumns('tab1');
         });
     </script>
 </body>
