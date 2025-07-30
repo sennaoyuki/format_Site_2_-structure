@@ -60,6 +60,62 @@
         /* Font loading optimization */
         .fonts-loaded body{font-family:'Noto Sans JP',sans-serif}
         
+        /* CASEセクションのスタイル */
+        .client_archive .case {
+            background: #fff;
+            border-radius: 5px;
+            border: 1px solid #ff7094;
+            margin: 8px 0;
+            overflow: hidden;
+        }
+        
+        .client_archive .case .heading {
+            color: #fff;
+            font-weight: 500;
+            font-size: 17px;
+            font-size: 1.7rem;
+            text-align: center;
+            background-color: #ff7094;
+            padding: 6px 0;
+            border-radius: 0;
+        }
+        
+        .client_archive .case .image {
+            text-align: center;
+            padding: 10px 15px 0;
+        }
+        
+        .client_archive .case .image p {
+            font-size: 12px;
+            font-size: 1.2rem;
+            text-align: left;
+            padding-top: 5px;
+        }
+        
+        .client_archive .case .slick-dots {
+            bottom: -25px;
+        }
+        
+        .slick-dotted.slick-slider {
+            margin-bottom: 30px;
+        }
+        
+        .slick-slider .slick-track, .slick-slider .slick-list {
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        
+        .slick-list {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
         /* 迷ったら1位クリニックセクションのスタイル */
         .first-choice-recommendation-section .cta-button:hover {
             transform: translateY(-2px);
@@ -1346,24 +1402,32 @@ text-align: center;
             
             // CASEセクションを作成
             const caseHtml = `
-                <div class="case" style="margin: 30px 20px;">
-                    <div class="heading" style="background: linear-gradient(135deg, #2CC7C5, #20A19A); color: white; padding: 15px; text-align: center; border-radius: 8px 8px 0 0; font-weight: bold; font-size: 18px; box-shadow: 0 2px 10px rgba(44, 199, 197, 0.3);">
-                        <span>症例実績</span>
-                    </div>
-                    <div class="image" style="background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; padding: 20px;">
-                        <div class="case-slider" id="case-slider" style="position: relative;">
-                            <div class="case-slides" style="display: flex; transition: transform 0.3s ease; width: ${cases.length * 100}%;">
-                                ${cases.map((caseItem, index) => `
-                                    <div class="case-slide" style="width: ${100 / cases.length}%; padding: 0 10px; box-sizing: border-box;">
-                                        <img src="${caseItem.image}" alt="症例${index + 1}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;" onerror="this.src='/images/placeholder-case.png'">
-                                        <p style="font-size: 12px; line-height: 1.4; color: #666; margin: 0; padding: 10px; background: #f9f9f9; border-radius: 6px;">${caseItem.description}</p>
+                <div class="client_archive">
+                    <h4 class="section-title-case" style="color: #333; font-size: 24px; font-weight: bold; text-align: center; margin: 30px 0 20px; padding: 15px 0; border-bottom: 3px solid #ff7094; position: relative;">
+                        CASE
+                        <span style="position: absolute; bottom: -3px; left: 50%; transform: translateX(-50%); width: 60px; height: 3px; background: #ff7094;"></span>
+                    </h4>
+                    <div class="case">
+                        <div class="heading">症例実績</div>
+                        <div class="image">
+                            <div class="autoplay slick-initialized slick-slider slick-dotted">
+                                <div class="slick-list draggable">
+                                    <div class="slick-track" style="opacity: 1; width: ${cases.length * 100}%; transform: translate3d(0, 0, 0);">
+                                        ${cases.map((caseItem, index) => `
+                                            <div class="slick-slide ${index === 0 ? 'slick-current slick-active' : ''}" data-slick-index="${index}" style="width: ${100 / cases.length}%;">
+                                                <img src="${caseItem.image}" alt="症例${index + 1}" style="width: 100%; height: auto;" onerror="this.src='/images/placeholder-case.png'">
+                                                <p>${caseItem.description}</p>
+                                            </div>
+                                        `).join('')}
                                     </div>
-                                `).join('')}
-                            </div>
-                            <div class="case-dots" style="text-align: center; margin-top: 20px;">
-                                ${cases.map((_, index) => `
-                                    <button class="case-dot ${index === 0 ? 'active' : ''}" data-slide="${index}" style="width: 12px; height: 12px; border-radius: 50%; border: none; margin: 0 5px; background: ${index === 0 ? '#2CC7C5' : '#ddd'}; cursor: pointer; transition: all 0.3s ease;"></button>
-                                `).join('')}
+                                </div>
+                                <ul class="slick-dots" style="display: block;">
+                                    ${cases.map((_, index) => `
+                                        <li class="${index === 0 ? 'slick-active' : ''}" role="presentation">
+                                            <button type="button" role="tab" data-slide="${index}" aria-label="${index + 1} of ${cases.length}" ${index === 0 ? 'aria-selected="true" tabindex="0"' : 'tabindex="-1"'}>${index + 1}</button>
+                                        </li>
+                                    `).join('')}
+                                </ul>
                             </div>
                         </div>
                     </div>
@@ -1391,7 +1455,7 @@ text-align: center;
             
             if (insertTarget) {
                 // 既存のCASEセクションがあれば削除
-                const existingCase = document.querySelector('.case');
+                const existingCase = document.querySelector('.client_archive');
                 if (existingCase) {
                     existingCase.remove();
                 }
@@ -1406,11 +1470,12 @@ text-align: center;
 
         // CASEスライダーの初期化
         function initCaseSlider() {
-            const slider = document.getElementById('case-slider');
-            if (!slider) return;
+            const slickSlider = document.querySelector('.client_archive .slick-slider');
+            if (!slickSlider) return;
             
-            const slides = slider.querySelector('.case-slides');
-            const dots = slider.querySelectorAll('.case-dot');
+            const slickTrack = slickSlider.querySelector('.slick-track');
+            const slides = slickSlider.querySelectorAll('.slick-slide');
+            const dots = slickSlider.querySelectorAll('.slick-dots button');
             let currentSlide = 0;
             
             // ドット機能
@@ -1423,17 +1488,27 @@ text-align: center;
             
             // 自動スライド
             setInterval(() => {
-                currentSlide = (currentSlide + 1) % dots.length;
+                currentSlide = (currentSlide + 1) % slides.length;
                 updateSlider();
             }, 5000);
             
             function updateSlider() {
-                const translateX = -currentSlide * (100 / dots.length);
-                slides.style.transform = `translateX(${translateX}%)`;
+                const slideWidth = 100 / slides.length;
+                const translateX = -currentSlide * slideWidth;
+                slickTrack.style.transform = `translate3d(${translateX}%, 0, 0)`;
                 
+                // スライドのアクティブ状態を更新
+                slides.forEach((slide, index) => {
+                    slide.classList.toggle('slick-current', index === currentSlide);
+                    slide.classList.toggle('slick-active', index === currentSlide);
+                });
+                
+                // ドットのアクティブ状態を更新
                 dots.forEach((dot, index) => {
-                    dot.classList.toggle('active', index === currentSlide);
-                    dot.style.background = index === currentSlide ? '#2CC7C5' : '#ddd';
+                    const li = dot.parentElement;
+                    li.classList.toggle('slick-active', index === currentSlide);
+                    dot.setAttribute('aria-selected', index === currentSlide);
+                    dot.setAttribute('tabindex', index === currentSlide ? '0' : '-1');
                 });
             }
         }
