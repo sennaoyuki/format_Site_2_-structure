@@ -6237,21 +6237,8 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* ===== CASEスライダー ===== */
-.case-section {
+.ribbon_point_box_no .case-slick-slider {
     margin: 20px 0;
-    padding: 0 10px;
-}
-
-.case-slider-container {
-    margin: 15px 0;
-    background: #fff;
-    border-radius: 8px;
-    padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-}
-
-.case-slick-slider {
-    margin: 0 auto;
 }
 
 .case-slide {

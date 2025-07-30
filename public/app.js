@@ -2240,26 +2240,6 @@ class RankingApp {
                     </div>
                 </div>
                 
-                ${clinic.id === '1' ? `
-                <!-- CASE -->
-                <div class="case-section">
-                    <h4 class="section-title">CASE</h4>
-                    <div class="case-slider-container">
-                        <div class="case-slick-slider" data-slider-id="${rank}">
-                            <div class="case-slide">
-                                <img src="images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1" loading="lazy">
-                            </div>
-                            <div class="case-slide">
-                                <img src="images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2" loading="lazy">
-                            </div>
-                            <div class="case-slide">
-                                <img src="images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3" loading="lazy">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ` : ''}
-                
                 <!-- 口コミ -->
                 <div class="reviews-section">
                     <h4 class="section-title-review">REVIEW</h4>
