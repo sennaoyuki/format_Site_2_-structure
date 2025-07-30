@@ -189,7 +189,7 @@
         </div>
     </div>
 
-    <script src="app.js?v=2025072201" defer></script>
+    <script src="app.js?v=2025072201"></script>
     <script>
         // グローバル変数と関数を定義
         let iframeLoadStatus = {};
@@ -319,59 +319,90 @@
             const urlParams = new URLSearchParams(window.location.search);
             const regionId = urlParams.get('region_id') || '013';
             
-            console.log('sendDataToIframes called, checking app...', window.app);
+            console.log('=== sendDataToIframes Debug Info ===');
+            console.log('window.app exists:', !!window.app);
+            console.log('window.app:', window.app);
+            
             if (window.app && window.app.dataManager) {
                 console.log('DataManager found, getting region data for:', regionId);
                 const region = window.app.dataManager.getRegionById(regionId);
+                console.log('Region data:', region);
+                
                 if (region) {
-                    console.log('Region found:', region);
                     updateRegionInIframes(region.name);
                     
                     // ランキングデータを送信
                     const ranking = window.app.dataManager.getRankingByRegionId(regionId);
                     const clinics = window.app.dataManager.getAllClinics();
+                    
+                    console.log('=== Data Debug ===');
                     console.log('Ranking data:', ranking);
-                    console.log('Clinics data:', clinics);
+                    console.log('Number of clinics:', clinics ? clinics.length : 0);
+                    console.log('First clinic:', clinics && clinics.length > 0 ? clinics[0] : null);
                     
                     // 各iframeにデータを送信
                     setTimeout(() => {
                         const rankingIframe = document.getElementById('ranking-iframe');
                         if (rankingIframe && rankingIframe.contentWindow) {
                             const rankingHtml = generateRankingHtml(clinics, ranking);
-                            console.log('Sending ranking HTML to iframe');
-                            rankingIframe.contentWindow.postMessage({
-                                action: 'update-ranking',
-                                rankingHtml: rankingHtml,
-                                regionName: region.name
-                            }, '*');
+                            console.log('Generated ranking HTML length:', rankingHtml.length);
+                            console.log('First 200 chars of ranking HTML:', rankingHtml.substring(0, 200));
+                            
+                            try {
+                                rankingIframe.contentWindow.postMessage({
+                                    action: 'update-ranking',
+                                    rankingHtml: rankingHtml,
+                                    regionName: region.name
+                                }, '*');
+                                console.log('Ranking data sent successfully');
+                            } catch (e) {
+                                console.error('Error sending ranking data:', e);
+                            }
+                        } else {
+                            console.error('Ranking iframe not found or contentWindow not accessible');
                         }
                         
                         const comparisonIframe = document.getElementById('comparison-iframe');
                         if (comparisonIframe && comparisonIframe.contentWindow) {
                             const comparisonHtml = generateComparisonHtml(clinics, ranking);
-                            console.log('Sending comparison HTML to iframe');
-                            comparisonIframe.contentWindow.postMessage({
-                                action: 'update-comparison',
-                                comparisonHtml: comparisonHtml,
-                                regionName: region.name
-                            }, '*');
+                            console.log('Generated comparison HTML length:', comparisonHtml.length);
+                            
+                            try {
+                                comparisonIframe.contentWindow.postMessage({
+                                    action: 'update-comparison',
+                                    comparisonHtml: comparisonHtml,
+                                    regionName: region.name
+                                }, '*');
+                                console.log('Comparison data sent successfully');
+                            } catch (e) {
+                                console.error('Error sending comparison data:', e);
+                            }
                         }
                         
                         const detailsIframe = document.getElementById('details-iframe');
                         if (detailsIframe && detailsIframe.contentWindow) {
                             const detailsHtml = generateDetailsHtml(clinics, ranking, regionId);
-                            console.log('Sending details HTML to iframe');
-                            detailsIframe.contentWindow.postMessage({
-                                action: 'update-details',
-                                detailsHtml: detailsHtml,
-                                regionName: region.name
-                            }, '*');
+                            console.log('Generated details HTML length:', detailsHtml.length);
+                            
+                            try {
+                                detailsIframe.contentWindow.postMessage({
+                                    action: 'update-details',
+                                    detailsHtml: detailsHtml,
+                                    regionName: region.name
+                                }, '*');
+                                console.log('Details data sent successfully');
+                            } catch (e) {
+                                console.error('Error sending details data:', e);
+                            }
                         }
                     }, 100);
+                } else {
+                    console.error('Region not found for ID:', regionId);
                 }
             } else {
                 // app.jsがまだ初期化されていない場合は再試行
                 console.log('App not initialized yet, retrying in 500ms...');
+                console.log('window.app:', window.app);
                 setTimeout(sendDataToIframes, 500);
             }
         }
@@ -379,7 +410,10 @@
         // app.jsの初期化完了を待ってからデータを送信
         window.addEventListener('app-initialized', function() {
             console.log('App initialized event received, sending data to iframes');
-            sendDataToIframes();
+            // 少し遅延を入れてiframeが完全に準備できるのを待つ
+            setTimeout(() => {
+                sendDataToIframes();
+            }, 500);
         });
 
         // DOMContentLoadedを待つ
@@ -429,8 +463,28 @@
                     
                     // 全てのiframeが読み込まれたらデータを送信
                     if (Object.keys(iframeLoadStatus).length === iframes.length) {
-                        console.log('All iframes loaded, sending data...');
-                        sendDataToIframes();
+                        console.log('All iframes loaded, will send data when app is ready...');
+                        // app.jsの準備ができているか確認
+                        if (window.app && window.app.dataManager) {
+                            console.log('App already initialized, sending data immediately');
+                            sendDataToIframes();
+                        } else {
+                            console.log('Waiting for app initialization...');
+                            // 既にイベントリスナーは設定されているので、フォールバックとして定期的にチェック
+                            let checkCount = 0;
+                            const checkInterval = setInterval(() => {
+                                checkCount++;
+                                console.log(`Checking app initialization... attempt ${checkCount}`);
+                                if (window.app && window.app.dataManager) {
+                                    console.log('App initialized via interval check');
+                                    clearInterval(checkInterval);
+                                    sendDataToIframes();
+                                } else if (checkCount > 20) { // 10秒後にタイムアウト
+                                    console.error('App initialization timeout');
+                                    clearInterval(checkInterval);
+                                }
+                            }, 500);
+                        }
                     }
                 };
                 
