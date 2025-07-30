@@ -3005,6 +3005,7 @@ class RankingApp {
                         }
                         
                         console.log('Final store name:', fullStoreName);
+                        console.log('Clinic name for modal:', clinicName);
                         self.showMapModal(fullStoreName, address, access, clinicName);
                     } catch (error) {
                         console.error('Error in showMapModal:', error);
@@ -3099,27 +3100,40 @@ class RankingApp {
             
             // 公式サイトボタンのURLとテキストを設定
             if (modalButton && clinicCode) {
-                const clinicNameLower = clinicCode.toLowerCase().replace(/クリニック|美容外科|美容/g, '').trim();
-                modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicNameLower);
+                // クリニック名から正しいコードを取得
+                let clinicUrlCode = '';
+                let clinicBaseName = '';
+                
+                if (clinicCode.includes('ディオ')) {
+                    clinicUrlCode = 'dio';
+                    clinicBaseName = 'ディオクリニック';
+                } else if (clinicCode.includes('エミナル')) {
+                    clinicUrlCode = 'eminal';
+                    clinicBaseName = 'エミナルクリニック';
+                } else if (clinicCode.includes('湘南')) {
+                    clinicUrlCode = 'sbc';
+                    clinicBaseName = '湘南美容クリニック';
+                } else if (clinicCode.includes('リエート')) {
+                    clinicUrlCode = 'lieto';
+                    clinicBaseName = 'リエートクリニック';
+                } else if (clinicCode.includes('ウララ') || clinicCode.includes('URARA')) {
+                    clinicUrlCode = 'urara';
+                    clinicBaseName = 'URARAクリニック';
+                } else {
+                    clinicUrlCode = '';
+                    clinicBaseName = 'クリニック';
+                }
+                
+                // URLを設定
+                if (clinicUrlCode) {
+                    modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicUrlCode);
+                } else {
+                    modalButton.href = '#';
+                }
                 
                 // ボタンテキストを設定
                 const buttonText = document.getElementById('map-modal-button-text');
                 if (buttonText) {
-                    // クリニック名を取得
-                    let clinicBaseName = '';
-                    if (clinicCode.includes('ディオ')) {
-                        clinicBaseName = 'ディオクリニック';
-                    } else if (clinicCode.includes('エミナル')) {
-                        clinicBaseName = 'エミナルクリニック';
-                    } else if (clinicCode.includes('湘南')) {
-                        clinicBaseName = '湘南美容クリニック';
-                    } else if (clinicCode.includes('リエート')) {
-                        clinicBaseName = 'リエートクリニック';
-                    } else if (clinicCode.includes('ウララ')) {
-                        clinicBaseName = 'ウララクリニック';
-                    } else {
-                        clinicBaseName = 'クリニック';
-                    }
                     buttonText.textContent = clinicBaseName + 'の公式サイト';
                 }
             }
