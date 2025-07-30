@@ -52,13 +52,13 @@
         /* Font loading optimization */
         .fonts-loaded body{font-family:'Noto Sans JP',sans-serif}
         
-        /* 迷ったらディオクリニックセクションのスタイル */
-        .dio-recommendation-section .cta-button:hover {
+        /* 迷ったら1位クリニックセクションのスタイル */
+        .first-choice-recommendation-section .cta-button:hover {
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(44, 199, 197, 0.4);
         }
         
-        .dio-recommendation-section .cta-button::before {
+        .first-choice-recommendation-section .cta-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -70,20 +70,20 @@
             transition: transform 0.3s ease;
         }
         
-        .dio-recommendation-section .cta-button:hover::before {
+        .first-choice-recommendation-section .cta-button:hover::before {
             transform: translateX(0);
         }
         
         @media (max-width: 768px) {
-            .dio-recommendation-section .points-grid {
+            .first-choice-recommendation-section .points-grid {
                 grid-template-columns: 1fr !important;
             }
             
-            .dio-recommendation-section h2 {
+            .first-choice-recommendation-section h2 {
                 font-size: 24px !important;
             }
             
-            .dio-recommendation-section .cta-button {
+            .first-choice-recommendation-section .cta-button {
                 padding: 16px 40px !important;
                 font-size: 16px !important;
             }
@@ -166,8 +166,8 @@
             <div class="loading-message">医療情報コラムを読み込み中...</div>
         </div>
         
-        <!-- 迷ったらディオクリニックセクション -->
-        <div id="dio-recommendation-section" class="section-loading">
+        <!-- 迷ったら1位クリニックセクション -->
+        <div id="first-choice-recommendation-section" class="section-loading">
             <div class="loading-message">おすすめ情報を読み込み中...</div>
         </div>
         

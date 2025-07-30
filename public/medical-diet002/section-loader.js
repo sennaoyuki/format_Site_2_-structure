@@ -10,7 +10,7 @@ class SectionLoader {
                 comparison: { default: 'design1' },
                 details: { default: 'design1' },
                 'medical-columns': { default: 'design1' },
-                'dio-recommendation': { default: 'design1' },
+                'first-choice-recommendation': { default: 'design1' },
                 footer: { default: 'design1' },
                 modals: { default: 'design1' }
             }
@@ -106,7 +106,7 @@ class SectionLoader {
     }
     
     async loadAllSections() {
-        const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details', 'medical-columns', 'dio-recommendation', 'footer', 'modals'];
+        const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details', 'medical-columns', 'first-choice-recommendation', 'footer', 'modals'];
         
         // 全セクションを順番に読み込み
         for (const section of sections) {
@@ -119,7 +119,7 @@ class SectionLoader {
             const mainElement = document.createElement('main');
             
             // ranking以降のセクションをmain要素に移動（footer、modals以外）
-            const mainSections = ['ranking', 'tips', 'comparison', 'details', 'medical-columns', 'dio-recommendation'];
+            const mainSections = ['ranking', 'tips', 'comparison', 'details', 'medical-columns', 'first-choice-recommendation'];
             mainSections.forEach(sectionName => {
                 const sectionElement = document.getElementById(`${sectionName}-section`);
                 if (sectionElement) {
