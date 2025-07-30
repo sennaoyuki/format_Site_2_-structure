@@ -138,6 +138,12 @@ class DisplayManager {
     }
 
     updateRankingDisplay(clinics, ranking) {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        if (!this.rankingList) {
+            console.log('ranking-list element not found, skipping updateRankingDisplay');
+            return;
+        }
+
         this.rankingList.innerHTML = '';
 
         if (!ranking || Object.keys(ranking.ranks).length === 0) {
@@ -314,6 +320,12 @@ class DisplayManager {
     }
 
     showError(message) {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        if (!this.errorText || !this.errorMessage) {
+            console.log('Error elements not found, skipping showError');
+            return;
+        }
+        
         this.errorText.textContent = message;
         this.errorMessage.style.display = 'block';
         // 既存のタイマーをクリア
@@ -327,10 +339,22 @@ class DisplayManager {
     }
 
     hideError() {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        if (!this.errorMessage) {
+            console.log('Error message element not found, skipping hideError');
+            return;
+        }
         this.errorMessage.style.display = 'none';
     }
 
     updateFooterClinics(clinics, ranking) {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        const footer = document.getElementById('footer');
+        if (!footer) {
+            console.log('Footer element not found, skipping updateFooterClinics');
+            return;
+        }
+
         // フッター内のすべてのulタグを取得
         const footerUls = document.querySelectorAll('#footer ul');
         let footerClinicsContainer = null;
@@ -716,6 +740,17 @@ class RankingApp {
             setTimeout(() => {
                 this.setupMapAccordions();
             }, 100);
+            
+            // 初期化完了イベントを発火
+            console.log('RankingApp initialization complete, dispatching event');
+            console.log('Current region ID:', this.currentRegionId);
+            console.log('DataManager ready:', !!this.dataManager);
+            window.dispatchEvent(new CustomEvent('app-initialized', {
+                detail: {
+                    currentRegionId: this.currentRegionId,
+                    dataManager: this.dataManager
+                }
+            }));
         } catch (error) {
             console.error('アプリケーションの初期化に失敗しました:', error);
             this.displayManager.showError('データの読み込みに失敗しました。ページを再読み込みしてください。');

@@ -252,11 +252,11 @@
                     <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
                 </div>
                 
-                <div class="js-cbn-table" id="tab-menu" data-active-tab="tab1">
-                    <div class="tab-menu">
-                        <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
-                        <div class="tab-menu-item" data-tab="tab2">施術内容</div>
-                        <div class="tab-menu-item" data-tab="tab3">サービス</div>
+                <div class="comparison-table" id="comparison-tab-menu" data-active-tab="tab1">
+                    <div class="comparison-tab-menu">
+                        <div class="comparison-tab-menu-item tab-active" data-tab="tab1">総合</div>
+                        <div class="comparison-tab-menu-item" data-tab="tab2">施術内容</div>
+                        <div class="comparison-tab-menu-item" data-tab="tab3">サービス</div>
                     </div>
                     <table>
                         <thead>
@@ -485,7 +485,7 @@
                                 「痩身」には、大きく分けて「医療痩身」と「エステ痩身（美容痩身・エステサロン）」の<span style="background-color: #fff3cd; padding: 2px 4px;">2種類があります</span>。それぞれの仕組みやメリット・デメリットを理解して、どちらが自分に適しているか判断するようにしましょう。
                             </div>
 
-                            <table class="comparison-table">
+                            <table class="tips-comparison-table">
                                 <thead class="table-header">
                                     <tr>
                                         <th></th>
@@ -972,13 +972,13 @@
             // パラメータを引き継ぐ
             preserveAllParams();
             
-            const tabMenuItems = document.querySelectorAll('.tab-menu-item');
-            const table = document.querySelector('.js-cbn-table table');
+            const tabMenuItems = document.querySelectorAll('.comparison-tab-menu-item');
+            const table = document.querySelector('.comparison-table table');
             
             function updateTableColumns(tabType) {
                 if (!table) return;
                 
-                const tableContainer = document.querySelector('.js-cbn-table');
+                const tableContainer = document.querySelector('.comparison-table');
                 const headers = table.querySelectorAll('th');
                 const rows = table.querySelectorAll('tbody tr');
                 
@@ -1157,6 +1157,9 @@
             });
         });
     </script>
+    
+    <!-- Analytics Tracking Script -->
+    <script src="analytics-tracking.js?v=2025072201" defer></script>
     
     <!-- Service Worker登録 -->
     <script>

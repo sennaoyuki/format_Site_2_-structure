@@ -49,11 +49,47 @@
     </section>
 
     <script>
+        console.log('Comparison iframe script loaded');
+        
+        // DOMContentLoadedを待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Comparison iframe DOMContentLoaded');
+            
+            // 親ウィンドウに準備完了を通知
+            if (window.parent !== window) {
+                console.log('Notifying parent that comparison iframe is ready');
+                window.parent.postMessage({
+                    action: 'iframe-ready',
+                    iframeId: 'comparison-iframe'
+                }, '*');
+            }
+        });
+        
         // 親ウィンドウから比較表データを受け取る
         window.addEventListener('message', function(e) {
+            console.log('Comparison iframe received message:', e.data);
             if (e.data.action === 'update-comparison') {
-                document.getElementById('comparison-tbody').innerHTML = e.data.comparisonHtml;
-                document.getElementById('comparison-region-name').textContent = e.data.regionName;
+                console.log('Updating comparison table with data');
+                const comparisonTbody = document.getElementById('comparison-tbody');
+                const regionName = document.getElementById('comparison-region-name');
+                
+                console.log('comparison-tbody element:', comparisonTbody);
+                console.log('comparison-region-name element:', regionName);
+                console.log('HTML length:', e.data.comparisonHtml ? e.data.comparisonHtml.length : 0);
+                
+                if (comparisonTbody) {
+                    comparisonTbody.innerHTML = e.data.comparisonHtml;
+                    console.log('Comparison HTML updated');
+                } else {
+                    console.error('comparison-tbody element not found!');
+                }
+                
+                if (regionName) {
+                    regionName.textContent = e.data.regionName;
+                    console.log('Region name updated to:', e.data.regionName);
+                } else {
+                    console.error('comparison-region-name element not found!');
+                }
             }
         });
 
