@@ -2246,13 +2246,13 @@ class RankingApp {
                     <div class="case-slider-container">
                         <div class="case-slick-slider" data-slider-id="${rank}">
                             <div class="case-slide">
-                                <img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1" loading="lazy">
+                                <img src="../images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1" loading="lazy">
                             </div>
                             <div class="case-slide">
-                                <img src="/images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2" loading="lazy">
+                                <img src="../images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2" loading="lazy">
                             </div>
                             <div class="case-slide">
-                                <img src="/images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3" loading="lazy">
+                                <img src="../images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3" loading="lazy">
                             </div>
                         </div>
                     </div>
