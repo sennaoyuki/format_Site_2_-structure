@@ -2240,6 +2240,7 @@ class RankingApp {
                     </div>
                 </div>
                 
+                ${clinic.id === '1' ? `
                 <!-- CASE -->
                 <div class="case-section">
                     <h4 class="section-title">CASE</h4>
@@ -2257,6 +2258,7 @@ class RankingApp {
                         </div>
                     </div>
                 </div>
+                ` : ''}
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
