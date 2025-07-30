@@ -1129,6 +1129,9 @@ text-align: center;
             
             // 3つの理由を設定
             setThreeReasons(clinicSlug);
+            
+            // 症例実績セクションを設定（1位クリニックのみ）
+            setCasesSection(clinicSlug, clinicInfo.cases);
         }
 
         // クリニック別の情報
@@ -1137,27 +1140,97 @@ text-align: center;
                 'dio': {
                     campaign: '期間限定キャンペーン<br>12ヶ月分0円',
                     achievement: '＼ダイエット成功率99％の実績／',
-                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/dio/?max_scroll=100&region_id=013'
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/dio/?max_scroll=100&region_id=013',
+                    cases: [
+                        {
+                            image: '/images/cases/dio/case01.png',
+                            description: '金額：リベルサス：8,580円（3mg）+16,280円(7mg)×2+26,070円(14mg)×3 期間：6ヶ月 治療内容：リベルサス錠（3mg/7mg/14mg） 副作用：副作用で主にみられるものは、吐き気、胸やけ、下痢、便秘などの胃腸障害ですが内服継続をすることで、それらの症状は緩和していきます。一般的には問題なく服用いただける方がほとんどです。極めて稀ですが急性膵炎などの副作用もあります。'
+                        },
+                        {
+                            image: '/images/cases/dio/case02.png',
+                            description: '金額：53,900円×4ヶ月 期間：4ヶ月 治療内容：マンジャロ 5mg 副作用：副作用で主にみられるものは、吐き気、胸やけ、下痢、便秘などの胃腸障害ですが投与継続をすることで、それらの症状は緩和していきます。一般的には問題なく投与いただける方がほとんどです。極めて稀ですが急性膵炎などの副作用もあります。'
+                        },
+                        {
+                            image: '/images/cases/dio/case03.png',
+                            description: '金額：リベルサス：8,580円（3mg）+16,280円(7mg)×4ヶ月 期間：4ヶ月 年齢：30代後半 治療内容：リベルサス錠（3mg/7mg） 副作用：副作用で主にみられるものは、吐き気、胸やけ、下痢、便秘などの胃腸障害ですが内服継続をすることで、それらの症状は緩和していきます。一般的には問題なく服用いただける方がほとんどです。極めて稀ですが急性膵炎などの副作用もあります。'
+                        }
+                    ]
                 },
                 'urara': {
                     campaign: '期間限定キャンペーン<br>最大79%OFF',
                     achievement: '＼ダイエット成功率94％の実績／',
-                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/urara/?max_scroll=100&region_id=013'
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/urara/?max_scroll=100&region_id=013',
+                    cases: [
+                        {
+                            image: '/images/cases/urara/case01.png',
+                            description: '金額：198,000円（6ヶ月コース） 期間：6ヶ月 治療内容：医療用EMS＋食事指導 副作用：特になし（非侵襲的治療のため） 年齢：20代後半 URARAクリニック独自のオーダーメイド治療プログラムによる結果です。'
+                        },
+                        {
+                            image: '/images/cases/urara/case02.png',
+                            description: '金額：148,000円（4ヶ月コース） 期間：4ヶ月 治療内容：クールスカルプティング＋栄養指導 副作用：軽度の赤み（1-2日で改善） 年齢：30代前半 最大79%OFFキャンペーン適用での治療例です。'
+                        },
+                        {
+                            image: '/images/cases/urara/case03.png',
+                            description: '金額：89,000円（3ヶ月コース） 期間：3ヶ月 治療内容：ハイフ＋生活習慣指導 副作用：特になし 年齢：40代前半 短期集中プログラムでの効果的な結果例です。'
+                        }
+                    ]
                 },
                 'lieto': {
                     campaign: 'モニター割引<br>最大80%OFF',
                     achievement: '＼ダイエット成功率94％の実績／',
-                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/lieto/?max_scroll=100&region_id=013'
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/lieto/?max_scroll=100&region_id=013',
+                    cases: [
+                        {
+                            image: '/images/cases/lieto/case01.png',
+                            description: '金額：165,000円（6ヶ月コース・モニター価格） 期間：6ヶ月 治療内容：脂肪冷却＋管理栄養士による食事指導 副作用：軽度の冷感（施術中のみ） 年齢：20代後半 医師監修のもと安全に実施されました。'
+                        },
+                        {
+                            image: '/images/cases/lieto/case02.png',
+                            description: '金額：98,000円（4ヶ月コース・モニター価格） 期間：4ヶ月 治療内容：医療ハイフ＋生活習慣改善指導 副作用：特になし 年齢：30代前半 最大80%OFFモニター価格での治療例です。'
+                        },
+                        {
+                            image: '/images/cases/lieto/case03.png',
+                            description: '金額：58,000円（3ヶ月コース・モニター価格） 期間：3ヶ月 治療内容：医療用EMS＋栄養カウンセリング 副作用：特になし 年齢：40代前半 短期集中モニタープログラムです。'
+                        }
+                    ]
                 },
                 'sbc': {
                     campaign: '症例実績30万件以上<br>安心の大手クリニック',
                     achievement: '＼症例実績30万件以上の実績／',
-                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/sbc/?max_scroll=100&region_id=013'
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/sbc/?max_scroll=100&region_id=013',
+                    cases: [
+                        {
+                            image: '/images/cases/sbc/case01.png',
+                            description: '金額：298,000円（6ヶ月コース） 期間：6ヶ月 治療内容：クールスカルプティング（認定機器使用） 副作用：軽度の赤み・腫れ（1週間程度） 年齢：30代前半 湘南美容クリニックの豊富な実績に基づく安心の治療です。'
+                        },
+                        {
+                            image: '/images/cases/sbc/case02.png',
+                            description: '金額：198,000円（4ヶ月コース） 期間：4ヶ月 治療内容：脂肪溶解注射＋食事指導 副作用：軽度の腫れ・内出血（数日で改善） 年齢：20代後半 症例実績30万件以上の豊富な経験による治療です。'
+                        },
+                        {
+                            image: '/images/cases/sbc/case03.png',
+                            description: '金額：148,000円（3ヶ月コース） 期間：3ヶ月 治療内容：医療ハイフ＋生活習慣指導 副作用：特になし 年齢：40代前半 全国展開のアクセス良好なクリニックでの治療例です。'
+                        }
+                    ]
                 },
                 'eminal': {
                     campaign: '医療ダイエット専門<br>個別プラン提案',
                     achievement: '＼医療ダイエット専門の実績／',
-                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/eminal/?max_scroll=100&region_id=013'
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/eminal/?max_scroll=100&region_id=013',
+                    cases: [
+                        {
+                            image: '/images/cases/eminal/case01.png',
+                            description: '金額：268,000円（6ヶ月専門プログラム） 期間：6ヶ月 治療内容：個別カウンセリング＋最適化治療プラン 副作用：治療内容により異なる（事前説明実施） 年齢：30代前半 医療ダイエット専門クリニックならではの個別対応です。'
+                        },
+                        {
+                            image: '/images/cases/eminal/case02.png',
+                            description: '金額：178,000円（4ヶ月専門プログラム） 期間：4ヶ月 治療内容：体質分析＋オーダーメイド治療 副作用：個人差あり（丁寧な事前カウンセリング実施） 年齢：20代後半 専門性の高い治療での効果的な結果例です。'
+                        },
+                        {
+                            image: '/images/cases/eminal/case03.png',
+                            description: '金額：118,000円（3ヶ月専門プログラム） 期間：3ヶ月 治療内容：集中治療＋アフターサポート 副作用：軽微（充実のサポート体制） 年齢：40代前半 充実のアフターサポートによる長期効果維持を重視した治療です。'
+                        }
+                    ]
                 }
             };
             
@@ -1265,6 +1338,104 @@ text-align: center;
             }
             
             pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
+        }
+
+        // 症例実績セクションを設定
+        function setCasesSection(clinicSlug, cases) {
+            if (!cases || cases.length === 0) return;
+            
+            // CASEセクションを作成
+            const caseHtml = `
+                <div class="case" style="margin: 30px 20px;">
+                    <div class="heading" style="background: linear-gradient(135deg, #2CC7C5, #20A19A); color: white; padding: 15px; text-align: center; border-radius: 8px 8px 0 0; font-weight: bold; font-size: 18px; box-shadow: 0 2px 10px rgba(44, 199, 197, 0.3);">
+                        <span>症例実績</span>
+                    </div>
+                    <div class="image" style="background: white; border: 1px solid #ddd; border-top: none; border-radius: 0 0 8px 8px; padding: 20px;">
+                        <div class="case-slider" id="case-slider" style="position: relative;">
+                            <div class="case-slides" style="display: flex; transition: transform 0.3s ease; width: ${cases.length * 100}%;">
+                                ${cases.map((caseItem, index) => `
+                                    <div class="case-slide" style="width: ${100 / cases.length}%; padding: 0 10px; box-sizing: border-box;">
+                                        <img src="${caseItem.image}" alt="症例${index + 1}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px; margin-bottom: 15px;" onerror="this.src='/images/placeholder-case.png'">
+                                        <p style="font-size: 12px; line-height: 1.4; color: #666; margin: 0; padding: 10px; background: #f9f9f9; border-radius: 6px;">${caseItem.description}</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                            <div class="case-dots" style="text-align: center; margin-top: 20px;">
+                                ${cases.map((_, index) => `
+                                    <button class="case-dot ${index === 0 ? 'active' : ''}" data-slide="${index}" style="width: 12px; height: 12px; border-radius: 50%; border: none; margin: 0 5px; background: ${index === 0 ? '#2CC7C5' : '#ddd'}; cursor: pointer; transition: all 0.3s ease;"></button>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // REVIEWセクションを探して、その前にCASEセクションを挿入
+            const reviewSections = document.querySelectorAll('.section-title-review, h4.section-title-review, [class*="review"]');
+            let insertTarget = null;
+            
+            for (const reviewSection of reviewSections) {
+                if (reviewSection.textContent && reviewSection.textContent.includes('REVIEW')) {
+                    insertTarget = reviewSection.closest('.reviews-section') || reviewSection.parentElement;
+                    break;
+                }
+            }
+            
+            if (!insertTarget) {
+                // REVIEWが見つからない場合は、迷ったらセクションの後に追加
+                const firstChoiceSection = document.getElementById('first-choice-recommendation-section');
+                if (firstChoiceSection) {
+                    insertTarget = firstChoiceSection;
+                }
+            }
+            
+            if (insertTarget) {
+                // 既存のCASEセクションがあれば削除
+                const existingCase = document.querySelector('.case');
+                if (existingCase) {
+                    existingCase.remove();
+                }
+                
+                // 新しいCASEセクションを挿入
+                insertTarget.insertAdjacentHTML('beforebegin', caseHtml);
+                
+                // スライダー機能を初期化
+                initCaseSlider();
+            }
+        }
+
+        // CASEスライダーの初期化
+        function initCaseSlider() {
+            const slider = document.getElementById('case-slider');
+            if (!slider) return;
+            
+            const slides = slider.querySelector('.case-slides');
+            const dots = slider.querySelectorAll('.case-dot');
+            let currentSlide = 0;
+            
+            // ドット機能
+            dots.forEach((dot, index) => {
+                dot.addEventListener('click', () => {
+                    currentSlide = index;
+                    updateSlider();
+                });
+            });
+            
+            // 自動スライド
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % dots.length;
+                updateSlider();
+            }, 5000);
+            
+            function updateSlider() {
+                const translateX = -currentSlide * (100 / dots.length);
+                slides.style.transform = `translateX(${translateX}%)`;
+                
+                dots.forEach((dot, index) => {
+                    dot.classList.toggle('active', index === currentSlide);
+                    dot.style.background = index === currentSlide ? '#2CC7C5' : '#ddd';
+                });
+            }
         }
 
         // 1位クリニック情報の更新を実行

@@ -40,6 +40,7 @@ class SectionLoader {
         
         try {
             console.log(`Loading section ${sectionName} from ${url}`);
+            const startTime = performance.now();
             const response = await fetch(url);
             if (!response.ok) {
                 console.error(`HTTP ${response.status} for ${url}`);
@@ -65,7 +66,8 @@ class SectionLoader {
                 
                 // セクション固有のスクリプトを実行
                 this.executeScripts(existingSection);
-                console.log(`Successfully loaded ${sectionName} with design ${design}`);
+                const endTime = performance.now();
+                console.log(`Successfully loaded ${sectionName} with design ${design} in ${(endTime - startTime).toFixed(2)}ms`);
             } else {
                 console.error(`Section container not found for ${sectionName}`);
             }
@@ -106,7 +108,11 @@ class SectionLoader {
         if (fallbackElement) {
             // 読み込み状態を解除
             fallbackElement.classList.remove('section-loading');
-            fallbackElement.innerHTML = `<div class="section-error">セクション ${sectionName} の読み込みに失敗しました。</div>`;
+            fallbackElement.innerHTML = `<div class="section-error">
+                <i class="fas fa-exclamation-triangle" style="margin-right: 8px; color: #e74c3c;"></i>
+                セクション ${sectionName} の読み込みに失敗しました。
+                <button onclick="window.sectionLoader.loadSection('${sectionName}')" style="margin-left: 10px; padding: 5px 10px; background: #3498db; color: white; border: none; border-radius: 3px; cursor: pointer;">再試行</button>
+            </div>`;
         }
     }
     
@@ -119,13 +125,45 @@ class SectionLoader {
         const results = await Promise.allSettled(loadPromises);
         
         // 読み込み結果をログ出力
+        let successCount = 0;
+        let failCount = 0;
         results.forEach((result, index) => {
             if (result.status === 'rejected') {
                 console.error(`Failed to load section ${sections[index]}:`, result.reason);
+                failCount++;
             } else {
                 console.log(`Successfully loaded section ${sections[index]}`);
+                successCount++;
             }
         });
+        console.log(`Section loading summary: ${successCount} successful, ${failCount} failed`);
+        
+        // 成功率を計算してログ出力
+        const successRate = ((successCount / sections.length) * 100).toFixed(1);
+        console.log(`Loading success rate: ${successRate}%`);
+        
+        // 失敗したセクションに対してリトライを試行
+        if (failCount > 0) {
+            console.log('Attempting to retry failed sections...');
+            const failedSections = [];
+            results.forEach((result, index) => {
+                if (result.status === 'rejected') {
+                    failedSections.push(sections[index]);
+                }
+            });
+            
+            // 1秒後にリトライ
+            setTimeout(async () => {
+                for (const section of failedSections) {
+                    console.log(`Retrying section: ${section}`);
+                    try {
+                        await this.loadSection(section);
+                    } catch (error) {
+                        console.error(`Retry failed for ${section}:`, error);
+                    }
+                }
+            }, 1000);
+        }
         
         // 読み込み完了後、mainタグでmainセクションを囲む
         const container = document.querySelector('.container');
