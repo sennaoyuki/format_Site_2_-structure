@@ -52,16 +52,15 @@ class SectionLoader {
             // 既存のコンテンツを置換
             const existingSection = document.getElementById(`${sectionName}-section`);
             if (existingSection) {
-                existingSection.innerHTML = '';
-                existingSection.appendChild(sectionContainer);
-            } else if (targetElement) {
-                targetElement.replaceWith(sectionContainer);
+                // loadingメッセージを削除してコンテンツを追加
+                existingSection.classList.remove('section-loading');
+                existingSection.innerHTML = html;
+                
+                // セクション固有のスクリプトを実行
+                this.executeScripts(existingSection);
             } else {
                 console.error(`Section container not found for ${sectionName}`);
             }
-            
-            // セクション固有のスクリプトを実行
-            this.executeScripts(sectionContainer);
             
             console.log(`Loaded ${sectionName} with design ${design}`);
             

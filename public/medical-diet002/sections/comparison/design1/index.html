@@ -1,42 +1,53 @@
-<!-- 比較表セクション Design 1 -->
+<!-- 比較表セクション -->
 <section class="comparison-section">
-    <div class="section-title">
-        <h2>クリニック比較表</h2>
+    <div class="comparison-header">
+        <h2 class="comparison-title"><span id="comparison-region-name">関東</span>で人気の医療ダイエット</h2>
+        <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
     </div>
     
-    <div class="comparison-container">
+    <div class="comparison-table" id="comparison-tab-menu" data-active-tab="tab1">
         <div class="comparison-tab-menu">
             <div class="comparison-tab-menu-item tab-active" data-tab="tab1">総合</div>
             <div class="comparison-tab-menu-item" data-tab="tab2">施術内容</div>
             <div class="comparison-tab-menu-item" data-tab="tab3">サービス</div>
         </div>
-        
-        <div class="comparison-table" data-active-tab="tab1">
-            <table>
-                <thead>
-                    <tr>
-                        <th>クリニック名</th>
-                        <th>価格</th>
-                        <th>人気度</th>
-                        <th>満足度</th>
-                        <th class="th-none" style="display: none;">施術の種類</th>
-                        <th class="th-none" style="display: none;">対応部位</th>
-                        <th class="th-none" style="display: none;">機器の種類</th>
-                        <th class="th-none" style="display: none;">店舗数</th>
-                        <th class="th-none" style="display: none;">特典・割引</th>
-                        <th class="th-none" style="display: none;">返金保証</th>
-                        <th>詳細</th>
-                    </tr>
-                </thead>
-                <tbody id="comparison-table-body">
-                    <!-- 比較表の内容はapp.jsから動的に挿入される -->
-                </tbody>
-            </table>
-        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>クリニック</th>
+                    <th class="" style="">総合評価</th>
+                    <th class="" style="">実績</th>
+                    <th class="" style="">特典</th>
+                    <th class="th-none" style="display: none;">人気プラン</th>
+                    <th class="th-none" style="display: none;">医療機器</th>
+                    <th class="th-none" style="display: none;">注射治療</th>
+                    <th class="th-none" style="display: none;">食事指導</th>
+                    <th class="th-none" style="display: none;">モニター割</th>
+                    <th class="th-none" style="display: none;">返金保証</th>
+                    <th>公式サイト</th>
+                </tr>
+            </thead>
+            <tbody id="comparison-tbody">
+                <!-- 比較表の内容はapp.jsから動的に挿入される -->
+            </tbody>
+        </table>
     </div>
 </section>
 
 <script>
+// 地域名を更新
+const regionMap = {
+    '013': '関東',
+    '027': '関西',
+    '040': '福岡',
+    '023': '愛知',
+    '014': '神奈川'
+};
+
+const regionId = new URLSearchParams(window.location.search).get('region_id') || '013';
+const regionName = regionMap[regionId] || '関東';
+document.getElementById('comparison-region-name').textContent = regionName;
+
 // 比較表のタブ切り替え機能
 const tabMenuItems = document.querySelectorAll('.comparison-tab-menu-item');
 const table = document.querySelector('.comparison-table table');
@@ -50,8 +61,8 @@ function updateTableColumns(tabType) {
     
     const tabColumnsMap = {
         'tab1': [0, 1, 2, 3, 10],      // 総合
-        'tab2': [0, 4, 5, 6, 10],      // 施術内容
-        'tab3': [0, 7, 8, 9, 10]       // サービス
+        'tab2': [0, 4, 5, 6, 10],      // 人気プラン、医療機器、注射治療
+        'tab3': [0, 7, 8, 9, 10]       // 食事指導、モニター割、返金保証
     };
     
     const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
@@ -83,6 +94,4 @@ tabMenuItems.forEach(item => {
 
 // 初期表示
 updateTableColumns('tab1');
-
-// app.jsの初期化はメインページで行われる
 </script>
