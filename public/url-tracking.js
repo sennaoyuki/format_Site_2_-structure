@@ -26,7 +26,11 @@
     // 公式サイトリンクの処理
     function setupOutboundLinkTracking() {
         document.addEventListener('click', function(e) {
-            const link = e.target.closest('a.link_btn');
+            // link_btnクラスまたは公式サイトへのリンクを検出
+            const link = e.target.closest('a.link_btn') || 
+                        e.target.closest('a[href*="/go/"]') ||
+                        e.target.closest('.btn_second_primary a') ||
+                        e.target.closest('.cta-button');
             if (!link) return;
             
             // リンク先がgo/xxx/形式の場合のみ処理
@@ -34,9 +38,26 @@
             if (!href || !href.includes('/go/')) return;
             
             // クリニック名を取得
-            const clinicName = link.closest('tr')?.querySelector('.clinic-link')?.textContent || 
-                              link.closest('.ranking-item')?.querySelector('.clinic-name')?.textContent || 
-                              'Unknown';
+            let clinicName = 'Unknown';
+            
+            // 比較表から
+            if (link.closest('tr')) {
+                clinicName = link.closest('tr').querySelector('.clinic-link')?.textContent || 'Unknown';
+            }
+            // ランキングセクションから
+            else if (link.closest('.ranking-item')) {
+                clinicName = link.closest('.ranking-item').querySelector('.clinic-name')?.textContent || 
+                            link.closest('.ranking-item').querySelector('h3')?.textContent || 'Unknown';
+            }
+            // 詳細セクションから
+            else if (link.closest('.detail-item')) {
+                clinicName = link.closest('.detail-item').querySelector('h3')?.childNodes[0]?.textContent?.trim() || 
+                            link.closest('.detail-item').querySelector('h3')?.textContent?.trim() || 'Unknown';
+            }
+            // 地図モーダルから
+            else if (link.closest('.map-modal')) {
+                clinicName = document.getElementById('map-modal-clinic-name')?.textContent || 'Unknown';
+            }
             
             // 現在は使用しないがコメントとして保持
             // const rankElement = link.closest('.ranking-item')?.querySelector('.rank-badge');
@@ -45,14 +66,16 @@
             
             // セクションを判別
             let clickSection = 'unknown';
-            if (link.closest('.ranking-container')) {
+            if (link.closest('.ranking-container') || link.closest('.ranking-item')) {
                 clickSection = 'ranking';
             } else if (link.closest('.comparison-table')) {
                 clickSection = 'comparison_table';
-            } else if (link.closest('.clinic-details-container')) {
+            } else if (link.closest('.clinic-details-container') || link.closest('.detail-item')) {
                 clickSection = 'details';
-            } else if (link.closest('.clinic-detail')) {
-                clickSection = 'detail_section';
+            } else if (link.closest('.campaign-section')) {
+                clickSection = 'campaign_section';
+            } else if (link.closest('.map-modal')) {
+                clickSection = 'map_modal';
             }
             
             // トラッキングパラメータ
