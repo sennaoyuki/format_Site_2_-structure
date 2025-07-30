@@ -50,11 +50,14 @@ class SectionLoader {
             sectionContainer.innerHTML = html;
             
             // 既存のコンテンツを置換
-            if (targetElement) {
+            const existingSection = document.getElementById(`${sectionName}-section`);
+            if (existingSection) {
+                existingSection.innerHTML = '';
+                existingSection.appendChild(sectionContainer);
+            } else if (targetElement) {
                 targetElement.replaceWith(sectionContainer);
             } else {
-                document.getElementById(`${sectionName}-section`).innerHTML = '';
-                document.getElementById(`${sectionName}-section`).appendChild(sectionContainer);
+                console.error(`Section container not found for ${sectionName}`);
             }
             
             // セクション固有のスクリプトを実行
@@ -102,25 +105,25 @@ class SectionLoader {
     async loadAllSections() {
         const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details'];
         
-        // ヘッダーとヒーローセクションを読み込み
-        await this.loadSection('header');
-        await this.loadSection('hero');
-        
-        // メインセクションの開始タグを追加
-        const mainElement = document.createElement('main');
-        
-        // 残りのセクションをmainタグ内に配置
-        for (const section of ['ranking', 'tips', 'comparison', 'details']) {
-            const sectionContainer = document.getElementById(`${section}-section`);
-            if (sectionContainer) {
-                mainElement.appendChild(sectionContainer);
-            }
+        // 全セクションを順番に読み込み
+        for (const section of sections) {
             await this.loadSection(section);
         }
         
-        // mainタグをcontainerに追加
+        // 読み込み完了後、mainタグでmainセクションを囲む
         const container = document.querySelector('.container');
         if (container && !container.querySelector('main')) {
+            const mainElement = document.createElement('main');
+            
+            // ranking以降のセクションをmain要素に移動
+            const mainSections = ['ranking', 'tips', 'comparison', 'details'];
+            mainSections.forEach(sectionName => {
+                const sectionElement = container.querySelector(`[data-section="${sectionName}"]`);
+                if (sectionElement) {
+                    mainElement.appendChild(sectionElement);
+                }
+            });
+            
             container.appendChild(mainElement);
         }
     }

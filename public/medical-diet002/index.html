@@ -122,6 +122,12 @@
             try {
                 await loader.loadAllSections();
                 console.log('All sections loaded successfully');
+                
+                // セクション読み込み完了後にapp.jsを初期化
+                if (window.app) {
+                    console.log('Initializing app after sections loaded');
+                    window.app.init();
+                }
             } catch (error) {
                 console.error('Error loading sections:', error);
             }

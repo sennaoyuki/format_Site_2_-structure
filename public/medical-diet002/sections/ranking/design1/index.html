@@ -23,15 +23,5 @@ const regionId = new URLSearchParams(window.location.search).get('region_id') ||
 const regionName = regionMap[regionId] || '東京';
 document.getElementById('rank-region-name').textContent = regionName;
 
-// app.jsの初期化を待つ
-if (window.app) {
-    window.app.init();
-} else {
-    // app.jsがまだ読み込まれていない場合は、少し待ってから再試行
-    setTimeout(() => {
-        if (window.app) {
-            window.app.init();
-        }
-    }, 100);
-}
+// app.jsの初期化はメインページで行われるため、ここでは地域名の更新のみ
 </script>

@@ -34,16 +34,7 @@
 </div>
 
 <script>
-// app.jsの初期化を待つ
-if (window.app) {
-    window.app.init();
-} else {
-    setTimeout(() => {
-        if (window.app) {
-            window.app.init();
-        }
-    }, 100);
-}
+// app.jsの初期化はメインページで行われる
 
 // 地図モーダルの基本的な動作
 document.getElementById('map-modal-close').addEventListener('click', function() {

@@ -84,14 +84,5 @@ tabMenuItems.forEach(item => {
 // 初期表示
 updateTableColumns('tab1');
 
-// app.jsの初期化を待つ
-if (window.app) {
-    window.app.init();
-} else {
-    setTimeout(() => {
-        if (window.app) {
-            window.app.init();
-        }
-    }, 100);
-}
+// app.jsの初期化はメインページで行われる
 </script>
