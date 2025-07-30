@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>002セクション確認</title>
+</head>
+<body>
+    <h1>medical-diet002のセクション読み込み状況</h1>
+    <iframe src="/medical-diet002/" width="100%" height="600"></iframe>
+    
+    <h2>セクション読み込みチェック</h2>
+    <div id="check-results"></div>
+    
+    <script>
+        // iframeが読み込まれるのを待つ
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const iframe = document.querySelector('iframe');
+                const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+                
+                const sections = [
+                    'header-section',
+                    'hero-section', 
+                    'ranking-section',
+                    'tips-section',
+                    'comparison-section',
+                    'details-section',
+                    'medical-columns-section',
+                    'dio-recommendation-section',
+                    'footer-section',
+                    'modals-section'
+                ];
+                
+                let results = '<ul>';
+                sections.forEach(section => {
+                    const element = iframeDoc.getElementById(section);
+                    if (element) {
+                        const hasContent = element.innerHTML.trim() !== '' && 
+                                         !element.innerHTML.includes('loading-message');
+                        results += `<li>${section}: ${hasContent ? '✅ 読み込み成功' : '❌ 読み込み失敗'}</li>`;
+                    } else {
+                        results += `<li>${section}: ❌ 要素が見つかりません</li>`;
+                    }
+                });
+                results += '</ul>';
+                
+                document.getElementById('check-results').innerHTML = results;
+            }, 3000); // 3秒待つ
+        });
+    </script>
+</body>
+</html>
