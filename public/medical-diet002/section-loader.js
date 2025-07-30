@@ -8,7 +8,11 @@ class SectionLoader {
                 ranking: { default: 'design1' },
                 tips: { default: 'design1' },
                 comparison: { default: 'design1' },
-                details: { default: 'design1' }
+                details: { default: 'design1' },
+                'medical-columns': { default: 'design1' },
+                'dio-recommendation': { default: 'design1' },
+                footer: { default: 'design1' },
+                modals: { default: 'design1' }
             }
         };
         
@@ -102,7 +106,7 @@ class SectionLoader {
     }
     
     async loadAllSections() {
-        const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details'];
+        const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details', 'medical-columns', 'dio-recommendation', 'footer', 'modals'];
         
         // 全セクションを順番に読み込み
         for (const section of sections) {
@@ -114,16 +118,22 @@ class SectionLoader {
         if (container && !container.querySelector('main')) {
             const mainElement = document.createElement('main');
             
-            // ranking以降のセクションをmain要素に移動
-            const mainSections = ['ranking', 'tips', 'comparison', 'details'];
+            // ranking以降のセクションをmain要素に移動（footer、modals以外）
+            const mainSections = ['ranking', 'tips', 'comparison', 'details', 'medical-columns', 'dio-recommendation'];
             mainSections.forEach(sectionName => {
-                const sectionElement = container.querySelector(`[data-section="${sectionName}"]`);
+                const sectionElement = document.getElementById(`${sectionName}-section`);
                 if (sectionElement) {
                     mainElement.appendChild(sectionElement);
                 }
             });
             
-            container.appendChild(mainElement);
+            // heroセクションの後にmainを挿入
+            const heroSection = document.getElementById('hero-section');
+            if (heroSection && heroSection.nextSibling) {
+                container.insertBefore(mainElement, heroSection.nextSibling);
+            } else {
+                container.appendChild(mainElement);
+            }
         }
     }
     

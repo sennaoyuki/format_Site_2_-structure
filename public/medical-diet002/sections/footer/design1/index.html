@@ -1,0 +1,77 @@
+<!-- フッター -->
+<div id="footer">
+    <div class="footer_contents">
+        <h4><a href="/">医療ダイエット比較.com</a></h4>
+        
+        <ul>
+            <h5>人気クリニック</h5>
+            <li><a href="#clinic1">品川美容外科</a></li>
+            <li><a href="#clinic2">湘南美容クリニック</a></li>
+            <li><a href="#clinic3">TCB東京中央美容外科</a></li>
+        </ul>
+                        
+        <ul>
+            <h5>運営</h5>
+            <li><a href="/company/" class="footer-page-link">運営者情報</a></li>
+            <li><a href="/privacy/" class="footer-page-link">プライバシーポリシー</a></li>
+            <li><a href="/disclaimer/" class="footer-page-link">免責事項</a></li>
+            <li><a href="mailto:clinic.hikaku.review@gmail.com">お問い合わせ</a></li>
+        </ul>
+        
+    </div>
+    
+    <div class="footer-bottom">
+        <p class="copyright">© 2025 医療ダイエット比較.com</p>
+        <p class="disclaimer">※本サイトの情報は参考程度に留め、必ず医療機関にご相談ください。</p>
+    </div>
+</div>
+
+<!-- サイドバーメニュー -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+<div class="sidebar-menu" id="sidebar-menu">
+    <div class="sidebar-header">
+        <h3 class="sidebar-title">絞り込み検索</h3>
+        <button class="close-sidebar" id="close-sidebar" aria-label="閉じる">×</button>
+    </div>
+    <div class="sidebar-content">
+        <div class="sidebar-filter-group">
+            <label for="sidebar-region-select" class="sidebar-filter-label">地域選択</label>
+            <select id="sidebar-region-select" class="sidebar-select">
+                <!-- 地域オプションはJavaScriptで動的に生成 -->
+            </select>
+        </div>
+        <div class="sidebar-filter-group">
+            <label for="sidebar-clinic-search" class="sidebar-filter-label">クリニック名検索</label>
+            <input type="text" id="sidebar-clinic-search" class="sidebar-search-input" placeholder="クリニック名を入力">
+        </div>
+        <div class="sidebar-filter-group">
+            <label for="sidebar-specialty-filter" class="sidebar-filter-label">対応部位</label>
+            <select id="sidebar-specialty-filter" class="sidebar-select">
+                <option value="">すべての部位</option>
+                <option value="face">顔</option>
+                <option value="upperarm">二の腕</option>
+                <option value="stomach">お腹</option>
+                <option value="buttocks">お尻</option>
+                <option value="thigh">太もも</option>
+                <option value="other">その他</option>
+            </select>
+        </div>
+        <div class="sidebar-filter-group">
+            <label for="sidebar-hours-filter" class="sidebar-filter-label">店舗数</label>
+            <select id="sidebar-hours-filter" class="sidebar-select">
+                <option value="">店舗数指定なし</option>
+                <option value="small">0〜5店舗</option>
+                <option value="medium">6〜10店舗</option>
+                <option value="large">10〜20店舗</option>
+                <option value="xlarge">それ以上</option>
+            </select>
+        </div>
+        <div class="sidebar-search-button">
+            <a href="search-results/" class="sidebar-search-link">詳細検索ページへ</a>
+        </div>
+    </div>
+</div>
+
+<div id="error-message" class="error-message" style="display: none;">
+    <p id="error-text"></p>
+</div>
