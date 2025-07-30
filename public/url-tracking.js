@@ -45,6 +45,18 @@
             // 現在のページ情報
             const currentRegion = new URLSearchParams(window.location.search).get('region_id') || '013';
             
+            // セクションを判別
+            let clickSection = 'unknown';
+            if (link.closest('.ranking-container')) {
+                clickSection = 'ranking';
+            } else if (link.closest('.comparison-table')) {
+                clickSection = 'comparison_table';
+            } else if (link.closest('.clinic-details-container')) {
+                clickSection = 'details';
+            } else if (link.closest('.clinic-detail')) {
+                clickSection = 'detail_section';
+            }
+            
             // トラッキングパラメータ
             const trackingParams = {
                 utm_source: 'medical-diet-comparison',
@@ -52,6 +64,7 @@
                 utm_campaign: 'ranking',
                 utm_content: `rank${rank || 'unknown'}`,
                 click_position: rank || 'comparison_table',
+                click_section: clickSection,
                 click_clinic: clinicName.replace(/\s+/g, '_'),
                 source_region: currentRegion,
                 source_page: window.location.pathname,
