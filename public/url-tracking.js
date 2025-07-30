@@ -40,23 +40,40 @@
             // クリニック名を取得
             let clinicName = 'Unknown';
             
-            // 比較表から
-            if (link.closest('tr')) {
-                clinicName = link.closest('tr').querySelector('.clinic-link')?.textContent || 'Unknown';
-            }
-            // ランキングセクションから
-            else if (link.closest('.ranking-item')) {
-                clinicName = link.closest('.ranking-item').querySelector('.clinic-name')?.textContent || 
-                            link.closest('.ranking-item').querySelector('h3')?.textContent || 'Unknown';
-            }
-            // 詳細セクションから
-            else if (link.closest('.detail-item')) {
-                clinicName = link.closest('.detail-item').querySelector('h3')?.childNodes[0]?.textContent?.trim() || 
-                            link.closest('.detail-item').querySelector('h3')?.textContent?.trim() || 'Unknown';
-            }
-            // 地図モーダルから
-            else if (link.closest('.map-modal')) {
-                clinicName = document.getElementById('map-modal-clinic-name')?.textContent || 'Unknown';
+            // URLからクリニック名を推測
+            const clinicIdMatch = href.match(/\/go\/(\w+)\//);
+            const clinicId = clinicIdMatch ? clinicIdMatch[1] : null;
+            
+            const clinicNameMap = {
+                'dio': 'ディオクリニック',
+                'eminal': 'エミナルクリニック',
+                'urara': 'URARAクリニック',
+                'lieto': 'リエートクリニック',
+                'sbc': '湘南美容クリニック'
+            };
+            
+            if (clinicId && clinicNameMap[clinicId]) {
+                clinicName = clinicNameMap[clinicId];
+            } else {
+                // 比較表から
+                if (link.closest('tr')) {
+                    clinicName = link.closest('tr').querySelector('.clinic-link')?.textContent || clinicName;
+                }
+                // ランキングセクションから（clinic-logo-sectionから取得）
+                else if (link.closest('.ranking-item')) {
+                    clinicName = link.closest('.ranking-item').querySelector('.clinic-logo-section')?.textContent?.trim() || clinicName;
+                }
+                // 詳細セクションから（h3の最初のテキストノードのみ取得）
+                else if (link.closest('.detail-item')) {
+                    const h3 = link.closest('.detail-item').querySelector('h3');
+                    if (h3 && h3.firstChild && h3.firstChild.nodeType === Node.TEXT_NODE) {
+                        clinicName = h3.firstChild.textContent.trim() || clinicName;
+                    }
+                }
+                // 地図モーダルから
+                else if (link.closest('.map-modal')) {
+                    clinicName = document.getElementById('map-modal-clinic-name')?.textContent || clinicName;
+                }
             }
             
             // 現在は使用しないがコメントとして保持
