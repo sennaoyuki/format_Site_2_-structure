@@ -148,22 +148,10 @@
         });
     }
 
-    // セッション情報の追加
+    // セッション情報の追加（現在は使用しない）
     function addSessionInfo() {
-        const currentUrl = new URL(window.location.href);
-        
-        // セッションIDがなければ生成
-        if (!currentUrl.searchParams.get('session_id')) {
-            const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            currentUrl.searchParams.set('session_id', sessionId);
-            window.history.replaceState({}, '', currentUrl.toString());
-        }
-        
-        // 初回訪問時刻
-        if (!currentUrl.searchParams.get('first_visit')) {
-            currentUrl.searchParams.set('first_visit', Date.now());
-            window.history.replaceState({}, '', currentUrl.toString());
-        }
+        // セッションIDとfirst_visitは不要なため、コメントアウト
+        // 必要に応じて後で有効化可能
     }
 
     // スクロール深度の記録
