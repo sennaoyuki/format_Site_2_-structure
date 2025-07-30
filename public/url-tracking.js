@@ -30,7 +30,8 @@
             const link = e.target.closest('a.link_btn') || 
                         e.target.closest('a[href*="/go/"]') ||
                         e.target.closest('.btn_second_primary a') ||
-                        e.target.closest('.cta-button');
+                        e.target.closest('.cta-button') ||
+                        e.target.closest('#first-choice-cta-link');
             if (!link) return;
             
             // リンク先がgo/xxx/形式の場合のみ処理
@@ -93,11 +94,15 @@
                 clickSection = 'campaign_section';
             } else if (link.closest('.map-modal')) {
                 clickSection = 'map_modal';
+            } else if (link.closest('#first-choice-recommendation-section') || 
+                      link.closest('.first-choice-recommendation-section') ||
+                      link.closest('.dio-recommendation-section')) {
+                clickSection = 'first_choice_recommendation';
             }
             
-            // トラッキングパラメータ
+            // トラッキングパラメータ（click_sectionは必須で含める）
             const trackingParams = {
-                click_section: clickSection,
+                click_section: clickSection || 'unknown',
                 click_clinic: clinicName.replace(/\s+/g, '_'),
                 source_page: window.location.pathname
             };
@@ -202,6 +207,34 @@
         });
     }
 
+    // すべての外部リンクに対するフォールバック処理
+    function setupGenericLinkTracking() {
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a');
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            if (!href || !href.includes('/go/')) return;
+            
+            // 既にトラッキングパラメータが付いている場合はスキップ
+            if (href.includes('click_section=')) return;
+            
+            // 基本的なトラッキングパラメータを追加
+            const trackingParams = {
+                click_section: 'unknown',
+                source_page: window.location.pathname
+            };
+            
+            const newUrl = addTrackingParameters(href, trackingParams);
+            link.setAttribute('href', newUrl);
+            
+            console.log('Generic link tracking applied:', {
+                original: href,
+                new: newUrl
+            });
+        }, true);
+    }
+
     // 初期化
     function init() {
         console.log('URL tracking initialized');
@@ -209,6 +242,7 @@
         // 各種トラッキングの設定
         setupOutboundLinkTracking();
         setupInternalLinkTracking();
+        setupGenericLinkTracking();
         setupTabTracking();
         addSessionInfo();
         trackScrollDepth();
