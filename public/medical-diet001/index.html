@@ -252,11 +252,11 @@
                     <h3 class="comparison-subtitle">クリニックを<span class="pink-text">徹底比較</span></h3>
                 </div>
                 
-                <div class="comparison-table" id="tab-menu" data-active-tab="tab1">
-                    <div class="tab-menu">
-                        <div class="tab-menu-item tab-active" data-tab="tab1">総合</div>
-                        <div class="tab-menu-item" data-tab="tab2">施術内容</div>
-                        <div class="tab-menu-item" data-tab="tab3">サービス</div>
+                <div class="comparison-table" id="comparison-tab-menu" data-active-tab="tab1">
+                    <div class="comparison-tab-menu">
+                        <div class="comparison-tab-menu-item tab-active" data-tab="tab1">総合</div>
+                        <div class="comparison-tab-menu-item" data-tab="tab2">施術内容</div>
+                        <div class="comparison-tab-menu-item" data-tab="tab3">サービス</div>
                     </div>
                     <table>
                         <thead>
@@ -972,7 +972,7 @@
             // パラメータを引き継ぐ
             preserveAllParams();
             
-            const tabMenuItems = document.querySelectorAll('.tab-menu-item');
+            const tabMenuItems = document.querySelectorAll('.comparison-tab-menu-item');
             const table = document.querySelector('.comparison-table table');
             
             function updateTableColumns(tabType) {

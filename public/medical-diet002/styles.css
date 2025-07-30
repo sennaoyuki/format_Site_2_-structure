@@ -2111,7 +2111,7 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* タブナビゲーション */
-.tab-menu {
+.comparison-tab-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -2119,7 +2119,7 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0 auto 0px;
 }
 
-.tab-menu .tab-menu-item {
+.comparison-tab-menu .comparison-tab-menu-item {
     border-radius: 4px 4px 0 0;
     border-left: 1px solid #6bd1d0;
     border-right: 1px solid #6bd1d0;
@@ -2136,7 +2136,7 @@ section.clinic-rankings .ranking-header-banner {
     transition: all 0.3s;
 }
 
-.tab-menu-item.tab-active {
+.comparison-tab-menu-item.tab-active {
     background: #6bd1d0;
     color: #fff;
     pointer-events: none;
@@ -2496,8 +2496,8 @@ section.clinic-rankings .ranking-header-banner {
 }
     
     /* 総合タブ以外で特定の列を非表示 */
-    .tab-menu-item[data-tab="tab1"].tab-active ~ table .td-width2,
-    .tab-menu-item[data-tab="tab1"].tab-active ~ table .th-none {
+    .comparison-tab-menu-item[data-tab="tab1"].tab-active ~ table .td-width2,
+    .comparison-tab-menu-item[data-tab="tab1"].tab-active ~ table .th-none {
         display: none !important;
     }
 }
