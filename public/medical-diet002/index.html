@@ -470,11 +470,12 @@
                     // 全てのiframeが読み込まれたらデータを送信
                     if (Object.keys(iframeLoadStatus).length === iframes.length) {
                         console.log('All iframes loaded, will send data when app is ready...');
-                        // app.jsの準備ができているか確認
-                        if (window.app && window.app.dataManager) {
-                            console.log('App already initialized, sending data immediately');
-                            sendDataToIframes();
-                        } else {
+                        // app.jsの準備ができているか確認（少し待ってから確認）
+                        setTimeout(() => {
+                            if (window.app && window.app.dataManager) {
+                                console.log('App already initialized, sending data immediately');
+                                sendDataToIframes();
+                            } else {
                             console.log('Waiting for app initialization...');
                             // 既にイベントリスナーは設定されているので、フォールバックとして定期的にチェック
                             let checkCount = 0;
@@ -490,7 +491,8 @@
                                     clearInterval(checkInterval);
                                 }
                             }, 500);
-                        }
+                            }
+                        }, 100); // 100ms待ってから確認
                     }
                 };
                 

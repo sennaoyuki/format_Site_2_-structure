@@ -339,6 +339,11 @@ class DisplayManager {
     }
 
     hideError() {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        if (!this.errorMessage) {
+            console.log('Error message element not found, skipping hideError');
+            return;
+        }
         this.errorMessage.style.display = 'none';
     }
 
