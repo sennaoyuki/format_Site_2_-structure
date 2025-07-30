@@ -1,91 +1,37 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: transparent;
-        }
-    </style>
-</head>
-<body>
-    <section class="clinic-rankings">
-        <div class="ranking-header-banner">
-            <img src="../../images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">                    
-        </div>
+<!-- ランキングセクション Design 1 -->
+<section class="clinic-rankings">
+    <div class="ranking-header-banner">
+        <img src="/images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">
         <div id="rank-region-name" style="position:absolute;top: 6%;left: 8%;text-align: center;color: #ffffff;font-size: clamp(16px, 5.2vw, 38px);font-weight: 600;z-index:10;pointer-events:none;">東京</div>
-        <div id="ranking-list" class="ranking-container">
-            <!-- ランキングは親ウィンドウから動的に挿入 -->
-        </div>
-    </section>
-    
-    <script>
-        console.log('Ranking iframe script loaded - timestamp:', new Date().getTime());
-        
-        // DOMContentLoadedを待つ
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Ranking iframe DOMContentLoaded');
-            
-            // 要素の存在確認
-            const rankingList = document.getElementById('ranking-list');
-            const regionName = document.getElementById('rank-region-name');
-            console.log('Initial elements check:', {
-                'ranking-list': !!rankingList,
-                'rank-region-name': !!regionName
-            });
-            
-            // 親ウィンドウに準備完了を通知
-            if (window.parent !== window) {
-                console.log('Notifying parent that ranking iframe is ready');
-                window.parent.postMessage({
-                    action: 'iframe-ready',
-                    iframeId: 'ranking-iframe'
-                }, '*');
-            }
-        });
-        
-        // ロード時にも通知（念のため）
-        window.addEventListener('load', function() {
-            console.log('Ranking iframe window loaded, sending ready notification again');
-            if (window.parent !== window) {
-                window.parent.postMessage({
-                    action: 'iframe-ready',
-                    iframeId: 'ranking-iframe'
-                }, '*');
-            }
-        });
-        
-        // 親ウィンドウからランキングデータを受け取る
-        window.addEventListener('message', function(e) {
-            console.log('Ranking iframe received message:', e.data);
-            if (e.data.action === 'update-ranking') {
-                console.log('Updating ranking with data');
-                const rankingList = document.getElementById('ranking-list');
-                const regionName = document.getElementById('rank-region-name');
-                
-                console.log('ranking-list element:', rankingList);
-                console.log('rank-region-name element:', regionName);
-                console.log('HTML length:', e.data.rankingHtml ? e.data.rankingHtml.length : 0);
-                
-                if (rankingList) {
-                    rankingList.innerHTML = e.data.rankingHtml;
-                    console.log('Ranking HTML updated');
-                } else {
-                    console.error('ranking-list element not found!');
-                }
-                
-                if (regionName) {
-                    regionName.textContent = e.data.regionName;
-                    console.log('Region name updated to:', e.data.regionName);
-                } else {
-                    console.error('rank-region-name element not found!');
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+    </div>
+    <div id="ranking-list" class="ranking-container">
+        <!-- ランキングはapp.jsから動的に挿入される -->
+    </div>
+</section>
+
+<script>
+// 地域名を更新
+const regionMap = {
+    '013': '東京',
+    '027': '大阪',
+    '040': '福岡',
+    '023': '愛知',
+    '014': '神奈川'
+};
+
+const regionId = new URLSearchParams(window.location.search).get('region_id') || '013';
+const regionName = regionMap[regionId] || '東京';
+document.getElementById('rank-region-name').textContent = regionName;
+
+// app.jsの初期化を待つ
+if (window.app) {
+    window.app.init();
+} else {
+    // app.jsがまだ読み込まれていない場合は、少し待ってから再試行
+    setTimeout(() => {
+        if (window.app) {
+            window.app.init();
+        }
+    }, 100);
+}
+</script>

@@ -1,73 +1,59 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../styles.css">
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background: transparent;
-        }
-    </style>
-</head>
-<body>
-    <section class="clinic-details-section">
-        <div class="details-header-banner">
-            <img src="../../images/details_header_bannar3.webp" alt="コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3" class="details-banner-image">
-            <div id="detail-region-name" style="position:absolute;top: 54%;left: 3%;text-align: center;color: #ffffff;font-size: clamp(16px, 4vw, 31px);font-weight: 600;z-index:10;pointer-events:none;padding: clamp(2px, 0.5vw, 4px) clamp(4px, 1vw, 8px);border-radius: 8px;">東京</div>
-        </div>
-        
-        <div id="clinic-details-list" class="clinic-details-container">
-            <!-- 詳細コンテンツは親ウィンドウから動的に挿入 -->
-        </div>
-    </section>
+<!-- 詳細セクション Design 1 -->
+<section class="clinic-details-section">
+    <div class="section-title">
+        <h2>クリニック詳細</h2>
+    </div>
+    
+    <div class="details-header-banner">
+        <img src="/images/details_header_bannar3.webp" alt="詳細バナー" class="details-banner-image">
+    </div>
+    
+    <div id="clinic-details-list" class="clinic-details-container">
+        <!-- クリニック詳細はapp.jsから動的に挿入される -->
+    </div>
+</section>
 
-    <script>
-        console.log('Details iframe script loaded');
-        
-        // DOMContentLoadedを待つ
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('Details iframe DOMContentLoaded');
-            
-            // 親ウィンドウに準備完了を通知
-            if (window.parent !== window) {
-                console.log('Notifying parent that details iframe is ready');
-                window.parent.postMessage({
-                    action: 'iframe-ready',
-                    iframeId: 'details-iframe'
-                }, '*');
-            }
-        });
-        
-        // 親ウィンドウから詳細データを受け取る
-        window.addEventListener('message', function(e) {
-            console.log('Details iframe received message:', e.data);
-            if (e.data.action === 'update-details') {
-                console.log('Updating details with data');
-                const detailsList = document.getElementById('clinic-details-list');
-                const regionName = document.getElementById('detail-region-name');
-                
-                console.log('clinic-details-list element:', detailsList);
-                console.log('detail-region-name element:', regionName);
-                console.log('HTML length:', e.data.detailsHtml ? e.data.detailsHtml.length : 0);
-                
-                if (detailsList) {
-                    detailsList.innerHTML = e.data.detailsHtml;
-                    console.log('Details HTML updated');
-                } else {
-                    console.error('clinic-details-list element not found!');
-                }
-                
-                if (regionName) {
-                    regionName.textContent = e.data.regionName;
-                    console.log('Region name updated to:', e.data.regionName);
-                } else {
-                    console.error('detail-region-name element not found!');
-                }
-            }
-        });
-    </script>
-</body>
-</html>
+<!-- 地図モーダル -->
+<div class="map-modal" id="map-modal">
+    <div class="map-modal-content">
+        <div class="map-modal-header">
+            <h3 id="map-modal-clinic-name">クリニック名</h3>
+            <button class="map-modal-close" id="map-modal-close">&times;</button>
+        </div>
+        <div class="map-modal-body">
+            <div class="map-container" id="map-modal-map-container">
+                <!-- Google Maps iframe will be inserted here -->
+            </div>
+            <div class="map-modal-footer">
+                <a href="#" class="map-modal-button" id="map-modal-button" target="_blank">
+                    <span id="map-modal-button-text">公式サイト</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+// app.jsの初期化を待つ
+if (window.app) {
+    window.app.init();
+} else {
+    setTimeout(() => {
+        if (window.app) {
+            window.app.init();
+        }
+    }, 100);
+}
+
+// 地図モーダルの基本的な動作
+document.getElementById('map-modal-close').addEventListener('click', function() {
+    document.getElementById('map-modal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('map-modal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+</script>
