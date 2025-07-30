@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-NR2WZVQX');</script>
+    <!-- End Google Tag Manager -->
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2025年決定版｜医療ダイエット比較ランキング</title>
+    <meta name="description" content="あなたの地域の優良クリニックを探そう。地域別ランキング、診療科目、営業時間から最適な医療機関を見つけられます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css?v=2025072201">
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    
+    <!-- セクションローダー用のスタイル -->
+    <style>
+        .section-container {
+            width: 100%;
+            min-height: 50px;
+            position: relative;
+        }
+        
+        .section-loading {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 200px;
+            background: #f5f5f5;
+        }
+        
+        .section-error {
+            padding: 20px;
+            background: #fee;
+            color: #c00;
+            text-align: center;
+            border: 1px solid #fcc;
+            border-radius: 4px;
+            margin: 10px;
+        }
+        
+        /* iframe版を使用する場合のスタイル */
+        .section-iframe {
+            width: 100%;
+            overflow: hidden;
+            transition: height 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NR2WZVQX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <div class="container">
+        <!-- ヘッダーセクション -->
+        <div id="header-section" class="section-loading">
+            <div class="loading-message">ヘッダーを読み込み中...</div>
+        </div>
+        
+        <!-- ヒーローセクション -->
+        <div id="hero-section" class="section-loading">
+            <div class="loading-message">メインビジュアルを読み込み中...</div>
+        </div>
+        
+        <!-- ランキングセクション -->
+        <div id="ranking-section" class="section-loading">
+            <div class="loading-message">ランキングを読み込み中...</div>
+        </div>
+        
+        <!-- Tipsセクション -->
+        <div id="tips-section" class="section-loading">
+            <div class="loading-message">Tipsを読み込み中...</div>
+        </div>
+        
+        <!-- 比較表セクション -->
+        <div id="comparison-section" class="section-loading">
+            <div class="loading-message">比較表を読み込み中...</div>
+        </div>
+        
+        <!-- 詳細セクション -->
+        <div id="details-section" class="section-loading">
+            <div class="loading-message">詳細情報を読み込み中...</div>
+        </div>
+    </div>
+    
+    <!-- 共通スクリプト -->
+    <script src="config.js?v=2025072201"></script>
+    <script src="app.js?v=2025072201"></script>
+    
+    <!-- セクションローダー -->
+    <script src="section-loader.js?v=2025072201"></script>
+    
+    <!-- URL Parameter Tracking -->
+    <script src="/url-tracking.js?v=2025072201" defer></script>
+    
+    <!-- セクション読み込みの初期化 -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async function() {
+            // ローダーのタイプを選択（'fetch' または 'iframe'）
+            const loaderType = new URLSearchParams(window.location.search).get('loader') || 'fetch';
+            
+            let loader;
+            if (loaderType === 'iframe') {
+                loader = new IframeSectionLoader();
+            } else {
+                loader = new SectionLoader();
+            }
+            
+            // グローバルに公開（デバッグ用）
+            window.sectionLoader = loader;
+            
+            // 全セクションを読み込む
+            try {
+                await loader.loadAllSections();
+                console.log('All sections loaded successfully');
+            } catch (error) {
+                console.error('Error loading sections:', error);
+            }
+            
+            // デザイン切り替えのためのヘルパー関数
+            window.switchSectionDesign = function(section, design) {
+                loader.switchDesign(section, design);
+            };
+            
+            window.switchAllDesigns = function(design) {
+                loader.switchAllDesigns(design);
+            };
+        });
+    </script>
+    
+    <!-- デバッグ用のコントロールパネル（開発時のみ） -->
+    <div id="debug-controls" style="position: fixed; bottom: 20px; right: 20px; background: white; padding: 10px; border: 1px solid #ccc; border-radius: 4px; display: none;">
+        <h4>セクションデザイン切り替え</h4>
+        <button onclick="switchAllDesigns('design1')">Design 1</button>
+        <button onclick="switchAllDesigns('design2')">Design 2</button>
+        <hr>
+        <label>
+            <input type="checkbox" id="use-iframe" onchange="location.href='?loader=' + (this.checked ? 'iframe' : 'fetch')">
+            iframeモードを使用
+        </label>
+    </div>
+    
+    <!-- デバッグモードの切り替え -->
+    <script>
+        // URLに?debug=1がある場合はコントロールパネルを表示
+        if (new URLSearchParams(window.location.search).get('debug') === '1') {
+            document.getElementById('debug-controls').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
