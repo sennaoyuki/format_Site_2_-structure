@@ -1,0 +1,199 @@
+// URL Parameter Tracking for Analytics
+// This script adds tracking parameters to outbound links
+
+(function() {
+    'use strict';
+
+    // クリックイベントのトラッキング
+    function addTrackingParameters(url, params) {
+        try {
+            const urlObj = new URL(url, window.location.origin);
+            
+            // 既存のパラメータを保持しつつ、新しいパラメータを追加
+            Object.keys(params).forEach(key => {
+                if (params[key] !== undefined && params[key] !== null) {
+                    urlObj.searchParams.set(key, params[key]);
+                }
+            });
+            
+            return urlObj.toString();
+        } catch (e) {
+            console.error('URL parsing error:', e);
+            return url;
+        }
+    }
+
+    // 公式サイトリンクの処理
+    function setupOutboundLinkTracking() {
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a.link_btn');
+            if (!link) return;
+            
+            // リンク先がgo/xxx/形式の場合のみ処理
+            const href = link.getAttribute('href');
+            if (!href || !href.includes('/go/')) return;
+            
+            // クリニック名を取得
+            const clinicName = link.closest('tr')?.querySelector('.clinic-link')?.textContent || 
+                              link.closest('.ranking-item')?.querySelector('.clinic-name')?.textContent || 
+                              'Unknown';
+            
+            // ランキング順位を取得
+            const rankElement = link.closest('.ranking-item')?.querySelector('.rank-badge');
+            const rank = rankElement ? rankElement.textContent.replace(/[^\d]/g, '') : '';
+            
+            // 現在のページ情報
+            const currentRegion = new URLSearchParams(window.location.search).get('region_id') || '013';
+            
+            // トラッキングパラメータ
+            const trackingParams = {
+                utm_source: 'medical-diet-comparison',
+                utm_medium: 'website',
+                utm_campaign: 'ranking',
+                utm_content: `rank${rank || 'unknown'}`,
+                click_position: rank || 'comparison_table',
+                click_clinic: clinicName.replace(/\s+/g, '_'),
+                source_region: currentRegion,
+                source_page: window.location.pathname,
+                timestamp: Date.now()
+            };
+            
+            // 新しいURLを生成
+            const newUrl = addTrackingParameters(href, trackingParams);
+            
+            // hrefを更新（実際のクリック時に適用される）
+            link.setAttribute('href', newUrl);
+            
+            // デバッグログ
+            console.log('Outbound link tracking:', {
+                original: href,
+                new: newUrl,
+                params: trackingParams
+            });
+        }, true); // キャプチャフェーズで実行
+    }
+
+    // 詳細を見るボタンの処理
+    function setupInternalLinkTracking() {
+        document.addEventListener('click', function(e) {
+            const link = e.target.closest('a.detail_btn');
+            if (!link) return;
+            
+            const href = link.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+            
+            // クリニック情報を取得
+            const clinicName = link.closest('tr')?.querySelector('.clinic-link')?.textContent || 'Unknown';
+            const rank = href.replace('#clinic', '');
+            
+            // URLにパラメータを追加（ハッシュは保持）
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('detail_click', clinicName.replace(/\s+/g, '_'));
+            currentUrl.searchParams.set('detail_rank', rank);
+            currentUrl.searchParams.set('detail_time', Date.now());
+            
+            // URLを更新（ページリロードなし）
+            window.history.replaceState({}, '', currentUrl.toString() + href);
+            
+            console.log('Internal navigation tracked:', {
+                clinic: clinicName,
+                rank: rank
+            });
+        });
+    }
+
+    // タブ切り替えの追跡
+    function setupTabTracking() {
+        // Tipsタブ
+        document.addEventListener('click', function(e) {
+            const tab = e.target.closest('.tips-container .tab');
+            if (!tab) return;
+            
+            const tabText = tab.querySelector('.tab-text')?.textContent || tab.textContent;
+            const tabIndex = tab.getAttribute('data-tab');
+            
+            // URLパラメータを更新
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('tips_tab', tabText.replace(/\s+/g, '_'));
+            currentUrl.searchParams.set('tips_index', tabIndex);
+            window.history.replaceState({}, '', currentUrl.toString());
+        });
+
+        // 比較表タブ
+        document.addEventListener('click', function(e) {
+            const tab = e.target.closest('.comparison-tab-menu-item');
+            if (!tab) return;
+            
+            const tabText = tab.textContent;
+            const tabType = tab.getAttribute('data-tab');
+            
+            // URLパラメータを更新
+            const currentUrl = new URL(window.location.href);
+            currentUrl.searchParams.set('comparison_tab', tabText.replace(/\s+/g, '_'));
+            currentUrl.searchParams.set('comparison_type', tabType);
+            window.history.replaceState({}, '', currentUrl.toString());
+        });
+    }
+
+    // セッション情報の追加
+    function addSessionInfo() {
+        const currentUrl = new URL(window.location.href);
+        
+        // セッションIDがなければ生成
+        if (!currentUrl.searchParams.get('session_id')) {
+            const sessionId = Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            currentUrl.searchParams.set('session_id', sessionId);
+            window.history.replaceState({}, '', currentUrl.toString());
+        }
+        
+        // 初回訪問時刻
+        if (!currentUrl.searchParams.get('first_visit')) {
+            currentUrl.searchParams.set('first_visit', Date.now());
+            window.history.replaceState({}, '', currentUrl.toString());
+        }
+    }
+
+    // スクロール深度の記録
+    function trackScrollDepth() {
+        let maxScroll = 0;
+        
+        window.addEventListener('scroll', function() {
+            const scrollPercentage = Math.round((window.pageYOffset / (document.documentElement.scrollHeight - window.innerHeight)) * 100);
+            
+            if (scrollPercentage > maxScroll) {
+                maxScroll = scrollPercentage;
+                
+                // 25%刻みで記録
+                if (maxScroll % 25 === 0) {
+                    const currentUrl = new URL(window.location.href);
+                    currentUrl.searchParams.set('max_scroll', maxScroll);
+                    currentUrl.searchParams.set('scroll_time', Date.now());
+                    window.history.replaceState({}, '', currentUrl.toString());
+                }
+            }
+        });
+    }
+
+    // 初期化
+    function init() {
+        console.log('URL tracking initialized');
+        
+        // 各種トラッキングの設定
+        setupOutboundLinkTracking();
+        setupInternalLinkTracking();
+        setupTabTracking();
+        addSessionInfo();
+        trackScrollDepth();
+        
+        // 現在のURLパラメータをログ
+        const params = new URLSearchParams(window.location.search);
+        console.log('Current tracking params:', Object.fromEntries(params));
+    }
+
+    // DOMContentLoadedで初期化
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+})();
