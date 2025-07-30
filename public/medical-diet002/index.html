@@ -416,10 +416,16 @@
         // app.jsの初期化完了を待ってからデータを送信
         window.addEventListener('app-initialized', function() {
             console.log('App initialized event received, sending data to iframes');
-            // 少し遅延を入れてiframeが完全に準備できるのを待つ
-            setTimeout(() => {
-                sendDataToIframes();
-            }, 500);
+            // iframe準備完了トリガーで既に送信済みの場合はスキップ
+            if (!dataSentFlag) {
+                // 少し遅延を入れてiframeが完全に準備できるのを待つ
+                setTimeout(() => {
+                    if (!dataSentFlag) {
+                        dataSentFlag = true;
+                        sendDataToIframes();
+                    }
+                }, 500);
+            }
         });
 
         // DOMContentLoadedを待つ
@@ -472,8 +478,9 @@
                         console.log('All iframes loaded, will send data when app is ready...');
                         // app.jsの準備ができているか確認（少し待ってから確認）
                         setTimeout(() => {
-                            if (window.app && window.app.dataManager) {
+                            if (window.app && window.app.dataManager && !dataSentFlag) {
                                 console.log('App already initialized, sending data immediately');
+                                dataSentFlag = true;
                                 sendDataToIframes();
                             } else {
                             console.log('Waiting for app initialization...');
@@ -482,9 +489,10 @@
                             const checkInterval = setInterval(() => {
                                 checkCount++;
                                 console.log(`Checking app initialization... attempt ${checkCount}`);
-                                if (window.app && window.app.dataManager) {
+                                if (window.app && window.app.dataManager && !dataSentFlag) {
                                     console.log('App initialized via interval check');
                                     clearInterval(checkInterval);
+                                    dataSentFlag = true;
                                     sendDataToIframes();
                                 } else if (checkCount > 20) { // 10秒後にタイムアウト
                                     console.error('App initialization timeout');
@@ -508,6 +516,7 @@
 
         // iframe準備完了状況を追跡
         let iframeReadyStatus = {};
+        let dataSentFlag = false; // 重複送信を防ぐフラグ
         
         // メッセージハンドラー（iframe間通信用）
         window.addEventListener('message', function(e) {
@@ -515,9 +524,10 @@
                 console.log('Iframe ready notification received:', e.data.iframeId);
                 iframeReadyStatus[e.data.iframeId] = true;
                 
-                // 必要なiframeが準備完了したらデータ送信
-                if (iframeReadyStatus['ranking-iframe'] && window.app && window.app.dataManager) {
+                // 必要なiframeが準備完了したらデータ送信（1回のみ）
+                if (iframeReadyStatus['ranking-iframe'] && window.app && window.app.dataManager && !dataSentFlag) {
                     console.log('Ranking iframe ready, sending data immediately');
+                    dataSentFlag = true;
                     sendDataToIframes();
                 }
             } else if (e.data.action === 'toggle-menu') {
