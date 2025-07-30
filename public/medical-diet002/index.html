@@ -346,7 +346,7 @@
                     console.log('Number of clinics:', clinics ? clinics.length : 0);
                     console.log('First clinic:', clinics && clinics.length > 0 ? clinics[0] : null);
                     
-                    // 各iframeにデータを送信
+                    // 各iframeにデータを送信（iframe内のスクリプトが完全に準備できるまで待つ）
                     setTimeout(() => {
                         const rankingIframe = document.getElementById('ranking-iframe');
                         if (rankingIframe && rankingIframe.contentWindow) {
@@ -401,7 +401,7 @@
                                 console.error('Error sending details data:', e);
                             }
                         }
-                    }, 100);
+                    }, 1000); // 1秒待つ
                 } else {
                     console.error('Region not found for ID:', regionId);
                 }
@@ -506,9 +506,21 @@
             });
         });
 
+        // iframe準備完了状況を追跡
+        let iframeReadyStatus = {};
+        
         // メッセージハンドラー（iframe間通信用）
         window.addEventListener('message', function(e) {
-            if (e.data.action === 'toggle-menu') {
+            if (e.data.action === 'iframe-ready') {
+                console.log('Iframe ready notification received:', e.data.iframeId);
+                iframeReadyStatus[e.data.iframeId] = true;
+                
+                // 必要なiframeが準備完了したらデータ送信
+                if (iframeReadyStatus['ranking-iframe'] && window.app && window.app.dataManager) {
+                    console.log('Ranking iframe ready, sending data immediately');
+                    sendDataToIframes();
+                }
+            } else if (e.data.action === 'toggle-menu') {
                 // ハンバーガーメニューの処理
                 const overlay = document.getElementById('sidebar-overlay');
                 const menu = document.getElementById('sidebar-menu');

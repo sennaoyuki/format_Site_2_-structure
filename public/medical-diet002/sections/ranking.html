@@ -24,7 +24,30 @@
     </section>
     
     <script>
-        console.log('Ranking iframe script loaded');
+        console.log('Ranking iframe script loaded - timestamp:', new Date().getTime());
+        
+        // DOMContentLoadedを待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Ranking iframe DOMContentLoaded');
+            
+            // 要素の存在確認
+            const rankingList = document.getElementById('ranking-list');
+            const regionName = document.getElementById('rank-region-name');
+            console.log('Initial elements check:', {
+                'ranking-list': !!rankingList,
+                'rank-region-name': !!regionName
+            });
+            
+            // 親ウィンドウに準備完了を通知
+            if (window.parent !== window) {
+                console.log('Notifying parent that ranking iframe is ready');
+                window.parent.postMessage({
+                    action: 'iframe-ready',
+                    iframeId: 'ranking-iframe'
+                }, '*');
+            }
+        });
+        
         // 親ウィンドウからランキングデータを受け取る
         window.addEventListener('message', function(e) {
             console.log('Ranking iframe received message:', e.data);
