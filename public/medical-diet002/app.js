@@ -716,6 +716,10 @@ class RankingApp {
             setTimeout(() => {
                 this.setupMapAccordions();
             }, 100);
+            
+            // 初期化完了イベントを発火
+            console.log('RankingApp initialization complete, dispatching event');
+            window.dispatchEvent(new Event('app-initialized'));
         } catch (error) {
             console.error('アプリケーションの初期化に失敗しました:', error);
             this.displayManager.showError('データの読み込みに失敗しました。ページを再読み込みしてください。');

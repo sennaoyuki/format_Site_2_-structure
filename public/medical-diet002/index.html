@@ -191,70 +191,9 @@
 
     <script src="app.js?v=2025072201" defer></script>
     <script>
-        // iframeの読み込み管理
-        const iframes = [
-            { id: 'header-iframe', loadingId: 'header-loading' },
-            { id: 'hero-iframe', loadingId: 'hero-loading' },
-            { id: 'ranking-iframe', loadingId: 'ranking-loading' },
-            { id: 'tips-iframe', loadingId: 'tips-loading' },
-            { id: 'comparison-iframe', loadingId: 'comparison-loading' },
-            { id: 'details-iframe', loadingId: 'details-loading' }
-        ];
-
-        // iframe読み込み完了フラグ
-        const iframeLoadStatus = {};
+        // グローバル変数と関数を定義
+        let iframeLoadStatus = {};
         
-        // 各iframeの読み込み完了を処理
-        iframes.forEach(({ id, loadingId }) => {
-            const iframe = document.getElementById(id);
-            const loading = document.getElementById(loadingId);
-            
-            iframe.onload = function() {
-                console.log(`iframe loaded: ${id}`);
-                // ローディング表示を隠す
-                loading.style.display = 'none';
-                iframe.style.display = 'block';
-                
-                // iframeの高さを自動調整
-                try {
-                    const height = iframe.contentWindow.document.body.scrollHeight;
-                    iframe.style.height = height + 'px';
-                } catch (e) {
-                    console.error('Cannot adjust iframe height:', e);
-                }
-                
-                // 読み込み完了フラグを立てる
-                iframeLoadStatus[id] = true;
-                
-                // 全てのiframeが読み込まれたらデータを送信
-                if (Object.keys(iframeLoadStatus).length === iframes.length) {
-                    console.log('All iframes loaded, sending data...');
-                    sendDataToIframes();
-                }
-            };
-        });
-
-        // メッセージハンドラー（iframe間通信用）
-        window.addEventListener('message', function(e) {
-            if (e.data.action === 'toggle-menu') {
-                // ハンバーガーメニューの処理
-                const overlay = document.getElementById('sidebar-overlay');
-                const menu = document.getElementById('sidebar-menu');
-                if (overlay && menu) {
-                    overlay.classList.toggle('active');
-                    menu.classList.toggle('active');
-                }
-            }
-            
-            // 高さ調整リクエスト
-            if (e.data.action === 'resize') {
-                const iframe = document.getElementById(e.data.iframeId);
-                if (iframe) {
-                    iframe.style.height = e.data.height + 'px';
-                }
-            }
-        });
-
         // 地域データを各iframeに送信
         function updateRegionInIframes(regionName) {
             const targetIframes = ['hero-iframe', 'ranking-iframe', 'comparison-iframe', 'details-iframe'];
@@ -269,80 +208,7 @@
             });
         }
 
-        // データをiframeに送信する関数
-        function sendDataToIframes() {
-            // URLパラメータから地域IDを取得
-            const urlParams = new URLSearchParams(window.location.search);
-            const regionId = urlParams.get('region_id') || '013';
-            
-            console.log('sendDataToIframes called, checking app...', window.app);
-            if (window.app && window.app.dataManager) {
-                console.log('DataManager found, getting region data for:', regionId);
-                const region = window.app.dataManager.getRegionById(regionId);
-                if (region) {
-                    console.log('Region found:', region);
-                    updateRegionInIframes(region.name);
-                    
-                    // ランキングデータを送信
-                    const ranking = window.app.dataManager.getRankingByRegionId(regionId);
-                    const clinics = window.app.dataManager.getAllClinics();
-                    console.log('Ranking data:', ranking);
-                    console.log('Clinics data:', clinics);
-                    
-                    // ランキングiframeにデータを送信
-                    const rankingIframe = document.getElementById('ranking-iframe');
-                    if (rankingIframe && rankingIframe.contentWindow) {
-                        // HTMLを生成してiframeに送信
-                        const rankingHtml = generateRankingHtml(clinics, ranking);
-                        console.log('Sending ranking HTML to iframe');
-                        rankingIframe.contentWindow.postMessage({
-                            action: 'update-ranking',
-                            rankingHtml: rankingHtml,
-                            regionName: region.name
-                        }, '*');
-                    }
-                    
-                    // 比較表iframeにデータを送信
-                    const comparisonIframe = document.getElementById('comparison-iframe');
-                    if (comparisonIframe && comparisonIframe.contentWindow) {
-                        const comparisonHtml = generateComparisonHtml(clinics, ranking);
-                        console.log('Sending comparison HTML to iframe');
-                        comparisonIframe.contentWindow.postMessage({
-                            action: 'update-comparison',
-                            comparisonHtml: comparisonHtml,
-                            regionName: region.name
-                        }, '*');
-                    }
-                    
-                    // 詳細iframeにデータを送信
-                    const detailsIframe = document.getElementById('details-iframe');
-                    if (detailsIframe && detailsIframe.contentWindow) {
-                        const detailsHtml = generateDetailsHtml(clinics, ranking, regionId);
-                        console.log('Sending details HTML to iframe');
-                        detailsIframe.contentWindow.postMessage({
-                            action: 'update-details',
-                            detailsHtml: detailsHtml,
-                            regionName: region.name
-                        }, '*');
-                    }
-                }
-            } else {
-                // app.jsがまだ初期化されていない場合は再試行
-                console.log('App not initialized yet, retrying in 500ms...');
-                setTimeout(sendDataToIframes, 500);
-            }
-        }
-
-        // アプリケーションの初期化を待つ
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('DOMContentLoaded fired');
-            // app.jsの読み込みを待つ
-            if (!window.app) {
-                console.log('Waiting for app.js to load...');
-            }
-        });
-
-        // ランキングHTML生成関数（app.jsのロジックを再利用）
+        // ランキングHTML生成関数
         function generateRankingHtml(clinics, ranking) {
             if (!ranking) return '';
             
@@ -365,7 +231,7 @@
                         </div>
                         <div class="clinic-info">
                             <div class="clinic-header">
-                                <img src="../images/clinics/${clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc'}/${clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc'}-logo.webp" alt="${clinic.name}" class="clinic-logo">
+                                <img src="../images/clinics/${clinic.code}/${clinic.code}-logo.webp" alt="${clinic.name}" class="clinic-logo">
                                 <h3 class="clinic-name">${clinic.name}</h3>
                             </div>
                             <div class="clinic-details">
@@ -393,12 +259,10 @@
                 const clinic = clinics.find(c => c.id === clinicId);
                 if (!clinic) return;
                 
-                const logoPath = clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc';
-                
                 html += `
                     <tr>
                         <td class="ranking-table_td1">
-                            <img src="../images/clinics/${logoPath}/${logoPath}-logo.webp" alt="${clinic.name}" width="80">
+                            <img src="../images/clinics/${clinic.code}/${clinic.code}-logo.webp" alt="${clinic.name}" width="80">
                             <a href="#clinic${clinic.id}" class="clinic-link">${clinic.name}</a>
                         </td>
                         <td class="">
@@ -408,7 +272,7 @@
                         <td class="">${clinic.feature1 || ''}</td>
                         <td class="">${clinic.feature2 || ''}</td>
                         <td>
-                            <a class="link_btn" href="/go/${logoPath}/" target="_blank">公式サイト &gt;</a>
+                            <a class="link_btn" href="/go/${clinic.code}/" target="_blank">公式サイト &gt;</a>
                             <a class="detail_btn" href="#clinic${clinic.id}">詳細をみる</a>
                         </td>
                     </tr>
@@ -429,7 +293,6 @@
                 if (!clinic) return;
                 
                 const rank = index + 1;
-                const logoPath = clinic.id === '1' ? 'dio' : clinic.id === '2' ? 'urara' : clinic.id === '3' ? 'lieto' : clinic.id === '4' ? 'eminal' : 'sbc';
                 
                 html += `
                     <div class="clinic-detail" id="clinic${clinic.id}">
@@ -438,7 +301,7 @@
                             <h2 class="detail-clinic-name">${clinic.name}</h2>
                         </div>
                         <div class="detail-content">
-                            <img src="../images/clinics/${logoPath}/${logoPath}-banner.webp" alt="${clinic.name}" class="detail-banner">
+                            <img src="../images/clinics/${clinic.code}/${clinic.code}_detail_bnr.webp" alt="${clinic.name}" class="detail-banner">
                             <div class="detail-description">
                                 <p>${clinic.description || ''}</p>
                             </div>
@@ -449,6 +312,158 @@
             
             return html;
         }
+
+        // データをiframeに送信する関数
+        function sendDataToIframes() {
+            // URLパラメータから地域IDを取得
+            const urlParams = new URLSearchParams(window.location.search);
+            const regionId = urlParams.get('region_id') || '013';
+            
+            console.log('sendDataToIframes called, checking app...', window.app);
+            if (window.app && window.app.dataManager) {
+                console.log('DataManager found, getting region data for:', regionId);
+                const region = window.app.dataManager.getRegionById(regionId);
+                if (region) {
+                    console.log('Region found:', region);
+                    updateRegionInIframes(region.name);
+                    
+                    // ランキングデータを送信
+                    const ranking = window.app.dataManager.getRankingByRegionId(regionId);
+                    const clinics = window.app.dataManager.getAllClinics();
+                    console.log('Ranking data:', ranking);
+                    console.log('Clinics data:', clinics);
+                    
+                    // 各iframeにデータを送信
+                    setTimeout(() => {
+                        const rankingIframe = document.getElementById('ranking-iframe');
+                        if (rankingIframe && rankingIframe.contentWindow) {
+                            const rankingHtml = generateRankingHtml(clinics, ranking);
+                            console.log('Sending ranking HTML to iframe');
+                            rankingIframe.contentWindow.postMessage({
+                                action: 'update-ranking',
+                                rankingHtml: rankingHtml,
+                                regionName: region.name
+                            }, '*');
+                        }
+                        
+                        const comparisonIframe = document.getElementById('comparison-iframe');
+                        if (comparisonIframe && comparisonIframe.contentWindow) {
+                            const comparisonHtml = generateComparisonHtml(clinics, ranking);
+                            console.log('Sending comparison HTML to iframe');
+                            comparisonIframe.contentWindow.postMessage({
+                                action: 'update-comparison',
+                                comparisonHtml: comparisonHtml,
+                                regionName: region.name
+                            }, '*');
+                        }
+                        
+                        const detailsIframe = document.getElementById('details-iframe');
+                        if (detailsIframe && detailsIframe.contentWindow) {
+                            const detailsHtml = generateDetailsHtml(clinics, ranking, regionId);
+                            console.log('Sending details HTML to iframe');
+                            detailsIframe.contentWindow.postMessage({
+                                action: 'update-details',
+                                detailsHtml: detailsHtml,
+                                regionName: region.name
+                            }, '*');
+                        }
+                    }, 100);
+                }
+            } else {
+                // app.jsがまだ初期化されていない場合は再試行
+                console.log('App not initialized yet, retrying in 500ms...');
+                setTimeout(sendDataToIframes, 500);
+            }
+        }
+        
+        // app.jsの初期化完了を待ってからデータを送信
+        window.addEventListener('app-initialized', function() {
+            console.log('App initialized event received, sending data to iframes');
+            sendDataToIframes();
+        });
+
+        // DOMContentLoadedを待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOMContentLoaded - Setting up iframe handlers');
+            
+            // iframeの読み込み管理
+            const iframes = [
+                { id: 'header-iframe', loadingId: 'header-loading' },
+                { id: 'hero-iframe', loadingId: 'hero-loading' },
+                { id: 'ranking-iframe', loadingId: 'ranking-loading' },
+                { id: 'tips-iframe', loadingId: 'tips-loading' },
+                { id: 'comparison-iframe', loadingId: 'comparison-loading' },
+                { id: 'details-iframe', loadingId: 'details-loading' }
+            ];
+            
+            // 各iframeの読み込み完了を処理
+            iframes.forEach(({ id, loadingId }) => {
+                const iframe = document.getElementById(id);
+                const loading = document.getElementById(loadingId);
+                
+                if (!iframe) {
+                    console.error(`iframe not found: ${id}`);
+                    return;
+                }
+                
+                console.log(`Setting up onload for iframe: ${id}`);
+                
+                iframe.onload = function() {
+                    console.log(`iframe loaded: ${id}`);
+                    // ローディング表示を隠す
+                    if (loading) {
+                        loading.style.display = 'none';
+                    }
+                    iframe.style.display = 'block';
+                    
+                    // iframeの高さを自動調整
+                    try {
+                        const height = iframe.contentWindow.document.body.scrollHeight;
+                        iframe.style.height = height + 'px';
+                    } catch (e) {
+                        console.error('Cannot adjust iframe height:', e);
+                    }
+                    
+                    // 読み込み完了フラグを立てる
+                    iframeLoadStatus[id] = true;
+                    
+                    // 全てのiframeが読み込まれたらデータを送信
+                    if (Object.keys(iframeLoadStatus).length === iframes.length) {
+                        console.log('All iframes loaded, sending data...');
+                        sendDataToIframes();
+                    }
+                };
+                
+                // エラーハンドリング
+                iframe.onerror = function() {
+                    console.error(`Failed to load iframe: ${id}`);
+                    if (loading) {
+                        loading.textContent = 'エラー: 読み込みに失敗しました';
+                    }
+                };
+            });
+        });
+
+        // メッセージハンドラー（iframe間通信用）
+        window.addEventListener('message', function(e) {
+            if (e.data.action === 'toggle-menu') {
+                // ハンバーガーメニューの処理
+                const overlay = document.getElementById('sidebar-overlay');
+                const menu = document.getElementById('sidebar-menu');
+                if (overlay && menu) {
+                    overlay.classList.toggle('active');
+                    menu.classList.toggle('active');
+                }
+            }
+            
+            // 高さ調整リクエスト
+            if (e.data.action === 'resize') {
+                const iframe = document.getElementById(e.data.iframeId);
+                if (iframe) {
+                    iframe.style.height = e.data.height + 'px';
+                }
+            }
+        });
 
         // サイドバーの処理
         document.getElementById('close-sidebar')?.addEventListener('click', function() {
