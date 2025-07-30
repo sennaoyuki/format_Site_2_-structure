@@ -1066,7 +1066,37 @@ text-align: center;
             if (!clinicData) return;
             
             const clinicName = clinicData.name || 'ディオクリニック';
-            const clinicSlug = clinicData.slug || 'dio';
+            
+            // クリニックIDまたは名前からslugを特定
+            const clinicIdToSlugMap = {
+                '1': 'dio',
+                '2': 'eminal', 
+                '3': 'urara',
+                '4': 'lieto',
+                '5': 'sbc'
+            };
+            
+            const clinicNameToSlugMap = {
+                'ディオクリニック': 'dio',
+                'エミナルクリニック': 'eminal',
+                'URARAクリニック': 'urara',
+                'リエートクリニック': 'lieto',
+                '湘南美容クリニック': 'sbc',
+                // 他の可能なクリニック名も追加
+                'エミナル': 'eminal',
+                'URARA': 'urara',
+                'リエート': 'lieto',
+                '湘南美容': 'sbc',
+                'SBC': 'sbc'
+            };
+            
+            const clinicSlug = clinicIdToSlugMap[clinicData.id] || clinicNameToSlugMap[clinicName] || 'dio';
+            
+            console.log('Setting first choice clinic:', {
+                id: clinicData.id,
+                name: clinicName,
+                slug: clinicSlug
+            });
             
             // テキスト要素を更新
             const regionText = document.getElementById('first-choice-region-text');
@@ -1237,20 +1267,103 @@ text-align: center;
             pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
         }
 
-        // 初期化時にランキング1位のクリニックを設定
-        document.addEventListener('DOMContentLoaded', function() {
-            // ランキングデータから1位のクリニックを取得
-            if (window.app && window.app.rankingData && window.app.rankingData.length > 0) {
-                const firstClinic = window.app.rankingData[0];
+        // 1位クリニック情報の更新を実行
+        function updateFirstChoiceClinic() {
+            if (!window.app || !window.app.dataManager) {
+                console.log('app or dataManager not ready yet');
+                return;
+            }
+            
+            // 現在の地域IDを取得
+            const regionId = window.app.urlHandler ? window.app.urlHandler.getRegionId() : '013';
+            console.log('Current region ID:', regionId);
+            
+            // ランキングデータを取得
+            const ranking = window.app.dataManager.getRankingByRegionId(regionId);
+            console.log('Ranking data:', ranking);
+            
+            if (!ranking || !ranking.ranks) {
+                console.log('No ranking data found for region:', regionId);
+                return;
+            }
+            
+            // 1位のクリニックIDを取得
+            const firstPlaceClinicId = ranking.ranks.no1;
+            console.log('First place clinic ID:', firstPlaceClinicId);
+            
+            if (!firstPlaceClinicId) {
+                console.log('No first place clinic found');
+                return;
+            }
+            
+            // クリニック情報を取得
+            const allClinics = window.app.dataManager.getAllClinics();
+            const firstClinic = allClinics.find(clinic => clinic.id === firstPlaceClinicId);
+            console.log('First clinic data:', firstClinic);
+            
+            if (firstClinic) {
                 setFirstChoiceClinic(firstClinic);
             }
+        }
+
+        // 初期化時に実行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, attempting to update first choice clinic');
+            updateFirstChoiceClinic();
         });
 
-        // app.jsが読み込まれた後にも実行
-        if (window.app && window.app.rankingData && window.app.rankingData.length > 0) {
-            const firstClinic = window.app.rankingData[0];
-            setFirstChoiceClinic(firstClinic);
+        // app.jsが読み込まれた後にも実行（タイマーで複数回試行）
+        let retryCount = 0;
+        const maxRetries = 10;
+        
+        function tryUpdateFirstChoice() {
+            if (window.app && window.app.dataManager && window.app.dataManager.getAllClinics().length > 0) {
+                console.log('App ready, updating first choice clinic');
+                updateFirstChoiceClinic();
+                return;
+            }
+            
+            retryCount++;
+            if (retryCount < maxRetries) {
+                console.log(`App not ready yet, retry ${retryCount}/${maxRetries}`);
+                setTimeout(tryUpdateFirstChoice, 500);
+            } else {
+                console.log('Max retries reached, app may not be loaded');
+            }
         }
+        
+        // 少し遅延してから開始
+        setTimeout(tryUpdateFirstChoice, 100);
+
+        // 地域変更時のイベントリスナーも追加
+        function setupRegionChangeWatcher() {
+            if (!window.app || !window.app.urlHandler) {
+                setTimeout(setupRegionChangeWatcher, 500);
+                return;
+            }
+            
+            let currentRegionId = window.app.urlHandler.getRegionId();
+            console.log('Initial region ID:', currentRegionId);
+            
+            // URLパラメータ変更の監視
+            setInterval(() => {
+                const newRegionId = window.app.urlHandler ? window.app.urlHandler.getRegionId() : '013';
+                if (newRegionId !== currentRegionId) {
+                    currentRegionId = newRegionId;
+                    console.log('Region changed to:', newRegionId);
+                    setTimeout(() => updateFirstChoiceClinic(), 100); // 少し遅延を入れる
+                }
+            }, 1000);
+        }
+        
+        // 地域監視を開始
+        setupRegionChangeWatcher();
+        
+        // ページ読み込み完了時にもう一度実行
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded, updating first choice clinic');
+            setTimeout(() => updateFirstChoiceClinic(), 1000);
+        });
     </script>
 
     <script>

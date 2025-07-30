@@ -1,6 +1,6 @@
 // medical-diet002ディレクトリ用の設定
 window.SITE_CONFIG = {
-    basePath: '/medical-diet002',
+    basePath: '.',
     assetsPath: '..',
     dataPath: '../data',
     imagesPath: '..'
