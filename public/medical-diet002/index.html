@@ -331,6 +331,11 @@
                 await loader.loadAllSections();
                 console.log('All sections loaded successfully');
                 
+                // 読み込み完了後にローディング状態を解除
+                document.querySelectorAll('.section-loading').forEach(element => {
+                    element.classList.remove('section-loading');
+                });
+                
                 // セクション読み込み完了後にapp.jsを初期化
                 if (window.app) {
                     console.log('Initializing app after sections loaded');

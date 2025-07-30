@@ -72,6 +72,7 @@ class SectionLoader {
             
         } catch (error) {
             console.error(`Error loading section ${sectionName}:`, error);
+            console.error(`Failed URL: ${url}`);
             // フォールバックとして元のコンテンツを表示
             this.loadFallback(sectionName);
         }
@@ -110,10 +111,9 @@ class SectionLoader {
     async loadAllSections() {
         const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details', 'medical-columns', 'first-choice-recommendation', 'footer', 'modals'];
         
-        // 全セクションを順番に読み込み
-        for (const section of sections) {
-            await this.loadSection(section);
-        }
+        // 全セクションを並列で読み込み（高速化）
+        const loadPromises = sections.map(section => this.loadSection(section));
+        await Promise.allSettled(loadPromises);
         
         // 読み込み完了後、mainタグでmainセクションを囲む
         const container = document.querySelector('.container');
