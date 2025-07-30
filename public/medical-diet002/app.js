@@ -743,7 +743,14 @@ class RankingApp {
             
             // 初期化完了イベントを発火
             console.log('RankingApp initialization complete, dispatching event');
-            window.dispatchEvent(new Event('app-initialized'));
+            console.log('Current region ID:', this.currentRegionId);
+            console.log('DataManager ready:', !!this.dataManager);
+            window.dispatchEvent(new CustomEvent('app-initialized', {
+                detail: {
+                    currentRegionId: this.currentRegionId,
+                    dataManager: this.dataManager
+                }
+            }));
         } catch (error) {
             console.error('アプリケーションの初期化に失敗しました:', error);
             this.displayManager.showError('データの読み込みに失敗しました。ページを再読み込みしてください。');

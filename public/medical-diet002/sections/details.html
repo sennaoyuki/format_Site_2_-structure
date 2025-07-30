@@ -26,6 +26,21 @@
 
     <script>
         console.log('Details iframe script loaded');
+        
+        // DOMContentLoadedを待つ
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Details iframe DOMContentLoaded');
+            
+            // 親ウィンドウに準備完了を通知
+            if (window.parent !== window) {
+                console.log('Notifying parent that details iframe is ready');
+                window.parent.postMessage({
+                    action: 'iframe-ready',
+                    iframeId: 'details-iframe'
+                }, '*');
+            }
+        });
+        
         // 親ウィンドウから詳細データを受け取る
         window.addEventListener('message', function(e) {
             console.log('Details iframe received message:', e.data);

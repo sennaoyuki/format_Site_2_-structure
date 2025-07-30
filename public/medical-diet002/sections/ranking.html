@@ -48,6 +48,17 @@
             }
         });
         
+        // ロード時にも通知（念のため）
+        window.addEventListener('load', function() {
+            console.log('Ranking iframe window loaded, sending ready notification again');
+            if (window.parent !== window) {
+                window.parent.postMessage({
+                    action: 'iframe-ready',
+                    iframeId: 'ranking-iframe'
+                }, '*');
+            }
+        });
+        
         // 親ウィンドウからランキングデータを受け取る
         window.addEventListener('message', function(e) {
             console.log('Ranking iframe received message:', e.data);
