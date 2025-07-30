@@ -210,10 +210,12 @@
 
         // ランキングHTML生成関数
         function generateRankingHtml(clinics, ranking) {
-            if (!ranking) return '';
+            if (!ranking || !ranking.ranks) return '';
             
             let html = '';
-            const clinicRanks = ranking.ranks.slice(0, 5);
+            // ranksがオブジェクトの場合は配列に変換
+            const ranksArray = Array.isArray(ranking.ranks) ? ranking.ranks : Object.values(ranking.ranks);
+            const clinicRanks = ranksArray.slice(0, 5);
             
             clinicRanks.forEach((clinicId, index) => {
                 const clinic = clinics.find(c => c.id === clinicId);
@@ -250,10 +252,12 @@
         }
 
         function generateComparisonHtml(clinics, ranking) {
-            if (!ranking) return '';
+            if (!ranking || !ranking.ranks) return '';
             
             let html = '';
-            const clinicRanks = ranking.ranks.slice(0, 5);
+            // ranksがオブジェクトの場合は配列に変換
+            const ranksArray = Array.isArray(ranking.ranks) ? ranking.ranks : Object.values(ranking.ranks);
+            const clinicRanks = ranksArray.slice(0, 5);
             
             clinicRanks.forEach((clinicId) => {
                 const clinic = clinics.find(c => c.id === clinicId);
@@ -283,10 +287,12 @@
         }
 
         function generateDetailsHtml(clinics, ranking, regionId) {
-            if (!ranking) return '';
+            if (!ranking || !ranking.ranks) return '';
             
             let html = '';
-            const clinicRanks = ranking.ranks.slice(0, 5);
+            // ranksがオブジェクトの場合は配列に変換
+            const ranksArray = Array.isArray(ranking.ranks) ? ranking.ranks : Object.values(ranking.ranks);
+            const clinicRanks = ranksArray.slice(0, 5);
             
             clinicRanks.forEach((clinicId, index) => {
                 const clinic = clinics.find(c => c.id === clinicId);

@@ -138,6 +138,12 @@ class DisplayManager {
     }
 
     updateRankingDisplay(clinics, ranking) {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        if (!this.rankingList) {
+            console.log('ranking-list element not found, skipping updateRankingDisplay');
+            return;
+        }
+
         this.rankingList.innerHTML = '';
 
         if (!ranking || Object.keys(ranking.ranks).length === 0) {
@@ -314,6 +320,12 @@ class DisplayManager {
     }
 
     showError(message) {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        if (!this.errorText || !this.errorMessage) {
+            console.log('Error elements not found, skipping showError');
+            return;
+        }
+        
         this.errorText.textContent = message;
         this.errorMessage.style.display = 'block';
         // 既存のタイマーをクリア
@@ -331,6 +343,13 @@ class DisplayManager {
     }
 
     updateFooterClinics(clinics, ranking) {
+        // medical-diet002ではiframeを使用するため、要素が存在しない場合はスキップ
+        const footer = document.getElementById('footer');
+        if (!footer) {
+            console.log('Footer element not found, skipping updateFooterClinics');
+            return;
+        }
+
         // フッター内のすべてのulタグを取得
         const footerUls = document.querySelectorAll('#footer ul');
         let footerClinicsContainer = null;
