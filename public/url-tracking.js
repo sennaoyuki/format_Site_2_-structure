@@ -168,12 +168,10 @@
             if (!tab) return;
             
             const tabText = tab.textContent;
-            const tabType = tab.getAttribute('data-tab');
             
             // URLパラメータを更新
             const currentUrl = new URL(window.location.href);
             currentUrl.searchParams.set('comparison_tab', tabText.replace(/\s+/g, '_'));
-            currentUrl.searchParams.set('comparison_type', tabType);
             window.history.replaceState({}, '', currentUrl.toString());
         });
     }
