@@ -104,7 +104,9 @@ class SectionLoader {
         console.warn(`Loading fallback content for ${sectionName}`);
         const fallbackElement = document.getElementById(`${sectionName}-section`);
         if (fallbackElement) {
-            fallbackElement.innerHTML = `<p>セクション ${sectionName} の読み込みに失敗しました。</p>`;
+            // 読み込み状態を解除
+            fallbackElement.classList.remove('section-loading');
+            fallbackElement.innerHTML = `<div class="section-error">セクション ${sectionName} の読み込みに失敗しました。</div>`;
         }
     }
     
@@ -112,8 +114,18 @@ class SectionLoader {
         const sections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details', 'medical-columns', 'first-choice-recommendation', 'footer', 'modals'];
         
         // 全セクションを並列で読み込み（高速化）
+        console.log('Loading sections in parallel:', sections);
         const loadPromises = sections.map(section => this.loadSection(section));
-        await Promise.allSettled(loadPromises);
+        const results = await Promise.allSettled(loadPromises);
+        
+        // 読み込み結果をログ出力
+        results.forEach((result, index) => {
+            if (result.status === 'rejected') {
+                console.error(`Failed to load section ${sections[index]}:`, result.reason);
+            } else {
+                console.log(`Successfully loaded section ${sections[index]}`);
+            }
+        });
         
         // 読み込み完了後、mainタグでmainセクションを囲む
         const container = document.querySelector('.container');

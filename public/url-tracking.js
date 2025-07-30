@@ -96,6 +96,7 @@
                 clickSection = 'map_modal';
             } else if (link.closest('#first-choice-recommendation-section') || 
                       link.closest('.first-choice-recommendation-section') ||
+                      link.closest('#dio-recommendation-section') ||
                       link.closest('.dio-recommendation-section')) {
                 clickSection = 'first_choice_recommendation';
             }
