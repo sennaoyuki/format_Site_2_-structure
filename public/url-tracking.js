@@ -38,12 +38,10 @@
                               link.closest('.ranking-item')?.querySelector('.clinic-name')?.textContent || 
                               'Unknown';
             
-            // ランキング順位を取得
-            const rankElement = link.closest('.ranking-item')?.querySelector('.rank-badge');
-            const rank = rankElement ? rankElement.textContent.replace(/[^\d]/g, '') : '';
-            
-            // 現在のページ情報
-            const currentRegion = new URLSearchParams(window.location.search).get('region_id') || '013';
+            // 現在は使用しないがコメントとして保持
+            // const rankElement = link.closest('.ranking-item')?.querySelector('.rank-badge');
+            // const rank = rankElement ? rankElement.textContent.replace(/[^\d]/g, '') : '';
+            // const currentRegion = new URLSearchParams(window.location.search).get('region_id') || '013';
             
             // セクションを判別
             let clickSection = 'unknown';
@@ -59,16 +57,9 @@
             
             // トラッキングパラメータ
             const trackingParams = {
-                utm_source: 'medical-diet-comparison',
-                utm_medium: 'website',
-                utm_campaign: 'ranking',
-                utm_content: `rank${rank || 'unknown'}`,
-                click_position: rank || 'comparison_table',
                 click_section: clickSection,
                 click_clinic: clinicName.replace(/\s+/g, '_'),
-                source_region: currentRegion,
-                source_page: window.location.pathname,
-                timestamp: Date.now()
+                source_page: window.location.pathname
             };
             
             // 新しいURLを生成
@@ -103,7 +94,6 @@
             const currentUrl = new URL(window.location.href);
             currentUrl.searchParams.set('detail_click', clinicName.replace(/\s+/g, '_'));
             currentUrl.searchParams.set('detail_rank', rank);
-            currentUrl.searchParams.set('detail_time', Date.now());
             
             // URLを更新（ページリロードなし）
             window.history.replaceState({}, '', currentUrl.toString() + href);
@@ -168,7 +158,6 @@
                 if (maxScroll % 25 === 0) {
                     const currentUrl = new URL(window.location.href);
                     currentUrl.searchParams.set('max_scroll', maxScroll);
-                    currentUrl.searchParams.set('scroll_time', Date.now());
                     window.history.replaceState({}, '', currentUrl.toString());
                 }
             }
