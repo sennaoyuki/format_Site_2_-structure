@@ -36,12 +36,14 @@ class SectionLoader {
     
     async loadSection(sectionName, targetElement) {
         const design = this.config.sections[sectionName].current;
-        const url = `/medical-diet002/sections/${sectionName}/${design}/index.html`;
+        const url = `./sections/${sectionName}/${design}/index.html`;
         
         try {
+            console.log(`Loading section ${sectionName} from ${url}`);
             const response = await fetch(url);
             if (!response.ok) {
-                throw new Error(`Failed to load ${sectionName} with design ${design}`);
+                console.error(`HTTP ${response.status} for ${url}`);
+                throw new Error(`Failed to load ${sectionName} with design ${design} (HTTP ${response.status})`);
             }
             
             const html = await response.text();
@@ -56,17 +58,17 @@ class SectionLoader {
             // 既存のコンテンツを置換
             const existingSection = document.getElementById(`${sectionName}-section`);
             if (existingSection) {
+                console.log(`Found section container for ${sectionName}, replacing content`);
                 // loadingメッセージを削除してコンテンツを追加
                 existingSection.classList.remove('section-loading');
                 existingSection.innerHTML = html;
                 
                 // セクション固有のスクリプトを実行
                 this.executeScripts(existingSection);
+                console.log(`Successfully loaded ${sectionName} with design ${design}`);
             } else {
                 console.error(`Section container not found for ${sectionName}`);
             }
-            
-            console.log(`Loaded ${sectionName} with design ${design}`);
             
         } catch (error) {
             console.error(`Error loading section ${sectionName}:`, error);
@@ -162,7 +164,7 @@ class SectionLoader {
 class IframeSectionLoader extends SectionLoader {
     async loadSection(sectionName, targetElement) {
         const design = this.config.sections[sectionName].current;
-        const url = `/medical-diet002/sections/${sectionName}/${design}/index.html`;
+        const url = `./sections/${sectionName}/${design}/index.html`;
         
         // iframeを作成
         const iframe = document.createElement('iframe');

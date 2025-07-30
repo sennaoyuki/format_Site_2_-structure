@@ -285,22 +285,49 @@
     
     <!-- セクション読み込みの初期化 -->
     <script>
+        // セクションローダーのデバッグログ
+        console.log('Starting section loader initialization...');
+        
         document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOM Content Loaded - initializing section loader');
+            
+            // SectionLoaderクラスが定義されているか確認
+            if (typeof SectionLoader === 'undefined') {
+                console.error('SectionLoader class is not defined');
+                return;
+            }
+            
             // ローダーのタイプを選択（'fetch' または 'iframe'）
             const loaderType = new URLSearchParams(window.location.search).get('loader') || 'fetch';
+            console.log('Using loader type:', loaderType);
             
             let loader;
             if (loaderType === 'iframe') {
-                loader = new IframeSectionLoader();
+                if (typeof IframeSectionLoader !== 'undefined') {
+                    loader = new IframeSectionLoader();
+                } else {
+                    console.warn('IframeSectionLoader not available, falling back to SectionLoader');
+                    loader = new SectionLoader();
+                }
             } else {
                 loader = new SectionLoader();
             }
             
             // グローバルに公開（デバッグ用）
             window.sectionLoader = loader;
+            console.log('Section loader created and assigned to window.sectionLoader');
+            
+            // 各セクションの存在確認
+            const requiredSections = ['header', 'hero', 'ranking', 'tips', 'comparison', 'details', 'medical-columns', 'first-choice-recommendation', 'footer', 'modals'];
+            console.log('Checking for section containers...');
+            requiredSections.forEach(section => {
+                const element = document.getElementById(`${section}-section`);
+                console.log(`Section ${section}:`, element ? 'found' : 'MISSING');
+            });
             
             // 全セクションを読み込む
             try {
+                console.log('Starting to load all sections...');
                 await loader.loadAllSections();
                 console.log('All sections loaded successfully');
                 
@@ -308,19 +335,26 @@
                 if (window.app) {
                     console.log('Initializing app after sections loaded');
                     window.app.init();
+                } else {
+                    console.log('window.app not found, skipping app initialization');
                 }
             } catch (error) {
                 console.error('Error loading sections:', error);
+                console.error('Error stack:', error.stack);
             }
             
             // デザイン切り替えのためのヘルパー関数
             window.switchSectionDesign = function(section, design) {
+                console.log(`Switching ${section} to ${design}`);
                 loader.switchDesign(section, design);
             };
             
             window.switchAllDesigns = function(design) {
+                console.log(`Switching all sections to ${design}`);
                 loader.switchAllDesigns(design);
             };
+            
+            console.log('Section loader initialization complete');
         });
     </script>
     
