@@ -548,6 +548,7 @@ class DataManager {
     // ランキングデータの読み込み
     async loadRankings() {
         const data = await this.loadCsvFile('出しわけSS - ranking.csv');
+        console.log('🔄 ランキングCSVデータ読み込み:', data.slice(0, 3)); // 最初の3行を表示
         
         // 地域ごとにランキングをグループ化
         const rankingMap = {};
@@ -560,9 +561,9 @@ class DataManager {
                 };
             }
             
-            // 各順位のクリニックIDを設定
+            // 各順位のクリニックIDを設定（"-"は除外）
             Object.keys(row).forEach(key => {
-                if (key.startsWith('no') && row[key]) {
+                if (key.startsWith('no') && row[key] && row[key] !== '-') {
                     rankingMap[regionId].ranks[key] = row[key];
                 }
             });
@@ -1172,23 +1173,29 @@ class RankingApp {
             return;
         }
 
+        console.log('🔄 比較表を更新中... ランキング:', ranking.ranks);
+
         // ランキング順のクリニックデータを取得
         const rankedClinics = [];
-        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
-            const numA = parseInt(a[0].replace('no', ''));
-            const numB = parseInt(b[0].replace('no', ''));
-            return numA - numB;
-        });
-
-        sortedRanks.forEach(([position, clinicId]) => {
-            const clinic = clinics.find(c => c.id === clinicId);
-            if (clinic) {
-                rankedClinics.push({
-                    ...clinic,
-                    rank: parseInt(position.replace('no', ''))
-                });
+        
+        // no1からno5まで順番に処理（1位→2位→3位→4位→5位の順）
+        ['no1', 'no2', 'no3', 'no4', 'no5'].forEach((position, index) => {
+            const clinicId = ranking.ranks[position];
+            if (clinicId && clinicId !== '-') {
+                // クリニックIDが文字列の場合と数値の場合の両方に対応
+                const numericClinicId = parseInt(clinicId);
+                const clinic = clinics.find(c => c.id == clinicId || c.id === numericClinicId);
+                if (clinic) {
+                    rankedClinics.push({
+                        ...clinic,
+                        rank: index + 1  // 1位、2位、3位...
+                    });
+                    console.log(`${index + 1}位: ${clinic.name} (ID: ${clinicId})`);
+                }
             }
         });
+
+        console.log('🏆 最終ランキング順:', rankedClinics.map(c => `${c.rank}位: ${c.name}`));
 
         // 比較表の内容を生成
         this.generateComparisonTable(rankedClinics);
@@ -1692,6 +1699,9 @@ class RankingApp {
         }
 
         detailsList.innerHTML = '';
+        
+        // 比較表も更新
+        this.updateComparisonTable(clinics, ranking);
 
         if (!ranking) {
             console.error('ランキングデータがnullです');
@@ -1718,9 +1728,13 @@ class RankingApp {
         }).slice(0, 5);
 
         console.log('sortedRanks:', sortedRanks);
+        console.log('Available clinics:', clinics.map(c => ({ id: c.id, name: c.name })));
+        
         sortedRanks.forEach(([position, clinicId]) => {
-            const clinic = clinics.find(c => c.id === clinicId);
-            console.log('Processing clinic:', { position, clinicId, clinic });
+            // clinicIdを数値に変換して比較
+            const numericClinicId = parseInt(clinicId);
+            const clinic = clinics.find(c => c.id == clinicId || c.id === numericClinicId);
+            console.log('Processing clinic:', { position, clinicId, numericClinicId, clinic });
             if (!clinic) {
                 console.error('クリニックが見つかりません:', clinicId);
                 return;

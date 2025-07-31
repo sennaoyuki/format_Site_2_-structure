@@ -43,8 +43,8 @@ const clinicFeatures = {
 async function convertCSVtoJSON() {
     console.log('📍 CSV → JSON変換開始...\n');
 
-    // CSVファイルを読み込み
-    const dataDir = path.join(__dirname, 'public/data');
+    // 現在のディレクトリ（dataディレクトリ）を使用
+    const dataDir = __dirname;
     
     // 1. 地域データ
     console.log('1️⃣ 地域データを読み込み中...');
@@ -204,6 +204,11 @@ async function convertCSVtoJSON() {
     compiledClinics.forEach(clinic => {
         console.log(`   ${clinic.name}: ${clinic.storeCount}店舗, ${clinic.regions.length}地域`);
     });
+    
+    console.log('\n💡 ヒント: 他の環境にも反映する場合は以下のコマンドを実行してください:');
+    console.log('   cp compiled-data.json ../draft/data/');
+    console.log('   cp compiled-data.json ../medical-diet001/data/');
+    console.log('   cp compiled-data.json ../medical-diet002/data/');
 }
 
 // 実行
