@@ -1110,25 +1110,60 @@ text-align: center;
             subtree: true
         });
         
+        // タブ切り替え時の再初期化
+        $(document).on('click', '.tab-button, .clinic-tab-button', function() {
+            setTimeout(function() {
+                initCaseSlider();
+            }, 500);
+        });
+        
         // ページ読み込み後にも初期化を試みる
         $(document).ready(function() {
+            // 初回初期化
             setTimeout(function() {
-                console.log('CASEスライダー初期化開始');
-                const caseSliders = $('.case-slider:not(.slick-initialized)');
-                console.log('見つかったスライダー数:', caseSliders.length);
-                
+                initCaseSlider();
+            }, 1000);
+            
+            // SP版での追加初期化（タブ切り替え時対応）
+            setTimeout(function() {
+                initCaseSlider();
+            }, 2000);
+            
+            // さらに遅延して初期化（SP版の動的生成対応）
+            setTimeout(function() {
+                initCaseSlider();
+            }, 3000);
+        });
+        
+        // スライダー初期化関数
+        function initCaseSlider() {
+            console.log('CASEスライダー初期化開始');
+            const caseSliders = $('.case-slider:not(.slick-initialized)');
+            console.log('見つかったスライダー数:', caseSliders.length);
+            
+            if (caseSliders.length > 0) {
                 caseSliders.slick({
                     dots: true,
                     infinite: true,
                     speed: 500,
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    arrows: true
+                    arrows: true,
+                    mobileFirst: true,
+                    responsive: [
+                        {
+                            breakpoint: 768,
+                            settings: {
+                                arrows: true,
+                                dots: true
+                            }
+                        }
+                    ]
                 });
                 
                 console.log('CASEスライダー初期化完了');
-            }, 1000);
-        });
+            }
+        }
     </script>
 
     <!-- 1位クリニック動的表示機能 -->

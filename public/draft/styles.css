@@ -6320,3 +6320,34 @@ section.clinic-rankings .ranking-header-banner {
 .case-slider .slick-next:before {
     content: '→';
 }
+
+/* SP版対応 */
+@media (max-width: 768px) {
+    .case-slider .slick-prev,
+    .case-slider .slick-next {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .case-slider .slick-prev {
+        left: 5px;
+    }
+    
+    .case-slider .slick-next {
+        right: 5px;
+    }
+    
+    .case-slider .slick-prev:before,
+    .case-slider .slick-next:before {
+        font-size: 16px;
+    }
+    
+    .case-slider .slick-dots {
+        margin-top: 15px;
+    }
+    
+    /* タッチデバイス対応 */
+    .case-slider {
+        touch-action: pan-y;
+    }
+}
