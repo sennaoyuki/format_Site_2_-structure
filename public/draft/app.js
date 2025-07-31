@@ -50,11 +50,11 @@ class UrlParamHandler {
     // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlWithRegionId(clinicId) {
         const redirectUrls = {
-            '1': '/go/dio/',
-            '2': '/go/eminal/',
-            '3': '/go/urara/',
-            '4': '/go/lieto/',
-            '5': '/go/sbc/'
+            '1': '/draft/go/dio/',
+            '2': '/draft/go/eminal/',
+            '3': '/draft/go/urara/',
+            '4': '/draft/go/lieto/',
+            '5': '/draft/go/sbc/'
         };
         
         const redirectUrl = redirectUrls[clinicId];
@@ -76,11 +76,11 @@ class UrlParamHandler {
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlByNameWithRegionId(clinicName) {
         const redirectUrls = {
-            'dio': '/go/dio/',
-            'eminal': '/go/eminal/',
-            'urara': '/go/urara/',
-            'lieto': '/go/lieto/',
-            'sbc': '/go/sbc/'
+            'dio': '/draft/go/dio/',
+            'eminal': '/draft/go/eminal/',
+            'urara': '/draft/go/urara/',
+            'lieto': '/draft/go/lieto/',
+            'sbc': '/draft/go/sbc/'
         };
         
         const redirectUrl = redirectUrls[clinicName];
@@ -3001,15 +3001,15 @@ class RankingApp {
                             const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
                             if (detailButtons.length > 0) {
                                 const href = detailButtons[0].getAttribute('href');
-                                if (href?.includes('/go/dio/')) {
+                                if (href?.includes('/draft/go/dio/') || href?.includes('/go/dio/')) {
                                     clinicName = 'ディオクリニック';
-                                } else if (href?.includes('/go/eminal/')) {
+                                } else if (href?.includes('/draft/go/eminal/') || href?.includes('/go/eminal/')) {
                                     clinicName = 'エミナルクリニック';
-                                } else if (href?.includes('/go/urara/')) {
+                                } else if (href?.includes('/draft/go/urara/') || href?.includes('/go/urara/')) {
                                     clinicName = 'ウララクリニック';
-                                } else if (href?.includes('/go/lieto/')) {
+                                } else if (href?.includes('/draft/go/lieto/') || href?.includes('/go/lieto/')) {
                                     clinicName = 'リエートクリニック';
-                                } else if (href?.includes('/go/sbc/')) {
+                                } else if (href?.includes('/draft/go/sbc/') || href?.includes('/go/sbc/')) {
                                     clinicName = '湘南美容クリニック';
                                 }
                             }

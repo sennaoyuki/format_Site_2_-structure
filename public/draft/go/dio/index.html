@@ -146,16 +146,10 @@
                 countdownElement.textContent = '移動中...';
                 clearInterval(timer);
                 
-                // リファラーを確実に送信するためにリンククリックをシミュレート
+                // CATSに確実に認識させるためのリダイレクト
                 setTimeout(() => {
-                    // 方法1: リンククリックによるリダイレクト（推奨）
-                    const link = document.getElementById('manualLink');
-                    if (link) {
-                        link.click();
-                    } else {
-                        // フォールバック: 従来の方法
-                        window.location.href = finalUrl;
-                    }
+                    // 方法1: location.replace (履歴に残らず、よりCATSが認識しやすい)
+                    window.location.replace(finalUrl);
                 }, 500);
             }
         }, 1000);
