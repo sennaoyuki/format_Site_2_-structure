@@ -1,0 +1,26 @@
+{
+  "name": "clinic-info-scraper",
+  "version": "1.0.0",
+  "description": "LULA美容クリニックの情報をスクレイピングするツール",
+  "main": "scrape-clinics.js",
+  "scripts": {
+    "scrape": "node scrape-clinics.js",
+    "convert": "node convert-csv-to-json.js"
+  },
+  "keywords": [
+    "scraping",
+    "clinic",
+    "lula",
+    "puppeteer"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "puppeteer": "^21.5.0",
+    "csv-parser": "^3.0.0",
+    "csv-writer": "^1.6.0"
+  },
+  "devDependencies": {
+    "prettier": "^3.0.0"
+  }
+}

@@ -31,11 +31,11 @@ class UrlParamHandler {
     // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlWithRegionId(clinicId) {
         const redirectUrls = {
-            '1': '/go/dio/',
-            '2': '/go/eminal/',
-            '3': '/go/urara/',
-            '4': '/go/lieto/',
-            '5': '/go/sbc/'
+            '1': '/go/ssc/',
+            '2': '/go/ta/',
+            '3': '/go/seish/',
+            '4': '/go/sbc/',
+            '5': '/go/yoshi/'
         };
         
         const redirectUrl = redirectUrls[clinicId];
@@ -57,11 +57,11 @@ class UrlParamHandler {
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlByNameWithRegionId(clinicName) {
         const redirectUrls = {
-            'dio': '/go/dio/',
-            'eminal': '/go/eminal/',
-            'urara': '/go/urara/',
-            'lieto': '/go/lieto/',
-            'sbc': '/go/sbc/'
+            'ssc': '/go/ssc/',
+            'ta': '/go/ta/',
+            'seish': '/go/seish/',
+            'sbc': '/go/sbc/',
+            'yoshi': '/go/yoshi/'
         };
         
         const redirectUrl = redirectUrls[clinicName];
@@ -200,13 +200,13 @@ class DisplayManager {
             // バナー画像の設定（クリニックIDに基づく）
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const bannerImages = {
-                1: `${imagesPath}/clinics/dio/dio-logo.webp`,
-                2: `${imagesPath}/clinics/eminal/eminal-logo.webp`,
-                3: `${imagesPath}/clinics/urara/urara-logo.webp`,
-                4: `${imagesPath}/clinics/lieto/lieto-logo.webp`,
-                5: `${imagesPath}/clinics/sbc/sbc-logo.webp`
+                1: `${imagesPath}/clinics/ssc/ssc-logo.webp`,
+                2: `${imagesPath}/clinics/ta/ta-logo.webp`,
+                3: `${imagesPath}/clinics/seish/seish-logo.webp`,
+                4: `${imagesPath}/clinics/sbc/sbc-logo.webp`,
+                5: `${imagesPath}/clinics/yoshi/yoshi-logo.webp`
             };
-            const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/dio/dio-logo.webp`;
+            const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/ssc/ssc-logo.webp`;
 
             // 押しメッセージの定義
             const pushMessages = {
@@ -868,11 +868,11 @@ class RankingApp {
         
         // クリニック名のマッピング
         const clinicNameMap = {
-            'ディオクリニック': 'ディオクリニック',
-            'エミナルクリニック': 'エミナルクリニック',
-            'ウララクリニック': 'ウララクリニック',
-            'リエートクリニック': 'リエートクリニック',
-            '湘南美容クリニック': '湘南美容クリニック'
+            '品川スキンクリニック': '品川スキンクリニック',
+            'TAクリニック': 'TAクリニック',
+            '聖心美容クリニック': '聖心美容クリニック',
+            '湘南美容クリニック': '湘南美容クリニック',
+            '銀座よしえクリニック': '銀座よしえクリニック'
         };
         
         const storeClinicName = clinicNameMap[normalizedClinicName] || normalizedClinicName;
@@ -1125,11 +1125,11 @@ class RankingApp {
                 // クリニック名のマッピング（items.csvとstores.csvの名前の違いを解決）
                 // 実際のstores.csvを確認した結果、すべて同じ名前で統一されていることが判明
                 const clinicNameMap = {
-                    'ディオクリニック': 'ディオクリニック',
-                    'エミナルクリニック': 'エミナルクリニック',
-                    'ウララクリニック': 'ウララクリニック',
-                    'リエートクリニック': 'リエートクリニック',
-                    '湘南美容クリニック': '湘南美容クリニック'
+                    '品川スキンクリニック': '品川スキンクリニック',
+                    'TAクリニック': 'TAクリニック',
+                    '聖心美容クリニック': '聖心美容クリニック',
+                    '湘南美容クリニック': '湘南美容クリニック',
+                    '銀座よしえクリニック': '銀座よしえクリニック'
                 };
                 
                 const storeClinicName = clinicNameMap[clinic.name] || clinic.name;
@@ -1260,16 +1260,13 @@ class RankingApp {
             // クリニックのロゴ画像パスを設定
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const clinicLogos = {
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
-                'ウララクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
-                'URARAクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
-                'リエートクリニック': `${imagesPath}/clinics/lieto/lieto-logo.webp`,
-                'エミナルクリニック': `${imagesPath}/clinics/eminal/eminal-logo.webp`,
-                'SBCクリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`,
-                '湘南美容クリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`
+                '品川スキンクリニック': `${imagesPath}/clinics/ssc/ssc-logo.webp`,
+                'TAクリニック': `${imagesPath}/clinics/ta/ta-logo.webp`,
+                '聖心美容クリニック': `${imagesPath}/clinics/seish/seish-logo.webp`,
+                '湘南美容クリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`,
+                '銀座よしえクリニック': `${imagesPath}/clinics/yoshi/yoshi-logo.webp`
             };
-            const logoPath = clinicLogos[clinic.name] || `${imagesPath}/clinics/dio/dio-logo.webp`;
+            const logoPath = clinicLogos[clinic.name] || `${imagesPath}/clinics/ssc/ssc-logo.webp`;
             
             tr.innerHTML = `
                 <td class="ranking-table_td1">

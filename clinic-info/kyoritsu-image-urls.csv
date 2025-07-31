@@ -1,0 +1,15 @@
+clinic_id,clinic_name,location,address,image_url,image_type,source
+KBC_001,共立美容外科,札幌院,北海道札幌市北区北7条西4-3 宮澤ビル7F,https://p1-1f54eb9e.imageflux.jp/uploads/diary_article_image/file/150718/f14e212e-e037-4306-aefa-c514dab26527.jpg,medical_procedure,Tribeau
+KBC_001,共立美容外科,札幌院,北海道札幌市北区北7条西4-3 宮澤ビル7F,https://p1-1f54eb9e.imageflux.jp/uploads/diary_image/file/18417/b85f768a-f6aa-4e7f-8538-1f29a736d17e.jpg,clinic_environment,Tribeau
+KBC_003,共立美容外科,新宿本院,東京都渋谷区代々木2-9-2 久保ビル7F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/577/6c26fc92-e36e-4bd1-8108-7bf3beba9513.jpg,interior_clinic,Tribeau
+KBC_003,共立美容外科,新宿本院,東京都渋谷区代々木2-9-2 久保ビル7F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/578/5a7b09f1-58f9-43a8-b688-b082cd5144ca.jpg,treatment_room,Tribeau
+KBC_003,共立美容外科,新宿本院,東京都渋谷区代々木2-9-2 久保ビル7F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/579/5c924d62-0ae4-40ca-a03b-a85d787ee997.jpg,interior_clinic,Tribeau
+KBC_009,共立美容外科,横浜院,神奈川県横浜市西区北幸1-8-2 犬山西口ビルヂング8F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1253/4a13b8e5-6b24-41fe-a1f9-7a832b825cbf.jpg,reception_area,Tribeau
+KBC_009,共立美容外科,横浜院,神奈川県横浜市西区北幸1-8-2 犬山西口ビルヂング8F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1254/2545bbd9-1e2c-48d7-84ee-b58704223a40.jpg,interior_space,Tribeau
+KBC_009,共立美容外科,横浜院,神奈川県横浜市西区北幸1-8-2 犬山西口ビルヂング8F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1255/4be06dd7-27ff-4a25-bd65-32771f410337.jpg,interior_clinic,Tribeau
+KBC_015,共立美容外科,名古屋院,愛知県名古屋市中区錦3-15-30 第2KTビル3F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1243/5ccf9bc5-8caa-4325-846d-6a40691dde77.jpg,waiting_area,Tribeau
+KBC_015,共立美容外科,名古屋院,愛知県名古屋市中区錦3-15-30 第2KTビル3F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1244/fa3866b7-4d47-424f-bdbb-7050448f41da.jpg,consultation_room,Tribeau
+KBC_015,共立美容外科,名古屋院,愛知県名古屋市中区錦3-15-30 第2KTビル3F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1245/f6e859c9-6c1b-4a06-878a-e4c28e82114a.jpg,interior_clinic,Tribeau
+KBC_023,共立美容外科,福岡院,福岡県福岡市中央区天神2-3-13 USHIOビル4F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1251/55a32532-04fd-452c-b170-9533a1b17201.jpg,reception_area,Tribeau
+KBC_023,共立美容外科,福岡院,福岡県福岡市中央区天神2-3-13 USHIOビル4F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1250/4bcef57b-9659-4aa0-97f8-bb95dbcd59c2.jpg,treatment_area,Tribeau
+KBC_023,共立美容外科,福岡院,福岡県福岡市中央区天神2-3-13 USHIOビル4F,https://p1-1f54eb9e.imageflux.jp/uploads/cliniccoverimage/file/1252/7e5a1632-5fc4-4ee2-87e7-30e2c1902d68.jpg,interior_clinic,Tribeau
