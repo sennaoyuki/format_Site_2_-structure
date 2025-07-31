@@ -6239,10 +6239,84 @@ section.clinic-rankings .ranking-header-banner {
 /* ===== CASEスライダー ===== */
 .case-slider {
     margin: 0;
+    position: relative;
 }
 
 .case-slider img {
     width: 100%;
     display: block;
     margin: 0 auto;
+}
+
+/* Slickのドット */
+.case-slider .slick-dots {
+    position: relative;
+    bottom: auto;
+    margin-top: 10px;
+    text-align: center;
+    list-style: none;
+    padding: 0;
+}
+
+.case-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 5px;
+}
+
+.case-slider .slick-dots li button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0;
+}
+
+.case-slider .slick-dots li button:before {
+    content: '•';
+    font-size: 20px;
+    color: #ddd;
+}
+
+.case-slider .slick-dots li.slick-active button:before {
+    color: #ff7094;
+}
+
+/* Slickの矢印 */
+.case-slider .slick-prev,
+.case-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 112, 148, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    color: white;
+    font-size: 0;
+}
+
+.case-slider .slick-prev:hover,
+.case-slider .slick-next:hover {
+    background: rgba(255, 112, 148, 1);
+}
+
+.case-slider .slick-prev {
+    left: 10px;
+}
+
+.case-slider .slick-next {
+    right: 10px;
+}
+
+.case-slider .slick-prev:before,
+.case-slider .slick-next:before {
+    content: '←';
+    font-size: 20px;
+    color: white;
+}
+
+.case-slider .slick-next:before {
+    content: '→';
 }
