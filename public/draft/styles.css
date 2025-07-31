@@ -6240,12 +6240,28 @@ section.clinic-rankings .ranking-header-banner {
 .case-slider {
     margin: 0;
     position: relative;
+    min-height: 200px;
+}
+
+.case-slider .slick-slide {
+    min-height: 200px;
+}
+
+.case-slider .slick-list {
+    overflow: visible;
+}
+
+.case-slider .slick-track {
+    display: flex;
+    align-items: center;
 }
 
 .case-slider img {
     width: 100%;
+    height: auto;
     display: block;
     margin: 0 auto;
+    object-fit: contain;
 }
 
 /* Slickのドット */
