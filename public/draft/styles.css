@@ -6353,7 +6353,7 @@ section.clinic-rankings .ranking-header-banner {
         margin-bottom: 15px;
     }
     
-    /* SP版での画像表示修正 */
+    /* SP版での画像表示修正 - レスポンシブ対応 */
     .case-slider.slick-initialized {
         height: 250px !important;
     }
@@ -6374,11 +6374,12 @@ section.clinic-rankings .ranking-header-banner {
         height: 100% !important;
     }
     
+    /* 画像の幅を画面幅に応じて調整 */
     .case-slider .slick-slide img {
-        width: 323px !important;
+        width: calc(100vw - 52px) !important; /* viewport幅 - padding等 */
+        max-width: 500px !important; /* 最大幅を制限 */
         height: 250px !important;
         object-fit: cover !important;
-        max-width: none !important;
     }
     
     .case-slider .slick-prev,
@@ -6410,37 +6411,15 @@ section.clinic-rankings .ranking-header-banner {
     }
 }
 
-/* 375px専用の調整 */
+/* より小さい画面（375px以下）の調整 */
 @media (max-width: 375px) {
     .ribbon_point_box_no {
         padding: 0 !important;
     }
     
-    /* Slick初期化後の強制的な高さ設定 */
-    .case-slider.slick-initialized {
-        height: 250px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-list {
-        height: 250px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-track {
-        height: 250px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-slide {
-        height: 250px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-slide > div {
-        height: 100% !important;
-    }
-    
+    /* 375px以下では画像幅をさらに調整 */
     .case-slider .slick-slide img {
-        width: 323px !important;
-        height: 250px !important;
-        object-fit: cover !important;
-        max-width: none !important;
+        width: calc(100vw - 52px) !important;
+        max-width: 323px !important;
     }
 }
