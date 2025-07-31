@@ -6236,8 +6236,12 @@ section.clinic-rankings .ranking-header-banner {
     margin: 8px 0;
 }
 
-/* ===== CASE画像 ===== */
-.case-image img {
+/* ===== CASEスライダー ===== */
+.case-slider {
+    margin: 0;
+}
+
+.case-slider img {
     width: 100%;
     display: block;
     margin: 0 auto;
