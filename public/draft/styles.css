@@ -6236,70 +6236,18 @@ section.clinic-rankings .ranking-header-banner {
     margin: 8px 0;
 }
 
-/* ===== CASEスライダー ===== */
-.ribbon_point_box_no .case-slick-slider {
+/* ===== CASE画像 ===== */
+.ribbon_point_box_no .case-image {
     margin: 20px 0;
+    text-align: center;
 }
 
-.case-slide {
-    padding: 0 10px;
-}
-
-.case-slide img {
+.case-image img {
     width: 100%;
+    max-width: 600px;
     height: auto;
+    display: block;
+    margin: 0 auto;
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-
-/* Slickのドット */
-.case-slick-slider .slick-dots {
-    bottom: -30px;
-}
-
-.case-slick-slider .slick-dots li button:before {
-    color: #ff7094;
-    font-size: 12px;
-}
-
-.case-slick-slider .slick-dots li.slick-active button:before {
-    color: #ff5582;
-}
-
-/* Slickの矢印 */
-.case-slick-slider .slick-prev,
-.case-slick-slider .slick-next {
-    background: rgba(255, 112, 148, 0.8);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    z-index: 1;
-}
-
-.case-slick-slider .slick-prev:hover,
-.case-slick-slider .slick-next:hover {
-    background: rgba(255, 112, 148, 1);
-}
-
-.case-slick-slider .slick-prev {
-    left: 10px;
-}
-
-.case-slick-slider .slick-next {
-    right: 10px;
-}
-
-.case-slick-slider .slick-prev:before,
-.case-slick-slider .slick-next:before {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    font-size: 20px;
-}
-
-.case-slick-slider .slick-prev:before {
-    content: '\f053';
-}
-
-.case-slick-slider .slick-next:before {
-    content: '\f054';
 }
