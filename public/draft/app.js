@@ -2245,7 +2245,7 @@ class RankingApp {
                 <div class="clinic-points-section">
                     <h4 class="section-title">CASE</h4>
                     <div class="ribbon_point_box_no">
-                        <img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1" style="width: 100%; display: block;">
+                        <img src="images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1" style="width: 100%; display: block;">
                     </div>
                 </div>
                 ` : ''}
