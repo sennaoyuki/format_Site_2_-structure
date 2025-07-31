@@ -233,7 +233,7 @@ class DisplayManager {
                         <div class="rating-score">${rating.score}<span class="score-max">/5.0</span></div>
                     </div>
                     <div class="clinic-logo-section">
-                        ${clinic.name}
+                        <h3>${clinic.name}</h3>
                     </div>
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${clinic.name}バナー" onerror="this.style.display='none'">
