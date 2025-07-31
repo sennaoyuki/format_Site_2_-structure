@@ -6374,10 +6374,11 @@ section.clinic-rankings .ranking-header-banner {
         height: 100% !important;
     }
     
-    .case-slider img {
-        width: 100% !important;
+    .case-slider .slick-slide img {
+        width: 323px !important;
         height: 250px !important;
         object-fit: cover !important;
+        max-width: none !important;
     }
     
     .case-slider .slick-prev,
@@ -6436,9 +6437,10 @@ section.clinic-rankings .ranking-header-banner {
         height: 100% !important;
     }
     
-    .case-slider img {
-        width: 100% !important;
+    .case-slider .slick-slide img {
+        width: 323px !important;
         height: 250px !important;
         object-fit: cover !important;
+        max-width: none !important;
     }
 }

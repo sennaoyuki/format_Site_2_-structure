@@ -32,25 +32,7 @@ if (detailRegionElement) {
 }
 </script>
 
-<!-- 地図モーダル -->
-<div class="map-modal" id="map-modal">
-    <div class="map-modal-content">
-        <div class="map-modal-header">
-            <h3 id="map-modal-clinic-name">クリニック名</h3>
-            <button class="map-modal-close" id="map-modal-close">&times;</button>
-        </div>
-        <div class="map-modal-body">
-            <div class="map-container" id="map-modal-map-container">
-                <!-- Google Maps iframe will be inserted here -->
-            </div>
-            <div class="map-modal-footer">
-                <a href="#" class="map-modal-button" id="map-modal-button" target="_blank">
-                    <span id="map-modal-button-text">公式サイト</span>
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
+<!-- 地図モーダルはmodalsセクションで定義されます -->
 
 <script>
 // app.jsの初期化はメインページで行われる
