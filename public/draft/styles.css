@@ -5039,6 +5039,40 @@ section.clinic-rankings .ranking-header-banner {
     }
 }
 
+/* 480〜768pxの中間サイズ対応 */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* ランキングセクションの調整 */
+    .clinic-rankings {
+        padding: 15px 10px;
+        width: 100%;
+        max-width: 100%;
+    }
+    
+    .ranking-item {
+        width: calc((100vw - 40px) / 2);
+        max-width: 200px;
+        flex-shrink: 0;
+    }
+    
+    .clinic-logo {
+        max-width: 120px;
+    }
+    
+    .ranking-header {
+        font-size: 1.4rem;
+    }
+    
+    /* 比較表の横スクロール対応 */
+    .comparison-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    .comparison-table table {
+        min-width: 600px;
+    }
+}
+
 /* 375px幅での完璧な表示 - 修正版 */
 @media (max-width: 480px) {
     /* 375px専用: ランキングセクション */
@@ -6328,11 +6362,13 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 .case-slider .slick-prev {
-    left: 10px;
+    left: -2%;
+    top: 70%;
 }
 
 .case-slider .slick-next {
-    right: 10px;
+    right: -2%;
+    top: 70%;
 }
 
 .case-slider .slick-prev:before,
@@ -6376,8 +6412,9 @@ section.clinic-rankings .ranking-header-banner {
     
     /* 画像の幅を画面幅に応じて調整 */
     .case-slider .slick-slide img {
-        width: calc(100vw - 52px) !important; /* viewport幅 - padding等 */
-        max-width: 500px !important; /* 最大幅を制限 */
+        padding: 2%;
+        width: calc(100vw - 66px) !important; /* viewport幅 - padding等 */
+        max-width: 505px !important; /* 最大幅を制限 */
         height: 250px !important;
         object-fit: cover !important;
     }
@@ -6389,11 +6426,13 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     .case-slider .slick-prev {
-        left: 5px;
+        left: -2%;
+        top: 70%;
     }
     
     .case-slider .slick-next {
-        right: 5px;
+        right: -2%;
+        top: 70%;
     }
     
     .case-slider .slick-prev:before,
@@ -6419,7 +6458,7 @@ section.clinic-rankings .ranking-header-banner {
     
     /* 375px以下では画像幅をさらに調整 */
     .case-slider .slick-slide img {
-        width: calc(100vw - 52px) !important;
+        width: calc(100vw - 66px) !important;
         max-width: 323px !important;
     }
 }
