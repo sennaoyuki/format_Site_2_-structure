@@ -175,10 +175,10 @@ class DisplayManager {
             // 評価スコアとスターの生成（仮のデータ）
             const ratings = {
                 1: { score: 4.9, stars: 5 },
-                2: { score: 4.8, stars: 4.8 },
-                3: { score: 4.7, stars: 4.7 },
-                4: { score: 4.6, stars: 4.6 },
-                5: { score: 4.5, stars: 4.5 }
+                2: { score: 4.5, stars: 4.5 },
+                3: { score: 4.3, stars: 4.3 },
+                4: { score: 4.1, stars: 4.1 },
+                5: { score: 3.8, stars: 3.8 }
             };
             const rating = ratings[rankNum] || { score: 4.5, stars: 4 };
 
@@ -1277,8 +1277,8 @@ class RankingApp {
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td class="" style="">
-                    <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
-                    <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
+                    <span class="ranking_evaluation">${ratings[rankNum] || '4.1'}</span><br>
+                    <span class="star5_rating" data-rate="${ratings[rankNum] || '4.1'}"></span>
                 </td>
                 <td class="" style="">${achievements[rankNum] || '豊富な実績'}</td>
                 <td class="" style="">${benefits[rankNum] || '特別キャンペーン'}</td>
@@ -1314,7 +1314,7 @@ class RankingApp {
             const rankClass = clinic.rank === 1 ? '' : clinic.rank === 2 ? 'silver' : 'bronze';
             
             // ダミーデータ（実際のデータに置き換え）
-            const ratings = { 1: 4.9, 2: 4.8, 3: 4.7, 4: 4.7, 5: 4.7 };
+            const ratings = { 1: 4.9, 2: 4.5, 3: 4.3, 4: 4.1, 5: 3.8 };
             const achievements = { 
                 1: '全国100院以上',
                 2: '累計施術50万件',
