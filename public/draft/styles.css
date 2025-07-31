@@ -6240,20 +6240,28 @@ section.clinic-rankings .ranking-header-banner {
 .case-slider {
     margin: 0;
     position: relative;
-    min-height: 200px;
 }
 
-.case-slider .slick-slide {
-    min-height: 200px;
+/* スライダー初期化前の表示 */
+.case-slider:not(.slick-initialized) > div {
+    display: none;
 }
 
-.case-slider .slick-list {
-    overflow: visible;
+.case-slider:not(.slick-initialized) > div:first-child {
+    display: block;
 }
 
-.case-slider .slick-track {
+/* スライダー初期化後 */
+.case-slider.slick-initialized .slick-list {
+    overflow: hidden;
+}
+
+.case-slider.slick-initialized .slick-track {
     display: flex;
-    align-items: center;
+}
+
+.case-slider.slick-initialized .slick-slide {
+    height: auto;
 }
 
 .case-slider img {
@@ -6261,6 +6269,7 @@ section.clinic-rankings .ranking-header-banner {
     height: auto;
     display: block;
     margin: 0 auto;
+    max-height: 400px;
     object-fit: contain;
 }
 
@@ -6379,8 +6388,33 @@ section.clinic-rankings .ranking-header-banner {
         padding: 0 !important;
     }
     
+    .case-slider {
+        min-height: 250px;
+    }
+    
+    .case-slider .slick-list {
+        min-height: 250px;
+    }
+    
+    .case-slider .slick-track {
+        min-height: 250px;
+    }
+    
+    .case-slider .slick-slide {
+        min-height: 250px;
+    }
+    
+    .case-slider .slick-slide > div {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
     .case-slider img {
         width: 100%;
-        height: auto;
+        height: 100%;
+        min-height: 200px;
+        object-fit: cover;
     }
 }
