@@ -5041,17 +5041,44 @@ section.clinic-rankings .ranking-header-banner {
 
 /* 480〜768pxの中間サイズ対応 */
 @media (min-width: 481px) and (max-width: 768px) {
+    /* グローバルリセット - 幅の異常を防ぐ */
+    html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
     /* ランキングセクションの調整 */
     .clinic-rankings {
         padding: 15px 10px;
         width: 100%;
         max-width: 100%;
+        overflow-x: hidden;
+        box-sizing: border-box;
+    }
+    
+    .ranking-container {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        gap: 10px;
+        padding: 10px 0px;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .ranking-container::-webkit-scrollbar {
+        display: none;
     }
     
     .ranking-item {
-        width: calc((100vw - 40px) / 2);
-        max-width: 200px;
-        flex-shrink: 0;
+        flex: 0 0 auto;
+        width: 160px;
+        min-width: 160px;
+        max-width: 180px;
+        box-sizing: border-box;
     }
     
     .clinic-logo {
@@ -5066,10 +5093,23 @@ section.clinic-rankings .ranking-header-banner {
     .comparison-table {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
     
     .comparison-table table {
         min-width: 600px;
+    }
+    
+    /* その他のセクションの幅制限 */
+    .container,
+    .clinic-details-section,
+    .point-section,
+    .review-section {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
     }
 }
 
