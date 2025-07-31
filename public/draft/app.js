@@ -1198,6 +1198,7 @@ class RankingApp {
             }
             
             // 実際のデータ設定
+            const ratings = { 1: 4.9, 2: 4.5, 3: 4.3, 4: 4.1, 5: 3.8 };
             const achievements = {
                 1: 'ダイエット成功率99％<br>平均13.7kg減',
                 2: 'ダイエット成功率94%',
