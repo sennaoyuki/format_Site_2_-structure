@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ディオクリニック公式サイトへ移動中...</title>
     <meta name="description" content="ディオクリニックの公式サイトへリダイレクトしています。">
+    <!-- リファラーポリシーを明示的に設定 -->
+    <meta name="referrer" content="unsafe-url">
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <!-- Analytics -->
     <script src="/analytics.js"></script>
@@ -144,9 +146,16 @@
                 countdownElement.textContent = '移動中...';
                 clearInterval(timer);
                 
-                // 3秒後にリダイレクト
+                // リファラーを確実に送信するためにリンククリックをシミュレート
                 setTimeout(() => {
-                    window.location.href = finalUrl;
+                    // 方法1: リンククリックによるリダイレクト（推奨）
+                    const link = document.getElementById('manualLink');
+                    if (link) {
+                        link.click();
+                    } else {
+                        // フォールバック: 従来の方法
+                        window.location.href = finalUrl;
+                    }
                 }, 500);
             }
         }, 1000);
