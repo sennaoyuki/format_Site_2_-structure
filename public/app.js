@@ -1719,250 +1719,250 @@ class RankingApp {
 
             // クリニック詳細データ（拡張版）
             const clinicDetailDataMap = {
-                '1': { // DIO
-                    title: '99%が実感した医療痩せ！<span class="info-icon" onclick="showDisclaimerInfo(\'dio-success-rate\')" title="詳細情報">ⓘ</span>',
-                    subtitle: '我慢・失敗・リバウンド防止',
-                    link: 'DIO ＞',
-                    banner: '/images/clinics/dio/dio_detail_bnr.webp',
+                '1': { // 品川スキンクリニック
+                    title: 'POTENZA最先端技術で美肌再生<span class="info-icon" onclick="showDisclaimerInfo(\'ssc-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: 'ニキビ跡・毛穴・肝斑を根本改善',
+                    link: '品川スキンクリニック ＞',
+                    banner: '/images/clinics/ssc/ssc_detail_bnr.webp',
                     features: [
-                        '医療ダイエット', '医療痩身', 'リバウンド防止',
-                        '医師監修', '栄養士指導', '切らない痩身',
+                        'POTENZA', 'ニキビ跡治療', '毛穴改善',
+                        '肝斑治療', '赤ら顔改善', 'ダウンタイム短い',
                         '19時以降OK', '駅チカ', '完全個室'
                     ],
-                    priceMain: '医療痩身コース',
-                    priceValue: '月々4,900円',
+                    priceMain: 'POTENZAトライアル',
+                    priceValue: '初回8,320円〜',
                     priceDetail: {
-                        '料金': '通常価格24,800円<br>80%OFF 月々4,900円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
-                        '目安期間': '-5〜10kg：約3ヶ月<br>-10kg以上：約5ヶ月',
-                        '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
+                        '料金': 'ニキビ跡 初回8,320円<br>毛穴 16,500円〜',
+                        '施術機械': 'POTENZA（マイクロニードルRF）<br>ドラッグデリバリーシステム',
+                        '目安期間': 'ニキビ跡：3〜5回<br>毛穴・肝斑：4〜6回',
+                        '営業時間': '院により異なる<br>多くは10:00〜20:00<br>土日祝日も診療',
+                        '対応部位': '顔全体／頬／鼻／額／<br>顎／その他気になる部位',
                         '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://dioclinic.jp/'
+                        '公式サイト': 'https://shinagawa-skin.com/'
                     },
                     vioPlans: {
                         vioOnly: {
-                            title: 'VIOのみ',
-                            price: '99,000円',
-                            sessions: '5回',
-                            monthly: '月々1,200円'
+                            title: 'ニキビ跡集中',
+                            price: '33,000円',
+                            sessions: '1回',
+                            monthly: '月々5,500円'
                         },
                         fullBody: {
-                            title: '全身＋VIO',
-                            price: '247,000円',
-                            sessions: '5回',
-                            monthly: '月々4,500円'
+                            title: '全顔POTENZA',
+                            price: '82,500円',
+                            sessions: '1回',
+                            monthly: '月々13,750円'
                         }
                     },
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！もう一人で悩まない',
-                            description: 'ディオクリニックでは医師・看護師・管理栄養士がチームであなたを徹底サポート！自己流ダイエットで挫折した方にもおすすめです。専門的な食事指導や生活改善アドバイスも受けられるから、ダイエットの悩みも解決！'
+                            title: '症例実績100万件以上！圧倒的な技術力',
+                            description: '品川スキンクリニックは開院から35年以上、症例実績100万件を超える実績。POTENZAの施術も経験豊富な医師が担当し、一人ひとりの肌悩みに最適な治療を提供します。'
                         },
                         {
                             icon: 'phone',
-                            title: '医療マシンをオーダーメイド！リバウンドしにくい身体へ',
-                            description: '脂肪冷却や医療EMSなど、複数の最新マシンをあなた専用に組み合わせ！寝ているだけで部分痩せや筋肉アップまで目指せるので、運動が苦手な方にもおすすめ。リバウンドしにくい体質づくりを目指せる！'
+                            title: '最新のPOTENZAで多様な肌悩みに対応',
+                            description: 'マイクロニードルRFとドラッグデリバリーシステムを搭載したPOTENZAで、ニキビ跡・毛穴・肝斑・赤ら顔など幅広い肌悩みを改善。ダウンタイムも短く、忙しい方にもおすすめです。'
                         },
                         {
                             icon: 'coin',
-                            title: '全額返金保証あり！効果が不安でも大丈夫',
-                            description: 'ディオクリニックは効果に自信があるから、「全額返金保証制度」付き！もし効果を実感できなくても金銭的なリスクがないから、思い切ってチャレンジできます！'
+                            title: '初回トライアル価格で気軽にお試し',
+                            description: 'POTENZAが初めての方でも安心の初回トライアル価格をご用意。8,320円からお試しいただけるので、効果を実感してから本格的な治療を検討できます。'
                         }
                     ],
                     reviews: [
                         {
                             rating: 5,
                             date: '2024年1月',
-                            text: 'スタッフの対応が丁寧で、痛みも少なく安心して通えています。'
+                            text: 'ニキビ跡が本当に薄くなりました。痛みも思ったより少なかったです。'
                         },
                         {
                             rating: 4,
                             date: '2023年12月',
-                            text: '予約が取りやすく、効果も実感できています。'
+                            text: '毛穴の開きが改善されて、化粧ノリが良くなりました。'
                         }
                     ],
                     // stores: [] // 店舗は動的に取得するため削除
                     campaigns: [
                         {
-                            title: '全身＋VIO ＋顔',
-                            subtitle: '5回コース',
-                            originalPrice: '286,000円',
-                            discountPrice: '143,000円',
-                            monthlyPrice: '月額2,000円',
-                            discount: '50%OFF'
+                            title: 'POTENZAトライアル',
+                            subtitle: 'ニキビ跡治療',
+                            originalPrice: '16,500円',
+                            discountPrice: '8,320円',
+                            monthlyPrice: '一括払い',
+                            discount: '初回限定価格'
                         }
                     ],
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'ディオクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/dio/dio-logo.webp',
-                        logoAlt: 'ディオクリニック',
-                        description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://dioclinic.jp/',
-                        ctaText: 'ディオクリニックの公式サイト',
-                        microcopy: '＼症例数50万件以上の実績で安心／'
+                        title: '品川スキンクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/ssc/ssc-logo.webp',
+                        logoAlt: '品川スキンクリニック',
+                        description: 'POTENZAトライアル実施中<br>初回限定特別価格',
+                        ctaUrl: 'https://shinagawa-skin.com/',
+                        ctaText: '品川スキンクリニックの公式サイト',
+                        microcopy: '＼症例実績100万件以上の信頼／'
                     }
                 },
-                '2': { // ウララクリニック
-                    title: '次世代医療！<span class="info-icon" onclick="showDisclaimerInfo(\'urara-success-rate\')" title="詳細情報">ⓘ</span>',
-                    subtitle: '成功率94%の実績',
-                    link: 'ウララクリニック ＞',
-                    banner: '/images/clinics/urara/urara_detail_bnr.webp',
+                '2': { // TAクリニック
+                    title: 'POTENZA×アートメイク<span class="info-icon" onclick="showDisclaimerInfo(\'ta-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: 'ダウンタイムゼロを可能に',
+                    link: 'TAクリニック ＞',
+                    banner: '/images/clinics/ta/ta_detail_bnr.webp',
                     features: [
-                        '医療ダイエット', '医療痩身', '美痩身',
-                        'リバウンド防止', '医師監修', '管理栄養士指導',
-                        '切らない痩身', '駅チカ', '健康的に美しく'
+                        'POTENZA', 'ニキビ跡', '毛穴治療',
+                        'アートメイク', 'ダウンタイムゼロ', '一日で終了',
+                        '美容外科', '駅チカ', '完全個室'
                     ],
-                    priceMain: '医療痩身コース',
-                    priceValue: '月々9,780円',
+                    priceMain: 'POTENZAフルフェイス',
+                    priceValue: '33,000円〜',
                     priceDetail: {
-                        '料金': '通常価格45,591円<br>79%0FF<br>月々9,780円',
-                        '施術機械': '脂肪冷却装置/医療用EMS/医療電磁場装置/医療ラジオ波',
-                        '目安期間': '-5〜10kg：約3ヶ月',
-                        '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
-                        '店舗': '東京 (新宿, 銀座)',
-                        '公式サイト': 'https://uraraclinic.jp/'
+                        '料金': 'POTENZA 33,000円〜<br>フルフェイス 99,000円',
+                        '施術機械': 'POTENZA<br>マイクロニードルRF',
+                        '目安期間': 'ニキビ跡：3〜5回<br>毛穴：4〜6回',
+                        '営業時間': '平日10:00〜19:00<br>土日祝日も診療',
+                        '対応部位': '顔全体／頬／鼻／額／<br>顎／その他',
+                        '店舗': '東京 (銀座, 新宿, 池袋)',
+                        '公式サイト': 'https://taclinic.jp/'
                     },
                     vioPlans: {
                         vioOnly: {
-                            title: '部分痩身',
-                            price: '30,000円',
-                            sessions: '3回',
-                            monthly: '月々3,000円'
+                            title: 'ニキビ跡集中',
+                            price: '44,000円',
+                            sessions: '1回',
+                            monthly: '月々7,300円'
                         },
                         fullBody: {
-                            title: '全身痩身',
-                            price: '49,600円',
-                            sessions: '5回',
-                            monthly: '月々9,600円'
+                            title: '全顔POTENZA',
+                            price: '99,000円',
+                            sessions: '1回',
+                            monthly: '月々16,500円'
                         }
                     },
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！',
-                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                            title: 'ダウンタイムゼロの独自技術',
+                            description: 'TAクリニックは「ダウンタイムゼロの仕上がり」を実現する独自技術を開発。POTENZA施術後、すぐにメイクが可能なまで回復するため、忙しい方でも気軽に受けられます。'
                         },
                         {
                             icon: 'mobile-alt',
-                            title: '医療マシンをオーダーメイド！',
-                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                            title: '一人ひとりに合わせたオーダーメイド治療',
+                            description: 'POTENZAの設定を肌質や悩みに合わせて細かく調整。ニキビ跡、毛穴、小じわなど、様々な肌悩みに対応。美容外科の専門性を活かしたアートメイクのような仕上がりを目指します。'
                         },
                         {
                             icon: 'clock',
-                            title: '安心のサポートと保証制度',
-                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                            title: '全国展開で8年以上の実績',
+                            description: 'TAクリニックは全国に展開しており、8年以上の豊富な実績を持つ美容外科。安心してPOTENZA治療を受けられる体制が整っています。'
                         }
                     ],
                     reviews: [
                         {
                             rating: 5,
                             date: '2024年1月',
-                            text: '料金が安くて効果もしっかり。コスパ最高です！'
+                            text: 'ダウンタイムがほとんどなく、すぐメイクできました！'
                         },
                         {
                             rating: 5,
                             date: '2023年12月',
-                            text: '予約も取りやすく、スタッフさんも親切です。'
+                            text: 'ニキビ跡が目立たなくなって、肌がツルツルに。'
                         }
                     ],
                     // stores: [] // 店舗は動的に取得するため削除
                     campaigns: [],
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'URARAクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/urara/urara-logo.webp',
-                        logoAlt: 'URARAクリニック',
-                        description: '痩せなければ返金保証<br>さらに脂肪買取制度あり',
-                        ctaUrl: 'https://uraraclinic.jp/',
-                        ctaText: 'URARAクリニックの公式サイト',
-                        microcopy: '＼ダイエット成功率94％の実績／'
+                        title: 'TAクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/ta/ta-logo.webp',
+                        logoAlt: 'TAクリニック',
+                        description: 'POTENZAモニター募集中<br>ダウンタイムゼロで施術',
+                        ctaUrl: 'https://taclinic.jp/',
+                        ctaText: 'TAクリニックの公式サイト',
+                        microcopy: '＼アートメイク仕上がりの技術／'
                     }
                 },
-                '3': { // リエートクリニック
-                    title: '最新技術で安心痩身<span class="info-icon" onclick="showDisclaimerInfo(\'lieto-success-rate\')" title="詳細情報">ⓘ</span>',
-                    subtitle: '個人に合わせたオーダーメイド施術',
-                    link: 'リエートクリニック ＞',
-                    banner: '/images/clinics/lieto/lieto_detail_bnr.webp',
+                '3': { // 聖心美容クリニック
+                    title: '超音波×RF波で美肌再生<span class="info-icon" onclick="showDisclaimerInfo(\'seishin-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '一人ひとりに寄り添う美容医療',
+                    link: '聖心美容クリニック ＞',
+                    banner: '/images/clinics/seishin/seishin_detail_bnr.webp',
                     features: [
-                        '医療ダイエット', '医療痩身', 'リバウンド防止',
-                        '医師監修', '管理栄養士指導', '切らない痩身',
-                        'オーダーメイド治療', '駅チカ', '完全個室'
+                        'POTENZA', 'ニキビ跡', '毛穴治療',
+                        '肝斑治療', 'オーダーメイド', '最新機器',
+                        '開業30年', '駅チカ', '完全個室'
                     ],
-                    priceMain: '医療痩身コース',
-                    priceValue: '月々9,600円',
+                    priceMain: 'POTENZAフェイシャル',
+                    priceValue: '66,000円〜',
                     priceDetail: {
-                        '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
-                        '目安期間': '-5〜10kg：約6ヶ月',
-                        '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
-                        '店舗': '池袋／横浜／名古屋',
-                        '公式サイト': 'https://lietoclinic.com/lpbot/lpbot07kana15'
+                        '料金': 'POTENZA 66,000円〜<br>フルフェイス 198,000円',
+                        '施術機械': 'POTENZA<br>マイクロニードルRF',
+                        '目安期間': 'ニキビ跡：3〜5回<br>毛穴・肝斑：4〜6回',
+                        '営業時間': '平日10:00〜19:00<br>土日祝日も診療<br>完全予約制',
+                        '対忌部位': '顔全体／頬／鼻／額／<br>顎／首／その他',
+                        '店舗': '全国9院<br>札幌／東京／大宮／横浜／<br>名古屋／大阪／広島／福岡',
+                        '公式サイト': 'https://www.biyougeka.com/'
                     },
                     vioPlans: {
                         vioOnly: {
-                            title: '部分痩身',
-                            price: '30,000円',
-                            sessions: '3回',
-                            monthly: '月々3,000円'
+                            title: 'ニキビ跡集中',
+                            price: '77,000円',
+                            sessions: '1回',
+                            monthly: '月々12,800円'
                         },
                         fullBody: {
-                            title: '全身痩身',
-                            price: '49,600円',
-                            sessions: '5回',
-                            monthly: '月々9,600円'
+                            title: '全顔POTENZA',
+                            price: '198,000円',
+                            sessions: '1回',
+                            monthly: '月々33,000円'
                         }
                     },
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！',
-                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                            title: '30年以上の信頼と実績',
+                            description: '聖心美容クリニックは開院から30年以上の歴史を持つ信頼の美容クリニック。「腹八分目の医療」をモットーに、一人ひとりに寄り添い、最適な治療を提供します。'
                         },
                         {
                             icon: 'phone',
-                            title: '医療マシンをオーダーメイド！',
-                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                            title: '最新機器を導入し続ける先進性',
+                            description: '常に最新の医療機器を導入し、POTENZAも早期から取り入れ。豊富な経験と最新技術を組み合わせ、効果的な治療を実現。ニキビ跡、毛穴、肝斑など幅広い肌悩みに対応します。'
                         },
                         {
                             icon: 'coin',
-                            title: '安心のサポートと保証制度',
-                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                            title: '安心の保証制度とアフターケア',
+                            description: '施術後のアフターケアも充実。万が一のトラブルにも誠実に対応し、患者様の不安を取り除きます。4保証制度で安心して治療を受けられます。'
                         }
                     ],
                     reviews: [
                         {
                             rating: 5,
                             date: '2024年1月',
-                            text: '若い頃の体型に戻れました！6カ月間通い終わり、80kgあった体重が62kgに、体脂肪率は40%から27%に。'
+                            text: '丁寧なカウンセリングで安心して施術を受けられました。'
                         },
                         {
                             rating: 5,
                             date: '2023年12月',
-                            text: 'スタッフのみなさんお一人お一人がとてもご親切ご丁寧な対応で驚きました。リエートクリニックは本当におすすめ！'
+                            text: 'ニキビ跡が本当に目立たなくなって感動です！'
                         }
                     ],
                     clinicInfo: {
-                        name: 'リエートクリニック 池袋院',
-                        address: '東京都豊島区南池袋1-25-1 池袋MYTビル4F',
-                        access: 'JR池袋駅東口より徒歩3分',
-                        tel: '0120-LLL-LLL',
-                        hours: '10:00〜20:00',
+                        name: '聖心美容クリニック 東京院',
+                        address: '東京都港区六本木6-6-9 ピラミッド2F',
+                        access: '東京メトロ日比谷線六本木駅3番出口より徒歩3分',
+                        tel: '0120-911-935',
+                        hours: '10:00〜19:00',
                         image: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300"%3E%3Crect fill="%23f3f4f6" width="400" height="300"/%3E%3Ctext x="200" y="150" text-anchor="middle" fill="%23666" font-size="18"%3E院内写真%3C/text%3E%3C/svg%3E'
                     },
                     campaignInfo: {
                         header: 'INFORMATION!',
-                        title: 'リエートクリニックの今月のお得な情報',
-                        logoSrc: '/images/clinics/lieto/lieto-logo.webp',
-                        logoAlt: 'リエートクリニック',
-                        description: 'モニター最大80％OFF<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://lietoclinic.com/lpbot/lpbot07kana15',
-                        ctaText: 'リエートクリニックの公式サイト',
-                        microcopy: '＼リバウンドしない率99.8％／'
+                        title: '聖心美容クリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/seishin/seishin-logo.webp',
+                        logoAlt: '聖心美容クリニック',
+                        description: 'POTENZA初回トライアル<br>モニター募集中',
+                        ctaUrl: 'https://www.biyougeka.com/',
+                        ctaText: '聖心美容クリニックの公式サイト',
+                        microcopy: '＼30年以上の信頼と実績／'
                     }
                 },
                 '4': { // エミナルクリニック
@@ -2116,16 +2116,92 @@ class RankingApp {
                         ctaText: '湘南美容クリニックの公式サイト',
                         microcopy: '＼症例実績30万件以上の実績／'
                     }
+                },
+                '5': { // 銀座よしえクリニック
+                    title: 'POTENZA×マッサージピール<span class="info-icon" onclick="showDisclaimerInfo(\'yoshi-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '組み合わせ治療で最大効果',
+                    link: '銀座よしえクリニック ＞',
+                    banner: '/images/clinics/yoshi/yoshi_detail_bnr.webp',
+                    features: [
+                        'POTENZA', 'マッサージピール', '組み合わせ治療',
+                        'ニキビ跡', '毛穴改善', '肌質改善',
+                        'オーダーメイド', '銀座・横浜', '完全予約制'
+                    ],
+                    priceMain: 'POTENZA×マッサージピール',
+                    priceValue: '44,000円〜',
+                    priceDetail: {
+                        '料金': 'POTENZA 44,000円〜<br>マッサージピール同時 88,000円',
+                        '施術機械': 'POTENZA<br>マッサージピール',
+                        '目安期間': 'ニキビ跡：4〜6回<br>毛穴・肌質：3〜5回',
+                        '営業時間': '平日11:00〜20:00<br>土日祝11:00〜18:00',
+                        '対応部位': '顔全体／頬／鼻／額／<br>顎／その他',
+                        '店舗': '銀座院／大岡山院／<br>表参道院／都立大学院／<br>新宿院／池袋院／横浜院',
+                        '公式サイト': 'https://www.ginzabiyou.com/'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: 'POTENZA単独',
+                            price: '44,000円',
+                            sessions: '1回',
+                            monthly: '月々7,300円'
+                        },
+                        fullBody: {
+                            title: 'コンビネーション',
+                            price: '88,000円',
+                            sessions: '1回',
+                            monthly: '月々14,600円'
+                        }
+                    },
+                    points: [
+                        {
+                            icon: 'user-md',
+                            title: 'オーダーメイドの組み合わせ治療',
+                            description: '銀座よしえクリニックでは、POTENZAとマッサージピールなど他の治療を組み合わせることで、相乗効果を得られます。一人ひとりの肌状態に合わせたオーダーメイド治療を提供。'
+                        },
+                        {
+                            icon: 'list-ul',
+                            title: '20年以上の信頼と実績',
+                            description: '銀座よしえクリニックは開院から20年以上、保険診療から美容医療まで幅広く対応。総合的な肌治療を提供できるクリニックとして、多くの患者様から信頼を得ています。'
+                        },
+                        {
+                            icon: 'award',
+                            title: 'アクセス抜群の立地',
+                            description: '銀座・大岡山・表参道・新宿・池袋・横浜など、主要駅からアクセス抜群の立地に展開。お仕事帰りやお買い物のついでにも通いやすい便利さです。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: 'マッサージピールとの組み合わせが効果的でした。'
+                        },
+                        {
+                            rating: 5,
+                            date: '2023年12月',
+                            text: '肌がツルツルになって、毛穴も小さくなりました。'
+                        }
+                    ],
+                    // stores: [] // 店舗は動的に取得するため削除
+                    campaignInfo: {
+                        header: 'INFORMATION!',
+                        title: '銀座よしえクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/yoshi/yoshi-logo.webp',
+                        logoAlt: '銀座よしえクリニック',
+                        description: 'POTENZA初回特別価格<br>コンビネーションプラン',
+                        ctaUrl: 'https://www.ginzabiyou.com/',
+                        ctaText: '銀座よしえクリニックの公式サイト',
+                        microcopy: '＼20年以上の信頼と実績／'
+                    }
                 }
             };
 
             // クリニック名に基づいて正しいクリニックIDを取得
             const clinicNameToIdMap = {
-                'ディオクリニック': '1',
-                'ウララクリニック': '2',
-                'リエートクリニック': '3',
-                'エミナルクリニック': '4',
-                '湘南美容クリニック': '5'
+                '品川スキンクリニック': '1',
+                'TAクリニック': '2',
+                '聖心美容クリニック': '3',
+                '湘南美容クリニック': '4',
+                '銀座よしえクリニック': '5'
             };
             
             const correctClinicId = clinicNameToIdMap[clinic.name] || clinicId;
@@ -2145,11 +2221,11 @@ class RankingApp {
             // クリニック名のマッピング（stores.csvとitems.csvの名前の違いを解決）
             // 実際のstores.csvを確認した結果、すべて同じ名前で統一されていることが判明
             const clinicNameMap = {
-                'ディオクリニック': 'ディオクリニック',
-                'エミナルクリニック': 'エミナルクリニック',
-                'ウララクリニック': 'ウララクリニック',
-                'リエートクリニック': 'リエートクリニック',
-                '湘南美容クリニック': '湘南美容クリニック'
+                '品川スキンクリニック': '品川スキンクリニック',
+                'TAクリニック': 'TAクリニック',
+                '聖心美容クリニック': '聖心美容クリニック',
+                '湘南美容クリニック': '湘南美容クリニック',
+                '銀座よしえクリニック': '銀座よしえクリニック'
             };
             
             const storeClinicName = clinicNameMap[clinic.name] || clinic.name;
@@ -2174,11 +2250,11 @@ class RankingApp {
                 ${(() => {
                     // クリニック名に基づいて正しいバナーパスを設定
                     const clinicNameToBannerMap = {
-                        'ディオクリニック': '/images/clinics/dio/dio_detail_bnr.webp',
-                        'ウララクリニック': '/images/clinics/urara/urara_detail_bnr.webp',
-                        'リエートクリニック': '/images/clinics/lieto/lieto_detail_bnr.webp',
-                        'エミナルクリニック': '/images/clinics/eminal/eminal_detail_bnr.webp',
-                        '湘南美容クリニック': '/images/clinics/sbc/sbc_detail_bnr.webp'
+                        '品川スキンクリニック': '/images/clinics/ssc/ssc_detail_bnr.webp',
+                        'TAクリニック': '/images/clinics/ta/ta_detail_bnr.webp',
+                        '聖心美容クリニック': '/images/clinics/seishin/seishin_detail_bnr.webp',
+                        '湘南美容クリニック': '/images/clinics/sbc/sbc_detail_bnr.webp',
+                        '銀座よしえクリニック': '/images/clinics/yoshi/yoshi_detail_bnr.webp'
                     };
                     const correctBanner = clinicNameToBannerMap[clinic.name] || data.banner;
                     return correctBanner ? `
