@@ -6237,95 +6237,11 @@ section.clinic-rankings .ranking-header-banner {
 }
 
 /* ===== CASEスライダー ===== */
-.ribbon_point_box_no .case-slick-slider {
+.case-slider {
     margin: 0;
-    position: relative;
 }
 
-.case-slide {
-    padding: 0;
-}
-
-.case-slide img {
+.case-slider img {
     width: 100%;
     display: block;
-    margin: 0 auto;
-}
-
-/* Slickのドット */
-.case-slick-slider .slick-dots {
-    position: relative;
-    bottom: auto;
-    width: 100%;
-    text-align: center;
-    padding: 10px 0;
-    margin: 0;
-}
-
-.case-slick-slider .slick-dots li {
-    display: inline-block;
-    margin: 0 5px;
-}
-
-.case-slick-slider .slick-dots li button {
-    background: transparent;
-    border: none;
-    padding: 0;
-}
-
-.case-slick-slider .slick-dots li button:before {
-    content: '•';
-    color: #ddd;
-    font-size: 20px;
-    opacity: 1;
-}
-
-.case-slick-slider .slick-dots li.slick-active button:before {
-    color: #ff7094;
-}
-
-/* Slickの矢印 */
-.case-slick-slider .slick-prev,
-.case-slick-slider .slick-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 112, 148, 0.8);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    z-index: 1;
-    color: white;
-    font-size: 0;
-}
-
-.case-slick-slider .slick-prev:hover,
-.case-slick-slider .slick-next:hover {
-    background: rgba(255, 112, 148, 1);
-}
-
-.case-slick-slider .slick-prev {
-    left: 10px;
-}
-
-.case-slick-slider .slick-next {
-    right: 10px;
-}
-
-.case-slick-slider .slick-prev:before,
-.case-slick-slider .slick-next:before {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    color: white;
-    font-size: 20px;
-}
-
-.case-slick-slider .slick-prev:before {
-    content: '\f053';
-}
-
-.case-slick-slider .slick-next:before {
-    content: '\f054';
 }
