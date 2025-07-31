@@ -1,3 +1,22 @@
+// クリニックURLを中央管理から取得
+function getClinicUrlFromConfig(clinicId) {
+    const clinicMap = {
+        '1': 'dio',
+        '2': 'eminal', 
+        '3': 'urara',
+        '4': 'lieto',
+        '5': 'sbc'
+    };
+    
+    const clinicSlug = clinicMap[clinicId];
+    if (window.CLINIC_URLS && window.CLINIC_URLS[clinicSlug]) {
+        return window.CLINIC_URLS[clinicSlug].baseUrl;
+    }
+    
+    // フォールバック
+    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
+}
+
 // URLパラメータ処理クラス
 class UrlParamHandler {
     getParam(name) {
@@ -1742,7 +1761,7 @@ class RankingApp {
                         '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
                         '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c'
+                        '公式サイト': getClinicUrlFromConfig('1')
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1804,7 +1823,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c',
+                        ctaUrl: getClinicUrlFromConfig('1'),
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
