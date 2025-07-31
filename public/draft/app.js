@@ -3135,8 +3135,29 @@ class RankingApp {
             
             // 公式サイトボタンのURLとテキストを設定
             if (modalButton && clinicCode) {
-                const clinicNameLower = clinicCode.toLowerCase().replace(/クリニック|美容外科|美容/g, '').trim();
-                modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicNameLower);
+                // クリニック名をマッピング用のキーに変換
+                let clinicKey = '';
+                if (clinicCode.includes('ディオ')) {
+                    clinicKey = 'dio';
+                } else if (clinicCode.includes('エミナル')) {
+                    clinicKey = 'eminal';
+                } else if (clinicCode.includes('ウララ')) {
+                    clinicKey = 'urara';
+                } else if (clinicCode.includes('リエート')) {
+                    clinicKey = 'lieto';
+                } else if (clinicCode.includes('湘南')) {
+                    clinicKey = 'sbc';
+                }
+                
+                const generatedUrl = this.urlHandler.getClinicUrlByNameWithRegionId(clinicKey);
+                
+                console.log('🔗 地図モーダルURL設定:', {
+                    clinicCode,
+                    clinicKey,
+                    generatedUrl
+                });
+                
+                modalButton.href = generatedUrl;
                 
                 // ボタンテキストを設定
                 const buttonText = document.getElementById('map-modal-button-text');
