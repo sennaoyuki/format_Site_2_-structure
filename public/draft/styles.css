@@ -6353,6 +6353,33 @@ section.clinic-rankings .ranking-header-banner {
         margin-bottom: 15px;
     }
     
+    /* SP版での画像表示修正 */
+    .case-slider.slick-initialized {
+        height: 250px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-list {
+        height: 250px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-track {
+        height: 250px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-slide {
+        height: 250px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-slide > div {
+        height: 100% !important;
+    }
+    
+    .case-slider img {
+        width: 100% !important;
+        height: 250px !important;
+        object-fit: cover !important;
+    }
+    
     .case-slider .slick-prev,
     .case-slider .slick-next {
         width: 30px;
@@ -6388,33 +6415,30 @@ section.clinic-rankings .ranking-header-banner {
         padding: 0 !important;
     }
     
-    .case-slider {
-        min-height: 250px;
+    /* Slick初期化後の強制的な高さ設定 */
+    .case-slider.slick-initialized {
+        height: 250px !important;
     }
     
-    .case-slider .slick-list {
-        min-height: 250px;
+    .case-slider.slick-initialized .slick-list {
+        height: 250px !important;
     }
     
-    .case-slider .slick-track {
-        min-height: 250px;
+    .case-slider.slick-initialized .slick-track {
+        height: 250px !important;
     }
     
-    .case-slider .slick-slide {
-        min-height: 250px;
+    .case-slider.slick-initialized .slick-slide {
+        height: 250px !important;
     }
     
-    .case-slider .slick-slide > div {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    .case-slider.slick-initialized .slick-slide > div {
+        height: 100% !important;
     }
     
     .case-slider img {
-        width: 100%;
-        height: 100%;
-        min-height: 200px;
-        object-fit: cover;
+        width: 100% !important;
+        height: 250px !important;
+        object-fit: cover !important;
     }
 }
