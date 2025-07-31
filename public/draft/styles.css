@@ -6239,6 +6239,11 @@ section.clinic-rankings .ranking-header-banner {
 /* ===== CASEスライダー ===== */
 .ribbon_point_box_no .case-slick-slider {
     margin: 0;
+    position: relative;
+}
+
+.case-slide {
+    padding: 0;
 }
 
 .case-slide img {
@@ -6249,10 +6254,12 @@ section.clinic-rankings .ranking-header-banner {
 
 /* Slickのドット */
 .case-slick-slider .slick-dots {
-    bottom: -25px;
-    position: absolute;
+    position: relative;
+    bottom: auto;
     width: 100%;
     text-align: center;
+    padding: 10px 0;
+    margin: 0;
 }
 
 .case-slick-slider .slick-dots li {
