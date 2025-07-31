@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SP版スライダーテスト</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        iframe {
+            width: 375px;
+            height: 812px;
+            border: 1px solid #ccc;
+            margin: 20px auto;
+            display: block;
+        }
+        .device-frame {
+            width: 415px;
+            margin: 0 auto;
+            text-align: center;
+            background: #f0f0f0;
+            padding: 20px;
+        }
+        .info {
+            margin-bottom: 10px;
+            font-family: Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <div class="device-frame">
+        <div class="info">iPhone SE/8 (375px × 812px)</div>
+        <iframe src="http://localhost:8090/draft/?region_id=00" id="sp-frame"></iframe>
+    </div>
+    
+    <script>
+        // iframeのコンソールログを親ウィンドウに転送
+        window.addEventListener('message', function(e) {
+            if (e.data.type === 'console') {
+                console.log('[iframe]', e.data.message);
+            }
+        });
+        
+        // iframe読み込み後の確認
+        document.getElementById('sp-frame').onload = function() {
+            console.log('SP版フレーム読み込み完了 (375px width)');
+        };
+    </script>
+</body>
+</html>

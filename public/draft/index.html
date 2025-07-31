@@ -1117,6 +1117,26 @@ text-align: center;
             }, 500);
         });
         
+        // SP版での画面タッチ時にも初期化（念のため）
+        let touchInitialized = false;
+        $(document).on('touchstart', function() {
+            if (!touchInitialized) {
+                touchInitialized = true;
+                setTimeout(function() {
+                    initCaseSlider();
+                }, 100);
+            }
+        });
+        
+        // 可視性変更時の初期化
+        document.addEventListener('visibilitychange', function() {
+            if (!document.hidden) {
+                setTimeout(function() {
+                    initCaseSlider();
+                }, 500);
+            }
+        });
+        
         // ページ読み込み後にも初期化を試みる
         $(document).ready(function() {
             // 初回初期化
@@ -1137,7 +1157,8 @@ text-align: center;
         
         // スライダー初期化関数
         function initCaseSlider() {
-            console.log('CASEスライダー初期化開始');
+            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+            console.log('CASEスライダー初期化開始 (Mobile:', isMobile + ')');
             const caseSliders = $('.case-slider:not(.slick-initialized)');
             console.log('見つかったスライダー数:', caseSliders.length);
             

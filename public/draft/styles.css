@@ -6323,6 +6323,11 @@ section.clinic-rankings .ranking-header-banner {
 
 /* SP版対応 */
 @media (max-width: 768px) {
+    /* CASEセクション全体の調整 */
+    .clinic-points-section {
+        margin-bottom: 15px;
+    }
+    
     .case-slider .slick-prev,
     .case-slider .slick-next {
         width: 30px;
@@ -6349,5 +6354,17 @@ section.clinic-rankings .ranking-header-banner {
     /* タッチデバイス対応 */
     .case-slider {
         touch-action: pan-y;
+    }
+}
+
+/* 375px専用の調整 */
+@media (max-width: 375px) {
+    .ribbon_point_box_no {
+        padding: 0 !important;
+    }
+    
+    .case-slider img {
+        width: 100%;
+        height: auto;
     }
 }
