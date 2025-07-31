@@ -1380,6 +1380,18 @@ text-align: center;
             return clinicInfoMap[clinicSlug] || clinicInfoMap['dio'];
         }
 
+        // クリニックURLを取得
+        function getClinicUrl(clinicSlug) {
+            const urlMap = {
+                'dio': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c',
+                'eminal': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a',
+                'urara': 'https://uraraclinic.jp/',
+                'lieto': 'https://lietoclinic.com/lpbot/lpbot07kana15',
+                'sbc': 'https://www.s-b-c.net/slimming/'
+            };
+            return urlMap[clinicSlug] || urlMap['dio'];
+        }
+
         // 3つの理由を設定
         function setThreeReasons(clinicSlug) {
             const pointsContainer = document.getElementById('first-choice-points');
@@ -1502,7 +1514,7 @@ text-align: center;
                             </div>
                         `).join('')}
                         <div class="ribbon_point_link">
-                            【公式】<a href="/go/${clinicSlug}/?region_id=002&comparison_tab=%E7%B7%8F%E5%90%88&max_scroll=25" target="_blank" rel="noopener"><strong>https://${clinicSlug === 'eminal' ? 'diet.eminal-clinic.jp/lp/m_bodymake/' : 'clinic-official.jp'}</strong></a>
+                            【公式】<a href="/go/${clinicSlug}/?region_id=002&comparison_tab=%E7%B7%8F%E5%90%88&max_scroll=25" target="_blank" rel="noopener"><strong>${getClinicUrl(clinicSlug)}</strong></a>
                         </div>
                     </div>
                 </div>
