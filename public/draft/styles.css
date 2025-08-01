@@ -6374,9 +6374,6 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0 auto;
     max-height: 400px;
     object-fit: contain;
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
 }
 
 /* Slickのドット */
@@ -6462,6 +6459,26 @@ section.clinic-rankings .ranking-header-banner {
     /* CASEセクション全体の調整 */
     .clinic-points-section {
         margin-bottom: 15px;
+    }
+    
+    /* SPでも写真を確実に中央寄せ */
+    .case-slider {
+        text-align: center !important;
+    }
+    
+    .case-slider .slick-list,
+    .case-slider .slick-track {
+        text-align: center !important;
+    }
+    
+    .case-slider .slick-slide {
+        text-align: center !important;
+    }
+    
+    .case-slider .slick-slide > div {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
     
     /* SP版での画像表示修正 - レスポンシブ対応 */
