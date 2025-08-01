@@ -16,8 +16,15 @@
     
     /* 2. メインコンテナの幅制限 */
     main,
-    .container,
-    body > * {
+    .container {
+        width: 100% !important;
+        max-width: 768px !important;
+        margin: 0 auto !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* body直下の要素から特定の要素を除外 */
+    body > *:not(.sidebar-menu):not(.sidebar-overlay):not(.map-modal):not(.disclaimer-modal) {
         width: 100% !important;
         max-width: 768px !important;
         margin: 0 auto !important;
@@ -244,22 +251,22 @@
     .sidebar-menu { z-index: 1100 !important; }
     .modal { z-index: 1200 !important; }
     .hamburger-menu { z-index: 1050 !important; }
-}
-
-    /* 16. mainタグの幅調整 */
-    main {
-        width: 100% !important;
-        max-width: 100% !important;
-        box-sizing: border-box !important;
-        overflow: hidden !important;
+    
+    /* 16. サイドバーメニューの幅を固定 */
+    .sidebar-menu {
+        width: 300px !important; /* 元の幅を維持 */
+        max-width: 300px !important;
+        right: -300px !important; /* 初期状態は画面外 */
     }
     
-    /* 17. containerクラスの調整 */
-    .container {
-        width: 100% !important;
-        max-width: 100% !important;
-        padding: 0 !important;
-        box-sizing: border-box !important;
+    .sidebar-menu.active {
+        right: 0 !important; /* アクティブ時は表示 */
+    }
+    
+    /* サイドバーオーバーレイも除外 */
+    .sidebar-overlay {
+        width: 100vw !important;
+        max-width: 100vw !important;
     }
 }
 
