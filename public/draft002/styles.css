@@ -1892,6 +1892,11 @@ section.clinic-rankings .ranking-header-banner {
     justify-content: center;
 }
 
+.clinic-logo-section h3 {
+    font-size: 12px !important;
+    margin: 0;
+}
+
 .clinic-logo {
     font-size: 1.8rem;
     font-weight: 600;
@@ -3905,6 +3910,11 @@ section.clinic-rankings .ranking-header-banner {
         display: flex;
         align-items: center;
         justify-content: center;
+    }
+    
+    .clinic-logo-section h3 {
+        font-size: 12px !important;
+        margin: 0;
     }
     
     .clinic-logo {
