@@ -152,16 +152,31 @@
     right: 10px !important;
 }
 
+/* CASEセクションのスタイル */
+.clinic-points-section {
+    margin: 20px 0 !important;
+    padding: 20px !important;
+    background: #fff !important;
+    border-radius: 8px !important;
+}
+
+.clinic-points-section .section-title {
+    text-align: center !important;
+    font-size: 24px !important;
+    margin-bottom: 20px !important;
+    color: #333 !important;
+}
+
 /* レスポンシブ対応 */
 @media (max-width: 768px) {
     .case-slide {
         padding: 0 15px !important;
-        min-height: 180px !important;
+        min-height: 250px !important;
     }
     
     .case-slide img {
-        max-width: 85% !important;
-        max-height: 220px !important;
+        max-width: 90% !important;
+        max-height: 230px !important;
     }
     
     .case-nav {
@@ -171,10 +186,22 @@
     }
 }
 
+@media (max-width: 500px) {
+    .case-slide {
+        padding: 0 10px !important;
+        min-height: 220px !important;
+    }
+    
+    .case-slide img {
+        max-width: 85% !important;
+        max-height: 200px !important;
+    }
+}
+
 @media (max-width: 480px) {
     .case-slide {
         padding: 0 10px !important;
-        min-height: 160px !important;
+        min-height: 200px !important;
     }
     
     .case-slide img {
@@ -189,14 +216,53 @@
     }
 }
 
+@media (max-width: 414px) {
+    .case-slide {
+        padding: 0 8px !important;
+        min-height: 180px !important;
+    }
+    
+    .case-slide img {
+        max-width: 78% !important;
+        max-height: 170px !important;
+    }
+}
+
 @media (max-width: 375px) {
+    .case-slide {
+        padding: 0 5px !important;
+        min-height: 170px !important;
+    }
+    
     .case-slide img {
         max-width: 75% !important;
         max-height: 160px !important;
     }
 }
 
+@media (max-width: 320px) {
+    .case-slide {
+        padding: 0 5px !important;
+        min-height: 160px !important;
+    }
+    
+    .case-slide img {
+        max-width: 70% !important;
+        max-height: 150px !important;
+    }
+    
+    .case-nav {
+        width: 25px !important;
+        height: 25px !important;
+        font-size: 12px !important;
+    }
+}
+
 @media (min-width: 769px) {
+    .case-slide {
+        min-height: 450px !important;
+    }
+    
     .case-slide img {
         max-width: 600px !important;
         max-height: 400px !important;

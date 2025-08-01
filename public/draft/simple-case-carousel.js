@@ -8,6 +8,18 @@ class SimpleCaseCarousel {
         this.dots = [];
         this.currentIndex = 0;
         
+        // デバッグ用
+        console.log('SimpleCaseCarousel initializing:', {
+            container: this.container,
+            slides: this.slides.length,
+            carousel: this.carousel
+        });
+        
+        if (!this.carousel || this.slides.length === 0) {
+            console.error('SimpleCaseCarousel: Missing required elements');
+            return;
+        }
+        
         this.init();
     }
     
@@ -132,6 +144,9 @@ function initCarousels() {
     });
 }
 
+// グローバルに公開
+window.initCarousels = initCarousels;
+
 // DOMContentLoaded
 document.addEventListener('DOMContentLoaded', initCarousels);
 
@@ -141,6 +156,33 @@ window.addEventListener('load', initCarousels);
 // 少し遅延して実行（動的生成対応）
 setTimeout(initCarousels, 1000);
 setTimeout(initCarousels, 2000);
+setTimeout(initCarousels, 3000);
+
+// MutationObserverで動的な要素の追加を監視
+const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+        if (mutation.type === 'childList') {
+            const addedNodes = Array.from(mutation.addedNodes);
+            addedNodes.forEach((node) => {
+                if (node.nodeType === 1) { // Element node
+                    if (node.classList && node.classList.contains('case-slider')) {
+                        setTimeout(initCarousels, 100);
+                    } else if (node.querySelector && node.querySelector('.case-slider')) {
+                        setTimeout(initCarousels, 100);
+                    }
+                }
+            });
+        }
+    });
+});
+
+// body要素を監視
+if (document.body) {
+    observer.observe(document.body, {
+        childList: true,
+        subtree: true
+    });
+}
 
 // 既存のSlick初期化を無効化
 if (window.jQuery) {
