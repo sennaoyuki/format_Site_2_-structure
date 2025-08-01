@@ -126,7 +126,7 @@
     <script>'fonts' in document&&document.fonts.ready.then(function(){document.documentElement.classList.add('fonts-loaded')})</script>
     
     <!-- シンプルカルーセル -->
-    <script src="simple-case-carousel.js?v=2025080114"></script>
+    <script src="simple-case-carousel.js?v=2025080115"></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -1397,55 +1397,17 @@ text-align: center;
             pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
         }
 
-        // CASEセクションを設定
+        // CASEセクションを設定 - 無効化
         function setCaseSection(clinicSlug, points) {
-            if (!points || points.length === 0) return;
+            // CASEセクションの表示を無効化
+            console.log('CASEセクションの表示は無効化されています');
             
-            // 症例画像を取得
-            const caseImages = getCaseImages(clinicSlug);
-            if (!caseImages || caseImages.length === 0) return;
-            
-            // CASEセクションを作成（カルーセル構造）
-            const caseHtml = `
-                <div class="clinic-points-section">
-                    <h4 class="section-title">CASE</h4>
-                    <div class="case-slider">
-                        <div class="case-carousel-container">
-                            ${caseImages.map((image, index) => `
-                                <div class="case-slide">
-                                    <img src="${image.src}" alt="${image.alt}" loading="lazy">
-                                </div>
-                            `).join('')}
-                        </div>
-                    </div>
-                </div>
-            `;
-            
-            // POINTセクションの後にCASEセクションを挿入
-            const pointsSection = document.getElementById('first-choice-points');
-            
-            if (pointsSection) {
-                // 既存のCASEセクションがあれば削除
-                const existingCase = document.querySelector('.case-section-container');
-                if (existingCase) {
-                    existingCase.remove();
-                }
-                
-                // POINTセクションの後にCASEセクションを挿入
-                const caseContainer = document.createElement('div');
-                caseContainer.className = 'case-section-container';
-                caseContainer.innerHTML = caseHtml;
-                
-                // POINTセクションの親要素の後に挿入
-                pointsSection.parentElement.insertBefore(caseContainer, pointsSection.nextSibling);
-                
-                // カルーセルを初期化
-                setTimeout(() => {
-                    if (typeof initCarousels === 'function') {
-                        initCarousels();
-                    }
-                }, 100);
+            // 既存のCASEセクションがあれば削除
+            const existingCase = document.querySelector('.case-section-container');
+            if (existingCase) {
+                existingCase.remove();
             }
+            return;
         }
         
         // クリニックごとの症例画像を管理
