@@ -6455,19 +6455,19 @@ section.clinic-rankings .ranking-header-banner {
     
     /* SP版での画像表示修正 - レスポンシブ対応 */
     .case-slider.slick-initialized {
-        height: 250px !important;
+        height: 100% !important;
     }
     
     .case-slider.slick-initialized .slick-list {
-        height: 250px !important;
+        height: 100% !important;
     }
     
     .case-slider.slick-initialized .slick-track {
-        height: 250px !important;
+        height: 100% !important;
     }
     
     .case-slider.slick-initialized .slick-slide {
-        height: 250px !important;
+        height: 100% !important;
     }
     
     .case-slider.slick-initialized .slick-slide > div {
@@ -6479,7 +6479,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 2%;
         width: calc(100vw - 66px) !important; /* viewport幅 - padding等 */
         max-width: 505px !important; /* 最大幅を制限 */
-        height: 250px !important;
+        height: 100% !important;
         object-fit: cover !important;
     }
     
