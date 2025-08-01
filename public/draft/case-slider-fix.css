@@ -37,6 +37,27 @@
     .case-slider .slick-track {
         width: auto !important;
     }
+    
+    /* 画像サイズの統一 */
+    .case-slider .slick-slide img {
+        width: calc(100% - 20px) !important;
+        max-width: 320px !important;
+        height: auto !important;
+        max-height: 200px !important;
+        object-fit: contain !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+}
+
+/* 414px - 768px の範囲 */
+@media (min-width: 414px) and (max-width: 768px) {
+    .case-slider .slick-slide img {
+        width: 100% !important;
+        max-width: 350px !important;
+        height: auto !important;
+        max-height: 220px !important;
+    }
 }
 
 /* 375px以下での最優先修正 */
