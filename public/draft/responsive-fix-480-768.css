@@ -136,14 +136,8 @@
     .clinic-rankings {
         width: 100% !important;
         max-width: 100% !important;
-        padding: 20px 0 !important; /* 左右のpaddingを削除 */
+        padding: 20px 15px !important;
         box-sizing: border-box !important;
-    }
-    
-    /* ランキングセクション内のコンテンツにpaddingを追加 */
-    .clinic-rankings > * {
-        padding-left: 15px !important;
-        padding-right: 15px !important;
     }
     
     .ranking-container {
@@ -161,11 +155,9 @@
     
     /* ランキングコンテナのスクロール領域を確保 */
     .clinic-rankings .ranking-container {
-        width: calc(100% + 30px) !important; /* 親のpaddingをオフセット */
-        margin-left: -15px !important; /* 左側のpaddingをオフセット */
-        margin-right: -15px !important; /* 右側のpaddingをオフセット */
-        padding-left: 15px !important; /* 内側にpaddingを追加 */
-        padding-right: 15px !important; /* 内側にpaddingを追加 */
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 15px 0 !important;
     }
     
     .ranking-item {

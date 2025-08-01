@@ -5070,7 +5070,8 @@ section.clinic-rankings .ranking-header-banner {
     /* clinic-rankings の幅を強制的に修正 - 高い詳細度 */
     main section.clinic-rankings.clinic-rankings {
         width: 100% !important;
-        max-width: 530px !important;
+        /* max-width: 530px !important; */
+        padding: 0px 15px;
         min-width: 320px !important;
         margin: 0 auto !important;
         transform: scale(1) !important;
@@ -5081,7 +5082,10 @@ section.clinic-rankings .ranking-header-banner {
     
     /* ランキングセクションの調整 - 強制的に適用 */
     .clinic-rankings {
-        padding: 15px 10px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px 15px !important;
+        box-sizing: border-box !important;
     }
     
     .ranking-container {
