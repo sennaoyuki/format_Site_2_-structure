@@ -670,8 +670,24 @@ class DataManager {
         });
         
         // 店舗IDに基づいて実際の店舗情報を取得
+        // アンダースコアで区切られた複数店舗IDを処理
+        const allStoreIds = [];
+        storeIdsToShow.forEach(storeId => {
+            if (storeId.includes('_')) {
+                // dio_009_dio_010 のような形式を分割
+                const ids = storeId.split('_').filter(id => id.match(/^\d+$/)).map(num => {
+                    // 最初の部分（クリニック名）を取得
+                    const prefix = storeId.split('_')[0];
+                    return `${prefix}_${num}`;
+                });
+                allStoreIds.push(...ids);
+            } else {
+                allStoreIds.push(storeId);
+            }
+        });
+        
         return this.stores.filter(store => 
-            storeIdsToShow.includes(store.id)
+            allStoreIds.includes(store.id)
         );
     }
 
@@ -2276,21 +2292,6 @@ class RankingApp {
                     </div>
                 </div>
                 
-                ${clinic.id === '1' ? `
-                <!-- CASE -->
-                <div class="clinic-points-section">
-                    <h4 class="section-title">CASE</h4>
-                    <div class="ribbon_point_box_no">
-                        <div class="case-slider">
-                            <div class="case-carousel-container">
-                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1"></div>
-                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2"></div>
-                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ` : ''}
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
