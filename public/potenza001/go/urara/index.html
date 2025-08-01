@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ウララクリニック公式サイトへ移動中...</title>
+    <meta name="description" content="ウララクリニックの公式サイトへリダイレクトしています。">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
+</head>
+<body class="font-sans bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen flex items-center justify-center m-0 text-gray-700">
+    <div class="text-center p-10 max-w-lg bg-white rounded-3xl shadow-2xl">
+        <img src="/images/clinics/urara/urara-logo.webp" alt="ウララクリニック" class="w-52 h-auto mb-5 mx-auto">
+        <div class="inline-block w-10 h-10 border-4 border-gray-200 border-t-teal-400 rounded-full animate-spin mb-5"></div>
+        <h1 class="text-lg font-semibold mb-4 text-teal-400">ウララクリニック公式サイトへ移動中...</h1>
+        <p class="text-sm text-gray-600 mb-8 leading-relaxed">
+            まもなく自動的にウララクリニックの公式サイトへリダイレクトします。<br>
+            移動しない場合は下のボタンをクリックしてください。
+        </p>
+        <div class="text-base text-gray-600 mt-2" id="countdown">3秒後に移動します...</div>
+        <a href="#" id="manualLink" class="inline-block mt-5 py-3 px-6 bg-teal-400 text-white no-underline rounded-full font-semibold transition-colors duration-300 hover:bg-teal-500" style="display: none;">ウララクリニック公式サイトへ</a>
+    </div>
+
+    <script>
+        // URLパラメータを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // ベースURL
+        const baseUrl = 'https://uraraclinic.jp/';
+        
+        // パラメータを引き継いでリダイレクトURLを構築
+        const redirectUrl = new URL(baseUrl);
+        
+        // 全てのパラメータを引き継ぎ
+        for (const [key, value] of urlParams) {
+            redirectUrl.searchParams.set(key, value);
+        }
+        
+        // region_idがない場合は東京をデフォルト設定
+        if (!redirectUrl.searchParams.has('region_id')) {
+            redirectUrl.searchParams.set('region_id', '013');
+        }
+        
+        const finalUrl = redirectUrl.toString();
+        
+        // 手動リンクにもURLを設定
+        document.getElementById('manualLink').href = finalUrl;
+        
+        // アナリティクスにクリックイベントを送信
+        if (window.trackEvent) {
+            trackEvent('clinic_redirect', {
+                clinic_name: 'urara',
+                destination_url: finalUrl,
+                source_page: document.referrer || 'direct'
+            });
+        }
+        
+        // カウントダウン機能
+        let countdown = 3;
+        const countdownElement = document.getElementById('countdown');
+        const manualLink = document.getElementById('manualLink');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                countdownElement.textContent = `${countdown}秒後に移動します...`;
+            } else {
+                countdownElement.textContent = '移動中...';
+                clearInterval(timer);
+                
+                // 3秒後にリダイレクト
+                setTimeout(() => {
+                    window.location.href = finalUrl;
+                }, 500);
+            }
+        }, 1000);
+        
+        // 5秒後に手動リンクを表示（何らかの理由でリダイレクトが失敗した場合）
+        setTimeout(() => {
+            manualLink.style.display = 'inline-block';
+            countdownElement.textContent = '自動移動に時間がかかっています。下のボタンをクリックしてください。';
+        }, 5000);
+    </script>
+</body>
+</html>

@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>検索結果 | POTENZA比較.com</title>
+    <meta name="description" content="POTENZA治療ができるクリニックの検索結果ページです。地域、治療内容、店舗数で絞り込んで最適なクリニックを見つけられます。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#FF6B6B',
+                        secondary: '#4A90E2',
+                        teal: {
+                            400: '#2CC7C5',
+                            500: '#20B2AA'
+                        }
+                    },
+                    maxWidth: {
+                        '3xl': '768px'
+                    },
+                    fontFamily: {
+                        'noto': ['Noto Sans JP', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="icon" type="image/png" href="../images/favicon.png">
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- ヘッダー -->
+        <header class="site-header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <a href="../" class="logo-link" id="header-logo-link">
+                        <div class="logo-main">
+                            <span class="logo-icon"><img src="/images/favicon.png" alt="POTENZA比較.com" style="width: 20px; height: 20px; vertical-align: middle;"></span>
+                            <h1 class="site-logo">POTENZA比較.com</h1>
+                        </div>
+                    </a>
+                </div>
+                <nav class="header-nav">
+                    <a href="/potenza001/" class="nav-link">
+                        <i class="fas fa-home"></i> ホーム
+                    </a>
+                </nav>
+            </div>
+        </header>
+
+        <main class="py-10 px-5 max-w-3xl mx-auto md:py-5 md:px-4">
+            <div class="mb-10 text-center">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2.5">検索結果</h1>
+                <p class="text-base text-gray-600" id="search-summary">条件に合うクリニックを表示しています</p>
+            </div>
+
+            <div class="bg-gray-50 p-7 rounded-xl mb-10 md:p-5">
+                <div class="mb-6 last:mb-0">
+                    <h3 class="text-base font-semibold text-gray-800 mb-4 block">対応部位</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="body-parts-filters">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="face" value="face" class="w-4 h-4 cursor-pointer">
+                            <label for="face" class="cursor-pointer text-sm text-gray-700">顔全体</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="upperarm" value="upperarm" class="w-4 h-4 cursor-pointer">
+                            <label for="upperarm" class="cursor-pointer text-sm text-gray-700">二の腕</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="stomach" value="stomach" class="w-4 h-4 cursor-pointer">
+                            <label for="stomach" class="cursor-pointer text-sm text-gray-700">お腹</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="buttocks" value="buttocks" class="w-4 h-4 cursor-pointer">
+                            <label for="buttocks" class="cursor-pointer text-sm text-gray-700">お尻</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="thigh" value="thigh" class="w-4 h-4 cursor-pointer">
+                            <label for="thigh" class="cursor-pointer text-sm text-gray-700">太もも</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="other" value="other" class="w-4 h-4 cursor-pointer">
+                            <label for="other" class="cursor-pointer text-sm text-gray-700">その他</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6 last:mb-0">
+                    <h3 class="text-base font-semibold text-gray-800 mb-4 block">地域</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="region-filters">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="hokkaido" name="regions" value="011" class="w-4 h-4 cursor-pointer">
+                            <label for="hokkaido" class="cursor-pointer text-sm text-gray-700">北海道</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="miyagi" name="regions" value="004" class="w-4 h-4 cursor-pointer">
+                            <label for="miyagi" class="cursor-pointer text-sm text-gray-700">宮城</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="tokyo" name="regions" value="013" class="w-4 h-4 cursor-pointer">
+                            <label for="tokyo" class="cursor-pointer text-sm text-gray-700">東京</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="saitama" name="regions" value="008" class="w-4 h-4 cursor-pointer">
+                            <label for="saitama" class="cursor-pointer text-sm text-gray-700">埼玉</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="kanagawa" name="regions" value="012" class="w-4 h-4 cursor-pointer">
+                            <label for="kanagawa" class="cursor-pointer text-sm text-gray-700">神奈川</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="chiba" name="regions" value="009" class="w-4 h-4 cursor-pointer">
+                            <label for="chiba" class="cursor-pointer text-sm text-gray-700">千葉</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="aichi" name="regions" value="017" class="w-4 h-4 cursor-pointer">
+                            <label for="aichi" class="cursor-pointer text-sm text-gray-700">愛知</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="kyoto" name="regions" value="020" class="w-4 h-4 cursor-pointer">
+                            <label for="kyoto" class="cursor-pointer text-sm text-gray-700">京都</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="osaka" name="regions" value="021" class="w-4 h-4 cursor-pointer">
+                            <label for="osaka" class="cursor-pointer text-sm text-gray-700">大阪</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="hyogo" name="regions" value="022" class="w-4 h-4 cursor-pointer">
+                            <label for="hyogo" class="cursor-pointer text-sm text-gray-700">兵庫</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="hiroshima" name="regions" value="028" class="w-4 h-4 cursor-pointer">
+                            <label for="hiroshima" class="cursor-pointer text-sm text-gray-700">広島</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="fukuoka" name="regions" value="033" class="w-4 h-4 cursor-pointer">
+                            <label for="fukuoka" class="cursor-pointer text-sm text-gray-700">福岡</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-6 last:mb-0">
+                    <h3 class="text-base font-semibold text-gray-800 mb-4 block">店舗数</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="store-count-filters">
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="stores-0-5" value="0-5" class="w-4 h-4 cursor-pointer">
+                            <label for="stores-0-5" class="cursor-pointer text-sm text-gray-700">0〜5店舗</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="stores-6-10" value="6-10" class="w-4 h-4 cursor-pointer">
+                            <label for="stores-6-10" class="cursor-pointer text-sm text-gray-700">6〜10店舗</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="stores-10-20" value="10-20" class="w-4 h-4 cursor-pointer">
+                            <label for="stores-10-20" class="cursor-pointer text-sm text-gray-700">10〜20店舗</label>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <input type="checkbox" id="stores-20-plus" value="20+" class="w-4 h-4 cursor-pointer">
+                            <label for="stores-20-plus" class="cursor-pointer text-sm text-gray-700">それ以上</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-7 mb-10 md:gap-5" id="results-container">
+                <!-- 検索結果がここに表示されます -->
+            </div>
+
+            <div class="text-center py-16 px-5" id="no-results" style="display: none;">
+                <div class="text-5xl text-gray-300 mb-5">
+                    <i class="fas fa-search"></i>
+                </div>
+                <p class="text-lg text-gray-600">該当するクリニックが見つかりませんでした</p>
+            </div>
+        </main>
+
+        <!-- フッター -->
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <span class="logo-icon"><img src="../images/favicon.png" alt="医療ダイエット比較.com" style="width: 20px; height: 20px; vertical-align: middle;"></span>
+                    <span class="footer-site-name">医療ダイエット比較.com</span>
+                </div>
+                <nav class="footer-nav">
+                    <ul class="footer-links">
+                        <li><a href="#about">サイトについて</a></li>
+                        <li><a href="#privacy">プライバシーポリシー</a></li>
+                        <li><a href="#contact">お問い合わせ</a></li>
+                    </ul>
+                </nav>
+                <div class="footer-info">
+                    <p>&copy; 2025 医療ダイエット比較.com All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="config.js"></script>
+    <script src="../search-results.js"></script>
+</body>
+</html>
