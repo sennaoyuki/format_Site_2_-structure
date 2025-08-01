@@ -1,5 +1,21 @@
 /* シンプルなCASEカルーセル - Slick不要 */
 
+/* 古いSlickのCSS上書き - 緊急修正 */
+body .case-slider:not(.slick-initialized) > div {
+    display: block !important;
+}
+
+body .case-slider:not(.slick-initialized) > div:first-child {
+    display: block !important;
+}
+
+/* Slick関連の古いルールを無効化 */
+body .case-slider .slick-slide img {
+    width: auto !important;
+    padding: 0 !important;
+    box-sizing: content-box !important;
+}
+
 .case-slider {
     position: relative;
     width: 100%;
@@ -10,16 +26,20 @@
     overflow: hidden;
 }
 
-/* スクロールコンテナ */
-.case-carousel-container {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-behavior: smooth;
-    scrollbar-width: none; /* Firefox */
-    -ms-overflow-style: none; /* IE/Edge */
-    gap: 0;
-    padding: 20px 0;
+/* スクロールコンテナ - 特異性を高める */
+body .case-slider .case-carousel-container {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    scroll-snap-type: x mandatory !important;
+    scroll-behavior: smooth !important;
+    scrollbar-width: none !important; /* Firefox */
+    -ms-overflow-style: none !important; /* IE/Edge */
+    gap: 0 !important;
+    padding: 20px 0 !important;
+    width: 100% !important;
+    height: auto !important;
 }
 
 /* Webkit系ブラウザのスクロールバーを隠す */
@@ -27,16 +47,19 @@
     display: none;
 }
 
-/* 各スライド */
-.case-slide {
-    flex: 0 0 100%;
-    scroll-snap-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 200px;
-    padding: 0 20px;
-    box-sizing: border-box;
+/* 各スライド - 特異性を高める */
+body .case-slider .case-slide {
+    flex: 0 0 100% !important;
+    flex-shrink: 0 !important;
+    scroll-snap-align: center !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 200px !important;
+    padding: 0 20px !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    min-width: 100% !important;
 }
 
 /* 画像スタイル */
