@@ -10485,14 +10485,14 @@
         "dio_015"
       ],
       "clinic_2": [
-        "-"
+        "eminal_047",
+        "eminal_048"
       ],
       "clinic_3": [
         "-"
       ],
       "clinic_4": [
-        "eminal_047",
-        "eminal_048"
+        "-"
       ],
       "clinic_5": [
         "sbc_108",
@@ -11383,7 +11383,7 @@
     }
   ],
   "metadata": {
-    "lastUpdated": "2025-08-01T06:18:28.384Z",
+    "lastUpdated": "2025-08-01T06:46:38.535Z",
     "totalClinics": 5,
     "totalStores": 214,
     "totalRegions": 301
