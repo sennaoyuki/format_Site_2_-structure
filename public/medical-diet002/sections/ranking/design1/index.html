@@ -1,0 +1,27 @@
+<!-- ランキング表示セクション -->
+<section class="clinic-rankings">
+    <div class="ranking-header-banner">
+        <img src="../images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">                    
+    </div>
+    <div id="rank-region-name" style="position: absolute;top: 21%;left: 7%;text-align: center;color: rgb(255, 255, 255);font-size: clamp(16px, 5.2vw, 38px);font-weight: 600;z-index: 10;pointer-events: none;">東京で人気の医療ダイエットはここ！</div>
+    <div id="ranking-list" class="ranking-container">
+        <!-- ランキングはJavaScriptで動的に生成 -->
+    </div>
+</section>
+
+<script>
+// 地域名を更新
+const regionMap = {
+    '013': '東京',
+    '027': '大阪',
+    '040': '福岡',
+    '023': '愛知',
+    '014': '神奈川'
+};
+
+const regionId = new URLSearchParams(window.location.search).get('region_id') || '013';
+const regionName = regionMap[regionId] || '東京';
+document.getElementById('rank-region-name').textContent = regionName + 'で人気の医療ダイエットはここ！';
+
+// app.jsの初期化はメインページで行われるため、ここでは地域名の更新のみ
+</script>

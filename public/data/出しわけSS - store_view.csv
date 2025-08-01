@@ -25,7 +25,7 @@ parameter_no,clinic_1,clinic_2,clinic_3,clinic_4,clinic_5
 023,dio_009/dio_010,-,lieto_001,eminal_029/eminal_030,sbc_051/sbc_052/sbc_053/sbc_054/sbc_055/sbc_056
 024,-,-,-,eminal_028,sbc_050
 025,-,-,-,eminal_027,-
-026,-,-,-,eminal_026,sbc_027/sbc_028/sbc_029
+026,dio_008,-,-,eminal_026,sbc_027/sbc_028/sbc_029
 027,dio_003/dio_004/dio_005/dio_007,-,-,eminal_023/eminal_024/eminal_025,sbc_030/sbc_031/sbc_032/sbc_033/sbc_034/sbc_035/sbc_036/sbc_037/sbc_038
 028,dio_006,-,-,eminal_021/eminal_022,sbc_022/sbc_023/sbc_024/sbc_025
 029,-,-,-,eminal_020,sbc_026
@@ -122,7 +122,7 @@ parameter_no,clinic_1,clinic_2,clinic_3,clinic_4,clinic_5
 120,-,-,-,eminal_014,sbc_015
 121,-,-,-,-,-
 122,-,-,-,-,-
-123,-,-,-,eminal_031,sbc_046
+123,-,-,-,-,sbc_046
 124,-,-,-,-,-
 125,-,-,-,-,-
 126,-,-,-,eminal_055,sbc_114

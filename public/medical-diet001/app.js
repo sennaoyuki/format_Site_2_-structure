@@ -1741,7 +1741,7 @@ class RankingApp {
                         '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
                         '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://dioclinic.jp/'
+                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1803,7 +1803,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://dioclinic.jp/',
+                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c',
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
@@ -1987,7 +1987,7 @@ class RankingApp {
                         '営業時間': '多くの院で11:00〜21:00<br>店舗により異なる',
                         '対応部位': '全身対応<br>お腹・二の腕・太もも・顔',
                         '店舗': '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）',
-                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
+                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -2039,7 +2039,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/eminal/eminal-logo.webp',
                         logoAlt: 'エミナルクリニック',
                         description: 'モニタープランで<br>大幅割引実施中',
-                        ctaUrl: 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
+                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a',
                         ctaText: 'エミナルクリニックの公式サイト',
                         microcopy: '＼全国60院以上の安心ネットワーク／'
                     }

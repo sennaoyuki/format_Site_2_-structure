@@ -83,7 +83,7 @@ class SearchResultsApp {
             {
                 id: 'dio',
                 clinic_name: 'DIO',
-                official_url: 'https://dioclinic.jp/',
+                official_url: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88',
                 storeCount: 22,
                 regions: new Set(['hokkaido', 'miyagi', 'tokyo', 'saitama', 'kanagawa', 'chiba', 'aichi', 'kyoto', 'osaka', 'hyogo', 'hiroshima', 'fukuoka']),
                 bodyParts: ['face', 'upperarm', 'stomach', 'buttocks', 'thigh']
@@ -182,7 +182,7 @@ class SearchResultsApp {
     
     getOfficialUrl(clinicId) {
         const urlMap = {
-            'dio': 'https://dioclinic.jp/',
+            'dio': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88',
             'eminal': 'https://eminal-clinic.jp/',
             'urara': 'https://urara-clinic.jp/',
             'lieto': 'https://lieto-clinic.jp/',

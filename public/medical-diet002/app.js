@@ -138,6 +138,10 @@ class DisplayManager {
     }
 
     updateRankingDisplay(clinics, ranking) {
+        if (!this.rankingList) {
+            console.error('rankingList element not found, skipping ranking display update');
+            return;
+        }
         this.rankingList.innerHTML = '';
 
         if (!ranking || Object.keys(ranking.ranks).length === 0) {
@@ -314,6 +318,10 @@ class DisplayManager {
     }
 
     showError(message) {
+        if (!this.errorText || !this.errorMessage) {
+            console.error('Error display elements not found, logging error to console:', message);
+            return;
+        }
         this.errorText.textContent = message;
         this.errorMessage.style.display = 'block';
         // 既存のタイマーをクリア
@@ -723,6 +731,14 @@ class RankingApp {
     }
 
     setupEventListeners() {
+        console.log('Setting up event listeners...');
+        console.log('Available DOM elements:', {
+            regionSelect: !!this.displayManager.regionSelect,
+            searchInput: !!this.displayManager.searchInput,
+            hamburgerMenu: !!this.displayManager.hamburgerMenu,
+            sidebarMenu: !!this.displayManager.sidebarMenu
+        });
+        
         // 地域選択の変更イベント（検索フィルター用）
         if (this.displayManager.regionSelect) {
             this.displayManager.regionSelect.addEventListener('change', () => {
@@ -1803,7 +1819,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://dioclinic.jp/',
+                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88',
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }

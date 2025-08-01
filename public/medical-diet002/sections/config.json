@@ -1,0 +1,46 @@
+{
+  "sections": {
+    "header": {
+      "default": "header.html",
+      "variants": {
+        "simple": "header-simple.html",
+        "full": "header-full.html"
+      }
+    },
+    "hero": {
+      "default": "hero.html",
+      "variants": {
+        "video": "hero-video.html",
+        "slider": "hero-slider.html"
+      }
+    },
+    "ranking": {
+      "default": "ranking.html",
+      "variants": {
+        "grid": "ranking-grid.html",
+        "list": "ranking-list.html"
+      }
+    },
+    "tips": {
+      "default": "tips.html",
+      "variants": {
+        "accordion": "tips-accordion.html",
+        "cards": "tips-cards.html"
+      }
+    },
+    "comparison": {
+      "default": "comparison.html",
+      "variants": {
+        "simple": "comparison-simple.html",
+        "detailed": "comparison-detailed.html"
+      }
+    },
+    "details": {
+      "default": "details.html",
+      "variants": {
+        "compact": "details-compact.html",
+        "expanded": "details-expanded.html"
+      }
+    }
+  }
+}

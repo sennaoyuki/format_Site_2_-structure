@@ -1,0 +1,51 @@
+<!-- 詳細セクション Design 1 -->
+<section class="clinic-details-section">
+    <div class="section-title">
+        <h2>クリニック詳細</h2>
+    </div>
+    
+    <div class="details-header-banner" style="position: relative;">
+        <img src="../images/details_header_bannar3.webp" alt="詳細バナー" class="details-banner-image">
+        <div id="detail-region-name" style="position: absolute;top: 54%;left: 4%;text-align: center;color: rgb(255, 255, 255);font-size: clamp(16px, 4vw, 31px);font-weight: 600;z-index: 10;pointer-events: none;padding: clamp(2px, 0.5vw, 4px) clamp(4px, 1vw, 8px);border-radius: 8px;">東京で人気のクリニック</div>
+    </div>
+    
+    <div id="clinic-details-list" class="clinic-details-container">
+        <!-- クリニック詳細はapp.jsから動的に挿入される -->
+    </div>
+</section>
+
+<script>
+// 地域名を更新
+const regionMap = {
+    '013': '東京',
+    '027': '大阪',
+    '040': '福岡',
+    '023': '愛知',
+    '014': '神奈川'
+};
+
+const regionId = new URLSearchParams(window.location.search).get('region_id') || '013';
+const regionName = regionMap[regionId] || '東京';
+const detailRegionElement = document.getElementById('detail-region-name');
+if (detailRegionElement) {
+    detailRegionElement.textContent = regionName + 'で人気のクリニック';
+}
+</script>
+
+<!-- 地図モーダルはmodalsセクションで定義されます -->
+
+<script>
+// app.jsの初期化はメインページで行われる
+
+// 地図モーダルの基本的な動作
+document.getElementById('map-modal-close').addEventListener('click', function() {
+    document.getElementById('map-modal').style.display = 'none';
+});
+
+window.addEventListener('click', function(event) {
+    const modal = document.getElementById('map-modal');
+    if (event.target === modal) {
+        modal.style.display = 'none';
+    }
+});
+</script>
