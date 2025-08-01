@@ -1,0 +1,54 @@
+/* CASEスライダーの幅問題を修正 */
+
+/* 全画面サイズ共通 */
+.case-slider .slick-track {
+    display: flex !important;
+    align-items: center !important;
+}
+
+.case-slider .slick-slide {
+    float: none !important;
+    display: flex !important;
+    height: auto !important;
+    min-height: 200px !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.case-slider .slick-slide > div {
+    width: 100% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+/* モバイルサイズでの追加修正 */
+@media (max-width: 768px) {
+    .case-slider.slick-initialized .slick-slide {
+        width: 100vw !important;
+        max-width: 100% !important;
+    }
+    
+    .case-slider .slick-list {
+        overflow: hidden !important;
+    }
+    
+    .case-slider .slick-track {
+        width: auto !important;
+    }
+}
+
+/* 375px以下での最優先修正 */
+@media (max-width: 375px) {
+    .case-slider .slick-slide img {
+        width: calc(100% - 20px) !important;
+        max-width: 300px !important;
+        height: auto !important;
+        min-height: 150px !important;
+        max-height: 180px !important;
+        object-fit: contain !important;
+        margin: 0 auto !important;
+        display: block !important;
+    }
+}
