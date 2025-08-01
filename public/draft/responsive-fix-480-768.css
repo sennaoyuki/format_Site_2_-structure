@@ -54,7 +54,6 @@
     
     .comparison-table table {
         width: 100% !important;
-        min-width: 600px !important; /* テーブルの最小幅を設定 */
         table-layout: fixed !important;
     }
     
@@ -281,7 +280,4 @@
         min-width: 190px !important;
     }
     
-    .comparison-table table {
-        min-width: 700px !important;
-    }
 }
