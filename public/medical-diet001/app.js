@@ -675,17 +675,11 @@ class DataManager {
         console.log('🔍 storeIdsToShow:', storeIdsToShow);
         
         storeIdsToShow.forEach(storeId => {
-            if (storeId.includes('_')) {
-                // dio_009_dio_010 のような形式を分割
-                const parts = storeId.split('_');
-                const prefix = parts[0]; // 'dio'
-                const storeNumbers = parts.slice(1); // ['009', '010']
-                
-                storeNumbers.forEach(num => {
-                    const fullStoreId = `${prefix}_${num}`;
-                    allStoreIds.push(fullStoreId);
-                });
-                console.log(`📦 分割: ${storeId} → ${allStoreIds.join(', ')}`);
+            if (storeId.includes('/')) {
+                // dio_009/dio_010 のような形式を分割
+                const ids = storeId.split('/');
+                allStoreIds.push(...ids);
+                console.log(`📦 分割: ${storeId} → ${ids.join(', ')}`);
             } else {
                 allStoreIds.push(storeId);
             }

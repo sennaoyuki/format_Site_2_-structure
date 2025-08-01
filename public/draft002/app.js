@@ -672,23 +672,28 @@ class DataManager {
         // 店舗IDに基づいて実際の店舗情報を取得
         // アンダースコアで区切られた複数店舗IDを処理
         const allStoreIds = [];
+        console.log('🔍 storeIdsToShow:', storeIdsToShow);
+        
         storeIdsToShow.forEach(storeId => {
-            if (storeId.includes('_')) {
-                // dio_009_dio_010 のような形式を分割
-                const ids = storeId.split('_').filter(id => id.match(/^\d+$/)).map(num => {
-                    // 最初の部分（クリニック名）を取得
-                    const prefix = storeId.split('_')[0];
-                    return `${prefix}_${num}`;
-                });
+            if (storeId.includes('/')) {
+                // dio_009/dio_010 のような形式を分割
+                const ids = storeId.split('/');
                 allStoreIds.push(...ids);
+                console.log(`📦 分割: ${storeId} → ${ids.join(', ')}`);
             } else {
                 allStoreIds.push(storeId);
             }
         });
         
-        return this.stores.filter(store => 
+        console.log('🏪 検索する店舗ID:', allStoreIds);
+        console.log('🏬 利用可能な店舗:', this.stores.slice(0, 5).map(s => s.id));
+        
+        const result = this.stores.filter(store => 
             allStoreIds.includes(store.id)
         );
+        
+        console.log('✅ 見つかった店舗:', result.map(s => `${s.id}: ${s.name}`));
+        return result;
     }
 
     // クリニック名で店舗を取得
