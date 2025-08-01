@@ -2282,9 +2282,11 @@ class RankingApp {
                     <h4 class="section-title">CASE</h4>
                     <div class="ribbon_point_box_no">
                         <div class="case-slider">
-                            <div><img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1"></div>
-                            <div><img src="/images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2"></div>
-                            <div><img src="/images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3"></div>
+                            <div class="case-carousel-container">
+                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1"></div>
+                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2"></div>
+                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
