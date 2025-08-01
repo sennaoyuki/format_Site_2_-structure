@@ -29,9 +29,9 @@
     <!-- Slick Carousel CSS -->
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
-    <link rel="stylesheet" href="styles.css?v=2025080101" media="all">
-    <link rel="stylesheet" href="responsive-fix-480-768.css?v=2025080101" media="all">
-    <link rel="stylesheet" href="case-slider-fix.css?v=2025080101" media="all">
+    <link rel="stylesheet" href="styles.css?v=2025080104" media="all">
+    <link rel="stylesheet" href="responsive-fix-480-768.css?v=2025080104" media="all">
+    <link rel="stylesheet" href="case-slider-fix-v2.css?v=2025080107" media="all">
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <!-- Critical CSS -->
     <style>
@@ -125,6 +125,9 @@
     </style>
     <!-- Font loading detection -->
     <script>'fonts' in document&&document.fonts.ready.then(function(){document.documentElement.classList.add('fonts-loaded')})</script>
+    
+    <!-- CASE画像の中央配置強制修正 -->
+    <script src="force-center-alignment.js?v=2025080107"></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -1172,6 +1175,7 @@ text-align: center;
                     slidesToShow: 1,
                     slidesToScroll: 1,
                     arrows: true,
+                    variableWidth: false,
                     mobileFirst: true,
                     responsive: [
                         {
