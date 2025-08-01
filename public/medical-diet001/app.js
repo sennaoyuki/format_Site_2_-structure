@@ -229,7 +229,7 @@ class DisplayManager {
 
             // 押しメッセージの定義
             const pushMessages = {
-                1: "【総合人気No.1】\n2025年のイチ押し！\n業界屈指のコスパ",
+                1: "2025年のイチ押し！\n業界屈指のコスパ",
                 2: "次世代医療！\n成功率94%の実績",
                 3: "厚労省承認マシン\n科学的に脂肪を減らす",
                 4: "多店舗展開\nエミナル",
@@ -654,15 +654,20 @@ class DataManager {
         
         // ランキングデータを取得して、表示されているクリニックを特定
         const ranking = this.getRankingByRegionId(regionId);
+        console.log(`🏆 地域 ${regionId} のランキング:`, ranking);
         if (!ranking) return [];
         
         // 表示する店舗IDのリストを作成
         const storeIdsToShow = [];
         
         // ランキングに表示されているクリニックIDに対応する店舗IDを取得
+        console.log('🎯 ランキングデータ:', ranking.ranks);
         Object.entries(ranking.ranks).forEach(([position, clinicId]) => {
+            console.log(`📍 位置 ${position}: クリニックID ${clinicId}`);
             // clinic_1〜clinic_5はクリニックID（1〜5）に対応
             const clinicKey = `clinic_${clinicId}`;
+            console.log(`🔑 検索キー: ${clinicKey}`);
+            console.log(`🏪 該当店舗:`, storeView.clinicStores[clinicKey]);
             
             if (storeView.clinicStores[clinicKey]) {
                 storeIdsToShow.push(...storeView.clinicStores[clinicKey]);
@@ -2201,6 +2206,7 @@ class RankingApp {
             
             // 店舗データを動的に取得（store_view.csvに基づいてフィルタリング）
             const allStores = this.dataManager.getStoresByRegionId(regionId);
+            console.log(`🏬 地域 ${regionId} の全店舗:`, allStores.map(s => `${s.id}:${s.clinicName}`));
             
             // クリニック名のマッピング（stores.csvとitems.csvの名前の違いを解決）
             // 実際のstores.csvを確認した結果、すべて同じ名前で統一されていることが判明
