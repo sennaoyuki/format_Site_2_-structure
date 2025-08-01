@@ -1,5 +1,16 @@
 /* 緊急修正: カルーセルを確実に横並びにする */
 
+/* 0. styles.cssの古いルールを強制的に上書き */
+.case-slider:not(.slick-initialized) > div {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
+.case-slider:not(.slick-initialized) > div:first-child {
+    display: block !important;
+}
+
 /* 1. 古いSlickルールを完全に無効化 */
 .case-slider,
 .case-slider[class*="slick"],
@@ -11,6 +22,7 @@
     background: white !important;
     border-radius: 8px !important;
     overflow: hidden !important;
+    text-align: left !important; /* 中央寄せを解除 */
 }
 
 /* 2. すべての直下のdivを表示 */
@@ -65,8 +77,8 @@
 }
 
 /* 5. 画像のスタイル */
-.case-slide img,
-.case-slider img {
+.case-slider .case-slide img,
+.case-carousel-container .case-slide img {
     width: auto !important;
     height: auto !important;
     max-width: 90% !important;
@@ -78,6 +90,12 @@
     box-sizing: content-box !important;
     border-radius: 8px !important;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important;
+}
+
+/* styles.cssの画像ルールを上書き */
+.case-slider img {
+    width: auto !important;
+    max-width: 90% !important;
 }
 
 /* 6. Slick関連のすべてのクラスを無効化 */
