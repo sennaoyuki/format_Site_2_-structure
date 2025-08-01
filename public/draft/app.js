@@ -2276,21 +2276,6 @@ class RankingApp {
                     </div>
                 </div>
                 
-                ${clinic.id === '1' ? `
-                <!-- CASE -->
-                <div class="clinic-points-section">
-                    <h4 class="section-title">CASE</h4>
-                    <div class="ribbon_point_box_no">
-                        <div class="case-slider">
-                            <div class="case-carousel-container">
-                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case01.jpg" alt="症例1"></div>
-                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case02.jpg" alt="症例2"></div>
-                                <div class="case-slide"><img src="/images/clinics/dio/dio_case/dio_case03.jpg" alt="症例3"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                ` : ''}
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
