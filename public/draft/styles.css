@@ -2808,7 +2808,7 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0px 0 15px;
     width: 100%;
     height: auto;
-    padding: 1% 0 1%;
+    padding: 1% 0.3%;
 }
 
 .ranking_box_in {
@@ -4787,7 +4787,7 @@ section.clinic-rankings .ranking-header-banner {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 0 15px 0 !important;
-        padding: 0.3% !important;
+        padding: 1% 0.3% !important;
         box-sizing: border-box !important;
     }
 
