@@ -6342,6 +6342,7 @@ section.clinic-rankings .ranking-header-banner {
 .case-slider {
     margin: 0;
     position: relative;
+    text-align: center;
 }
 
 /* スライダー初期化前の表示 */
@@ -6373,6 +6374,9 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0 auto;
     max-height: 400px;
     object-fit: contain;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
 /* Slickのドット */
@@ -6383,11 +6387,14 @@ section.clinic-rankings .ranking-header-banner {
     text-align: center;
     list-style: none;
     padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
 }
 
 .case-slider .slick-dots li {
     display: inline-block;
-    margin: 0 5px;
+    margin: 0 3px;
 }
 
 .case-slider .slick-dots li button {
@@ -6399,7 +6406,7 @@ section.clinic-rankings .ranking-header-banner {
 
 .case-slider .slick-dots li button:before {
     content: '•';
-    font-size: 20px;
+    font-size: 14px;
     color: #ddd;
 }
 
@@ -6481,10 +6488,12 @@ section.clinic-rankings .ranking-header-banner {
     /* 画像の幅を画面幅に応じて調整 */
     .case-slider .slick-slide img {
         padding: 2%;
-        width: calc(100vw - 66px) !important; /* viewport幅 - padding等 */
-        max-width: 505px !important; /* 最大幅を制限 */
+        width: auto !important;
+        max-width: 90% !important;
         height: 100% !important;
-        object-fit: cover !important;
+        object-fit: contain !important;
+        margin: 0 auto !important;
+        display: block !important;
     }
     
     .case-slider .slick-prev,
@@ -6512,6 +6521,14 @@ section.clinic-rankings .ranking-header-banner {
         margin-top: 15px;
     }
     
+    .case-slider .slick-dots li {
+        margin: 0 2px;
+    }
+    
+    .case-slider .slick-dots li button:before {
+        font-size: 12px;
+    }
+    
     /* タッチデバイス対応 */
     .case-slider {
         touch-action: pan-y;
@@ -6526,7 +6543,7 @@ section.clinic-rankings .ranking-header-banner {
     
     /* 375px以下では画像幅をさらに調整 */
     .case-slider .slick-slide img {
-        width: calc(100vw - 66px) !important;
-        max-width: 323px !important;
+        width: auto !important;
+        max-width: 85% !important;
     }
 }
