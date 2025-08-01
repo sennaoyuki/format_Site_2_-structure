@@ -121,13 +121,26 @@ class SimpleCaseCarousel {
     }
 }
 
-// 初期化
-document.addEventListener('DOMContentLoaded', () => {
+// 初期化 - タイミングを複数設定
+function initCarousels() {
     const caseSliders = document.querySelectorAll('.case-slider');
     caseSliders.forEach(slider => {
-        new SimpleCaseCarousel(slider);
+        if (!slider.classList.contains('carousel-initialized')) {
+            new SimpleCaseCarousel(slider);
+            slider.classList.add('carousel-initialized');
+        }
     });
-});
+}
+
+// DOMContentLoaded
+document.addEventListener('DOMContentLoaded', initCarousels);
+
+// window.onload（画像読み込み後）
+window.addEventListener('load', initCarousels);
+
+// 少し遅延して実行（動的生成対応）
+setTimeout(initCarousels, 1000);
+setTimeout(initCarousels, 2000);
 
 // 既存のSlick初期化を無効化
 if (window.jQuery) {
