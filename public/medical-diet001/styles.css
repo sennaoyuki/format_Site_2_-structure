@@ -703,7 +703,7 @@ select {
 /* ribbon_point_box_noスタイルを.clinic-points-section内で使用 */
 .clinic-points-section .ribbon_point_box_no {
     border: 1px solid #d9d9d9;
-    padding: 0px 10px 10px 10px;
+    padding: 0px 0px 6px 0px;
     margin: 0px auto 20px;
     max-width: 100%;
     width: 100%;
@@ -1377,7 +1377,7 @@ body > .container main section {
     .detail-item {
         max-width: 768px;
         margin: 0 auto;
-        padding: 0 10px;
+        padding: 0.3%;
     }
 }
 
@@ -2346,6 +2346,13 @@ section.clinic-rankings .ranking-header-banner {
 .star5_rating[data-rate="4.7"]:after { width: 94%; }
 .star5_rating[data-rate="4.6"]:after { width: 92%; }
 .star5_rating[data-rate="4.5"]:after { width: 90%; }
+.star5_rating[data-rate="4.4"]:after { width: 88%; }
+.star5_rating[data-rate="4.3"]:after { width: 86%; }
+.star5_rating[data-rate="4.2"]:after { width: 84%; }
+.star5_rating[data-rate="4.1"]:after { width: 82%; }
+.star5_rating[data-rate="4.0"]:after { width: 80%; }
+.star5_rating[data-rate="3.9"]:after { width: 78%; }
+.star5_rating[data-rate="3.8"]:after { width: 76%; }
 
 /* ボタンスタイル */
 .comparison-table .link_btn {
@@ -2801,7 +2808,7 @@ section.clinic-rankings .ranking-header-banner {
     margin: 0px 0 15px;
     width: 100%;
     height: auto;
-    padding: 1% 0 1%;
+    padding: 1% 0.3%;
 }
 
 .ranking_box_in {
@@ -4741,7 +4748,7 @@ section.clinic-rankings .ranking-header-banner {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 0 20px 0 !important;
-        padding: 10px !important;
+        padding: 0.3% !important;
         box-sizing: border-box !important;
     }
     
@@ -4780,7 +4787,7 @@ section.clinic-rankings .ranking-header-banner {
         width: 100% !important;
         max-width: 100% !important;
         margin: 0 0 15px 0 !important;
-        padding: 0.3% !important;
+        padding: 1% 0.3% !important;
         box-sizing: border-box !important;
     }
 
@@ -5039,6 +5046,101 @@ section.clinic-rankings .ranking-header-banner {
     }
 }
 
+/* 480〜768pxの中間サイズ対応 */
+@media (min-width: 481px) and (max-width: 768px) {
+    /* グローバルリセット - 幅の異常を防ぐ */
+    html, body {
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+    }
+    
+    /* 全てのコンテナの幅をリセット - 根本的な修正 */
+    .container,
+    .clinic-rankings,
+    .ranking-container,
+    .comparison-table {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        overflow-x: hidden !important;
+        box-sizing: border-box !important;
+    }
+    
+    /* clinic-rankings の幅を強制的に修正 - 高い詳細度 */
+    main section.clinic-rankings.clinic-rankings {
+        width: 100% !important;
+        /* max-width: 530px !important; */
+        padding: 0px 15px;
+        min-width: 320px !important;
+        margin: 0 auto !important;
+        transform: scale(1) !important;
+        will-change: transform !important;
+        isolation: isolate !important;
+        contain: layout !important;
+    }
+    
+    /* ランキングセクションの調整 - 強制的に適用 */
+    .clinic-rankings {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 20px 15px !important;
+        box-sizing: border-box !important;
+    }
+    
+    .ranking-container {
+        display: flex !important;
+        flex-wrap: nowrap !important;
+        overflow-x: auto !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 10px !important;
+        padding: 10px 0px !important;
+    }
+    
+    .ranking-container::-webkit-scrollbar {
+        display: none;
+    }
+    
+    .ranking-item {
+        flex: 0 0 auto;
+        width: 160px;
+        min-width: 160px;
+        max-width: 180px;
+        box-sizing: border-box;
+    }
+    
+    .clinic-logo {
+        max-width: 120px;
+    }
+    
+    .ranking-header {
+        font-size: 1.4rem;
+    }
+    
+    /* 比較表の横スクロール対応 */
+    .comparison-table {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .comparison-table table {
+        min-width: 600px;
+    }
+    
+    /* その他のセクションの幅制限 */
+    .container,
+    .clinic-details-section,
+    .point-section,
+    .review-section {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+}
+
 /* 375px幅での完璧な表示 - 修正版 */
 @media (max-width: 480px) {
     /* 375px専用: ランキングセクション */
@@ -5142,7 +5244,7 @@ section.clinic-rankings .ranking-header-banner {
     
     .detail-item {
         margin-bottom: 30px;
-        padding: 15px;
+        padding: 0.3%;
         box-sizing: border-box;
     }
     
@@ -6234,4 +6336,256 @@ section.clinic-rankings .ranking-header-banner {
 
 .merit-table .merit-content li {
     margin: 8px 0;
+}
+
+/* ===== CASEスライダー ===== */
+.case-slider {
+    margin: 0;
+    position: relative;
+    text-align: center;
+}
+
+/* スライダー初期化前の表示 */
+.case-slider:not(.slick-initialized) > div {
+    display: none;
+}
+
+.case-slider:not(.slick-initialized) > div:first-child {
+    display: block;
+}
+
+/* スライダー初期化後 */
+.case-slider.slick-initialized .slick-list {
+    overflow: hidden;
+}
+
+.case-slider.slick-initialized .slick-track {
+    display: flex;
+}
+
+.case-slider.slick-initialized .slick-slide {
+    height: auto;
+}
+
+.case-slider img {
+    width: 100%;
+    max-width: 600px;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    max-height: 400px;
+    object-fit: contain;
+}
+
+/* Slickのドット */
+.case-slider .slick-dots {
+    position: relative;
+    bottom: auto;
+    margin-top: 10px;
+    text-align: center;
+    list-style: none;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+}
+
+.case-slider .slick-dots li {
+    display: inline-block;
+    margin: 0 3px;
+}
+
+.case-slider .slick-dots li button {
+    background: transparent;
+    border: none;
+    padding: 0;
+    font-size: 0;
+}
+
+.case-slider .slick-dots li button:before {
+    content: '•';
+    font-size: 14px;
+    color: #ddd;
+}
+
+.case-slider .slick-dots li.slick-active button:before {
+    color: #ff7094;
+}
+
+/* Slickの矢印 */
+.case-slider .slick-prev,
+.case-slider .slick-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 112, 148, 0.8);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    z-index: 1;
+    color: white;
+    font-size: 0;
+}
+
+.case-slider .slick-prev:hover,
+.case-slider .slick-next:hover {
+    background: rgba(255, 112, 148, 1);
+}
+
+.case-slider .slick-prev {
+    left: -2%;
+    top: 70%;
+}
+
+.case-slider .slick-next {
+    right: -2%;
+    top: 70%;
+}
+
+.case-slider .slick-prev:before,
+.case-slider .slick-next:before {
+    content: '←';
+    font-size: 20px;
+    color: white;
+}
+
+.case-slider .slick-next:before {
+    content: '→';
+}
+
+/* SP版対応 */
+@media (max-width: 768px) {
+    /* CASEセクション全体の調整 */
+    .clinic-points-section {
+        margin-bottom: 15px;
+    }
+    
+    /* SPでも写真を確実に中央寄せ */
+    .case-slider {
+        text-align: center !important;
+    }
+    
+    .case-slider .slick-list,
+    .case-slider .slick-track {
+        text-align: center !important;
+    }
+    
+    .case-slider .slick-slide {
+        text-align: center !important;
+    }
+    
+    .case-slider .slick-slide > div {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        width: 100% !important;
+    }
+    
+    /* SP版での画像表示修正 - レスポンシブ対応 */
+    .case-slider.slick-initialized {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-list {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-track {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-slide {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    .case-slider.slick-initialized .slick-slide > div {
+        height: auto !important;
+        min-height: 200px !important;
+    }
+    
+    /* 画像の幅を画面幅に応じて調整 */
+    .case-slider .slick-slide img {
+        padding: 10px;
+        width: 100% !important;
+        max-width: 320px !important;
+        height: auto !important;
+        max-height: 180px !important;
+        object-fit: contain !important;
+        margin: 0 auto !important;
+        display: block !important;
+        box-sizing: border-box !important;
+    }
+    
+    .case-slider .slick-prev,
+    .case-slider .slick-next {
+        width: 30px;
+        height: 30px;
+    }
+    
+    .case-slider .slick-prev {
+        left: -2%;
+        top: 70%;
+    }
+    
+    .case-slider .slick-next {
+        right: -2%;
+        top: 70%;
+    }
+    
+    .case-slider .slick-prev:before,
+    .case-slider .slick-next:before {
+        font-size: 16px;
+    }
+    
+    .case-slider .slick-dots {
+        margin-top: 15px;
+    }
+    
+    .case-slider .slick-dots li {
+        margin: 0 2px;
+    }
+    
+    .case-slider .slick-dots li button:before {
+        font-size: 12px;
+    }
+    
+    /* タッチデバイス対応 */
+    .case-slider {
+        touch-action: pan-y;
+    }
+}
+
+/* より小さい画面（375px以下）の調整 */
+@media (max-width: 375px) {
+    .ribbon_point_box_no {
+        padding: 0 !important;
+    }
+    
+    /* 375px以下では画像幅をさらに調整 */
+    .case-slider .slick-slide img {
+        width: 100% !important;
+        max-width: 300px !important;
+        height: auto !important;
+        max-height: 180px !important;
+        object-fit: contain !important;
+    }
+    
+    /* スライドの幅を確保 */
+    .case-slider .slick-slide {
+        width: 100% !important;
+        min-width: 280px !important;
+    }
+    
+    .case-slider .slick-slide > div {
+        width: 100% !important;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
 }

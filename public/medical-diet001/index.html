@@ -20,13 +20,17 @@
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
     <!-- 重要なリソースのpreload -->
     <link rel="preload" as="image" href="../images/MV2.webp" fetchpriority="high" type="image/webp">
-    <link rel="preload" as="style" href="styles.css?v=2025072201">
-    <link rel="preload" as="script" href="app.js?v=2025072201">
+    <link rel="preload" as="style" href="styles.css?v=2025080101">
+    <link rel="preload" as="script" href="app.js?v=2025080101">
     <!-- Google Fontsはプリロードせず、通常のロードのみにする -->
     <!-- スタイルシート -->
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;600;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="styles.css?v=2025072201" media="all">
+    <!-- Slick削除済み - シンプルカルーセル使用 -->
+    <link rel="stylesheet" href="styles.css?v=2025080104" media="all">
+    <link rel="stylesheet" href="responsive-fix-480-768.css?v=2025080104" media="all">
+    <link rel="stylesheet" href="simple-case-carousel.css?v=2025080113" media="all">
+    <link rel="stylesheet" href="simple-case-carousel-override.css?v=2025080114" media="all">
     <link rel="icon" type="image/png" href="../images/favicon.png">
     <!-- Critical CSS -->
     <style>
@@ -59,9 +63,70 @@
         
         /* Font loading optimization */
         .fonts-loaded body{font-family:'Noto Sans JP',sans-serif}
+        
+        
+        .slick-dotted.slick-slider {
+            margin-bottom: 30px;
+        }
+        
+        .slick-slider .slick-track, .slick-slider .slick-list {
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+        }
+        
+        .slick-list {
+            position: relative;
+            display: block;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* 迷ったら1位クリニックセクションのスタイル */
+        .first-choice-recommendation-section .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(44, 199, 197, 0.4);
+        }
+        
+        .first-choice-recommendation-section .cta-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .first-choice-recommendation-section .cta-button:hover::before {
+            transform: translateX(0);
+        }
+        
+        @media (max-width: 768px) {
+            .first-choice-recommendation-section .points-grid {
+                grid-template-columns: 1fr !important;
+            }
+            
+            .first-choice-recommendation-section h2 {
+                font-size: 24px !important;
+            }
+            
+            .first-choice-recommendation-section .cta-button {
+                padding: 16px 40px !important;
+                font-size: 16px !important;
+            }
+        }
     </style>
     <!-- Font loading detection -->
     <script>'fonts' in document&&document.fonts.ready.then(function(){document.documentElement.classList.add('fonts-loaded')})</script>
+    
+    <!-- シンプルカルーセル -->
+    <script src="simple-case-carousel.js?v=2025080114"></script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -116,7 +181,7 @@
 
             <!-- ユーザーの悩みを解消するためのTips -->
             <div class="container tips-container" style="max-width: 768px; margin: 20px auto; padding: 0 10px; position: relative;">
-                <div style="width: 100%;">
+                <div class="tips-section" style="width: 100%;">
                     <div style="display: flex; flex-direction: column;">
                         <!-- タブナビゲーション -->
                         <div class="tabs" style="display: flex; gap: 5px; margin-bottom: 0;">
@@ -303,8 +368,8 @@
                                     <a href="#clinic2" class="clinic-link">URARAクリニック</a>
                                 </td>
                                 <td class="">
-                                    <span class="ranking_evaluation">4.6</span><br>
-                                    <span class="star5_rating" data-rate="4.6"></span>
+                                    <span class="ranking_evaluation">4.5</span><br>
+                                    <span class="star5_rating" data-rate="4.5"></span>
                                 </td>
                                 <td class="">ダイエット成功率94%</td>
                                 <td class="">今なら<br>最大79%OFF！</td>
@@ -325,8 +390,8 @@
                                     <a href="#clinic3" class="clinic-link">リエートクリニック</a>
                                 </td>
                                 <td class="">
-                                    <span class="ranking_evaluation">4.4</span><br>
-                                    <span class="star5_rating" data-rate="4.4"></span>
+                                    <span class="ranking_evaluation">4.3</span><br>
+                                    <span class="star5_rating" data-rate="4.3"></span>
                                 </td>
                                 <td class="">ダイエット成功率94%</td>
                                 <td class="">最大80%OFF<br>（モニター割引）</td>
@@ -809,29 +874,31 @@
                 </div>
             </section>
 
-            <!-- 迷ったらディオクリニックセクション -->
-            <div id="dio-recommendation-section">
+
+
+            <!-- 迷ったら1位クリニックセクション -->
+            <div id="first-choice-recommendation-section">
                 <div style="position: relative; display: inline-block; width: 100%;">
                     <img src="/images/ranking_header_banner.webp" alt="で人気の医療ダイエットはここ！" class="ranking-banner-image">
-                    <div id="rank-region-name" style="position: absolute;bottom: 44%;left: 6%;text-align: center;color: rgb(255, 255, 255);font-size: clamp(16px, 5vw, 38px);font-weight: 600;z-index: 10;pointer-events: none;">迷ったらディオクリニックがおすすめ</div>
-                </div><section class="dio-recommendation-section" style="border: 5px solid rgb(253 208 124);border-radius: -5px;padding: 5px 5px 10px 5px;margin: 0px 20px;background-color: #fffef8;">
+                    <div id="first-choice-region-text" style="position: absolute;bottom: 44%;left: 6%;text-align: center;color: rgb(255, 255, 255);font-size: clamp(16px, 5vw, 38px);font-weight: 600;z-index: 10;pointer-events: none;">迷ったら<span id="first-choice-clinic-name">ディオクリニック</span>がおすすめ</div>
+                </div><section class="first-choice-recommendation-section" style="border: 5px solid rgb(253 208 124);border-radius: -5px;padding: 5px 5px 10px 5px;margin: 0px 20px;background-color: #fffef8;">
                                 
             
             <!-- バナー -->
-            <div class="dio-banner" style="text-align: center;/* margin-bottom: 30px; */">
-                <img src="/images/clinics/dio/dio_detail_bnr.webp" alt="ディオクリニック" style="max-width: 100%; height: auto;">
+            <div class="first-choice-banner" style="text-align: center;/* margin-bottom: 30px; */">
+                <img id="first-choice-banner-image" src="/images/clinics/dio/dio_detail_bnr.webp" alt="ディオクリニック" style="max-width: 100%; height: auto;">
             </div>
             
-            <!-- ディオクリニックがおすすめの3つの理由 -->
+            <!-- クリニックがおすすめの3つの理由 -->
             <div class="section-title" style="
 margin: 2%;
 text-align: center;
 ">
-                <h3>ディオクリニックがおすすめの<span style="color: #2CC7C5;">3つの理由</span></h3>
+                <h3><span id="first-choice-title-clinic-name">ディオクリニック</span>がおすすめの<span style="color: #2CC7C5;">3つの理由</span></h3>
             </div>
             
             <!-- ポイント -->
-            <div class="ribbon_point_box_no">
+            <div class="ribbon_point_box_no" id="first-choice-points">
                 
                     <div class="ribbon_point_title2_s">
                         <i class="fas fa-clock point-icon-inline"></i>
@@ -857,8 +924,8 @@ text-align: center;
                         <p style="font-size:14px;">管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。</p>
                     </div>
                     
-                <div class="ribbon_point_link">
-                    【公式】<a href="https://www.xn--ecki4eoz3204ct89aepry34c.com/go/dio/?max_scroll=100&amp;region_id=013" target="_blank" rel="noopener"><strong>https://dioclinic.jp/</strong></a>
+                <div class="ribbon_point_link" id="first-choice-official-link">
+                    【公式】<a href="https://www.xn--ecki4eoz3204ct89aepry34c.com/draft/go/dio/?max_scroll=100&amp;region_id=013" target="_blank" rel="noopener"><strong>https://dioclinic.jp/</strong></a>
                 </div>
             </div>
             
@@ -868,18 +935,18 @@ text-align: center;
                 <div class="campaign-content">
                     <div class="camp_header3">
                         <div class="info_logo">
-                            <img src="/images/clinics/dio/dio-logo.webp" alt="ディオクリニック">
+                            <img id="first-choice-info-logo" src="/images/clinics/dio/dio-logo.webp" alt="ディオクリニック">
                         </div>
-                        <div class="camp_txt">
+                        <div class="camp_txt" id="first-choice-campaign-text">
                             期間限定キャンペーン<br>12ヶ月分0円
                         </div>
                     </div>
                     
                     <div class="cv_box_img">
-                        ＼ダイエット成功率99％の実績／
+                        <span id="first-choice-achievement-text">＼ダイエット成功率99％の実績／</span>
                         <p class="btn btn_second_primary" style="margin-top: 10px;">
-                            <a href="https://www.xn--ecki4eoz3204ct89aepry34c.com/go/dio/?max_scroll=100&amp;region_id=013" target="_blank" rel="noopener">
-                                <span class="bt_s">ディオクリニックの公式サイト</span>
+                            <a id="first-choice-cta-link" href="https://www.xn--ecki4eoz3204ct89aepry34c.com/draft/go/dio/?max_scroll=100&amp;region_id=013" target="_blank" rel="noopener">
+                                <span class="bt_s" id="first-choice-cta-text">ディオクリニックの公式サイト</span>
                                 <span class="btn-arrow">▶</span>
                             </a>
                         </p>
@@ -1018,7 +1085,547 @@ text-align: center;
         </div>
     </div>
 
-    <script src="app.js?v=2025072201" defer></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Slick Carousel JS -->
+    <!-- Slick.js削除済み -->
+    <script src="app.js?v=2025080108" defer></script>
+    
+
+    <!-- 1位クリニック動的表示機能 -->
+    <script>
+        // 1位クリニックの情報を設定
+        function setFirstChoiceClinic(clinicData) {
+            if (!clinicData) return;
+            
+            const clinicName = clinicData.name || 'ディオクリニック';
+            
+            // クリニックIDまたは名前からslugを特定
+            const clinicIdToSlugMap = {
+                '1': 'dio',
+                '2': 'eminal', 
+                '3': 'urara',
+                '4': 'lieto',
+                '5': 'sbc'
+            };
+            
+            const clinicNameToSlugMap = {
+                'ディオクリニック': 'dio',
+                'エミナルクリニック': 'eminal',
+                'URARAクリニック': 'urara',
+                'リエートクリニック': 'lieto',
+                '湘南美容クリニック': 'sbc',
+                // 他の可能なクリニック名も追加
+                'エミナル': 'eminal',
+                'URARA': 'urara',
+                'リエート': 'lieto',
+                '湘南美容': 'sbc',
+                'SBC': 'sbc'
+            };
+            
+            const clinicSlug = clinicIdToSlugMap[clinicData.id] || clinicNameToSlugMap[clinicName] || 'dio';
+            
+            console.log('Setting first choice clinic:', {
+                id: clinicData.id,
+                name: clinicName,
+                slug: clinicSlug
+            });
+            
+            // テキスト要素を更新
+            const regionText = document.getElementById('first-choice-region-text');
+            const clinicNameSpan = document.getElementById('first-choice-clinic-name');
+            const titleClinicName = document.getElementById('first-choice-title-clinic-name');
+            const bannerImage = document.getElementById('first-choice-banner-image');
+            const infoLogo = document.getElementById('first-choice-info-logo');
+            const campaignText = document.getElementById('first-choice-campaign-text');
+            const achievementText = document.getElementById('first-choice-achievement-text');
+            const ctaLink = document.getElementById('first-choice-cta-link');
+            const ctaText = document.getElementById('first-choice-cta-text');
+            
+            if (clinicNameSpan) clinicNameSpan.textContent = clinicName;
+            if (titleClinicName) titleClinicName.textContent = clinicName;
+            if (bannerImage) {
+                bannerImage.src = `/images/clinics/${clinicSlug}/${clinicSlug}_detail_bnr.webp`;
+                bannerImage.alt = clinicName;
+            }
+            if (infoLogo) {
+                infoLogo.src = `/images/clinics/${clinicSlug}/${clinicSlug}-logo.webp`;
+                infoLogo.alt = clinicName;
+            }
+            if (ctaText) ctaText.textContent = `${clinicName}の公式サイト`;
+            
+            // クリニック別の内容設定
+            const clinicInfo = getClinicInfo(clinicSlug);
+            if (campaignText) campaignText.innerHTML = clinicInfo.campaign;
+            if (achievementText) achievementText.textContent = clinicInfo.achievement;
+            if (ctaLink) ctaLink.href = clinicInfo.ctaUrl;
+            
+            // 3つの理由を設定
+            setThreeReasons(clinicSlug);
+            
+            // CASEセクションを設定（1位クリニックのみ）
+            setCaseSection(clinicSlug, clinicInfo.points);
+        }
+
+        // クリニック別の情報
+        function getClinicInfo(clinicSlug) {
+            const clinicInfoMap = {
+                'dio': {
+                    campaign: '期間限定キャンペーン<br>12ヶ月分0円',
+                    achievement: '＼ダイエット成功率99％の実績／',
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/draft/go/dio/?max_scroll=100&region_id=013',
+                    points: [
+                        {
+                            icon: 'fas fa-chart-line',
+                            title: 'ダイエット成功率99％の実績',
+                            description: 'ディオクリニックは99％という圧倒的な成功率を誇ります。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。多くの方が理想の体型を実現しており、あなたも安心して治療を始めていただけます。'
+                        },
+                        {
+                            icon: 'fas fa-user-md',
+                            title: '管理栄養士による専門食事指導',
+                            description: 'ディオクリニックでは管理栄養士による専門的な食事指導が受けられます。一人ひとりの体質や生活習慣に合わせたオーダーメイドの食事プランで、健康的で持続可能なダイエットをサポートします。'
+                        },
+                        {
+                            icon: 'fas fa-shield-alt',
+                            title: '全額返金保証で安心サポート',
+                            description: 'ディオクリニックでは痩せなかった場合の全額返金保証制度を設けています。また、リバウンド防止プログラム付きで長期的な効果維持をサポート。安心して治療を受けていただけます。'
+                        }
+                    ]
+                },
+                'urara': {
+                    campaign: '期間限定キャンペーン<br>最大79%OFF',
+                    achievement: '＼ダイエット成功率94％の実績／',
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/urara/?max_scroll=100&region_id=013',
+                    points: [
+                        {
+                            icon: 'fas fa-percentage',
+                            title: '最大79%OFFの特別価格',
+                            description: 'URARAクリニックでは期間限定で最大79%OFFの特別価格を実施中。コストを抑えながら本格的な医療ダイエットを始められます。お得な今がチャンス！'
+                        },
+                        {
+                            icon: 'fas fa-chart-line',
+                            title: 'ダイエット成功率94％の実績',
+                            description: 'URARAクリニック独自の医療痩身プログラムで94％の高い成功率を実現。一人ひとりに合わせたオーダーメイド治療で理想の体型を目指します。'
+                        },
+                        {
+                            icon: 'fas fa-list-alt',
+                            title: '豊富な治療メニューから最適選択',
+                            description: '脂肪冷却から注射治療まで、豊富な治療メニューを用意。あなたの体質や目標に合わせて最適な治療法を選択できます。専門医が丁寧にカウンセリングします。'
+                        }
+                    ]
+                },
+                'lieto': {
+                    campaign: 'モニター割引<br>最大80%OFF',
+                    achievement: '＼ダイエット成功率94％の実績／',
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/lieto/?max_scroll=100&region_id=013',
+                    points: [
+                        {
+                            icon: 'fas fa-percentage',
+                            title: '最大80%OFFモニター割引',
+                            description: 'リエートクリニックでは最大80%OFFの大幅割引を実施中。モニター価格で本格的な医療ダイエットを始められるチャンスです。お得な価格で理想の体型を目指しましょう。'
+                        },
+                        {
+                            icon: 'fas fa-user-md',
+                            title: '医師監修の安心サポート',
+                            description: '経験豊富な医師が監修するプログラムで安全性を最優先。管理栄養士による食事指導も含め、医療の専門知識に基づいた安心のトータルサポートを提供します。'
+                        },
+                        {
+                            icon: 'fas fa-chart-line',
+                            title: 'ダイエット成功率94％の実績',
+                            description: 'リエートクリニック独自の医療痩身プログラムで94％の高い成功率を達成。確実な結果を出すための科学的アプローチで、あなたの理想を現実にします。'
+                        }
+                    ]
+                },
+                'sbc': {
+                    campaign: '症例実績30万件以上<br>安心の大手クリニック',
+                    achievement: '＼症例実績30万件以上の実績／',
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/sbc/?max_scroll=100&region_id=013',
+                    points: [
+                        {
+                            icon: 'fas fa-hospital',
+                            title: '症例実績30万件以上の安心',
+                            description: '湘南美容クリニックは症例実績30万件以上の豊富な経験を持つ大手クリニック。確かな技術力と実績で安心して治療を受けられます。全国展開でアクセスも良好です。'
+                        },
+                        {
+                            icon: 'fas fa-certificate',
+                            title: '認定機器による確実な効果',
+                            description: 'FDA認可のクールスカルプティングをはじめ、認定機器による確実で安全な治療を提供。医療機器の品質にこだわり、高い効果を実現します。'
+                        },
+                        {
+                            icon: 'fas fa-map-marker-alt',
+                            title: '全国130院以上の豊富なネットワーク',
+                            description: '全国130院以上を展開する豊富なネットワーク。どこに住んでいても同じ品質の医療ダイエットを受けられます。引っ越しがあっても安心して継続できます。'
+                        }
+                    ]
+                },
+                'eminal': {
+                    campaign: '医療ダイエット専門<br>個別プラン提案',
+                    achievement: '＼医療ダイエット専門の実績／',
+                    ctaUrl: 'https://www.xn--ecki4eoz3204ct89aepry34c.com/go/eminal/?max_scroll=100&region_id=013',
+                    points: [
+                        {
+                            icon: 'fas fa-clock',
+                            title: '管理栄養士によるオンライン食事指導',
+                            description: 'エミナルクリニックでは管理栄養士によるオンラインでの食事指導が受けられます。LINEなどを使って手軽に相談できるので、継続しやすいと評判です。'
+                        },
+                        {
+                            icon: 'fas fa-clock',
+                            title: '全国60院以上の安心ネットワーク',
+                            description: 'エミナルクリニックは全国60院以上を展開しており、どこに住んでいても同じ品質の医療ダイエットを受けられます。安心・安全なネットワークで、あなたのボディメイクをサポートします。'
+                        },
+                        {
+                            icon: 'fas fa-clock',
+                            title: 'モニター満足度95%の実績',
+                            description: 'エミナルクリニックはモニター満足度95%という高い実績を誇っています。多くの方が結果に満足しており、あなたも安心して治療を始めていただけます。'
+                        }
+                    ]
+                }
+            };
+            
+            return clinicInfoMap[clinicSlug] || clinicInfoMap['dio'];
+        }
+
+        // クリニックURLを取得（中央管理から）
+        function getClinicUrl(clinicSlug) {
+            if (window.CLINIC_URLS && window.CLINIC_URLS[clinicSlug]) {
+                return window.CLINIC_URLS[clinicSlug].baseUrl;
+            }
+            // フォールバック（念のため）
+            return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
+        }
+
+        // 3つの理由を設定
+        function setThreeReasons(clinicSlug) {
+            const pointsContainer = document.getElementById('first-choice-points');
+            if (!pointsContainer) return;
+            
+            const reasonsMap = {
+                'dio': [
+                    {
+                        title: '圧倒的な実績＆成功率99％',
+                        description: 'ダイエット成功率99％、平均13.7kg減の実績。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。'
+                    },
+                    {
+                        title: '最新の医療機器を完備',
+                        description: '脂肪冷却・医療用EMS・医療ハイフ・医療ラジオ波など、最新の痩身機器を多数完備。一人一人の悩みに合わせた最適な治療を提供します。'
+                    },
+                    {
+                        title: '管理栄養士による完全サポート',
+                        description: '管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。'
+                    }
+                ],
+                'urara': [
+                    {
+                        title: 'ダイエット成功率94％の実績',
+                        description: '確実な結果を出すURARAクリニック独自の医療痩身プログラム。一人一人に合わせたオーダーメイド治療で理想の体型を実現します。'
+                    },
+                    {
+                        title: '最大79%OFFの特別価格',
+                        description: '今なら期間限定で最大79%OFFの特別価格。コストを抑えながら本格的な医療ダイエットを始められます。'
+                    },
+                    {
+                        title: '豊富な治療メニュー',
+                        description: '脂肪冷却から注射治療まで、豊富な治療メニューを用意。あなたの体質や目標に合わせて最適な治療法を選択できます。'
+                    }
+                ],
+                'lieto': [
+                    {
+                        title: 'ダイエット成功率94％',
+                        description: 'リエートクリニック独自の医療痩身プログラムで、確実な結果を出します。医師監修のもと安全で効果的な治療を提供。'
+                    },
+                    {
+                        title: '最大80%OFFモニター割引',
+                        description: 'モニター割引で最大80%OFF。お得な価格で本格的な医療ダイエットを体験できます。'
+                    },
+                    {
+                        title: '医師監修の安心サポート',
+                        description: '医師監修のもと管理栄養士が食事指導。安全で健康的なダイエットをトータルサポートします。'
+                    }
+                ],
+                'sbc': [
+                    {
+                        title: '症例実績30万件以上の安心',
+                        description: '湘南美容クリニックは症例実績30万件以上の豊富な経験。確かな技術力と実績で安心して治療を受けられます。'
+                    },
+                    {
+                        title: '全国展開の通いやすさ',
+                        description: '全国に多数のクリニックを展開。アクセスの良い立地で通いやすく、継続しやすい環境を提供します。'
+                    },
+                    {
+                        title: '豊富な治療メニュー',
+                        description: 'クールスカルプティングから脂肪溶解注射まで、豊富な治療メニュー。一人一人に最適化した治療を提供します。'
+                    }
+                ],
+                'eminal': [
+                    {
+                        title: '医療ダイエット専門クリニック',
+                        description: 'エミナルクリニックは医療ダイエット専門。専門性の高い治療と豊富な経験で確実な結果を提供します。'
+                    },
+                    {
+                        title: '個別カウンセリング重視',
+                        description: '一人一人の体質や目標に合わせた個別プランを提案。丁寧なカウンセリングで最適な治療法を選択します。'
+                    },
+                    {
+                        title: '充実のアフターサポート',
+                        description: '治療後のアフターサポートも充実。リバウンド防止のためのフォローアップで長期的な効果を維持します。'
+                    }
+                ]
+            };
+            
+            const reasons = reasonsMap[clinicSlug] || reasonsMap['dio'];
+            const officialUrl = `https://www.xn--ecki4eoz3204ct89aepry34c.com/go/${clinicSlug}/?max_scroll=100&region_id=013`;
+            
+            let html = '';
+            reasons.forEach(reason => {
+                html += `
+                    <div class="ribbon_point_title2_s">
+                        <i class="fas fa-clock point-icon-inline"></i>
+                        <strong>${reason.title}</strong>
+                    </div>
+                    <div class="ribbon_point_txt">
+                        <p style="font-size:14px;">${reason.description}</p>
+                    </div>
+                `;
+            });
+            
+            // 公式リンクも更新
+            const officialLink = document.getElementById('first-choice-official-link');
+            if (officialLink) {
+                officialLink.innerHTML = `【公式】<a href="${officialUrl}" target="_blank" rel="noopener"><strong>https://dioclinic.jp/</strong></a>`;
+            }
+            
+            pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
+        }
+
+        // CASEセクションを設定
+        function setCaseSection(clinicSlug, points) {
+            if (!points || points.length === 0) return;
+            
+            // 症例画像を取得
+            const caseImages = getCaseImages(clinicSlug);
+            if (!caseImages || caseImages.length === 0) return;
+            
+            // CASEセクションを作成（カルーセル構造）
+            const caseHtml = `
+                <div class="clinic-points-section">
+                    <h4 class="section-title">CASE</h4>
+                    <div class="case-slider">
+                        <div class="case-carousel-container">
+                            ${caseImages.map((image, index) => `
+                                <div class="case-slide">
+                                    <img src="${image.src}" alt="${image.alt}" loading="lazy">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // POINTセクションの後にCASEセクションを挿入
+            const pointsSection = document.getElementById('first-choice-points');
+            
+            if (pointsSection) {
+                // 既存のCASEセクションがあれば削除
+                const existingCase = document.querySelector('.case-section-container');
+                if (existingCase) {
+                    existingCase.remove();
+                }
+                
+                // POINTセクションの後にCASEセクションを挿入
+                const caseContainer = document.createElement('div');
+                caseContainer.className = 'case-section-container';
+                caseContainer.innerHTML = caseHtml;
+                
+                // POINTセクションの親要素の後に挿入
+                pointsSection.parentElement.insertBefore(caseContainer, pointsSection.nextSibling);
+                
+                // カルーセルを初期化
+                setTimeout(() => {
+                    if (typeof initCarousels === 'function') {
+                        initCarousels();
+                    }
+                }, 100);
+            }
+        }
+        
+        // クリニックごとの症例画像を管理
+        function getCaseImages(clinicSlug) {
+            const caseImagesMap = {
+                'dio': [
+                    {
+                        src: '../images/case01.jpg',
+                        alt: 'CASE 01 - ボディメイクコース（脂肪冷却＋EMS等）68.4kg → 54.3kg'
+                    },
+                    {
+                        src: '../images/case02.jpg',
+                        alt: 'CASE 02 - ボディメイクコース（脂肪冷却＋ハイフ等）97.3kg → 65.8kg'
+                    },
+                    {
+                        src: '../images/case03.jpg',
+                        alt: 'CASE 03 - ボディメイクコース（内服薬＋EMS等）118.4kg → 81.6kg'
+                    }
+                ],
+                'lieto': [
+                    {
+                        src: '../images/case-lieto01.jpg',
+                        alt: 'CASE 01 - リエートクリニックの症例'
+                    },
+                    {
+                        src: '../images/case-lieto02.jpg',
+                        alt: 'CASE 02 - リエートクリニックの症例'
+                    },
+                    {
+                        src: '../images/case-lieto03.jpg',
+                        alt: 'CASE 03 - リエートクリニックの症例'
+                    }
+                ],
+                'sbc': [
+                    {
+                        src: '../images/case-sbc01.jpg',
+                        alt: 'CASE 01 - 湘南美容クリニックの症例'
+                    },
+                    {
+                        src: '../images/case-sbc02.jpg',
+                        alt: 'CASE 02 - 湘南美容クリニックの症例'
+                    },
+                    {
+                        src: '../images/case-sbc03.jpg',
+                        alt: 'CASE 03 - 湘南美容クリニックの症例'
+                    }
+                ],
+                'eminal': [
+                    {
+                        src: '../images/case-eminal01.jpg',
+                        alt: 'CASE 01 - エミナルクリニックの症例'
+                    },
+                    {
+                        src: '../images/case-eminal02.jpg',
+                        alt: 'CASE 02 - エミナルクリニックの症例'
+                    },
+                    {
+                        src: '../images/case-eminal03.jpg',
+                        alt: 'CASE 03 - エミナルクリニックの症例'
+                    }
+                ],
+                'urara': [
+                    {
+                        src: '../images/case-urara01.jpg',
+                        alt: 'CASE 01 - ウララクリニックの症例'
+                    },
+                    {
+                        src: '../images/case-urara02.jpg',
+                        alt: 'CASE 02 - ウララクリニックの症例'
+                    },
+                    {
+                        src: '../images/case-urara03.jpg',
+                        alt: 'CASE 03 - ウララクリニックの症例'
+                    }
+                ]
+            };
+            
+            return caseImagesMap[clinicSlug] || [];
+        }
+
+
+        // 1位クリニック情報の更新を実行
+        function updateFirstChoiceClinic() {
+            if (!window.app || !window.app.dataManager) {
+                console.log('app or dataManager not ready yet');
+                return;
+            }
+            
+            // 現在の地域IDを取得
+            const regionId = window.app.urlHandler ? window.app.urlHandler.getRegionId() : '013';
+            console.log('Current region ID:', regionId);
+            
+            // ランキングデータを取得
+            const ranking = window.app.dataManager.getRankingByRegionId(regionId);
+            console.log('Ranking data:', ranking);
+            
+            if (!ranking || !ranking.ranks) {
+                console.log('No ranking data found for region:', regionId);
+                return;
+            }
+            
+            // 1位のクリニックIDを取得
+            const firstPlaceClinicId = ranking.ranks.no1;
+            console.log('First place clinic ID:', firstPlaceClinicId);
+            
+            if (!firstPlaceClinicId) {
+                console.log('No first place clinic found');
+                return;
+            }
+            
+            // クリニック情報を取得
+            const allClinics = window.app.dataManager.getAllClinics();
+            const firstClinic = allClinics.find(clinic => clinic.id === firstPlaceClinicId);
+            console.log('First clinic data:', firstClinic);
+            
+            if (firstClinic) {
+                setFirstChoiceClinic(firstClinic);
+            }
+        }
+
+        // 初期化時に実行
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, attempting to update first choice clinic');
+            updateFirstChoiceClinic();
+        });
+
+        // app.jsが読み込まれた後にも実行（タイマーで複数回試行）
+        let retryCount = 0;
+        const maxRetries = 10;
+        
+        function tryUpdateFirstChoice() {
+            if (window.app && window.app.dataManager && window.app.dataManager.getAllClinics().length > 0) {
+                console.log('App ready, updating first choice clinic');
+                updateFirstChoiceClinic();
+                return;
+            }
+            
+            retryCount++;
+            if (retryCount < maxRetries) {
+                console.log(`App not ready yet, retry ${retryCount}/${maxRetries}`);
+                setTimeout(tryUpdateFirstChoice, 500);
+            } else {
+                console.log('Max retries reached, app may not be loaded');
+            }
+        }
+        
+        // 少し遅延してから開始
+        setTimeout(tryUpdateFirstChoice, 100);
+
+        // 地域変更時のイベントリスナーも追加
+        function setupRegionChangeWatcher() {
+            if (!window.app || !window.app.urlHandler) {
+                setTimeout(setupRegionChangeWatcher, 500);
+                return;
+            }
+            
+            let currentRegionId = window.app.urlHandler.getRegionId();
+            console.log('Initial region ID:', currentRegionId);
+            
+            // URLパラメータ変更の監視
+            setInterval(() => {
+                const newRegionId = window.app.urlHandler ? window.app.urlHandler.getRegionId() : '013';
+                if (newRegionId !== currentRegionId) {
+                    currentRegionId = newRegionId;
+                    console.log('Region changed to:', newRegionId);
+                    setTimeout(() => updateFirstChoiceClinic(), 100); // 少し遅延を入れる
+                }
+            }, 1000);
+        }
+        
+        // 地域監視を開始
+        setupRegionChangeWatcher();
+        
+        // ページ読み込み完了時にもう一度実行
+        window.addEventListener('load', function() {
+            console.log('Page fully loaded, updating first choice clinic');
+            setTimeout(() => updateFirstChoiceClinic(), 1000);
+        });
+    </script>
+
     <script>
         // 比較表のタブ切り替え機能
         // 全てのパラメータを引き継ぐ共通処理
@@ -1235,6 +1842,9 @@ text-align: center;
             });
         });
     </script>
+    
+    <!-- Centralized Clinic URLs -->
+    <script src="config/clinic-urls.js?v=2025072201"></script>
     
     <!-- URL Parameter Tracking -->
     <script src="/url-tracking.js?v=2025072201" defer></script>

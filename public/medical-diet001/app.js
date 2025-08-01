@@ -1,3 +1,22 @@
+// クリニックURLを中央管理から取得
+function getClinicUrlFromConfig(clinicId) {
+    const clinicMap = {
+        '1': 'dio',
+        '2': 'eminal', 
+        '3': 'urara',
+        '4': 'lieto',
+        '5': 'sbc'
+    };
+    
+    const clinicSlug = clinicMap[clinicId];
+    if (window.CLINIC_URLS && window.CLINIC_URLS[clinicSlug]) {
+        return window.CLINIC_URLS[clinicSlug].baseUrl;
+    }
+    
+    // フォールバック
+    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
+}
+
 // URLパラメータ処理クラス
 class UrlParamHandler {
     getParam(name) {
@@ -31,11 +50,11 @@ class UrlParamHandler {
     // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlWithRegionId(clinicId) {
         const redirectUrls = {
-            '1': '/go/dio/',
-            '2': '/go/eminal/',
-            '3': '/go/urara/',
-            '4': '/go/lieto/',
-            '5': '/go/sbc/'
+            '1': '/draft/go/dio/',
+            '2': '/draft/go/eminal/',
+            '3': '/draft/go/urara/',
+            '4': '/draft/go/lieto/',
+            '5': '/draft/go/sbc/'
         };
         
         const redirectUrl = redirectUrls[clinicId];
@@ -57,11 +76,11 @@ class UrlParamHandler {
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlByNameWithRegionId(clinicName) {
         const redirectUrls = {
-            'dio': '/go/dio/',
-            'eminal': '/go/eminal/',
-            'urara': '/go/urara/',
-            'lieto': '/go/lieto/',
-            'sbc': '/go/sbc/'
+            'dio': '/draft/go/dio/',
+            'eminal': '/draft/go/eminal/',
+            'urara': '/draft/go/urara/',
+            'lieto': '/draft/go/lieto/',
+            'sbc': '/draft/go/sbc/'
         };
         
         const redirectUrl = redirectUrls[clinicName];
@@ -175,10 +194,10 @@ class DisplayManager {
             // 評価スコアとスターの生成（仮のデータ）
             const ratings = {
                 1: { score: 4.9, stars: 5 },
-                2: { score: 4.8, stars: 4.8 },
-                3: { score: 4.7, stars: 4.7 },
-                4: { score: 4.6, stars: 4.6 },
-                5: { score: 4.5, stars: 4.5 }
+                2: { score: 4.5, stars: 4.5 },
+                3: { score: 4.3, stars: 4.3 },
+                4: { score: 4.1, stars: 4.1 },
+                5: { score: 3.8, stars: 3.8 }
             };
             const rating = ratings[rankNum] || { score: 4.5, stars: 4 };
 
@@ -233,7 +252,7 @@ class DisplayManager {
                         <div class="rating-score">${rating.score}<span class="score-max">/5.0</span></div>
                     </div>
                     <div class="clinic-logo-section">
-                        ${clinic.name}
+                        <h3>${clinic.name}</h3>
                     </div>
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${clinic.name}バナー" onerror="this.style.display='none'">
@@ -529,6 +548,7 @@ class DataManager {
     // ランキングデータの読み込み
     async loadRankings() {
         const data = await this.loadCsvFile('出しわけSS - ranking.csv');
+        console.log('🔄 ランキングCSVデータ読み込み:', data.slice(0, 3)); // 最初の3行を表示
         
         // 地域ごとにランキングをグループ化
         const rankingMap = {};
@@ -541,9 +561,9 @@ class DataManager {
                 };
             }
             
-            // 各順位のクリニックIDを設定
+            // 各順位のクリニックIDを設定（"-"は除外）
             Object.keys(row).forEach(key => {
-                if (key.startsWith('no') && row[key]) {
+                if (key.startsWith('no') && row[key] && row[key] !== '-') {
                     rankingMap[regionId].ranks[key] = row[key];
                 }
             });
@@ -1153,23 +1173,29 @@ class RankingApp {
             return;
         }
 
+        console.log('🔄 比較表を更新中... ランキング:', ranking.ranks);
+
         // ランキング順のクリニックデータを取得
         const rankedClinics = [];
-        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
-            const numA = parseInt(a[0].replace('no', ''));
-            const numB = parseInt(b[0].replace('no', ''));
-            return numA - numB;
-        });
-
-        sortedRanks.forEach(([position, clinicId]) => {
-            const clinic = clinics.find(c => c.id === clinicId);
-            if (clinic) {
-                rankedClinics.push({
-                    ...clinic,
-                    rank: parseInt(position.replace('no', ''))
-                });
+        
+        // no1からno5まで順番に処理（1位→2位→3位→4位→5位の順）
+        ['no1', 'no2', 'no3', 'no4', 'no5'].forEach((position, index) => {
+            const clinicId = ranking.ranks[position];
+            if (clinicId && clinicId !== '-') {
+                // クリニックIDが文字列の場合と数値の場合の両方に対応
+                const numericClinicId = parseInt(clinicId);
+                const clinic = clinics.find(c => c.id == clinicId || c.id === numericClinicId);
+                if (clinic) {
+                    rankedClinics.push({
+                        ...clinic,
+                        rank: index + 1  // 1位、2位、3位...
+                    });
+                    console.log(`${index + 1}位: ${clinic.name} (ID: ${clinicId})`);
+                }
             }
         });
+
+        console.log('🏆 最終ランキング順:', rankedClinics.map(c => `${c.rank}位: ${c.name}`));
 
         // 比較表の内容を生成
         this.generateComparisonTable(rankedClinics);
@@ -1198,6 +1224,7 @@ class RankingApp {
             }
             
             // 実際のデータ設定
+            const ratings = { 1: 4.9, 2: 4.5, 3: 4.3, 4: 4.1, 5: 3.8 };
             const achievements = {
                 1: 'ダイエット成功率99％<br>平均13.7kg減',
                 2: 'ダイエット成功率94%',
@@ -1277,8 +1304,8 @@ class RankingApp {
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td class="" style="">
-                    <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
-                    <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
+                    <span class="ranking_evaluation">${ratings[rankNum] || '4.1'}</span><br>
+                    <span class="star5_rating" data-rate="${ratings[rankNum] || '4.1'}"></span>
                 </td>
                 <td class="" style="">${achievements[rankNum] || '豊富な実績'}</td>
                 <td class="" style="">${benefits[rankNum] || '特別キャンペーン'}</td>
@@ -1314,7 +1341,7 @@ class RankingApp {
             const rankClass = clinic.rank === 1 ? '' : clinic.rank === 2 ? 'silver' : 'bronze';
             
             // ダミーデータ（実際のデータに置き換え）
-            const ratings = { 1: 4.9, 2: 4.8, 3: 4.7, 4: 4.7, 5: 4.7 };
+            const ratings = { 1: 4.9, 2: 4.5, 3: 4.3, 4: 4.1, 5: 3.8 };
             const achievements = { 
                 1: '全国100院以上',
                 2: '累計施術50万件',
@@ -1672,6 +1699,9 @@ class RankingApp {
         }
 
         detailsList.innerHTML = '';
+        
+        // 比較表も更新
+        this.updateComparisonTable(clinics, ranking);
 
         if (!ranking) {
             console.error('ランキングデータがnullです');
@@ -1698,9 +1728,13 @@ class RankingApp {
         }).slice(0, 5);
 
         console.log('sortedRanks:', sortedRanks);
+        console.log('Available clinics:', clinics.map(c => ({ id: c.id, name: c.name })));
+        
         sortedRanks.forEach(([position, clinicId]) => {
-            const clinic = clinics.find(c => c.id === clinicId);
-            console.log('Processing clinic:', { position, clinicId, clinic });
+            // clinicIdを数値に変換して比較
+            const numericClinicId = parseInt(clinicId);
+            const clinic = clinics.find(c => c.id == clinicId || c.id === numericClinicId);
+            console.log('Processing clinic:', { position, clinicId, numericClinicId, clinic });
             if (!clinic) {
                 console.error('クリニックが見つかりません:', clinicId);
                 return;
@@ -1741,7 +1775,7 @@ class RankingApp {
                         '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
                         '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c'
+                        '公式サイト': 'https://dioclinic.jp/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1803,7 +1837,8 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=96845522dd28188c',
+                        ctaUrl: getClinicUrlFromConfig('1'),
+                        displayUrl: 'https://dioclinic.jp/',
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }
@@ -1987,7 +2022,7 @@ class RankingApp {
                         '営業時間': '多くの院で11:00〜21:00<br>店舗により異なる',
                         '対応部位': '全身対応<br>お腹・二の腕・太もも・顔',
                         '店舗': '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）',
-                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a'
+                        '公式サイト': 'https://eminal-clinic.jp/'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -2040,6 +2075,7 @@ class RankingApp {
                         logoAlt: 'エミナルクリニック',
                         description: 'モニタープランで<br>大幅割引実施中',
                         ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a',
+                        displayUrl: 'https://eminal-clinic.jp/',
                         ctaText: 'エミナルクリニックの公式サイト',
                         microcopy: '＼全国60院以上の安心ネットワーク／'
                     }
@@ -2239,6 +2275,7 @@ class RankingApp {
                         </div>
                     </div>
                 </div>
+                
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
@@ -2967,15 +3004,15 @@ class RankingApp {
                             const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
                             if (detailButtons.length > 0) {
                                 const href = detailButtons[0].getAttribute('href');
-                                if (href?.includes('/go/dio/')) {
+                                if (href?.includes('/draft/go/dio/') || href?.includes('/go/dio/')) {
                                     clinicName = 'ディオクリニック';
-                                } else if (href?.includes('/go/eminal/')) {
+                                } else if (href?.includes('/draft/go/eminal/') || href?.includes('/go/eminal/')) {
                                     clinicName = 'エミナルクリニック';
-                                } else if (href?.includes('/go/urara/')) {
+                                } else if (href?.includes('/draft/go/urara/') || href?.includes('/go/urara/')) {
                                     clinicName = 'ウララクリニック';
-                                } else if (href?.includes('/go/lieto/')) {
+                                } else if (href?.includes('/draft/go/lieto/') || href?.includes('/go/lieto/')) {
                                     clinicName = 'リエートクリニック';
-                                } else if (href?.includes('/go/sbc/')) {
+                                } else if (href?.includes('/draft/go/sbc/') || href?.includes('/go/sbc/')) {
                                     clinicName = '湘南美容クリニック';
                                 }
                             }
@@ -3099,8 +3136,29 @@ class RankingApp {
             
             // 公式サイトボタンのURLとテキストを設定
             if (modalButton && clinicCode) {
-                const clinicNameLower = clinicCode.toLowerCase().replace(/クリニック|美容外科|美容/g, '').trim();
-                modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicNameLower);
+                // クリニック名をマッピング用のキーに変換
+                let clinicKey = '';
+                if (clinicCode.includes('ディオ')) {
+                    clinicKey = 'dio';
+                } else if (clinicCode.includes('エミナル')) {
+                    clinicKey = 'eminal';
+                } else if (clinicCode.includes('ウララ')) {
+                    clinicKey = 'urara';
+                } else if (clinicCode.includes('リエート')) {
+                    clinicKey = 'lieto';
+                } else if (clinicCode.includes('湘南')) {
+                    clinicKey = 'sbc';
+                }
+                
+                const generatedUrl = this.urlHandler.getClinicUrlByNameWithRegionId(clinicKey);
+                
+                console.log('🔗 地図モーダルURL設定:', {
+                    clinicCode,
+                    clinicKey,
+                    generatedUrl
+                });
+                
+                modalButton.href = generatedUrl;
                 
                 // ボタンテキストを設定
                 const buttonText = document.getElementById('map-modal-button-text');

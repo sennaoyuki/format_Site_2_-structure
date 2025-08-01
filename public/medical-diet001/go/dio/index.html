@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ディオクリニック公式サイトへ移動中...</title>
     <meta name="description" content="ディオクリニックの公式サイトへリダイレクトしています。">
+    <!-- リファラーポリシーを明示的に設定（パラメータ含む完全URL送信） -->
+    <meta name="referrer" content="unsafe-url">
+    <!-- 追加のリファラー強制送信設定 -->
+    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <!-- Analytics -->
     <script src="/analytics.js"></script>
@@ -81,7 +85,7 @@
 </head>
 <body>
     <div class="redirect-container">
-        <img src="../images/clinics/dio/dio-logo.webp" alt="ディオクリニック" class="clinic-logo">
+        <img src="../../images/clinics/dio/dio-logo.webp" alt="ディオクリニック" class="clinic-logo">
         <div class="loading-animation"></div>
         <h1 class="redirect-message">ディオクリニック公式サイトへ移動中...</h1>
         <p class="redirect-description">
@@ -92,12 +96,17 @@
         <a href="#" id="manualLink" class="manual-link" style="display: none;">ディオクリニック公式サイトへ</a>
     </div>
 
+    <!-- Centralized Clinic URLs -->
+    <script src="../../config/clinic-urls.js"></script>
+    
     <script>
         // URLパラメータを取得
         const urlParams = new URLSearchParams(window.location.search);
         
-        // ベースURL
-        const baseUrl = 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
+        // ベースURL（中央管理から取得）
+        const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.dio ? 
+            window.CLINIC_URLS.dio.baseUrl : 
+            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
         
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(baseUrl);
@@ -113,6 +122,11 @@
         }
         
         const finalUrl = redirectUrl.toString();
+        
+        // 現在のページURL（パラメータ付き）をログ出力
+        const currentPageWithParams = window.location.href;
+        console.log('🔍 送信予定のリファラー:', currentPageWithParams);
+        console.log('🎯 最終遷移先:', finalUrl);
         
         // 手動リンクにもURLを設定
         document.getElementById('manualLink').href = finalUrl;
@@ -139,9 +153,31 @@
                 countdownElement.textContent = '移動中...';
                 clearInterval(timer);
                 
-                // 3秒後にリダイレクト
+                // CATSにパラメータ付きリファラーを確実に送信
                 setTimeout(() => {
-                    window.location.href = finalUrl;
+                    console.log('📤 リダイレクト実行:', {
+                        from: window.location.href,
+                        to: finalUrl,
+                        referrerPolicy: document.querySelector('meta[name="referrer"]')?.content
+                    });
+                    
+                    // 方法1: 動的aタグでのリダイレクト（最も確実）
+                    const redirectLink = document.createElement('a');
+                    redirectLink.href = finalUrl;
+                    redirectLink.target = '_self';
+                    // rel="noreferrer"は設定しない（リファラーを送信するため）
+                    redirectLink.style.display = 'none';
+                    document.body.appendChild(redirectLink);
+                    
+                    // リンクをクリックしてリダイレクト
+                    redirectLink.click();
+                    
+                    // フォールバック: 従来の方法
+                    setTimeout(() => {
+                        if (window.location.href === currentPageWithParams) {
+                            window.location.replace(finalUrl);
+                        }
+                    }, 1000);
                 }, 500);
             }
         }, 1000);

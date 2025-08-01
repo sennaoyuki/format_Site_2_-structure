@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>エミナルクリニック公式サイトへ移動中...</title>
-    <meta name="description" content="エミナルクリニックの公式サイトへリダイレクトしています。">
-    <!-- リファラーポリシーを明示的に設定（パラメータ含む完全URL送信） -->
-    <meta name="referrer" content="unsafe-url">
-    <!-- 追加のリファラー強制送信設定 -->
-    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
+    <title>ディオクリニック公式サイトへ移動中...</title>
+    <meta name="description" content="ディオクリニックの公式サイトへリダイレクトしています。">
     <link rel="icon" type="image/png" href="/images/favicon.png">
     <!-- Analytics -->
     <script src="/analytics.js"></script>
+    <!-- URLコンフィグを読み込み -->
+    <script src="/draft/config/clinic-urls.js"></script>
     <style>
         body {
             font-family: 'Noto Sans JP', sans-serif;
@@ -26,21 +24,22 @@
         .redirect-container {
             text-align: center;
             padding: 40px;
-            max-width: 500px;
             background: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 90%;
         }
         .clinic-logo {
             width: 200px;
             height: auto;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
         }
         .redirect-message {
-            font-size: 18px;
+            font-size: 24px;
             font-weight: 600;
-            margin-bottom: 15px;
             color: #4bc0c0;
+            margin-bottom: 15px;
         }
         .redirect-description {
             font-size: 14px;
@@ -85,28 +84,32 @@
 </head>
 <body>
     <div class="redirect-container">
-        <img src="../../images/clinics/eminal/eminal-logo.webp" alt="エミナルクリニック" class="clinic-logo">
+        <img src="../images/clinics/dio/dio-logo.webp" alt="ディオクリニック" class="clinic-logo">
         <div class="loading-animation"></div>
-        <h1 class="redirect-message">エミナルクリニック公式サイトへ移動中...</h1>
+        <h1 class="redirect-message">ディオクリニック公式サイトへ移動中...</h1>
         <p class="redirect-description">
-            まもなく自動的にエミナルクリニックの公式サイトへリダイレクトします。<br>
+            まもなく自動的にディオクリニックの公式サイトへリダイレクトします。<br>
             移動しない場合は下のボタンをクリックしてください。
         </p>
         <div class="countdown" id="countdown">3秒後に移動します...</div>
-        <a href="#" id="manualLink" class="manual-link" style="display: none;">エミナルクリニック公式サイトへ</a>
+        <a href="#" id="manualLink" class="manual-link" style="display: none;">ディオクリニック公式サイトへ</a>
     </div>
 
-    <!-- Centralized Clinic URLs -->
-    <script src="../../config/clinic-urls.js"></script>
-    
     <script>
         // URLパラメータを取得
         const urlParams = new URLSearchParams(window.location.search);
         
-        // ベースURL（中央管理から取得）
-        const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.eminal ? 
-            window.CLINIC_URLS.eminal.baseUrl : 
-            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a';
+        // clinic-urls.jsから設定を取得
+        const clinicId = 'dio';
+        const clinicConfig = window.CLINIC_URLS && window.CLINIC_URLS[clinicId];
+        
+        if (!clinicConfig) {
+            console.error('Clinic configuration not found');
+            return;
+        }
+        
+        // ベースURLを設定から取得
+        const baseUrl = clinicConfig.baseUrl;
         
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(baseUrl);
@@ -116,6 +119,15 @@
             redirectUrl.searchParams.set(key, value);
         }
         
+        // デフォルトパラメータを追加
+        if (clinicConfig.defaultParams) {
+            for (const [key, value] of Object.entries(clinicConfig.defaultParams)) {
+                if (!redirectUrl.searchParams.has(key)) {
+                    redirectUrl.searchParams.set(key, value);
+                }
+            }
+        }
+        
         // region_idがない場合は東京をデフォルト設定
         if (!redirectUrl.searchParams.has('region_id')) {
             redirectUrl.searchParams.set('region_id', '013');
@@ -123,18 +135,13 @@
         
         const finalUrl = redirectUrl.toString();
         
-        // 現在のページURL（パラメータ付き）をログ出力
-        const currentPageWithParams = window.location.href;
-        console.log('🔍 送信予定のリファラー:', currentPageWithParams);
-        console.log('🎯 最終遷移先:', finalUrl);
-        
         // 手動リンクにもURLを設定
         document.getElementById('manualLink').href = finalUrl;
         
         // アナリティクスにクリックイベントを送信
         if (window.trackEvent) {
             trackEvent('clinic_redirect', {
-                clinic_name: 'eminal',
+                clinic_name: clinicId,
                 destination_url: finalUrl,
                 source_page: document.referrer || 'direct'
             });
@@ -150,42 +157,19 @@
             if (countdown > 0) {
                 countdownElement.textContent = `${countdown}秒後に移動します...`;
             } else {
-                countdownElement.textContent = '移動中...';
                 clearInterval(timer);
+                countdownElement.textContent = '移動中...';
                 
-                // CATSにパラメータ付きリファラーを確実に送信
+                // 3秒後にリダイレクト
                 setTimeout(() => {
-                    console.log('📤 リダイレクト実行:', {
-                        from: window.location.href,
-                        to: finalUrl,
-                        referrerPolicy: document.querySelector('meta[name="referrer"]')?.content
-                    });
-                    
-                    // 方法1: 動的aタグでのリダイレクト（最も確実）
-                    const redirectLink = document.createElement('a');
-                    redirectLink.href = finalUrl;
-                    redirectLink.target = '_self';
-                    // rel="noreferrer"は設定しない（リファラーを送信するため）
-                    redirectLink.style.display = 'none';
-                    document.body.appendChild(redirectLink);
-                    
-                    // リンクをクリックしてリダイレクト
-                    redirectLink.click();
-                    
-                    // フォールバック: 従来の方法
-                    setTimeout(() => {
-                        if (window.location.href === currentPageWithParams) {
-                            window.location.replace(finalUrl);
-                        }
-                    }, 1000);
-                }, 500);
+                    window.location.href = finalUrl;
+                }, 100);
             }
         }, 1000);
         
         // 5秒後に手動リンクを表示（何らかの理由でリダイレクトが失敗した場合）
         setTimeout(() => {
             manualLink.style.display = 'inline-block';
-            countdownElement.textContent = '自動移動に時間がかかっています。下のボタンをクリックしてください。';
         }, 5000);
     </script>
 </body>
