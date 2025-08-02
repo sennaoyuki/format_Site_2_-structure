@@ -13,7 +13,7 @@ const CLINIC_URLS = {
     // エミナルクリニック
     eminal: {
         name: 'エミナルクリニック',
-        baseUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a',
+        baseUrl: 'https://eminal-clinic.jp/lp01/medicaldiet_03/',
         defaultParams: {}
     },
     

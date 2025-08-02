@@ -2095,7 +2095,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/eminal/eminal-logo.webp',
                         logoAlt: 'エミナルクリニック',
                         description: 'モニタープランで<br>大幅割引実施中',
-                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=N48N9Qbe91f8860a',
+                        ctaUrl: 'https://eminal-clinic.jp/lp01/medicaldiet_03/',
                         displayUrl: 'https://eminal-clinic.jp/',
                         ctaText: 'エミナルクリニックの公式サイト',
                         microcopy: '＼全国60院以上の安心ネットワーク／'
