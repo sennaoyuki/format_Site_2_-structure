@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCLID Placeholder Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .test-link {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .test-link:hover {
+            background: #0056b3;
+        }
+        .url-display {
+            background: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            word-break: break-all;
+            margin-top: 10px;
+            font-family: monospace;
+            font-size: 14px;
+        }
+        .status {
+            color: #28a745;
+            font-weight: bold;
+        }
+        .error {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>GCLID Placeholder 置換テスト</h1>
+    
+    <div class="test-section">
+        <h2>現在のURL情報</h2>
+        <p><strong>現在のURL:</strong> <span id="currentUrl"></span></p>
+        <p><strong>GCLID:</strong> <span id="gclidValue" class="status"></span></p>
+    </div>
+    
+    <div class="test-section">
+        <h2>テストリンク</h2>
+        <p>以下のリンクをクリックして、GCLID置換が正しく動作することを確認してください：</p>
+        
+        <div style="margin: 20px 0;">
+            <a href="medical-diet001/go/dio/" class="test-link">ディオクリニック（medical-diet001）</a>
+            <div class="url-display" id="dio-medical-url"></div>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <a href="draft/go/dio/" class="test-link">ディオクリニック（draft）</a>
+            <div class="url-display" id="dio-draft-url"></div>
+        </div>
+        
+        <div style="margin: 20px 0;">
+            <a href="draft002/go/dio/" class="test-link">ディオクリニック（draft002）</a>
+            <div class="url-display" id="dio-draft002-url"></div>
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>テスト用GCLID付きリンク</h2>
+        <p>以下のリンクをクリックして、このページをGCLID付きで再読み込みできます：</p>
+        <a href="?gclid=TEST_GCLID_12345" class="test-link">GCLIDテスト値: TEST_GCLID_12345</a>
+        <a href="?gclid=EXAMPLE_ABC_789" class="test-link">GCLIDテスト値: EXAMPLE_ABC_789</a>
+        <a href="?" class="test-link">GCLIDなし（リセット）</a>
+    </div>
+
+    <script>
+        // 現在のURL情報を表示
+        document.getElementById('currentUrl').textContent = window.location.href;
+        
+        // GCLIDを取得して表示
+        const urlParams = new URLSearchParams(window.location.search);
+        const gclid = urlParams.get('gclid');
+        const gclidElement = document.getElementById('gclidValue');
+        
+        if (gclid) {
+            gclidElement.textContent = gclid;
+        } else {
+            gclidElement.textContent = 'なし';
+            gclidElement.classList.add('error');
+        }
+        
+        // 各リンクのURLを表示（GCLIDが含まれるか確認）
+        document.querySelectorAll('.test-link').forEach(link => {
+            if (link.href.includes('/go/dio/')) {
+                const fullUrl = new URL(link.href, window.location.origin);
+                
+                // 現在のURLパラメータを追加
+                for (const [key, value] of urlParams) {
+                    fullUrl.searchParams.set(key, value);
+                }
+                
+                link.href = fullUrl.toString();
+                
+                // URLを表示
+                const displayId = link.textContent.includes('medical-diet001') ? 'dio-medical-url' : 
+                                 link.textContent.includes('draft002') ? 'dio-draft002-url' : 'dio-draft-url';
+                const displayElement = document.getElementById(displayId);
+                if (displayElement) {
+                    displayElement.innerHTML = `<strong>遷移先URL:</strong><br>${fullUrl.toString()}`;
+                }
+            }
+        });
+    </script>
+</body>
+</html>
