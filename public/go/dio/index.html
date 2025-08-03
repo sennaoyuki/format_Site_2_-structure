@@ -127,15 +127,30 @@
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(processedBaseUrl);
         
-        // 全てのパラメータを引き継ぎ
-        for (const [key, value] of urlParams) {
-            redirectUrl.searchParams.set(key, value);
-        }
+        // 追跡用パラメータをparam4に統合
+        const trackingParams = {
+            click_section: urlParams.get('click_section') || '',
+            click_clinic: urlParams.get('click_clinic') || '',
+            source_page: urlParams.get('source_page') || '',
+            region_id: urlParams.get('region_id') || '013',
+            timestamp: new Date().toISOString()
+        };
         
-        // region_idがない場合は東京をデフォルト設定
-        if (!redirectUrl.searchParams.has('region_id')) {
-            redirectUrl.searchParams.set('region_id', '013');
-        }
+        // param4として追跡データをエンコード
+        redirectUrl.searchParams.set('param4', encodeURIComponent(JSON.stringify(trackingParams)));
+        
+        // 重要なパラメータは個別に引き継ぎ（アフィリエイト側で必須の場合）
+        redirectUrl.searchParams.set('gclid', gclid || '');
+        redirectUrl.searchParams.set('region_id', trackingParams.region_id);
+        
+        // UTMパラメータなどその他のパラメータも引き継ぎ
+        const preserveParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        preserveParams.forEach(param => {
+            const value = urlParams.get(param);
+            if (value) {
+                redirectUrl.searchParams.set(param, value);
+            }
+        });
         
         const finalUrl = redirectUrl.toString();
         
@@ -152,6 +167,19 @@
             }
         } else {
             console.log('❌ param3がURLに含まれていません');
+        }
+        
+        // param4の確認
+        if (finalUrl.includes('param4=')) {
+            const param4Match = finalUrl.match(/param4=([^&]*)/);
+            if (param4Match && param4Match[1]) {
+                try {
+                    const decodedParam4 = JSON.parse(decodeURIComponent(param4Match[1]));
+                    console.log('✅ param4設定済み:', decodedParam4);
+                } catch (e) {
+                    console.log('✅ param4設定済み (デコード不可):', param4Match[1]);
+                }
+            }
         }
         console.log('=============================================');
         
