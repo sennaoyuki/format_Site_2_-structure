@@ -228,23 +228,25 @@
                         referrerPolicy: document.querySelector('meta[name="referrer"]')?.content
                     });
                     
-                    // 方法1: 動的aタグでのリダイレクト（最も確実）
-                    const redirectLink = document.createElement('a');
-                    redirectLink.href = finalUrl;
-                    redirectLink.target = '_self';
-                    // rel="noreferrer"は設定しない（リファラーを送信するため）
-                    redirectLink.style.display = 'none';
-                    document.body.appendChild(redirectLink);
+                    // リダイレクトフラグを設定
+                    let redirected = false;
                     
-                    // リンクをクリックしてリダイレクト
-                    redirectLink.click();
+                    // 方法1: window.location.hrefでのリダイレクト
+                    try {
+                        window.location.href = finalUrl;
+                        redirected = true;
+                        console.log('✅ リダイレクト実行');
+                    } catch (e) {
+                        console.error('❌ リダイレクトエラー:', e);
+                    }
                     
-                    // フォールバック: 従来の方法
+                    // フォールバック: 3秒後にまだページにいる場合のみ
                     setTimeout(() => {
-                        if (window.location.href === currentPageWithParams) {
+                        if (!redirected && window.location.href.includes('/go/')) {
+                            console.log('⚠️ フォールバックリダイレクト実行');
                             window.location.replace(finalUrl);
                         }
-                    }, 1000);
+                    }, 3000)
                 }, 500);
             }
         }, 1000);
