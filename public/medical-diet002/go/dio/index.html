@@ -97,10 +97,23 @@
         const urlParams = new URLSearchParams(window.location.search);
         
         // ベースURL
-        const baseUrl = 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
+        const baseUrl = 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+        
+        // gclidを取得
+        const gclid = urlParams.get('gclid');
+        
+        // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
+        let processedBaseUrl = baseUrl;
+        if (gclid && processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
+            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', gclid);
+            console.log('🔄 GCLID置換実行:', gclid);
+        } else if (processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
+            // gclidがない場合はプレースホルダーを空文字で置換
+            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', '');
+        }
         
         // パラメータを引き継いでリダイレクトURLを構築
-        const redirectUrl = new URL(baseUrl);
+        const redirectUrl = new URL(processedBaseUrl);
         
         // 全てのパラメータを引き継ぎ
         for (const [key, value] of urlParams) {
