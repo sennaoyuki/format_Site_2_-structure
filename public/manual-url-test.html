@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Manual URL Builder Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .container { max-width: 1000px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        input, textarea { width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; font-family: monospace; }
+        .button { background: #28a745; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; margin: 5px; }
+        .button:hover { background: #218838; }
+        .result { margin: 20px 0; padding: 15px; background: #f8f9fa; border: 1px solid #dee2e6; border-radius: 5px; }
+        .success { background: #d4edda; color: #155724; }
+        .error { background: #f8d7da; color: #721c24; }
+        .code { background: #f8f9fa; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 12px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 手動URL構築テスト</h1>
+        <p>正しいparam3付きURLを手動で構築してテストします。</p>
+        
+        <h2>1. テストGCLIDを入力</h2>
+        <input type="text" id="gclidInput" placeholder="例: TEST123" value="TEST_MANUAL_123">
+        
+        <h2>2. ベースURLを確認・編集</h2>
+        <textarea id="baseUrlInput" rows="3">https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]</textarea>
+        
+        <button class="button" onclick="buildAndTest()">URLを構築してテスト</button>
+        
+        <div id="results"></div>
+        
+        <h2>正しい動作の期待値</h2>
+        <div class="code">
+// 入力
+gclid: TEST123
+
+// 期待される出力URL
+https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=TEST123&gclid=TEST123&region_id=013...
+
+// アフィリエイト管理画面で見えるべき内容
+param3: TEST123
+        </div>
+        
+        <h2>現在の問題</h2>
+        <div class="result error">
+            サーバー上のclinic-urls.jsにparam3=[GCLID_PLACEHOLDER]が反映されていないため、
+            GCLIDがあってもparam3として渡されていません。
+        </div>
+        
+        <h2>解決策</h2>
+        <ol>
+            <li>GitHubへのプッシュは成功済み（commit: 92cadb2）</li>
+            <li>サーバーへのデプロイメント待ち</li>
+            <li>CDNキャッシュのクリア待ち</li>
+            <li>または手動でサーバー上のファイルを更新</li>
+        </ol>
+    </div>
+    
+    <script>
+        function buildAndTest() {
+            const results = document.getElementById('results');
+            const gclid = document.getElementById('gclidInput').value;
+            const baseUrl = document.getElementById('baseUrlInput').value;
+            
+            results.innerHTML = '<h2>結果</h2>';
+            
+            // プレースホルダーを置換
+            let finalUrl = baseUrl;
+            if (gclid && finalUrl.includes('[GCLID_PLACEHOLDER]')) {
+                finalUrl = finalUrl.replace('[GCLID_PLACEHOLDER]', gclid);
+                results.innerHTML += `<div class="result success">✅ GCLID置換成功: [GCLID_PLACEHOLDER] → ${gclid}</div>`;
+            } else if (finalUrl.includes('[GCLID_PLACEHOLDER]')) {
+                finalUrl = finalUrl.replace('[GCLID_PLACEHOLDER]', '');
+                results.innerHTML += `<div class="result error">⚠️ GCLIDが空のため、プレースホルダーを空文字で置換</div>`;
+            }
+            
+            // 追加パラメータ
+            const url = new URL(finalUrl);
+            url.searchParams.set('gclid', gclid);
+            url.searchParams.set('region_id', '013');
+            url.searchParams.set('click_section', 'details');
+            url.searchParams.set('click_clinic', 'ディオクリニック');
+            url.searchParams.set('source_page', '/medical-diet001/');
+            
+            const finalUrlWithParams = url.toString();
+            
+            results.innerHTML += `<div class="result"><strong>最終URL:</strong><div class="code">${finalUrlWithParams}</div></div>`;
+            
+            // param3の確認
+            if (finalUrlWithParams.includes('param3=')) {
+                const param3Match = finalUrlWithParams.match(/param3=([^&]*)/);
+                if (param3Match && param3Match[1]) {
+                    results.innerHTML += `<div class="result success">✅ param3が正しく設定されています: ${param3Match[1]}</div>`;
+                } else {
+                    results.innerHTML += `<div class="result error">⚠️ param3は存在しますが値が空です</div>`;
+                }
+            } else {
+                results.innerHTML += `<div class="result error">❌ param3がURLに含まれていません</div>`;
+            }
+            
+            // テストリンク
+            results.innerHTML += `
+                <div class="result">
+                    <h3>テストリンク</h3>
+                    <a href="${finalUrlWithParams}" target="_blank" class="button">このURLで遷移をテスト</a>
+                    <p style="margin-top:10px;font-size:12px;color:#666;">
+                        ※ このリンクをクリックして、アフィリエイト管理画面でparam3が表示されるか確認してください
+                    </p>
+                </div>
+            `;
+        }
+        
+        // 初期実行
+        buildAndTest();
+    </script>
+</body>
+</html>

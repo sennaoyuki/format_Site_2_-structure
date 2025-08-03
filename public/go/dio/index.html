@@ -96,20 +96,32 @@
         // URLパラメータを取得
         const urlParams = new URLSearchParams(window.location.search);
         
+        // パラメータログ出力（デバッグ用）
+        console.log('========== ディオクリニック リダイレクトページ ==========');
+        console.log('📍 現在のURL:', window.location.href);
+        console.log('📋 受け取ったパラメータ:');
+        for (const [key, value] of urlParams) {
+            console.log(`  ${key}: ${value}`);
+        }
+        console.log('=============================================');
+        
         // ベースURL
         const baseUrl = 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
         
         // gclidを取得
         const gclid = urlParams.get('gclid');
+        console.log('🔍 GCLID検出:', gclid || 'なし');
         
         // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
         let processedBaseUrl = baseUrl;
         if (gclid && processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
             processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', gclid);
             console.log('🔄 GCLID置換実行:', gclid);
+            console.log('✅ 置換後URL:', processedBaseUrl);
         } else if (processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
             // gclidがない場合はプレースホルダーを空文字で置換
             processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', '');
+            console.log('⚠️ GCLIDなし: プレースホルダーを空文字で置換');
         }
         
         // パラメータを引き継いでリダイレクトURLを構築
@@ -126,6 +138,22 @@
         }
         
         const finalUrl = redirectUrl.toString();
+        
+        // 最終URLログ出力
+        console.log('🎯 最終遷移先URL:', finalUrl);
+        
+        // param3の確認
+        if (finalUrl.includes('param3=')) {
+            const param3Match = finalUrl.match(/param3=([^&]*)/);
+            if (param3Match && param3Match[1]) {
+                console.log('✅ param3設定済み:', param3Match[1]);
+            } else {
+                console.log('⚠️ param3は存在するが値が空');
+            }
+        } else {
+            console.log('❌ param3がURLに含まれていません');
+        }
+        console.log('=============================================');
         
         // 手動リンクにもURLを設定
         document.getElementById('manualLink').href = finalUrl;
