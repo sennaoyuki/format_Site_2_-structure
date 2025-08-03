@@ -14,7 +14,7 @@ function getClinicUrlFromConfig(clinicId) {
     }
     
     // フォールバック
-    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88';
+    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
 }
 
 // URLパラメータ処理クラス

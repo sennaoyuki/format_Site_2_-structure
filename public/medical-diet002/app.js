@@ -1819,7 +1819,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88',
+                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]',
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼症例数50万件以上の実績で安心／'
                     }

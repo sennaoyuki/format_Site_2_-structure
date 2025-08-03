@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ディオクリニック公式サイトへ移動中...</title>
+    <meta name="description" content="ディオクリニックの公式サイトへリダイレクトしています。">
+    <!-- リファラーポリシーを明示的に設定（パラメータ含む完全URL送信） -->
+    <meta name="referrer" content="unsafe-url">
+    <!-- 追加のリファラー強制送信設定 -->
+    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9f2f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            color: #333;
+        }
+        .redirect-container {
+            text-align: center;
+            padding: 40px;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .clinic-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .redirect-message {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #4bc0c0;
+        }
+        .redirect-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .loading-animation {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4bc0c0;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .manual-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #4bc0c0;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .manual-link:hover {
+            background: #3da9a9;
+        }
+        .countdown {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+        }
+        .debug-log {
+            background: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: left;
+            font-family: monospace;
+            font-size: 12px;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .debug-log h3 {
+            margin-top: 0;
+            color: #495057;
+        }
+        .debug-log .log-entry {
+            margin: 5px 0;
+            padding: 5px;
+            background: #ffffff;
+            border-radius: 4px;
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #17a2b8; }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <img src="/images/clinics/dio/dio-logo.webp" alt="ディオクリニック" class="clinic-logo">
+        <div class="loading-animation"></div>
+        <h1 class="redirect-message">ディオクリニック公式サイトへ移動中...</h1>
+        <p class="redirect-description">
+            まもなく自動的にディオクリニックの公式サイトへリダイレクトします。<br>
+            移動しない場合は下のボタンをクリックしてください。
+        </p>
+        <div class="countdown" id="countdown">3秒後に移動します...</div>
+        <a href="#" id="manualLink" class="manual-link" style="display: none;">ディオクリニック公式サイトへ</a>
+        
+        <!-- デバッグログ表示 -->
+        <div class="debug-log" id="debugLog">
+            <h3>デバッグログ</h3>
+        </div>
+    </div>
+
+    <!-- Centralized Clinic URLs -->
+    <script src="../../config/clinic-urls.js"></script>
+    
+    <script>
+        const debugLog = document.getElementById('debugLog');
+        function addLog(message, type = 'info') {
+            const entry = document.createElement('div');
+            entry.className = `log-entry ${type}`;
+            entry.textContent = message;
+            debugLog.appendChild(entry);
+        }
+
+        addLog('デバッグモード開始', 'info');
+        
+        // URLパラメータを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        addLog(`URLパラメータ: ${window.location.search}`, 'info');
+        
+        // clinic-urls.jsの読み込み確認
+        if (window.CLINIC_URLS) {
+            addLog('✅ CLINIC_URLSが読み込まれました', 'success');
+            if (window.CLINIC_URLS.dio) {
+                addLog(`✅ dio設定が存在: ${JSON.stringify(window.CLINIC_URLS.dio)}`, 'success');
+            } else {
+                addLog('❌ dio設定が見つかりません', 'error');
+            }
+        } else {
+            addLog('❌ CLINIC_URLSが読み込まれていません', 'error');
+        }
+        
+        // ベースURL（中央管理から取得）
+        const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.dio ? 
+            window.CLINIC_URLS.dio.baseUrl : 
+            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+        
+        addLog(`baseURL: ${baseUrl}`, 'info');
+        addLog(`[GCLID_PLACEHOLDER]を含む: ${baseUrl.includes('[GCLID_PLACEHOLDER]')}`, 'info');
+        
+        // gclidを取得
+        const gclid = urlParams.get('gclid');
+        addLog(`gclid: ${gclid || 'なし'}`, gclid ? 'success' : 'error');
+        
+        // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
+        let processedBaseUrl = baseUrl;
+        if (gclid && processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
+            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', gclid);
+            console.log('🔄 GCLID置換実行:', gclid);
+            addLog(`✅ GCLID置換実行: [GCLID_PLACEHOLDER] → ${gclid}`, 'success');
+        } else if (processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
+            // gclidがない場合はプレースホルダーを空文字で置換
+            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', '');
+            addLog('⚠️ gclidなし: [GCLID_PLACEHOLDER]を空文字で置換', 'error');
+        } else {
+            addLog('⚠️ [GCLID_PLACEHOLDER]が見つかりません', 'error');
+        }
+        
+        addLog(`処理後のURL: ${processedBaseUrl}`, 'info');
+        
+        // パラメータを引き継いでリダイレクトURLを構築
+        const redirectUrl = new URL(processedBaseUrl);
+        
+        // 全てのパラメータを引き継ぎ
+        for (const [key, value] of urlParams) {
+            redirectUrl.searchParams.set(key, value);
+        }
+        
+        // region_idがない場合は東京をデフォルト設定
+        if (!redirectUrl.searchParams.has('region_id')) {
+            redirectUrl.searchParams.set('region_id', '013');
+        }
+        
+        const finalUrl = redirectUrl.toString();
+        addLog(`最終URL: ${finalUrl}`, 'success');
+        
+        // param3の確認
+        if (finalUrl.includes('param3=')) {
+            const param3Match = finalUrl.match(/param3=([^&]*)/);
+            if (param3Match && param3Match[1]) {
+                addLog(`✅ param3が設定されています: ${param3Match[1]}`, 'success');
+            } else {
+                addLog('⚠️ param3は空です', 'error');
+            }
+        } else {
+            addLog('❌ param3がURLに含まれていません', 'error');
+        }
+        
+        // 現在のページURL（パラメータ付き）をログ出力
+        const currentPageWithParams = window.location.href;
+        console.log('🔍 送信予定のリファラー:', currentPageWithParams);
+        console.log('🎯 最終遷移先:', finalUrl);
+        
+        // 手動リンクにもURLを設定
+        document.getElementById('manualLink').href = finalUrl;
+        
+        // アナリティクスにクリックイベントを送信
+        if (window.trackEvent) {
+            trackEvent('clinic_redirect', {
+                clinic_name: 'dio',
+                destination_url: finalUrl,
+                source_page: document.referrer || 'direct'
+            });
+        }
+        
+        // カウントダウン機能（デバッグモードでは無効化）
+        const countdownElement = document.getElementById('countdown');
+        const manualLink = document.getElementById('manualLink');
+        
+        // デバッグモードでは自動リダイレクトを無効化
+        countdownElement.textContent = 'デバッグモード: 自動リダイレクトは無効です';
+        manualLink.style.display = 'inline-block';
+    </script>
+</body>
+</html>
