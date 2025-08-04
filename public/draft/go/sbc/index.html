@@ -99,6 +99,9 @@
         // ベースURL
         const baseUrl = 'https://www.s-b-c.net/slimming/';
         
+        // processedBaseUrlを定義
+        let processedBaseUrl = baseUrl;
+        
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(processedBaseUrl);
         
@@ -113,6 +116,9 @@
         
         // param4として追跡データをエンコード
         redirectUrl.searchParams.set('param4', encodeURIComponent(JSON.stringify(trackingParams)));
+        
+        // gclidを取得
+        const gclid = urlParams.get('gclid');
         
         // 重要なパラメータは個別に引き継ぎ（アフィリエイト側で必須の場合）
         redirectUrl.searchParams.set('gclid', gclid || '');

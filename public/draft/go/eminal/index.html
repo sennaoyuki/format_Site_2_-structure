@@ -108,6 +108,9 @@
             window.CLINIC_URLS.eminal.baseUrl : 
             'https://eminal-clinic.jp/lp01/medicaldiet_03/?sokyucd=5003';
         
+        // processedBaseUrlを定義
+        let processedBaseUrl = baseUrl;
+        
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(processedBaseUrl);
         
@@ -122,6 +125,9 @@
         
         // param4として追跡データをエンコード
         redirectUrl.searchParams.set('param4', encodeURIComponent(JSON.stringify(trackingParams)));
+        
+        // gclidを取得
+        const gclid = urlParams.get('gclid');
         
         // 重要なパラメータは個別に引き継ぎ（アフィリエイト側で必須の場合）
         redirectUrl.searchParams.set('gclid', gclid || '');
