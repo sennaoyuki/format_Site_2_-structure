@@ -444,6 +444,21 @@ class DataManager {
             // キャンペーンデータの設定
             this.campaigns = data.campaigns;
             
+            // 共通テキストデータの読み込み
+            try {
+                const commonTextResponse = await fetch(this.dataPath + 'site-common-texts.json');
+                if (commonTextResponse.ok) {
+                    this.commonTexts = await commonTextResponse.json();
+                    console.log('✅ 共通テキストデータを読み込みました:', this.commonTexts);
+                } else {
+                    console.warn('⚠️ site-common-texts.json が見つかりません。デフォルトテキストを使用します。');
+                    this.commonTexts = {};
+                }
+            } catch (error) {
+                console.warn('⚠️ 共通テキストの読み込みに失敗しました:', error);
+                this.commonTexts = {};
+            }
+            
             // クリニック別テキストデータの読み込み
             try {
                 const clinicTextResponse = await fetch(this.dataPath + 'clinic-texts.json');
@@ -666,6 +681,14 @@ class DataManager {
         return defaultText;
     }
 
+    // 共通テキストを取得
+    getCommonText(itemKey, defaultText = '') {
+        if (this.commonTexts && this.commonTexts[itemKey]) {
+            return this.commonTexts[itemKey];
+        }
+        return defaultText;
+    }
+    
     // クリニック名と項目名でクリニック別テキストを取得
     getClinicText(clinicName, itemKey, defaultText = '') {
         if (this.clinicTexts && this.clinicTexts[clinicName] && this.clinicTexts[clinicName][itemKey]) {
@@ -1239,10 +1262,10 @@ class RankingApp {
                 console.log(`✅ Meta description updated: ${metaDescText}`);
             }
 
-            // サイトロゴの更新
+            // サイトロゴの更新（共通テキスト）
             const siteLogo = document.querySelector('.site-logo');
             if (siteLogo) {
-                const logoText = this.dataManager.getClinicText(currentClinic, 'サイトロゴ', '脂肪溶解注射比較.com');
+                const logoText = this.dataManager.getCommonText('サイトロゴ', '脂肪溶解注射比較.com');
                 siteLogo.textContent = logoText;
                 console.log(`✅ Site logo updated: ${logoText}`);
             }
@@ -1262,33 +1285,33 @@ class RankingApp {
                 console.log(`✅ MV Appeal Text 2 updated: ${text2}`);
             }
 
-            // SVGテキストの更新
+            // SVGテキストの更新（共通テキスト）
             const svgText1Element = document.querySelector('#mv-svg-text1 text');
             if (svgText1Element) {
-                const svgText1 = this.dataManager.getClinicText(currentClinic, 'MVSVGテキスト1', '脂肪溶解注射');
+                const svgText1 = this.dataManager.getCommonText('MVSVGテキスト1', '脂肪溶解注射');
                 svgText1Element.textContent = svgText1;
                 console.log(`✅ MV SVG Text 1 updated: ${svgText1}`);
             }
 
             const svgText2Element = document.querySelector('#mv-svg-text2 text');
             if (svgText2Element) {
-                const svgText2 = this.dataManager.getClinicText(currentClinic, 'MVSVGテキスト2', 'ランキング');
+                const svgText2 = this.dataManager.getCommonText('MVSVGテキスト2', 'ランキング');
                 svgText2Element.textContent = svgText2;
                 console.log(`✅ MV SVG Text 2 updated: ${svgText2}`);
             }
 
-            // ランキングバナーのalt属性更新
+            // ランキングバナーのalt属性更新（共通テキスト）
             const rankingBanner = document.querySelector('.ranking-banner-image');
             if (rankingBanner) {
-                const rankingAlt = this.dataManager.getClinicText(currentClinic, 'ランキングバナーalt', 'で人気の脂肪溶解注射はここ！');
+                const rankingAlt = this.dataManager.getCommonText('ランキングバナーalt', 'で人気の脂肪溶解注射はここ！');
                 rankingBanner.setAttribute('alt', rankingAlt);
                 console.log(`✅ Ranking banner alt updated: ${rankingAlt}`);
             }
 
-            // 比較表タイトルの更新
+            // 比較表タイトルの更新（共通テキスト）
             const comparisonTitle = document.querySelector('.comparison-title');
             if (comparisonTitle) {
-                const titleText = this.dataManager.getClinicText(currentClinic, '比較表タイトル', 'で人気の脂肪溶解注射');
+                const titleText = this.dataManager.getCommonText('比較表タイトル', 'で人気の脂肪溶解注射');
                 // 地域名を動的に挿入
                 const region = this.dataManager.getRegionById(regionId);
                 const regionName = region ? region.name : '';
@@ -1296,19 +1319,36 @@ class RankingApp {
                 console.log(`✅ Comparison title updated: ${regionName}${titleText}`);
             }
 
-            // 比較表サブタイトルの更新（固定）
+            // 比較表サブタイトルの更新（共通テキスト）
             const comparisonSubtitle = document.querySelector('.comparison-subtitle');
             if (comparisonSubtitle) {
-                comparisonSubtitle.innerHTML = `クリニックを<span class="pink-text">徹底比較</span>`;
+                const subtitleHtml = this.dataManager.getCommonText('比較表サブタイトル', 'クリニックを<span class="pink-text">徹底比較</span>');
+                comparisonSubtitle.innerHTML = subtitleHtml;
                 console.log(`✅ Comparison subtitle updated`);
             }
             
-            // 案件詳細バナーのalt属性を更新
+            // 案件詳細バナーのalt属性を更新（共通テキスト）
             const detailsBannerImg = document.querySelector('.details-banner-image');
             if (detailsBannerImg) {
-                const detailsBannerAlt = this.dataManager.getClinicText(currentClinic, '案件詳細バナーalt', 'コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3');
+                const detailsBannerAlt = this.dataManager.getCommonText('案件詳細バナーalt', 'コスパ×効果×通いやすさで選ぶ脂肪溶解注射BEST3');
                 detailsBannerImg.setAttribute('alt', detailsBannerAlt);
                 console.log(`✅ Details banner alt updated: ${detailsBannerAlt}`);
+            }
+            
+            // フッターサイト名の更新（共通テキスト）
+            const footerSiteName = document.querySelector('.footer_contents h4 a');
+            if (footerSiteName) {
+                const footerText = this.dataManager.getCommonText('フッターサイト名', '脂肪溶解注射比較.com');
+                footerSiteName.textContent = footerText;
+                console.log(`✅ Footer site name updated: ${footerText}`);
+            }
+            
+            // フッターコピーライトの更新（共通テキスト）
+            const footerCopyright = document.querySelector('.copyright');
+            if (footerCopyright) {
+                const copyrightText = this.dataManager.getCommonText('フッターコピーライト', '© 2025 脂肪溶解注射比較.com');
+                footerCopyright.textContent = copyrightText;
+                console.log(`✅ Footer copyright updated: ${copyrightText}`);
             }
 
         } catch (error) {
