@@ -1167,10 +1167,12 @@ class RankingApp {
             // サイト全体のテキストを動的に更新
             this.updateAllTexts(regionId);
 
-            //ランキングの地域名も更新
+            //ランキングの地域名も更新（共通テキストを使用）
             const rankRegionElement = document.getElementById('rank-region-name');
             if (rankRegionElement) {
-                rankRegionElement.textContent = region.name + 'で人気の医療ダイエットはここ！';
+                // 共通テキストから後半部分を取得
+                const rankingText = this.dataManager.getCommonText('ランキング地域名テキスト', 'で人気の脂肪溶解注射はここ！');
+                rankRegionElement.textContent = region.name + rankingText;
                 
                 // 地域名の文字数に応じてleftの位置を調整
                 const regionNameLength = region.name.length;
