@@ -1350,6 +1350,45 @@ class RankingApp {
                 footerCopyright.textContent = copyrightText;
                 console.log(`✅ Footer copyright updated: ${copyrightText}`);
             }
+            
+            // Tipsセクションの更新（共通テキスト）
+            // タブタイトルの更新
+            const tabTexts = document.querySelectorAll('.tips-container .tab-text');
+            if (tabTexts.length >= 3) {
+                tabTexts[0].textContent = this.dataManager.getCommonText('Tipsタブ1タイトル', '脂肪溶解注射の効果');
+                tabTexts[1].textContent = this.dataManager.getCommonText('Tipsタブ2タイトル', 'クリニック選び');
+                tabTexts[2].textContent = this.dataManager.getCommonText('Tipsタブ3タイトル', '今がおすすめ');
+                console.log('✅ Tips tab titles updated');
+            }
+            
+            // Tips見出しの更新
+            const tipsHeaders = document.querySelectorAll('.tips-container h3');
+            if (tipsHeaders.length >= 3) {
+                tipsHeaders[0].textContent = this.dataManager.getCommonText('Tips1見出し', '本気で痩せたいなら脂肪溶解注射が最短！');
+                tipsHeaders[1].textContent = this.dataManager.getCommonText('Tips2見出し', 'クリニック選びは立地とアクセスが重要');
+                tipsHeaders[2].textContent = this.dataManager.getCommonText('Tips3見出し', '夏直前の今がベストタイミング！');
+                console.log('✅ Tips headers updated');
+            }
+            
+            // Tips内容の更新（タブコンテンツ内のp要素）
+            const tabContents = document.querySelectorAll('.tips-container .tab-content');
+            if (tabContents.length >= 3) {
+                const tips1P = tabContents[0].querySelector('p');
+                if (tips1P) {
+                    tips1P.textContent = this.dataManager.getCommonText('Tips1内容', '脂肪溶解注射は科学的根拠に基づき、脂肪細胞そのものを破壊・減少させる痩身治療です。リバウンドしにくく、部分痩せも可能。自己流ダイエットで失敗続きの方にこそ試してほしい、確実な痩身方法です。');
+                }
+                
+                const tips2P = tabContents[1].querySelector('p');
+                if (tips2P) {
+                    tips2P.textContent = this.dataManager.getCommonText('Tips2内容', '脂肪溶解注射は定期的な通院が必要なため、通いやすい場所を選ぶことが成功の鍵。仕事帰りや休日に無理なく通える立地で、継続しやすい環境を整えましょう。途中で通えなくなることが最大の失敗要因です。');
+                }
+                
+                const tips3P = tabContents[2].querySelector('p');
+                if (tips3P) {
+                    tips3P.textContent = this.dataManager.getCommonText('Tips3内容', '夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。');
+                }
+                console.log('✅ Tips contents updated');
+            }
 
         } catch (error) {
             console.error('クリニック別テキストの更新に失敗しました:', error);
