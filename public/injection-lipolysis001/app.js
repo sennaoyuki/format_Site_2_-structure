@@ -1302,6 +1302,14 @@ class RankingApp {
                 comparisonSubtitle.innerHTML = `クリニックを<span class="pink-text">徹底比較</span>`;
                 console.log(`✅ Comparison subtitle updated`);
             }
+            
+            // 案件詳細バナーのalt属性を更新
+            const detailsBannerImg = document.querySelector('.details-banner-image');
+            if (detailsBannerImg) {
+                const detailsBannerAlt = this.dataManager.getClinicText(currentClinic, '案件詳細バナーalt', 'コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3');
+                detailsBannerImg.setAttribute('alt', detailsBannerAlt);
+                console.log(`✅ Details banner alt updated: ${detailsBannerAlt}`);
+            }
 
         } catch (error) {
             console.error('クリニック別テキストの更新に失敗しました:', error);
