@@ -1270,34 +1270,27 @@ class RankingApp {
                 console.log(`✅ Site logo updated: ${logoText}`);
             }
 
-            // MVアピールテキストの更新
-            const appealText1Element = document.getElementById('mv-appeal-text1');
+            // MVアピールテキストの更新（共通テキスト）
+            const appealText1Element = document.getElementById('mv-left-appeal-text');
             if (appealText1Element) {
-                const text1 = this.dataManager.getClinicText(currentClinic, 'MVアピールテキスト1', 'コスパ');
+                const text1 = this.dataManager.getCommonText('MVアピールテキスト1', 'コスパ');
                 appealText1Element.textContent = text1;
                 console.log(`✅ MV Appeal Text 1 updated: ${text1}`);
             }
 
-            const appealText2Element = document.getElementById('mv-appeal-text2');
+            const appealText2Element = document.getElementById('mv-right-appeal-text');
             if (appealText2Element) {
-                const text2 = this.dataManager.getClinicText(currentClinic, 'MVアピールテキスト2', '通いやすさ');
+                const text2 = this.dataManager.getCommonText('MVアピールテキスト2', '通いやすさ');
                 appealText2Element.textContent = text2;
                 console.log(`✅ MV Appeal Text 2 updated: ${text2}`);
             }
 
             // SVGテキストの更新（共通テキスト）
-            const svgText1Element = document.querySelector('#mv-svg-text1 text');
+            const svgText1Element = document.querySelector('#mv-main-svg-text text');
             if (svgText1Element) {
                 const svgText1 = this.dataManager.getCommonText('MVSVGテキスト1', '脂肪溶解注射');
                 svgText1Element.textContent = svgText1;
                 console.log(`✅ MV SVG Text 1 updated: ${svgText1}`);
-            }
-
-            const svgText2Element = document.querySelector('#mv-svg-text2 text');
-            if (svgText2Element) {
-                const svgText2 = this.dataManager.getCommonText('MVSVGテキスト2', 'ランキング');
-                svgText2Element.textContent = svgText2;
-                console.log(`✅ MV SVG Text 2 updated: ${svgText2}`);
             }
 
             // ランキングバナーのalt属性更新（共通テキスト）
