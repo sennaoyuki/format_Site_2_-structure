@@ -406,7 +406,8 @@ class DataManager {
         this.rankings = [];
         this.storeViews = [];
         this.campaigns = [];
-        this.siteTexts = {}; // サイトテキストデータ
+        this.siteTexts = {}; // サイトテキストデータ（旧）
+        this.clinicTexts = {}; // クリニック別テキストデータ
         // Handle subdirectory paths
         if (window.SITE_CONFIG) {
             this.dataPath = window.SITE_CONFIG.dataPath + '/';
@@ -443,19 +444,19 @@ class DataManager {
             // キャンペーンデータの設定
             this.campaigns = data.campaigns;
             
-            // サイトテキストデータの読み込み
+            // クリニック別テキストデータの読み込み
             try {
-                const textResponse = await fetch(this.dataPath + 'site-texts.json');
-                if (textResponse.ok) {
-                    this.siteTexts = await textResponse.json();
-                    console.log('✅ サイトテキストデータを読み込みました:', this.siteTexts);
+                const clinicTextResponse = await fetch(this.dataPath + 'clinic-texts.json');
+                if (clinicTextResponse.ok) {
+                    this.clinicTexts = await clinicTextResponse.json();
+                    console.log('✅ クリニック別テキストデータを読み込みました:', this.clinicTexts);
                 } else {
-                    console.warn('⚠️ site-texts.json が見つかりません。デフォルトテキストを使用します。');
-                    this.siteTexts = {};
+                    console.warn('⚠️ clinic-texts.json が見つかりません。デフォルトテキストを使用します。');
+                    this.clinicTexts = {};
                 }
             } catch (error) {
-                console.warn('⚠️ サイトテキストの読み込みに失敗しました:', error);
-                this.siteTexts = {};
+                console.warn('⚠️ クリニック別テキストの読み込みに失敗しました:', error);
+                this.clinicTexts = {};
             }
             
             // 店舗データをクリニックから抽出
@@ -657,12 +658,54 @@ class DataManager {
         return this.regions.find(r => r.id === regionId);
     }
 
-    // 地域IDとエレメントIDでサイトテキストを取得
+    // 地域IDとエレメントIDでサイトテキストを取得（旧）
     getSiteText(regionId, elementId, defaultText = '') {
         if (this.siteTexts && this.siteTexts[regionId] && this.siteTexts[regionId][elementId]) {
             return this.siteTexts[regionId][elementId];
         }
         return defaultText;
+    }
+
+    // クリニック名と項目名でクリニック別テキストを取得
+    getClinicText(clinicName, itemKey, defaultText = '') {
+        if (this.clinicTexts && this.clinicTexts[clinicName] && this.clinicTexts[clinicName][itemKey]) {
+            return this.clinicTexts[clinicName][itemKey];
+        }
+        return defaultText;
+    }
+
+    // 現在選択されているクリニックを判定する関数
+    getCurrentClinic() {
+        // URLパラメータから判定
+        const urlParams = new URLSearchParams(window.location.search);
+        const clinicParam = urlParams.get('clinic');
+        if (clinicParam) {
+            return clinicParam;
+        }
+
+        // 地域の1位クリニックをデフォルトとして使用
+        const currentRegionId = this.getCurrentRegionId();
+        const ranking = this.getRankingByRegionId(currentRegionId);
+        if (ranking && ranking.ranks && ranking.ranks.length > 0) {
+            const topClinic = ranking.ranks[0];
+            // クリニック名からコードにマッピング
+            const clinicNameMap = {
+                'ディオクリニック': 'dio',
+                'エミナルクリニック': 'eminal', 
+                'ウララクリニック': 'urara',
+                'リエートクリニック': 'lieto',
+                '湘南美容クリニック': 'sbc'
+            };
+            return clinicNameMap[topClinic.name] || 'dio';
+        }
+        
+        return 'dio'; // デフォルト
+    }
+
+    // 現在の地域IDを取得
+    getCurrentRegionId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('region_id') || '013';
     }
 
     // 地域IDでランキングを取得
@@ -1177,18 +1220,21 @@ class RankingApp {
         }
     }
 
-    // サイト全体のテキストを動的に更新
+    // サイト全体のテキストを動的に更新（クリニック別対応）
     updateAllTexts(regionId) {
         try {
+            const currentClinic = this.dataManager.getCurrentClinic();
+            console.log(`🎯 現在のクリニック: ${currentClinic}`);
+
             // ページタイトルの更新
-            const pageTitle = this.dataManager.getSiteText(regionId, 'page-title', '2025年決定版｜医療ダイエット比較ランキング');
+            const pageTitle = this.dataManager.getClinicText(currentClinic, 'サイトタイトル', '2025年決定版｜脂肪溶解注射比較ランキング');
             document.title = pageTitle;
             console.log(`✅ Page title updated: ${pageTitle}`);
 
             // メタディスクリプションの更新
             const metaDesc = document.querySelector('meta[name="description"]');
             if (metaDesc) {
-                const metaDescText = this.dataManager.getSiteText(regionId, 'meta-description', 'あなたの地域の優良クリニックを探そう。');
+                const metaDescText = this.dataManager.getClinicText(currentClinic, 'メタディスクリプション', 'あなたの地域の優良クリニックを探そう。');
                 metaDesc.setAttribute('content', metaDescText);
                 console.log(`✅ Meta description updated: ${metaDescText}`);
             }
@@ -1196,30 +1242,22 @@ class RankingApp {
             // サイトロゴの更新
             const siteLogo = document.querySelector('.site-logo');
             if (siteLogo) {
-                const logoText = this.dataManager.getSiteText(regionId, 'site-logo', '医療ダイエット比較.com');
+                const logoText = this.dataManager.getClinicText(currentClinic, 'サイトロゴ', '脂肪溶解注射比較.com');
                 siteLogo.textContent = logoText;
                 console.log(`✅ Site logo updated: ${logoText}`);
-            }
-
-            // ヒーロー画像のalt属性更新
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage) {
-                const heroAlt = this.dataManager.getSiteText(regionId, 'hero-alt', '脂肪溶解注射ランキング - コスパ×通いやすさで選ぶ');
-                heroImage.setAttribute('alt', heroAlt);
-                console.log(`✅ Hero image alt updated: ${heroAlt}`);
             }
 
             // MVアピールテキストの更新
             const appealText1Element = document.getElementById('mv-appeal-text1');
             if (appealText1Element) {
-                const text1 = this.dataManager.getSiteText(regionId, 'mv-appeal-text1', 'コスパ');
+                const text1 = this.dataManager.getClinicText(currentClinic, 'MVアピールテキスト1', 'コスパ');
                 appealText1Element.textContent = text1;
                 console.log(`✅ MV Appeal Text 1 updated: ${text1}`);
             }
 
             const appealText2Element = document.getElementById('mv-appeal-text2');
             if (appealText2Element) {
-                const text2 = this.dataManager.getSiteText(regionId, 'mv-appeal-text2', '通いやすさ');
+                const text2 = this.dataManager.getClinicText(currentClinic, 'MVアピールテキスト2', '通いやすさ');
                 appealText2Element.textContent = text2;
                 console.log(`✅ MV Appeal Text 2 updated: ${text2}`);
             }
@@ -1227,14 +1265,14 @@ class RankingApp {
             // SVGテキストの更新
             const svgText1Element = document.querySelector('#mv-svg-text1 text');
             if (svgText1Element) {
-                const svgText1 = this.dataManager.getSiteText(regionId, 'mv-svg-text1', '脂肪ダイエット');
+                const svgText1 = this.dataManager.getClinicText(currentClinic, 'MVSVGテキスト1', '脂肪溶解注射');
                 svgText1Element.textContent = svgText1;
                 console.log(`✅ MV SVG Text 1 updated: ${svgText1}`);
             }
 
             const svgText2Element = document.querySelector('#mv-svg-text2 text');
             if (svgText2Element) {
-                const svgText2 = this.dataManager.getSiteText(regionId, 'mv-svg-text2', 'ランキング');
+                const svgText2 = this.dataManager.getClinicText(currentClinic, 'MVSVGテキスト2', 'ランキング');
                 svgText2Element.textContent = svgText2;
                 console.log(`✅ MV SVG Text 2 updated: ${svgText2}`);
             }
@@ -1242,7 +1280,7 @@ class RankingApp {
             // ランキングバナーのalt属性更新
             const rankingBanner = document.querySelector('.ranking-banner-image');
             if (rankingBanner) {
-                const rankingAlt = this.dataManager.getSiteText(regionId, 'ranking-banner-alt', 'で人気の医療ダイエットはここ！');
+                const rankingAlt = this.dataManager.getClinicText(currentClinic, 'ランキングバナーalt', 'で人気の脂肪溶解注射はここ！');
                 rankingBanner.setAttribute('alt', rankingAlt);
                 console.log(`✅ Ranking banner alt updated: ${rankingAlt}`);
             }
@@ -1250,7 +1288,7 @@ class RankingApp {
             // 比較表タイトルの更新
             const comparisonTitle = document.querySelector('.comparison-title');
             if (comparisonTitle) {
-                const titleText = this.dataManager.getSiteText(regionId, 'comparison-title', 'で人気の医療ダイエット');
+                const titleText = this.dataManager.getClinicText(currentClinic, '比較表タイトル', 'で人気の脂肪溶解注射');
                 // 地域名を動的に挿入
                 const region = this.dataManager.getRegionById(regionId);
                 const regionName = region ? region.name : '';
@@ -1258,46 +1296,15 @@ class RankingApp {
                 console.log(`✅ Comparison title updated: ${regionName}${titleText}`);
             }
 
-            // 比較表サブタイトルの更新
+            // 比較表サブタイトルの更新（固定）
             const comparisonSubtitle = document.querySelector('.comparison-subtitle');
             if (comparisonSubtitle) {
-                const subtitleText = this.dataManager.getSiteText(regionId, 'comparison-subtitle', 'クリニックを徹底比較');
                 comparisonSubtitle.innerHTML = `クリニックを<span class="pink-text">徹底比較</span>`;
-                console.log(`✅ Comparison subtitle updated: ${subtitleText}`);
-            }
-
-            // 詳細バナーのalt属性更新
-            const detailsBanner = document.querySelector('.details-banner-image');
-            if (detailsBanner) {
-                const detailsAlt = this.dataManager.getSiteText(regionId, 'details-banner-alt', 'コスパ×効果×通いやすさで選ぶ医療痩身クリニックBEST3');
-                detailsBanner.setAttribute('alt', detailsAlt);
-                console.log(`✅ Details banner alt updated: ${detailsAlt}`);
-            }
-
-            // コラム画像のalt属性更新
-            const column1Img = document.querySelector('img[alt*="医療ダイエット解説"], img[alt*="注射ダイエット解説"]');
-            if (column1Img) {
-                const column1Alt = this.dataManager.getSiteText(regionId, 'column1-alt', '医療ダイエット解説');
-                column1Img.setAttribute('alt', column1Alt);
-                console.log(`✅ Column 1 alt updated: ${column1Alt}`);
-            }
-
-            const column2Img = document.querySelector('img[alt*="医療痩身の副作用について"], img[alt*="注射痩身の副作用について"]');
-            if (column2Img) {
-                const column2Alt = this.dataManager.getSiteText(regionId, 'column2-alt', '医療痩身の副作用について');
-                column2Img.setAttribute('alt', column2Alt);
-                console.log(`✅ Column 2 alt updated: ${column2Alt}`);
-            }
-
-            const column3Img = document.querySelector('img[alt*="医療痩身契約の注意点"], img[alt*="注射痩身契約の注意点"]');
-            if (column3Img) {
-                const column3Alt = this.dataManager.getSiteText(regionId, 'column3-alt', '医療痩身契約の注意点');
-                column3Img.setAttribute('alt', column3Alt);
-                console.log(`✅ Column 3 alt updated: ${column3Alt}`);
+                console.log(`✅ Comparison subtitle updated`);
             }
 
         } catch (error) {
-            console.error('テキストの更新に失敗しました:', error);
+            console.error('クリニック別テキストの更新に失敗しました:', error);
         }
     }
 
