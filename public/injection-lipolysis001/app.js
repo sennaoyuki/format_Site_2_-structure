@@ -1361,26 +1361,17 @@ class RankingApp {
                 console.log('✅ Tips tab titles updated');
             }
             
-            // Tips見出しの更新
-            const tipsHeaders = document.querySelectorAll('.tips-container h3');
-            if (tipsHeaders.length >= 3) {
-                tipsHeaders[0].textContent = this.dataManager.getCommonText('Tips1見出し', '本気で痩せたいなら脂肪溶解注射が最短！');
-                tipsHeaders[1].textContent = this.dataManager.getCommonText('Tips2見出し', 'クリニック選びは立地とアクセスが重要');
-                tipsHeaders[2].textContent = this.dataManager.getCommonText('Tips3見出し', '夏直前の今がベストタイミング！');
-                console.log('✅ Tips headers updated');
-            }
-            
             // Tips内容の更新（タブコンテンツ内のp要素）
             const tabContents = document.querySelectorAll('.tips-container .tab-content');
             if (tabContents.length >= 3) {
                 const tips1P = tabContents[0].querySelector('p');
                 if (tips1P) {
-                    tips1P.textContent = this.dataManager.getCommonText('Tips1内容', '脂肪溶解注射は科学的根拠に基づき、脂肪細胞そのものを破壊・減少させる痩身治療です。リバウンドしにくく、部分痩せも可能。自己流ダイエットで失敗続きの方にこそ試してほしい、確実な痩身方法です。');
+                    tips1P.textContent = this.dataManager.getCommonText('Tips1内容', '本気で痩せたいなら脂肪溶解注射が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させる痩身治療です。リバウンドしにくく、部分痩せも可能。自己流ダイエットで失敗続きの方にこそ試してほしい、確実な痩身方法です。');
                 }
                 
                 const tips2P = tabContents[1].querySelector('p');
                 if (tips2P) {
-                    tips2P.textContent = this.dataManager.getCommonText('Tips2内容', '脂肪溶解注射は定期的な通院が必要なため、通いやすい場所を選ぶことが成功の鍵。仕事帰りや休日に無理なく通える立地で、継続しやすい環境を整えましょう。途中で通えなくなることが最大の失敗要因です。');
+                    tips2P.innerHTML = this.dataManager.getCommonText('Tips2内容', 'クリニック選びの失敗が理想の体型実現の失敗につながります。<br>強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>☑️医師が直接診察する<br>☑️施術後のアフターケア<br>☑️料金を明確に説明する');
                 }
                 
                 const tips3P = tabContents[2].querySelector('p');
