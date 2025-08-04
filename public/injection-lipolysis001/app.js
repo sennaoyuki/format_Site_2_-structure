@@ -406,6 +406,7 @@ class DataManager {
         this.rankings = [];
         this.storeViews = [];
         this.campaigns = [];
+        this.siteTexts = {}; // サイトテキストデータ
         // Handle subdirectory paths
         if (window.SITE_CONFIG) {
             this.dataPath = window.SITE_CONFIG.dataPath + '/';
@@ -441,6 +442,21 @@ class DataManager {
             
             // キャンペーンデータの設定
             this.campaigns = data.campaigns;
+            
+            // サイトテキストデータの読み込み
+            try {
+                const textResponse = await fetch(this.dataPath + 'site-texts.json');
+                if (textResponse.ok) {
+                    this.siteTexts = await textResponse.json();
+                    console.log('✅ サイトテキストデータを読み込みました:', this.siteTexts);
+                } else {
+                    console.warn('⚠️ site-texts.json が見つかりません。デフォルトテキストを使用します。');
+                    this.siteTexts = {};
+                }
+            } catch (error) {
+                console.warn('⚠️ サイトテキストの読み込みに失敗しました:', error);
+                this.siteTexts = {};
+            }
             
             // 店舗データをクリニックから抽出
             this.stores = [];
@@ -639,6 +655,14 @@ class DataManager {
     // 地域IDで地域を取得
     getRegionById(regionId) {
         return this.regions.find(r => r.id === regionId);
+    }
+
+    // 地域IDとエレメントIDでサイトテキストを取得
+    getSiteText(regionId, elementId, defaultText = '') {
+        if (this.siteTexts && this.siteTexts[regionId] && this.siteTexts[regionId][elementId]) {
+            return this.siteTexts[regionId][elementId];
+        }
+        return defaultText;
     }
 
     // 地域IDでランキングを取得
@@ -1074,6 +1098,9 @@ class RankingApp {
                 mvRegionElement.textContent = region.name;
             }
 
+            // MVのアピールテキストを動的に更新
+            this.updateMvTexts(regionId);
+
             //ランキングの地域名も更新
             const rankRegionElement = document.getElementById('rank-region-name');
             if (rankRegionElement) {
@@ -1147,6 +1174,46 @@ class RankingApp {
             if (regionId !== '013') {
                 this.changeRegion('013');
             }
+        }
+    }
+
+    // MVテキストを動的に更新
+    updateMvTexts(regionId) {
+        try {
+            // アピールテキスト1の更新
+            const appealText1Element = document.getElementById('mv-appeal-text1');
+            if (appealText1Element) {
+                const text1 = this.dataManager.getSiteText(regionId, 'mv-appeal-text1', 'コスパ');
+                appealText1Element.textContent = text1;
+                console.log(`✅ MV Appeal Text 1 updated: ${text1}`);
+            }
+
+            // アピールテキスト2の更新
+            const appealText2Element = document.getElementById('mv-appeal-text2');
+            if (appealText2Element) {
+                const text2 = this.dataManager.getSiteText(regionId, 'mv-appeal-text2', '通いやすさ');
+                appealText2Element.textContent = text2;
+                console.log(`✅ MV Appeal Text 2 updated: ${text2}`);
+            }
+
+            // SVGテキスト1の更新
+            const svgText1Element = document.querySelector('#mv-svg-text1 text');
+            if (svgText1Element) {
+                const svgText1 = this.dataManager.getSiteText(regionId, 'mv-svg-text1', '脂肪ダイエット');
+                svgText1Element.textContent = svgText1;
+                console.log(`✅ MV SVG Text 1 updated: ${svgText1}`);
+            }
+
+            // SVGテキスト2の更新
+            const svgText2Element = document.querySelector('#mv-svg-text2 text');
+            if (svgText2Element) {
+                const svgText2 = this.dataManager.getSiteText(regionId, 'mv-svg-text2', 'ランキング');
+                svgText2Element.textContent = svgText2;
+                console.log(`✅ MV SVG Text 2 updated: ${svgText2}`);
+            }
+
+        } catch (error) {
+            console.error('MVテキストの更新に失敗しました:', error);
         }
     }
 
