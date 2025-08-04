@@ -1,9 +1,9 @@
-const CACHE_NAME = 'medical-diet-v1';
+const CACHE_NAME = 'injection-lipolysis-v1';
 const urlsToCache = [
   '/',
   '/styles.css',
   '/app.js',
-  '/images/MV2.webp',
+  '/images/injection-MV.webp',
   '/images/favicon.png',
   '/images/ranking_header_banner.webp'
 ];
