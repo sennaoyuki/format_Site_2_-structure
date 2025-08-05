@@ -275,6 +275,12 @@ section, main, header, footer, nav, aside, article {
     border: 1px solid #E0E0E0 !important;
 }
 
+/* CSV deco tag styling */
+.deco-text {
+    color: #fa7794;
+    font-weight: 600;
+}
+
 /* 全てのselect要素の矢印を黒色に統一 */
 select {
     appearance: none;

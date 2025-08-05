@@ -708,6 +708,14 @@ class DataManager {
         return this.getClinicText(clinicCode, 'クリニック名', defaultName);
     }
 
+    // decoタグを処理してHTMLに変換する関数
+    processDecoTags(text) {
+        if (!text || typeof text !== 'string') return text;
+        
+        // <deco>タグを<span class="deco-text">に変換
+        return text.replace(/<deco>(.*?)<\/deco>/g, '<span class="deco-text">$1</span>');
+    }
+
     // 現在選択されているクリニックを判定する関数
     getCurrentClinic() {
         // URLパラメータから判定
@@ -1342,7 +1350,7 @@ class RankingApp {
             const comparisonSubtitle = document.querySelector('.comparison-subtitle');
             if (comparisonSubtitle) {
                 const subtitleHtml = this.dataManager.getCommonText('比較表サブタイトル', 'クリニックを<span class="pink-text">徹底比較</span>');
-                comparisonSubtitle.innerHTML = subtitleHtml;
+                comparisonSubtitle.innerHTML = this.dataManager.processDecoTags(subtitleHtml);
                 console.log(`✅ Comparison subtitle updated`);
             }
             
@@ -1385,17 +1393,20 @@ class RankingApp {
             if (tabContents.length >= 3) {
                 const tips1P = tabContents[0].querySelector('p');
                 if (tips1P) {
-                    tips1P.textContent = this.dataManager.getCommonText('Tips1内容', '本気で痩せたいなら脂肪溶解注射が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させる痩身治療です。リバウンドしにくく、部分痩せも可能。自己流ダイエットで失敗続きの方にこそ試してほしい、確実な痩身方法です。');
+                    const tips1Content = this.dataManager.getCommonText('Tips1内容', '本気で痩せたいなら脂肪溶解注射が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させる痩身治療です。リバウンドしにくく、部分痩せも可能。自己流ダイエットで失敗続きの方にこそ試してほしい、確実な痩身方法です。');
+                    tips1P.innerHTML = this.dataManager.processDecoTags(tips1Content);
                 }
                 
                 const tips2P = tabContents[1].querySelector('p');
                 if (tips2P) {
-                    tips2P.innerHTML = this.dataManager.getCommonText('Tips2内容', 'クリニック選びの失敗が理想の体型実現の失敗につながります。<br>強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>☑️医師が直接診察する<br>☑️施術後のアフターケア<br>☑️料金を明確に説明する');
+                    const tips2Content = this.dataManager.getCommonText('Tips2内容', 'クリニック選びの失敗が理想の体型実現の失敗につながります。<br>強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>☑️医師が直接診察する<br>☑️施術後のアフターケア<br>☑️料金を明確に説明する');
+                    tips2P.innerHTML = this.dataManager.processDecoTags(tips2Content);
                 }
                 
                 const tips3P = tabContents[2].querySelector('p');
                 if (tips3P) {
-                    tips3P.textContent = this.dataManager.getCommonText('Tips3内容', '夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。');
+                    const tips3Content = this.dataManager.getCommonText('Tips3内容', '夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。');
+                    tips3P.innerHTML = this.dataManager.processDecoTags(tips3Content);
                 }
                 console.log('✅ Tips contents updated');
             }
@@ -2560,7 +2571,7 @@ class RankingApp {
                     ${Object.entries(data.priceDetail).map(([key, value]) => `
                         <tr>
                             <td>${key}</td>
-                            <td>${value}</td>
+                            <td>${this.dataManager.processDecoTags(value)}</td>
                         </tr>
                     `).join('')}
                 </table>
@@ -2588,10 +2599,10 @@ class RankingApp {
                             return `
                             <div class="ribbon_point_title2_s">
                                 <i class="fas ${iconClass} point-icon-inline"></i>
-                                <strong>${point.title}</strong>
+                                <strong>${this.dataManager.processDecoTags(point.title)}</strong>
                             </div>
                             <div class="ribbon_point_txt">
-                                <p style="font-size:14px;">${point.description}</p>
+                                <p style="font-size:14px;">${this.dataManager.processDecoTags(point.description)}</p>
                             </div>
                             `;
                         }).join('')}
