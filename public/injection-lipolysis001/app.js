@@ -1387,6 +1387,21 @@ class RankingApp {
                 console.log('✅ Tips contents updated');
             }
 
+            // 注意事項HTMLの更新
+            const disclaimerHTML = this.dataManager.getCommonText('注意事項HTML', '');
+            if (disclaimerHTML) {
+                // 既存の注意事項セクションを探す
+                const disclaimerAccordion = document.querySelector('.disclaimer-accordion');
+                if (disclaimerAccordion) {
+                    // 既存の main-disclaimer の直前に新しい注意事項を挿入
+                    const existingMainDisclaimer = disclaimerAccordion.querySelector('.main-disclaimer');
+                    if (existingMainDisclaimer) {
+                        existingMainDisclaimer.insertAdjacentHTML('beforebegin', disclaimerHTML);
+                        console.log('✅ 注意事項HTML inserted');
+                    }
+                }
+            }
+
         } catch (error) {
             console.error('クリニック別テキストの更新に失敗しました:', error);
         }
