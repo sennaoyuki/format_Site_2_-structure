@@ -3872,7 +3872,7 @@ section.clinic-rankings .ranking-header-banner {
     .clinic-card {
         padding: 38px 4px 8px;
         border-radius: 5px;
-        border-width: 1px;
+        border: 1px solid #E0E0E0;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
