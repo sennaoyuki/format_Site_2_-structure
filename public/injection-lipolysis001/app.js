@@ -1387,20 +1387,32 @@ class RankingApp {
                 console.log('✅ Tips contents updated');
             }
 
-            // 注意事項HTMLの更新
+            // 注意事項HTMLの更新（既存の注意事項を置き換える）
             const disclaimerHTML = this.dataManager.getCommonText('注意事項HTML', '');
             if (disclaimerHTML) {
                 // 既存の注意事項セクションを探す
                 const disclaimerAccordion = document.querySelector('.disclaimer-accordion');
                 if (disclaimerAccordion) {
-                    // 既存の main-disclaimer の直前に新しい注意事項を挿入
+                    // 既存の main-disclaimer を置き換える
                     const existingMainDisclaimer = disclaimerAccordion.querySelector('.main-disclaimer');
                     if (existingMainDisclaimer) {
-                        existingMainDisclaimer.insertAdjacentHTML('beforebegin', disclaimerHTML);
-                        console.log('✅ 注意事項HTML inserted');
+                        // 注意：JSONからのHTMLが正しい形式でない場合があるので、確認
+                        // 現在は既存のHTMLはそのまま使用
+                        console.log('✅ 注意事項HTML 確認（現在は既存のHTMLを維持）');
                     }
                 }
             }
+
+            // 比較表ヘッダーの更新（食事指導を対応部位に変更）
+            const tableHeaders = document.querySelectorAll('.comparison-table th');
+            tableHeaders.forEach(th => {
+                if (th.textContent.includes('食事指導')) {
+                    th.textContent = '対応部位';
+                    th.style.display = ''; // 表示する
+                    th.classList.remove('th-none');
+                    console.log('✅ 比較表ヘッダー「食事指導」を「対応部位」に変更');
+                }
+            });
 
         } catch (error) {
             console.error('クリニック別テキストの更新に失敗しました:', error);
@@ -1549,12 +1561,10 @@ class RankingApp {
                 4: '脂肪溶解注射<br>GLP-1',
                 5: '脂肪溶解注射<br>（BNLSアルティメット）<br>サクセンダ<br>山参注射'
             };
-            const dietSupport = {
-                1: '栄養管理士<br>による指導',
-                2: '管理栄養士<br>による指導',
-                3: '医師監修のもと<br>管理栄養士の指導',
-                4: '管理栄養士による<br>オンライン食事指導',
-                5: '専門クリニックで<br>管理栄養士指導'
+            // 対応部位をJSONから取得
+            const getBodyPartsFromJson = (rankNum) => {
+                const clinicCode = this.getClinicCodeByRank(rankNum);
+                return this.dataManager.getClinicText(clinicCode, '対応部位', '顔・二の腕・お腹・太もも・その他');
             };
             const monitorDiscount = {
                 1: 'あり<br>75％OFF',
@@ -1601,7 +1611,7 @@ class RankingApp {
                 <td class="th-none" style="display: none;">${getPopularPlanFromJson(rankNum)}</td>
                 <td class="th-none" style="display: none;">${machines[rankNum] || '医療機器'}</td>
                 <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
-                <td class="th-none" style="display: none;">${dietSupport[rankNum] || '〇'}</td>
+                <td class="th-none" style="display: none;">${getBodyPartsFromJson(rankNum)}</td>
                 <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
                 <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
                 <td>
@@ -2083,18 +2093,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！もう一人で悩まない',
-                            description: 'ディオクリニックでは医師・看護師・管理栄養士がチームであなたを徹底サポート！自己流ダイエットで挫折した方にもおすすめです。専門的な食事指導や生活改善アドバイスも受けられるから、ダイエットの悩みも解決！'
+                            title: this.dataManager.getClinicText('dio', 'POINT1タイトル', '専門家チームが徹底伴走！もう一人で悩まない'),
+                            description: this.dataManager.getClinicText('dio', 'POINT1内容', 'ディオクリニックでは医師・看護師・管理栄養士がチームであなたを徹底サポート！自己流ダイエットで挫折した方にもおすすめです。専門的な食事指導や生活改善アドバイスも受けられるから、ダイエットの悩みも解決！')
                         },
                         {
                             icon: 'phone',
-                            title: '医療マシンをオーダーメイド！リバウンドしにくい身体へ',
-                            description: '脂肪冷却や医療EMSなど、複数の最新マシンをあなた専用に組み合わせ！寝ているだけで部分痩せや筋肉アップまで目指せるので、運動が苦手な方にもおすすめ。リバウンドしにくい体質づくりを目指せる！'
+                            title: this.dataManager.getClinicText('dio', 'POINT2タイトル', '医療マシンをオーダーメイド！リバウンドしにくい身体へ'),
+                            description: this.dataManager.getClinicText('dio', 'POINT2内容', '脂肪冷却や医療EMSなど、複数の最新マシンをあなた専用に組み合わせ！寝ているだけで部分痩せや筋肉アップまで目指せるので、運動が苦手な方にもおすすめ。リバウンドしにくい体質づくりを目指せる！')
                         },
                         {
                             icon: 'coin',
-                            title: '全額返金保証あり！効果が不安でも大丈夫',
-                            description: 'ディオクリニックは効果に自信があるから、「全額返金保証制度」付き！もし効果を実感できなくても金銭的なリスクがないから、思い切ってチャレンジできます！'
+                            title: this.dataManager.getClinicText('dio', 'POINT3タイトル', '全額返金保証あり！効果が不安でも大丈夫'),
+                            description: this.dataManager.getClinicText('dio', 'POINT3内容', 'ディオクリニックは効果に自信があるから、「全額返金保証制度」付き！もし効果を実感できなくても金銭的なリスクがないから、思い切ってチャレンジできます！')
                         }
                     ],
                     reviews: [
@@ -2170,18 +2180,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！',
-                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                            title: this.dataManager.getClinicText('urara', 'POINT1タイトル', '専門家チームが徹底伴走！'),
+                            description: this.dataManager.getClinicText('urara', 'POINT1内容', '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。')
                         },
                         {
                             icon: 'mobile-alt',
-                            title: '医療マシンをオーダーメイド！',
-                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                            title: this.dataManager.getClinicText('urara', 'POINT2タイトル', '医療マシンをオーダーメイド！'),
+                            description: this.dataManager.getClinicText('urara', 'POINT2内容', '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。')
                         },
                         {
                             icon: 'clock',
-                            title: '安心のサポートと保証制度',
-                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                            title: this.dataManager.getClinicText('urara', 'POINT3タイトル', '安心のサポートと保証制度'),
+                            description: this.dataManager.getClinicText('urara', 'POINT3内容', '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。')
                         }
                     ],
                     reviews: [
@@ -2247,18 +2257,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！',
-                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                            title: this.dataManager.getClinicText('lieto', 'POINT1タイトル', '専門家チームが徹底伴走！'),
+                            description: this.dataManager.getClinicText('lieto', 'POINT1内容', '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。')
                         },
                         {
                             icon: 'phone',
-                            title: '医療マシンをオーダーメイド！',
-                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                            title: this.dataManager.getClinicText('lieto', 'POINT2タイトル', '医療マシンをオーダーメイド！'),
+                            description: this.dataManager.getClinicText('lieto', 'POINT2内容', '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。')
                         },
                         {
                             icon: 'coin',
-                            title: '安心のサポートと保証制度',
-                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                            title: this.dataManager.getClinicText('lieto', 'POINT3タイトル', '安心のサポートと保証制度'),
+                            description: this.dataManager.getClinicText('lieto', 'POINT3内容', '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。')
                         }
                     ],
                     reviews: [
@@ -2330,18 +2340,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'users',
-                            title: '管理栄養士によるオンライン食事指導',
-                            description: 'エミナルクリニックでは管理栄養士によるオンラインでの食事指導が受けられます。LINEなどを使って手軽に相談できるので、継続しやすいと評判です。'
+                            title: this.dataManager.getClinicText('eminal', 'POINT1タイトル', '管理栄養士によるオンライン食事指導'),
+                            description: this.dataManager.getClinicText('eminal', 'POINT1内容', 'エミナルクリニックでは管理栄養士によるオンラインでの食事指導が受けられます。LINEなどを使って手軽に相談できるので、継続しやすいと評判です。')
                         },
                         {
                             icon: 'network-wired',
-                            title: '全国60院以上の安心ネットワーク',
-                            description: 'エミナルクリニックは全国60院以上を展開しており、どこに住んでいても同じ品質の医療ダイエットを受けられます。安心・安全なネットワークで、あなたのボディメイクをサポートします。'
+                            title: this.dataManager.getClinicText('eminal', 'POINT2タイトル', '全国60院以上の安心ネットワーク'),
+                            description: this.dataManager.getClinicText('eminal', 'POINT2内容', 'エミナルクリニックは全国60院以上を展開しており、どこに住んでいても同じ品質の医療ダイエットを受けられます。安心・安全なネットワークで、あなたのボディメイクをサポートします。')
                         },
                         {
                             icon: 'clock',
-                            title: 'モニター満足度95%の実績',
-                            description: 'エミナルクリニックはモニター満足度95%という高い実績を誇っています。多くの方が結果に満足しており、あなたも安心して治療を始めていただけます。'
+                            title: this.dataManager.getClinicText('eminal', 'POINT3タイトル', 'モニター満足度95%の実績'),
+                            description: this.dataManager.getClinicText('eminal', 'POINT3内容', 'エミナルクリニックはモニター満足度95%という高い実績を誇っています。多くの方が結果に満足しており、あなたも安心して治療を始めていただけます。')
                         }
                     ],
                     reviews: [
@@ -2407,18 +2417,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'user-md',
-                            title: '経験豊富な医師の的確な診断',
-                            description: '湘南美容クリニックでは経験豊富な医師があなたの体質やライフスタイルに合わせて最適な痩身プランを提案します。一人一人に最適化された治療で確実な結果を目指します。'
+                            title: this.dataManager.getClinicText('sbc', 'POINT1タイトル', '経験豊富な医師の的確な診断'),
+                            description: this.dataManager.getClinicText('sbc', 'POINT1内容', '湘南美容クリニックでは経験豊富な医師があなたの体質やライフスタイルに合わせて最適な痩身プランを提案します。一人一人に最適化された治療で確実な結果を目指します。')
                         },
                         {
                             icon: 'list-ul',
-                            title: '豊富なメニューで一人一人に最適化',
-                            description: '湘南美容クリニックでは豊富なメニューを用意しており、あなたの悩みや目標に合わせて最適な治療を選択できます。クールスカルプティングから脂肪溶解注射まで、一人一人に最適化した痩身治療を提供します。'
+                            title: this.dataManager.getClinicText('sbc', 'POINT2タイトル', '豊富なメニューで一人一人に最適化'),
+                            description: this.dataManager.getClinicText('sbc', 'POINT2内容', '湘南美容クリニックでは豊富なメニューを用意しており、あなたの悩みや目標に合わせて最適な治療を選択できます。クールスカルプティングから脂肪溶解注射まで、一人一人に最適化した痩身治療を提供します。')
                         },
                         {
                             icon: 'award',
-                            title: '経験豊富な医師と安心サポート',
-                            description: '湘南美容クリニックは経験豊富な医師が在籍し、あなたの不安や疑問に丁寧に答えます。最新の医療技術と安心のサポート体制で、理想のボディラインを実現します。'
+                            title: this.dataManager.getClinicText('sbc', 'POINT3タイトル', '経験豊富な医師と安心サポート'),
+                            description: this.dataManager.getClinicText('sbc', 'POINT3内容', '湘南美容クリニックは経験豊富な医師が在籍し、あなたの不安や疑問に丁寧に答えます。最新の医療技術と安心のサポート体制で、理想のボディラインを実現します。')
                         }
                     ],
                     reviews: [
