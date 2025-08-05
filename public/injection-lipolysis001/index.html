@@ -1314,102 +1314,94 @@ text-align: center;
             const pointsContainer = document.getElementById('first-choice-points');
             if (!pointsContainer) return;
             
-            const reasonsMap = {
-                'dio': [
-                    {
-                        title: '圧倒的な実績＆成功率99％',
-                        description: 'ダイエット成功率99％、平均13.7kg減の実績。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。'
-                    },
-                    {
-                        title: '最新の医療機器を完備',
-                        description: '脂肪冷却・医療用EMS・医療ハイフ・医療ラジオ波など、最新の痩身機器を多数完備。一人一人の悩みに合わせた最適な治療を提供します。'
-                    },
-                    {
-                        title: '管理栄養士による完全サポート',
-                        description: '管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。'
+            // JSONファイルから動的にPOINTタイトルと内容を取得
+            fetch('./data/clinic-texts.json')
+                .then(response => response.json())
+                .then(clinicTexts => {
+                    const clinicData = clinicTexts[clinicSlug] || clinicTexts['dio'];
+                    
+                    const reasons = [
+                        {
+                            title: clinicData['POINT1タイトル'] || '圧倒的な実績＆成功率99％',
+                            description: clinicData['POINT1内容'] || 'ダイエット成功率99％、平均13.7kg減の実績。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。'
+                        },
+                        {
+                            title: clinicData['POINT2タイトル'] || '最新の医療機器を完備',
+                            description: clinicData['POINT2内容'] || '脂肪冷却・医療用EMS・医療ハイフ・医療ラジオ波など、最新の痩身機器を多数完備。一人一人の悩みに合わせた最適な治療を提供します。'
+                        },
+                        {
+                            title: clinicData['POINT3タイトル'] || '管理栄養士による完全サポート',
+                            description: clinicData['POINT3内容'] || '管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。'
+                        }
+                    ];
+                    
+                    const officialUrl = `https://www.xn--ecki4eoz3204ct89aepry34c.com/go/${clinicSlug}/?max_scroll=100&region_id=013`;
+                    
+                    let html = '';
+                    reasons.forEach(reason => {
+                        html += `
+                            <div class="ribbon_point_title2_s">
+                                <i class="fas fa-clock point-icon-inline"></i>
+                                <strong>${reason.title}</strong>
+                            </div>
+                            <div class="ribbon_point_txt">
+                                <p style="font-size:14px;">${reason.description}</p>
+                            </div>
+                        `;
+                    });
+                    
+                    // 公式リンクも更新
+                    const officialLink = document.getElementById('first-choice-official-link');
+                    if (officialLink) {
+                        const clinicUrl = clinicData['公式サイトURL'] || 'https://dioclinic.jp/';
+                        officialLink.innerHTML = `【公式】<a href="${officialUrl}" target="_blank" rel="noopener"><strong>${clinicUrl}</strong></a>`;
                     }
-                ],
-                'urara': [
-                    {
-                        title: 'ダイエット成功率94％の実績',
-                        description: '確実な結果を出すURARAクリニック独自の医療痩身プログラム。一人一人に合わせたオーダーメイド治療で理想の体型を実現します。'
-                    },
-                    {
-                        title: '最大79%OFFの特別価格',
-                        description: '今なら期間限定で最大79%OFFの特別価格。コストを抑えながら本格的な医療ダイエットを始められます。'
-                    },
-                    {
-                        title: '豊富な治療メニュー',
-                        description: '脂肪冷却から注射治療まで、豊富な治療メニューを用意。あなたの体質や目標に合わせて最適な治療法を選択できます。'
+                    
+                    pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
+                })
+                .catch(error => {
+                    console.error('Error loading clinic texts:', error);
+                    // フォールバック処理
+                    const reasonsMap = {
+                        'dio': [
+                            {
+                                title: '圧倒的な実績＆成功率99％',
+                                description: 'ダイエット成功率99％、平均13.7kg減の実績。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。'
+                            },
+                            {
+                                title: '最新の医療機器を完備',
+                                description: '脂肪冷却・医療用EMS・医療ハイフ・医療ラジオ波など、最新の痩身機器を多数完備。一人一人の悩みに合わせた最適な治療を提供します。'
+                            },
+                            {
+                                title: '管理栄養士による完全サポート',
+                                description: '管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。'
+                            }
+                        ]
+                    };
+                    
+                    const reasons = reasonsMap[clinicSlug] || reasonsMap['dio'];
+                    const officialUrl = `https://www.xn--ecki4eoz3204ct89aepry34c.com/go/${clinicSlug}/?max_scroll=100&region_id=013`;
+                    
+                    let html = '';
+                    reasons.forEach(reason => {
+                        html += `
+                            <div class="ribbon_point_title2_s">
+                                <i class="fas fa-clock point-icon-inline"></i>
+                                <strong>${reason.title}</strong>
+                            </div>
+                            <div class="ribbon_point_txt">
+                                <p style="font-size:14px;">${reason.description}</p>
+                            </div>
+                        `;
+                    });
+                    
+                    const officialLink = document.getElementById('first-choice-official-link');
+                    if (officialLink) {
+                        officialLink.innerHTML = `【公式】<a href="${officialUrl}" target="_blank" rel="noopener"><strong>https://dioclinic.jp/</strong></a>`;
                     }
-                ],
-                'lieto': [
-                    {
-                        title: 'ダイエット成功率94％',
-                        description: 'リエートクリニック独自の医療痩身プログラムで、確実な結果を出します。医師監修のもと安全で効果的な治療を提供。'
-                    },
-                    {
-                        title: '最大80%OFFモニター割引',
-                        description: 'モニター割引で最大80%OFF。お得な価格で本格的な医療ダイエットを体験できます。'
-                    },
-                    {
-                        title: '医師監修の安心サポート',
-                        description: '医師監修のもと管理栄養士が食事指導。安全で健康的なダイエットをトータルサポートします。'
-                    }
-                ],
-                'sbc': [
-                    {
-                        title: '症例実績30万件以上の安心',
-                        description: '湘南美容クリニックは症例実績30万件以上の豊富な経験。確かな技術力と実績で安心して治療を受けられます。'
-                    },
-                    {
-                        title: '全国展開の通いやすさ',
-                        description: '全国に多数のクリニックを展開。アクセスの良い立地で通いやすく、継続しやすい環境を提供します。'
-                    },
-                    {
-                        title: '豊富な治療メニュー',
-                        description: 'クールスカルプティングから脂肪溶解注射まで、豊富な治療メニュー。一人一人に最適化した治療を提供します。'
-                    }
-                ],
-                'eminal': [
-                    {
-                        title: '医療ダイエット専門クリニック',
-                        description: 'エミナルクリニックは医療ダイエット専門。専門性の高い治療と豊富な経験で確実な結果を提供します。'
-                    },
-                    {
-                        title: '個別カウンセリング重視',
-                        description: '一人一人の体質や目標に合わせた個別プランを提案。丁寧なカウンセリングで最適な治療法を選択します。'
-                    },
-                    {
-                        title: '充実のアフターサポート',
-                        description: '治療後のアフターサポートも充実。リバウンド防止のためのフォローアップで長期的な効果を維持します。'
-                    }
-                ]
-            };
-            
-            const reasons = reasonsMap[clinicSlug] || reasonsMap['dio'];
-            const officialUrl = `https://www.xn--ecki4eoz3204ct89aepry34c.com/go/${clinicSlug}/?max_scroll=100&region_id=013`;
-            
-            let html = '';
-            reasons.forEach(reason => {
-                html += `
-                    <div class="ribbon_point_title2_s">
-                        <i class="fas fa-clock point-icon-inline"></i>
-                        <strong>${reason.title}</strong>
-                    </div>
-                    <div class="ribbon_point_txt">
-                        <p style="font-size:14px;">${reason.description}</p>
-                    </div>
-                `;
-            });
-            
-            // 公式リンクも更新
-            const officialLink = document.getElementById('first-choice-official-link');
-            if (officialLink) {
-                officialLink.innerHTML = `【公式】<a href="${officialUrl}" target="_blank" rel="noopener"><strong>https://dioclinic.jp/</strong></a>`;
-            }
-            
-            pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
+                    
+                    pointsContainer.innerHTML = html + pointsContainer.innerHTML.match(/<div class="ribbon_point_link"[\s\S]*?<\/div>/)?.[0] || '';
+                });
         }
 
         // CASEセクションを設定 - 無効化
@@ -1839,31 +1831,8 @@ text-align: center;
     
     <!-- POINTタイトルを動的に更新 -->
     <script>
-        // JSONデータから動的にPOINTタイトルを取得して更新
-        fetch('./data/clinic-texts.json')
-            .then(response => response.json())
-            .then(data => {
-                // POINT1タイトル
-                const point1Title = document.getElementById('point1-title');
-                if (point1Title && data.dio && data.dio['POINT1タイトル']) {
-                    point1Title.textContent = data.dio['POINT1タイトル'];
-                }
-                
-                // POINT2タイトル
-                const point2Title = document.getElementById('point2-title');
-                if (point2Title && data.dio && data.dio['POINT2タイトル']) {
-                    point2Title.textContent = data.dio['POINT2タイトル'];
-                }
-                
-                // POINT3タイトル
-                const point3Title = document.getElementById('point3-title');
-                if (point3Title && data.dio && data.dio['POINT3タイトル']) {
-                    point3Title.textContent = data.dio['POINT3タイトル'];
-                }
-            })
-            .catch(error => {
-                console.error('Error loading clinic texts:', error);
-            });
+        // このスクリプトは不要になったため、setThreeReasons関数内で処理
+        // JSONデータの読み込みはsetThreeReasons関数内で実行される
     </script>
 </body>
 </html>
