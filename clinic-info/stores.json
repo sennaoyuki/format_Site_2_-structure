@@ -1,0 +1,686 @@
+[
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "渋谷本院",
+    "postalCode": "〒150-0043",
+    "address": "東京都渋谷区道玄坂1丁目12-1 渋谷マークシティウェスト14階",
+    "access": "渋谷駅直結",
+    "businessHours": "10:00-19:00（最終受付18:00）",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "新宿院",
+    "postalCode": "〒160-0021",
+    "address": "東京都新宿区歌舞伎町1丁目1-17 エキニア新宿ビル8階",
+    "access": "新宿駅東口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "高田馬場院",
+    "postalCode": "〒171-0033",
+    "address": "東京都豊島区高田3丁目11-19 ヴィラオートヴァーグ2階",
+    "access": "高田馬場駅徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "池袋院",
+    "postalCode": "〒171-0022",
+    "address": "東京都豊島区南池袋2丁目27-8 第10野萩ビル5階",
+    "access": "池袋駅東口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "東京駅前院",
+    "postalCode": "〒103-0027",
+    "address": "東京都中央区日本橋2丁目1-17 丹生ビル4階",
+    "access": "東京駅八重洲口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "町田院",
+    "postalCode": "〒194-0013",
+    "address": "東京都町田市原町田6丁目8-1 町田センタービル4階",
+    "access": "町田駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "上野院",
+    "postalCode": "〒110-0005",
+    "address": "東京都台東区上野3丁目21-5 Bino御徒町3階",
+    "access": "御徒町駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "横浜院",
+    "postalCode": "〒220-0004",
+    "address": "神奈川県横浜市西区北幸1丁目11-1 水信ビル7階",
+    "access": "横浜駅西口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "千葉院",
+    "postalCode": "〒260-0015",
+    "address": "千葉県千葉市中央区富士見2丁目7-5 富士見ハイネスビル2階",
+    "access": "千葉駅東口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "大宮院",
+    "postalCode": "〒330-0854",
+    "address": "埼玉県さいたま市大宮区桜木町2丁目2-12 藤沢ビル2階",
+    "access": "大宮駅西口徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "大阪心斎橋院",
+    "postalCode": "〒542-0085",
+    "address": "大阪府大阪市中央区心斎橋筋1丁目10-1 心斎橋タワービル8階",
+    "access": "心斎橋駅直結",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "梅田院",
+    "postalCode": "〒530-0057",
+    "address": "大阪府大阪市北区曽根崎2丁目12-4 コフレ梅田11階",
+    "access": "梅田駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "京都院",
+    "postalCode": "〒600-8005",
+    "address": "京都府京都市下京区四条通寺町西入ル奈良物町370 鈴木第二ビル5階",
+    "access": "河原町駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "神戸院",
+    "postalCode": "〒650-0021",
+    "address": "兵庫県神戸市中央区三宮町1丁目9-1 三宮センタープラザ東館5階",
+    "access": "三宮駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "名古屋栄院",
+    "postalCode": "〒460-0003",
+    "address": "愛知県名古屋市中区錦3丁目24-4 サンシャインサカエ6階",
+    "access": "栄駅直結",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "名古屋駅前院",
+    "postalCode": "〒453-0015",
+    "address": "愛知県名古屋市中村区椿町16-19 プリンシパル名駅7階",
+    "access": "名古屋駅太閤通口徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "福岡院",
+    "postalCode": "〒810-0001",
+    "address": "福岡県福岡市中央区天神2丁目7-21 天神プライム8階",
+    "access": "天神駅徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "LULA美容クリニック",
+    "branchName": "沖縄院",
+    "postalCode": "〒900-0015",
+    "address": "沖縄県那覇市久茂地3丁目8-6 新星LANDビル6階",
+    "access": "県庁前駅徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "不定休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "札幌院",
+    "postalCode": "〒060-0807",
+    "address": "北海道札幌市北区北7条西4-3 宮澤ビル7F",
+    "access": "JR札幌駅北口徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "仙台院",
+    "postalCode": "〒983-0852",
+    "address": "宮城県仙台市宮城野区榴岡2-1-20 HPビル4F",
+    "access": "JR仙台駅東口徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "新宿本院",
+    "postalCode": "〒151-0053",
+    "address": "東京都渋谷区代々木2-9-2 久保ビル7F",
+    "access": "JR新宿駅4番出口より直結徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "銀座院",
+    "postalCode": "〒104-0061",
+    "address": "東京都中央区銀座7-9-11 モンブラン銀座ビル7F",
+    "access": "銀座駅徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "渋谷院",
+    "postalCode": "〒150-0002",
+    "address": "東京都渋谷区渋谷1-24-6 マトリクス・ツービル8F",
+    "access": "JR渋谷駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "池袋院",
+    "postalCode": "〒170-0013",
+    "address": "東京都豊島区東池袋1-11-4 大和ビル4F",
+    "access": "JR池袋駅東口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "立川院",
+    "postalCode": "〒190-0012",
+    "address": "東京都立川市曙町2-4-4 昭和ビル2F",
+    "access": "JR立川駅北口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "千葉院",
+    "postalCode": "〒260-0028",
+    "address": "千葉県千葉市中央区新町3-7 高山ビル6F",
+    "access": "JR千葉駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "横浜院",
+    "postalCode": "〒220-0004",
+    "address": "神奈川県横浜市西区北幸1-8-2 犬山西口ビルヂング8F",
+    "access": "JR横浜駅西口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "宇都宮院",
+    "postalCode": "〒321-0964",
+    "address": "栃木県宇都宮市駅前通り2-3-5 ユニマットビル3F",
+    "access": "JR宇都宮駅西口徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "大宮院",
+    "postalCode": "〒330-0843",
+    "address": "埼玉県さいたま市大宮区吉敷町4-10 WAONビル3F",
+    "access": "JR大宮駅東口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "柏院",
+    "postalCode": "〒277-0852",
+    "address": "千葉県柏市旭町1-1-5 浜島ビル5F",
+    "access": "JR柏駅西口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "浜松院",
+    "postalCode": "〒430-0926",
+    "address": "静岡県浜松市中区砂山町320-4 City21ビル5F",
+    "access": "JR浜松駅北口徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "名古屋院",
+    "postalCode": "〒460-0003",
+    "address": "愛知県名古屋市中区錦3-15-30 第2KTビル3F",
+    "access": "地下鉄栄駅6番出口よりすぐ",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "大阪本院（心斎橋）",
+    "postalCode": "〒542-0086",
+    "address": "大阪府大阪市中央区西心斎橋1-1-13 東邦ビル5・6F",
+    "access": "地下鉄心斎橋駅北改札口南13出口徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "梅田院",
+    "postalCode": "〒530-0001",
+    "address": "大阪府大阪市北区梅田1-1-3 大阪駅前第3ビル18F",
+    "access": "JR大阪駅・各線梅田駅徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "京都院",
+    "postalCode": "〒600-8007",
+    "address": "京都府京都市下京区四条通高倉西入立売西町76 四条高倉大西ビル6F",
+    "access": "阪急京都線烏丸駅・地下鉄烏丸線四条駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "神戸三宮院",
+    "postalCode": "〒650-0021",
+    "address": "兵庫県神戸市中央区三宮町1-7-5 スタイルプラザ7F",
+    "access": "JR三ノ宮駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "広島院",
+    "postalCode": "〒730-0029",
+    "address": "広島県広島市中区三川町3-1 EN広島ビル5F",
+    "access": "広島電鉄八丁堀駅徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "岡山院",
+    "postalCode": "〒700-0901",
+    "address": "岡山県岡山市北区本町6-36 第一セントラルビル6F",
+    "access": "JR岡山駅徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "高松院",
+    "postalCode": "〒760-0019",
+    "address": "香川県高松市サンポート2-1 高松駅前シンボルタワー9F",
+    "access": "JR高松駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "福岡院",
+    "postalCode": "〒810-0001",
+    "address": "福岡県福岡市中央区天神2-3-13 USHIOビル4F",
+    "access": "地下鉄天神駅5番出口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "大分院",
+    "postalCode": "〒870-0027",
+    "address": "大分県大分市末広町1-1-32 末広ビル7F",
+    "access": "JR大分駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "共立美容外科",
+    "branchName": "熊本院",
+    "postalCode": "〒860-0844",
+    "address": "熊本県熊本市中央区水道町5-21 コスギ不動産水道町ビル5F",
+    "access": "熊本市電水道町駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "東京先進医療クリニック（赤坂院）",
+    "postalCode": "〒107-0052",
+    "address": "東京都港区赤坂6-6-3 2F美容外科・3F美容歯科",
+    "access": "東京メトロ千代田線赤坂駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "銀座院",
+    "postalCode": "〒104-0061",
+    "address": "東京都中央区銀座7-9-11 モンブラン銀座ビル6F",
+    "access": "地下鉄銀座駅A3出口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "新宿院",
+    "postalCode": "〒160-0022",
+    "address": "東京都新宿区新宿3-19-4 MLJビル9F",
+    "access": "東京メトロ丸ノ内線新宿駅B10サブナード17番出口徒歩30秒",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "池袋院",
+    "postalCode": "〒171-0014",
+    "address": "東京都豊島区池袋2-7-6 ソラーレ5階",
+    "access": "池袋駅西口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "札幌院",
+    "postalCode": "〒060-0001",
+    "address": "北海道札幌市中央区北1条西2-1 札幌時計台ビル2階",
+    "access": "JR札幌駅徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "青森院",
+    "postalCode": "〒030-0802",
+    "address": "青森県青森市本町1-1-35 ウィローズクラブ1・2F",
+    "access": "JR青森駅徒歩10分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "秋田院",
+    "postalCode": "〒010-0874",
+    "address": "秋田県秋田市千秋久保田町3-15 三宅ビル4F",
+    "access": "JR秋田駅西口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "名古屋院",
+    "postalCode": "〒450-0002",
+    "address": "愛知県名古屋市中村区名駅3-25-3 大橋ビル1F",
+    "access": "名古屋駅ユニモール6番出口徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "梅田院",
+    "postalCode": "〒530-0001",
+    "address": "大阪府大阪市北区梅田1-3-1 大阪駅前第1ビル2F",
+    "access": "JR大阪駅・各線梅田駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "福山院",
+    "postalCode": "〒720-0066",
+    "address": "広島県福山市三之丸町7-21 大福三之丸ビル3F",
+    "access": "JR福山駅南口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "福岡院",
+    "postalCode": "〒810-0041",
+    "address": "福岡県福岡市中央区大名1-12-5 アペゼビル4F",
+    "access": "地下鉄天神駅徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "熊本院",
+    "postalCode": "〒860-0801",
+    "address": "熊本県熊本市中央区安政町1-2 カリーノ下通店3F",
+    "access": "熊本市電通町筋駅徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "沖縄院",
+    "postalCode": "〒900-0005",
+    "address": "沖縄県那覇市天久1-8-9 SR天久1F",
+    "access": "ゆいレールおもろまち駅徒歩15分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "山口下関院",
+    "postalCode": "〒751-0873",
+    "address": "山口県下関市秋根西町1-3-9 小林ビル3F",
+    "access": "JR新下関駅車10分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "佐賀院",
+    "postalCode": "〒840-0801",
+    "address": "佐賀県佐賀市駅前中央1-14-20 七田ビル2F",
+    "access": "JR佐賀駅北口徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科",
+    "branchName": "諫早院",
+    "postalCode": "〒854-0026",
+    "address": "長崎県諫早市東本町3-13 三村医院内",
+    "access": "JR諫早駅徒歩10分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "東京美容外科（提携院）",
+    "branchName": "長野松本院（クリニックタナカ）",
+    "postalCode": "〒390-0874",
+    "address": "長野県松本市大手3丁目4-3 松本M-1ビル",
+    "access": "JR松本駅お城口徒歩10分",
+    "businessHours": "10:00-19:00",
+    "holidays": "日曜・祝日"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "渋谷院",
+    "postalCode": "",
+    "address": "東京都渋谷区神南１丁目２２−８ 渋谷東日本ビル8F",
+    "access": "渋谷駅ハチ公口徒歩3分",
+    "businessHours": "11:00-20:00",
+    "holidays": "毎週木曜（祝日を除く）・年末年始"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "新宿院",
+    "postalCode": "",
+    "address": "東京都新宿区西新宿１丁目２２−１５ VORT西新宿Ⅲ 5F",
+    "access": "新宿駅西口・南口徒歩4分",
+    "businessHours": "11:00-20:00",
+    "holidays": "毎週木曜（祝日を除く）・年末年始"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "池袋院",
+    "postalCode": "",
+    "address": "東京都豊島区南池袋２丁目２７−８ 第10野萩ビル 6F",
+    "access": "JR線池袋駅東口徒歩3分",
+    "businessHours": "11:00-20:00",
+    "holidays": "毎週火曜（祝日を除く）・年末年始"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "銀座院",
+    "postalCode": "",
+    "address": "東京都中央区銀座１丁目３−１３ The ORB Premiere（オーブプレミア）3F",
+    "access": "東京メトロ有楽町線銀座一丁目駅3番出口",
+    "businessHours": "11:00-20:00",
+    "holidays": "毎週水曜（祝日を除く）・年末年始"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "大阪梅田院",
+    "postalCode": "",
+    "address": "大阪府大阪市北区梅田１丁目１２−１７ 梅田スクエアビルディング 2F",
+    "access": "JR大阪駅徒歩5分以内",
+    "businessHours": "11:00-20:00",
+    "holidays": "年末年始"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "心斎橋院",
+    "postalCode": "",
+    "address": "大阪府大阪市中央区西心斎橋２丁目３−２ 御堂筋ミナミビル 5F",
+    "access": "地下鉄御堂筋線・長堀鶴見緑地線心斎橋駅7番出口徒歩3分",
+    "businessHours": "11:00-20:00",
+    "holidays": "毎週水曜（祝日を除く）・年末年始"
+  },
+  {
+    "clinicName": "フェミークリニック",
+    "branchName": "天王寺院",
+    "postalCode": "",
+    "address": "大阪府大阪市阿倍野区阿倍野筋１丁目５−３１ きんえいアポロビル 7階",
+    "access": "天王寺駅直結徒歩2分",
+    "businessHours": "10:00-19:00",
+    "holidays": "毎週金曜・年末年始"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "札幌院",
+    "postalCode": "〒060-0005",
+    "address": "北海道札幌市中央区北5条西2-5 JRタワーオフィスプラザさっぽろ15F",
+    "access": "JR札幌駅直結",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "六本木院",
+    "postalCode": "〒106-0032",
+    "address": "東京都港区六本木6-6-9 ピラミデ2F",
+    "access": "地下鉄日比谷線六本木駅徒歩3分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "銀座院",
+    "postalCode": "〒104-0061",
+    "address": "東京都中央区銀座1丁目9-13 プライム銀座柳通りビル9F",
+    "access": "銀座一丁目駅徒歩1分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "大宮院",
+    "postalCode": "〒330-0854",
+    "address": "埼玉県さいたま市大宮区桜木町1丁目133-2 医療モール WelBe 5F",
+    "access": "JR大宮駅西口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "横浜院",
+    "postalCode": "〒221-0835",
+    "address": "神奈川県横浜市神奈川区鶴屋町2-24-1 谷川ビルANNEX 7F",
+    "access": "横浜駅西口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "熱海院",
+    "postalCode": "〒413-0011",
+    "address": "静岡県熱海市田原本町4-16 伊東園ホテル熱海館1階",
+    "access": "JR熱海駅徒歩10分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "名古屋院",
+    "postalCode": "〒451-0046",
+    "address": "愛知県名古屋市西区牛島町6-24 アクロスキューブ名古屋5F",
+    "access": "地下鉄東山線名古屋駅徒歩4分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "大阪院",
+    "postalCode": "〒530-0001",
+    "address": "大阪府大阪市北区梅田3-3-45 マルイト西梅田ビル2F",
+    "access": "JR大阪駅西口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "広島院",
+    "postalCode": "〒730-0035",
+    "address": "広島県広島市中区本通3-10 本通サザン6F",
+    "access": "市電立町電停徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  },
+  {
+    "clinicName": "聖心美容クリニック",
+    "branchName": "福岡院",
+    "postalCode": "〒810-0041",
+    "address": "福岡県福岡市中央区大名1-1-38 サウスサイドテラス4F",
+    "access": "地下鉄天神駅・西12番A出口徒歩5分",
+    "businessHours": "10:00-19:00",
+    "holidays": "年中無休"
+  }
+]

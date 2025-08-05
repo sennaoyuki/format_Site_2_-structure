@@ -40,8 +40,8 @@ async function convertCsvToJson(csvFilePath, jsonFilePath) {
 
 // 実行
 if (require.main === module) {
-  const csvPath = path.join(__dirname, 'lula_clinics.csv');
-  const jsonPath = path.join(__dirname, 'lula_clinics.json');
+  const csvPath = path.join(__dirname, 'stores.csv');
+  const jsonPath = path.join(__dirname, 'stores.json');
   
   convertCsvToJson(csvPath, jsonPath)
     .then(() => console.log('変換が完了しました'))

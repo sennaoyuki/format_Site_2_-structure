@@ -17,10 +17,10 @@
   "Tips3内容": "夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。",
   "Tips3画像パス": "/images/Tips3.webp",
   "比較表タイトル": "で人気の脂肪溶解注射",
-  "比較表サブタイトル": "クリニックを<span class=accent-text>徹底比較</span>",
+  "比較表サブタイトル": "クリニックを<span class=\"accent-text\">徹底比較</span>",
   "詳細バナー画像パス": "/images/details_header_bannar3.webp",
   "ファビコン画像パス": "/images/favicon.png",
   "フッターサイト名": "医療ダイエット比較.com",
   "フッターコピーライト": "© 2025 医療ダイエット比較.com",
-  "注意事項HTML": "<div class=main-disclaimer><span id=main-arrow style=font-size: 8px; color: rgb(153, 153, 153); transition: transform 0.2s; transform: rotate(180deg);>▼</span><div id=main-content class=main-disclaimer-content style=display: block; padding: 5px; background-color: rgb(252, 252, 252); border-right: 1px solid rgb(240, 240, 240); border-bottom: 1px solid rgb(240, 240, 240); border-left: 1px solid rgb(240, 240, 240);><p>「12ヶ月分 0円」※支払総額193,000円に分割し、12ヶ月分（12回分）の分割金が減額されます。※他キャンペーンとの併用不可※当社指定の信販会社で契約をした方限定※コースのみ契約者適用※契約時の申し出のみ有効。</p></div></div>"
+  "注意事項HTML": "\"<div class=\"\"main-disclaimer\"\"><span id=\"\"main-arrow\"\" style=\"\"font-size: 8px; color: rgb(153"
 }
