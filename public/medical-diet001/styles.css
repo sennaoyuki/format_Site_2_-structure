@@ -1776,18 +1776,15 @@ section.clinic-rankings .ranking-header-banner {
 
 /* クリニックカード */
 .clinic-card {
-    margin: 0%;
     padding: 38px 4px 8px;
-    border-radius: 15px;
+    border-radius: 5px;
     border-width: 1px;
-    border-style: solid;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 310px;
     position: relative;
-    transition: border-color 0.3s ease;
 }
 
 .rank-1 .clinic-card {
@@ -3874,8 +3871,8 @@ section.clinic-rankings .ranking-header-banner {
     
     .clinic-card {
         padding: 38px 4px 8px;
-        border-radius: 15px;
-        border-width: 3px;
+        border-radius: 5px;
+        border-width: 1px;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
