@@ -697,6 +697,17 @@ class DataManager {
         return defaultText;
     }
 
+    // クリニック評価を取得する関数
+    getClinicRating(clinicCode, defaultRating = 4.5) {
+        const rating = this.getClinicText(clinicCode, '総合評価', defaultRating.toString());
+        return parseFloat(rating) || defaultRating;
+    }
+
+    // クリニック名を取得する関数
+    getClinicName(clinicCode, defaultName = 'クリニック') {
+        return this.getClinicText(clinicCode, 'クリニック名', defaultName);
+    }
+
     // 現在選択されているクリニックを判定する関数
     getCurrentClinic() {
         // URLパラメータから判定
@@ -1480,21 +1491,27 @@ class RankingApp {
                 tr.style.backgroundColor = '#fffbdc';
             }
             
-            // 実際のデータ設定
-            const ratings = { 1: 4.9, 2: 4.5, 3: 4.3, 4: 4.1, 5: 3.8 };
-            const achievements = {
-                1: 'ダイエット成功率99％<br>平均13.7kg減',
-                2: 'ダイエット成功率94%',
-                3: 'ダイエット成功率94%',
-                4: '3ヶ月で-10kg以上<br>モニター満足度95%',
-                5: '症例実績30万件以上<br>リピート率90%以上'
+            // 実際のデータ設定 - JSONから取得
+            const clinicCodeMap = { 1: 'dio', 2: 'eminal', 3: 'urara', 4: 'lieto', 5: 'sbc' };
+            const getRatingFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicRating(clinicCode, 4.5) : 4.5;
             };
-            const benefits = {
-                1: '今なら<br>12ヶ月分0円！',
-                2: '今なら<br>最大79%OFF！',
-                3: '最大80%OFF<br>（モニター割引）',
-                4: 'モニタープラン<br>大幅割引あり',
-                5: '期間限定<br>キャンペーン実施中'
+            const getAchievementFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicText(clinicCode, '実績', '豊富な実績') : '豊富な実績';
+            };
+            const getBenefitFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicText(clinicCode, '特典', '特典あり') : '特典あり';
+            };
+            const getPopularPlanFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicText(clinicCode, '人気プラン', '脂肪冷却') : '脂肪冷却';
+            };
+            const getClinicNameFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicName(clinicCode) : 'クリニック';
             };
             const popularPlans = {
                 1: '脂肪冷却',
@@ -1561,12 +1578,12 @@ class RankingApp {
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td class="" style="">
-                    <span class="ranking_evaluation">${ratings[rankNum] || '4.1'}</span><br>
-                    <span class="star5_rating" data-rate="${ratings[rankNum] || '4.1'}"></span>
+                    <span class="ranking_evaluation">${getRatingFromJson(rankNum)}</span><br>
+                    <span class="star5_rating" data-rate="${getRatingFromJson(rankNum)}"></span>
                 </td>
-                <td class="" style="">${achievements[rankNum] || '豊富な実績'}</td>
-                <td class="" style="">${benefits[rankNum] || '特別キャンペーン'}</td>
-                <td class="th-none" style="display: none;">${popularPlans[rankNum] || '人気プラン'}</td>
+                <td class="" style="">${getAchievementFromJson(rankNum)}</td>
+                <td class="" style="">${getBenefitFromJson(rankNum)}</td>
+                <td class="th-none" style="display: none;">${getPopularPlanFromJson(rankNum)}</td>
                 <td class="th-none" style="display: none;">${machines[rankNum] || '医療機器'}</td>
                 <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
                 <td class="th-none" style="display: none;">${dietSupport[rankNum] || '〇'}</td>
@@ -1624,14 +1641,14 @@ class RankingApp {
                     </div>
                 </td>
                 <td>
-                    <div class="rating-cell">${ratings[clinic.rank] || 4.5}</div>
+                    <div class="rating-cell">${getRatingFromJson(clinic.rank)}</div>
                     <div class="rating-stars">
-                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(ratings[clinic.rank] || 4.5))}
-                        ${(ratings[clinic.rank] || 4.5) % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(getRatingFromJson(clinic.rank)))}
+                        ${getRatingFromJson(clinic.rank) % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
                     </div>
                 </td>
-                <td class="achievement-text">${achievements[clinic.rank] || '豊富な実績'}</td>
-                <td class="benefit-text">${benefits[clinic.rank] || '特典あり'}</td>
+                <td class="achievement-text">${getAchievementFromJson(clinic.rank)}</td>
+                <td class="benefit-text">${getBenefitFromJson(clinic.rank)}</td>
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
