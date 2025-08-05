@@ -348,7 +348,7 @@
                                 <th class="th-none" style="display: none;">人気プラン</th>
                                 <th class="th-none" style="display: none;">医療機器</th>
                                 <th class="th-none" style="display: none;">注射治療</th>
-                                <th class="th-none" style="display: none;">食事指導</th>
+                                <th class="th-none" style="display: none;">対応部位</th>
                                 <th class="th-none" style="display: none;">モニター割</th>
                                 <th class="th-none" style="display: none;">返金保証</th>
                                 <th>公式サイト</th>
@@ -429,9 +429,9 @@
                         <div class="main-disclaimer">
                             <button class="main-disclaimer-header" onclick="toggleMainDisclaimer()" style="width: 100%; text-align: left; padding: 8px 12px; background-color: #fafafa; border: 1px solid #f0f0f0; border-radius: 3px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
                                 <span style="font-size: 10px; font-weight: 500; color: #666;">各クリニックの注意事項</span>
-                                <span id="main-arrow" style="font-size: 8px; color: #999; transition: transform 0.2s;">▼</span>
+                                <span id="main-arrow" style="font-size: 8px; color: rgb(153, 153, 153); transition: transform 0.2s; transform: rotate(0deg);">▼</span>
                             </button>
-                            <div id="main-content" class="main-disclaimer-content" style="display: none; padding: 5px; background-color: #fcfcfc; border: 1px solid #f0f0f0; border-top: none; border-radius: 0 0 3px 3px; margin-top: -5px;">
+                            <div id="main-content" class="main-disclaimer-content" style="display: none; padding: 5px; background-color: rgb(252, 252, 252); border-right: 1px solid rgb(240, 240, 240); border-bottom: 1px solid rgb(240, 240, 240); border-left: 1px solid rgb(240, 240, 240); border-image: initial; border-top: none; border-radius: 0px 0px 3px 3px; margin-top: -5px;">
                                 
                                 <!-- 第2段階: ディオクリニック -->
                                 <div class="disclaimer-item">
@@ -917,7 +917,7 @@ text-align: center;
                 
                     <div class="ribbon_point_title2_s">
                         <i class="fas fa-clock point-icon-inline"></i>
-                        <strong>圧倒的な実績＆成功率99％</strong>
+                        <strong id="point1-title">圧倒的な実績＆成功率99％</strong>
                     </div>
                     <div class="ribbon_point_txt">
                         <p style="font-size:14px;">ダイエット成功率99％、平均13.7kg減の実績。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。</p>
@@ -925,7 +925,7 @@ text-align: center;
                     
                     <div class="ribbon_point_title2_s">
                         <i class="fas fa-clock point-icon-inline"></i>
-                        <strong>最新の医療機器を完備</strong>
+                        <strong id="point2-title">最新の医療機器を完備</strong>
                     </div>
                     <div class="ribbon_point_txt">
                         <p style="font-size:14px;">脂肪冷却・医療用EMS・医療ハイフ・医療ラジオ波など、最新の痩身機器を多数完備。一人一人の悩みに合わせた最適な治療を提供します。</p>
@@ -933,7 +933,7 @@ text-align: center;
                     
                     <div class="ribbon_point_title2_s">
                         <i class="fas fa-clock point-icon-inline"></i>
-                        <strong>管理栄養士による完全サポート</strong>
+                        <strong id="point3-title">管理栄養士による完全サポート</strong>
                     </div>
                     <div class="ribbon_point_txt">
                         <p style="font-size:14px;">管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。</p>
@@ -1648,7 +1648,7 @@ text-align: center;
                 const tabColumnsMap = {
                     'tab1': [0, 1, 2, 3, 10], // 総合: クリニック, 総合評価, 実績, 特典, 公式サイト
                     'tab2': [0, 4, 5, 6, 10], // 施術内容: クリニック, 人気プラン, 医療機器, 注射治療, 公式サイト
-                    'tab3': [0, 7, 8, 9, 10]  // サービス: クリニック, 食事指導, モニター割, 返金保証, 公式サイト
+                    'tab3': [0, 7, 8, 9, 10]  // サービス: クリニック, 対応部位, モニター割, 返金保証, 公式サイト
                 };
                 
                 const showIndexes = tabColumnsMap[tabType] || tabColumnsMap['tab1'];
@@ -1835,6 +1835,35 @@ text-align: center;
                     .catch(err => console.log('ServiceWorker registration failed'));
             });
         }
+    </script>
+    
+    <!-- POINTタイトルを動的に更新 -->
+    <script>
+        // JSONデータから動的にPOINTタイトルを取得して更新
+        fetch('./data/clinic-texts.json')
+            .then(response => response.json())
+            .then(data => {
+                // POINT1タイトル
+                const point1Title = document.getElementById('point1-title');
+                if (point1Title && data.dio && data.dio['POINT1タイトル']) {
+                    point1Title.textContent = data.dio['POINT1タイトル'];
+                }
+                
+                // POINT2タイトル
+                const point2Title = document.getElementById('point2-title');
+                if (point2Title && data.dio && data.dio['POINT2タイトル']) {
+                    point2Title.textContent = data.dio['POINT2タイトル'];
+                }
+                
+                // POINT3タイトル
+                const point3Title = document.getElementById('point3-title');
+                if (point3Title && data.dio && data.dio['POINT3タイトル']) {
+                    point3Title.textContent = data.dio['POINT3タイトル'];
+                }
+            })
+            .catch(error => {
+                console.error('Error loading clinic texts:', error);
+            });
     </script>
 </body>
 </html>
