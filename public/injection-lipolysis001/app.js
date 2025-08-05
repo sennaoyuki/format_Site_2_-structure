@@ -834,6 +834,7 @@ class RankingApp {
         this.displayManager = new DisplayManager(this.urlHandler);
         this.dataManager = null;
         this.currentRegionId = null;
+        this.textsInitialized = false;
     }
 
     async init() {
@@ -1176,7 +1177,15 @@ class RankingApp {
             }
 
             // サイト全体のテキストを動的に更新
-            this.updateAllTexts(regionId);
+            // 初回はsetTimeoutで少し遅延させてDOMが完全に構築されるのを待つ
+            if (!this.textsInitialized) {
+                setTimeout(() => {
+                    this.updateAllTexts(regionId);
+                    this.textsInitialized = true;
+                }, 100);
+            } else {
+                this.updateAllTexts(regionId);
+            }
 
             //ランキングの地域名も更新（共通テキストを使用）
             const rankRegionElement = document.getElementById('rank-region-name');
@@ -1259,6 +1268,10 @@ class RankingApp {
     // サイト全体のテキストを動的に更新（クリニック別対応）
     updateAllTexts(regionId) {
         try {
+            console.log('🔄 updateAllTexts called with regionId:', regionId);
+            console.log('📊 CommonTexts loaded:', Object.keys(this.dataManager.commonTexts || {}).length);
+            console.log('📊 ClinicTexts loaded:', Object.keys(this.dataManager.clinicTexts || {}).length);
+            
             const currentClinic = this.dataManager.getCurrentClinic();
             console.log(`🎯 現在のクリニック: ${currentClinic}`);
 
@@ -1563,7 +1576,19 @@ class RankingApp {
             };
             // 対応部位をJSONから取得
             const getBodyPartsFromJson = (rankNum) => {
-                const clinicCode = this.getClinicCodeByRank(rankNum);
+                // clinicsからクリニックデータを取得（indexはrankNum-1）
+                const clinic = clinics[rankNum - 1];
+                if (!clinic) return '顔・二の腕・お腹・太もも・その他';
+                
+                // クリニック名からコードにマッピング
+                const clinicCodeMap = {
+                    'ディオクリニック': 'dio',
+                    'エミナルクリニック': 'eminal',
+                    'ウララクリニック': 'urara',
+                    'リエートクリニック': 'lieto',
+                    '湘南美容クリニック': 'sbc'
+                };
+                const clinicCode = clinicCodeMap[clinic.name] || 'dio';
                 return this.dataManager.getClinicText(clinicCode, '対応部位', '顔・二の腕・お腹・太もも・その他');
             };
             const monitorDiscount = {
@@ -2069,7 +2094,7 @@ class RankingApp {
                     priceValue: '月々4,900円',
                     priceDetail: {
                         '料金': '通常価格24,800円<br>80%OFF 月々4,900円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
+                        '注射治療': this.dataManager.getClinicText('dio', '注射治療', '脂肪溶解注射<br>サンサム注射<br>ダイエット点滴<br>GLP-1<br>サクセンダ'),
                         '目安期間': '-5〜10kg：約3ヶ月<br>-10kg以上：約5ヶ月',
                         '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
@@ -2156,7 +2181,7 @@ class RankingApp {
                     priceValue: '月々9,780円',
                     priceDetail: {
                         '料金': '通常価格45,591円<br>79%0FF<br>月々9,780円',
-                        '施術機械': '脂肪冷却装置/医療用EMS/医療電磁場装置/医療ラジオ波',
+                        '注射治療': this.dataManager.getClinicText('urara', '注射治療', '脂肪溶解注射<br>ダイエット点滴<br>GLP-1<br>オルリスタット<br>ビグアナイド系薬剤'),
                         '目安期間': '-5〜10kg：約3ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
@@ -2233,7 +2258,7 @@ class RankingApp {
                     priceValue: '月々9,600円',
                     priceDetail: {
                         '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
+                        '注射治療': this.dataManager.getClinicText('lieto', '注射治療', '脂肪溶解注射<br>ダイエット美容点滴<br>エクソソーム点滴'),
                         '目安期間': '-5〜10kg：約6ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
@@ -2316,7 +2341,7 @@ class RankingApp {
                     priceValue: 'モニタープラン',
                     priceDetail: {
                         '料金': 'モニタープラン<br>月額制で負担軽減',
-                        '施術機械': '医療ハイフ<br>EMS<br>脂肪冷却',
+                        '注射治療': this.dataManager.getClinicText('eminal', '注射治療', '脂肪溶解注射<br>ダイエット点滴<br>GLP-1'),
                         '目安期間': '3ヶ月コースが基本<br>個人の目標に合わせ調整可',
                         '営業時間': '多くの院で11:00〜21:00<br>店舗により異なる',
                         '対応部位': '全身対応<br>お腹・二の腕・太もも・顔',
@@ -2393,7 +2418,7 @@ class RankingApp {
                     priceValue: '1エリア 29,800円～',
                     priceDetail: {
                         '料金': 'クールスカルプティング®<br>1エリア 29,800円～',
-                        '施術機械': 'クールスカルプティング®エリート<br>トゥルースカルプiD<br>脂肪溶解リニアハイフ<br>オンダリフト',
+                        '注射治療': this.dataManager.getClinicText('sbc', '注射治療', '脂肪溶解注射<br>GLP-1<br>ダイエット点滴'),
                         '目安期間': '施術内容による<br>ダウンタイムほとんどなし',
                         '営業時間': '店舗により異なる<br>多くは10:00〜19:00',
                         '対応部位': 'お腹・二の腕・太もも・顔<br>全身の気になる部位',
