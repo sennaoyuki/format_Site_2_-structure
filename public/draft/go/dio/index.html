@@ -92,7 +92,7 @@
             まもなく自動的にディオクリニックの公式サイトへリダイレクトします。<br>
             移動しない場合は下のボタンをクリックしてください。
         </p>
-        <div class="countdown" id="countdown">3秒後に移動します...</div>
+        <div class="countdown" id="countdown">3.2秒後に移動します...</div>
         <a href="#" id="manualLink" class="manual-link" style="display: none;">ディオクリニック公式サイトへ</a>
     </div>
 
@@ -169,14 +169,14 @@
         }
         
         // カウントダウン機能
-        let countdown = 3;
+        let countdown = 3.2;
         const countdownElement = document.getElementById('countdown');
         const manualLink = document.getElementById('manualLink');
         
         const timer = setInterval(() => {
-            countdown--;
+            countdown -= 0.1;
             if (countdown > 0) {
-                countdownElement.textContent = `${countdown}秒後に移動します...`;
+                countdownElement.textContent = `${Math.ceil(countdown * 10) / 10}秒後に移動します...`;
             } else {
                 countdownElement.textContent = '移動中...';
                 clearInterval(timer);
@@ -210,7 +210,7 @@
                     }, 3000)
                 }, 500);
             }
-        }, 1000);
+        }, 100);
         
         // 5秒後に手動リンクを表示（何らかの理由でリダイレクトが失敗した場合）
         setTimeout(() => {
