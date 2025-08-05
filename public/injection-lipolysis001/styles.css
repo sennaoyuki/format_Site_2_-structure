@@ -270,6 +270,11 @@ section, main, header, footer, nav, aside, article {
     padding-right: 40px;
 }
 
+/* clinic-card border update for medical-diet001 style matching */
+.clinic-card {
+    border: 1px solid #E0E0E0 !important;
+}
+
 /* 全てのselect要素の矢印を黒色に統一 */
 select {
     appearance: none;
@@ -1776,24 +1781,21 @@ section.clinic-rankings .ranking-header-banner {
 
 /* クリニックカード */
 .clinic-card {
-    margin: 0%;
     padding: 38px 4px 8px;
-    border-radius: 15px;
-    border-width: 1px;
-    border-style: solid;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    min-height: 310px;
+    border-radius: 5px;
+    border: 1px solid #E0E0E0;
+    width: 100%;
+    background-color: #FFFFFF;
+    text-align: center;
+    display: inline-block;
     position: relative;
-    transition: border-color 0.3s ease;
 }
 
 .rank-1 .clinic-card {
     border-color: #E0E0E0;
     background-color: #FFFFFF;
     text-align: center;
+    background: rgb(247 255 0 / 21%);
 }
 
 .rank-2 .clinic-card {
@@ -3873,13 +3875,12 @@ section.clinic-rankings .ranking-header-banner {
     
     .clinic-card {
         padding: 38px 4px 8px;
-        border-radius: 15px;
-        border-width: 3px;
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-        min-height: 310px;
+        border-radius: 5px;
+        border: 1px solid #E0E0E0;
+        width: 100%;
+        background-color: #FFFFFF;
+        text-align: center;
+        display: inline-block;
         position: relative;
     }
     
@@ -5229,7 +5230,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 5px 0px;
         font-size: 0.7rem;
         gap: 0px;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     
     .clinic-card .btn.btn_second_primary .bt_s {
