@@ -1794,6 +1794,7 @@ section.clinic-rankings .ranking-header-banner {
     border-color: #E0E0E0;
     background-color: #FFFFFF;
     text-align: center;
+    background: rgb(247 255 0 / 21%);
 }
 
 .rank-2 .clinic-card {
@@ -1833,7 +1834,7 @@ section.clinic-rankings .ranking-header-banner {
     padding: 3px 10px;
     font-size: 0.8rem;
     margin-bottom: 5px;
-    border-radius: 4px;
+    border-radius: 0px;
     margin-top: 30px;
     display: inline-block;
     font-weight: 700;
@@ -3887,7 +3888,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 3px 10px;
         font-size: 0.8rem;
         margin-bottom: 5px;
-        border-radius: 12px;
+        border-radius: 0px;
         margin-top: 30px;
     }
     
@@ -5229,7 +5230,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 5px 0px;
         font-size: 0.7rem;
         gap: 0px;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     
     .clinic-card .btn.btn_second_primary .bt_s {
