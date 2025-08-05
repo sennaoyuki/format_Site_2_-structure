@@ -1276,7 +1276,7 @@ class RankingApp {
             console.log(`🎯 現在のクリニック: ${currentClinic}`);
 
             // ページタイトルの更新
-            const pageTitle = this.dataManager.getClinicText(currentClinic, 'サイトタイトル', '2025年決定版｜脂肪溶解注射比較ランキング');
+            const pageTitle = this.dataManager.getClinicText(currentClinic, 'サイトタイトル', '2025年全国版｜脂肪溶解注射比較ランキング');
             document.title = pageTitle;
             console.log(`✅ Page title updated: ${pageTitle}`);
 

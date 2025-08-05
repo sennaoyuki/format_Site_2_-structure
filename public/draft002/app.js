@@ -1,3 +1,14 @@
+// 症例画像を取得するヘルパー関数
+function getCaseImages(clinicSlug) {
+    // 全てのクリニックで同じ症例画像を表示するよう修正
+    const caseImages = [
+        { src: '/images/clinics/dio/dio_case/dio_case01.jpg', alt: '症例写真1' },
+        { src: '/images/clinics/dio/dio_case/dio_case02.jpg', alt: '症例写真2' },
+        { src: '/images/clinics/dio/dio_case/dio_case03.jpg', alt: '症例写真3' }
+    ];
+    return caseImages;
+}
+
 // クリニックURLを中央管理から取得
 function getClinicUrlFromConfig(clinicId) {
     const clinicMap = {
@@ -1132,6 +1143,11 @@ class RankingApp {
                 this.setupMapAccordions();
             }, 100);
 
+            // カルーセルの初期化
+            if (typeof initCarousels === 'function') {
+                setTimeout(initCarousels, 200); // 少し遅延させて実行
+            }
+
             // エラーメッセージを隠す
             this.displayManager.hideError();
         } catch (error) {
@@ -2193,7 +2209,29 @@ class RankingApp {
             // 正しいクリニックIDに基づいてデータを取得し、地域IDを追加
             const data = clinicDetailDataMap[correctClinicId] || clinicDetailDataMap['1'];
             data.regionId = regionId;
-            
+
+            const clinicMap = { '1': 'dio', '2': 'eminal', '3': 'urara', '4': 'lieto', '5': 'sbc' };
+            const clinicSlug = clinicMap[clinic.id];
+            const caseImages = getCaseImages(clinicSlug);
+            let caseCarouselHtml = '';
+
+            if (caseImages && caseImages.length > 0) {
+                caseCarouselHtml = `
+                    <div class="clinic-points-section">
+                        <h4 class="section-title">CASE</h4>
+                        <div class="case-slider">
+                            <div class="case-carousel-container">
+                                ${caseImages.map(image => `
+                                    <div class="case-slide">
+                                        <img src="${image.src}" alt="${image.alt}" loading="lazy">
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+
             // 5番目のクリニック（湘南美容クリニック）の場合、bannerを追加
             if (clinicId === '5' && !data.banner) {
                 data.banner = '/images/clinics/sbc/sbc_detail_bnr.webp';
@@ -2296,8 +2334,9 @@ class RankingApp {
                         </div>
                     </div>
                 </div>
-                
-                
+
+                ${caseCarouselHtml}
+
                 <!-- 口コミ -->
                 <div class="reviews-section">
                     <h4 class="section-title-review">REVIEW</h4>
@@ -2585,6 +2624,11 @@ class RankingApp {
             detailsList.appendChild(detailItem);
             console.log('Detail item appended. Current HTML length:', detailsList.innerHTML.length);
         });
+
+        // カルーセルの初期化
+        if (typeof initCarousels === 'function') {
+            setTimeout(initCarousels, 100); // DOMの描画を待ってから初期化
+        }
     }
     
     // 店舗表示のHTML生成（MAX3店舗 + アコーディオン）
