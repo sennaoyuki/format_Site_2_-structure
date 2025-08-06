@@ -5,27 +5,20 @@ class SimpleCaseCarousel {
         this.container = container;
         this.carousel = container.querySelector('.case-carousel-container');
         this.slides = container.querySelectorAll('.case-slide');
-        this.dots = [];
+        this.prevBtn = container.querySelector('.case-nav-prev');
+        this.nextBtn = container.querySelector('.case-nav-next');
+        this.dots = container.querySelectorAll('.case-dot');
         this.currentIndex = 0;
-        
-        // デバッグ用
-        console.log('SimpleCaseCarousel initializing:', {
-            container: this.container,
-            slides: this.slides.length,
-            carousel: this.carousel
-        });
-        
+
         if (!this.carousel || this.slides.length === 0) {
             console.error('SimpleCaseCarousel: Missing required elements');
             return;
         }
-        
+
         this.init();
     }
-    
+
     init() {
-        this.createDots();
-        this.createNavigation();
         this.setupEventListeners();
         this.updateActiveStates();
     }
@@ -33,12 +26,6 @@ class SimpleCaseCarousel {
     createDots() {
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'case-dots';
-        // スタイルを直接指定して中央揃えを強制
-        dotsContainer.style.display = 'flex';
-        dotsContainer.style.justifyContent = 'center';
-        dotsContainer.style.gap = '8px';
-        dotsContainer.style.marginTop = '15px';
-        dotsContainer.style.padding = '0 20px';
         
         this.slides.forEach((_, index) => {
             const dot = document.createElement('button');
@@ -67,6 +54,19 @@ class SimpleCaseCarousel {
     }
     
     setupEventListeners() {
+        if (this.prevBtn) {
+            this.prevBtn.addEventListener('click', () => this.prevSlide());
+        }
+        if (this.nextBtn) {
+            this.nextBtn.addEventListener('click', () => this.nextSlide());
+        }
+        this.dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                const index = parseInt(e.target.dataset.index);
+                this.goToSlide(index);
+            });
+        });
+
         // スクロール位置の監視
         let scrollTimeout;
         this.carousel.addEventListener('scroll', () => {

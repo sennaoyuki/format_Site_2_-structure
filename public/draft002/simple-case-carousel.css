@@ -64,13 +64,6 @@ body .case-slider .case-slide {
 
 /* 画像スタイル */
 .case-slide img {
-    width: auto;
-    height: auto;
-    max-width: 90%;
-    max-height: 300px;
-    object-fit: contain;
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     transition: transform 0.3s ease;
 }
 

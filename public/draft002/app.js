@@ -1913,7 +1913,7 @@ class RankingApp {
                         ctaUrl: getClinicUrlFromConfig('1'),
                         displayUrl: 'https://dioclinic.jp/',
                         ctaText: 'ディオクリニックの公式サイト',
-                        microcopy: '＼症例数50万件以上の実績で安心／'
+                        microcopy: '＼外来実績50万件以上の実績で安心／'
                     }
                 },
                 '2': { // ウララクリニック
@@ -2255,13 +2255,18 @@ class RankingApp {
                 caseCarouselHtml = `
                     <div class="clinic-points-section">
                         <h4 class="section-title">CASE</h4>
-                        <div class="case-slider">
+                        <div class="case-slider" style="position: relative;">
                             <div class="case-carousel-container" style="display: flex !important; overflow-x: auto !important; scroll-snap-type: x mandatory !important; scrollbar-width: none !important; -ms-overflow-style: none !important;">
                                 ${caseImages.map(image => `
-                                    <div class="case-slide" style="flex: 0 0 100% !important; scroll-snap-align: center !important;">
-                                        <img src="${image.src}" alt="${image.alt}" loading="lazy" style="width: 90% !important; margin: 0 auto !important; display: block !important;">
+                                    <div class="case-slide" style="flex: 0 0 100% !important; scroll-snap-align: center !important; padding: 0 2% !important;">
+                                        <img src="${image.src}" alt="${image.alt}" loading="lazy" style="width: auto !important; height: auto !important; max-width: 100% !important; max-height: 300px !important; object-fit: contain !important; margin: 0 auto !important; display: block !important; padding: 0 !important; box-sizing: content-box !important; padding-top: 2% !important;">
                                     </div>
                                 `).join('')}
+                            </div>
+                            <button class="case-nav case-nav-prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">&lt;</button>
+                            <button class="case-nav case-nav-next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">&gt;</button>
+                            <div class="case-dots" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex !important; justify-content: center !important; gap: 10px !important; margin-top: 20px !important; padding: 0px 20px !important; list-style: none !important;">
+                                ${caseImages.map((_, index) => `<button class="case-dot" data-index="${index}" style="width: 12px; height: 12px; border-radius: 50%; border: none; background: #ccc; cursor: pointer;"></button>`).join('')}
                             </div>
                         </div>
                     </div>
@@ -2936,7 +2941,7 @@ class RankingApp {
                             <p>「12ヶ月分無料」※支払総額の12ヶ月分が無料※他キャンペーンとの併用不可</p>
                             <p>「モニター75%OFF」※1～3：他キャンペーンと併用不可／契約時の申し出のみ有効コースご契約者様限定、但し一部コースを除く※3：医師の判断で適用できない場合がございます。</p>
                             <p>「痩せなかったら全額返金保証」※他のキャンペーンの併用不可※初回ご来院時測定体重を元に目標体重を設定し、減量率が50%未満の場合、契約終了を条件に全額返金の適用を受けられます※契約時に同意書契約を結んだ場合のみ適用※落ち幅3.0%での計算に限る※中途解約手数料なし。</p>
-                            <p>下記に当てはまる方は施術不可の為、施術が受けれられません。体重40kg以下/BMI18.5以下/19歳以下70歳以上/がん/妊娠中/授乳中/産後3ヶ月以内の方</p>
+                            <p>「外来実績50万件」※2020年11月〜2025年4月の累計数</p>
                         </div>
                     </div>
                 </div>

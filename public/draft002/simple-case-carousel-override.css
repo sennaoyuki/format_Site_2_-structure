@@ -12,17 +12,16 @@
 }
 
 /* 1. 古いSlickルールを完全に無効化 */
-.case-slider,
-.case-slider[class*="slick"],
-.case-slider:not(.slick-initialized) {
+.case-slider, .case-slider[class*="slick"], .case-slider:not(.slick-initialized) {
     position: relative !important;
     width: 100% !important;
     max-width: 100% !important;
     margin: 0 auto !important;
     background: white !important;
-    border-radius: 8px !important;
+    border-radius: 0px !important;
     overflow: hidden !important;
-    text-align: left !important; /* 中央寄せを解除 */
+    border: 1px solid #d9d9d9;
+    text-align: left !important;
 }
 
 /* 2. すべての直下のdivを表示 */
@@ -36,21 +35,17 @@
 
 /* 根本対策: セレクタの優先度を最大化して競合に勝つ */
 body .clinic-details-section .detail-item .case-carousel-container {
-    display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;
-    overflow-x: auto !important;
     overflow-y: hidden !important;
-    scroll-snap-type: x mandatory !important;
     scroll-behavior: smooth !important;
     -webkit-overflow-scrolling: touch !important;
     width: 100% !important;
     height: auto !important;
     gap: 0 !important;
-    padding: 20px 0 !important;
+    padding: 0px 0px 40px !important;
     margin: 0 !important;
     position: relative !important;
-    scrollbar-width: none !important;
     -ms-overflow-style: none !important;
 }
 
@@ -58,8 +53,8 @@ body .clinic-details-section .detail-item .case-carousel-container {
     display: none !important;
 }
 
-/* 4. 各スライドを確実に横並びに */
-body .case-slider .case-slide {
+/* 根本対策: セレクタの優先度を最大化して競合に勝つ */
+body .clinic-details-section .detail-item .case-slide {
     flex: 0 0 100% !important;
     flex-shrink: 0 !important;
     scroll-snap-align: center !important;
@@ -73,48 +68,13 @@ body .case-slider .case-slide {
     min-width: 100% !important;
 }
 
-/* 5. 画像のスタイル */
-.case-slider .case-slide img, .case-carousel-container .case-slide img {
-    width: auto !important;
-    height: auto !important;
-    max-width: 90% !important;
-    max-height: 300px !important;
-    object-fit: contain !important;
-    margin: 0 auto !important;
-    display: block !important;
-    padding: 0 !important;
-    box-sizing: content-box !important;
-    /* border-radius: 0px !important; */
-    /* box-shadow: 0 4px 20px rgba(0,0,0,0.1) !important; */
+body .clinic-details-section .detail-item .case-slider .case-slide img, 
+body .clinic-details-section .detail-item .case-carousel-container .case-slide img {
 }
 
-/* styles.cssの画像ルールを上書き */
-.case-slider img {
-    width: auto !important;
-    max-width: 90% !important;
-}
-
-/* 6. Slick関連のすべてのクラスを無効化 */
-.case-slider .slick-list,
-.case-slider .slick-track,
-.case-slider .slick-slide,
-.case-slider .slick-dots,
-.case-slider .slick-prev,
-.case-slider .slick-next,
-.case-slider .slick-initialized,
-.case-slider[class*="slick"] {
-    all: unset !important;
-    display: block !important;
-}
-
-/* 7. ドットとナビゲーションのスタイル */
-.case-dots {
-    display: flex !important;
-    justify-content: center !important;
-    gap: 8px !important;
-    margin-top: 0px !important;
-    padding: 0 20px !important;
-    list-style: none !important;
+body .clinic-details-section .detail-item .case-dots {
+    left: 50%;
+    width: 100%;
 }
 
 .case-dot {
@@ -159,17 +119,15 @@ body .case-slider .case-slide {
 }
 
 .case-nav-prev {
-    left: 10px !important;
 }
 
 .case-nav-next {
-    right: 10px !important;
 }
 
 /* CASEセクションのスタイル */
 .clinic-points-section {
     margin: 20px 0 !important;
-    padding: 20px !important;
+    padding: 2% !important;
     background: #fff !important;
     border-radius: 8px !important;
 }
@@ -194,9 +152,9 @@ body .case-slider .case-slide {
     }
     
     .case-nav {
-        width: 35px !important;
-        height: 35px !important;
-        font-size: 16px !important;
+        width: 15px !important;
+        height: 15px !important;
+        font-size: 14px !important;
     }
 }
 
@@ -224,9 +182,9 @@ body .case-slider .case-slide {
     }
     
     .case-nav {
-        width: 30px !important;
-        height: 30px !important;
-        font-size: 14px !important;
+        width: 15px !important;
+        height: 15px !important;
+        font-size: 10px !important;
     }
 }
 
