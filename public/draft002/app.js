@@ -2256,10 +2256,10 @@ class RankingApp {
                     <div class="clinic-points-section">
                         <h4 class="section-title">CASE</h4>
                         <div class="case-slider">
-                            <div class="case-carousel-container">
+                            <div class="case-carousel-container" style="display: flex !important; overflow-x: auto !important; scroll-snap-type: x mandatory !important; scrollbar-width: none !important; -ms-overflow-style: none !important;">
                                 ${caseImages.map(image => `
-                                    <div class="case-slide">
-                                        <img src="${image.src}" alt="${image.alt}" loading="lazy">
+                                    <div class="case-slide" style="flex: 0 0 100% !important; scroll-snap-align: center !important;">
+                                        <img src="${image.src}" alt="${image.alt}" loading="lazy" style="width: 90% !important; margin: 0 auto !important; display: block !important;">
                                     </div>
                                 `).join('')}
                             </div>
