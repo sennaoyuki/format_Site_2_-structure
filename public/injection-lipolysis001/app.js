@@ -1327,6 +1327,14 @@ class RankingApp {
                 console.log(`✅ MV SVG Text 1 updated: ${svgText1}`);
             }
 
+            // SVGテキスト2の更新（共通テキスト）
+            const svgText2Element = document.querySelector('#mv-appeal1-text text');
+            if (svgText2Element) {
+                const svgText2 = this.dataManager.getCommonText('MVSVGテキスト2', 'ランキング');
+                svgText2Element.textContent = svgText2;
+                console.log(`✅ MV SVG Text 2 updated: ${svgText2}`);
+            }
+
             // ランキングバナーのalt属性更新（共通テキスト）
             const rankingBanner = document.querySelector('.ranking-banner-image');
             if (rankingBanner) {
