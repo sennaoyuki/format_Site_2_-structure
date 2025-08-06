@@ -2814,6 +2814,20 @@ class RankingApp {
             return `${imagesPath}/clinics/${clinicName}/${clinicName}-logo.webp`;
         }
         
+        // ディオクリニックの特定店舗画像を使用
+        if (clinicName === 'dio') {
+            const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
+            const storeImages = {
+                1: 'yurakucho.jpg',  // 銀座有楽町院
+                2: 'sendai.jpg',     // 仙台院  
+                3: 'sapporo.jpg'     // 札幌院
+            };
+            
+            if (storeImages[storeNumber]) {
+                return `${imagesPath}/clinics/dio/stores/${storeImages[storeNumber]}`;
+            }
+        }
+        
         // 店舗番号を3桁の文字列に変換
         const paddedNumber = String(storeNumber).padStart(3, '0');
         
