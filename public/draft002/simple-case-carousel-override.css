@@ -34,8 +34,8 @@
     opacity: 1 !important;
 }
 
-/* 根本対策: セレクタの優先度を上げて競合に勝つ */
-body .clinic-details-section .case-carousel-container {
+/* 根本対策: セレクタの優先度を最大化して競合に勝つ */
+body .clinic-details-section .detail-item .case-carousel-container {
     display: flex !important;
     flex-direction: row !important;
     flex-wrap: nowrap !important;

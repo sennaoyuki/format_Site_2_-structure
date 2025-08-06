@@ -1,3 +1,38 @@
+function injectCarouselStyles() {
+    const styleId = 'dynamic-carousel-styles';
+    if (document.getElementById(styleId)) {
+        return; // スタイルは既に注入済み
+    }
+
+    const styles = `
+        .case-carousel-container {
+            display: flex !important;
+            overflow-x: auto !important;
+            scroll-snap-type: x mandatory !important;
+            scrollbar-width: none !important;
+            -ms-overflow-style: none !important;
+        }
+        .case-carousel-container::-webkit-scrollbar {
+            display: none !important;
+        }
+        .case-slide {
+            flex: 0 0 100% !important;
+            scroll-snap-align: center !important;
+        }
+        .case-slide img {
+            width: 90% !important;
+            margin: 0 auto !important;
+            display: block !important;
+        }
+    `;
+
+    const styleSheet = document.createElement("style");
+    styleSheet.id = styleId;
+    styleSheet.type = "text/css";
+    styleSheet.innerText = styles;
+    document.head.appendChild(styleSheet);
+}
+
 // 症例画像を取得するヘルパー関数
 function getCaseImages(clinicSlug) {
     // 全てのクリニックで同じ症例画像を表示するよう修正
@@ -1728,6 +1763,7 @@ class RankingApp {
 
     // クリニック詳細の更新
     updateClinicDetails(clinics, ranking, regionId) {
+        injectCarouselStyles(); // ★スタイルを注入
         console.log('updateClinicDetails called:', { clinics, ranking, regionId });
         const detailsList = document.getElementById('clinic-details-list');
         if (!detailsList) {
