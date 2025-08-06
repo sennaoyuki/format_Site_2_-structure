@@ -33,6 +33,12 @@ class SimpleCaseCarousel {
     createDots() {
         const dotsContainer = document.createElement('div');
         dotsContainer.className = 'case-dots';
+        // スタイルを直接指定して中央揃えを強制
+        dotsContainer.style.display = 'flex';
+        dotsContainer.style.justifyContent = 'center';
+        dotsContainer.style.gap = '8px';
+        dotsContainer.style.marginTop = '15px';
+        dotsContainer.style.padding = '0 20px';
         
         this.slides.forEach((_, index) => {
             const dot = document.createElement('button');
