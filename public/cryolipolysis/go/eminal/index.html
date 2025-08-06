@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>エミナルクリニック公式サイトへ移動中...</title>
+    <meta name="description" content="エミナルクリニックの公式サイトへリダイレクトしています。">
+    <!-- リファラーポリシーを明示的に設定（パラメータ含む完全URL送信） -->
+    <meta name="referrer" content="unsafe-url">
+    <!-- 追加のリファラー強制送信設定 -->
+    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
+    <link rel="icon" type="image/png" href="/images/favicon.png">
+    <!-- Analytics -->
+    <script src="/analytics.js"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #e9f2f9 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            color: #333;
+        }
+        .redirect-container {
+            text-align: center;
+            padding: 40px;
+            max-width: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .clinic-logo {
+            width: 200px;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        .redirect-message {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #4bc0c0;
+        }
+        .redirect-description {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+        .loading-animation {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4bc0c0;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .manual-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            background: #4bc0c0;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+        .manual-link:hover {
+            background: #3da9a9;
+        }
+        .countdown {
+            font-size: 16px;
+            color: #666;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <img src="/images/clinics/eminal/eminal-logo.webp" alt="エミナルクリニック" class="clinic-logo">
+        <div class="loading-animation"></div>
+        <h1 class="redirect-message">エミナルクリニック公式サイトへ移動中...</h1>
+        <p class="redirect-description">
+            まもなく自動的にエミナルクリニックの公式サイトへリダイレクトします。<br>
+            移動しない場合は下のボタンをクリックしてください。
+        </p>
+        <div class="countdown" id="countdown">3秒後に移動します...</div>
+        <a href="#" id="manualLink" class="manual-link" style="display: none;">エミナルクリニック公式サイトへ</a>
+    </div>
+
+    <!-- Centralized Clinic URLs -->
+    <script src="../../config/clinic-urls.js"></script>
+    
+    <script>
+        // URLパラメータを取得
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        // ベースURL（中央管理から取得）
+        const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.eminal ? 
+            window.CLINIC_URLS.eminal.baseUrl : 
+            'https://eminal-clinic.jp/lp01/medicaldiet_03/?sokyucd=5003';
+        
+        // パラメータを引き継いでリダイレクトURLを構築
+        const redirectUrl = new URL(processedBaseUrl);
+        
+        // 追跡用パラメータをparam4に統合
+        const trackingParams = {
+            click_section: urlParams.get('click_section') || '',
+            click_clinic: urlParams.get('click_clinic') || '',
+            source_page: urlParams.get('source_page') || '',
+            region_id: urlParams.get('region_id') || '013',
+            timestamp: new Date().toISOString()
+        };
+        
+        // param4として追跡データをエンコード
+        redirectUrl.searchParams.set('param4', encodeURIComponent(JSON.stringify(trackingParams)));
+        
+        // 重要なパラメータは個別に引き継ぎ（アフィリエイト側で必須の場合）
+        redirectUrl.searchParams.set('gclid', gclid || '');
+        redirectUrl.searchParams.set('region_id', trackingParams.region_id);
+        
+        // UTMパラメータなどその他のパラメータも引き継ぎ
+        const preserveParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        preserveParams.forEach(param => {
+            const value = urlParams.get(param);
+            if (value) {
+                redirectUrl.searchParams.set(param, value);
+            }
+        })
+        
+        const finalUrl = redirectUrl.toString();
+        
+        // 現在のページURL（パラメータ付き）をログ出力
+        const currentPageWithParams = window.location.href;
+        console.log('🔍 送信予定のリファラー:', currentPageWithParams);
+        console.log('🎯 最終遷移先:', finalUrl);
+        
+        // 手動リンクにもURLを設定
+        document.getElementById('manualLink').href = finalUrl;
+        
+        // アナリティクスにクリックイベントを送信
+        if (window.trackEvent) {
+            trackEvent('clinic_redirect', {
+                clinic_name: 'eminal',
+                destination_url: finalUrl,
+                source_page: document.referrer || 'direct'
+            });
+        }
+        
+        // カウントダウン機能
+        let countdown = 3;
+        const countdownElement = document.getElementById('countdown');
+        const manualLink = document.getElementById('manualLink');
+        
+        const timer = setInterval(() => {
+            countdown--;
+            if (countdown > 0) {
+                countdownElement.textContent = `${countdown}秒後に移動します...`;
+            } else {
+                countdownElement.textContent = '移動中...';
+                clearInterval(timer);
+                
+                // CATSにパラメータ付きリファラーを確実に送信
+                setTimeout(() => {
+                    console.log('📤 リダイレクト実行:', {
+                        from: window.location.href,
+                        to: finalUrl,
+                        referrerPolicy: document.querySelector('meta[name="referrer"]')?.content
+                    });
+                    
+                    // リダイレクトフラグを設定
+                    let redirected = false;
+                    
+                    // 方法1: window.location.hrefでのリダイレクト
+                    try {
+                        window.location.href = finalUrl;
+                        redirected = true;
+                        console.log('✅ リダイレクト実行');
+                    } catch (e) {
+                        console.error('❌ リダイレクトエラー:', e);
+                    }
+                    
+                    // フォールバック: 3秒後にまだページにいる場合のみ
+                    setTimeout(() => {
+                        if (!redirected && window.location.href.includes('/go/')) {
+                            console.log('⚠️ フォールバックリダイレクト実行');
+                            window.location.replace(finalUrl);
+                        }
+                    }, 3000)
+                }, 500);
+            }
+        }, 1000);
+        
+        // 5秒後に手動リンクを表示（何らかの理由でリダイレクトが失敗した場合）
+        setTimeout(() => {
+            manualLink.style.display = 'inline-block';
+            countdownElement.textContent = '自動移動に時間がかかっています。下のボタンをクリックしてください。';
+        }, 5000);
+    </script>
+</body>
+</html>
