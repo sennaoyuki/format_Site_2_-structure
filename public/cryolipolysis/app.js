@@ -2112,13 +2112,13 @@ class RankingApp {
                     priceMain: '医療痩身コース',
                     priceValue: '月々4,900円',
                     priceDetail: {
-                        '料金': '通常価格24,800円<br>80%OFF 月々4,900円',
-                        '注射治療': this.dataManager.getClinicText('dio', '注射治療', '脂肪溶解注射<br>サンサム注射<br>ダイエット点滴<br>GLP-1<br>サクセンダ'),
-                        '目安期間': '-5〜10kg：約3ヶ月<br>-10kg以上：約5ヶ月',
-                        '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
-                        '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://dioclinic.jp/'
+                        '料金': this.dataManager.getClinicText('dio', '料金', '通常価格24800円<br>80%OFF 月々4900円'),
+                        '医療機器': this.dataManager.getClinicText('dio', '医療機器', '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波'),
+                        '目安期間': this.dataManager.getClinicText('dio', '目安期間', '-5〜10kg：約3ヶ月<br>-10kg以上：約5ヶ月'),
+                        '営業時間': this.dataManager.getClinicText('dio', '営業時間', '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始'),
+                        '対応部位': this.dataManager.getClinicText('dio', '対応部位', '下腹部/二の腕/腰/太もも/背中など/脂肪が付きやすい部位'),
+                        '店舗': this.dataManager.getClinicText('dio', '店舗', '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡'),
+                        '公式サイト': this.dataManager.getClinicText('dio', '公式サイトURL', 'https://dioclinic.jp/')
                     },
                     vioPlans: {
                         vioOnly: {
@@ -2200,7 +2200,7 @@ class RankingApp {
                     priceValue: '月々9,780円',
                     priceDetail: {
                         '料金': '通常価格45,591円<br>79%0FF<br>月々9,780円',
-                        '注射治療': this.dataManager.getClinicText('urara', '注射治療', '脂肪溶解注射<br>ダイエット点滴<br>GLP-1<br>オルリスタット<br>ビグアナイド系薬剤'),
+                        '医療機器': this.dataManager.getClinicText('urara', '医療機器', '脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波'),
                         '目安期間': '-5〜10kg：約3ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
@@ -2277,7 +2277,7 @@ class RankingApp {
                     priceValue: '月々9,600円',
                     priceDetail: {
                         '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
-                        '注射治療': this.dataManager.getClinicText('lieto', '注射治療', '脂肪溶解注射<br>ダイエット美容点滴<br>エクソソーム点滴'),
+                        '医療機器': this.dataManager.getClinicText('lieto', '医療機器', '脂肪冷却<br>医療用EMS<br>医療ハイフ'),
                         '目安期間': '-5〜10kg：約6ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
@@ -2359,13 +2359,13 @@ class RankingApp {
                     priceMain: '3ヶ月コース特別モニター',
                     priceValue: 'モニタープラン',
                     priceDetail: {
-                        '料金': 'モニタープラン<br>月額制で負担軽減',
-                        '注射治療': this.dataManager.getClinicText('eminal', '注射治療', '脂肪溶解注射<br>ダイエット点滴<br>GLP-1'),
-                        '目安期間': '3ヶ月コースが基本<br>個人の目標に合わせ調整可',
-                        '営業時間': '多くの院で11:00〜21:00<br>店舗により異なる',
-                        '対応部位': '全身対応<br>お腹・二の腕・太もも・顔',
-                        '店舗': '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）',
-                        '公式サイト': 'https://eminal-clinic.jp/'
+                        '料金': this.dataManager.getClinicText('eminal', '料金', 'モニタープラン<br>月額制で負担軽減'),
+                        '医療機器': this.dataManager.getClinicText('eminal', '医療機器', '脂肪冷却<br>医療用EMS<br>ハイフ'),
+                        '目安期間': this.dataManager.getClinicText('eminal', '目安期間', '3ヶ月コースが基本<br>個人の目標に合わせ調整可'),
+                        '営業時間': this.dataManager.getClinicText('eminal', '営業時間', '多くの院で11:00〜21:00<br>店舗により異なる'),
+                        '対応部位': this.dataManager.getClinicText('eminal', '対応部位', 'お腹/太もも/二の腕/背中/顔下など'),
+                        '店舗': this.dataManager.getClinicText('eminal', '店舗', '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）'),
+                        '公式サイト': this.dataManager.getClinicText('eminal', '公式サイトURL', 'https://eminal-clinic.jp/')
                     },
                     vioPlans: {
                         vioOnly: {
@@ -2437,7 +2437,7 @@ class RankingApp {
                     priceValue: '1エリア 29,800円～',
                     priceDetail: {
                         '料金': 'クールスカルプティング®<br>1エリア 29,800円～',
-                        '注射治療': this.dataManager.getClinicText('sbc', '注射治療', '脂肪溶解注射<br>GLP-1<br>ダイエット点滴'),
+                        '医療機器': this.dataManager.getClinicText('sbc', '医療機器', '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>ラジオ波'),
                         '目安期間': '施術内容による<br>ダウンタイムほとんどなし',
                         '営業時間': '店舗により異なる<br>多くは10:00〜19:00',
                         '対応部位': 'お腹・二の腕・太もも・顔<br>全身の気になる部位',

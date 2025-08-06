@@ -1,3 +1,22 @@
+// クリニックURLを中央管理から取得
+function getClinicUrlFromConfig(clinicId) {
+    const clinicMap = {
+        '1': 'dio',
+        '2': 'eminal', 
+        '3': 'urara',
+        '4': 'lieto',
+        '5': 'sbc'
+    };
+    
+    const clinicSlug = clinicMap[clinicId];
+    if (window.CLINIC_URLS && window.CLINIC_URLS[clinicSlug]) {
+        return window.CLINIC_URLS[clinicSlug].baseUrl;
+    }
+    
+    // フォールバック
+    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+}
+
 // URLパラメータ処理クラス
 class UrlParamHandler {
     getParam(name) {
@@ -31,11 +50,11 @@ class UrlParamHandler {
     // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlWithRegionId(clinicId) {
         const redirectUrls = {
-            '1': '/go/dio/',
-            '2': '/go/eminal/',
-            '3': '/go/urara/',
-            '4': '/go/lieto/',
-            '5': '/go/sbc/'
+            '1': '/draft/go/dio/',
+            '2': '/draft/go/eminal/',
+            '3': '/draft/go/urara/',
+            '4': '/draft/go/lieto/',
+            '5': '/draft/go/sbc/'
         };
         
         const redirectUrl = redirectUrls[clinicId];
@@ -57,11 +76,11 @@ class UrlParamHandler {
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlByNameWithRegionId(clinicName) {
         const redirectUrls = {
-            'dio': '/go/dio/',
-            'eminal': '/go/eminal/',
-            'urara': '/go/urara/',
-            'lieto': '/go/lieto/',
-            'sbc': '/go/sbc/'
+            'dio': '/draft/go/dio/',
+            'eminal': '/draft/go/eminal/',
+            'urara': '/draft/go/urara/',
+            'lieto': '/draft/go/lieto/',
+            'sbc': '/draft/go/sbc/'
         };
         
         const redirectUrl = redirectUrls[clinicName];
@@ -175,10 +194,10 @@ class DisplayManager {
             // 評価スコアとスターの生成（仮のデータ）
             const ratings = {
                 1: { score: 4.9, stars: 5 },
-                2: { score: 4.8, stars: 4.8 },
-                3: { score: 4.7, stars: 4.7 },
-                4: { score: 4.6, stars: 4.6 },
-                5: { score: 4.5, stars: 4.5 }
+                2: { score: 4.5, stars: 4.5 },
+                3: { score: 4.3, stars: 4.3 },
+                4: { score: 4.1, stars: 4.1 },
+                5: { score: 3.8, stars: 3.8 }
             };
             const rating = ratings[rankNum] || { score: 4.5, stars: 4 };
 
@@ -210,7 +229,7 @@ class DisplayManager {
 
             // 押しメッセージの定義
             const pushMessages = {
-                1: "【総合人気No.1】\n2025年のイチ押し！\n業界屈指のコスパ",
+                1: "2025年のイチ押し！\n業界屈指のコスパ",
                 2: "次世代医療！\n成功率94%の実績",
                 3: "厚労省承認マシン\n科学的に脂肪を減らす",
                 4: "多店舗展開\nエミナル",
@@ -233,7 +252,7 @@ class DisplayManager {
                         <div class="rating-score">${rating.score}<span class="score-max">/5.0</span></div>
                     </div>
                     <div class="clinic-logo-section">
-                        ${clinic.name}
+                        <h3>${clinic.name}</h3>
                     </div>
                     <div class="clinic-banner">
                         <img src="${bannerImage}" alt="${clinic.name}バナー" onerror="this.style.display='none'">
@@ -387,6 +406,8 @@ class DataManager {
         this.rankings = [];
         this.storeViews = [];
         this.campaigns = [];
+        this.siteTexts = {}; // サイトテキストデータ（旧）
+        this.clinicTexts = {}; // クリニック別テキストデータ
         // Handle subdirectory paths
         if (window.SITE_CONFIG) {
             this.dataPath = window.SITE_CONFIG.dataPath + '/';
@@ -422,6 +443,36 @@ class DataManager {
             
             // キャンペーンデータの設定
             this.campaigns = data.campaigns;
+            
+            // 共通テキストデータの読み込み
+            try {
+                const commonTextResponse = await fetch(this.dataPath + 'site-common-texts.json');
+                if (commonTextResponse.ok) {
+                    this.commonTexts = await commonTextResponse.json();
+                    console.log('✅ 共通テキストデータを読み込みました:', this.commonTexts);
+                } else {
+                    console.warn('⚠️ site-common-texts.json が見つかりません。デフォルトテキストを使用します。');
+                    this.commonTexts = {};
+                }
+            } catch (error) {
+                console.warn('⚠️ 共通テキストの読み込みに失敗しました:', error);
+                this.commonTexts = {};
+            }
+            
+            // クリニック別テキストデータの読み込み
+            try {
+                const clinicTextResponse = await fetch(this.dataPath + 'clinic-texts.json');
+                if (clinicTextResponse.ok) {
+                    this.clinicTexts = await clinicTextResponse.json();
+                    console.log('✅ クリニック別テキストデータを読み込みました:', this.clinicTexts);
+                } else {
+                    console.warn('⚠️ clinic-texts.json が見つかりません。デフォルトテキストを使用します。');
+                    this.clinicTexts = {};
+                }
+            } catch (error) {
+                console.warn('⚠️ クリニック別テキストの読み込みに失敗しました:', error);
+                this.clinicTexts = {};
+            }
             
             // 店舗データをクリニックから抽出
             this.stores = [];
@@ -529,6 +580,7 @@ class DataManager {
     // ランキングデータの読み込み
     async loadRankings() {
         const data = await this.loadCsvFile('出しわけSS - ranking.csv');
+        console.log('🔄 ランキングCSVデータ読み込み:', data.slice(0, 3)); // 最初の3行を表示
         
         // 地域ごとにランキングをグループ化
         const rankingMap = {};
@@ -541,9 +593,9 @@ class DataManager {
                 };
             }
             
-            // 各順位のクリニックIDを設定
+            // 各順位のクリニックIDを設定（"-"は除外）
             Object.keys(row).forEach(key => {
-                if (key.startsWith('no') && row[key]) {
+                if (key.startsWith('no') && row[key] && row[key] !== '-') {
                     rankingMap[regionId].ranks[key] = row[key];
                 }
             });
@@ -621,6 +673,83 @@ class DataManager {
         return this.regions.find(r => r.id === regionId);
     }
 
+    // 地域IDとエレメントIDでサイトテキストを取得（旧）
+    getSiteText(regionId, elementId, defaultText = '') {
+        if (this.siteTexts && this.siteTexts[regionId] && this.siteTexts[regionId][elementId]) {
+            return this.siteTexts[regionId][elementId];
+        }
+        return defaultText;
+    }
+
+    // 共通テキストを取得
+    getCommonText(itemKey, defaultText = '') {
+        if (this.commonTexts && this.commonTexts[itemKey]) {
+            return this.commonTexts[itemKey];
+        }
+        return defaultText;
+    }
+    
+    // クリニック名と項目名でクリニック別テキストを取得
+    getClinicText(clinicName, itemKey, defaultText = '') {
+        if (this.clinicTexts && this.clinicTexts[clinicName] && this.clinicTexts[clinicName][itemKey]) {
+            return this.clinicTexts[clinicName][itemKey];
+        }
+        return defaultText;
+    }
+
+    // クリニック評価を取得する関数
+    getClinicRating(clinicCode, defaultRating = 4.5) {
+        const rating = this.getClinicText(clinicCode, '総合評価', defaultRating.toString());
+        return parseFloat(rating) || defaultRating;
+    }
+
+    // クリニック名を取得する関数
+    getClinicName(clinicCode, defaultName = 'クリニック') {
+        return this.getClinicText(clinicCode, 'クリニック名', defaultName);
+    }
+
+    // decoタグを処理してHTMLに変換する関数
+    processDecoTags(text) {
+        if (!text || typeof text !== 'string') return text;
+        
+        // <deco>タグを<span class="deco-text">に変換
+        return text.replace(/<deco>(.*?)<\/deco>/g, '<span class="deco-text">$1</span>');
+    }
+
+    // 現在選択されているクリニックを判定する関数
+    getCurrentClinic() {
+        // URLパラメータから判定
+        const urlParams = new URLSearchParams(window.location.search);
+        const clinicParam = urlParams.get('clinic');
+        if (clinicParam) {
+            return clinicParam;
+        }
+
+        // 地域の1位クリニックをデフォルトとして使用
+        const currentRegionId = this.getCurrentRegionId();
+        const ranking = this.getRankingByRegionId(currentRegionId);
+        if (ranking && ranking.ranks && ranking.ranks.length > 0) {
+            const topClinic = ranking.ranks[0];
+            // クリニック名からコードにマッピング
+            const clinicNameMap = {
+                'ディオクリニック': 'dio',
+                'エミナルクリニック': 'eminal', 
+                'ウララクリニック': 'urara',
+                'リエートクリニック': 'lieto',
+                '湘南美容クリニック': 'sbc'
+            };
+            return clinicNameMap[topClinic.name] || 'dio';
+        }
+        
+        return 'dio'; // デフォルト
+    }
+
+    // 現在の地域IDを取得
+    getCurrentRegionId() {
+        const urlParams = new URLSearchParams(window.location.search);
+        return urlParams.get('region_id') || '013';
+    }
+
     // 地域IDでランキングを取得
     getRankingByRegionId(regionId) {
         return this.rankings.find(r => r.regionId === regionId);
@@ -634,15 +763,20 @@ class DataManager {
         
         // ランキングデータを取得して、表示されているクリニックを特定
         const ranking = this.getRankingByRegionId(regionId);
+        console.log(`🏆 地域 ${regionId} のランキング:`, ranking);
         if (!ranking) return [];
         
         // 表示する店舗IDのリストを作成
         const storeIdsToShow = [];
         
         // ランキングに表示されているクリニックIDに対応する店舗IDを取得
+        console.log('🎯 ランキングデータ:', ranking.ranks);
         Object.entries(ranking.ranks).forEach(([position, clinicId]) => {
+            console.log(`📍 位置 ${position}: クリニックID ${clinicId}`);
             // clinic_1〜clinic_5はクリニックID（1〜5）に対応
             const clinicKey = `clinic_${clinicId}`;
+            console.log(`🔑 検索キー: ${clinicKey}`);
+            console.log(`🏪 該当店舗:`, storeView.clinicStores[clinicKey]);
             
             if (storeView.clinicStores[clinicKey]) {
                 storeIdsToShow.push(...storeView.clinicStores[clinicKey]);
@@ -650,9 +784,30 @@ class DataManager {
         });
         
         // 店舗IDに基づいて実際の店舗情報を取得
-        return this.stores.filter(store => 
-            storeIdsToShow.includes(store.id)
+        // アンダースコアで区切られた複数店舗IDを処理
+        const allStoreIds = [];
+        console.log('🔍 storeIdsToShow:', storeIdsToShow);
+        
+        storeIdsToShow.forEach(storeId => {
+            if (storeId.includes('/')) {
+                // dio_009/dio_010 のような形式を分割
+                const ids = storeId.split('/');
+                allStoreIds.push(...ids);
+                console.log(`📦 分割: ${storeId} → ${ids.join(', ')}`);
+            } else {
+                allStoreIds.push(storeId);
+            }
+        });
+        
+        console.log('🏪 検索する店舗ID:', allStoreIds);
+        console.log('🏬 利用可能な店舗:', this.stores.slice(0, 5).map(s => s.id));
+        
+        const result = this.stores.filter(store => 
+            allStoreIds.includes(store.id)
         );
+        
+        console.log('✅ 見つかった店舗:', result.map(s => `${s.id}: ${s.name}`));
+        return result;
     }
 
     // クリニック名で店舗を取得
@@ -687,6 +842,7 @@ class RankingApp {
         this.displayManager = new DisplayManager(this.urlHandler);
         this.dataManager = null;
         this.currentRegionId = null;
+        this.textsInitialized = false;
     }
 
     async init() {
@@ -1028,21 +1184,34 @@ class RankingApp {
                 mvRegionElement.textContent = region.name;
             }
 
-            //ランキングの地域名も更新
+            // サイト全体のテキストを動的に更新
+            // 初回はsetTimeoutで少し遅延させてDOMが完全に構築されるのを待つ
+            if (!this.textsInitialized) {
+                setTimeout(() => {
+                    this.updateAllTexts(regionId);
+                    this.textsInitialized = true;
+                }, 100);
+            } else {
+                this.updateAllTexts(regionId);
+            }
+
+            //ランキングの地域名も更新（共通テキストを使用）
             const rankRegionElement = document.getElementById('rank-region-name');
             if (rankRegionElement) {
-                rankRegionElement.textContent = region.name + 'で人気の医療ダイエットはここ！';
+                // 共通テキストから後半部分を取得
+                const rankingText = this.dataManager.getCommonText('ランキング地域名テキスト', 'で人気の脂肪溶解注射はここ！');
+                rankRegionElement.textContent = region.name + rankingText;
                 
                 // 地域名の文字数に応じてleftの位置を調整
                 const regionNameLength = region.name.length;
-                let leftPosition = '6%'; // デフォルト値
+                let leftPosition = '52%'; // デフォルト値
                 
                 if (regionNameLength === 2) {
-                    leftPosition = '9%'; // 2文字（例：千葉）
+                    leftPosition = '52%'; // 2文字（例：東京）
                 } else if (regionNameLength === 3) {
-                    leftPosition = '7.5%'; // 3文字（例：神奈川）
+                    leftPosition = '51%'; // 3文字（例：神奈川）
                 } else if (regionNameLength === 4) {
-                    leftPosition = '6%'; // 4文字（例：神奈川）
+                    leftPosition = '50%'; // 4文字
                 }
                 
                 rankRegionElement.style.left = leftPosition;
@@ -1104,6 +1273,206 @@ class RankingApp {
         }
     }
 
+    // サイト全体のテキストを動的に更新（クリニック別対応）
+    updateAllTexts(regionId) {
+        try {
+            console.log('🔄 updateAllTexts called with regionId:', regionId);
+            console.log('📊 CommonTexts loaded:', Object.keys(this.dataManager.commonTexts || {}).length);
+            console.log('📊 ClinicTexts loaded:', Object.keys(this.dataManager.clinicTexts || {}).length);
+            
+            const currentClinic = this.dataManager.getCurrentClinic();
+            console.log(`🎯 現在のクリニック: ${currentClinic}`);
+
+            // ページタイトルの更新
+            const pageTitle = this.dataManager.getClinicText(currentClinic, 'サイトタイトル', '2025年全国版｜脂肪冷却比較ランキング');
+            document.title = pageTitle;
+            console.log(`✅ Page title updated: ${pageTitle}`);
+
+            // メタディスクリプションの更新
+            const metaDesc = document.querySelector('meta[name="description"]');
+            if (metaDesc) {
+                const metaDescText = this.dataManager.getClinicText(currentClinic, 'メタディスクリプション', 'あなたの地域の優良クリニックを探そう。');
+                metaDesc.setAttribute('content', metaDescText);
+                console.log(`✅ Meta description updated: ${metaDescText}`);
+            }
+
+            // サイトロゴの更新（共通テキスト）
+            const siteLogo = document.querySelector('.site-logo');
+            if (siteLogo) {
+                const logoText = this.dataManager.getCommonText('サイトロゴ', '脂肪溶解注射比較.com');
+                siteLogo.textContent = logoText;
+                console.log(`✅ Site logo updated: ${logoText}`);
+            }
+
+            // MVアピールテキストの更新（共通テキスト）
+            const appealText1Element = document.getElementById('mv-left-appeal-text');
+            if (appealText1Element) {
+                const text1 = this.dataManager.getCommonText('MVアピールテキスト1', 'コスパ');
+                appealText1Element.textContent = text1;
+                console.log(`✅ MV Appeal Text 1 updated: ${text1}`);
+            }
+
+            const appealText2Element = document.getElementById('mv-right-appeal-text');
+            if (appealText2Element) {
+                const text2 = this.dataManager.getCommonText('MVアピールテキスト2', '通いやすさ');
+                appealText2Element.textContent = text2;
+                console.log(`✅ MV Appeal Text 2 updated: ${text2}`);
+            }
+
+            // SVGテキストの更新（共通テキスト）
+            const svgText1Element = document.querySelector('#mv-main-svg-text text');
+            if (svgText1Element) {
+                const svgText1 = this.dataManager.getCommonText('MVSVGテキスト1', '脂肪溶解注射');
+                svgText1Element.textContent = svgText1;
+                console.log(`✅ MV SVG Text 1 updated: ${svgText1}`);
+            }
+
+            // SVGテキスト2の更新（共通テキスト）
+            const svgText2Element = document.querySelector('#mv-appeal1-text text');
+            if (svgText2Element) {
+                const svgText2 = this.dataManager.getCommonText('MVSVGテキスト2', 'ランキング');
+                svgText2Element.textContent = svgText2;
+                console.log(`✅ MV SVG Text 2 updated: ${svgText2}`);
+            }
+
+            // ランキングバナーのalt属性更新（共通テキスト）
+            const rankingBanner = document.querySelector('.ranking-banner-image');
+            if (rankingBanner) {
+                const rankingAlt = this.dataManager.getCommonText('ランキングバナーalt', 'で人気の脂肪溶解注射はここ！');
+                rankingBanner.setAttribute('alt', rankingAlt);
+                console.log(`✅ Ranking banner alt updated: ${rankingAlt}`);
+            }
+
+            // 比較表タイトルの更新（共通テキスト）
+            const comparisonTitle = document.querySelector('.comparison-title');
+            if (comparisonTitle) {
+                const titleText = this.dataManager.getCommonText('比較表タイトル', 'で人気の脂肪溶解注射');
+                // 地域名を動的に挿入
+                const region = this.dataManager.getRegionById(regionId);
+                const regionName = region ? region.name : '';
+                comparisonTitle.innerHTML = `<span id="comparison-region-name">${regionName}</span>${titleText}`;
+                console.log(`✅ Comparison title updated: ${regionName}${titleText}`);
+            }
+
+            // 比較表サブタイトルの更新（共通テキスト）
+            const comparisonSubtitle = document.querySelector('.comparison-subtitle');
+            if (comparisonSubtitle) {
+                const subtitleHtml = this.dataManager.getCommonText('比較表サブタイトル', 'クリニックを<span class="pink-text">徹底比較</span>');
+                comparisonSubtitle.innerHTML = this.dataManager.processDecoTags(subtitleHtml);
+                console.log(`✅ Comparison subtitle updated`);
+            }
+            
+            // 案件詳細バナーのalt属性を更新（共通テキスト）
+            const detailsBannerImg = document.querySelector('.details-banner-image');
+            if (detailsBannerImg) {
+                const detailsBannerAlt = this.dataManager.getCommonText('案件詳細バナーalt', 'コスパ×効果×通いやすさで選ぶ脂肪溶解注射BEST3');
+                detailsBannerImg.setAttribute('alt', detailsBannerAlt);
+                console.log(`✅ Details banner alt updated: ${detailsBannerAlt}`);
+            }
+            
+            // フッターサイト名の更新（共通テキスト）
+            const footerSiteName = document.querySelector('.footer_contents h4 a');
+            if (footerSiteName) {
+                const footerText = this.dataManager.getCommonText('フッターサイト名', '脂肪溶解注射比較.com');
+                footerSiteName.textContent = footerText;
+                console.log(`✅ Footer site name updated: ${footerText}`);
+            }
+            
+            // フッターコピーライトの更新（共通テキスト）
+            const footerCopyright = document.querySelector('.copyright');
+            if (footerCopyright) {
+                const copyrightText = this.dataManager.getCommonText('フッターコピーライト', '© 2025 脂肪溶解注射比較.com');
+                footerCopyright.textContent = copyrightText;
+                console.log(`✅ Footer copyright updated: ${copyrightText}`);
+            }
+            
+            // Tipsセクションの更新（共通テキスト）
+            // タブタイトルの更新
+            const tabTexts = document.querySelectorAll('.tips-container .tab-text');
+            if (tabTexts.length >= 3) {
+                tabTexts[0].textContent = this.dataManager.getCommonText('Tipsタブ1タイトル', '脂肪溶解注射の効果');
+                tabTexts[1].textContent = this.dataManager.getCommonText('Tipsタブ2タイトル', 'クリニック選び');
+                tabTexts[2].textContent = this.dataManager.getCommonText('Tipsタブ3タイトル', '今がおすすめ');
+                console.log('✅ Tips tab titles updated');
+            }
+            
+            // Tips内容の更新（タブコンテンツ内のp要素）
+            const tabContents = document.querySelectorAll('.tips-container .tab-content');
+            if (tabContents.length >= 3) {
+                const tips1P = tabContents[0].querySelector('p');
+                if (tips1P) {
+                    const tips1Content = this.dataManager.getCommonText('Tips1内容', '本気で痩せたいなら脂肪溶解注射が最短！科学的根拠に基づき、脂肪細胞そのものを破壊・減少させる痩身治療です。リバウンドしにくく、部分痩せも可能。自己流ダイエットで失敗続きの方にこそ試してほしい、確実な痩身方法です。');
+                    tips1P.innerHTML = this.dataManager.processDecoTags(tips1Content);
+                }
+                
+                const tips2P = tabContents[1].querySelector('p');
+                if (tips2P) {
+                    const tips2Content = this.dataManager.getCommonText('Tips2内容', 'クリニック選びの失敗が理想の体型実現の失敗につながります。<br>強引な勧誘は危険信号。次の3条件を満たす医院を選びましょう。<br><br>☑️医師が直接診察する<br>☑️施術後のアフターケア<br>☑️料金を明確に説明する');
+                    tips2P.innerHTML = this.dataManager.processDecoTags(tips2Content);
+                }
+                
+                const tips3P = tabContents[2].querySelector('p');
+                if (tips3P) {
+                    const tips3Content = this.dataManager.getCommonText('Tips3内容', '夏本番になると予約が取りにくくなり、料金も高くなりがち。今なら夏直前キャンペーンでお得に始められて、予約もスムーズ！理想の体型で夏を迎えるなら今がラストチャンスです。');
+                    tips3P.innerHTML = this.dataManager.processDecoTags(tips3Content);
+                }
+                console.log('✅ Tips contents updated');
+                
+                // Tips画像の更新
+                const tips1Img = tabContents[0].querySelector('img');
+                if (tips1Img) {
+                    const tips1ImagePath = this.dataManager.getCommonText('Tips1画像パス', '/images/Tips1.webp');
+                    tips1Img.src = tips1ImagePath;
+                    console.log(`✅ Tips1 image updated: ${tips1ImagePath}`);
+                }
+                
+                const tips2Img = tabContents[1].querySelector('img');
+                if (tips2Img) {
+                    const tips2ImagePath = this.dataManager.getCommonText('Tips2画像パス', '/images/Tips2.webp');
+                    tips2Img.src = tips2ImagePath;
+                    console.log(`✅ Tips2 image updated: ${tips2ImagePath}`);
+                }
+                
+                const tips3Img = tabContents[2].querySelector('img');
+                if (tips3Img) {
+                    const tips3ImagePath = this.dataManager.getCommonText('Tips3画像パス', '/images/Tips3.webp');
+                    tips3Img.src = tips3ImagePath;
+                    console.log(`✅ Tips3 image updated: ${tips3ImagePath}`);
+                }
+            }
+
+            // 注意事項HTMLの更新（既存の注意事項を置き換える）
+            const disclaimerHTML = this.dataManager.getCommonText('注意事項HTML', '');
+            if (disclaimerHTML) {
+                // 既存の注意事項セクションを探す
+                const disclaimerAccordion = document.querySelector('.disclaimer-accordion');
+                if (disclaimerAccordion) {
+                    // 既存の main-disclaimer を置き換える
+                    const existingMainDisclaimer = disclaimerAccordion.querySelector('.main-disclaimer');
+                    if (existingMainDisclaimer) {
+                        // 注意：JSONからのHTMLが正しい形式でない場合があるので、確認
+                        // 現在は既存のHTMLはそのまま使用
+                        console.log('✅ 注意事項HTML 確認（現在は既存のHTMLを維持）');
+                    }
+                }
+            }
+
+            // 比較表ヘッダーの更新（食事指導を対応部位に変更）
+            const tableHeaders = document.querySelectorAll('.comparison-table th');
+            tableHeaders.forEach(th => {
+                if (th.textContent.includes('食事指導')) {
+                    th.textContent = '対応部位';
+                    th.style.display = ''; // 表示する
+                    th.classList.remove('th-none');
+                    console.log('✅ 比較表ヘッダー「食事指導」を「対応部位」に変更');
+                }
+            });
+
+        } catch (error) {
+            console.error('クリニック別テキストの更新に失敗しました:', error);
+        }
+    }
+
     // 店舗をクリニックごとにグループ化して表示順を管理
     groupStoresByClinics(stores, ranking, allClinics) {
         const clinicsWithStores = new Map();
@@ -1153,23 +1522,29 @@ class RankingApp {
             return;
         }
 
+        console.log('🔄 比較表を更新中... ランキング:', ranking.ranks);
+
         // ランキング順のクリニックデータを取得
         const rankedClinics = [];
-        const sortedRanks = Object.entries(ranking.ranks).sort((a, b) => {
-            const numA = parseInt(a[0].replace('no', ''));
-            const numB = parseInt(b[0].replace('no', ''));
-            return numA - numB;
-        });
-
-        sortedRanks.forEach(([position, clinicId]) => {
-            const clinic = clinics.find(c => c.id === clinicId);
-            if (clinic) {
-                rankedClinics.push({
-                    ...clinic,
-                    rank: parseInt(position.replace('no', ''))
-                });
+        
+        // no1からno5まで順番に処理（1位→2位→3位→4位→5位の順）
+        ['no1', 'no2', 'no3', 'no4', 'no5'].forEach((position, index) => {
+            const clinicId = ranking.ranks[position];
+            if (clinicId && clinicId !== '-') {
+                // クリニックIDが文字列の場合と数値の場合の両方に対応
+                const numericClinicId = parseInt(clinicId);
+                const clinic = clinics.find(c => c.id == clinicId || c.id === numericClinicId);
+                if (clinic) {
+                    rankedClinics.push({
+                        ...clinic,
+                        rank: index + 1  // 1位、2位、3位...
+                    });
+                    console.log(`${index + 1}位: ${clinic.name} (ID: ${clinicId})`);
+                }
             }
         });
+
+        console.log('🏆 最終ランキング順:', rankedClinics.map(c => `${c.rank}位: ${c.name}`));
 
         // 比較表の内容を生成
         this.generateComparisonTable(rankedClinics);
@@ -1197,20 +1572,27 @@ class RankingApp {
                 tr.style.backgroundColor = '#fffbdc';
             }
             
-            // 実際のデータ設定
-            const achievements = {
-                1: 'ダイエット成功率99％<br>平均13.7kg減',
-                2: 'ダイエット成功率94%',
-                3: 'ダイエット成功率94%',
-                4: '3ヶ月で-10kg以上<br>モニター満足度95%',
-                5: '症例実績30万件以上<br>リピート率90%以上'
+            // 実際のデータ設定 - JSONから取得
+            const clinicCodeMap = { 1: 'dio', 2: 'eminal', 3: 'urara', 4: 'lieto', 5: 'sbc' };
+            const getRatingFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicRating(clinicCode, 4.5) : 4.5;
             };
-            const benefits = {
-                1: '今なら<br>12ヶ月分0円！',
-                2: '今なら<br>最大79%OFF！',
-                3: '最大80%OFF<br>（モニター割引）',
-                4: 'モニタープラン<br>大幅割引あり',
-                5: '期間限定<br>キャンペーン実施中'
+            const getAchievementFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicText(clinicCode, '実績', '豊富な実績') : '豊富な実績';
+            };
+            const getBenefitFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicText(clinicCode, '特典', '特典あり') : '特典あり';
+            };
+            const getPopularPlanFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicText(clinicCode, '人気プラン', '脂肪冷却') : '脂肪冷却';
+            };
+            const getClinicNameFromJson = (rank) => {
+                const clinicCode = clinicCodeMap[rank];
+                return clinicCode ? this.dataManager.getClinicName(clinicCode) : 'クリニック';
             };
             const popularPlans = {
                 1: '脂肪冷却',
@@ -1233,12 +1615,22 @@ class RankingApp {
                 4: '脂肪溶解注射<br>GLP-1',
                 5: '脂肪溶解注射<br>（BNLSアルティメット）<br>サクセンダ<br>山参注射'
             };
-            const dietSupport = {
-                1: '栄養管理士<br>による指導',
-                2: '管理栄養士<br>による指導',
-                3: '医師監修のもと<br>管理栄養士の指導',
-                4: '管理栄養士による<br>オンライン食事指導',
-                5: '専門クリニックで<br>管理栄養士指導'
+            // 対応部位をJSONから取得
+            const getBodyPartsFromJson = (rankNum) => {
+                // clinicsからクリニックデータを取得（indexはrankNum-1）
+                const clinic = clinics[rankNum - 1];
+                if (!clinic) return '顔・二の腕・お腹・太もも・その他';
+                
+                // クリニック名からコードにマッピング
+                const clinicCodeMap = {
+                    'ディオクリニック': 'dio',
+                    'エミナルクリニック': 'eminal',
+                    'ウララクリニック': 'urara',
+                    'リエートクリニック': 'lieto',
+                    '湘南美容クリニック': 'sbc'
+                };
+                const clinicCode = clinicCodeMap[clinic.name] || 'dio';
+                return this.dataManager.getClinicText(clinicCode, '対応部位', '顔・二の腕・お腹・太もも・その他');
             };
             const monitorDiscount = {
                 1: 'あり<br>75％OFF',
@@ -1277,15 +1669,15 @@ class RankingApp {
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td class="" style="">
-                    <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
-                    <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
+                    <span class="ranking_evaluation">${getRatingFromJson(rankNum)}</span><br>
+                    <span class="star5_rating" data-rate="${getRatingFromJson(rankNum)}"></span>
                 </td>
-                <td class="" style="">${achievements[rankNum] || '豊富な実績'}</td>
-                <td class="" style="">${benefits[rankNum] || '特別キャンペーン'}</td>
-                <td class="th-none" style="display: none;">${popularPlans[rankNum] || '人気プラン'}</td>
+                <td class="" style="">${getAchievementFromJson(rankNum)}</td>
+                <td class="" style="">${getBenefitFromJson(rankNum)}</td>
+                <td class="th-none" style="display: none;">${getPopularPlanFromJson(rankNum)}</td>
                 <td class="th-none" style="display: none;">${machines[rankNum] || '医療機器'}</td>
                 <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
-                <td class="th-none" style="display: none;">${dietSupport[rankNum] || '〇'}</td>
+                <td class="th-none" style="display: none;">${getBodyPartsFromJson(rankNum)}</td>
                 <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
                 <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
                 <td>
@@ -1314,7 +1706,7 @@ class RankingApp {
             const rankClass = clinic.rank === 1 ? '' : clinic.rank === 2 ? 'silver' : 'bronze';
             
             // ダミーデータ（実際のデータに置き換え）
-            const ratings = { 1: 4.9, 2: 4.8, 3: 4.7, 4: 4.7, 5: 4.7 };
+            const ratings = { 1: 4.9, 2: 4.5, 3: 4.3, 4: 4.1, 5: 3.8 };
             const achievements = { 
                 1: '全国100院以上',
                 2: '累計施術50万件',
@@ -1340,14 +1732,14 @@ class RankingApp {
                     </div>
                 </td>
                 <td>
-                    <div class="rating-cell">${ratings[clinic.rank] || 4.5}</div>
+                    <div class="rating-cell">${getRatingFromJson(clinic.rank)}</div>
                     <div class="rating-stars">
-                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(ratings[clinic.rank] || 4.5))}
-                        ${(ratings[clinic.rank] || 4.5) % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
+                        ${'<i class="fas fa-star"></i>'.repeat(Math.floor(getRatingFromJson(clinic.rank)))}
+                        ${getRatingFromJson(clinic.rank) % 1 ? '<i class="fas fa-star-half-alt"></i>' : ''}
                     </div>
                 </td>
-                <td class="achievement-text">${achievements[clinic.rank] || '豊富な実績'}</td>
-                <td class="benefit-text">${benefits[clinic.rank] || '特典あり'}</td>
+                <td class="achievement-text">${getAchievementFromJson(clinic.rank)}</td>
+                <td class="benefit-text">${getBenefitFromJson(clinic.rank)}</td>
                 <td>
                     <div class="cta-cell">
                         <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
@@ -1672,6 +2064,9 @@ class RankingApp {
         }
 
         detailsList.innerHTML = '';
+        
+        // 比較表も更新
+        this.updateComparisonTable(clinics, ranking);
 
         if (!ranking) {
             console.error('ランキングデータがnullです');
@@ -1698,9 +2093,13 @@ class RankingApp {
         }).slice(0, 5);
 
         console.log('sortedRanks:', sortedRanks);
+        console.log('Available clinics:', clinics.map(c => ({ id: c.id, name: c.name })));
+        
         sortedRanks.forEach(([position, clinicId]) => {
-            const clinic = clinics.find(c => c.id === clinicId);
-            console.log('Processing clinic:', { position, clinicId, clinic });
+            // clinicIdを数値に変換して比較
+            const numericClinicId = parseInt(clinicId);
+            const clinic = clinics.find(c => c.id == clinicId || c.id === numericClinicId);
+            console.log('Processing clinic:', { position, clinicId, numericClinicId, clinic });
             if (!clinic) {
                 console.error('クリニックが見つかりません:', clinicId);
                 return;
@@ -1735,13 +2134,13 @@ class RankingApp {
                     priceMain: '医療痩身コース',
                     priceValue: '月々4,900円',
                     priceDetail: {
-                        '料金': '通常価格24,800円<br>80%OFF 月々4,900円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
-                        '目安期間': '-5〜10kg：約3ヶ月<br>-10kg以上：約5ヶ月',
-                        '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
-                        '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
-                        '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]'
+                        '料金': this.dataManager.getClinicText('dio', '料金', '通常価格24800円<br>80%OFF 月々4900円'),
+                        '医療機器': this.dataManager.getClinicText('dio', '医療機器', 'クールスカルプティング<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波'),
+                        '目安期間': this.dataManager.getClinicText('dio', '目安期間', '-5〜10kg：約3ヶ月<br>-10kg以上：約5ヶ月'),
+                        '営業時間': this.dataManager.getClinicText('dio', '営業時間', '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始'),
+                        '対応部位': this.dataManager.getClinicText('dio', '対応部位', '下腹部/二の腕/腰/太もも/背中など/脂肪が付きやすい部位'),
+                        '店舗': this.dataManager.getClinicText('dio', '店舗', '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡'),
+                        '公式サイト': this.dataManager.getClinicText('dio', '公式サイトURL', 'https://dioclinic.jp/')
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1760,18 +2159,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！もう一人で悩まない',
-                            description: 'ディオクリニックでは医師・看護師・管理栄養士がチームであなたを徹底サポート！自己流ダイエットで挫折した方にもおすすめです。専門的な食事指導や生活改善アドバイスも受けられるから、ダイエットの悩みも解決！'
+                            title: this.dataManager.getClinicText('dio', 'POINT1タイトル', '専門家チームが徹底伴走！もう一人で悩まない'),
+                            description: this.dataManager.getClinicText('dio', 'POINT1内容', 'ディオクリニックでは医師・看護師・管理栄養士がチームであなたを徹底サポート！自己流ダイエットで挫折した方にもおすすめです。専門的な食事指導や生活改善アドバイスも受けられるから、ダイエットの悩みも解決！')
                         },
                         {
                             icon: 'phone',
-                            title: '医療マシンをオーダーメイド！リバウンドしにくい身体へ',
-                            description: '脂肪冷却や医療EMSなど、複数の最新マシンをあなた専用に組み合わせ！寝ているだけで部分痩せや筋肉アップまで目指せるので、運動が苦手な方にもおすすめ。リバウンドしにくい体質づくりを目指せる！'
+                            title: this.dataManager.getClinicText('dio', 'POINT2タイトル', '医療マシンをオーダーメイド！リバウンドしにくい身体へ'),
+                            description: this.dataManager.getClinicText('dio', 'POINT2内容', '脂肪冷却や医療EMSなど、複数の最新マシンをあなた専用に組み合わせ！寝ているだけで部分痩せや筋肉アップまで目指せるので、運動が苦手な方にもおすすめ。リバウンドしにくい体質づくりを目指せる！')
                         },
                         {
                             icon: 'coin',
-                            title: '全額返金保証あり！効果が不安でも大丈夫',
-                            description: 'ディオクリニックは効果に自信があるから、「全額返金保証制度」付き！もし効果を実感できなくても金銭的なリスクがないから、思い切ってチャレンジできます！'
+                            title: this.dataManager.getClinicText('dio', 'POINT3タイトル', '全額返金保証あり！効果が不安でも大丈夫'),
+                            description: this.dataManager.getClinicText('dio', 'POINT3内容', 'ディオクリニックは効果に自信があるから、「全額返金保証制度」付き！もし効果を実感できなくても金銭的なリスクがないから、思い切ってチャレンジできます！')
                         }
                     ],
                     reviews: [
@@ -1803,7 +2202,8 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]',
+                        ctaUrl: getClinicUrlFromConfig('1'),
+                        displayUrl: 'https://dioclinic.jp/',
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼外来実績50万件以上の実績で安心／'
                     }
@@ -1822,7 +2222,7 @@ class RankingApp {
                     priceValue: '月々9,780円',
                     priceDetail: {
                         '料金': '通常価格45,591円<br>79%0FF<br>月々9,780円',
-                        '施術機械': '脂肪冷却装置/医療用EMS/医療電磁場装置/医療ラジオ波',
+                        '医療機器': this.dataManager.getClinicText('urara', '医療機器', 'クールスカルプティング<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波'),
                         '目安期間': '-5〜10kg：約3ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他 (全身)',
@@ -1846,18 +2246,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！',
-                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                            title: this.dataManager.getClinicText('urara', 'POINT1タイトル', '専門家チームが徹底伴走！'),
+                            description: this.dataManager.getClinicText('urara', 'POINT1内容', '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。')
                         },
                         {
                             icon: 'mobile-alt',
-                            title: '医療マシンをオーダーメイド！',
-                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                            title: this.dataManager.getClinicText('urara', 'POINT2タイトル', '医療マシンをオーダーメイド！'),
+                            description: this.dataManager.getClinicText('urara', 'POINT2内容', '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。')
                         },
                         {
                             icon: 'clock',
-                            title: '安心のサポートと保証制度',
-                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                            title: this.dataManager.getClinicText('urara', 'POINT3タイトル', '安心のサポートと保証制度'),
+                            description: this.dataManager.getClinicText('urara', 'POINT3内容', '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。')
                         }
                     ],
                     reviews: [
@@ -1899,7 +2299,7 @@ class RankingApp {
                     priceValue: '月々9,600円',
                     priceDetail: {
                         '料金': '通常価格49,600円<br>80%0FF 月々9,600円',
-                        '施術機械': '脂肪冷却<br>医療用EMS<br>医療ハイフ',
+                        '医療機器': this.dataManager.getClinicText('lieto', '医療機器', 'クールスカルプティング<br>医療用EMS<br>医療ハイフ'),
                         '目安期間': '-5〜10kg：約6ヶ月',
                         '営業時間': '平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他',
@@ -1923,18 +2323,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'lightbulb',
-                            title: '専門家チームが徹底伴走！',
-                            description: '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。'
+                            title: this.dataManager.getClinicText('lieto', 'POINT1タイトル', '専門家チームが徹底伴走！'),
+                            description: this.dataManager.getClinicText('lieto', 'POINT1内容', '医師・管理栄養士・看護師がチームであなたを徹底サポート！医学的観点と栄養学に基づき、多角的なアプローチで課題を解決。LINEでの相談も可能で、通院日以外も安心です。')
                         },
                         {
                             icon: 'phone',
-                            title: '医療マシンをオーダーメイド！',
-                            description: '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。'
+                            title: this.dataManager.getClinicText('lieto', 'POINT2タイトル', '医療マシンをオーダーメイド！'),
+                            description: this.dataManager.getClinicText('lieto', 'POINT2内容', '厚労省承認の脂肪冷却機器をはじめ、複数の医療機器を個人の体質や目標に合わせてオーダーメイドで組み合わせ。切らずに、科学的根拠に基づいた部分痩せとリバウンドしにくい体質改善を目指せます。')
                         },
                         {
                             icon: 'coin',
-                            title: '安心のサポートと保証制度',
-                            description: '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。'
+                            title: this.dataManager.getClinicText('lieto', 'POINT3タイトル', '安心のサポートと保証制度'),
+                            description: this.dataManager.getClinicText('lieto', 'POINT3内容', '無理な勧誘はなく、予算や目標を丁寧にヒアリングする姿勢が口コミでも高評価。万が一に備えた「全額返金保証制度」（※条件あり）も用意されており、安心してプログラムを開始できます。')
                         }
                     ],
                     reviews: [
@@ -1981,13 +2381,13 @@ class RankingApp {
                     priceMain: '3ヶ月コース特別モニター',
                     priceValue: 'モニタープラン',
                     priceDetail: {
-                        '料金': 'モニタープラン<br>月額制で負担軽減',
-                        '施術機械': '医療ハイフ<br>EMS<br>脂肪冷却',
-                        '目安期間': '3ヶ月コースが基本<br>個人の目標に合わせ調整可',
-                        '営業時間': '多くの院で11:00〜21:00<br>店舗により異なる',
-                        '対応部位': '全身対応<br>お腹・二の腕・太もも・顔',
-                        '店舗': '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）',
-                        '公式サイト': 'https://diet.eminal-clinic.jp/lp/m_bodymake/'
+                        '料金': this.dataManager.getClinicText('eminal', '料金', 'モニタープラン<br>月額制で負担軽減'),
+                        '医療機器': this.dataManager.getClinicText('eminal', '医療機器', 'クールスカルプティング<br>医療用EMS<br>ハイフ'),
+                        '目安期間': this.dataManager.getClinicText('eminal', '目安期間', '3ヶ月コースが基本<br>個人の目標に合わせ調整可'),
+                        '営業時間': this.dataManager.getClinicText('eminal', '営業時間', '多くの院で11:00〜21:00<br>店舗により異なる'),
+                        '対応部位': this.dataManager.getClinicText('eminal', '対応部位', 'お腹/太もも/二の腕/背中/顔下など'),
+                        '店舗': this.dataManager.getClinicText('eminal', '店舗', '全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）'),
+                        '公式サイト': this.dataManager.getClinicText('eminal', '公式サイトURL', 'https://eminal-clinic.jp/')
                     },
                     vioPlans: {
                         vioOnly: {
@@ -2006,18 +2406,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'users',
-                            title: '管理栄養士によるオンライン食事指導',
-                            description: 'エミナルクリニックでは管理栄養士によるオンラインでの食事指導が受けられます。LINEなどを使って手軽に相談できるので、継続しやすいと評判です。'
+                            title: this.dataManager.getClinicText('eminal', 'POINT1タイトル', '管理栄養士によるオンライン食事指導'),
+                            description: this.dataManager.getClinicText('eminal', 'POINT1内容', 'エミナルクリニックでは管理栄養士によるオンラインでの食事指導が受けられます。LINEなどを使って手軽に相談できるので、継続しやすいと評判です。')
                         },
                         {
                             icon: 'network-wired',
-                            title: '全国60院以上の安心ネットワーク',
-                            description: 'エミナルクリニックは全国60院以上を展開しており、どこに住んでいても同じ品質の医療ダイエットを受けられます。安心・安全なネットワークで、あなたのボディメイクをサポートします。'
+                            title: this.dataManager.getClinicText('eminal', 'POINT2タイトル', '全国60院以上の安心ネットワーク'),
+                            description: this.dataManager.getClinicText('eminal', 'POINT2内容', 'エミナルクリニックは全国60院以上を展開しており、どこに住んでいても同じ品質の医療ダイエットを受けられます。安心・安全なネットワークで、あなたのボディメイクをサポートします。')
                         },
                         {
                             icon: 'clock',
-                            title: 'モニター満足度95%の実績',
-                            description: 'エミナルクリニックはモニター満足度95%という高い実績を誇っています。多くの方が結果に満足しており、あなたも安心して治療を始めていただけます。'
+                            title: this.dataManager.getClinicText('eminal', 'POINT3タイトル', 'モニター満足度95%の実績'),
+                            description: this.dataManager.getClinicText('eminal', 'POINT3内容', 'エミナルクリニックはモニター満足度95%という高い実績を誇っています。多くの方が結果に満足しており、あなたも安心して治療を始めていただけます。')
                         }
                     ],
                     reviews: [
@@ -2039,7 +2439,8 @@ class RankingApp {
                         logoSrc: '/images/clinics/eminal/eminal-logo.webp',
                         logoAlt: 'エミナルクリニック',
                         description: 'モニタープランで<br>大幅割引実施中',
-                        ctaUrl: 'https://diet.eminal-clinic.jp/lp/m_bodymake/',
+                        ctaUrl: 'https://eminal-clinic.jp/lp01/medicaldiet_03/?sokyucd=5003',
+                        displayUrl: 'https://eminal-clinic.jp/',
                         ctaText: 'エミナルクリニックの公式サイト',
                         microcopy: '＼全国60院以上の安心ネットワーク／'
                     }
@@ -2058,7 +2459,7 @@ class RankingApp {
                     priceValue: '1エリア 29,800円～',
                     priceDetail: {
                         '料金': 'クールスカルプティング®<br>1エリア 29,800円～',
-                        '施術機械': 'クールスカルプティング®エリート<br>トゥルースカルプiD<br>脂肪溶解リニアハイフ<br>オンダリフト',
+                        '医療機器': this.dataManager.getClinicText('sbc', '医療機器', 'クールスカルプティング<br>医療用EMS<br>医療ハイフ<br>ラジオ波'),
                         '目安期間': '施術内容による<br>ダウンタイムほとんどなし',
                         '営業時間': '店舗により異なる<br>多くは10:00〜19:00',
                         '対応部位': 'お腹・二の腕・太もも・顔<br>全身の気になる部位',
@@ -2082,18 +2483,18 @@ class RankingApp {
                     points: [
                         {
                             icon: 'user-md',
-                            title: '経験豊富な医師の的確な診断',
-                            description: '湘南美容クリニックでは経験豊富な医師があなたの体質やライフスタイルに合わせて最適な痩身プランを提案します。一人一人に最適化された治療で確実な結果を目指します。'
+                            title: this.dataManager.getClinicText('sbc', 'POINT1タイトル', '経験豊富な医師の的確な診断'),
+                            description: this.dataManager.getClinicText('sbc', 'POINT1内容', '湘南美容クリニックでは経験豊富な医師があなたの体質やライフスタイルに合わせて最適な痩身プランを提案します。一人一人に最適化された治療で確実な結果を目指します。')
                         },
                         {
                             icon: 'list-ul',
-                            title: '豊富なメニューで一人一人に最適化',
-                            description: '湘南美容クリニックでは豊富なメニューを用意しており、あなたの悩みや目標に合わせて最適な治療を選択できます。クールスカルプティングから脂肪溶解注射まで、一人一人に最適化した痩身治療を提供します。'
+                            title: this.dataManager.getClinicText('sbc', 'POINT2タイトル', '豊富なメニューで一人一人に最適化'),
+                            description: this.dataManager.getClinicText('sbc', 'POINT2内容', '湘南美容クリニックでは豊富なメニューを用意しており、あなたの悩みや目標に合わせて最適な治療を選択できます。クールスカルプティングから脂肪溶解注射まで、一人一人に最適化した痩身治療を提供します。')
                         },
                         {
                             icon: 'award',
-                            title: '経験豊富な医師と安心サポート',
-                            description: '湘南美容クリニックは経験豊富な医師が在籍し、あなたの不安や疑問に丁寧に答えます。最新の医療技術と安心のサポート体制で、理想のボディラインを実現します。'
+                            title: this.dataManager.getClinicText('sbc', 'POINT3タイトル', '経験豊富な医師と安心サポート'),
+                            description: this.dataManager.getClinicText('sbc', 'POINT3内容', '湘南美容クリニックは経験豊富な医師が在籍し、あなたの不安や疑問に丁寧に答えます。最新の医療技術と安心のサポート体制で、理想のボディラインを実現します。')
                         }
                     ],
                     reviews: [
@@ -2144,6 +2545,7 @@ class RankingApp {
             
             // 店舗データを動的に取得（store_view.csvに基づいてフィルタリング）
             const allStores = this.dataManager.getStoresByRegionId(regionId);
+            console.log(`🏬 地域 ${regionId} の全店舗:`, allStores.map(s => `${s.id}:${s.clinicName}`));
             
             // クリニック名のマッピング（stores.csvとitems.csvの名前の違いを解決）
             // 実際のstores.csvを確認した結果、すべて同じ名前で統一されていることが判明
@@ -2199,7 +2601,7 @@ class RankingApp {
                     ${Object.entries(data.priceDetail).map(([key, value]) => `
                         <tr>
                             <td>${key}</td>
-                            <td>${value}</td>
+                            <td>${this.dataManager.processDecoTags(value)}</td>
                         </tr>
                     `).join('')}
                 </table>
@@ -2227,10 +2629,10 @@ class RankingApp {
                             return `
                             <div class="ribbon_point_title2_s">
                                 <i class="fas ${iconClass} point-icon-inline"></i>
-                                <strong>${point.title}</strong>
+                                <strong>${this.dataManager.processDecoTags(point.title)}</strong>
                             </div>
                             <div class="ribbon_point_txt">
-                                <p style="font-size:14px;">${point.description}</p>
+                                <p style="font-size:14px;">${this.dataManager.processDecoTags(point.description)}</p>
                             </div>
                             `;
                         }).join('')}
@@ -2239,6 +2641,7 @@ class RankingApp {
                         </div>
                     </div>
                 </div>
+                
                 
                 <!-- 口コミ -->
                 <div class="reviews-section">
@@ -2967,15 +3370,15 @@ class RankingApp {
                             const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
                             if (detailButtons.length > 0) {
                                 const href = detailButtons[0].getAttribute('href');
-                                if (href?.includes('/go/dio/')) {
+                                if (href?.includes('/draft/go/dio/') || href?.includes('/go/dio/')) {
                                     clinicName = 'ディオクリニック';
-                                } else if (href?.includes('/go/eminal/')) {
+                                } else if (href?.includes('/draft/go/eminal/') || href?.includes('/go/eminal/')) {
                                     clinicName = 'エミナルクリニック';
-                                } else if (href?.includes('/go/urara/')) {
+                                } else if (href?.includes('/draft/go/urara/') || href?.includes('/go/urara/')) {
                                     clinicName = 'ウララクリニック';
-                                } else if (href?.includes('/go/lieto/')) {
+                                } else if (href?.includes('/draft/go/lieto/') || href?.includes('/go/lieto/')) {
                                     clinicName = 'リエートクリニック';
-                                } else if (href?.includes('/go/sbc/')) {
+                                } else if (href?.includes('/draft/go/sbc/') || href?.includes('/go/sbc/')) {
                                     clinicName = '湘南美容クリニック';
                                 }
                             }
@@ -3005,7 +3408,6 @@ class RankingApp {
                         }
                         
                         console.log('Final store name:', fullStoreName);
-                        console.log('Clinic name for modal:', clinicName);
                         self.showMapModal(fullStoreName, address, access, clinicName);
                     } catch (error) {
                         console.error('Error in showMapModal:', error);
@@ -3100,40 +3502,48 @@ class RankingApp {
             
             // 公式サイトボタンのURLとテキストを設定
             if (modalButton && clinicCode) {
-                // クリニック名から正しいコードを取得
-                let clinicUrlCode = '';
-                let clinicBaseName = '';
-                
+                // クリニック名をマッピング用のキーに変換
+                let clinicKey = '';
                 if (clinicCode.includes('ディオ')) {
-                    clinicUrlCode = 'dio';
-                    clinicBaseName = 'ディオクリニック';
+                    clinicKey = 'dio';
                 } else if (clinicCode.includes('エミナル')) {
-                    clinicUrlCode = 'eminal';
-                    clinicBaseName = 'エミナルクリニック';
-                } else if (clinicCode.includes('湘南')) {
-                    clinicUrlCode = 'sbc';
-                    clinicBaseName = '湘南美容クリニック';
+                    clinicKey = 'eminal';
+                } else if (clinicCode.includes('ウララ')) {
+                    clinicKey = 'urara';
                 } else if (clinicCode.includes('リエート')) {
-                    clinicUrlCode = 'lieto';
-                    clinicBaseName = 'リエートクリニック';
-                } else if (clinicCode.includes('ウララ') || clinicCode.includes('URARA')) {
-                    clinicUrlCode = 'urara';
-                    clinicBaseName = 'URARAクリニック';
-                } else {
-                    clinicUrlCode = '';
-                    clinicBaseName = 'クリニック';
+                    clinicKey = 'lieto';
+                } else if (clinicCode.includes('湘南')) {
+                    clinicKey = 'sbc';
                 }
                 
-                // URLを設定
-                if (clinicUrlCode) {
-                    modalButton.href = this.urlHandler.getClinicUrlByNameWithRegionId(clinicUrlCode);
-                } else {
-                    modalButton.href = '#';
-                }
+                const generatedUrl = this.urlHandler.getClinicUrlByNameWithRegionId(clinicKey);
+                
+                console.log('🔗 地図モーダルURL設定:', {
+                    clinicCode,
+                    clinicKey,
+                    generatedUrl
+                });
+                
+                modalButton.href = generatedUrl;
                 
                 // ボタンテキストを設定
                 const buttonText = document.getElementById('map-modal-button-text');
                 if (buttonText) {
+                    // クリニック名を取得
+                    let clinicBaseName = '';
+                    if (clinicCode.includes('ディオ')) {
+                        clinicBaseName = 'ディオクリニック';
+                    } else if (clinicCode.includes('エミナル')) {
+                        clinicBaseName = 'エミナルクリニック';
+                    } else if (clinicCode.includes('湘南')) {
+                        clinicBaseName = '湘南美容クリニック';
+                    } else if (clinicCode.includes('リエート')) {
+                        clinicBaseName = 'リエートクリニック';
+                    } else if (clinicCode.includes('ウララ')) {
+                        clinicBaseName = 'ウララクリニック';
+                    } else {
+                        clinicBaseName = 'クリニック';
+                    }
                     buttonText.textContent = clinicBaseName + 'の公式サイト';
                 }
             }
