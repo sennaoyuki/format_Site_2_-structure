@@ -119,9 +119,9 @@
         const gclid = urlParams.get('gclid');
         console.log('🔍 GCLID検出:', gclid || 'なし');
         
-        // ad_idを取得
-        const ad_id = urlParams.get('ad_id');
-        console.log('🔍 AD_ID検出:', ad_id || 'なし');
+        // utm_creativeを取得
+        const utm_creative = urlParams.get('utm_creative');
+        console.log('🔍 UTM_CREATIVE検出:', utm_creative || 'なし');
         
         // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
         let processedBaseUrl = baseUrl;
@@ -135,26 +135,30 @@
             console.log('⚠️ GCLIDなし: プレースホルダーを空文字で置換');
         }
         
-        // [ADID_PLACEHOLDER]をad_idで置換（ad_idがある場合）
-        if (ad_id && processedBaseUrl.includes('ADID_PLACEHOLDER')) {
-            processedBaseUrl = processedBaseUrl.replace('ADID_PLACEHOLDER', ad_id);
-            console.log('🔄 AD_ID置換実行:', ad_id);
+        // UTM_CREATIVE_PLACEHOLDERをutm_creativeで置換（utm_creativeがある場合）
+        if (utm_creative && processedBaseUrl.includes('UTM_CREATIVE_PLACEHOLDER')) {
+            processedBaseUrl = processedBaseUrl.replace('UTM_CREATIVE_PLACEHOLDER', utm_creative);
+            console.log('🔄 UTM_CREATIVE置換実行:', utm_creative);
             console.log('✅ param2置換後URL:', processedBaseUrl);
-        } else if (processedBaseUrl.includes('ADID_PLACEHOLDER')) {
-            // ad_idがない場合はプレースホルダーを空文字で置換
-            processedBaseUrl = processedBaseUrl.replace('ADID_PLACEHOLDER', '');
-            console.log('⚠️ AD_IDなし: プレースホルダーを空文字で置換');
+        } else if (processedBaseUrl.includes('UTM_CREATIVE_PLACEHOLDER')) {
+            // utm_creativeがない場合はプレースホルダーを空文字で置換
+            processedBaseUrl = processedBaseUrl.replace('UTM_CREATIVE_PLACEHOLDER', '');
+            console.log('⚠️ UTM_CREATIVEなし: プレースホルダーを空文字で置換');
         }
         
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(processedBaseUrl);
         
         // 追跡用パラメータをparam4に統合
+        // リファラー取得機能を保持するため、現在のページURLをベースURLのみ（パラメータなし）で保存
+        const currentPageWithParams = window.location.href;
+        const baseReferrerUrl = currentPageWithParams.split('?')[0];
         const trackingParams = {
             click_section: urlParams.get('click_section') || '',
             click_clinic: urlParams.get('click_clinic') || '',
             source_page: urlParams.get('source_page') || '',
             region_id: urlParams.get('region_id') || '013',
+            referrer_url: baseReferrerUrl,  // リファラー取得機能を保持
             timestamp: new Date().toISOString()
         };
         
@@ -166,7 +170,7 @@
         redirectUrl.searchParams.set('region_id', trackingParams.region_id);
         
         // UTMパラメータなどその他のパラメータも引き継ぎ
-        const preserveParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        const preserveParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_creative'];
         preserveParams.forEach(param => {
             const value = urlParams.get(param);
             if (value) {
@@ -176,8 +180,6 @@
         
         const finalUrl = redirectUrl.toString();
         
-        // 現在のページURL（パラメータ付き）をログ出力
-        const currentPageWithParams = window.location.href;
         console.log('🔍 送信予定のリファラー:', currentPageWithParams);
         console.log('🎯 最終遷移先:', finalUrl);
         
