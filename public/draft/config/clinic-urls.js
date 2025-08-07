@@ -5,7 +5,7 @@ const CLINIC_URLS = {
     // ディオクリニック
     dio: {
         name: 'ディオクリニック',
-        baseUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]',
+        baseUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]',
         // 必要に応じて追加のパラメータを設定可能
         defaultParams: {}
     },

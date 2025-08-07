@@ -38,8 +38,16 @@ class UrlParamHandler {
             '5': '/go/sbc/'
         };
         
-        const redirectUrl = redirectUrls[clinicId];
+        let redirectUrl = redirectUrls[clinicId];
         if (!redirectUrl) return '#';
+        
+        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
+            const topDir = pathSegments[0];
+            redirectUrl = `/${topDir}${redirectUrl}`;
+        }
         
         // 現在のURLパラメータを全て取得
         const currentParams = new URLSearchParams(window.location.search);
@@ -64,8 +72,16 @@ class UrlParamHandler {
             'sbc': '/go/sbc/'
         };
         
-        const redirectUrl = redirectUrls[clinicName];
+        let redirectUrl = redirectUrls[clinicName];
         if (!redirectUrl) return '#';
+        
+        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
+            const topDir = pathSegments[0];
+            redirectUrl = `/${topDir}${redirectUrl}`;
+        }
         
         // 現在のURLパラメータを全て取得
         const currentParams = new URLSearchParams(window.location.search);

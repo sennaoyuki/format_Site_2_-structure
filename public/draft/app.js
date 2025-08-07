@@ -14,7 +14,7 @@ function getClinicUrlFromConfig(clinicId) {
     }
     
     // フォールバック
-    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
 }
 
 // URLパラメータ処理クラス
@@ -50,15 +50,23 @@ class UrlParamHandler {
     // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlWithRegionId(clinicId) {
         const redirectUrls = {
-            '1': '/draft/go/dio/',
-            '2': '/draft/go/eminal/',
-            '3': '/draft/go/urara/',
-            '4': '/draft/go/lieto/',
-            '5': '/draft/go/sbc/'
+            '1': '/go/dio/',
+            '2': '/go/eminal/',
+            '3': '/go/urara/',
+            '4': '/go/lieto/',
+            '5': '/go/sbc/'
         };
         
-        const redirectUrl = redirectUrls[clinicId];
+        let redirectUrl = redirectUrls[clinicId];
         if (!redirectUrl) return '#';
+        
+        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
+            const topDir = pathSegments[0];
+            redirectUrl = `/${topDir}${redirectUrl}`;
+        }
         
         // 現在のURLパラメータを全て取得
         const currentParams = new URLSearchParams(window.location.search);
@@ -76,15 +84,23 @@ class UrlParamHandler {
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
     getClinicUrlByNameWithRegionId(clinicName) {
         const redirectUrls = {
-            'dio': '/draft/go/dio/',
-            'eminal': '/draft/go/eminal/',
-            'urara': '/draft/go/urara/',
-            'lieto': '/draft/go/lieto/',
-            'sbc': '/draft/go/sbc/'
+            'dio': '/go/dio/',
+            'eminal': '/go/eminal/',
+            'urara': '/go/urara/',
+            'lieto': '/go/lieto/',
+            'sbc': '/go/sbc/'
         };
         
-        const redirectUrl = redirectUrls[clinicName];
+        let redirectUrl = redirectUrls[clinicName];
         if (!redirectUrl) return '#';
+        
+        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
+            const topDir = pathSegments[0];
+            redirectUrl = `/${topDir}${redirectUrl}`;
+        }
         
         // 現在のURLパラメータを全て取得
         const currentParams = new URLSearchParams(window.location.search);
@@ -3025,15 +3041,15 @@ class RankingApp {
                             const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
                             if (detailButtons.length > 0) {
                                 const href = detailButtons[0].getAttribute('href');
-                                if (href?.includes('/draft/go/dio/') || href?.includes('/go/dio/')) {
+                                if (href?.includes('/go/dio/')) {
                                     clinicName = 'ディオクリニック';
-                                } else if (href?.includes('/draft/go/eminal/') || href?.includes('/go/eminal/')) {
+                                } else if (href?.includes('/go/eminal/')) {
                                     clinicName = 'エミナルクリニック';
-                                } else if (href?.includes('/draft/go/urara/') || href?.includes('/go/urara/')) {
+                                } else if (href?.includes('/go/urara/')) {
                                     clinicName = 'ウララクリニック';
-                                } else if (href?.includes('/draft/go/lieto/') || href?.includes('/go/lieto/')) {
+                                } else if (href?.includes('/go/lieto/')) {
                                     clinicName = 'リエートクリニック';
-                                } else if (href?.includes('/draft/go/sbc/') || href?.includes('/go/sbc/')) {
+                                } else if (href?.includes('/go/sbc/')) {
                                     clinicName = '湘南美容クリニック';
                                 }
                             }

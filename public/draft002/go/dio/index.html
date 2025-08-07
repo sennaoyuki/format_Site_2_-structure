@@ -97,7 +97,7 @@
     </div>
 
     <!-- Centralized Clinic URLs -->
-    <script src="/config/clinic-urls.js"></script>
+    <script src="/config/clinic-urls.js?v=2.1.0&t=20250807_1230"></script>
     
     <script>
         // URLパラメータを取得
@@ -106,7 +106,7 @@
         // ベースURL（中央管理から取得）
         const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.dio ? 
             window.CLINIC_URLS.dio.baseUrl : 
-            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
+            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=ADID_PLACEHOLDER&param3=GCLID_PLACEHOLDER';
         
         // gclidとad_idを取得
         const gclid = urlParams.get('gclid');

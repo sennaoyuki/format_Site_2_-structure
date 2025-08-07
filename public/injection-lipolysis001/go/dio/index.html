@@ -5,11 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ディオクリニック公式サイトへ移動中...</title>
     <meta name="description" content="ディオクリニックの公式サイトへリダイレクトしています。">
-    <!-- リファラーポリシーを明示的に設定（パラメータ含む完全URL送信） -->
     <meta name="referrer" content="unsafe-url">
-    <!-- 追加のリファラー強制送信設定 -->
-    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
     <link rel="icon" type="image/png" href="/images/favicon.png">
+    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
     <!-- Analytics -->
     <script src="/analytics.js"></script>
     <style>
@@ -97,7 +95,7 @@
     </div>
 
     <!-- Centralized Clinic URLs -->
-    <script src="/config/clinic-urls.js"></script>
+    <script src="/config/clinic-urls.js?v=2.1.0&t=20250807_1230"></script>
     
     <script>
         // URLパラメータを取得
@@ -110,41 +108,42 @@
         for (const [key, value] of urlParams) {
             console.log(`  ${key}: ${value}`);
         }
-        
-        
-        // param4の確認
-        if (finalUrl.includes('param4=')) {
-            const param4Match = finalUrl.match(/param4=([^&]*)/);
-            if (param4Match && param4Match[1]) {
-                try {
-                    const decodedParam4 = JSON.parse(decodeURIComponent(param4Match[1]));
-                    console.log('✅ param4設定済み:', decodedParam4);
-                } catch (e) {
-                    console.log('✅ param4設定済み (デコード不可):', param4Match[1]);
-                }
-            }
-        }
         console.log('=============================================');
         
         // ベースURL（中央管理から取得）
         const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.dio ? 
             window.CLINIC_URLS.dio.baseUrl : 
-            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=ADID_PLACEHOLDER&param3=GCLID_PLACEHOLDER';
         
         // gclidを取得
         const gclid = urlParams.get('gclid');
         console.log('🔍 GCLID検出:', gclid || 'なし');
         
+        // ad_idを取得
+        const ad_id = urlParams.get('ad_id');
+        console.log('🔍 AD_ID検出:', ad_id || 'なし');
+        
         // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
         let processedBaseUrl = baseUrl;
-        if (gclid && processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
-            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', gclid);
+        if (gclid && processedBaseUrl.includes('GCLID_PLACEHOLDER')) {
+            processedBaseUrl = processedBaseUrl.replace('GCLID_PLACEHOLDER', gclid);
             console.log('🔄 GCLID置換実行:', gclid);
             console.log('✅ 置換後URL:', processedBaseUrl);
-        } else if (processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
+        } else if (processedBaseUrl.includes('GCLID_PLACEHOLDER')) {
             // gclidがない場合はプレースホルダーを空文字で置換
-            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', '');
+            processedBaseUrl = processedBaseUrl.replace('GCLID_PLACEHOLDER', '');
             console.log('⚠️ GCLIDなし: プレースホルダーを空文字で置換');
+        }
+        
+        // [ADID_PLACEHOLDER]をad_idで置換（ad_idがある場合）
+        if (ad_id && processedBaseUrl.includes('ADID_PLACEHOLDER')) {
+            processedBaseUrl = processedBaseUrl.replace('ADID_PLACEHOLDER', ad_id);
+            console.log('🔄 AD_ID置換実行:', ad_id);
+            console.log('✅ param2置換後URL:', processedBaseUrl);
+        } else if (processedBaseUrl.includes('ADID_PLACEHOLDER')) {
+            // ad_idがない場合はプレースホルダーを空文字で置換
+            processedBaseUrl = processedBaseUrl.replace('ADID_PLACEHOLDER', '');
+            console.log('⚠️ AD_IDなし: プレースホルダーを空文字で置換');
         }
         
         // パラメータを引き継いでリダイレクトURLを構築
@@ -173,14 +172,14 @@
             if (value) {
                 redirectUrl.searchParams.set(param, value);
             }
-        })
+        });
         
         const finalUrl = redirectUrl.toString();
         
         // 現在のページURL（パラメータ付き）をログ出力
         const currentPageWithParams = window.location.href;
         console.log('🔍 送信予定のリファラー:', currentPageWithParams);
-        console.log('🎯 最終遷移先URL:', finalUrl);
+        console.log('🎯 最終遷移先:', finalUrl);
         
         // param3の確認
         if (finalUrl.includes('param3=')) {
@@ -192,6 +191,31 @@
             }
         } else {
             console.log('❌ param3がURLに含まれていません');
+        }
+        
+        
+        // param2の確認
+        if (finalUrl.includes('param2=')) {
+            const param2Match = finalUrl.match(/param2=([^&]*)/);
+            if (param2Match && param2Match[1]) {
+                console.log('✅ param2設定済み:', param2Match[1]);
+            } else {
+                console.log('⚠️ param2は存在するが値が空');
+            }
+        } else {
+            console.log('❌ param2がURLに含まれていません');
+        }
+        // param4の確認
+        if (finalUrl.includes('param4=')) {
+            const param4Match = finalUrl.match(/param4=([^&]*)/);
+            if (param4Match && param4Match[1]) {
+                try {
+                    const decodedParam4 = JSON.parse(decodeURIComponent(param4Match[1]));
+                    console.log('✅ param4設定済み:', decodedParam4);
+                } catch (e) {
+                    console.log('✅ param4設定済み (デコード不可):', param4Match[1]);
+                }
+            }
         }
         console.log('=============================================');
         

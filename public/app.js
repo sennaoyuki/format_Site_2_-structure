@@ -38,8 +38,16 @@ class UrlParamHandler {
             '5': '/go/sbc/'
         };
         
-        const redirectUrl = redirectUrls[clinicId];
+        let redirectUrl = redirectUrls[clinicId];
         if (!redirectUrl) return '#';
+        
+        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
+            const topDir = pathSegments[0];
+            redirectUrl = `/${topDir}${redirectUrl}`;
+        }
         
         // 現在のURLパラメータを全て取得
         const currentParams = new URLSearchParams(window.location.search);
@@ -64,8 +72,16 @@ class UrlParamHandler {
             'sbc': '/go/sbc/'
         };
         
-        const redirectUrl = redirectUrls[clinicName];
+        let redirectUrl = redirectUrls[clinicName];
         if (!redirectUrl) return '#';
+        
+        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
+        const currentPath = window.location.pathname;
+        const pathSegments = currentPath.split('/').filter(segment => segment);
+        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
+            const topDir = pathSegments[0];
+            redirectUrl = `/${topDir}${redirectUrl}`;
+        }
         
         // 現在のURLパラメータを全て取得
         const currentParams = new URLSearchParams(window.location.search);
@@ -1741,7 +1757,7 @@ class RankingApp {
                         '営業時間': '平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始',
                         '対応部位': '顔全体／二の腕／お腹／お尻／太もも／その他',
                         '店舗': '北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡',
-                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]'
+                        '公式サイト': 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]'
                     },
                     vioPlans: {
                         vioOnly: {
@@ -1803,7 +1819,7 @@ class RankingApp {
                         logoSrc: '/images/clinics/dio/dio-logo.webp',
                         logoAlt: 'ディオクリニック',
                         description: '今なら12ヶ月分が0円！<br>痩せなければ返金保証あり',
-                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]',
+                        ctaUrl: 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]',
                         ctaText: 'ディオクリニックの公式サイト',
                         microcopy: '＼外来実績50万件以上の実績で安心／'
                     }

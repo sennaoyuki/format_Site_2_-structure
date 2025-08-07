@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ディオクリニック公式サイトへ移動中...</title>
     <meta name="description" content="ディオクリニックの公式サイトへリダイレクトしています。">
+    <meta name="referrer" content="unsafe-url">
     <link rel="icon" type="image/png" href="/images/favicon.png">
+    <meta http-equiv="Content-Security-Policy" content="referrer unsafe-url">
     <!-- Analytics -->
     <script src="/analytics.js"></script>
     <style>
@@ -89,9 +91,12 @@
             移動しない場合は下のボタンをクリックしてください。
         </p>
         <div class="countdown" id="countdown">3秒後に移動します...</div>
-        <a href="#" id="manualLink" class="manual-link" style="display: none;">ディオクリニック公式サイトへ</a>
+        <a href="#" id="manualLink" class="manual-link">ディオクリニック公式サイトへ</a>
     </div>
 
+    <!-- Centralized Clinic URLs with Cache Busting -->
+    <script src="/config/clinic-urls.js?v=2.4.0&t=20250807_1700"></script>
+    
     <script>
         // URLパラメータを取得
         const urlParams = new URLSearchParams(window.location.search);
@@ -105,23 +110,53 @@
         }
         console.log('=============================================');
         
-        // ベースURL
-        const baseUrl = 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+        // ベースURL（中央管理から取得）
+        const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.dio ? 
+            window.CLINIC_URLS.dio.baseUrl : 
+            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=UTM_CREATIVE_PLACEHOLDER&param3=GCLID_PLACEHOLDER';
+            
+        console.log('🔧 デバッグ情報:');
+        console.log('  - CLINIC_URLS存在:', !!window.CLINIC_URLS);
+        console.log('  - dio設定存在:', !!(window.CLINIC_URLS && window.CLINIC_URLS.dio));
+        console.log('  - 取得したbaseUrl:', baseUrl);
         
         // gclidを取得
         const gclid = urlParams.get('gclid');
         console.log('🔍 GCLID検出:', gclid || 'なし');
         
-        // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
+        // utm_creativeを取得
+        const utm_creative = urlParams.get('utm_creative');
+        console.log('🔍 UTM_CREATIVE検出:', utm_creative || 'なし');
+        
+        // GCLID_PLACEHOLDERをgclidで置換（gclidがある場合）
         let processedBaseUrl = baseUrl;
-        if (gclid && processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
-            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', gclid);
+        console.log('🔄 GCLID置換前URL:', processedBaseUrl);
+        console.log('🔍 GCLID_PLACEHOLDER検出:', processedBaseUrl.includes('GCLID_PLACEHOLDER'));
+        if (gclid && processedBaseUrl.includes('GCLID_PLACEHOLDER')) {
+            console.log('🔄 置換実行: GCLID_PLACEHOLDER → ' + gclid);
+            processedBaseUrl = processedBaseUrl.replace('GCLID_PLACEHOLDER', gclid);
             console.log('🔄 GCLID置換実行:', gclid);
             console.log('✅ 置換後URL:', processedBaseUrl);
-        } else if (processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
+        } else if (processedBaseUrl.includes('GCLID_PLACEHOLDER')) {
             // gclidがない場合はプレースホルダーを空文字で置換
-            processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', '');
+            processedBaseUrl = processedBaseUrl.replace('GCLID_PLACEHOLDER', '');
             console.log('⚠️ GCLIDなし: プレースホルダーを空文字で置換');
+        }
+        
+        // UTM_CREATIVE_PLACEHOLDERをutm_creativeで置換（utm_creativeがある場合）
+        console.log('🔄 UTM_CREATIVE置換前URL:', processedBaseUrl);
+        console.log('🔍 UTM_CREATIVE_PLACEHOLDER検出:', processedBaseUrl.includes('UTM_CREATIVE_PLACEHOLDER'));
+        if (utm_creative && processedBaseUrl.includes('UTM_CREATIVE_PLACEHOLDER')) {
+            console.log('🔄 置換実行: UTM_CREATIVE_PLACEHOLDER → ' + utm_creative);
+            processedBaseUrl = processedBaseUrl.replace('UTM_CREATIVE_PLACEHOLDER', utm_creative);
+            console.log('🔄 UTM_CREATIVE置換実行:', utm_creative);
+            console.log('✅ param2置換後URL:', processedBaseUrl);
+        } else if (processedBaseUrl.includes('UTM_CREATIVE_PLACEHOLDER')) {
+            // utm_creativeがない場合はプレースホルダーを空文字で置換
+            processedBaseUrl = processedBaseUrl.replace('UTM_CREATIVE_PLACEHOLDER', '');
+            console.log('⚠️ UTM_CREATIVEなし: プレースホルダーを空文字で置換');
+        } else {
+            console.log('❌ UTM_CREATIVE_PLACEHOLDER が見つかりません');
         }
         
         // パラメータを引き継いでリダイレクトURLを構築
@@ -144,7 +179,7 @@
         redirectUrl.searchParams.set('region_id', trackingParams.region_id);
         
         // UTMパラメータなどその他のパラメータも引き継ぎ
-        const preserveParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+        const preserveParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'utm_creative'];
         preserveParams.forEach(param => {
             const value = urlParams.get(param);
             if (value) {
@@ -154,8 +189,38 @@
         
         const finalUrl = redirectUrl.toString();
         
-        // 最終URLログ出力
-        console.log('🎯 最終遷移先URL:', finalUrl);
+        // 現在のページURL（パラメータ付き）をログ出力
+        let currentPageWithParams = window.location.href;
+        
+        // source_pageパラメータから元のページを取得して相対パス修正
+        const sourcePage = urlParams.get('source_page');
+        if (sourcePage && sourcePage.startsWith('/') && sourcePage !== '/' && !currentPageWithParams.includes(sourcePage.replace('/', ''))) {
+            // source_pageが/medical-diet001/のような場合、リファラーも相対パスに修正
+            const sourceDir = sourcePage.replace(/^\/|\/$/g, ''); // 前後のスラッシュを除去
+            if (sourceDir && currentPageWithParams.includes('/go/dio/')) {
+                currentPageWithParams = currentPageWithParams.replace('/go/dio/', `/${sourceDir}/go/dio/`);
+                console.log('🔄 リファラーパス修正:', {
+                    元のパス: window.location.href,
+                    source_page: sourcePage,
+                    修正後: currentPageWithParams
+                });
+            }
+        }
+        
+        console.log('🔍 送信予定のリファラー:', currentPageWithParams);
+        console.log('🎯 最終遷移先:', finalUrl);
+        
+        // param2の確認
+        if (finalUrl.includes('param2=')) {
+            const param2Match = finalUrl.match(/param2=([^&]*)/);
+            if (param2Match && param2Match[1]) {
+                console.log('✅ param2設定済み:', param2Match[1]);
+            } else {
+                console.log('⚠️ param2は存在するが値が空');
+            }
+        } else {
+            console.log('❌ param2がURLに含まれていません');
+        }
         
         // param3の確認
         if (finalUrl.includes('param3=')) {
@@ -208,17 +273,43 @@
                 countdownElement.textContent = '移動中...';
                 clearInterval(timer);
                 
-                // 3秒後にリダイレクト
+                // CATSにパラメータ付きリファラーを確実に送信
                 setTimeout(() => {
-                    window.location.href = finalUrl;
+                    console.log('📤 リダイレクト実行:', {
+                        from: window.location.href,
+                        to: finalUrl,
+                        referrerPolicy: document.querySelector('meta[name="referrer"]')?.content
+                    });
+                    
+                    // リダイレクトフラグを設定
+                    let redirected = false;
+                    
+                    // 方法1: window.location.hrefでのリダイレクト
+                    try {
+                        window.location.href = finalUrl;
+                        redirected = true;
+                        console.log('✅ リダイレクト実行');
+                    } catch (e) {
+                        console.error('❌ リダイレクトエラー:', e);
+                    }
+                    
+                    // フォールバック: 3秒後にまだページにいる場合のみ
+                    setTimeout(() => {
+                        if (!redirected && window.location.href.includes('/go/')) {
+                            console.log('⚠️ フォールバックリダイレクト実行');
+                            window.location.replace(finalUrl);
+                        }
+                    }, 3000)
                 }, 500);
             }
         }, 1000);
         
-        // 5秒後に手動リンクを表示（何らかの理由でリダイレクトが失敗した場合）
+        // 3秒後のリダイレクト後、さらに2秒経っても同じページにいる場合に警告表示
         setTimeout(() => {
-            manualLink.style.display = 'inline-block';
-            countdownElement.textContent = '自動移動に時間がかかっています。下のボタンをクリックしてください。';
+            if (window.location.href.includes('/go/dio/')) {
+                countdownElement.textContent = '自動移動に時間がかかっています。下のボタンをクリックしてください。';
+                countdownElement.style.color = '#ff6b6b';
+            }
         }, 5000);
     </script>
 </body>
