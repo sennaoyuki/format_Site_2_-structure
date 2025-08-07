@@ -86,10 +86,10 @@
         <h1 class="redirect-message">リエートクリニック公式サイトへ移動中...</h1>
         <p class="redirect-description">
             まもなく自動的にリエートクリニックの公式サイトへリダイレクトします。<br>
-            移動しない場合は下のリンクをクリックしてください。
+            移動しない場合は下のボタンをクリックしてください。
         </p>
-        <div class="countdown" id="countdown">2秒後に移動します...</div>
-        <a href="#" id="manualLink" class="manual-link">https://lietoclinic.com/</a>
+        <div class="countdown" id="countdown">3秒後に移動します...</div>
+        <a href="#" id="manualLink" class="manual-link" style="display: none;">リエートクリニック公式サイトへ</a>
     </div>
 
     <script>
@@ -98,9 +98,6 @@
         
         // ベースURL
         const baseUrl = 'https://lietoclinic.com/lpbot/lpbot07kana15';
-        
-        // processedBaseUrlを定義
-        let processedBaseUrl = baseUrl;
         
         // パラメータを引き継いでリダイレクトURLを構築
         const redirectUrl = new URL(processedBaseUrl);
@@ -116,9 +113,6 @@
         
         // param4として追跡データをエンコード
         redirectUrl.searchParams.set('param4', encodeURIComponent(JSON.stringify(trackingParams)));
-        
-        // gclidを取得
-        const gclid = urlParams.get('gclid');
         
         // 重要なパラメータは個別に引き継ぎ（アフィリエイト側で必須の場合）
         redirectUrl.searchParams.set('gclid', gclid || '');
@@ -148,7 +142,7 @@
         }
         
         // カウントダウン機能
-        let countdown = 2;
+        let countdown = 3;
         const countdownElement = document.getElementById('countdown');
         const manualLink = document.getElementById('manualLink');
         
@@ -160,7 +154,7 @@
                 countdownElement.textContent = '移動中...';
                 clearInterval(timer);
                 
-                // 2秒後にリダイレクト
+                // 3秒後にリダイレクト
                 setTimeout(() => {
                     window.location.href = finalUrl;
                 }, 500);

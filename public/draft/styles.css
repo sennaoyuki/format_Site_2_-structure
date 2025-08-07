@@ -1,6 +1,6 @@
 /* ===== 医療系クリニック比較サイト専用CSS ===== */
 
-/* Vercel deployment trigger - 2025/01/22 17:47 */
+/* Vercel deployment trigger - 2025/08/05 08:32:19 */
 
 /* グローバルリセット */
 *, *::before, *::after {
@@ -672,9 +672,10 @@ select {
 
 /* POINTセクション - クリニック詳細内 */
 .clinic-points-section {
-    margin: 30px 0;
-    padding: 0;
-    background: white;
+    margin: 20px 0 !important;
+    padding: 2% !important;
+    background: #fff !important;
+    border-radius: 8px !important;
 }
 
 .clinic-points-section .section-title {
@@ -1775,24 +1776,22 @@ section.clinic-rankings .ranking-header-banner {
 
 /* クリニックカード */
 .clinic-card {
-    margin: 0%;
     padding: 38px 4px 8px;
-    border-radius: 15px;
-    border-width: 1px;
-    border-style: solid;
+    border-radius: 5px;
+    border: 1px solid #E0E0E0;
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     height: 100%;
     min-height: 310px;
     position: relative;
-    transition: border-color 0.3s ease;
 }
 
 .rank-1 .clinic-card {
     border-color: #E0E0E0;
     background-color: #FFFFFF;
     text-align: center;
+    background: rgb(247 255 0 / 21%);
 }
 
 .rank-2 .clinic-card {
@@ -1832,7 +1831,7 @@ section.clinic-rankings .ranking-header-banner {
     padding: 3px 10px;
     font-size: 0.8rem;
     margin-bottom: 5px;
-    border-radius: 4px;
+    border-radius: 0px;
     margin-top: 30px;
     display: inline-block;
     font-weight: 700;
@@ -3872,8 +3871,8 @@ section.clinic-rankings .ranking-header-banner {
     
     .clinic-card {
         padding: 38px 4px 8px;
-        border-radius: 15px;
-        border-width: 3px;
+        border-radius: 5px;
+        border: 1px solid #E0E0E0;
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -3886,7 +3885,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 3px 10px;
         font-size: 0.8rem;
         margin-bottom: 5px;
-        border-radius: 12px;
+        border-radius: 0px;
         margin-top: 30px;
     }
     
@@ -3901,7 +3900,7 @@ section.clinic-rankings .ranking-header-banner {
     }
     
     .score-max {
-        font-size: 0.6rem;
+        font-size: 0.8rem;
     }
     
     .clinic-logo-section {
@@ -4521,7 +4520,7 @@ section.clinic-rankings .ranking-header-banner {
     
     .clinic-points-section .ribbon_point_title2_s strong {
         font-size: 13px;
-        margin: 0px 0px 0px 22px;
+        margin: 0px 0px 0px 10px;
     }
     
     .clinic-points-section .ribbon_point_txt p {
@@ -5228,7 +5227,7 @@ section.clinic-rankings .ranking-header-banner {
         padding: 5px 0px;
         font-size: 0.7rem;
         gap: 0px;
-        border-radius: 8px;
+        border-radius: 4px;
     }
     
     .clinic-card .btn.btn_second_primary .bt_s {
@@ -6348,254 +6347,3 @@ section.clinic-rankings .ranking-header-banner {
     margin: 8px 0;
 }
 
-/* ===== CASEスライダー ===== */
-.case-slider {
-    margin: 0;
-    position: relative;
-    text-align: center;
-}
-
-/* スライダー初期化前の表示 */
-.case-slider:not(.slick-initialized) > div {
-    display: none;
-}
-
-.case-slider:not(.slick-initialized) > div:first-child {
-    display: block;
-}
-
-/* スライダー初期化後 */
-.case-slider.slick-initialized .slick-list {
-    overflow: hidden;
-}
-
-.case-slider.slick-initialized .slick-track {
-    display: flex;
-}
-
-.case-slider.slick-initialized .slick-slide {
-    height: auto;
-}
-
-.case-slider img {
-    width: 100%;
-    max-width: 600px;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-    max-height: 400px;
-    object-fit: contain;
-}
-
-/* Slickのドット */
-.case-slider .slick-dots {
-    position: relative;
-    bottom: auto;
-    margin-top: 10px;
-    text-align: center;
-    list-style: none;
-    padding: 0;
-    width: 100%;
-    max-width: 100%;
-    overflow: hidden;
-}
-
-.case-slider .slick-dots li {
-    display: inline-block;
-    margin: 0 3px;
-}
-
-.case-slider .slick-dots li button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    font-size: 0;
-}
-
-.case-slider .slick-dots li button:before {
-    content: '•';
-    font-size: 14px;
-    color: #ddd;
-}
-
-.case-slider .slick-dots li.slick-active button:before {
-    color: #ff7094;
-}
-
-/* Slickの矢印 */
-.case-slider .slick-prev,
-.case-slider .slick-next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(255, 112, 148, 0.8);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    cursor: pointer;
-    z-index: 1;
-    color: white;
-    font-size: 0;
-}
-
-.case-slider .slick-prev:hover,
-.case-slider .slick-next:hover {
-    background: rgba(255, 112, 148, 1);
-}
-
-.case-slider .slick-prev {
-    left: -2%;
-    top: 70%;
-}
-
-.case-slider .slick-next {
-    right: -2%;
-    top: 70%;
-}
-
-.case-slider .slick-prev:before,
-.case-slider .slick-next:before {
-    content: '←';
-    font-size: 20px;
-    color: white;
-}
-
-.case-slider .slick-next:before {
-    content: '→';
-}
-
-/* SP版対応 */
-@media (max-width: 768px) {
-    /* CASEセクション全体の調整 */
-    .clinic-points-section {
-        margin-bottom: 15px;
-    }
-    
-    /* SPでも写真を確実に中央寄せ */
-    .case-slider {
-        text-align: center !important;
-    }
-    
-    .case-slider .slick-list,
-    .case-slider .slick-track {
-        text-align: center !important;
-    }
-    
-    .case-slider .slick-slide {
-        text-align: center !important;
-    }
-    
-    .case-slider .slick-slide > div {
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        width: 100% !important;
-    }
-    
-    /* SP版での画像表示修正 - レスポンシブ対応 */
-    .case-slider.slick-initialized {
-        height: auto !important;
-        min-height: 200px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-list {
-        height: auto !important;
-        min-height: 200px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-track {
-        height: auto !important;
-        min-height: 200px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-slide {
-        height: auto !important;
-        min-height: 200px !important;
-    }
-    
-    .case-slider.slick-initialized .slick-slide > div {
-        height: auto !important;
-        min-height: 200px !important;
-    }
-    
-    /* 画像の幅を画面幅に応じて調整 */
-    .case-slider .slick-slide img {
-        padding: 10px;
-        width: 100% !important;
-        max-width: 320px !important;
-        height: auto !important;
-        max-height: 180px !important;
-        object-fit: contain !important;
-        margin: 0 auto !important;
-        display: block !important;
-        box-sizing: border-box !important;
-    }
-    
-    .case-slider .slick-prev,
-    .case-slider .slick-next {
-        width: 30px;
-        height: 30px;
-    }
-    
-    .case-slider .slick-prev {
-        left: -2%;
-        top: 70%;
-    }
-    
-    .case-slider .slick-next {
-        right: -2%;
-        top: 70%;
-    }
-    
-    .case-slider .slick-prev:before,
-    .case-slider .slick-next:before {
-        font-size: 16px;
-    }
-    
-    .case-slider .slick-dots {
-        margin-top: 15px;
-    }
-    
-    .case-slider .slick-dots li {
-        margin: 0 2px;
-    }
-    
-    .case-slider .slick-dots li button:before {
-        font-size: 12px;
-    }
-    
-    /* タッチデバイス対応 */
-    .case-slider {
-        touch-action: pan-y;
-    }
-}
-
-/* より小さい画面（375px以下）の調整 */
-@media (max-width: 375px) {
-    .ribbon_point_box_no {
-        padding: 0 !important;
-    }
-    
-    /* 375px以下では画像幅をさらに調整 */
-    .case-slider .slick-slide img {
-        width: 100% !important;
-        max-width: 300px !important;
-        height: auto !important;
-        max-height: 180px !important;
-        object-fit: contain !important;
-    }
-    
-    /* スライドの幅を確保 */
-    .case-slider .slick-slide {
-        width: 100% !important;
-        min-width: 280px !important;
-    }
-    
-    .case-slider .slick-slide > div {
-        width: 100% !important;
-        display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-    }
-}
