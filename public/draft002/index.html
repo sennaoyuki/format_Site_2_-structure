@@ -1310,7 +1310,7 @@ text-align: center;
                 return window.CLINIC_URLS[clinicSlug].baseUrl;
             }
             // フォールバック（念のため）
-            return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+            return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
         }
 
         // 3つの理由を設定
@@ -1433,6 +1433,11 @@ text-align: center;
                             ${caseImages.map((image, index) => `
                                 <div class="case-slide">
                                     <img src="${image.src}" alt="${image.alt}" loading="lazy">
+                                    <div class="case-info">
+                                        <div class="case-course-name">コース名：医療痩身ボディメイクコース</div>
+                                        <div class="case-treatment">施術の説明：直流EMS、電磁場EMS、脂肪冷却、ボディハイフ、医師監修ダイエット食事指導、オーダーメイド薬セット・医師による薬指導、医師推奨プロテイン</div>
+                                        <div class="case-risk">施術の副作用（リスク）：筋肉痛、赤み、腫れ、内出血、しこり、低血糖、吐気、嘔吐、便秘、下痢の症状が出る場合があります。</div>
+                                    </div>
                                 </div>
                             `).join('')}
                         </div>

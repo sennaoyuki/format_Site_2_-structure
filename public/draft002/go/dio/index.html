@@ -106,10 +106,11 @@
         // ベースURL（中央管理から取得）
         const baseUrl = window.CLINIC_URLS && window.CLINIC_URLS.dio ? 
             window.CLINIC_URLS.dio.baseUrl : 
-            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+            'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
         
-        // gclidを取得
+        // gclidとad_idを取得
         const gclid = urlParams.get('gclid');
+        const ad_id = urlParams.get('ad_id');
         
         // [GCLID_PLACEHOLDER]をgclidで置換（gclidがある場合）
         let processedBaseUrl = baseUrl;
@@ -119,6 +120,15 @@
         } else if (processedBaseUrl.includes('[GCLID_PLACEHOLDER]')) {
             // gclidがない場合はプレースホルダーを空文字で置換
             processedBaseUrl = processedBaseUrl.replace('[GCLID_PLACEHOLDER]', '');
+        }
+        
+        // [ADID_PLACEHOLDER]をad_idで置換（ad_idがある場合）
+        if (ad_id && processedBaseUrl.includes('[ADID_PLACEHOLDER]')) {
+            processedBaseUrl = processedBaseUrl.replace('[ADID_PLACEHOLDER]', ad_id);
+            console.log('🔄 AD_ID置換実行:', ad_id);
+        } else if (processedBaseUrl.includes('[ADID_PLACEHOLDER]')) {
+            // ad_idがない場合はプレースホルダーを空文字で置換
+            processedBaseUrl = processedBaseUrl.replace('[ADID_PLACEHOLDER]', '');
         }
         
         // パラメータを引き継いでリダイレクトURLを構築
@@ -138,6 +148,7 @@
         
         // 重要なパラメータは個別に引き継ぎ（アフィリエイト側で必須の場合）
         redirectUrl.searchParams.set('gclid', gclid || '');
+        redirectUrl.searchParams.set('ad_id', ad_id || '');
         redirectUrl.searchParams.set('region_id', trackingParams.region_id);
         
         // UTMパラメータなどその他のパラメータも引き継ぎ

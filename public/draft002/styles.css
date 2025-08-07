@@ -6599,3 +6599,62 @@ section.clinic-rankings .ranking-header-banner {
         align-items: center !important;
     }
 }
+
+
+/* CASE情報のスタイル */
+.case-slide {
+    display: flex !important;
+    flex-direction: column !important;
+}
+
+.case-info {
+    margin-top: 15px;
+    padding: 0 15px;
+    text-align: left;
+    font-size: 12px;
+    line-height: 1.6;
+    width: 100%;
+}
+
+.case-course-name {
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.case-treatment {
+    margin-bottom: 8px;
+    color: #555;
+}
+
+.case-risk {
+    color: #666;
+    font-size: 11px;
+}
+
+/* CASE画像の配置調整 */
+.case-slide img {
+    max-width: 100% !important;
+    height: auto !important;
+    display: block !important;
+    margin: 0 auto !important;
+}
+
+/* SP版対応 */
+@media (max-width: 768px) {
+    .case-slide {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: center !important;
+    }
+    
+    .case-info {
+        padding: 0 10px;
+        font-size: 11px;
+        width: 100%;
+    }
+    
+    .case-risk {
+        font-size: 10px;
+    }
+}

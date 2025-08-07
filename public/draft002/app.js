@@ -60,7 +60,7 @@ function getClinicUrlFromConfig(clinicId) {
     }
     
     // フォールバック
-    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param3=[GCLID_PLACEHOLDER]';
+    return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
 }
 
 // URLパラメータ処理クラス
@@ -2251,20 +2251,26 @@ class RankingApp {
             const caseImages = getCaseImages(clinicSlug);
             let caseCarouselHtml = '';
 
-            if (caseImages && caseImages.length > 0) {
+            // CASEセクションは1位のクリニックのみ表示
+            if (rank === 1 && caseImages && caseImages.length > 0) {
                 caseCarouselHtml = `
                     <div class="clinic-points-section">
                         <h4 class="section-title">CASE</h4>
                         <div class="case-slider" style="position: relative;">
                             <div class="case-carousel-container" style="display: flex !important; overflow-x: auto !important; scroll-snap-type: x mandatory !important; scrollbar-width: none !important; -ms-overflow-style: none !important;">
                                 ${caseImages.map(image => `
-                                    <div class="case-slide" style="flex: 0 0 100% !important; scroll-snap-align: center !important; padding: 0 2% !important;">
+                                    <div class="case-slide" style="flex: 0 0 100% !important; scroll-snap-align: center !important; padding: 0 2% !important; display: flex !important; flex-direction: column !important;">
                                         <img src="${image.src}" alt="${image.alt}" loading="lazy" style="width: auto !important; height: auto !important; max-width: 100% !important; max-height: 300px !important; object-fit: contain !important; margin: 0 auto !important; display: block !important; padding: 0 !important; box-sizing: content-box !important; padding-top: 2% !important;">
+                                        <div class="case-info" style="margin-top: 15px; padding: 0 5%; text-align: left; font-size: 12px; line-height: 1.6; width: 100%;">
+                                            <div class="case-course-name" style="font-weight: bold; margin-bottom: 8px;">コース名：医療痩身ボディメイクコース</div>
+                                            <div class="case-treatment" style="margin-bottom: 8px;">施術の説明：直流EMS、電磁場EMS、脂肪冷却、ボディハイフ、医師監修ダイエット食事指導、オーダーメイド薬セット・医師による薬指導、医師推奨プロテイン</div>
+                                            <div class="case-risk" style="color: #666;">施術の副作用（リスク）：筋肉痛、赤み、腫れ、内出血、しこり、低血糖、吐気、嘔吐、便秘、下痢の症状が出る場合があります。</div>
+                                        </div>
                                     </div>
                                 `).join('')}
                             </div>
-                            <button class="case-nav case-nav-prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">&lt;</button>
-                            <button class="case-nav case-nav-next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">&gt;</button>
+                            <button class="case-nav case-nav-prev" style="position: absolute; top: 150px; left: 10px; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">&lt;</button>
+                            <button class="case-nav case-nav-next" style="position: absolute; top: 150px; right: 10px; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.5); color: white; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer;">&gt;</button>
                             <div class="case-dots" style="position: absolute; bottom: 10px; left: 50%; transform: translateX(-50%); display: flex !important; justify-content: center !important; gap: 10px !important; margin-top: 20px !important; padding: 0px 20px !important; list-style: none !important;">
                                 ${caseImages.map((_, index) => `<button class="case-dot" data-index="${index}" style="width: 12px; height: 12px; border-radius: 50%; border: none; background: #ccc; cursor: pointer;"></button>`).join('')}
                             </div>
