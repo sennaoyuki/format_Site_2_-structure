@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>新しいタブで開くテスト</title>
+</head>
+<body>
+    <h1>新しいタブで開くテスト</h1>
+    
+    <h2>自動追跡機能テスト（新しいタブで開く）</h2>
+    <p>以下のリンクは自動的に追跡パラメータが付与され、新しいタブで開きます：</p>
+    <ul>
+        <li><a href="/go/dio/">ディオクリニック（自動追跡あり）</a></li>
+        <li><a href="/go/eminal/">エミナルクリニック（自動追跡あり）</a></li>
+        <li><a href="/go/urara/">ウララクリニック（自動追跡あり）</a></li>
+    </ul>
+    
+    <h2>直接リンクテスト（従来通り同じタブ）</h2>
+    <p>以下のリンクは直接リダイレクトページへ移動します：</p>
+    <ul>
+        <li><a href="/go/dio/?region_id=013&ad_id=test1234&gclid=123456" target="_blank">
+            ad_idとgclidの両方あり
+        </a></li>
+        <li><a href="/go/dio/?region_id=013&ad_id=test5678" target="_blank">
+            ad_idのみ
+        </a></li>
+        <li><a href="/go/dio/?region_id=013&gclid=999888" target="_blank">
+            gclidのみ
+        </a></li>
+        <li><a href="/go/dio/?region_id=013" target="_blank">
+            どちらもなし
+        </a></li>
+    </ul>
+    
+    <h2>期待される動作</h2>
+    <ol>
+        <li>上の自動追跡リンクをクリック → 新しいタブで開く</li>
+        <li>下の直接リンクをクリック → 新しいタブで開く（target="_blank"により）</li>
+        <li>param2=test1234 と param3=123456 が設定される</li>
+        <li>param2=test5678 が設定される（param3は空）</li>
+        <li>param3=999888 が設定される（param2は空）</li>
+        <li>param2とparam3は両方空</li>
+    </ol>
+    
+    <p>ブラウザのコンソールを開いて、リンクをクリックしてテストしてください。</p>
+    
+    <!-- 追跡スクリプト -->
+    <script src="/tracking-params.js"></script>
+</body>
+</html>
