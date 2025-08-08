@@ -1816,7 +1816,38 @@ text-align: center;
         window.toggleDisclaimer = function(clinicId) {
             console.log('>>> toggleDisclaimer called:', clinicId);
             
-            // IDに既に-contentや-arrowが含まれている場合と含まれていない場合の両方に対応
+            // 特別な処理: dio-campaign-first-choiceの場合
+            if (clinicId === 'dio-campaign-first-choice') {
+                // 1位クリニックセクションのアコーディオンは独立している
+                const content = document.getElementById('dio-campaign-first-choice-content');
+                const arrow = document.getElementById('dio-campaign-first-choice-arrow');
+                
+                if (content && arrow) {
+                    const currentDisplay = window.getComputedStyle(content).display;
+                    console.log('First choice accordion - current display:', currentDisplay);
+                    
+                    if (currentDisplay === 'none') {
+                        // 表示
+                        content.style.display = 'block';
+                        arrow.style.transform = 'rotate(180deg)';
+                        console.log('→ First choice accordion opened');
+                        
+                        // main-disclaimer-contentが親要素として影響している場合の対処
+                        const mainContent = document.getElementById('main-content');
+                        if (mainContent && window.getComputedStyle(mainContent).display === 'none') {
+                            console.log('Note: main-content is hidden but should not affect first-choice accordion');
+                        }
+                    } else {
+                        // 非表示
+                        content.style.display = 'none';
+                        arrow.style.transform = 'rotate(0deg)';
+                        console.log('→ First choice accordion closed');
+                    }
+                }
+                return; // 特別処理終了
+            }
+            
+            // 通常のアコーディオン処理
             const contentId = clinicId + '-content';
             const arrowId = clinicId + '-arrow';
             
@@ -1826,47 +1857,16 @@ text-align: center;
             console.log('Looking for:', contentId, '→', content ? 'FOUND' : 'NOT FOUND');
             console.log('Looking for:', arrowId, '→', arrow ? 'FOUND' : 'NOT FOUND');
             
-            if (!content || !arrow) {
-                // 要素が見つからない場合、実際のIDを確認
-                const allIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
-                const relevantIds = allIds.filter(id => id.includes('dio') || id.includes('campaign') || id.includes('first-choice'));
-                console.log('Available IDs with dio/campaign/first-choice:', relevantIds);
-                return;
-            }
-            
-            // 要素が見つかった場合の処理
-            const currentDisplay = window.getComputedStyle(content).display;
-            console.log('Current display:', currentDisplay);
-            
-            if (currentDisplay === 'none') {
-                // より強力な表示設定 - 既存のスタイルを保持しつつ追加
-                const existingStyles = content.getAttribute('style') || '';
-                content.setAttribute('style', existingStyles.replace(/display:\s*[^;]+;?/gi, '') + ' display: block !important; visibility: visible !important; opacity: 1 !important;');
-                arrow.style.transform = 'rotate(180deg)';
-                console.log('→ Opened');
+            if (content && arrow) {
+                const currentDisplay = window.getComputedStyle(content).display;
                 
-                // 設定後の状態を確認
-                setTimeout(() => {
-                    const afterDisplay = window.getComputedStyle(content).display;
-                    const afterVisibility = window.getComputedStyle(content).visibility;
-                    const afterOpacity = window.getComputedStyle(content).opacity;
-                    console.log('After setting - display:', afterDisplay, 'visibility:', afterVisibility, 'opacity:', afterOpacity);
-                    
-                    // 親要素の状態も確認
-                    let parent = content.parentElement;
-                    while(parent && parent !== document.body) {
-                        const parentDisplay = window.getComputedStyle(parent).display;
-                        const parentVisibility = window.getComputedStyle(parent).visibility;
-                        if(parentDisplay === 'none' || parentVisibility === 'hidden') {
-                            console.log('WARNING: Parent element is hidden:', parent.className || parent.id, 'display:', parentDisplay, 'visibility:', parentVisibility);
-                        }
-                        parent = parent.parentElement;
-                    }
-                }, 100);
-            } else {
-                content.style.cssText = 'display: none !important;';
-                arrow.style.transform = 'rotate(0deg)';
-                console.log('→ Closed');
+                if (currentDisplay === 'none') {
+                    content.style.display = 'block';
+                    arrow.style.transform = 'rotate(180deg)';
+                } else {
+                    content.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                }
             }
         }
 
