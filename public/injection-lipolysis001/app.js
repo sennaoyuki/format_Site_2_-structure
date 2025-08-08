@@ -215,14 +215,20 @@ class DisplayManager {
             // スターのHTML生成
             let starsHtml = '';
             const fullStars = Math.floor(rating.stars);
-            const hasHalfStar = rating.stars % 1 !== 0;
+            const decimalPart = rating.stars % 1;
             
+            // 完全な星を表示
             for (let i = 0; i < fullStars; i++) {
                 starsHtml += '<i class="fas fa-star"></i>';
             }
-            if (hasHalfStar) {
-                starsHtml += '<i class="fas fa-star-half-alt"></i>';
+            
+            // 小数部分の処理
+            if (decimalPart > 0) {
+                const percentage = Math.round(decimalPart * 100);
+                starsHtml += `<i class="far fa-star" style="background: linear-gradient(90deg, #ffd700 ${percentage}%, transparent ${percentage}%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;"></i>`;
             }
+            
+            // 残りの空の星を表示
             for (let i = Math.ceil(rating.stars); i < 5; i++) {
                 starsHtml += '<i class="far fa-star"></i>';
             }
@@ -795,15 +801,18 @@ class DataManager {
     
     // 店舗画像パスを取得
     getStoreImage(clinicCode, storeNumber) {
-        // SBCクリニックまたは湘南美容クリニックの場合は、ロゴ画像を使用
-        if (clinicCode === 'sbc') {
-            return `/images/clinics/${clinicCode}/${clinicCode}-logo.webp`;
+        // クリニックの設定に基づいて画像パスを動的に決定
+        const clinic = this.clinics?.find(c => c.code === clinicCode);
+        if (clinic) {
+            // クリニック固有の画像設定がある場合はそれを使用
+            const customImagePath = this.getClinicText(clinicCode, '店舗画像パス', '');
+            if (customImagePath) {
+                return customImagePath;
+            }
         }
         
-        // 店舗番号を3桁の文字列に変換
+        // デフォルトの画像パス生成
         const paddedNumber = String(storeNumber).padStart(3, '0');
-        
-        // 基本的には clinic_image_xxx.webp 形式
         return `/images/clinics/${clinicCode}/${clinicCode}_clinic/clinic_image_${paddedNumber}.webp`;
     }
     
@@ -897,6 +906,58 @@ class DataManager {
             `;
         });
         
+        // 4店舗以上ある場合は隠しコンテンツとして追加
+        hiddenStores.forEach((store, index) => {
+            html += `
+                <div class='shop hidden-content hidden'>
+                    <div class='shop-image'>
+                        <img src="${this.getStoreImage(clinicCode, index + 4)}" alt="${store.name}" onerror="this.src='${this.getClinicLogoPath(clinicCode)}'" />
+                    </div>
+                    <div class='shop-info'>
+                        <div class='shop-name'>
+                            <a href="./go/${clinicCode}/?region_id=${regionId}" target="_blank" rel="nofollow">${store.name}</a>
+                        </div>
+                        <div class='shop-address line-clamp'>
+                            ${store.address}
+                        </div>
+                    </div>
+                    <a class="shop-btn map-toggle-btn" href="javascript:void(0);" data-store-id="${storeId}-${index + 3}">
+                        <i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
+                    </a>
+                    <!-- 地図アコーディオン -->
+                    <div class="map-accordion" id="map-${storeId}-${index + 3}" style="display: none;">
+                        <div class="map-content">
+                            <div class="map-iframe-container">
+                                ${this.generateMapIframe(store.address)}
+                            </div>
+                            <div class="map-details">
+                                <div class="map-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="map-detail-label">住所:</span>
+                                    <span>${store.address}</span>
+                                </div>
+                                ${store.access ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-train"></i>
+                                    <span class="map-detail-label">アクセス:</span>
+                                    <span>${store.access}</span>
+                                </div>
+                                ` : ''}
+                                ${store.hours ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="map-detail-label">営業時間:</span>
+                                    <span>${store.hours}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
         html += '</div>';
         
         // 4店舗以上ある場合はボタンを追加
@@ -914,33 +975,50 @@ class DataManager {
     
     // クリニックの店舗データを取得（地域別）
     getStoreDataForClinic(clinicCode, regionId) {
-        // 地域名を取得
-        const regionName = this.getRegionName(regionId);
+        // store_viewから該当地域のデータを取得
+        const storeView = this.storeViews.find(sv => sv.regionId === regionId);
+        if (!storeView) return [];
         
-        // 基本的な店舗データ（clinic-texts.jsonから取得した情報を基に生成）
-        const storeInfo = this.getClinicText(clinicCode, '店舗', '');
-        if (!storeInfo) {
-            return [];
-        }
+        // ランキングデータを取得して、表示されているクリニックを特定
+        const ranking = this.getRankingByRegionId(regionId);
+        if (!ranking) return [];
         
-        // 特定の地域に合わせた店舗データを生成
-        if (clinicCode === 'dio') {
-            // ディオクリニックの店舗データ
-            return [{
-                name: `${regionName}院`,
-                address: this.generateAddressForRegion(regionId, '渋谷区宇田川町33-1グランド東京渋谷ビル4階'),
-                access: 'JR渋谷駅ハチ公口より徒歩5分・東京メトロ渋谷駅A2出口より徒歩2分',
-                hours: '平日11:00〜20:00、土日祝日10:00〜19:00'
-            }];
-        }
+        // クリニックコードからクリニックIDを動的に取得
+        const clinic = this.clinics.find(c => c.code === clinicCode);
+        if (!clinic) return [];
         
-        // その他のクリニックの基本データ
-        return [{
-            name: `${regionName}院`,
-            address: this.generateAddressForRegion(regionId),
-            access: '主要駅より徒歩圏内',
-            hours: '10:00〜19:00'
-        }];
+        const clinicId = clinic.id;
+        if (!clinicId) return [];
+        
+        // ランキングに表示されているクリニックIDに対応する店舗IDを取得
+        const clinicKey = `clinic_${clinicId}`;
+        const storeIdsToShow = storeView.clinicStores[clinicKey] || [];
+        
+        if (storeIdsToShow.length === 0) return [];
+        
+        // 店舗IDに基づいて実際の店舗情報を取得
+        const allStoreIds = [];
+        storeIdsToShow.forEach(storeId => {
+            if (storeId.includes('/')) {
+                // dio_009/dio_010 のような形式を分割
+                const ids = storeId.split('/');
+                allStoreIds.push(...ids);
+            } else {
+                allStoreIds.push(storeId);
+            }
+        });
+        
+        const result = this.stores.filter(store => 
+            allStoreIds.includes(store.id)
+        );
+        
+        // 結果を適切な形式に変換
+        return result.map(store => ({
+            name: store.storeName || store.name,
+            address: store.address,
+            access: store.access || '主要駅より徒歩圏内',
+            hours: this.getClinicText(clinicCode, '営業時間', '10:00〜19:00')
+        }));
     }
     
     // 地域に応じた住所を生成
@@ -1048,7 +1126,7 @@ class DataManager {
         
         // デフォルトは最初のクリニックのコードを使用
         const firstClinic = this.clinics && this.clinics[0];
-        return firstClinic ? firstClinic.code : 'dio';
+        return firstClinic ? firstClinic.code : '';
     }
 
     // 現在の地域IDを取得
@@ -2860,16 +2938,14 @@ class RankingApp {
                             const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
                             if (detailButtons.length > 0) {
                                 const href = detailButtons[0].getAttribute('href');
-                                if (href?.includes('/go/dio/')) {
-                                    clinicName = 'ディオクリニック';
-                                } else if (href?.includes('/go/eminal/')) {
-                                    clinicName = 'エミナルクリニック';
-                                } else if (href?.includes('/go/urara/')) {
-                                    clinicName = 'ウララクリニック';
-                                } else if (href?.includes('/go/lieto/')) {
-                                    clinicName = 'リエートクリニック';
-                                } else if (href?.includes('/go/sbc/')) {
-                                    clinicName = '湘南美容クリニック';
+                                // URLからクリニックコードを抽出して動的にクリニック名を取得
+                                const urlMatch = href?.match(/\/go\/([^\/]+)\//);
+                                if (urlMatch) {
+                                    const clinicCode = urlMatch[1];
+                                    const clinic = this.dataManager?.clinics?.find(c => c.code === clinicCode);
+                                    if (clinic) {
+                                        clinicName = clinic.name;
+                                    }
                                 }
                             }
                         }
