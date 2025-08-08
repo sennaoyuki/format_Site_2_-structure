@@ -1839,11 +1839,32 @@ text-align: center;
             console.log('Current display:', currentDisplay);
             
             if (currentDisplay === 'none') {
-                content.style.display = 'block';
+                // より強力な表示設定 - 既存のスタイルを保持しつつ追加
+                const existingStyles = content.getAttribute('style') || '';
+                content.setAttribute('style', existingStyles.replace(/display:\s*[^;]+;?/gi, '') + ' display: block !important; visibility: visible !important; opacity: 1 !important;');
                 arrow.style.transform = 'rotate(180deg)';
                 console.log('→ Opened');
+                
+                // 設定後の状態を確認
+                setTimeout(() => {
+                    const afterDisplay = window.getComputedStyle(content).display;
+                    const afterVisibility = window.getComputedStyle(content).visibility;
+                    const afterOpacity = window.getComputedStyle(content).opacity;
+                    console.log('After setting - display:', afterDisplay, 'visibility:', afterVisibility, 'opacity:', afterOpacity);
+                    
+                    // 親要素の状態も確認
+                    let parent = content.parentElement;
+                    while(parent && parent !== document.body) {
+                        const parentDisplay = window.getComputedStyle(parent).display;
+                        const parentVisibility = window.getComputedStyle(parent).visibility;
+                        if(parentDisplay === 'none' || parentVisibility === 'hidden') {
+                            console.log('WARNING: Parent element is hidden:', parent.className || parent.id, 'display:', parentDisplay, 'visibility:', parentVisibility);
+                        }
+                        parent = parent.parentElement;
+                    }
+                }, 100);
             } else {
-                content.style.display = 'none';
+                content.style.cssText = 'display: none !important;';
                 arrow.style.transform = 'rotate(0deg)';
                 console.log('→ Closed');
             }
