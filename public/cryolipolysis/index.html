@@ -916,11 +916,11 @@ text-align: center;
                     </div>
                 </div>
             </div>
-            
             <!-- ディオクリニックの確認事項アコーディオン -->
             <div class="disclaimer-accordion" style="margin-top: 15px;">
+                
                 <button class="disclaimer-header" onclick="toggleDisclaimer('dio-campaign-first-choice')" style="width: 100%; text-align: left; padding: 8px 12px; background-color: #fafafa; border: 1px solid #f0f0f0; border-radius: 3px; cursor: pointer; display: flex; justify-content: space-between; align-items: center;">
-                    <span style="font-size: 10px; font-weight: 500; color: #666;">ディオクリニック</span>
+                    <span id="first-choice-disclaimer-title" style="font-size: 10px; font-weight: 500; color: #666;"></span>
                     <span id="dio-campaign-first-choice-arrow" style="font-size: 8px; color: rgb(153, 153, 153); transition: transform 0.2s;">▼</span>
                 </button>
                 <div id="dio-campaign-first-choice-content" class="disclaimer-content" style="display: none; padding: 8px 12px; background-color: rgb(252, 252, 252); border-right: 1px solid rgb(240, 240, 240); border-bottom: 1px solid rgb(240, 240, 240); border-left: 1px solid rgb(240, 240, 240); border-image: initial; border-top: none; border-radius: 0px 0px 3px 3px; margin-top: -1px;">
@@ -931,7 +931,7 @@ text-align: center;
                         <p>「12ヶ月分無料」※支払総額の12ヶ月分が無料※他キャンペーンとの併用不可</p>
                         <p>「モニター75%OFF」※1～3：他キャンペーンと併用不可／契約時の申し出のみ有効コースご契約者様限定、但し一部コースを除く※3：医師の判断で適用できない場合がございます。</p>
                         <p>「痩せなかったら全額返金保証」※他のキャンペーンの併用不可※初回ご来院時測定体重を元に目標体重を設定し、減量率が50%未満の場合、契約終了を条件に全額返金の適用を受けられます※契約時に同意書契約を結んだ場合のみ適用※落ち幅3.0%での計算に限る※中途解約手数料なし。</p>
-                        <p>下記に当てはまる方は施術不可の為、施術が受けれられません。体重40kg以下/BMI18.5以下/19歳以下70歳以上/がん/妊娠中/授乳中/産後3ヶ月以内の方<br>「脂肪冷却１回分無料」※3ヵ月以上のコースのみ適用※契約時の申し出のみ有効。<br>※他キャンペーンとの併用不可※コースによって適用できる条件が異なります</p>
+                        <p>下記に当てはまる方は施術不可の為、施術が受けれられません。体重40kg以下/BMI18.5以下/19歳以下70歳以上/がん/妊娠中/授乳中/産後3ヶ月以内の方「脂肪冷却１回分無料」※3ヵ月以上のコースのみ適用※契約時の申し出のみ有効。※他キャンペーンとの併用不可※コースによって適用できる条件が異なります</p>
                     </div>
                 </div>
             </div>
@@ -1814,21 +1814,55 @@ text-align: center;
         }
         
         window.toggleDisclaimer = function(clinicId) {
-            // IDに既に-contentや-arrowが含まれている場合と含まれていない場合の両方に対応
-            const content = document.getElementById(clinicId + '-content');
-            const arrow = document.getElementById(clinicId + '-arrow');
+            console.log('>>> toggleDisclaimer called:', clinicId);
             
-            if (content && arrow) {
-                if (content.style.display === 'none' || content.style.display === '') {
-                    content.style.display = 'block';
-                    arrow.style.transform = 'rotate(180deg)';
-                } else {
-                    content.style.display = 'none';
-                    arrow.style.transform = 'rotate(0deg)';
-                }
+            // IDに既に-contentや-arrowが含まれている場合と含まれていない場合の両方に対応
+            const contentId = clinicId + '-content';
+            const arrowId = clinicId + '-arrow';
+            
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById(arrowId);
+            
+            console.log('Looking for:', contentId, '→', content ? 'FOUND' : 'NOT FOUND');
+            console.log('Looking for:', arrowId, '→', arrow ? 'FOUND' : 'NOT FOUND');
+            
+            if (!content || !arrow) {
+                // 要素が見つからない場合、実際のIDを確認
+                const allIds = Array.from(document.querySelectorAll('[id]')).map(el => el.id);
+                const relevantIds = allIds.filter(id => id.includes('dio') || id.includes('campaign') || id.includes('first-choice'));
+                console.log('Available IDs with dio/campaign/first-choice:', relevantIds);
+                return;
+            }
+            
+            // 要素が見つかった場合の処理
+            const currentDisplay = window.getComputedStyle(content).display;
+            console.log('Current display:', currentDisplay);
+            
+            if (currentDisplay === 'none') {
+                content.style.display = 'block';
+                arrow.style.transform = 'rotate(180deg)';
+                console.log('→ Opened');
+            } else {
+                content.style.display = 'none';
+                arrow.style.transform = 'rotate(0deg)';
+                console.log('→ Closed');
             }
         }
 
+        // ディオクリニックの確認事項ボタンに直接イベントリスナーを設定
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(function() {
+                const disclaimerButton = document.querySelector('.disclaimer-accordion .disclaimer-header');
+                if (disclaimerButton) {
+                    console.log('Setting up disclaimer button listener');
+                    disclaimerButton.onclick = function(e) {
+                        e.preventDefault();
+                        window.toggleDisclaimer('dio-campaign-first-choice');
+                    };
+                }
+            }, 1000); // ページロード後1秒待つ
+        });
+        
         // Add click animation to links
         document.querySelectorAll('.medical-columns-section .toc-link, .medical-columns-section .contact-link').forEach(link => {
             link.addEventListener('click', function(e) {
