@@ -342,6 +342,13 @@ class DisplayManager {
     }
 
     updateStoresDisplay(stores, clinicsWithStores) {
+        console.log('🏪 updateStoresDisplay called:', {
+            storesCount: stores?.length || 0,
+            clinicsCount: clinicsWithStores?.size || 0,
+            stores: stores,
+            clinicsWithStores: clinicsWithStores
+        });
+        
         // brand-section-wrapperを取得（複数の方法で試行）
         let brandSectionWrapper = document.querySelector('.brand-section-wrapper');
         
@@ -363,28 +370,41 @@ class DisplayManager {
         
         // 店舗データがない場合は非表示にする
         if (!stores || stores.length === 0) {
-            brandSectionWrapper.innerHTML = '';
+            console.log('❌ No stores array:', stores);
+            brandSectionWrapper.innerHTML = '<div style="text-align:center; padding:20px;">この地域には店舗がありません</div>';
             return;
         }
         
+        if (!clinicsWithStores || clinicsWithStores.size === 0) {
+            console.log('❌ No clinicsWithStores map:', clinicsWithStores);
+            brandSectionWrapper.innerHTML = '<div style="text-align:center; padding:20px;">この地域には店舗がありません</div>';
+            return;
+        }
+        
+        console.log('✅ Building HTML for stores display...');
+        
         // 店舗情報を表示
-        let html = '<div class="brand-section">';
+        let html = '<div class="brand-section" style="max-width: 1200px; margin: 0 auto;">';
+        html += '<h3 style="text-align:center; margin-bottom: 30px; font-size: 24px; color: #333;">東京の店舗一覧</h3>';
         
         // クリニックごとに店舗をグループ化して表示
+        let hasAnyStores = false;
         clinicsWithStores.forEach((clinicStores, clinic) => {
+            console.log(`Processing clinic ${clinic.name}:`, clinicStores);
             if (clinicStores && clinicStores.length > 0) {
+                hasAnyStores = true;
                 html += `
-                    <div class="clinic-stores-section">
-                        <h4>${clinic.name}の店舗</h4>
-                        <div class="stores-list">
+                    <div class="clinic-stores-section" style="margin-bottom: 30px; padding: 20px; background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+                        <h4 style="color: #2CC7C5; margin-bottom: 15px; font-size: 20px;">${clinic.name}の【東京】の店舗</h4>
+                        <div class="stores-list" style="display: grid; gap: 15px;">
                 `;
                 
                 clinicStores.forEach(store => {
                     html += `
-                        <div class="store-item">
-                            <div class="store-name">${store.storeName || store.name || '店舗名不明'}</div>
-                            <div class="store-address">${store.address || '住所不明'}</div>
-                            <div class="store-access">${store.access || ''}</div>
+                        <div class="store-item" style="padding: 15px; background: #f8f9fa; border-left: 3px solid #2CC7C5;">
+                            <div class="store-name" style="font-weight: bold; margin-bottom: 5px;">${store.storeName || store.name || '店舗名不明'}</div>
+                            <div class="store-address" style="color: #666; margin-bottom: 5px;">${store.address || '住所不明'}</div>
+                            <div class="store-access" style="color: #888; font-size: 14px;">${store.access || ''}</div>
                         </div>
                     `;
                 });
@@ -396,7 +416,12 @@ class DisplayManager {
             }
         });
         
+        if (!hasAnyStores) {
+            html += '<div style="text-align:center; padding:20px;">この地域には店舗がありません</div>';
+        }
+        
         html += '</div>';
+        console.log('✅ HTML built, length:', html.length);
         brandSectionWrapper.innerHTML = html;
     }
 
@@ -486,8 +511,8 @@ class DataManager {
 
     async init() {
         try {
-            // JSONファイルの読み込み
-            const response = await fetch('./data/compiled-data.json');
+            // JSONファイルの読み込み（共通のcompiled-data.jsonを使用）
+            const response = await fetch('../data/compiled-data.json');
             if (!response.ok) {
                 throw new Error('Failed to load compiled-data.json');
             }
@@ -983,7 +1008,17 @@ class DataManager {
         if (!clinicId) return [];
         
         // ランキングに表示されているクリニックIDに対応する店舗IDを取得
-        const clinicKey = `clinic_${clinicId}`;
+        // clinicKeyはランキング順位に基づく（clinic_1, clinic_2, etc）
+        let clinicKey = null;
+        Object.entries(ranking.ranks).forEach(([position, rankClinicId]) => {
+            if (rankClinicId === clinicId) {
+                const positionNumber = position.replace('no', '');
+                clinicKey = `clinic_${positionNumber}`;
+            }
+        });
+        
+        if (!clinicKey) return [];
+        
         const storeIdsToShow = storeView.clinicStores[clinicKey] || [];
         
         if (storeIdsToShow.length === 0) return [];
@@ -1147,10 +1182,11 @@ class DataManager {
         const storeIdsToShow = [];
         
         // ランキングに表示されているクリニックIDに対応する店舗IDを取得
-        
+        // 注意: storeView.clinicStoresのキーはclinic_1〜clinic_5で、これは「ランキング順位」に対応
         Object.entries(ranking.ranks).forEach(([position, clinicId]) => {
-            // clinic_1〜clinic_5はクリニックID（1〜5）に対応
-            const clinicKey = `clinic_${clinicId}`;
+            // positionはno1, no2等の文字列なので、数字部分だけ抽出
+            const positionNumber = position.replace('no', '');
+            const clinicKey = `clinic_${positionNumber}`;
             
             if (storeView.clinicStores[clinicKey]) {
                 storeIdsToShow.push(...storeView.clinicStores[clinicKey]);
@@ -2497,7 +2533,6 @@ class RankingApp {
             
             // 店舗データを動的に取得（store_view.csvに基づいてフィルタリング）
             const allStores = this.dataManager.getStoresByRegionId(regionId);
-            console.log(`🏬 地域 ${regionId} の全店舗:`, allStores.map(s => `${s.id}:${s.clinicName}`));
             
             // クリニック名はそのまま使用
             const storeClinicName = clinic.name;
