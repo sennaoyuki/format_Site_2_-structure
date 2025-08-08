@@ -1979,6 +1979,9 @@ class RankingApp {
         // 比較表の内容を生成
         this.generateComparisonTable(rankedClinics);
         
+        // 1位クリニックおすすめセクションを更新
+        this.updateFirstChoiceRecommendation(rankedClinics[0]);
+        
         // レビュータブ切り替え機能の設定
         this.setupReviewTabs();
         
@@ -2085,6 +2088,93 @@ class RankingApp {
             
             tbody.appendChild(tr);
         });
+    }
+
+    // 1位クリニックおすすめセクションの更新
+    updateFirstChoiceRecommendation(topClinic) {
+        if (!topClinic) return;
+        
+        console.log('Updating first choice recommendation for:', topClinic.name);
+        
+        const clinicCode = window.dataManager.getClinicCodeById(topClinic.id);
+        if (!clinicCode) return;
+        
+        // 画像パスの設定
+        const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
+        
+        // クリニック名を更新
+        const clinicNameElements = ['first-choice-clinic-name', 'first-choice-title-clinic-name'];
+        clinicNameElements.forEach(id => {
+            const element = document.getElementById(id);
+            if (element) element.textContent = topClinic.name;
+        });
+        
+        // バナー画像を更新
+        const bannerImage = document.getElementById('first-choice-banner-image');
+        if (bannerImage) {
+            const bannerPath = window.dataManager.getClinicText(clinicCode, 'クリニック詳細バナー画像パス', '') || 
+                             `${imagesPath}/clinics/${clinicCode}/${clinicCode}_detail_bnr.webp`;
+            bannerImage.src = bannerPath;
+            bannerImage.alt = topClinic.name;
+        }
+        
+        // 3つのポイントを更新
+        const point1Title = document.getElementById('point1-title');
+        const point1Desc = document.getElementById('point1-description');
+        const point2Title = document.getElementById('point2-title');
+        const point2Desc = document.getElementById('point2-description');
+        const point3Title = document.getElementById('point3-title');
+        const point3Desc = document.getElementById('point3-description');
+        
+        if (point1Title) point1Title.textContent = window.dataManager.getClinicText(clinicCode, 'おすすめポイント1タイトル', '圧倒的な実績＆成功率99％');
+        if (point1Desc) point1Desc.textContent = window.dataManager.getClinicText(clinicCode, 'おすすめポイント1詳細', 'ダイエット成功率99％、平均13.7kg減の実績。科学的根拠に基づいた医療痩身プログラムで、確実に結果を出します。');
+        
+        if (point2Title) point2Title.textContent = window.dataManager.getClinicText(clinicCode, 'おすすめポイント2タイトル', '最新の医療機器を完備');
+        if (point2Desc) point2Desc.textContent = window.dataManager.getClinicText(clinicCode, 'おすすめポイント2詳細', '脂肪冷却・医療用EMS・医療ハイフ・医療ラジオ波など、最新の痩身機器を多数完備。一人一人の悩みに合わせた最適な治療を提供します。');
+        
+        if (point3Title) point3Title.textContent = window.dataManager.getClinicText(clinicCode, 'おすすめポイント3タイトル', '管理栄養士による完全サポート');
+        if (point3Desc) point3Desc.textContent = window.dataManager.getClinicText(clinicCode, 'おすすめポイント3詳細', '管理栄養士による食事指導で健康的にダイエット。痩せなかったら全額返金、リバウンド防止プログラム付きで安心です。');
+        
+        // ロゴ画像を更新
+        const infoLogo = document.getElementById('first-choice-info-logo');
+        if (infoLogo) {
+            const logoPath = window.dataManager.getClinicText(clinicCode, 'クリニックロゴ画像パス', '') || 
+                            `${imagesPath}/clinics/${clinicCode}/${clinicCode}-logo.webp`;
+            infoLogo.src = logoPath;
+            infoLogo.alt = topClinic.name;
+        }
+        
+        // キャンペーンテキストを更新
+        const campaignText = document.getElementById('first-choice-campaign-text');
+        if (campaignText) {
+            const campaign = window.dataManager.getClinicText(clinicCode, 'キャンペーン', '期間限定キャンペーン<br>12ヶ月分0円');
+            campaignText.innerHTML = campaign;
+        }
+        
+        // 実績テキストを更新
+        const achievementText = document.getElementById('first-choice-achievement-text');
+        if (achievementText) {
+            const achievement = window.dataManager.getClinicText(clinicCode, '実績', '\\ダイエット成功率99％の実績/');
+            achievementText.textContent = achievement;
+        }
+        
+        // CTAテキストを更新
+        const ctaText = document.getElementById('first-choice-cta-text');
+        if (ctaText) {
+            ctaText.textContent = `${topClinic.name}の公式サイト`;
+        }
+        
+        // CTAリンクを更新
+        const ctaLink = document.getElementById('first-choice-cta-link');
+        if (ctaLink) {
+            ctaLink.href = this.urlHandler.getClinicUrlWithRegionId(topClinic.id, topClinic.rank || 1);
+        }
+        
+        // 免責事項のタイトルを更新
+        const disclaimerTitle = document.getElementById('first-choice-disclaimer-title');
+        if (disclaimerTitle) {
+            disclaimerTitle.textContent = `${topClinic.name}の確認事項`;
+        }
     }
 
     // クリニック名の表示形式を取得
