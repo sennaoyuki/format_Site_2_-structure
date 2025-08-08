@@ -192,15 +192,12 @@ class DisplayManager {
             else if (rankNum === 2) medalClass = 'silver-medal';
             else if (rankNum === 3) medalClass = 'bronze-medal';
 
-            // 評価スコアとスターの生成（仮のデータ）
-            const ratings = {
-                1: { score: 4.9, stars: 5 },
-                2: { score: 4.8, stars: 4.8 },
-                3: { score: 4.7, stars: 4.7 },
-                4: { score: 4.6, stars: 4.6 },
-                5: { score: 4.5, stars: 4.5 }
-            };
-            const rating = ratings[rankNum] || { score: 4.5, stars: 4 };
+            // 評価スコアとスターの生成（clinic-texts.jsonベース）
+            const clinicCodeForRating = window.dataManager.getClinicCodeById(clinic.id);
+            const ratingScoreNumber = clinicCodeForRating 
+                ? parseFloat(window.dataManager.getClinicText(clinicCodeForRating, '総合評価', '4.5'))
+                : 4.5;
+            const rating = { score: ratingScoreNumber, stars: ratingScoreNumber };
 
             // スターのHTML生成
             let starsHtml = '';
@@ -217,26 +214,20 @@ class DisplayManager {
                 starsHtml += '<i class="far fa-star"></i>';
             }
 
-            // バナー画像の設定（クリニックIDに基づく）
+            // バナー画像の設定（clinic-texts.json優先）
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
-            const bannerImages = {
-                1: `${imagesPath}/clinics/dio/dio-logo.webp`,
-                2: `${imagesPath}/clinics/eminal/eminal-logo.webp`,
-                3: `${imagesPath}/clinics/urara/urara-logo.webp`,
-                4: `${imagesPath}/clinics/lieto/lieto-logo.webp`,
-                5: `${imagesPath}/clinics/sbc/sbc-logo.webp`
-            };
-            const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/dio/dio-logo.webp`;
+            const clinicCodeForImage = window.dataManager.getClinicCodeById(clinic.id);
+            let bannerImage = `${imagesPath}/clinics/dio/dio-logo.webp`;
+            if (clinicCodeForImage) {
+                const imagePath = window.dataManager.getClinicText(clinicCodeForImage, 'クリニックロゴ画像パス', '');
+                bannerImage = imagePath || `${imagesPath}/clinics/${clinicCodeForImage}/${clinicCodeForImage}-logo.webp`;
+            }
 
-            // 押しメッセージの定義
-            const pushMessages = {
-                1: "2025年のイチ押し！\n業界屈指のコスパ",
-                2: "次世代医療！\n成功率94%の実績",
-                3: "厚労省承認マシン\n科学的に脂肪を減らす",
-                4: "多店舗展開\nエミナル",
-                5: "大手美容クリニック\nメニュー豊富"
-            };
-            const pushMessage = pushMessages[rankNum] || "人気のクリニック";
+            // 押しメッセージはclinic-texts.jsonから
+            const clinicCode = window.dataManager.getClinicCodeById(clinic.id);
+            const pushMessage = clinicCode 
+                ? window.dataManager.getClinicText(clinicCode, 'ランキングプッシュメッセージ', '人気のクリニック')
+                : '人気のクリニック';
 
             rankingItem.innerHTML = `
                 <div class="rank-medal ${medalClass}">
@@ -411,6 +402,8 @@ class DataManager {
         this.rankings = [];
         this.storeViews = [];
         this.campaigns = [];
+        this.commonTexts = {};
+        this.clinicTexts = {};
         // Handle subdirectory paths
         if (window.SITE_CONFIG) {
             this.dataPath = window.SITE_CONFIG.dataPath + '/';
@@ -446,7 +439,35 @@ class DataManager {
             
             // キャンペーンデータの設定
             this.campaigns = data.campaigns;
-            
+
+            // 共通テキストデータの読み込み
+            try {
+                const commonTextResponse = await fetch(this.dataPath + 'site-common-texts.json');
+                if (commonTextResponse.ok) {
+                    this.commonTexts = await commonTextResponse.json();
+                } else {
+                    console.warn('site-common-texts.json not found, using defaults');
+                    this.commonTexts = {};
+                }
+            } catch (e) {
+                console.warn('Failed to load site-common-texts.json:', e);
+                this.commonTexts = {};
+            }
+
+            // クリニック別テキストデータの読み込み
+            try {
+                const clinicTextResponse = await fetch(this.dataPath + 'clinic-texts.json');
+                if (clinicTextResponse.ok) {
+                    this.clinicTexts = await clinicTextResponse.json();
+                } else {
+                    console.warn('clinic-texts.json not found, using empty');
+                    this.clinicTexts = {};
+                }
+            } catch (e) {
+                console.warn('Failed to load clinic-texts.json:', e);
+                this.clinicTexts = {};
+            }
+
             // 店舗データをクリニックから抽出
             this.stores = [];
             this.clinics.forEach(clinic => {
@@ -701,6 +722,35 @@ class DataManager {
         return this.campaigns.find(c => 
             c.regionId === regionId && c.clinicId === clinicId
         );
+    }
+    
+    // クリニックIDからコードを取得
+    getClinicCodeById(clinicId) {
+        const clinic = this.clinics.find(c => c.id === String(clinicId));
+        return clinic ? clinic.code : null;
+    }
+
+    // 共通テキストの取得
+    getCommonText(key, defaultText = '') {
+        if (this.commonTexts && Object.prototype.hasOwnProperty.call(this.commonTexts, key)) {
+            return this.commonTexts[key];
+        }
+        return defaultText;
+    }
+
+    // クリニック別テキストの取得
+    getClinicText(clinicCode, key, defaultText = '') {
+        if (!clinicCode || !this.clinicTexts) return defaultText;
+        const clinicEntry = this.clinicTexts[clinicCode];
+        if (clinicEntry && Object.prototype.hasOwnProperty.call(clinicEntry, key)) {
+            return clinicEntry[key];
+        }
+        // 互換: クリニック名キーで保持されている場合
+        const clinicByName = this.clinics.find(c => c.code === clinicCode);
+        if (clinicByName && this.clinicTexts[clinicByName.name] && Object.prototype.hasOwnProperty.call(this.clinicTexts[clinicByName.name], key)) {
+            return this.clinicTexts[clinicByName.name][key];
+        }
+        return defaultText;
     }
 }
 
@@ -1063,7 +1113,17 @@ class RankingApp {
             //ランキングの地域名も更新
             const rankRegionElement = document.getElementById('rank-region-name');
             if (rankRegionElement) {
-                rankRegionElement.textContent = region.name + 'で人気の医療ダイエットはここ！';
+                const rankingText = this.dataManager.getCommonText('ランキング地域名テキスト', 'で人気の医療ダイエットはここ！');
+                rankRegionElement.textContent = region.name + rankingText;
+
+                // ランキングバナーのaltも更新
+                const rankingBannerImages = document.querySelectorAll('.ranking-banner-image');
+                if (rankingBannerImages && rankingBannerImages.length) {
+                    const altText = this.dataManager.getCommonText('ランキングバナーAltテキスト', 'で人気の医療ダイエットはここ！');
+                    rankingBannerImages.forEach(img => {
+                        img.alt = region.name + altText;
+                    });
+                }
                 
                 // 地域名の文字数に応じてleftの位置を調整
                 const regionNameLength = region.name.length;
@@ -1229,79 +1289,27 @@ class RankingApp {
                 tr.style.backgroundColor = '#fffbdc';
             }
             
-            // 実際のデータ設定
-            const achievements = {
-                1: 'ダイエット成功率99％<br>平均13.7kg減',
-                2: 'ダイエット成功率94%',
-                3: 'ダイエット成功率94%',
-                4: '3ヶ月で-10kg以上<br>モニター満足度95%',
-                5: '症例実績30万件以上<br>リピート率90%以上'
-            };
-            const benefits = {
-                1: '今なら<br>12ヶ月分0円！',
-                2: '今なら<br>最大79%OFF！',
-                3: '最大80%OFF<br>（モニター割引）',
-                4: 'モニタープラン<br>大幅割引あり',
-                5: '期間限定<br>キャンペーン実施中'
-            };
-            const popularPlans = {
-                1: '脂肪冷却',
-                2: '脂肪冷却',
-                3: '脂肪冷却',
-                4: '3ヶ月コース特別モニター',
-                5: 'クールスカルプティング®エリート'
-            };
-            const machines = {
-                1: '脂肪冷却<br>医療用EMS<br>医療ハイフ<br>医療ラジオ波',
-                2: '脂肪冷却装置<br>医療用EMS<br>医療電磁場装置<br>医療ラジオ波',
-                3: '脂肪冷却<br>医療用EMS<br>医療ハイフ',
-                4: '医療ハイフ<br>EMS<br>脂肪冷却',
-                5: 'クールスカルプティング®エリート<br>トゥルースカルプiD<br>脂肪溶解リニアハイフ<br>オンダリフト'
-            };
-            const injections = {
-                1: '脂肪溶解注射<br>サンサム注射<br>ダイエット点滴<br>GLP-1<br>サクセンダ',
-                2: '脂肪溶解注射<br>ダイエット点滴<br>GLP-1<br>オルリスタット<br>ビグアナイド系薬剤',
-                3: '脂肪溶解注射<br>ダイエット美容点滴<br>エクソソーム点滴',
-                4: '脂肪溶解注射<br>GLP-1',
-                5: '脂肪溶解注射<br>（BNLSアルティメット）<br>サクセンダ<br>山参注射'
-            };
-            const dietSupport = {
-                1: '栄養管理士<br>による指導',
-                2: '管理栄養士<br>による指導',
-                3: '医師監修のもと<br>管理栄養士の指導',
-                4: '管理栄養士による<br>オンライン食事指導',
-                5: '専門クリニックで<br>管理栄養士指導'
-            };
-            const monitorDiscount = {
-                1: 'あり<br>75％OFF',
-                2: 'あり<br>最大79%OFF',
-                3: 'あり<br>最大80%OFF',
-                4: 'あり<br>条件により大幅割引',
-                5: 'あり<br>各施術でモニター募集'
-            };
-            const moneyBack = {
-                1: '痩せなかったら返金',
-                2: '痩せなかったら返金',
-                3: 'あり（※条件付き）',
-                4: 'あり（※条件あり）',
-                5: '一部施術で<br>返金保証あり'
-            };
+            // クリニックコードからクリニック別テキストを参照
+            const clinicCode = window.dataManager.getClinicCodeById(clinic.id);
+            const ratingScore = clinicCode ? (window.dataManager.getClinicText(clinicCode, '総合評価', '4.8')) : '4.8';
+            const achievements = clinicCode ? window.dataManager.getClinicText(clinicCode, '実績', '豊富な実績') : '豊富な実績';
+            const benefits = clinicCode ? window.dataManager.getClinicText(clinicCode, '特典', '特別キャンペーン') : '特別キャンペーン';
+            const popularPlan = clinicCode ? window.dataManager.getClinicText(clinicCode, '人気プラン', '人気プラン') : '人気プラン';
+            const machines = clinicCode ? window.dataManager.getClinicText(clinicCode, '医療機器', '医療機器') : '医療機器';
+            const injections = clinicCode ? window.dataManager.getClinicText(clinicCode, '注射治療', '注射治療') : '注射治療';
+            const bodyParts = clinicCode ? window.dataManager.getClinicText(clinicCode, '対応部位', '〇') : '〇';
+            const monitorDiscount = clinicCode ? window.dataManager.getClinicText(clinicCode, 'モニター割', '×') : '×';
+            const moneyBack = clinicCode ? window.dataManager.getClinicText(clinicCode, '返金保証', '×') : '×';
             
             const rankNum = clinic.rank || index + 1;
             
-            // クリニックのロゴ画像パスを設定
+            // クリニックのロゴ画像パスを設定（clinic-texts.json優先）
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
-            const clinicLogos = {
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
-                'ウララクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
-                'URARAクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
-                'リエートクリニック': `${imagesPath}/clinics/lieto/lieto-logo.webp`,
-                'エミナルクリニック': `${imagesPath}/clinics/eminal/eminal-logo.webp`,
-                'SBCクリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`,
-                '湘南美容クリニック': `${imagesPath}/clinics/sbc/sbc-logo.webp`
-            };
-            const logoPath = clinicLogos[clinic.name] || `${imagesPath}/clinics/dio/dio-logo.webp`;
+            let logoPath = `${imagesPath}/clinics/dio/dio-logo.webp`;
+            if (clinicCode) {
+                const imagePath = window.dataManager.getClinicText(clinicCode, 'クリニックロゴ画像パス', '');
+                logoPath = imagePath || `${imagesPath}/clinics/${clinicCode}/${clinicCode}-logo.webp`;
+            }
             
             tr.innerHTML = `
                 <td class="ranking-table_td1">
@@ -1309,17 +1317,17 @@ class RankingApp {
                     <a href="#clinic${rankNum}" class="clinic-link">${clinic.name}</a>
                 </td>
                 <td class="" style="">
-                    <span class="ranking_evaluation">${clinic.rating || '4.8'}</span><br>
-                    <span class="star5_rating" data-rate="${clinic.rating || '4.8'}"></span>
+                    <span class="ranking_evaluation">${ratingScore}</span><br>
+                    <span class="star5_rating" data-rate="${ratingScore}"></span>
                 </td>
-                <td class="" style="">${achievements[rankNum] || '豊富な実績'}</td>
-                <td class="" style="">${benefits[rankNum] || '特別キャンペーン'}</td>
-                <td class="th-none" style="display: none;">${popularPlans[rankNum] || '人気プラン'}</td>
-                <td class="th-none" style="display: none;">${machines[rankNum] || '医療機器'}</td>
-                <td class="th-none" style="display: none;">${injections[rankNum] || '注射療法'}</td>
-                <td class="th-none" style="display: none;">${dietSupport[rankNum] || '〇'}</td>
-                <td class="th-none" style="display: none;">${monitorDiscount[rankNum] || '×'}</td>
-                <td class="th-none" style="display: none;">${moneyBack[rankNum] || '×'}</td>
+                <td class="" style="">${achievements}</td>
+                <td class="" style="">${benefits}</td>
+                <td class="th-none" style="display: none;">${popularPlan}</td>
+                <td class="th-none" style="display: none;">${machines}</td>
+                <td class="th-none" style="display: none;">${injections}</td>
+                <td class="th-none" style="display: none;">${bodyParts}</td>
+                <td class="th-none" style="display: none;">${monitorDiscount}</td>
+                <td class="th-none" style="display: none;">${moneyBack}</td>
                 <td>
                     <a class="link_btn" href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank">公式サイト &gt;</a>
                     <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>

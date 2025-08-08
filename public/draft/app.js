@@ -54,7 +54,8 @@ class UrlParamHandler {
             '2': './go/eminal/',
             '3': './go/urara/',
             '4': './go/lieto/',
-            '5': './go/sbc/'
+            '5': './go/sbc/',
+            '6': './go/dsc/'
         };
         
         const redirectUrl = redirectUrls[clinicId];
@@ -88,7 +89,8 @@ class UrlParamHandler {
             'eminal': './go/eminal/',
             'urara': './go/urara/',
             'lieto': './go/lieto/',
-            'sbc': './go/sbc/'
+            'sbc': './go/sbc/',
+            'ds': './go/dsc/'
         };
         
         const redirectUrl = redirectUrls[clinicName];
@@ -231,7 +233,8 @@ class DisplayManager {
                 2: `${imagesPath}/clinics/eminal/eminal-logo.webp`,
                 3: `${imagesPath}/clinics/urara/urara-logo.webp`,
                 4: `${imagesPath}/clinics/lieto/lieto-logo.webp`,
-                5: `${imagesPath}/clinics/sbc/sbc-logo.webp`
+                5: `${imagesPath}/clinics/sbc/sbc-logo.webp`,
+                6: `${imagesPath}/clinics/dsc/dsc-logo.jpg`
             };
             const bannerImage = bannerImages[clinic.id] || `${imagesPath}/clinics/dio/dio-logo.webp`;
 
@@ -1322,7 +1325,7 @@ class RankingApp {
             const imagesPath = window.SITE_CONFIG ? window.SITE_CONFIG.imagesPath + '/images' : '/images';
             const clinicLogos = {
                 'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
-                'ディオクリニック': `${imagesPath}/clinics/dio/dio-logo.webp`,
+                'DSクリニック': `${imagesPath}/clinics/dsc/dsc-logo.jpg`,
                 'ウララクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
                 'URARAクリニック': `${imagesPath}/clinics/urara/urara-logo.webp`,
                 'リエートクリニック': `${imagesPath}/clinics/lieto/lieto-logo.webp`,
@@ -2189,6 +2192,81 @@ class RankingApp {
                         ctaText: '湘南美容クリニックの公式サイト',
                         microcopy: '＼症例実績30万件以上の実績／'
                     }
+                },
+                '6': { // DSクリニック
+                    title: '20年以上の実績を誇るオーダーメイド医療痩身<span class="info-icon" onclick="showDisclaimerInfo(\'ds-success-rate\')" title="詳細情報">ⓘ</span>',
+                    subtitle: '医師・管理栄養士のチーム医療であなたを徹底サポート',
+                    link: 'DSクリニック ＞',
+                    banner: '/images/clinics/dsc/ds_detail_bnr.jpg',
+                    features: [
+                        '医療ダイエット', '医療痩身', '部分痩せ',
+                        '医師監修', '管理栄養士指導', '漢方処方',
+                        '20時まで診療', '駅チカ', '完全個室'
+                    ],
+                    priceMain: '痩身治療プラン',
+                    priceValue: '月々8,800円〜',
+                    priceDetail: {
+                        '料金': '痩身治療プラン<br>月々8,800円〜',
+                        '施術機械': '高周波治療<br>クールスカルプティングエリート<br>医療EMS(Exe\'t/エグゼット)',
+                        '目安期間': '2ヶ月プラン、3ヶ月以上のプランあり',
+                        '営業時間': '11:00〜20:00<br>休診日：年末年始',
+                        '対応部位': '顔／二の腕／腹部／上半身／下半身／その他',
+                        '店舗': '東京（渋谷、新宿）',
+                        '公式サイト': 'https://ds-clinic.jp/'
+                    },
+                    vioPlans: {
+                        vioOnly: {
+                            title: '部分痩身',
+                            price: '月々8,800円',
+                            sessions: '2ヶ月プラン',
+                            monthly: '月々8,800円'
+                        },
+                        fullBody: {
+                            title: '全身痩身',
+                            price: '応相談',
+                            sessions: '3ヶ月以上',
+                            monthly: '応相談'
+                        }
+                    },
+                    points: [
+                        {
+                            icon: 'users',
+                            title: '専門家チームによるオーダーメイド治療',
+                            description: '医師、看護師、管理栄養士、カウンセラーがチームとなり、一人ひとりの体質や目標に合わせた最適な治療プランを提案。測定結果をもとに、施術、漢方、内服薬、食事改善などを組み合わせ、総合的にサポートします。'
+                        },
+                        {
+                            icon: 'network-wired',
+                            title: '豊富な痩身メニューで内外からアプローチ',
+                            description: '最新の医療機器による施術で脂肪細胞に直接アプローチするだけでなく、脂肪溶解注射による部分痩せ、漢方や内服薬による体質改善、管理栄養士による食事指導など、体の外と内の両方から理想の体型へと導きます。'
+                        },
+                        {
+                            icon: 'shield-alt',
+                            title: '痩せなかった場合の「返金保証」と「永久サポート」',
+                            description: '痩身治療プランでは、万が一痩せなかった場合に適応される返金保証制度があります。また、ダイエット成功後もリバウンドしないよう、タイミングに合わせた体の測定やアドバイスを行う「永久サポート保証」も用意されています。'
+                        }
+                    ],
+                    reviews: [
+                        {
+                            rating: 5,
+                            date: '2024年1月',
+                            text: '2ヶ月で4kg減！プランに高周波治療をつけた内容で2ヶ月間通いました。体重が4kgほど落ちたのでよかったです。'
+                        },
+                        {
+                            rating: 5,
+                            date: '2023年12月',
+                            text: '渋谷駅から歩いて行きやすいの場所にあり、通いやすいです。スタッフの方もフレンドリーで、いろいろおすすめの情報を教えていただき助かっています。'
+                        }
+                    ],
+                    campaignInfo: {
+                        header: 'INFORMATION!',
+                        title: 'DSクリニックの今月のお得な情報',
+                        logoSrc: '/images/clinics/dsc/dsc-logo.jpg',
+                        logoAlt: 'DSクリニック',
+                        description: '脂肪買取キャンペーン<br>1kg痩せるごとに1万円キャッシュバック',
+                        ctaUrl: 'https://ds-clinic.jp/campaign/',
+                        ctaText: 'DSクリニックの公式サイト',
+                        microcopy: '＼20年以上の実績とチーム医療で安心／'
+                    }
                 }
             };
 
@@ -2198,7 +2276,8 @@ class RankingApp {
                 'ウララクリニック': '2',
                 'リエートクリニック': '3',
                 'エミナルクリニック': '4',
-                '湘南美容クリニック': '5'
+                '湘南美容クリニック': '5',
+                'DSクリニック': '6'
             };
             
             const correctClinicId = clinicNameToIdMap[clinic.name] || clinicId;
@@ -2252,7 +2331,8 @@ class RankingApp {
                         'ウララクリニック': '/images/clinics/urara/urara_detail_bnr.webp',
                         'リエートクリニック': '/images/clinics/lieto/lieto_detail_bnr.webp',
                         'エミナルクリニック': '/images/clinics/eminal/eminal_detail_bnr.webp',
-                        '湘南美容クリニック': '/images/clinics/sbc/sbc_detail_bnr.webp'
+                        '湘南美容クリニック': '/images/clinics/sbc/sbc_detail_bnr.webp',
+                        'DSクリニック': '/images/clinics/dsc/ds_detail_bnr.jpg'
                     };
                     const correctBanner = clinicNameToBannerMap[clinic.name] || data.banner;
                     return correctBanner ? `
@@ -2312,7 +2392,7 @@ class RankingApp {
                 </div>
                 
                 ${(() => {
-                    const clinicMap = { '1': 'dio', '2': 'eminal', '3': 'urara', '4': 'lieto', '5': 'sbc' };
+                    const clinicMap = { '1': 'dio', '2': 'eminal', '3': 'urara', '4': 'lieto', '5': 'sbc', '6': 'ds' };
                     const clinicSlug = clinicMap[clinic.id];
                     const caseImages = getCaseImages(clinicSlug);
                     let caseCarouselHtml = '';
@@ -2658,7 +2738,8 @@ class RankingApp {
             '2': 'eminal',
             '3': 'urara',
             '4': 'lieto',
-            '5': 'sbc'
+            '5': 'sbc',
+            '6': 'ds'
         };
         const clinicName = clinicNames[clinicId] || 'dio';
         if (!stores || stores.length === 0) {

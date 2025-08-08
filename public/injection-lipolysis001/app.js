@@ -42,38 +42,34 @@ class UrlParamHandler {
         this.setParam('region_id', regionId);
     }
 
-    // クリニックURLにregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
-    getClinicUrlWithRegionId(clinicId) {
-        const redirectUrls = {
-            '1': '/go/dio/',
-            '2': '/go/eminal/',
-            '3': '/go/urara/',
-            '4': '/go/lieto/',
-            '5': '/go/sbc/'
-        };
-        
-        let redirectUrl = redirectUrls[clinicId];
-        if (!redirectUrl) return '#';
-        
-        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
-        const currentPath = window.location.pathname;
-        const pathSegments = currentPath.split('/').filter(segment => segment);
-        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
-            const topDir = pathSegments[0];
-            redirectUrl = `/${topDir}${redirectUrl}`;
+    // クリニックURLを取得（CSVから直接URLを取得し、パラメータを適切に処理）
+    getClinicUrlWithRegionId(clinicId, rank = 1) {
+        // DataManagerが初期化されているか確認
+        if (!window.dataManager) {
+            console.error('DataManager not initialized');
+            return '#';
         }
         
-        // 現在のURLパラメータを全て取得
+        // 中間ページ経由でリダイレクトするURLを生成
+        const redirectUrl = new URL('./redirect.html', window.location.origin + window.location.pathname);
         const currentParams = new URLSearchParams(window.location.search);
         
-        // region_idがない場合は現在の地域IDを設定
-        if (!currentParams.has('region_id')) {
-            currentParams.set('region_id', this.getRegionId());
+        // 中間ページに渡すパラメータを設定
+        redirectUrl.searchParams.set('clinic_id', clinicId);
+        redirectUrl.searchParams.set('rank', rank);
+        
+        // region_idを追加
+        const regionId = this.getRegionId();
+        if (regionId) {
+            redirectUrl.searchParams.set('region_id', regionId);
         }
         
-        // リダイレクトURLにパラメータを付与
-        const finalUrl = redirectUrl + (currentParams.toString() ? '?' + currentParams.toString() : '');
-        return finalUrl;
+        // 現在のURLのパラメータをすべて転送
+        for (const [key, value] of currentParams) {
+            redirectUrl.searchParams.set(key, value);
+        }
+        
+        return redirectUrl.toString();
     }
 
     // クリニック名からURLを生成してregion_idパラメータを付与するヘルパー関数（リダイレクトページ経由）
@@ -277,7 +273,7 @@ class DisplayManager {
                         ${pushMessage}
                     </div>
                     <p class="btn btn_second_primary">
-                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener">
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank || 1)}" target="_blank" rel="noopener">
                             <span class="bt_s">公式サイト</span>
                             <span class="btn-arrow">▶</span>
                         </a>
@@ -403,7 +399,7 @@ class DisplayManager {
 
             const li = document.createElement('li');
             const link = document.createElement('a');
-            link.href = this.urlHandler.getClinicUrlWithRegionId(clinic.id);
+            link.href = this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank || 1);
             link.target = '_blank';
             link.rel = 'noopener noreferrer';
             link.textContent = clinic.name;
@@ -435,7 +431,7 @@ class DataManager {
     async init() {
         try {
             // JSONファイルの読み込み
-            const response = await fetch('/data/compiled-data.json');
+            const response = await fetch('./data/compiled-data.json');
             if (!response.ok) {
                 throw new Error('Failed to load compiled-data.json');
             }
@@ -791,6 +787,189 @@ class DataManager {
         return reviews;
     }
     
+    // 地域名を取得
+    getRegionName(regionId) {
+        const region = this.getRegionById(regionId);
+        return region ? region.name : '';
+    }
+    
+    // 店舗画像パスを取得
+    getStoreImage(clinicCode, storeNumber) {
+        // SBCクリニックまたは湘南美容クリニックの場合は、ロゴ画像を使用
+        if (clinicCode === 'sbc') {
+            return `/images/clinics/${clinicCode}/${clinicCode}-logo.webp`;
+        }
+        
+        // 店舗番号を3桁の文字列に変換
+        const paddedNumber = String(storeNumber).padStart(3, '0');
+        
+        // 基本的には clinic_image_xxx.webp 形式
+        return `/images/clinics/${clinicCode}/${clinicCode}_clinic/clinic_image_${paddedNumber}.webp`;
+    }
+    
+    // Google Maps iframeを生成
+    generateMapIframe(address) {
+        if (!address) {
+            return '<p>住所情報がありません</p>';
+        }
+        
+        // 住所をエンコード
+        const encodedAddress = encodeURIComponent(address);
+        
+        // Google Maps Embed APIのURL
+        const mapUrl = `https://maps.google.com/maps?q=${encodedAddress}&output=embed&z=16`;
+        
+        return `
+            <iframe src="${mapUrl}" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps">
+            </iframe>
+        `;
+    }
+    
+    // 店舗表示のHTML生成（medical-diet001スタイル）
+    generateStoresDisplay(clinicId, regionId) {
+        // クリニックコードを取得
+        const clinicCode = this.getClinicCodeById(clinicId);
+        if (!clinicCode) {
+            return '<div class="shops"><p class="no-stores">店舗情報がありません</p></div>';
+        }
+        
+        // 簡単な店舗データ（後で拡張可能）
+        const storeData = this.getStoreDataForClinic(clinicCode, regionId);
+        if (!storeData || storeData.length === 0) {
+            return '<div class="shops"><p class="no-stores">この地域には店舗がありません</p></div>';
+        }
+        
+        const visibleStores = storeData.slice(0, 3);
+        const hiddenStores = storeData.slice(3);
+        const storeId = `shops-${Date.now()}`; // ユニークなIDを生成
+        
+        let html = `<div class="shops" id="${storeId}">`;
+        
+        // 最初の3店舗を表示
+        visibleStores.forEach((store, index) => {
+            html += `
+                <div class='shop'>
+                    <div class='shop-image'>
+                        <img src="${this.getStoreImage(clinicCode, index + 1)}" alt="${store.name}" onerror="this.src='${this.getClinicLogoPath(clinicCode)}'" />
+                    </div>
+                    <div class='shop-info'>
+                        <div class='shop-name'>
+                            <a href="./go/${clinicCode}/?region_id=${regionId}" target="_blank" rel="nofollow">${store.name}</a>
+                        </div>
+                        <div class='shop-address line-clamp'>
+                            ${store.address}
+                        </div>
+                    </div>
+                    <a class="shop-btn map-toggle-btn" href="javascript:void(0);" data-store-id="${storeId}-${index}">
+                        <i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
+                    </a>
+                    <!-- 地図アコーディオン -->
+                    <div class="map-accordion" id="map-${storeId}-${index}" style="display: none;">
+                        <div class="map-content">
+                            <div class="map-iframe-container">
+                                ${this.generateMapIframe(store.address)}
+                            </div>
+                            <div class="map-details">
+                                <div class="map-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="map-detail-label">住所:</span>
+                                    <span>${store.address}</span>
+                                </div>
+                                ${store.access ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-train"></i>
+                                    <span class="map-detail-label">アクセス:</span>
+                                    <span>${store.access}</span>
+                                </div>
+                                ` : ''}
+                                ${store.hours ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="map-detail-label">営業時間:</span>
+                                    <span>${store.hours}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        
+        // 4店舗以上ある場合はボタンを追加
+        if (hiddenStores.length > 0) {
+            html += `
+                <a class="section-btn" data-target="#${storeId}" href="javascript:void(0);" onclick="toggleStores(this)">
+                    他${hiddenStores.length}件のクリニックを見る
+                    <i class="fas fa-chevron-down btn-icon"></i>
+                </a>
+            `;
+        }
+        
+        return html;
+    }
+    
+    // クリニックの店舗データを取得（地域別）
+    getStoreDataForClinic(clinicCode, regionId) {
+        // 地域名を取得
+        const regionName = this.getRegionName(regionId);
+        
+        // 基本的な店舗データ（clinic-texts.jsonから取得した情報を基に生成）
+        const storeInfo = this.getClinicText(clinicCode, '店舗', '');
+        if (!storeInfo) {
+            return [];
+        }
+        
+        // 特定の地域に合わせた店舗データを生成
+        if (clinicCode === 'dio') {
+            // ディオクリニックの店舗データ
+            return [{
+                name: `${regionName}院`,
+                address: this.generateAddressForRegion(regionId, '渋谷区宇田川町33-1グランド東京渋谷ビル4階'),
+                access: 'JR渋谷駅ハチ公口より徒歩5分・東京メトロ渋谷駅A2出口より徒歩2分',
+                hours: '平日11:00〜20:00、土日祝日10:00〜19:00'
+            }];
+        }
+        
+        // その他のクリニックの基本データ
+        return [{
+            name: `${regionName}院`,
+            address: this.generateAddressForRegion(regionId),
+            access: '主要駅より徒歩圏内',
+            hours: '10:00〜19:00'
+        }];
+    }
+    
+    // 地域に応じた住所を生成
+    generateAddressForRegion(regionId, defaultAddress = '') {
+        const region = this.getRegionById(regionId);
+        if (!region) {
+            return defaultAddress || '住所情報準備中';
+        }
+        
+        // 地域IDに基づく基本的な住所パターン
+        const addressPatterns = {
+            '013': '東京都渋谷区宇田川町33-1グランド東京渋谷ビル4階', // 東京
+            '056': '東京都渋谷区宇田川町33-1グランド東京渋谷ビル4階', // 東京その他
+            '014': '神奈川県横浜市西区高島2-19-12スカイビル16階', // 神奈川
+            '015': '埼玉県さいたま市大宮区桜木町2-3-2泰伸ビル2階', // 埼玉
+            '012': '千葉県千葉市中央区富士見2-3-1塚本大千葉ビル7階', // 千葉
+            '027': '大阪府大阪市北区梅田1-1-3大阪駅前第3ビル18階', // 大阪
+            '023': '愛知県名古屋市中村区名駅3-26-19名駅永田ビル7階', // 愛知
+            '040': '福岡県福岡市中央区天神2-3-10天神パインクレスト4階' // 福岡
+        };
+        
+        return addressPatterns[regionId] || `${region.name}の主要エリア内`;
+    }
+
+    // クリニックロゴパスを取得
+    getClinicLogoPath(clinicCode) {
+        return this.getClinicText(clinicCode, 'クリニックロゴ画像パス', `/images/clinics/${clinicCode}/${clinicCode}-logo.webp`);
+    }
+
     // クリニック詳細データを動的に取得
     getClinicDetailData(clinicId) {
         const clinic = this.getClinicById(clinicId);
@@ -1113,6 +1292,26 @@ class RankingApp {
             });
         }
 
+        // 地図アコーディオンの開閉制御
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('.map-toggle-btn') || e.target.closest('.map-toggle-btn')) {
+                const button = e.target.matches('.map-toggle-btn') ? e.target : e.target.closest('.map-toggle-btn');
+                const storeId = button.getAttribute('data-store-id');
+                const mapElement = document.getElementById(`map-${storeId}`);
+                
+                if (mapElement) {
+                    if (mapElement.style.display === 'none' || mapElement.style.display === '') {
+                        mapElement.style.display = 'block';
+                        button.classList.add('active');
+                    } else {
+                        mapElement.style.display = 'none';
+                        button.classList.remove('active');
+                    }
+                }
+                e.preventDefault();
+            }
+        });
+
         // ブラウザの戻る/進むボタン対応（region_idは使用しない）
         /*
         window.addEventListener('popstate', () => {
@@ -1376,7 +1575,6 @@ class RankingApp {
             this.displayManager.updateFooterClinics(allClinics, ranking);
 
             // 店舗リストの取得と表示（クリニックごとにグループ化）
-            // 店舗情報の表示を無効化
             // const stores = this.dataManager.getStoresByRegionId(regionId);
             // const clinicsWithStores = this.groupStoresByClinics(stores, ranking, allClinics);
             // this.displayManager.updateStoresDisplay(stores, clinicsWithStores);
@@ -1771,7 +1969,7 @@ class RankingApp {
                 <td class="th-none" style="display: none;">${getClinicDataByRank(rankNum, 'モニター割', '')}</td>
                 <td class="th-none" style="display: none;">${getClinicDataByRank(rankNum, '返金保証', '')}</td>
                 <td>
-                    <a class="link_btn" href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank">公式サイト &gt;</a>
+                    <a class="link_btn" href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank || rankNum)}" target="_blank">公式サイト &gt;</a>
                     <a class="detail_btn" href="#clinic${rankNum}">詳細をみる</a>
                 </td>
             `;
@@ -1832,7 +2030,7 @@ class RankingApp {
                 <td class="benefit-text">${getBenefitFromJson(clinic.rank)}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         <a href="#clinic${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
@@ -1865,7 +2063,7 @@ class RankingApp {
                 <td><i class="fas fa-circle feature-icon"></i></td>
                 <td>
                     <div class="cta-cell">
-                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         <a href="#clinic${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
@@ -1898,7 +2096,7 @@ class RankingApp {
                 <td>${clinic.rank <= 2 ? '<i class="fas fa-circle feature-icon"></i>' : '-'}</td>
                 <td>
                     <div class="cta-cell">
-                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank)}" class="cta-button" target="_blank" rel="noopener">公式サイト</a>
                         <a href="#clinic${clinic.rank}" class="cta-link detail-scroll-link" data-rank="${clinic.rank}">詳細を見る</a>
                     </div>
                 </td>
@@ -2245,7 +2443,7 @@ class RankingApp {
                             </div>
                         </div>
                         <div class="ranking__name">
-                            <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
+                            <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank)}" target="_blank" rel="noopener nofollow">${clinic.name} ＞</a>
                         </div>
                     </div>
                 ${(() => {
@@ -2275,7 +2473,7 @@ class RankingApp {
                 <!-- CTAボタン -->
                 <div class="clinic-cta-button-wrapper">
                     <p class="btn btn_second_primary">
-                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener noreferrer">
+                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank)}" target="_blank" rel="noopener noreferrer">
                             <span class="bt_s">無料カウンセリングはコチラ</span>
                             <span class="btn-arrow">▶</span>
                         </a>
@@ -2303,7 +2501,7 @@ class RankingApp {
                             `;
                         }).join('')}
                         <div class="ribbon_point_link">
-                            【公式】<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id)}" target="_blank" rel="noopener"><strong>${data.priceDetail['公式サイト'] || '#'}</strong></a>
+                            【公式】<a href="${this.urlHandler.getClinicUrlWithRegionId(clinic.id, clinic.rank)}" target="_blank" rel="noopener"><strong>${data.priceDetail['公式サイト'] || '#'}</strong></a>
                         </div>
                     </div>
                 </div>
@@ -2410,6 +2608,14 @@ class RankingApp {
                     </section>
                 </div>
                 
+                <!-- 店舗情報 -->
+                <div class="brand-section">
+                    <h4 class="section-heading">
+                        ${clinic.name}の【${this.dataManager.getRegionName(regionId)}】の店舗
+                    </h4>
+                    ${this.dataManager.generateStoresDisplay(clinicId, regionId)}
+                </div>
+                
                 <!-- キャンペーンセクション -->
                 <div class="campaign-section">
                     <div class="campaign-container">
@@ -2438,7 +2644,7 @@ class RankingApp {
                                 <div class="cv_box_img">
                                     ${campaignMicrocopy}
                                     <p class="btn btn_second_primary" style="margin-top: 10px;">
-                                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinicId)}" target="_blank" rel="noopener">
+                                        <a href="${this.urlHandler.getClinicUrlWithRegionId(clinicId, clinic.rank || 1)}" target="_blank" rel="noopener">
                                             <span class="bt_s">${ctaText}</span>
                                             <span class="btn-arrow">▶</span>
                                         </a>

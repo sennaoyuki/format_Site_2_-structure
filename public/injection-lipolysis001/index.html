@@ -1350,6 +1350,19 @@ text-align: center;
             return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
         }
 
+        // クリニックコードから日本語クリニック名へのマッピング
+        function getClinicNameFromCode(clinicCode) {
+            const codeToNameMap = {
+                'dio': 'ディオクリニック',
+                'eminal': 'エミナルクリニック',
+                'urara': 'ウララクリニック', 
+                'lieto': 'リエートクリニック',
+                'sbc': '湘南美容クリニック',
+                'dsc': 'DSクリニック'
+            };
+            return codeToNameMap[clinicCode] || 'ディオクリニック';
+        }
+
         // 3つの理由を設定
         function setThreeReasons(clinicSlug) {
             const pointsContainer = document.getElementById('first-choice-points');
@@ -1359,7 +1372,9 @@ text-align: center;
             fetch('./data/clinic-texts.json')
                 .then(response => response.json())
                 .then(clinicTexts => {
-                    const clinicData = clinicTexts[clinicSlug] || clinicTexts['dio'];
+                    // クリニックコードから日本語名に変換
+                    const clinicName = getClinicNameFromCode(clinicSlug);
+                    const clinicData = clinicTexts[clinicName] || clinicTexts['ディオクリニック'];
                     
                     const reasons = [
                         {

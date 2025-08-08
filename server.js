@@ -5,9 +5,18 @@ const path = require('path');
 const server = http.createServer((req, res) => {
     console.log('Request:', req.url);
     
-    let filePath = './public' + req.url;
+    // URLのクエリパラメータを除去
+    const urlParts = req.url.split('?');
+    const cleanUrl = urlParts[0];
+    
+    let filePath = './public' + cleanUrl;
     if (filePath === './public/') {
         filePath = './public/index.html';
+    }
+    
+    // ディレクトリの場合は index.html を追加
+    if (filePath.endsWith('/')) {
+        filePath += 'index.html';
     }
     
     const extname = path.extname(filePath).toLowerCase();

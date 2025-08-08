@@ -1,7 +1,7 @@
-clinic_id,clinic_name,code
-1,ディオクリニック,dio
-2,エミナルクリニック,eminal
-3,ウララクリニック,urara
-4,リエートクリニック,lieto
-5,湘南美容クリニック,sbc
-6,DSクリニック,ds
+clinic_id,clinic_name,code,redirect_url
+1,ディオクリニック,dio,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/
+2,エミナルクリニック,eminal,https://eminal-clinic.jp/
+3,ウララクリニック,urara,https://urara-clinic.jp/
+4,リエートクリニック,lieto,https://lieto-clinic.jp/
+5,湘南美容クリニック,sbc,https://sbc-clinic.jp/
+6,DSクリニック,dsc,https://ds-clinic.jp/
