@@ -1814,48 +1814,18 @@ text-align: center;
         }
         
         window.toggleDisclaimer = function(clinicId) {
-            console.log('=== toggleDisclaimer called with:', clinicId);
-            
             // IDに既に-contentや-arrowが含まれている場合と含まれていない場合の両方に対応
-            let content, arrow;
-            
-            // まず完全なIDで試す（dio-campaign-first-choice-contentなど）
-            const contentId = clinicId + '-content';
-            const arrowId = clinicId + '-arrow';
-            
-            console.log('Looking for content ID:', contentId);
-            console.log('Looking for arrow ID:', arrowId);
-            
-            content = document.getElementById(contentId);
-            arrow = document.getElementById(arrowId);
-            
-            console.log('Content element found:', !!content);
-            console.log('Arrow element found:', !!arrow);
+            const content = document.getElementById(clinicId + '-content');
+            const arrow = document.getElementById(clinicId + '-arrow');
             
             if (content && arrow) {
-                const currentDisplay = content.style.display;
-                console.log('Current display:', currentDisplay);
-                
-                if (currentDisplay === 'none' || currentDisplay === '') {
+                if (content.style.display === 'none' || content.style.display === '') {
                     content.style.display = 'block';
                     arrow.style.transform = 'rotate(180deg)';
-                    console.log('Opened accordion');
                 } else {
                     content.style.display = 'none';
                     arrow.style.transform = 'rotate(0deg)';
-                    console.log('Closed accordion');
                 }
-            } else {
-                console.error('toggleDisclaimer: Elements not found!');
-                console.error('Expected content ID:', contentId);
-                console.error('Expected arrow ID:', arrowId);
-                
-                // 実際に存在するIDを全て表示
-                const allElements = document.querySelectorAll('[id]');
-                const relevantIds = Array.from(allElements)
-                    .map(el => el.id)
-                    .filter(id => id.includes('dio') || id.includes('campaign') || id.includes('first-choice'));
-                console.error('Available relevant IDs:', relevantIds);
             }
         }
 
