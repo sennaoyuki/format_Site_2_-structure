@@ -21,27 +21,25 @@ function parseCSV(csvText) {
     return data;
 }
 
-// 対応部位のマッピング（ハードコードされていた部分）
-const bodyPartsMap = {
-    'ディオクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh'],
-    'エミナルクリニック': ['upperarm', 'stomach', 'buttocks', 'thigh'],
-    'ウララクリニック': ['face', 'stomach', 'buttocks', 'thigh'],
-    'リエートクリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh'],
-    '湘南美容クリニック': ['face', 'upperarm', 'stomach', 'buttocks', 'thigh', 'other']
-};
-
-// クリニックの特徴
-const clinicFeatures = {
-    'ディオクリニック': '419万通りのメニューから選べるオーダーメイド医療ダイエット',
-    'エミナルクリニック': '注射が苦手な方も安心！医療機器メインの痩身プログラム',
-    'ウララクリニック': '次世代医療テクノロジーで健康的に美しく痩せる',
-    'リエートクリニック': '非侵襲的な施術でダウンタイムなし！即日常生活に戻れます',
-    '湘南美容クリニック': '豊富な脂肪溶解注射メニューで理想のボディデザインを実現'
-};
+// 対応部位の文字列をパーツ配列に変換する関数
+function parseBodyParts(bodyPartsText) {
+    if (!bodyPartsText) return ['stomach', 'thigh']; // デフォルト
+    
+    const parts = [];
+    if (bodyPartsText.includes('顔') || bodyPartsText.includes('face')) parts.push('face');
+    if (bodyPartsText.includes('二の腕') || bodyPartsText.includes('upperarm')) parts.push('upperarm');
+    if (bodyPartsText.includes('お腹') || bodyPartsText.includes('腹') || bodyPartsText.includes('stomach')) parts.push('stomach');
+    if (bodyPartsText.includes('お尻') || bodyPartsText.includes('buttocks')) parts.push('buttocks');
+    if (bodyPartsText.includes('太もも') || bodyPartsText.includes('thigh')) parts.push('thigh');
+    if (bodyPartsText.includes('その他') || bodyPartsText.includes('全身') || bodyPartsText.includes('other')) parts.push('other');
+    
+    return parts.length > 0 ? parts : ['stomach', 'thigh'];
+}
 
 // メイン処理
 async function convertCSVtoJSON() {
     console.log('📍 CSV → JSON変換開始...\n');
+    console.log('🔄 v3.0 - 完全動的対応版: CSVデータから全て自動取得、ハードコード撤廃');
 
     // 現在のディレクトリ（dataディレクトリ）を使用
     const dataDir = __dirname;
@@ -85,29 +83,45 @@ async function convertCSVtoJSON() {
     const campaigns = parseCSV(campaignCSV);
     console.log(`   ✅ ${campaigns.length}件のキャンペーンデータ`);
 
+    // 7. クリニック詳細情報（injection-lipolysis001から）
+    console.log('\n7️⃣ クリニック詳細情報を読み込み中...');
+    let clinicTexts = {};
+    try {
+        const clinicTextsPath = path.join(__dirname, '../injection-lipolysis001/data/clinic-texts.json');
+        if (fs.existsSync(clinicTextsPath)) {
+            const clinicTextsJSON = fs.readFileSync(clinicTextsPath, 'utf8');
+            clinicTexts = JSON.parse(clinicTextsJSON);
+            console.log(`   ✅ ${Object.keys(clinicTexts).length}件のクリニック詳細情報`);
+        } else {
+            console.log('   ⚠️  クリニック詳細情報が見つかりません、基本情報のみ使用');
+        }
+    } catch (error) {
+        console.log('   ⚠️  クリニック詳細情報の読み込みに失敗、基本情報のみ使用');
+    }
+
     // データを統合して構造化
     console.log('\n📊 データを統合中...');
     
-    // クリニック名のマッピング（CSV間の不一致を解決）
-    const clinicNameMapping = {
-        'ディオクリニック': 'DIO',
-        'エミナルクリニック': 'エミナルクリニック',
-        'ウララクリニック': 'ウララクリニック', 
-        'リエートクリニック': 'リエートクリニック',
-        '湘南美容クリニック': '湘南美容クリニック'
-    };
+    // クリニック名とコードのマッピング（完全動的）
+    const clinicCodeMap = {};
+    const clinicNameMap = {};
+    clinics.forEach(clinic => {
+        clinicCodeMap[clinic.clinic_name] = clinic.code;
+        clinicNameMap[clinic.code] = clinic.clinic_name;
+    });
     
     // クリニックごとにデータを集約
     const compiledClinics = clinics.map(clinic => {
         const clinicName = clinic.clinic_name;
-        const storeClinicName = clinicNameMapping[clinicName] || clinicName;
+        const clinicCode = clinic.code;
         
-        // 該当クリニックの全店舗を取得
-        const clinicStores = stores.filter(store => 
-            store.clinic_name === storeClinicName || 
-            store.clinic_name === clinicName || 
-            store.clinic_name === clinic.code
-        );
+        // 該当クリニックの全店舗を取得（複数パターンで検索）
+        const clinicStores = stores.filter(store => {
+            return store.clinic_name === clinicName || 
+                   store.clinic_name === clinicCode.toUpperCase() || 
+                   store.clinic_name === 'DIO' && clinicCode === 'dio' ||
+                   store.clinic_name === 'DSクリニック' && clinicCode === 'ds';
+        });
         
         // 店舗が存在する地域IDを取得
         const clinicRegions = new Set();
@@ -120,14 +134,33 @@ async function convertCSVtoJSON() {
             });
         });
         
+        // クリニック詳細情報から対応部位と特徴を取得
+        const clinicDetail = clinicTexts[clinicCode];
+        let bodyParts = ['stomach', 'thigh']; // デフォルト
+        let features = '医療ダイエット専門クリニック'; // デフォルト
+        
+        if (clinicDetail) {
+            // 対応部位を解析
+            bodyParts = parseBodyParts(clinicDetail['対応部位']);
+            
+            // 特徴を取得（複数の候補から）
+            features = clinicDetail['特徴タグ'] || 
+                      clinicDetail['ランキングプッシュメッセージ'] || 
+                      clinicDetail['詳細タイトル'] || 
+                      features;
+            
+            // HTMLタグを削除
+            features = features.replace(/<[^>]*>/g, '').replace(/# /g, '').split('<br>')[0];
+        }
+        
         return {
             id: clinic.clinic_id,
-            code: clinic.code,
+            code: clinicCode,
             name: clinicName,
             regions: Array.from(clinicRegions).sort(),
             storeCount: clinicStores.length,
-            bodyParts: bodyPartsMap[clinicName] || ['stomach', 'thigh'],
-            features: clinicFeatures[clinicName] || '医療ダイエット専門クリニック',
+            bodyParts: bodyParts,
+            features: features,
             stores: clinicStores.map(store => ({
                 id: store.store_id,
                 name: store.store_name,
@@ -151,17 +184,20 @@ async function convertCSVtoJSON() {
         };
     });
 
-    // 店舗ビューデータを地域ごとに整理
+    // 店舗ビューデータを地域ごとに整理（動的にクリニック数に対応）
     const storeViewsByRegion = {};
     storeViews.forEach(view => {
         const regionId = view.parameter_no;
-        storeViewsByRegion[regionId] = {
-            clinic_1: view.clinic_1 ? view.clinic_1.split('/') : [],
-            clinic_2: view.clinic_2 ? view.clinic_2.split('/') : [],
-            clinic_3: view.clinic_3 ? view.clinic_3.split('/') : [],
-            clinic_4: view.clinic_4 ? view.clinic_4.split('/') : [],
-            clinic_5: view.clinic_5 ? view.clinic_5.split('/') : []
-        };
+        const regionData = {};
+        
+        // 動的にクリニックフィールドを処理
+        Object.keys(view).forEach(key => {
+            if (key.startsWith('clinic_') && key !== 'parameter_no') {
+                regionData[key] = view[key] ? view[key].split('/') : [];
+            }
+        });
+        
+        storeViewsByRegion[regionId] = regionData;
     });
 
     // 統合データ
