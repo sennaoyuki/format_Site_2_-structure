@@ -1204,9 +1204,13 @@ text-align: center;
             // IDを更新
             if (disclaimerArrow) {
                 disclaimerArrow.id = `${clinicCode}-campaign-first-choice-arrow`;
+                // 矢印の初期状態を確実に設定
+                disclaimerArrow.style.transform = 'rotate(0deg)';
             }
             if (disclaimerContentDiv) {
                 disclaimerContentDiv.id = `${clinicCode}-campaign-first-choice-content`;
+                // アコーディオンの初期状態を確実に閉じた状態にする
+                disclaimerContentDiv.style.display = 'none';
             }
             
             // 確認事項の内容を動的に取得
