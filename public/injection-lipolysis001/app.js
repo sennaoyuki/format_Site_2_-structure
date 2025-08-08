@@ -2875,6 +2875,23 @@ class RankingApp {
                 const shopContainer = button.closest('.shop');
                 console.log('Shop container found:', !!shopContainer);
                 
+                // コンテキストからクリニック名を優先的に取得（data-clinic-idベース）
+                let clinicName = 'クリニック';
+                try {
+                    const shopsContainer = shopContainer?.closest('.shops');
+                    const clinicDetailElement = shopsContainer?.closest('.detail-item');
+                    const contextualClinicId = clinicDetailElement?.getAttribute('data-clinic-id');
+                    if (contextualClinicId && self.dataManager) {
+                        const contextualClinic = self.dataManager.clinics?.find(c => c.id == contextualClinicId);
+                        if (contextualClinic) {
+                            clinicName = contextualClinic.name;
+                            console.log('Context clinic resolved from data-clinic-id:', clinicName);
+                        }
+                    }
+                } catch (ctxErr) {
+                    console.warn('Failed to resolve context clinic:', ctxErr);
+                }
+                
                 if (shopContainer) {
                     // 店舗名を取得
                     const storeNameElement = shopContainer.querySelector('.shop-name a');
@@ -2886,7 +2903,6 @@ class RankingApp {
                     
                     // アクセス情報を取得
                     let access = '駅から徒歩圏内'; // デフォルト値
-                    let clinicName = 'クリニック'; // デフォルト値
                     
                     // CSVデータから正確なアクセス情報とクリニック名を取得
                     if (self.dataManager) {
@@ -2900,8 +2916,8 @@ class RankingApp {
                             if (matchingStore.access) {
                                 access = matchingStore.access;
                             }
-                            // CSVからクリニック名を取得
-                            if (matchingStore.clinicName) {
+                            // クリニック名はDOMコンテキスト優先。未解決の場合のみCSVの値を採用
+                            if (clinicName === 'クリニック' && matchingStore.clinicName) {
                                 clinicName = matchingStore.clinicName;
                             }
                             console.log('Found store in CSV:', matchingStore);
@@ -2921,25 +2937,44 @@ class RankingApp {
                     
                     // CSVからクリニック名を取得できなかった場合のみ、HTMLから取得
                     if (clinicName === 'クリニック') {
-                        const shopsContainer = shopContainer.closest('.shops');
-                        const clinicDetailElement = shopsContainer?.closest('.detail-item');
-                        
-                        // h3要素から正しいクリニック名を取得（例: ディオクリニック）
-                        const h3Element = clinicDetailElement?.querySelector('h3');
-                        if (h3Element) {
-                            // h3のテキストから「ⓘ」などの記号を除去
-                            const h3Text = h3Element.childNodes[0]?.textContent?.trim() || h3Element.textContent?.trim();
-                            // 実際のクリニック名を抽出（ボタンのクラス名などから推測）
-                            const detailButtons = clinicDetailElement.querySelectorAll('.detail_btn_2, .link_btn');
-                            if (detailButtons.length > 0) {
-                                const href = detailButtons[0].getAttribute('href');
-                                // URLからクリニックコードを抽出して動的にクリニック名を取得
-                                const urlMatch = href?.match(/\/go\/([^\/]+)\//);
-                                if (urlMatch) {
-                                    const clinicCode = urlMatch[1];
-                                    const clinic = this.dataManager?.clinics?.find(c => c.code === clinicCode);
-                                    if (clinic) {
-                                        clinicName = clinic.name;
+                        // data-clinic-idで未解決なら、h3要素から取得を試みる
+                        const shopsContainer2 = shopContainer.closest('.shops');
+                        const clinicDetailElement2 = shopsContainer2?.closest('.detail-item');
+                        if (clinicName === 'クリニック') {
+                            const h3Element = clinicDetailElement?.querySelector('h3');
+                            if (h3Element) {
+                                // h3のテキストから「ⓘ」などの記号を除去
+                                const h3Text = h3Element.childNodes[0]?.textContent?.trim() || h3Element.textContent?.trim();
+                                
+                                // h3テキストから直接クリニック名を取得
+                                if (h3Text && h3Text !== '') {
+                                    // データベースから正確なクリニック名を検索
+                                    if (self.dataManager && self.dataManager.clinics) {
+                                        const matchedClinic = self.dataManager.clinics.find(c => 
+                                            h3Text.includes(c.name) || c.name.includes(h3Text)
+                                        );
+                                        if (matchedClinic) {
+                                            clinicName = matchedClinic.name;
+                                            console.log('Found clinic by h3 text match:', clinicName);
+                                        }
+                                    }
+                                }
+                                
+                                // それでも見つからない場合は、リンクのhrefから取得
+                                if (clinicName === 'クリニック') {
+                                    const detailButtons = clinicDetailElement2?.querySelectorAll('.detail_btn_2, .link_btn');
+                                    if (detailButtons.length > 0) {
+                                        const href = detailButtons[0].getAttribute('href');
+                                        // redirect.htmlのクエリパラメータからclinic_idを取得
+                                        const clinicIdMatch = href?.match(/clinic_id=(\d+)/);
+                                        if (clinicIdMatch) {
+                                            const extractedClinicId = clinicIdMatch[1];
+                                            const clinic = self.dataManager?.clinics?.find(c => c.id == extractedClinicId);
+                                            if (clinic) {
+                                                clinicName = clinic.name;
+                                                console.log('Found clinic by redirect URL clinic_id:', clinicName);
+                                            }
+                                        }
                                     }
                                 }
                             }
