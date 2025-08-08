@@ -1810,15 +1810,33 @@ text-align: center;
         }
         
         window.toggleDisclaimer = function(clinicId) {
-            const content = document.getElementById(clinicId + '-content');
-            const arrow = document.getElementById(clinicId + '-arrow');
+            // IDに既に-contentや-arrowが含まれている場合と含まれていない場合の両方に対応
+            let content, arrow;
             
-            if (content.style.display === 'none' || content.style.display === '') {
-                content.style.display = 'block';
-                arrow.style.transform = 'rotate(180deg)';
+            // まず完全なIDで試す（dio-campaign-first-choice-contentなど）
+            content = document.getElementById(clinicId + '-content');
+            arrow = document.getElementById(clinicId + '-arrow');
+            
+            // 見つからない場合、IDをそのまま使用する可能性もチェック
+            if (!content) {
+                console.log('toggleDisclaimer: Looking for ID:', clinicId + '-content');
+            }
+            if (!arrow) {
+                console.log('toggleDisclaimer: Looking for arrow ID:', clinicId + '-arrow');
+            }
+            
+            if (content && arrow) {
+                if (content.style.display === 'none' || content.style.display === '') {
+                    content.style.display = 'block';
+                    arrow.style.transform = 'rotate(180deg)';
+                } else {
+                    content.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                }
             } else {
-                content.style.display = 'none';
-                arrow.style.transform = 'rotate(0deg)';
+                console.error('toggleDisclaimer: Elements not found for clinicId:', clinicId);
+                console.error('Available elements with similar IDs:', 
+                    Array.from(document.querySelectorAll('[id*="' + clinicId + '"]')).map(el => el.id));
             }
         }
 
