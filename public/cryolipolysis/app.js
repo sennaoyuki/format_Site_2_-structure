@@ -849,6 +849,250 @@ class DataManager {
             c.regionId === regionId && c.clinicId === clinicId
         );
     }
+
+    // クリニックIDでクリニックを取得
+    getClinicById(clinicId) {
+        return this.clinics.find(c => c.id === clinicId);
+    }
+
+    // クリニックIDからクリニックコードを取得
+    getClinicCodeById(clinicId) {
+        const clinic = this.getClinicById(clinicId);
+        return clinic ? clinic.code : null;
+    }
+
+    // 地域名を取得
+    getRegionName(regionId) {
+        const region = this.getRegionById(regionId);
+        return region ? region.name : '';
+    }
+
+    // 店舗画像パスを取得
+    getStoreImage(clinicCode, storeNumber) {
+        // クリニックの設定に基づいて画像パスを動的に決定
+        const clinic = this.clinics?.find(c => c.code === clinicCode);
+        if (clinic) {
+            // クリニック固有の画像設定がある場合はそれを使用
+            const customImagePath = this.getClinicText(clinicCode, '店舗画像パス', '');
+            if (customImagePath) {
+                return customImagePath;
+            }
+        }
+        
+        // デフォルトの画像パス生成
+        const paddedNumber = String(storeNumber).padStart(3, '0');
+        return `/images/clinics/${clinicCode}/${clinicCode}_clinic/clinic_image_${paddedNumber}.webp`;
+    }
+
+    // Google Maps iframeを生成
+    generateMapIframe(address) {
+        if (!address) {
+            return '<p>住所情報がありません</p>';
+        }
+        
+        // 住所をエンコード
+        const encodedAddress = encodeURIComponent(address);
+        
+        // Google Maps Embed APIのURL
+        const mapUrl = `https://maps.google.com/maps?q=${encodedAddress}&output=embed&z=16`;
+        
+        return `
+            <iframe src="${mapUrl}" width="100%" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Maps">
+            </iframe>
+        `;
+    }
+
+    // クリニックロゴパスを取得
+    getClinicLogoPath(clinicCode) {
+        return this.getClinicText(clinicCode, 'クリニックロゴ画像パス', `/images/clinics/${clinicCode}/${clinicCode}-logo.webp`);
+    }
+
+    // 店舗表示のHTML生成（medical-diet001スタイル）
+    generateStoresDisplay(clinicId, regionId) {
+        // クリニックコードを取得
+        const clinicCode = this.getClinicCodeById(clinicId);
+        if (!clinicCode) {
+            return '<div class="shops"><p class="no-stores">店舗情報がありません</p></div>';
+        }
+        
+        // 簡単な店舗データ（後で拡張可能）
+        const storeData = this.getStoreDataForClinic(clinicCode, regionId);
+        if (!storeData || storeData.length === 0) {
+            return '<div class="shops"><p class="no-stores">この地域には店舗がありません</p></div>';
+        }
+        
+        const visibleStores = storeData.slice(0, 3);
+        const hiddenStores = storeData.slice(3);
+        const storeId = `shops-${Date.now()}`; // ユニークなIDを生成
+        
+        let html = `<div class="shops" id="${storeId}">`;
+        
+        // 最初の3店舗を表示
+        visibleStores.forEach((store, index) => {
+            html += `
+                <div class='shop'>
+                    <div class='shop-image'>
+                        <img src="${this.getStoreImage(clinicCode, index + 1)}" alt="${store.name}" onerror="this.src='${this.getClinicLogoPath(clinicCode)}'" />
+                    </div>
+                    <div class='shop-info'>
+                        <div class='shop-name'>
+                            <a href="./go/${clinicCode}/?region_id=${regionId}" target="_blank" rel="nofollow">${store.name}</a>
+                        </div>
+                        <div class='shop-address line-clamp'>
+                            ${store.address}
+                        </div>
+                    </div>
+                    <a class="shop-btn map-toggle-btn" href="javascript:void(0);" data-store-id="${storeId}-${index}">
+                        <i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
+                    </a>
+                    <!-- 地図アコーディオン -->
+                    <div class="map-accordion" id="map-${storeId}-${index}" style="display: none;">
+                        <div class="map-content">
+                            <div class="map-iframe-container">
+                                ${this.generateMapIframe(store.address)}
+                            </div>
+                            <div class="map-details">
+                                <div class="map-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="map-detail-label">住所:</span>
+                                    <span>${store.address}</span>
+                                </div>
+                                ${store.access ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-train"></i>
+                                    <span class="map-detail-label">アクセス:</span>
+                                    <span>${store.access}</span>
+                                </div>
+                                ` : ''}
+                                ${store.hours ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="map-detail-label">営業時間:</span>
+                                    <span>${store.hours}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        // 4店舗以上ある場合は隠しコンテンツとして追加
+        hiddenStores.forEach((store, index) => {
+            html += `
+                <div class='shop hidden-content hidden'>
+                    <div class='shop-image'>
+                        <img src="${this.getStoreImage(clinicCode, index + 4)}" alt="${store.name}" onerror="this.src='${this.getClinicLogoPath(clinicCode)}'" />
+                    </div>
+                    <div class='shop-info'>
+                        <div class='shop-name'>
+                            <a href="./go/${clinicCode}/?region_id=${regionId}" target="_blank" rel="nofollow">${store.name}</a>
+                        </div>
+                        <div class='shop-address line-clamp'>
+                            ${store.address}
+                        </div>
+                    </div>
+                    <a class="shop-btn map-toggle-btn" href="javascript:void(0);" data-store-id="${storeId}-${index + 3}">
+                        <i class='fas fa-map-marker-alt btn-icon'></i>
+                        地図
+                    </a>
+                    <!-- 地図アコーディオン -->
+                    <div class="map-accordion" id="map-${storeId}-${index + 3}" style="display: none;">
+                        <div class="map-content">
+                            <div class="map-iframe-container">
+                                ${this.generateMapIframe(store.address)}
+                            </div>
+                            <div class="map-details">
+                                <div class="map-detail-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    <span class="map-detail-label">住所:</span>
+                                    <span>${store.address}</span>
+                                </div>
+                                ${store.access ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-train"></i>
+                                    <span class="map-detail-label">アクセス:</span>
+                                    <span>${store.access}</span>
+                                </div>
+                                ` : ''}
+                                ${store.hours ? `
+                                <div class="map-detail-item">
+                                    <i class="fas fa-clock"></i>
+                                    <span class="map-detail-label">営業時間:</span>
+                                    <span>${store.hours}</span>
+                                </div>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+        
+        // 4店舗以上ある場合はボタンを追加
+        if (hiddenStores.length > 0) {
+            html += `
+                <a class="section-btn" data-target="#${storeId}" href="javascript:void(0);" onclick="toggleStores(this)">
+                    他${hiddenStores.length}件のクリニックを見る
+                    <i class="fas fa-chevron-down btn-icon"></i>
+                </a>
+            `;
+        }
+        
+        return html;
+    }
+
+    // クリニックの店舗データを取得（地域別）
+    getStoreDataForClinic(clinicCode, regionId) {
+        // store_viewから該当地域のデータを取得
+        const storeView = this.storeViews.find(sv => sv.regionId === regionId);
+        if (!storeView) return [];
+        
+        // ランキングデータを取得して、表示されているクリニックを特定
+        const ranking = this.getRankingByRegionId(regionId);
+        if (!ranking) return [];
+        
+        // クリニックコードからクリニックIDを動的に取得
+        const clinic = this.clinics.find(c => c.code === clinicCode);
+        if (!clinic) return [];
+        
+        const clinicId = clinic.id;
+        if (!clinicId) return [];
+        
+        // ランキングに表示されているクリニックIDに対応する店舗IDを取得
+        const clinicKey = `clinic_${clinicId}`;
+        const storeIdsToShow = storeView.clinicStores[clinicKey] || [];
+        
+        if (storeIdsToShow.length === 0) return [];
+        
+        // 店舗IDに基づいて実際の店舗情報を取得
+        const allStoreIds = [];
+        storeIdsToShow.forEach(storeId => {
+            if (storeId.includes('/')) {
+                // dio_009/dio_010 のような形式を分割
+                const ids = storeId.split('/');
+                allStoreIds.push(...ids);
+            } else {
+                allStoreIds.push(storeId);
+            }
+        });
+        
+        const result = this.stores.filter(store => 
+            allStoreIds.includes(store.id)
+        );
+        
+        // 結果を適切な形式に変換
+        return result.map(store => ({
+            name: store.storeName || store.name,
+            address: store.address,
+            access: store.access || '主要駅より徒歩圏内',
+            hours: this.getClinicText(clinicCode, '営業時間', '10:00〜19:00')
+        }));
+    }
 }
 
 // アプリケーションクラス
@@ -1008,6 +1252,35 @@ class RankingApp {
                 this.displayManager.sidebarOverlay.classList.remove('active');
             });
         }
+
+        // 地図トグルボタンのイベント設定
+        document.addEventListener('click', (e) => {
+            if (e.target.closest('.map-toggle-btn')) {
+                e.preventDefault();
+                const button = e.target.closest('.map-toggle-btn');
+                const storeId = button.getAttribute('data-store-id');
+                const mapAccordion = document.getElementById(`map-${storeId}`);
+                
+                if (mapAccordion) {
+                    // トグル表示
+                    if (mapAccordion.style.display === 'none' || !mapAccordion.style.display) {
+                        mapAccordion.style.display = 'block';
+                        // ボタンのテキストを変更（オプション）
+                        const btnText = button.querySelector('.btn-text');
+                        if (btnText) {
+                            btnText.textContent = '閉じる';
+                        }
+                    } else {
+                        mapAccordion.style.display = 'none';
+                        // ボタンのテキストを戻す（オプション）
+                        const btnText = button.querySelector('.btn-text');
+                        if (btnText) {
+                            btnText.textContent = '地図';
+                        }
+                    }
+                }
+            }
+        });
 
         // ブラウザの戻る/進むボタン対応（region_idは使用しない）
         /*
@@ -2908,9 +3181,9 @@ class RankingApp {
                 <!-- 店舗情報 -->
                 <div class="brand-section">
                     <h4 class="section-heading">
-                        ${clinic.name}の【${this.getRegionName(data.regionId)}】の店舗
+                        ${clinic.name}の【${this.dataManager.getRegionName(regionId)}】の店舗
                     </h4>
-                    ${this.generateStoresDisplay(data.stores || [], clinicId)}
+                    ${this.dataManager.generateStoresDisplay(clinicId, regionId)}
                 </div>
                 
                 <!-- 特典情報 -->

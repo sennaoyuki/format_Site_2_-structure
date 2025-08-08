@@ -1,11 +1,11 @@
 項目,目的・注意事項,ディオクリニック,エミナルクリニック,ウララクリニック,リエートクリニック,湘南美容クリニック,DSクリニック
 クリニック名,正式名称を使用,ディオクリニック,エミナルクリニック,ウララクリニック,リエートクリニック,湘南美容クリニック,DSクリニック
 クリニックコード,英字3-5文字の略称,dio,eminal,urara,lieto,sbc,dsc
-遷移先URL（1位）,1位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://urara-clinic.jp/,https://lieto-clinic.jp/,https://sbc-clinic.jp/,https://ds-clinic.jp/
-遷移先URL（2位）,2位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://urara-clinic.jp/,https://lieto-clinic.jp/,https://sbc-clinic.jp/,https://ds-clinic.jp/
-遷移先URL（3位）,3位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://urara-clinic.jp/,https://lieto-clinic.jp/,https://sbc-clinic.jp/,https://ds-clinic.jp/
-遷移先URL（4位）,4位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://urara-clinic.jp/,https://lieto-clinic.jp/,https://sbc-clinic.jp/,https://ds-clinic.jp/
-遷移先URL（5位）,5位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://urara-clinic.jp/,https://lieto-clinic.jp/,https://sbc-clinic.jp/,https://ds-clinic.jp/
+遷移先URL（1位）,1位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://uraraclinic.jp/lp/,https://lietoclinic.com/lpbot/,https://sbc-clinic.jp/,https://ds-clinic.jp/
+遷移先URL（2位）,2位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://uraraclinic.jp/lp/,https://lietoclinic.com/lpbot/,https://sbc-clinic.jp/,https://ds-clinic.jp/
+遷移先URL（3位）,3位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://uraraclinic.jp/lp/,https://lietoclinic.com/lpbot/,https://sbc-clinic.jp/,https://ds-clinic.jp/
+遷移先URL（4位）,4位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://uraraclinic.jp/lp/,https://lietoclinic.com/lpbot/,https://sbc-clinic.jp/,https://ds-clinic.jp/
+遷移先URL（5位）,5位表示時の遷移先URL,https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88,https://eminal-clinic.jp/,https://uraraclinic.jp/lp/,https://lietoclinic.com/lpbot/,https://sbc-clinic.jp/,https://ds-clinic.jp/
 総合評価,比較表の総合評価スコア,4.9,4.1,4.5,4.3,3.8,4.4
 クリニックロゴ画像パス,各クリニックのロゴ画像パス,/images/clinics/dio/dio-logo.webp,/images/clinics/eminal/eminal-logo.webp,/images/clinics/urara/urara-logo.webp,/images/clinics/lieto/lieto-logo.webp,/images/clinics/sbc/sbc-logo.webp,/images/clinics/dsc/dsc-logo.jpg,
 ランキングプッシュメッセージ,ランキングカード内の短い訴求文,2025年のイチ押し！<br>業界屈指のコスパ,次世代医療！<br>成功率94%の実績,厚労省承認マシン<br>科学的に脂肪を減らす,多店舗展開<br>エミナル,大手美容クリニック<br>メニュー豊富,痩身専門20年以上！<br>信頼ある施術！
@@ -27,7 +27,7 @@
 営業時間,案件詳細セクションの営業時間,平日11:00〜20:00<br>土日祝日10:00〜19:00<br>休診日：年末年始,多くの院で11:00〜21:00<br>店舗により異なる,平日10:00〜20:00<br>土日祝日10:00〜20:00,平日10:00〜20:00<br>土日祝日10:00〜20:00<br>休診日：年末年始,店舗により異なる<br>多くは10:00〜19:00,11:00〜20:00<br>休診日：年末年始
 対応部位,案件詳細セクションの対応部位,顔全体／二の腕／お腹／お尻／太もも／その他,全身対応<br>お腹・二の腕・太もも・顔,顔全体／二の腕／お腹／お尻／太もも／その他 (全身),顔全体／二の腕／お腹／お尻／太もも／背中／ふくらはぎ／その他,お腹・二の腕・太もも・顔<br>全身の気になる部位,顔／二の腕／腹部／上半身／下半身／その他
 店舗,案件詳細セクションの店舗,北海道／宮城／東京／埼玉／<br>神奈川／千葉／愛知／京都／<br>大阪／兵庫／広島／福岡,全国60院以上<br>（北海道・東北・関東・中部・近畿・中国・四国・九州・沖縄）,東京 (新宿、銀座),池袋／横浜／名古屋,日本全国および海外に展開,東京（渋谷）
-公式サイトURL,各クリニックの公式サイトURL,https://dioclinic.jp/,https://eminal-clinic.jp/,https://urara-clinic.jp/,https://lieto-clinic.jp/,https://www.s-b-c.net/,https://dsclinic.jp/
+公式サイトURL,各クリニックの公式サイトURL,https://dioclinic.jp/,https://eminal-clinic.jp/,https://uraraclinic.jp/lp/,https://lietoclinic.com/lpbot/,https://www.s-b-c.net/,https://dsclinic.jp/
 CTAボタン1テキスト,詳細セクションのCTAボタン1,無料カウンセリングはコチラ,無料カウンセリングはコチラ,無料カウンセリングはコチラ,無料カウンセリングはコチラ,無料カウンセリングはコチラ,無料カウンセリング予約
 CTAボタン2テキスト,詳細セクションのCTAボタン2,ディオクリニックの公式サイト,エミナルクリニックの公式サイト,ウララクリニックの公式サイト,リエートクリニックの公式サイト,湘南美容クリニックの公式サイト,DSクリニックの公式サイト
 POINT1タイトル,案件詳細セクションのPOINT1タイトル,脂肪細胞を溶かす高濃度注射,オーダーメイド医療ダイエットプラン,対応部位が広範囲,脂肪細胞を直接破壊,経験豊富な医師の的確な診断,専門家チームによるオーダーメイド治療！

@@ -1341,10 +1341,15 @@ text-align: center;
             return clinicInfoMap[clinicSlug] || clinicInfoMap['dio'];
         }
 
-        // クリニックURLを取得（中央管理から）
-        function getClinicUrl(clinicSlug) {
-            if (window.CLINIC_URLS && window.CLINIC_URLS[clinicSlug]) {
-                return window.CLINIC_URLS[clinicSlug].baseUrl;
+        // クリニックURLを取得（CSVデータベースから動的に）
+        function getClinicUrl(clinicSlug, rank = 1) {
+            // DataManagerから動的に取得
+            if (window.dataManager) {
+                const urlKey = `遷移先URL（${rank}位）`;
+                const url = window.dataManager.getClinicText(clinicSlug, urlKey, '');
+                if (url) {
+                    return url;
+                }
             }
             // フォールバック（念のため）
             return 'https://sss.ac01.l-ad.net/cl/p1a64143O61e70f7/?bid=a6640dkh37648h88&param2=[ADID_PLACEHOLDER]&param3=[GCLID_PLACEHOLDER]';
@@ -1868,8 +1873,7 @@ text-align: center;
         });
     </script>
     
-    <!-- Centralized Clinic URLs -->
-    <script src="config/clinic-urls.js?v=2025072201"></script>
+    <!-- Clinic URLs are now managed dynamically from CSV database -->
     
     <!-- URL Parameter Tracking -->
     <script src="/url-tracking.js?v=2025072201" defer></script>

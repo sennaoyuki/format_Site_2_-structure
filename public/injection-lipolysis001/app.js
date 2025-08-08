@@ -1,10 +1,15 @@
-// クリニックURLを中央管理から取得
-function getClinicUrlFromConfig(clinicId) {
+// クリニックURLをCSVデータベースから動的に取得
+function getClinicUrlFromConfig(clinicId, rank = 1) {
     // DataManagerから動的に取得
     if (window.dataManager) {
         const clinicCode = window.dataManager.getClinicCodeById(clinicId);
-        if (clinicCode && window.CLINIC_URLS && window.CLINIC_URLS[clinicCode]) {
-            return window.CLINIC_URLS[clinicCode].baseUrl;
+        if (clinicCode) {
+            // CSVデータベースから遷移先URLを取得
+            const urlKey = `遷移先URL（${rank}位）`;
+            const url = window.dataManager.getClinicText(clinicCode, urlKey, '');
+            if (url) {
+                return url;
+            }
         }
     }
     
@@ -77,37 +82,82 @@ class UrlParamHandler {
         // DataManagerから動的にクリニックコードを取得
         let clinicCode = clinicName;
         
+        // グローバルのdataManagerを使用
+        const dataManager = window.dataManager;
+        
         // clinicNameがクリニック名の場合、クリニックコードに変換
-        if (this.dataManager) {
-            const clinics = this.dataManager.clinics || [];
+        if (dataManager) {
+            const clinics = dataManager.clinics || [];
             const clinic = clinics.find(c => c.name === clinicName || c.code === clinicName);
             if (clinic) {
                 clinicCode = clinic.code;
             }
         }
         
-        let redirectUrl = `/go/${clinicCode}/`;
+        // redirect.htmlへのパスを生成
         if (!clinicCode) return '#';
         
-        // 現在のパスから相対パスを生成（例：/medical-diet001/go/dio/）
-        const currentPath = window.location.pathname;
-        const pathSegments = currentPath.split('/').filter(segment => segment);
-        if (pathSegments.length > 0 && pathSegments[0] !== 'go') {
-            const topDir = pathSegments[0];
-            redirectUrl = `/${topDir}${redirectUrl}`;
+        // DataManagerからクリニックIDを取得
+        let clinicId = null;
+        let rank = 1; // デフォルトは1位
+        
+        if (dataManager) {
+            const clinics = dataManager.clinics || [];
+            const clinic = clinics.find(c => c.code === clinicCode);
+            if (clinic) {
+                clinicId = clinic.id;
+                // ランキングから順位を取得（getRankingsByRegionメソッドを直接使用）
+                try {
+                    if (dataManager.getRankingsByRegion && typeof dataManager.getRankingsByRegion === 'function') {
+                        const rankings = dataManager.getRankingsByRegion(this.getRegionId());
+                        const rankInfo = rankings.find(r => r.clinicId == clinicId);
+                        if (rankInfo) {
+                            rank = rankInfo.rank;
+                        }
+                    } else {
+                        // getRankingsByRegionが存在しない場合は、rankingsから直接取得
+                        const regionId = this.getRegionId();
+                        if (dataManager.rankings && dataManager.rankings[regionId]) {
+                            const regionRankings = dataManager.rankings[regionId];
+                            // regionRankingsから該当するクリニックの順位を探す
+                            const rankingEntries = Object.entries(regionRankings.ranks || {});
+                            for (const [position, cId] of rankingEntries) {
+                                if (cId == clinicId) {
+                                    rank = parseInt(position.replace('no', '')) || 1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                } catch (e) {
+                    console.log('ランキング取得エラー:', e);
+                    rank = 1; // エラー時はデフォルトで1位
+                }
+            }
         }
         
-        // 現在のURLパラメータを全て取得
-        const currentParams = new URLSearchParams(window.location.search);
+        if (!clinicId) return '#';
         
-        // region_idがない場合は現在の地域IDを設定
-        if (!currentParams.has('region_id')) {
-            currentParams.set('region_id', this.getRegionId());
+        // redirect.htmlへのパスを生成
+        const regionId = this.getRegionId();
+        let redirectUrl = `./redirect.html?clinic_id=${clinicId}&rank=${rank}`;
+        if (regionId) {
+            redirectUrl += `&region_id=${regionId}`;
         }
         
-        // リダイレクトURLにパラメータを付与
-        const finalUrl = redirectUrl + (currentParams.toString() ? '?' + currentParams.toString() : '');
-        return finalUrl;
+        // UTMパラメータなどを追加
+        const urlParams = new URLSearchParams(window.location.search);
+        const utmCreative = urlParams.get('utm_creative');
+        const gclid = urlParams.get('gclid');
+        
+        if (utmCreative) {
+            redirectUrl += `&utm_creative=${encodeURIComponent(utmCreative)}`;
+        }
+        if (gclid) {
+            redirectUrl += `&gclid=${encodeURIComponent(gclid)}`;
+        }
+        
+        return redirectUrl;
     }
 }
 
@@ -873,35 +923,6 @@ class DataManager {
                         <i class='fas fa-map-marker-alt btn-icon'></i>
                         地図
                     </a>
-                    <!-- 地図アコーディオン -->
-                    <div class="map-accordion" id="map-${storeId}-${index}" style="display: none;">
-                        <div class="map-content">
-                            <div class="map-iframe-container">
-                                ${this.generateMapIframe(store.address)}
-                            </div>
-                            <div class="map-details">
-                                <div class="map-detail-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span class="map-detail-label">住所:</span>
-                                    <span>${store.address}</span>
-                                </div>
-                                ${store.access ? `
-                                <div class="map-detail-item">
-                                    <i class="fas fa-train"></i>
-                                    <span class="map-detail-label">アクセス:</span>
-                                    <span>${store.access}</span>
-                                </div>
-                                ` : ''}
-                                ${store.hours ? `
-                                <div class="map-detail-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span class="map-detail-label">営業時間:</span>
-                                    <span>${store.hours}</span>
-                                </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             `;
         });
@@ -925,35 +946,6 @@ class DataManager {
                         <i class='fas fa-map-marker-alt btn-icon'></i>
                         地図
                     </a>
-                    <!-- 地図アコーディオン -->
-                    <div class="map-accordion" id="map-${storeId}-${index + 3}" style="display: none;">
-                        <div class="map-content">
-                            <div class="map-iframe-container">
-                                ${this.generateMapIframe(store.address)}
-                            </div>
-                            <div class="map-details">
-                                <div class="map-detail-item">
-                                    <i class="fas fa-map-marker-alt"></i>
-                                    <span class="map-detail-label">住所:</span>
-                                    <span>${store.address}</span>
-                                </div>
-                                ${store.access ? `
-                                <div class="map-detail-item">
-                                    <i class="fas fa-train"></i>
-                                    <span class="map-detail-label">アクセス:</span>
-                                    <span>${store.access}</span>
-                                </div>
-                                ` : ''}
-                                ${store.hours ? `
-                                <div class="map-detail-item">
-                                    <i class="fas fa-clock"></i>
-                                    <span class="map-detail-label">営業時間:</span>
-                                    <span>${store.hours}</span>
-                                </div>
-                                ` : ''}
-                            </div>
-                        </div>
-                    </div>
                 </div>
             `;
         });
@@ -1229,6 +1221,7 @@ class RankingApp {
             
             // グローバルアクセス用にwindowオブジェクトに設定
             window.dataManager = this.dataManager;
+            window.urlHandler = this.urlHandler;
             
 
             // 初期地域IDの取得（URLパラメータから取得、なければデフォルト）
@@ -1370,7 +1363,8 @@ class RankingApp {
             });
         }
 
-        // 地図アコーディオンの開閉制御
+        // 地図アコーディオンの開閉制御 - モーダル表示に変更したため無効化
+        /*
         document.addEventListener('click', function(e) {
             if (e.target.matches('.map-toggle-btn') || e.target.closest('.map-toggle-btn')) {
                 const button = e.target.matches('.map-toggle-btn') ? e.target : e.target.closest('.map-toggle-btn');
@@ -1389,6 +1383,7 @@ class RankingApp {
                 e.preventDefault();
             }
         });
+        */
 
         // ブラウザの戻る/進むボタン対応（region_idは使用しない）
         /*
@@ -2866,10 +2861,10 @@ class RankingApp {
         
         // 既存のイベントリスナーがあれば削除
         if (this.mapButtonClickHandler) {
-            document.removeEventListener('click', this.mapButtonClickHandler);
+            document.removeEventListener('click', this.mapButtonClickHandler, true);
         }
         
-        // 新しいイベントリスナーを作成
+        // 新しいイベントリスナーを作成（モーダル表示）
         this.mapButtonClickHandler = (e) => {
             if (e.target.closest('.map-toggle-btn')) {
                 console.log('Map button clicked!');
@@ -2993,7 +2988,7 @@ class RankingApp {
         };
         
         // イベントリスナーを追加
-        document.addEventListener('click', this.mapButtonClickHandler);
+        document.addEventListener('click', this.mapButtonClickHandler, true);
         
         // モーダルを閉じるイベント
         if (mapModalClose) {
@@ -3037,6 +3032,11 @@ class RankingApp {
         });
         
         if (modal && modalClinicName && modalAddress && modalAccess && modalMapContainer) {
+            // まずモーダルを表示
+            modal.style.display = 'flex';
+            document.body.style.overflow = 'hidden'; // スクロールを無効化
+            console.log('Modal display set to flex');
+            
             // モーダルの内容を設定
             modalClinicName.textContent = clinicName;
             modalAddress.textContent = address;
@@ -3066,53 +3066,125 @@ class RankingApp {
             // Google Maps iframeを生成
             modalMapContainer.innerHTML = this.generateMapIframe(address);
             
-            // 公式サイトボタンのURLとテキストを設定
-            if (modalButton && clinicCode) {
-                // クリニック名をマッピング用のキーに変換
-                // DataManagerから動的にクリニックコードを取得
+            // 公式サイトボタンのURLとテキストを設定（エラーが発生してもモーダルは表示される）
+            if (modalButton) {
+                try {
+                // クリニック名からクリニックコードを取得
                 let clinicKey = '';
                 const clinics = this.dataManager.clinics || [];
-                const clinic = clinics.find(c => c.name === clinicCode);
+                
+                // clinicCodeパラメータはクリニック名なので、クリニック名で検索
+                const clinic = clinics.find(c => 
+                    c.name === clinicCode || 
+                    clinicName.includes(c.name) || 
+                    c.name === clinicName
+                );
+                
                 if (clinic) {
                     clinicKey = clinic.code;
+                } else {
+                    // フォールバック：クリニック名から推測
+                    if (clinicName.includes('ディオ')) {
+                        clinicKey = 'dio';
+                    } else if (clinicName.includes('エミナル')) {
+                        clinicKey = 'eminal';
+                    } else if (clinicName.includes('湘南')) {
+                        clinicKey = 'sbc';
+                    } else if (clinicName.includes('リエート')) {
+                        clinicKey = 'lieto';
+                    } else if (clinicName.includes('ウララ')) {
+                        clinicKey = 'urara';
+                    } else if (clinicName.includes('DS')) {
+                        clinicKey = 'dsc';
+                    }
                 }
                 
-                const generatedUrl = this.urlHandler.getClinicUrlByNameWithRegionId(clinicKey);
+                // urlHandlerのインスタンスがある場合は使用、なければ直接URLを生成
+                let generatedUrl = '#';
+                
+                try {
+                    if (window.urlHandler) {
+                        generatedUrl = window.urlHandler.getClinicUrlByNameWithRegionId(clinicKey);
+                    }
+                } catch (e) {
+                    console.error('URL生成エラー:', e);
+                }
+                
+                // URLが生成できなかった場合のフォールバック
+                if (!generatedUrl || generatedUrl === '#') {
+                    // 直接redirect.htmlへのリンクを生成
+                    const regionId = new URLSearchParams(window.location.search).get('region_id') || '013';
+                    if (clinic) {
+                        generatedUrl = `./redirect.html?clinic_id=${clinic.id}&rank=1&region_id=${regionId}`;
+                    }
+                }
                 
                 console.log('🔗 地図モーダルURL設定:', {
+                    clinicName,
                     clinicCode,
                     clinicKey,
-                    generatedUrl
+                    generatedUrl,
+                    hasUrlHandler: !!window.urlHandler,
+                    hasClinic: !!clinic
                 });
                 
-                modalButton.href = generatedUrl;
+                // URLが正しく生成されているか確認
+                if (generatedUrl && generatedUrl !== '#' && generatedUrl !== '') {
+                    modalButton.href = generatedUrl;
+                    modalButton.target = '_blank';
+                    modalButton.rel = 'noopener';
+                    
+                    // クリックイベントを削除（通常のリンクとして動作させる）
+                    modalButton.onclick = null;
+                } else {
+                    console.error('❌ 地図モーダルURL生成失敗:', {
+                        clinicName,
+                        clinicKey,
+                        generatedUrl
+                    });
+                    // URLが生成できない場合は、メインページのクリニック詳細へスクロール
+                    modalButton.href = '#';
+                    modalButton.onclick = (e) => {
+                        e.preventDefault();
+                        this.hideMapModal();
+                        // クリニック詳細セクションへスクロール
+                        const clinicDetail = document.querySelector(`[data-clinic-id="${clinic?.id || '1'}"]`);
+                        if (clinicDetail) {
+                            clinicDetail.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    };
+                }
                 
-                // ボタンテキストを設定
-                const buttonText = document.getElementById('map-modal-button-text');
-                if (buttonText) {
-                    // クリニック名を取得
-                    let clinicBaseName = '';
-                    if (clinicCode.includes('ディオ')) {
-                        clinicBaseName = 'ディオクリニック';
-                    } else if (clinicCode.includes('エミナル')) {
-                        clinicBaseName = 'エミナルクリニック';
-                    } else if (clinicCode.includes('湘南')) {
-                        clinicBaseName = '湘南美容クリニック';
-                    } else if (clinicCode.includes('リエート')) {
-                        clinicBaseName = 'リエートクリニック';
-                    } else if (clinicCode.includes('ウララ')) {
-                        clinicBaseName = 'ウララクリニック';
-                    } else {
-                        clinicBaseName = 'クリニック';
+                    // ボタンテキストを設定
+                    const buttonText = document.getElementById('map-modal-button-text');
+                    if (buttonText) {
+                        // クリニック名を取得
+                        let clinicBaseName = '';
+                        if (clinicCode.includes('ディオ')) {
+                            clinicBaseName = 'ディオクリニック';
+                        } else if (clinicCode.includes('エミナル')) {
+                            clinicBaseName = 'エミナルクリニック';
+                        } else if (clinicCode.includes('湘南')) {
+                            clinicBaseName = '湘南美容クリニック';
+                        } else if (clinicCode.includes('リエート')) {
+                            clinicBaseName = 'リエートクリニック';
+                        } else if (clinicCode.includes('ウララ')) {
+                            clinicBaseName = 'ウララクリニック';
+                        } else {
+                            clinicBaseName = 'クリニック';
+                        }
+                        buttonText.textContent = clinicBaseName + 'の公式サイト';
                     }
-                    buttonText.textContent = clinicBaseName + 'の公式サイト';
+                } catch (error) {
+                    console.error('Error setting modal button:', error);
+                    // エラーが発生してもモーダルは表示されたままにする
+                    modalButton.href = '#';
+                    modalButton.onclick = (e) => {
+                        e.preventDefault();
+                        this.hideMapModal();
+                    };
                 }
             }
-            
-            // モーダルを表示
-            modal.style.display = 'flex';
-            document.body.style.overflow = 'hidden'; // スクロールを無効化
-            console.log('Modal display set to flex');
         } else {
             console.error('Modal elements missing. Cannot show modal.');
         }

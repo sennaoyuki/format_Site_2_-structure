@@ -6785,6 +6785,19 @@ section.clinic-rankings .ranking-header-banner {
     transform: scale(0.98);
 }
 
+/* 店舗レイアウトの修正 */
+.detail-item .brand-section .shop {
+    display: grid;
+    grid-template-columns: 72px 1fr auto;
+    gap: 10px;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-bottom: 15px;
+}
+
 /* レスポンシブ対応 */
 @media (min-width: 720px) {
     .detail-item .brand-section .shop-image {
@@ -6799,4 +6812,147 @@ section.clinic-rankings .ranking-header-banner {
     .map-detail-item {
         font-size: 14px;
     }
+}
+
+/* 地図モーダルのスタイル */
+.map-modal {
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: none; /* デフォルトは非表示 */
+    align-items: center;
+    justify-content: center;
+}
+
+.map-modal-overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.map-modal-content {
+    background-color: #fefefe;
+    position: relative;
+    padding: 0;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.map-modal-header {
+    background-color: #f5f5f5;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e0e0e0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.map-modal-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+    margin: 0;
+}
+
+.map-modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    color: #999;
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+}
+
+.map-modal-close:hover {
+    color: #333;
+}
+
+.map-modal-body {
+    padding: 0;
+}
+
+.map-modal-map {
+    width: 100%;
+    height: 250px;
+    background-color: #f0f0f0;
+}
+
+.map-modal-map iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+.map-modal-info {
+    padding: 20px;
+}
+
+.map-modal-info-table {
+    width: calc(100% - 40px);
+    border-collapse: collapse;
+    margin: 20px;
+}
+
+.map-modal-info-table th,
+.map-modal-info-table td {
+    padding: 12px 6px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.map-modal-info-table th {
+    background-color: #f5f5f5;
+    color: #666;
+    font-size: 13px;
+    font-weight: 600;
+    width: 86px;
+}
+
+.map-modal-info-table td {
+    font-size: 12px;
+    line-height: 1.6;
+    color: #333;
+}
+
+.map-modal-info-table tr:last-child th,
+.map-modal-info-table tr:last-child td {
+    border-bottom: none;
+}
+
+.map-modal-footer {
+    padding: 0 20px 20px;
+    text-align: center;
+}
+
+.map-modal-footer .btn_second_primary {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.map-modal-footer .btn_second_primary a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    padding: 16px 20px;
+    font-size: 16px;
 }
