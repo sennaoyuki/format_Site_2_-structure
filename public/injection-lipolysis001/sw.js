@@ -1,11 +1,15 @@
-const CACHE_NAME = 'injection-lipolysis-v1';
+const CACHE_NAME = 'injection-lipolysis-v2';
 const urlsToCache = [
   '/',
   '/styles.css',
   '/app.js',
   '/images/injection-MV.webp',
   '/images/favicon.png',
-  '/images/ranking_header_banner.webp'
+  '/images/ranking_header_banner.webp',
+  '/images/clinics/dsc/dsc-logo.webp',
+  '/images/clinics/dsc/dsc-logo.jpg',
+  '/images/clinics/dsc/dsc_detail_bnr.webp',
+  '/images/clinics/dsc/dsc_detail_bnr.jpg'
 ];
 
 // インストール時にキャッシュ
